@@ -1,0 +1,1910 @@
+\chapter{Proper names, salience and accommodation}
+\label{ch:propnames}
+\setcounter{examplectr}{0}
+
+\section{Montague's PTQ as a semantic benchmark}
+
+In this chapter and the following chapters we will extend the linguistic coverage of the toy
+grammar we presented in Chapter~\ref{ch:gram}.  We will take
+Montague's PTQ \citep{Montague1973,Montague1974} as providing a benchmark of linguistic phenomena that
+need to be covered and try to cover a sizeable part of what Montague covered, although we will add a few things which are
+obviously closely related to Montague's original benchmark and which
+have been treated subsequently in the literature.
+
+For many of the phenomena we discuss we will first present a treatment
+which is as close as possible to Montague's original treatment and
+then present a treatment which exploits the advantages of the approach
+we are proposing in this book as well as more recent developments
+since Montague's original work.  Our aim is to show that we have
+something to say about all these phenomena in an overall consistent
+framework, that is, to show that we can cover a significant part of the benchmark using the
+tools we are proposing and in many cases say something new concerning
+a dialogical approach to these phenomena.  In doing this within the
+space of a single book we will not be able to cover all the aspects of
+these phenomena which have been studied in the literature following
+after Montague.  We hope, however, to show that it is a fruitful line
+of research to add a rich type theoretic perspective and a dialogical
+approach to current work in linguistic semantics.   
+ 
+
+
+
+\section{Montague's treatment of proper names and a sign-based approach}
+
+The treatment of proper names that we presented in
+Chapter~\ref{ch:gram}, encapsulated in the definition of SemPropName
+and Lex$_{\mathrm{PropName}}$
+in Appendix~\ref{app:gramrules}, is an adaptation of Montague's
+original treatment in that it has the content of a proper name utterance
+as a quantifier generated from an individual.  The essence of
+Montague's treatment was that if we have a proper name \textit{Sam}
+whose denotation is based on an individual `sam', then the denotation
+of \textit{Sam} is the characteristic function of the set of
+properties possessed by the individual concept of `sam'.  Montague
+modelled individual concepts as functions from possible worlds to
+individuals.  Using more or less Montague's logical notation, the denotation of
+\textit{Sam} would be represented by \nexteg{}.
+\begin{ex} 
+$\lambda P.P\{[\,\up\mathrm{sam}]\}$ 
+\label{ex:MontagueSam}
+\end{ex} 
+Here $[\,\up\mathrm{sam}]$ represents the individual concept of `sam',
+that is,
+that function, $f$, on the set of possible worlds such that for any
+world $w$, $f(w)=\mathrm{sam}$.  The reason that Montague used the
+individual concept (and the associated special notion of application
+involved in applying a property to an individual concept represented
+by the `\{\}'-brackets) was to treat what is known as the Partee-puzzle
+concerning temperature and price which we will discuss in Chapter~\ref{ch:commonnouns}.  Many
+subsequent researchers came to the conclusion that Montague's treatment of
+this puzzle was not the correct one and that the individual concept
+was not necessary in the treatment of proper names.  Thus \preveg{}
+could be simplified to \nexteg{}.
+\begin{ex} 
+$\lambda P.P(\mathrm{sam})$ 
+\end{ex} 
+The content that we assigned to an utterance of \textit{Sam} in
+Chapter~\ref{ch:gram} is represented in \nexteg{}.
+\begin{ex} 
+$\lambda P$:\textit{Ppty}.$P$(\smallrecord{\field{x}{sam}}) 
+\end{ex} 
+The reason that we have chosen to characterize properties as having
+records as their domain rather than individuals, has to do with our
+treatment of the Partee puzzle as we will explain in Chapter~\ref{ch:commonnouns}.  Thus the
+reason that we have the record \smallrecord{\field{x}{sam}} as the
+argument to the property rather than an individual as in \nexteg{} is for the same reason as
+Montague introduced an individual concept.
+\begin{ex} 
+$\lambda P$:\textit{Ppty}.$P$(sam) 
+\end{ex} 
+The treatment of proper names we presented in Chapter~\ref{ch:gram}
+has an important advantage over
+Montague's original.  For Montague, (\ref{ex:MontagueSam}) is the
+result of applying an interpretation function to the linguistic
+expression \textit{Sam} and a number of indices for the
+interpretation, $\mathfrak{A}$, a possible world, $i$, a time, $j$,
+and an assignment to variables, $g$.  This is represented in
+\nexteg{}.
+\begin{ex} 
+\mng{Sam}$^{\mathfrak{A},i,j,g}$ = $\lambda P.P\{[\,\up\mathrm{sam}]\}$ 
+\end{ex} 
+This requires that the English expression \textit{Sam} is always
+associated with the same individual `sam' with respect to
+$\mathfrak{A}$ and any $i,j,g$ related to $\mathfrak{A}$.  This seems to go against the obvious fact that
+more than one individual can have the name \textit{Sam}.  It does not
+work to say that a different individual can be associated with
+\textit{Sam} when it is evaluated with respect to different
+parameters.  $g$ is irrelevant since it is defined as an assignment to
+variables and the English expression \textit{Sam} is not (associated
+with) a variable --- it cannot be bound by a quantifier.\footnote{This
+  claim has been called into question by more recent research.  See
+  \cite{Maier2009} for discussion.}  A strategy
+which involves varying the
+possible world and time to get a different individual associated with
+\textit{Sam} would be defeated by the fact that there are many people
+called Sam in the actual world right now as well as having the
+unintuitive consequence that \textit{Sam might be Sam} would be true if it is true
+that Sam might be somebody else called Sam and \textit{Sam will be
+  Sam} could be true if somebody called Sam now is somebody else
+called Sam at a future time.  We might try saying that associating a
+different individual with Sam involves a different interpretation,
+$\mathfrak{A}'$, of the language.  This has some intuitive appeal and
+we will discuss a variant of it in Section~\ref{sec:Paderewski} in
+relation to a recent proposal by \cite{Ludlow2014}. But
+it will come to grief when we need to talk about two people named Sam
+in the same sentence unless we allow a switch in interpretation
+mid-sentence.  While allowing interpretation to change mid-sentence
+may be an attractive option for other reasons it is not an option that
+is available on Montague's account of meaning.  The normal assumption
+is that in cases where two individuals have the same name the language
+contains two expressions which are pronounced the same, for example,
+\textit{Sam}$_1$ and \textit{Sam}$_2$.  This would make the treatment
+of proper names somewhat like Montague's treatment of pronouns in that
+they have silent numerical subscripts attached to them.  How many
+\textit{Sam}$_i$ should the language contain? One for each person
+named Sam, now, in the past and future and who could be named Sam in
+some non-actual world?  If we follow the strategy with variables we
+would introduce countably many \textit{Sam}$_i$ so that we would
+always have enough.  But with assignments to variables we can always
+assign individuals to more that one variable without this causing a
+problem.  But the consequence of doing this with proper names would be
+to say that an individual can have many names that are pronounced the
+same.  (Sam says, ``My name is Sam'', not ``My names are Sam''.) Similarly no two individuals would have the same name, although
+they would be able to have distinct names which are pronounced the
+same.  This would mean that the interpretation of \textit{have the
+  same name} would have to mean ``have names which are pronounced the
+same''.  This might cause difficulties distinguishing between a case
+where we have two people named Sam and a case where people really do
+have distinct names which are pronounced the same such as \textit{Ann}
+and \textit{Anne} (unless you want to count this as a case of spelling
+the same name differently).
+
+In contrast the analysis of proper names we presented in
+Chapter~\ref{ch:gram} is sign-based.  It allows several sign types to
+share the same phonology but be associated with different contents.
+Treating the language in terms of signs eliminates the need for
+arbitrary indexing of proper names.  It also allows us to individuate
+names in a sensible way.  One way to individuate names is by the
+phonologies occurring in proper name sign types.  Thus if we have two
+proper name sign types with the same phonology but contents associated
+with different individuals, then we have two individuals with the same
+name.  Note that this proposal would make \textit{Ann} and
+\textit{Anne} different spellings of the same name since they are both
+associated with the same phonological type.  How we individuate names
+can be different in different contexts if we follow the kind of
+proposal for counting discussed by \cite{Cooper2011}.  We could, for
+example, introduce a field into lexical sign types for an
+orthographical type and allow the individuation of names by either
+phonology or orthography or a combination of both depending on what is
+most useful to the purpose at hand.
+
+Using signs in this way seems to give us a clear, if rather simple,
+advantage over Montague's formal language approach, even though we
+have so far essentiually just transplanted Montague's analysis of
+proper names into our variant of a sign-based approach.  However,
+there is a remaining question within sign-based approaches which is
+a kind of correlate to the need on Montague's approach to create many
+different names \textit{Sam}$_i$.  We are tempted to think of a
+``language'' as being defined as a collection of sign types.  Thus a
+person who knows English will know sign types which pair the
+phonological type ``Sam'' with various individuals who are called
+Sam.  The problem with this is that different speakers of English will
+know different people named Sam and thus technically we would have to
+say that they speak different languages.  This may well be a coherent
+technical notion of language.  In the terminology of
+Chapter~\ref{ch:gram} we would say that the two agents indeed have
+different linguistic resources available to them.  But there is also a
+resource which the two agents share, even if they do not have any
+overlap in the people named Sam that they are aware of.  This is the
+knowledge that \textit{Sam} is a proper name in English and can be
+used to name individuals.  Arguably it is this knowledge which is
+constitutive of English, rather than the knowledge of who is actually
+called Sam, important though that might be for performing adequately
+in linguistic situations.  In Chapter~\ref{ch:gram} we introduced sign
+type contruction operations and in particular
+`Lex$_{\mathrm{PropName}}$' which maps a phonological type and an
+individual to an appropiate proper name sign type (see
+Appendix~\ref{app:gramrules}).  We called this a universal resource
+since it represents the general knowledge that utterances can be used
+to name individuals.  In the English resources we defined there we
+named sign types such as `Lex$_{\mathrm{PropName}}$(``Sam'', sam)',
+where we specify both the phonological type and the individual
+associated with it.  But, given the power of functional abstraction,
+we can identify \nexteg{} as an English resource where the
+phonological type is specified but not the particular individual.
+\begin{ex} 
+$\lambda x$:\textit{Ind} . Lex$_{\mathrm{PropName}}$(``Sam'', $x$)
+\label{ex:lexpropnameSamResource} 
+\end{ex} 
+Saying that an agent has this function available as an English resource could
+be argued to encode the fact that the agent has the knowledge that
+\textit{Sam} is a proper name in English.  An agent who has this
+resource has a recipe for constructing an appropriate sign type in
+their resources whenever they meet somebody called Sam.  Knowing that
+\textit{Sam} is a proper name in English is not a matter of knowing
+who is called Sam but rather a matter of knowing what to do
+linguistically when you encounter somebody called Sam.  Thus while we
+have so far just taken over Montague's original analysis of proper
+names we have given ourselves the opportunity to recast it in terms of
+a theory which enables agents to update their linguistic resources as
+they become aware of new facts about the world.
+
+\section{Proper names and communication}
+
+However, what we have done so far tells us little about the
+communicative processes associated with utterances of proper names.
+In \cite{Cooper2013b} we pointed out that this kind of analysis does not give us any way of placing the requirement
+on the interlocutor's gameboard that there already be a person named
+Sam available in order to integrate the new information onto the
+gameboard.  As \cite{Ginzburg2012} points out, the successful use
+of a proper name to refer to an individual $a$ requires that the name
+be publically known as a name for $a$.  We will follow the analysis of
+\cite{Cooper2013b} in parametrizing the content.  A
+\textit{parametric content} is a function which maps a context to a
+content.  As such it relates to Montague's technical notion of
+  \textit{meaning} in his paper `Universal Grammar'
+  \citep{Montague1970,Montague1974} where he regarded meaning as a
+  function from possible worlds and contexts of use to denotations.
+  This also corresponds to the notion of \textit{character} in
+  \cite{Kaplan1978}.
+
+We will take a context to be a situation
+modelled as a record.  A simple proposal for a parametric content for
+a proper name might be \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
+\hspace*{1em}$\lambda P$:\textit{Ppty} . $P(r)$
+\label{ex:paramcontpropname} 
+\end{ex} 
+This would allow any record with an individual labelled `x' to be
+mapped to a proper name content.  Recall that the label `x' is picked
+up by the notion of property that we defined in Chapter~\ref{ch:gram}
+as being of type
+(\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType}),
+an example being \nexteg{}. 
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{run($r$.x)}} 
+\end{ex} 
+Associating the phonological type ``Sam'' with
+(\ref{ex:paramcontpropname}) would essentially be a way of
+encapsulating in the interpretation of \textit{Sam} what is expressed
+by (\ref{ex:lexpropnameSamResource}) --- namely, that potentially any
+individual can be called Sam.  We want the parametric content of
+\textit{Sam} to be
+more restrictive than this.  It is going to be the tool that we use to
+help us identify an appropriate referent when we are confronted with
+an utterance of type ``Sam''.  The obvious constraint that we should
+place is that the referent is indeed named Sam.  Thus we can restrict
+(\ref{ex:paramcontpropname}) so that it is an appropriate parametric
+content for \textit{Sam} rather than something that appears to be a
+parametric content appropriate to proper names in general.  The
+modification is given in \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, ``Sam'')}} . \\
+\hspace*{5em}$\lambda P$:\textit{Ppty} . $P(r)$ 
+\label{ex:parametricSam}
+\end{ex} 
+This is closely related to treatments of proper
+names that were proposed earlier in situation semantics
+\citep{GawronPeters1990,Cooper1991,BarwiseCooper1993}.  A more recent
+close relation is Maier's (\citeyear{Maier2009}) proposal for the
+treatment of proper names in terms of layered discourse representation
+theory (LDRT).  Maier points out in a useful overview of the history
+of semantic treatments of proper names that this view of proper
+names is a hybrid of the descriptivist and referential approaches:
+it uses a description like ``named Sam'' to provide a presuppositional
+restriction on the kind of referent which can be assigned to the
+proper name.  \preveg{}
+maps a context in which there is an individual named Sam to a proper
+name content based on that individual.  Care has to be taken with the
+predicate `named' on this kind of analysis.  It is important that it
+not be too restrictive, for example, requiring the legal registering
+of the name.  It may be sufficient that someone at some point has
+called the individual by the name.  The exact conditions under which a
+situation may be of a type constructed with this predicate will vary
+depending on the needs associated with the conversation at hand.  We
+may, for example, take a stricter view of what it means to have a
+certain name if we are talking in a court of law than if we are trying
+to attract somebody's attention to avoid an accident on a
+mountainside.  This flexibility of meaning ``in flux'' has been
+discussed in \cite{CooperKempson2008,Cooper2012,Ludlow2014,GinzburgCooper2014,KrachtKlein2014} among many other
+places and we will return to it several times in the following chapters.
+
+An alternative to the use of parametric contents is to use parametric
+signs.  This could be formulated as in \nexteg{} where
+Lex$_{\mathrm{PropName}}$ is the function for associating lexical
+content with phonological types that was introduced in
+Chapter~\ref{ch:gram} and summarized in Appendix~\ref{app:signtypeconstr}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, ``Sam'')}} . \\
+\hspace*{5em}Lex$_{\mathrm{PropName}}$(``Sam'', $r$.x) 
+\end{ex} 
+Intuitively, \preveg{} says that given a situation in which there is
+an individual named by the phonological type ``Sam'' we can construct
+a sign type in which the phonological type ``Sam'' is associated with
+that individual.  From the point of view of the formal semantics
+tradition \preveg{} is a much more radical proposal than
+(\ref{ex:parametricSam}).  The function (\ref{ex:parametricSam}) is a
+close relative of Montague's \textit{meaning} and Kaplan's \textit{character}.
+It is a function from contexts to contents, although our theory of
+what contexts and contents are differs from both Montague's and
+Kaplan's proposals.  The function in \preveg{}, however, is something
+that creates a kind of linguistic resource on the basis of a context.
+That is, given a context in which `sam' is named by ``Sam'' we derive
+the information that linguistic signs can be used which associate
+``Sam'' with `sam'.  If we did not know this before we are extending
+the collection of linguistic resources we have available.  We suspect
+that both parametric contents and parametric sign types could be of
+importance for a theory of linguistic interpretation and learning.
+For now, we will work with the less radical notion of parametric
+content.  
+
+Parametric contents as we have presented them so far are problematic
+for compositional semantics because the domain type of the
+function (representing the ``presupposition'') which is the parametric
+content varies from case to case depending on what the intuitive
+presupposition of the phrase is.  According to our rules it will
+always be some subtype of \textit{RecType} (since we are thinking of
+contexts as records/situations) but it would not be possible to state
+a single type of parametric content for proper names or other
+syntactic categories.  For this reason we will say that a parametric
+content is a pair (that is, a record with two fields) containing a
+type and a function whose domain type is that type.
+We can create such a parametric content by using a redefined
+version of `SemPropName' which we introduced in Chapter~\ref{ch:gram},
+see Appendix~\ref{app:gramrulesuniv}.  Whereas the version from
+Chapter~\ref{ch:gram} took an individual as argument and created the
+content of a name of that individual, the new version will take a
+phonological type as argument and create a parametric content
+requiring an individual named by that phonological type.  The new
+version is given in \nexteg{}.
+\begin{ex} 
+SemPropName($T$), where $T$ is a phonological type,
+is
+
+\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}}} \\
+        \field{fg}{$\lambda r$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}} . \\
+& & \hspace*{5em}$\lambda P$:\textit{Ppty} . $P(r)$}}
+\label{ex:SemPropName-chpropnames} 
+\end{ex}
+Here the field labelled `bg' (``background'') contains a record type
+and the field labelled `fg' (``foreground'') is a function whose
+domain type is the background record type.  From now on we will mean
+records of this kind by \textit{parametric content}.
+The type of a parametric content of proper names is thus \nexteg{}.
+\begin{ex}
+\record{\tfield{bg}{\textit{RecType}} \\
+        \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
+% $\displaystyle{\bigvee_{T\sqsubseteq
+%     \mathit{Rec}}}(T\rightarrow\textit{Quant})$
+\end{ex}
+That is, the foreground is a function from
+records of the  background type (modelling contexts) to quantifiers.  We will refer to this type as
+\textit{PQuant} (``parametric quantifiers'').  The universal resource
+Lex$_{\mathrm{PropName}}$ for associating proper name content with
+phonological types, creating a sign type for a proper name (see Appendix~\ref{app:gramrulesuniv}), will now be
+redefined so that it only takes a phonological type as argument as in
+\nexteg{}.
+
+\begin{ex} 
+Lex$_{\mathrm{PropName}}$($T_{\mathrm{Phon}}$), where
+$T_{\mathrm{Phon}}$ is a phonological type,
+\\
+is defined as \\
+Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{Phon}}$)}{\textit{PQuant}}} 
+\end{ex} 
+Note that the phonological type plays a dual role here.  It figures
+once as determining the phonology of the sign and again as determining
+the presupposition associated with the parametric content.   
+  
+
+There are two main questions that need to be answered about parametric
+contents.  One concerns how the compositional semantics works and the
+other concerns the nature of contexts and how you compute with them.
+We will take the compositionality issue first.  Let us assume that all
+signs provide us with a parametric content rather than a content.  In
+those cases where there is no constraint on what the context must be
+we will use a trivial parametric content, that is, one that maps any
+context (modelled as a record) to the same content.  Thus, for
+example, if we wish to represent a theory in which the intransitive
+verb \textit{leave} does not place any restrictions on the context, we
+could represent its parametric content as \nexteg{a} which is of the
+type for parametric properties (\textit{PPpty}) given in \nexteg{b}.
+\begin{ex}
+\begin{subex}
+\item \record{\field{bg}{\textit{Rec}}\\ 
+        \field{fg}{$\lambda r_1$:\textit{Rec}.$\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_2$.x)}}}}
+
+\item \record{\tfield{bg}{\textit{RecType}}\\
+              \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
+\end{subex}
+\label{ex:parametricLeave}
+
+\end{ex}
+The foreground of this parametric property will map any context $r_1$ to the function $\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_2$.x)}} which does not depend in
+any way on $r_1$. Such a content could be introduced by a resource for
+lexical content construction `SemIntransVerb' as characterized in
+\nexteg{}, where $T_{\mathrm{bg}}$, the
+``background'' or ``presupposition'' type, is a record type and $p$ is a predicate with arity $\langle$\textit{Ind}$\rangle$.
+\begin{ex} 
+SemIntransVerb($T_{\mathrm{bg}}$, $p$) is \\ 
+\record{\field{bg}{$T_{\mathrm{bg}}$}\\
+        \field{fg}{$\lambda r_1$:$T_{\mathrm{bg}}$ . $\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{$p$($r_2$.x)}}}} 
+\end{ex}
+
+
+ 
+Note that if \preveg{} is the only way of constructing parametric content for
+lexical intransitive verbs, then although it is possible to place
+restrictions on the context by choosing a non-trivial record type
+(something other than \textit{Rec}) for $T_{\mathrm{bg}}$ this will
+not have any effect on the property returned as the content.  As we
+are not here concerned with presuppositions introduced by lexical
+intransitive verbs we will leave open whether it is necessary to
+change this.  `SemIntransVerb' will be used by the universal resource
+`Lex$_{\mathrm{IntransVerb}}$' defined in \nexteg{}, where
+$T_{\mathrm{phon}}$ is a phonological type and $p$ is a predicate with
+arity $\langle$\textit{Ind}$\rangle$.
+\begin{ex} 
+Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$, $p$)\\
+is defined as \\
+Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}  
+\end{ex} 
+This means that the English resource corresponding to the lexical
+entry for \textit{leave} can be defined as \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave) 
+\end{ex} 
+       
+
+A standard strategy for dealing with compositional semantics when
+using parametric contents is to use a version of what is known in
+combinatorial logic as the S-combinator.  In its $\lambda$-calculus
+version this is \nexteg{}.
+\begin{ex} 
+$\lambda z. \alpha(z)(\beta(z))$ 
+\end{ex} 
+Our version of the S-combinator including different type requirements
+on the context arising from the function and the argument will be
+\nexteg{}.
+\begin{ex}
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+\begin{quote}
+\record{\field{bg}{\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
+                                \smalltfield{a}{$\beta$.bg}}}\\
+        \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
+                                \smalltfield{a}{$\beta$.bg}} . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))}}
+\end{quote}
+% if $\alpha : (T_1 \rightarrow (T_2 \rightarrow T_3))$ and 
+% \hspace*{1em}$\beta
+%   : (T_4\rightarrow T_2)$ then the \textit{combination of $\alpha$ and
+%     $\beta$  based on functional application} is 
+% \begin{quote}
+% $\lambda r$:\smallrecord{\smalltfield{f}{$T_1$} \\
+%                          \smalltfield{a}{$T_4$}}. $\alpha(r.\textrm{f})(\beta(r.\textrm{a}))$
+% \end{quote} 
+\end{ex} 
+Note that in the background for the result we have kept the
+backgrounds of $\alpha$ and $\beta$
+separated in their own fields labelled `f' (``function'') and `a'
+(``argument'').\footnote{While textually this statement of the combination
+  will be correct, we need to take account of the fact that the
+  abbreviatory notation for labels in argument positions to predicates
+  now represent path-names in $\alpha$.bg and $\beta$.bg to which the labels `f'
+  and `a' have been prefixed respectively.  To be precise we could
+  notate this as $[\alpha.\text{bg}]^{f.}$ and $[\beta.\text{bg}]^{a.}$.}  This means that we avoid an unwanted clash of labels
+if $\alpha$.bg and $\beta$.bg should happen to share
+labels.\footnote{This new method of combination for parametric
+  contents means that we also have to adjust the sign combination operation
+  CntForwardApp (``forward application of contents'') used in the
+  definition of interpreted phrase structure rules.  See
+  Appendix~\ref{app:signcomb} for details.}  We could use
+\preveg{} to combine the contents (\ref{ex:parametricSam}) and
+(\ref{ex:parametricLeave}).  The foreground of the result is given in \nexteg{} where we can
+show by successive applications of $\beta$-reduction that
+\nexteg{a--d} all represent the same function.
+
+
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda
+  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} . \\
+\hspace*{2em}($\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, ``Sam'')}} . $\lambda P$:\textit{Ppty} . $P(r_2)$)($r_1$.f)\\
+\hspace*{4em}($\lambda r_3$:\textit{Rec}.$\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.a)) 
+ 
+\item  $\lambda
+  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} . \\
+\hspace*{2em}$\lambda P$:\textit{Ppty} . $P$($r_1$.f)\\
+\hspace*{4em}($\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_4$.x)}}) 
+
+\item $\lambda
+  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} . \\
+\hspace*{2em}$\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.f)
+
+\item $\lambda
+  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} . \\
+\hspace*{2em}
+\smallrecord{\smalltfield{e}{leave($r_1$.f.x)}}
+ 
+ 
+\end{subex} 
+\label{ex:paramcontSamLeft}   
+\end{ex} 
+\preveg{} represents the foreground of the parametric content of \textit{Sam leaves}.
+Given a situation containing an individual, $a$, named by ``Sam'' it
+returns a type of situation in which $a$ leaves.  As usual this type
+can play the role of a ``proposition''.  It  is, for example, ``true''
+if there is a situation of the type and ``false'' if there is no
+situation of the type.  
+
+The background of the parametric content, that is the domain type
+of it foreground,
+is to be thought of as placing a constraint on the context.  The idea
+is that you can only get to the non-parametric content if you have an
+appropriate situation available.  The background of the parametric
+content is a type which represents a kind of \textit{presupposition}.  We shall treat
+presuppositions as constraints on the resources available to dialogue
+participants.  In Chapter~\ref{ch:infex} we introduced the notion of a
+dialogue gameboard as a type of dialogue information state.  The most
+obvious place to look for the referent of an utterance of a proper
+name is in the shared commitments represented on the gameboard
+representing what has been committed to in the dialogue so far.  If an
+individual named Sam has already been introduced in the dialogue, then
+a subsequent utterance of \textit{Sam} in that dialogue is most likely
+to refer to that individual unless there is an explicit indication to
+the contrary.  The shared commitments on an agent's dialogue gameboard
+represent information that is particularly \textit{salient} to the
+agent.  The notion of salience in semantics was first introduced by
+\cite{Lewis1979} in connection with the analysis of definite
+descriptions.  As Lewis says, ``There are various ways for something
+to gain salience. Some have to do with the course of conversation,
+others do not.''  We wish to suggest that a way of gaining salience in
+a conversation is by figuring in the shared commitments on the
+gameboard.  (\citealp{Ginzburg2012}, argues that being on shared
+commitments, or FACTS in his terminology, is not always sufficient to
+indicate salience.)
+
+A reasonable strategy, then, is to look at the shared
+commitments on the dialogue gameboard first and then look elsewhere if
+that fails.  We will first explore what we need to do to match the
+background type of a parametric content against the type which models the
+shared commitments of the dialogue and then we will discuss what needs
+to be done if there is not a successful match with the shared
+commitments. In Chapter~\ref{ch:infex}  we treated the gameboard as a
+record type.  In Chapter~\ref{ch:infex}, example 
+(\ref{ex:gameboardDudamelBeethovenUchida}), for instance, the shared commitments
+were represented as the type \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
+    \\
+                                                                                                       \smalltfield{e}{conductor(dudamel)}}}
+                                                                   \\
+                                                                       \smalltfield{e}{composer(beethoven)}}}
+                                   \\
+                                       \smalltfield{e}{pianist(uchida)}} 
+\end{ex} 
+Recall that with each successive updating of the shared commitments
+the record type representing the previous state of shared commitments
+was embedded under the label `prev' (``previous'').  This prevented
+label clash and also kept a record of the order in which information
+was introduced.  As \cite{Lewis1979} observed, information introduced
+later in the dialogue tends to be more salient than information
+introduced earlier.  Thus keeping track of the order also gives us one
+measure of relative salience.
+
+In Chapter~\ref{ch:infex} we were using the Montague treatment of
+proper names that did not introduce the naming predicate.  In this
+chapter we will work towards shared commitments where the naming
+associated with proper names is made explicit, as in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}
+\label{ex:gameboardDudamelBeethovenUchidaBg}  
+\end{ex} 
+Here we are using the label `bg' to represent background information
+in the manner suggested by \cite{Larsson2010} and we see also that
+this labelling
+corresponds to our use of `bg' and `fg' in parametric contents.  Note that in this
+version of the shared commitments we have lost the connection with the
+actual individuals `dudamel', `beethoven' and `uchida'.  This can be
+seen as an advantage if we are representing the information state of
+an agent in the kind of situation described in Chapter~\ref{ch:infex}.
+If we simply inform an agent with no previous knowledge of Dudamel that Dudamel
+is a conductor, then the information that this agent will get is that
+there is somebody named Dudamel who is a conductor.  There will be no
+connection to a particular individual of whom the agent is aware.  If
+this is not the case, we can reinstate the connection to the
+individuals by using manifest fields to anchor the information as in
+\nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smallmfield{x}{dudamel}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smallmfield{x}{beethoven}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smallmfield{x}{uchida}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}   
+\end{ex} 
+The `bg'-fields in (\ref{ex:gameboardDudamelBeethovenUchidaBg}) can
+be thought of as corresponding to the internal anchors of
+\cite{Kamp1990,KampGenabithReyle2011}.  The use of manifest fields in
+\preveg{} would then correspond to the association of what they call external anchors
+with those internal anchors.
+
+The task we have before us is to try to match the domain type of the function
+in (\ref{ex:paramcontSamLeft}), that is, the type which is the
+background of the paramertric content, repeated in \nexteg{}, against the types of shared commitments
+in (\ref{ex:gameboardDudamelBeethovenUchidaBg}) or \preveg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}}
+\label{ex:namedSam} 
+\end{ex} 
+Intuitively, this attempt at matching should fail since there is no
+commitment to an individual named Sam in the shared commitments.
+Suppose now that we add to
+(\ref{ex:gameboardDudamelBeethovenUchidaBg}) as in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}}\\
+     \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                   \smalltfield{e}{named(x,
+                                     ``Sam'')}}}\\
+     \smalltfield{fg}{\smallrecord{\smalltfield{e}{singer($\Uparrow$bg.x)}}}} 
+\label{ex:sharedcommsnonexpanded}
+\end{ex} 
+Intuitively, this should enable a match since this does commit to an
+individual named Sam.  However, there is not a direct formal
+relationship between (\ref{ex:namedSam}) and \preveg{} corresponding
+to this intuition. We will use flattening and relabelling of record
+types in order to capture the relationship.  First recall that
+\preveg{} is an abbreviated form of \nexteg{} where we have expanded
+the paths of the labels which are used as arguments to predicates.  (We
+use $\ell^n$ for $\ell.\ell.\ldots.\ell$ where the label $\ell$ occurs $n$ times.) 
+\begin{ex} 
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(prev$^3$.bg.x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor(prev$^3$.bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(prev$^2$.bg.x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer(prev$^2$.bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(prev.bg.x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist(prev.bg.x)}}}}}\\
+     \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                   \smalltfield{e}{named(bg.x,
+                                     ``Sam'')}}}\\
+     \smalltfield{fg}{\smallrecord{\smalltfield{e}{singer(bg.x)}}}}
+\label{ex:nonflatsharedcomms} 
+\end{ex}
+The result of flattening \preveg{} will be a new type \nexteg{} where each path
+has been replaced by a single complex label consisting of the sequence
+of labels on the path (which we represent using the normal
+dot-notation for paths).
+\begin{ex} 
+\record{\tfield{prev$^4$}{\textit{Rec}} \\
+        \tfield{prev$^3$.bg.x}{\textit{Ind}} \\
+        \tfield{prev$^3$.bg.e}{named(prev$^3$.bg.x, ``Dudamel'')} \\
+        \tfield{prev$^3$.fg.e}{conductor(prev$^3$.bg.x)} \\
+        \tfield{prev$^2$.bg.x}{\textit{Ind}} \\
+        \tfield{prev$^2$.bg.e}{named(prev$^2$.bg.x, ``Beethoven'')} \\
+        \tfield{prev$^2$.fg.e}{composer(prev$^2$.bg.x)} \\
+        \tfield{prev.bg.x}{\textit{Ind}} \\
+        \tfield{prev.bg.e}{named(prev.bg.x, ``Uchida'')} \\
+        \tfield{prev.fg.e}{pianist(prev.bg.x)} \\
+        \tfield{bg.x}{\textit{Ind}} \\
+        \tfield{bg.e}{named(bg.x, ``Sam'')} \\
+        \tfield{fg.e}{singer(bg.x)}}
+\label{ex:flatsharedcomms}
+\end{ex} 
+While (\ref{ex:nonflatsharedcomms}) and \preveg{} are distinct record types which do
+not share any witnesses there is nevertheless a strong equivalence
+between them in that for any record which is of the type
+(\ref{ex:nonflatsharedcomms}) there is a multiset extensionally
+equivalent record (see Appendix~\ref{app:rectypes}) of type \preveg{} and \textit{vice
+  versa}.  There is a one-one mapping between the two types which
+preserves multiset extension.  Intuitively, this means that the two
+types represent the same basic commitments about the world, namely
+Dudamel is a conducor, Beethoven is a composer, Uchida is a pianist
+and Sam is a singer.  The difference between the two types involves
+the structure they impose on this world.  In the case of \preveg{} we
+have one big situation in which all of these facts hold and in
+(\ref{ex:nonflatsharedcomms}) we have a situation which is made up of
+several smaller situations for each of the individuals involved. Note,
+however, that because we have used the complex labels representing the
+paths we are able to recreate that structure from the flattened type
+in \preveg{}.
+Note also that we can still read off the relative salience of the
+various individuals and facts by checking the number of occurrences
+of `prev' in the label.  
+
+In the type of the potential new information state that we are hoping
+to create (\ref{ex:nonflatsharedcomms}) would be embedded under the
+label `prev' showing that it is the type representing shared
+commitments in the previous information state. Thus the actual
+flattened type we want to relate the background of the parametric
+content to is \nexteg{}.
+\begin{ex} 
+\record{\tfield{prev$^5$}{\textit{Rec}} \\
+        \tfield{prev$^4$.bg.x}{\textit{Ind}} \\
+        \tfield{prev$^4$.bg.e}{named(prev$^3$.bg.x, ``Dudamel'')} \\
+        \tfield{prev$^4$.fg.e}{conductor(prev$^3$.bg.x)} \\
+        \tfield{prev$^3$.bg.x}{\textit{Ind}} \\
+        \tfield{prev$^3$.bg.e}{named(prev$^2$.bg.x, ``Beethoven'')} \\
+        \tfield{prev$^3$.fg.e}{composer(prev$^2$.bg.x)} \\
+        \tfield{prev$^2$.bg.x}{\textit{Ind}} \\
+        \tfield{prev$^2$.bg.e}{named(prev.bg.x, ``Uchida'')} \\
+        \tfield{prev$^2$.fg.e}{pianist(prev.bg.x)} \\
+        \tfield{prev.bg.x}{\textit{Ind}} \\
+        \tfield{prev.bg.e}{named(bg.x, ``Sam'')} \\
+        \tfield{prev.fg.e}{singer(bg.x)}}
+\label{ex:prevflatsharedcomms}
+\end{ex} 
+
+We can also flatten the type we are trying to match, that is
+(\ref{ex:namedSam}).  The result is \nexteg{}.
+\begin{ex} 
+\record{\tfield{f.x}{\textit{Ind}} \\
+        \tfield{f.e}{named(f.x, ``Sam'')} \\
+        \tfield{a}{\textit{Rec}}}
+\end{ex} 
+
+In order to match \preveg{} against (\ref{ex:prevflatsharedcomms}) we look
+for a relabelling, $\eta$, of \preveg{} that would make
+(\ref{ex:prevflatsharedcomms}) be a subtype of \preveg{}.  Such a
+relabelling is given in \nexteg{a} and the result of applying it to
+\preveg{} is given in \nexteg{b}.
+\begin{ex}
+\begin{subex}
+\item $\eta$ is a function with domain \{f.x,f.e,a\} such that
+\begin{quote}
+$\eta$(f.x) = prev.bg.x\\
+$\eta$(f.e) = prev.bg.e\\
+$\eta$(a) = prev$^5$
+\end{quote}
+ 
+\item \record{\tfield{prev.bg.x}{\textit{Ind}} \\
+        \tfield{prev.bg.e}{named(bg.x, ``Sam'')} \\
+        \tfield{prev$^5$}{\textit{Rec}}}
+\end{subex}
+\end{ex}
+This means, then, that any situation which is of the type required by
+the shared commitments would, modulo the relabelling, be of the type
+which is the background of the parametric content under consideration,
+spelled out in \nexteg{}.
+\begin{ex}
+\record{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}}}\\
+        \field{fg}{$\lambda
+  r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} . 
+\smallrecord{\smalltfield{e}{leave($r$.f.x)}}}} 
+ 
+\end{ex} 
+The background of the parametric content is
+being used as a presupposition which is being matched against the
+hearer's current information state.
+
+Given that we have now found a match, how can we go about updating the
+shared commitments with the new information represented by the
+parametric content?  % The technique for doing this will involve the
+% notion of a \textit{fixed point type}.  Given a function, $f$, that returns
+% a type, we can always ask the question:  is there an object, $a$, such
+% that $a:f(a)$.  That is, $a$ is of the type which is the result of
+% applying $f$ to $a$ itself.  This means that $a$ is a \textit{fixed
+%   point} for $f$.  This raises a further question: can we characterize
+% a type $T$ such that any $a$ which is of type $T$ will be a fixed
+% point for $f$?  In this case $T$ will be called a \textit{fixed point
+%   type} for $f$.  Consider the example of the foreground of the parametric content of
+% \textit{Sam left} in (\ref{ex:paramcontSamLeft}) repeated as
+% \nexteg{a}.  A fixed point type of this function is given in
+% \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda
+%   r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                \smalltfield{e}{named(x,
+%                                                  ``Sam'')}}}\\
+%                   \smalltfield{a}{\textit{Rec}}} . 
+% %\hspace*{2em}
+% \smallrecord{\smalltfield{e}{leave($r_1$.f.x)}} 
+ 
+% \item \smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                \smalltfield{e}{named(x,
+%                                                  ``Sam'')}}}\\
+%                   \smalltfield{a}{\textit{Rec}} \\
+%                   \smalltfield{e}{leave(f.x)}} 
+ 
+% \end{subex} 
+% \label{ex:parcontfixedpoint}   
+% \end{ex} 
+% Any record of type \preveg{b} will be a fixed point for
+% \preveg{a}. \preveg{b} can be obtained by applying the fixed point
+% type construction function, $\mathcal{F}$, to \preveg{a}.  This
+% function is defined explicitly in Appendix~\ref{app:merge},
+% p.~\pageref{pg:fixedpointtype}. 
+
+If we are updating (\ref{ex:sharedcommsnonexpanded}) with the parametric
+content \preveg{a} then the result should be \nexteg{} where
+(\ref{ex:sharedcommsnonexpanded}) has been embedded under the label
+`prev' and the new information provided by the parametric content has
+been added at the top level of the new type, suitably relabelled so as
+to pick out the individual named Sam which has been previously introduced.
+\begin{ex}
+
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}}\\
+     \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                   \smalltfield{e}{named(x,
+                                     ``Sam'')}}}\\
+     \smalltfield{fg}{\smallrecord{\smalltfield{e}{singer($\Uparrow$bg.x)}}}}}
+ \\
+\smalltfield{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smallmfield{x}{$\Uparrow^2$prev.bg.x}{\textit{Ind}}\\
+                                               \smallmfield{e}{$\Uparrow^2$prev.bg.e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smallmfield{a}{$\Uparrow$prev$^5$}{\textit{Rec}}}}\\
+\smalltfield{fg}{\smallrecord{\smalltfield{e}{leave($\Uparrow$bg.f.x)}}}} 
+\end{ex}
+Note that this both achieves a link to a previous mention of Sam and
+simultaneously ensures that Sam is the most salient individual in
+shared commitments in virtue of the new mention.
+
+
+We can achieve this update by using the tools of flattening and
+relabelling that we have just introduced.  Suppose that $T_{\mathrm{comm}}$ is the
+type representing shared commitments that we wish to update with a
+parametric content given in \nexteg{}.
+\begin{ex}
+\record{\field{bg}{$T_{\mathrm{bg}}$}\\
+        \field{fg}{$f$}}
+\end{ex}
+where $f:(T_{\mathrm{bg}}\rightarrow\textit{RecType})$.  The
+first thing to do is embed  $T_{\mathrm{comm}}$ under the label `prev', obtaining
+\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}}.  Let
+$r_{\mathrm{prev}}$ be a record of this type.  We need to
+consider the flattened version of this type, that is,
+$\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}}). We
+need to find a relabelling, $\eta$, of the flattened version of
+$T_{\mathrm{bg}}$ such that
+$\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}})
+$\sqsubseteq$ $[\varphi(T_{\mathrm{bg}})]_\eta$, that is, the
+flattened version of
+\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}} is a subtype of
+result of relabelling the flattened version of $T_{\mathrm{bg}}$ with
+$\eta$.  Having found such an $\eta$ we use it to anchor
+$T_{\mathrm{bg}}$ with $r_{\mathrm{prev}}$, that is
+$T_{\mathrm{bg}}\parallel_\eta r_{\mathrm{prev}}$. The operation
+$T \parallel_\eta r$ (defined explicitly in
+Appendix~\ref{app:specrec}) replaces fields in $T$, \smallrecord{\smalltfield{$\ell$}{$T'$}}, such
+that $\ell$ is in the
+domain of the relabelling, $\eta$, and for which $\eta$ returns a
+path, $\pi$,
+in $r$ such that $r.\pi:T'$ with a manifest
+field \smallrecord{\smallmfield{$\ell$}{$r.\pi$}{$T'$}}. In the type of the updated shared
+commitments the background will be the background of the parametric
+content anchored to the previous shared commitments and the foreground
+will be the result of applying the function which is the foreground of
+the parametric content to this background.
+The updated type of the shared commitments
+will thus be that given in \nexteg{}.   
+\begin{ex} 
+\record{\tfield{prev}{$T_{\mathrm{comm}}$}\\
+             \tfield{bg}{$T_{\mathrm{bg}}$ $\parallel_\eta$
+               prev}\\
+             \tfield{fg}{$f$(bg)}}
+\end{ex} 
+We can tie all this together in a single update function, given in
+\nexteg{}, a preliminary version which we will revise slightly later
+in the light of other accommodation functions which we will introduce
+in Section~\ref{sec:accommodation}.
+\begin{ex} 
+\textbf{AccGB}($\eta$) -- preliminary version
+
+$\lambda T$:\textit{GameBoard} . \\
+\hspace*{1em} $\lambda
+f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+              . \\
+\hspace*{2em} $\lambda r$:$T$ . \\ 
+\hspace*{3em} $T$ \fbox{\d{$\wedge$}} 
+\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.shared.commitments}\\
+                                                                                      \smalltfield{bg}{$f$.bg
+                                                                                        $\parallel_\eta$
+                                                                                        prev}\\
+                                                                                      \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}
+\label{ex:AccGBprelim} 
+\end{ex} 
+This function takes a game-board, $T$, (recall that a gameboard is a type of
+an information state which in turn is a record) and a parametric
+content and returns a function that will map an information state of
+type $T$ to a new type which is the result of an asymmetric merge of
+$T$ with a type that will replace the type representing shared
+commitments according to $T$ with a new type where the old shared
+commitments is labelled with `prev'  and new `bg' and `fg' fields are
+added as described above.
+
+  
+
+%  $\eta$ in general will not be defined
+% on all the labels of $\mathcal{F}(f)$ since its set of labels will be
+% a superset of the set of labels of $T_{\mathrm{bg}}$.  What we need is
+% a relabelling of $\mathcal{F}(f)$, $\eta'$ which is an extension of
+% $\eta$, that is, the domain of $\eta$ is a subset of the domain of
+% $\eta'$ and  for any label, $\ell$, in the domain of $\eta$,
+% $\eta'(\ell)=\eta(\ell)$.\label{pg:etaprime}  We can now compute the merge of the two
+% flattened types we have obtained, that is,
+% $\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}})\d{$\wedge$}$[\varphi(\mathcal{F}(f))]_{\eta'}$.
+% Finally, we can unflatten the resulting merge, obtaining the final
+% result of the update,
+% $\varphi^-$($\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}})\d{$\wedge$}$[\varphi(\mathcal{F}(f))]_{\eta'}$).
+
+\section{Proper names, salience and accommodation}
+\label{sec:accommodation}
+
+What we have presented so far enables us to find a match for
+presuppositions introduced by a parametric content when such a match
+is present in shared commitments.  Suppose there is more than one such
+match.  In that case there will be a choice of relabellings $\eta$.
+In this case we may wish to choose the relabelling that corresponds to
+a match with the most salient match in terms of recency of
+introduction into the shared commitments.  Technically, this means
+that we choose the relabelling which introduces labels with the least
+number of occurrences of `prev'.  Note that the most recent match may
+be anchored to a match that was introduced earlier in the manner we
+have just described.  There may be other factors than recency which
+contribute to salience, for example, the kinds of factors that are
+discussed in centering theory \citep{JoshiWeinstein1981,GroszJoshiWeinstein1983,GroszJoshiWeinstein1995,WalkerJoshiPrince1998,PoesioStevensonEugenioHitzeman2004}.  We will leave it to future work to give a
+more detailed account of saliency in the current framework.
+
+What happens when there is no match for \textit{Sam} in the shared
+commitments?  Here we need some kind of accommodation in order to use
+the parametric content to update the gameboard.  There are two kinds
+of accommodation we will consider.  The first is where the agent knows
+of a person named Sam independently of the current conversation.  That
+is, a match for \textit{Sam} can be found in the agent's resources
+corresponding to long term memory.  We will not attempt a detailed
+account of the stucture of long term memory.  We assume that it is
+complex and constantly in flux not only in terms of new information
+being added but also in terms of what is salient in the old
+information, depending on which part of the memory is being focussed
+on at any particular time.  Here we will content ourselves with a
+simple model of long term memory as a record type of a similar kind to
+that we have proposed for shared commitments.  This means that the
+techniques we need for matching will be the same as those discussed
+above.  In reality the notion of salience with respect to long term
+memory will be a good deal more complicated than salience with respect
+to the shared commitments on the dialogue gameboard.  You have to take
+into account not only recency but also likelihood based on other
+knowledge that it is this particular Sam that is being referred to.
+For example, if you believe that your interlocutor could not possibly
+know of the Sam in your memory who is otherwise the most likely
+candidate you should not choose that Sam as a match.  Choosing an
+appropriate match involves a great deal of world knowledge and common
+sense.  We will ignore these matters and concentrate our attention on
+what needs to be done if we find a suitable match.  The idea is that
+if you have failed to find a match in shared commitments on the
+gameboard but you do find a match in long term memory, then you need
+to load the item from long term memory into the shared commitments on
+your gameboard.  This is what will constitute accommodation in this
+case.
+
+We will introduce the notion of a \textit{total information state} \citep[\textit{cf.}][]{Larsson2002}
+which includes a record type corresponding to long term memory,
+represented by the `ltm'-field in \nexteg{} and a dialogue gameboard,
+represented by the `gb'-field in \nexteg{}.  Up until now we have
+thought of the gameboard as a record type.  Now, however, we want to
+be able to make links from the gameboard to long term memory and we
+will achieve this by making the gameboard be a dependent type which
+maps records (situations) of the type representing long term memory to
+the record type representing the gameboard.  Thus a total information state
+will be of the type \nexteg{}.
+\begin{ex} 
+\record{\tfield{ltm}{\textit{RecType}} \\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} 
+\end{ex} 
+Here we use \textit{GameBoard} as the type of types which are a
+subtype of \textit{InfoState} (as defined in Appendix~\ref{app:infostate}), that is, a gameboard is a type of
+information states.  Formally, this is expressed as in \nexteg{}.
+\begin{ex} 
+$T$ : \textit{GameBoard} iff $T\sqsubseteq$ \textit{InfoState}
+\label{ex:GameBoard}
+\end{ex} 
+
+  
+An example of a type corresponding to long term memory is given in
+\nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_0$}{\textit{Rec}}\\
+             \smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Dudamel'')}}}\\ 
+             \smalltfield{id$_2$}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$id$_1$.x)}}}\\
+             \smalltfield{id$_3$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Beethoven'')}}}\\
+             \smalltfield{id$_4$}{\smallrecord{\smalltfield{e}{composer($\Uparrow$id$_3$.x)}}}\\
+             \smalltfield{id$_5$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Uchida'')}}}\\
+             \smalltfield{id$_6$}{\smallrecord{\smalltfield{x}{pianist($\Uparrow$id$_5$.x)}}}\\
+             \smalltfield{id$_7$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+             \smalltfield{id$_8$}{\smallrecord{\smalltfield{e}{singer($\Uparrow$id$_7$.x)}}}}
+\label{ex:ltm} 
+\end{ex} 
+\preveg{} is one way of putting the information in shared commitments represented by
+(\ref{ex:nonflatsharedcomms}) into a type corresponding to long term
+memory.  We are assuming that in long term memory information is
+indexed by unique identifiers modelled here by the labels `id$_n$' (of
+which we assume there is a countably infinite stock, one for each
+natural number, $n$).  It is important that in long term memory paths
+are persistent under updating, that is, the old paths do not change
+when we add information to long term memory.  This is in contrast to
+the kind of updating we proposed for the gameboard, adding the label
+`prev' to the path for the old gameboard.  This meant that all paths
+within the old gameboard were adjusted by an update.  When we link from the
+gameboard to long term memory we want to make sure that the link uses
+a persistent path which will still be correct if the long term memory
+should get updated.  When long term memory is updated we prefix the
+path to the new information with 
+the identifier `id$_{i+1}$', where $i$ is the highest index on an
+`id'-label in the long term memory type we are updating.  (This is the
+same technique we used for `e'-labels in our treatment of chart parsing
+in Chapter~\ref{ch:gram}.) The way of achieving the link is
+illustrated schematically in \nexteg{} where we use $M$ to represent
+the long term memory \preveg{} and leave out all irrelevant details of
+the gameboard.
+\begin{ex} 
+\smallrecord{\smallmfield{ltm}{$M$}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r$:ltm . \smallrecord{\ldots\\
+                                              \smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\ldots\\
+                                                                                                   \smalltfield{bg}{\smallrecord{\smallmfield{x}{$r$.id$_7$.x}{\textit{Ind}}\\
+                                                                                                                                 \smallmfield{e}{$r$.id$_7$.e}{named(x,``Sam'')}}}\\
+                                                                                                   \smalltfield{fg}{\smallrecord{\smalltfield{e}{leave($\Uparrow$bg.x)}}}
+                                                                                                   }}{\textit{RecType}}}}\\
+                                              \ldots}}{\\ \hspace*{27em}(ltm$\rightarrow$\textit{RecType})}}
+\label{ex:tisSamLeaves}
+\end{ex} 
+The intuition expressed in \preveg{} is as follows:  given a
+situation, $r$,
+of the type represented by our long term memory, that is one in which
+a particular appropriate individual is labelled by `id$_7$', the gameboard will
+be a type of information state where the background of the parametric
+content used to update the shared commitments is anchored to `id$_7$'.  Two agents are aligned in their shared
+commitments to the extent that we can find an equivalence between the
+two types which represent their respective view of the shared
+commitments obtained by applying their respective functions labelled `gb' to a
+situation of their respective memory types. 
+
+
+The link represented by the dependence on the long term memory type corresponds
+to what \cite{Kamp1990,KampGenabithReyle2011} call an internal
+anchor.  We are representing here how individual roles in an agent's
+view of shared commitments can be anchored in that agent's long term
+memory.  In a more complete treatment we could in addition make the
+gameboard depend on a type for the current visual scene and also types
+for other sensory input.  Our use of dependent types and Kamp
+\textit{et al.}'s use of internal anchors allow us to link different
+components of cognitive structure.  Cognitive structure can also be
+linked to objects in the external world, giving rise to what Kamp
+\textit{et al.} call external anchors.  Our manifest fields can be
+used to correspond to their external anchors.  Suppose, for example,
+that we have an individual `sam' who is named Sam.  We can use a
+manifest field to restrict the long term memory type (\ref{ex:ltm}) so that any record
+(``situation'') of that type has `sam' in the `id$_7$.x'-field.  This
+is represented in \nexteg{} where for convenience we have omitted all but the
+`id$_7$'-field in (\ref{ex:ltm}).
+\begin{ex} 
+\smallrecord{\ldots\\
+             \smalltfield{id$_7$}{\smallrecord{\smallmfield{x}{sam}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+             \ldots}
+\end{ex} 
+If $M$ in (\ref{ex:tisSamLeaves}) is the type \preveg{} then for any
+$r:M$, it will be the case that $r$.id$_7$.x will be `sam'.  Thus the
+shared commitment is that `sam' leaves.  Given that manifest fields
+can occur in any record type, this kind of external anchoring is not
+restricted to long term memory but could also be directly in the
+gameboard if that is desired. 
+
+Let us now consider how the update of a gameboard dependent on long
+term memory can be carried out when there is a match between the
+parametric content used for updating and an item in long term memory.
+Suppose that the current total information state, $\iota_{\mathrm{curr}}$, is of the type in \nexteg{}
+\begin{ex} 
+\record{\tfield{ltm}{\textit{RecType}}\\
+        \mfield{gb}{$\lambda r$:ltm . $T_{\mathrm{gb}}(r)$}{(ltm$\rightarrow$\textit{RecType})}}
+\end{ex} 
+and that we wish to update this with the parametric content, $f$, given in \nexteg{} (where
+$T_{\mathrm{bg}}\sqsubseteq$ \smallrecord{\smalltfield{x}{\textit{Ind}}}).
+\begin{ex}
+\record{\field{bg}{$T_{\mathrm{bg}}$}\\ 
+        \field{fg}{$\lambda r$:$T_{\mathrm{bg}}$ . $T_{\mathrm{upd}}(r)$}}
+\end{ex} 
+In order to find a match between $f$.bg, that is, $T_{\mathrm{bg}}$ and $\iota_{\mathrm{curr}}$.ltm
+(that is, to ascertain that the presupposition associated with the
+parametric content is met by the long term memory of the current total
+information state) we need to find a relabelling, $\eta$, of the flattened
+version of $T_{\mathrm{bg}}$, $\varphi(T_{\mathrm{bg}})$, such that
+\nexteg{} holds.
+\begin{ex} 
+$\varphi$($\iota_{\mathrm{curr}}$.ltm) $\sqsubseteq$ $[\varphi(T_{\mathrm{bg}})]_\eta$ 
+\end{ex} 
+Then we can derive \nexteg{} as a type of the updated total
+information state.
+\begin{ex} 
+\smallrecord{\smallmfield{ltm}{$\iota_{\mathrm{curr}}$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r$:ltm
+          . ($T_{\mathrm{gb}}(r)$\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$\iota_{\mathrm{curr}}$.gb.shared.commitments}\\
+                                                                                                                           \smalltfield{bg}{$T_{\mathrm{bg}}\parallel_\eta
+                                                                                                                             r$}\\
+                                                                                                                           \smalltfield{fg}{$f$(bg)}}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{RecType})}}
+
+ 
+\end{ex}
+Here the notation $T_{\mathrm{bg}}\parallel_\eta r$ represents the
+specification or anchoring of the type $T_{\mathrm{bg}}$ by the record $r$
+according to the relabelling $\eta$.  That is, we replace fields in
+$T_{\mathrm{bg}}$ with manifest fields according to the matches we
+have in the `ltm'-field.  Thus, for example, if $T_{\mathrm{bg}}$ is
+(\ref{ex:namedSam}), repeated as \nexteg{a}, $r$ is a record
+representing long term memory of type (\ref{ex:ltm}), repeated as
+\nexteg{b} and $\eta$ is the relabelling with domain \{f.x,f.e,a\}
+with values as defined in \nexteg{c}, then
+$T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} 
+ 
+\item \smallrecord{\smalltfield{id$_0$}{\textit{Rec}}\\
+             \smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Dudamel'')}}}\\ 
+             \smalltfield{id$_2$}{\smallrecord{\smalltfield{e}{conductor(id$_1$.x)}}}\\
+             \smalltfield{id$_3$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Beethoven'')}}}\\
+             \smalltfield{id$_4$}{\smallrecord{\smalltfield{e}{composer(id$_3$.x)}}}\\
+             \smalltfield{id$_5$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Uchida'')}}}\\
+             \smalltfield{id$_6$}{\smallrecord{\smalltfield{x}{pianist(id$_5$.x)}}}\\
+             \smalltfield{id$_7$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+             \smalltfield{id$_8$}{\smallrecord{\smalltfield{e}{singer(id$_7$.x)}}}}
+
+\item  $\eta$(f.x) = id$_7$.x\\
+       $\eta$(f.e) = id$_7$.e\\
+       $\eta$(a) = id$_0$
+
+\item \smallrecord{\smalltfield{f}{\smallrecord{\smallmfield{x}{$r$.id$_7$.x}{\textit{Ind}}\\
+                                               \smallmfield{e}{$r$.id$_7$.e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smallmfield{a}{$r$.id$_0$}{\textit{Rec}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+A precise and general definition of this notation is in Appendix~\ref{app:specrec}.   
+
+
+ 
+We can now put all this together as the update function in \nexteg{},
+which we call \textbf{AccLTM}($\eta$) (``accommodate match with long term memory'').
+\begin{ex}
+\textbf{AccLTM}($\eta$) =\\ 
+$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+\hspace*{1em}$\lambda
+f$: \record{\tfield{bg}{\textit{RecType}}\\
+            \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
+\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r_1$:ltm
+          . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
+\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
+             \smalltfield{bg}{$f$.bg $\parallel_\eta r_1$}\\
+             \smalltfield{fg}{$f$.fg(bg)}
+}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+\label{ex:AccLTM}
+\end{ex}
+\label{pg:inverserelabelling} 
+Here \textit{GameBoard} is as defined in (\ref{ex:GameBoard}).
+     
+We have used accommodation from long term memory to represent the kind
+of accommodation where the agent has a resource which provides a
+match.  In a more complete treatment we could use this technique for
+accommodation from other available resources such as the visual scene.
+We now turn our attention to accommodation where there is no
+appropriate match
+with other resources.  This corresponds to the case where the hearer
+does not know any appropriate person named Sam but merely adds that
+there is a person named Sam to the shared dialogue commitments.
+
+The first step in this update is to create a type from the parametric
+content under consideration so that we can merge it with
+\smallrecord{\smalltfield{prev}{$T$}}, where $T$ is the type
+representing the current shared commitments.  
+% The type we create is
+% one where the domain type of the function which is the parametric
+% content is embedded under the label `bg' (for ``background'') and the
+% result is merged with the type which the function returns,
+% appropriately relabelled.  In \nexteg{a} we repeat the parametric
+% content given in (\ref{ex:parcontfixedpoint}) and in \nexteg{b} we
+% give the corresponding backgrounding type. 
+Suppose we are considering the parametric content, $\xi$, given in
+\nexteg{a}.  Then the type we will create from $\xi$ is defined as in
+\nexteg{b} which is identical with \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\xi$ = \record{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}}}\\
+              \field{fg}{$\lambda
+  r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                  \smalltfield{a}{\textit{Rec}}} . 
+%\hspace*{2em}
+\smallrecord{\smalltfield{e}{leave($r$.f.x)}}}} 
+
+\item \record{\tfield{bg}{$\xi$.bg}\\
+              \tfield{fg}{\record{\tfield{e}{$\xi$.fg(bg)}}}}
+ 
+\item \smallrecord{\smalltfield{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                                                 \smalltfield{a}{\textit{Rec}}}} \\
+                  \smalltfield{fg}{\smallrecord{\smalltfield{e}{leave(bg.f.x)}}}} 
+ 
+\end{subex} 
+   
+\end{ex}
+% An explicit definition of how to obtain the backgrounding type, $\mathcal{B}(f)$, from
+% a function, $f$, is given in Appendix~\ref{app:comptypes},
+% p.~\pageref{pg:backgroundingtype}.
+Suppose now that the current shared
+commitments are given by the type in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{fg}{\smallrecord{\smalltfield{e}{named(x, ``Beethoven'')}}}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}
+       
+\end{ex} 
+Then the new shared commitments will be \nexteg{a} which is
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}}} \d{$\wedge$} \smallrecord{\smalltfield{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                                                 \smalltfield{a}{\textit{Rec}}}} \\
+                  \smalltfield{fg}{\smallrecord{\smalltfield{e}{leave($\Uparrow$bg.f.x)}}}}
+ 
+\item \smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                                           \smalltfield{e}{named(x, ``Dudamel'')}}}\\
+                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor($\Uparrow$bg.x)}}}}}
+                                                                   \\
+                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x, ``Beethoven'')}}}\\
+                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer($\Uparrow$bg.x)}}}}}
+                                   \\
+              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                            \smalltfield{e}{named(x, ``Uchida'')}}}\\
+              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$bg.x)}}}}}\\
+\smalltfield{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Sam'')}}}\\
+                                                 \smalltfield{a}{\textit{Rec}}}} \\
+                  \smalltfield{fg}{\smallrecord{\smalltfield{e}{leave($\Uparrow$bg.f.x)}}}}
+ 
+\end{subex} 
+   
+\end{ex} 
+We can now put this together as the update function in \nexteg{},
+which we call \textbf{AccNM} (``accommodate no match'').
+\begin{ex}
+
+\textbf{AccNM} =\\
+$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+\hspace*{1em}$\lambda
+f$: \record{\tfield{bg}{\textit{RecType}}\\
+            \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
+\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r_1$:ltm
+          . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
+\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
+             \smalltfield{bg}{$f$.bg}\\
+             \smalltfield{fg}{$f$.fg(bg)}
+}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}} 
+% $\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+%                     \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+% \hspace*{1em}$\lambda
+% f$:$\displaystyle{\bigvee_{T\sqsubseteq [\mathrm{x}:\mathit{Ind}]}}(T\rightarrow \mathit{RecType})$ . \\
+% \hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+%                            \smallmfield{gb}{$\lambda r_1$:ltm
+%           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}}\d{$\wedge$}$\mathcal{B}(f)$}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+\end{ex}
+
+
+This is the same as \textbf{AccLTM} in (\ref{ex:AccLTM}) except that
+in the update for shared commitments 
+there is no anchoring to long term memory.
+
+We can now adjust the preliminary version of \textbf{AccGB} given in
+(\ref{ex:AccGBprelim}) which was the update function for cases where there is a
+match on the gameboard so that it is accommodated in the general format of update functions for
+total information states.  % Assuming that we have relabellings $\eta$ and $\eta'$
+% as defined on p.~% \pageref{pg:etaprime}
+% we can formulate the update
+% function in \nexteg{}, which we call \textbf{AccGB}($\eta'$)
+% (``accommodate match on gameboard'').
+
+\scalebox{.9}
+{\begin{ex} 
+\textbf{AccGB}($\eta$) -- final version
+
+
+\hspace*{-3em}$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} . \\
+\hspace*{-2em} $\lambda
+f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+              . \\
+\hspace*{-1em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r_1$:ltm
+          . $r$.gb($r_1$)\fbox{\d{$\wedge$}} 
+\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.gb.shared.commitments}\\
+                                                                                      \smalltfield{bg}{$f$.bg
+                                                                                        $\parallel_\eta$
+                                                                                        prev}\\
+                                                                                      \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}}{\\\hspace*{30em}(ltm$\rightarrow$\textit{RecType})}}
+ 
+\end{ex}  
+}
+% \scalebox{.9}
+% {\begin{ex}
+% \textbf{AccGB}($\eta'$) =\\ 
+% \hspace*{-1em}$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+%                     \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+% \hspace*{-.7em}$\lambda
+% f$:$\displaystyle{\bigvee_{T\sqsubseteq [\mathrm{x}:\mathit{Ind}]}}(T\rightarrow \mathit{RecType})$ . \\
+% \hspace*{-.6em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+%                            \smallmfield{gb}{$\lambda r_1$:ltm
+%           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{$\varphi^-$($\varphi$(\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}})\d{$\wedge$}$[\varphi(\mathcal{F}(f))]_{\eta'}$)\\\hspace*{25em}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+
+% \end{ex}}
+
+The three update functions for accommodation that we have defined are
+governed by the single licensing condition given in \nexteg{}.
+\begin{ex} 
+If $A$ is an agent, $s_i$ is $A$'s current information state, $f$ is a
+parametric content of type $T_f$ such that
+\begin{quote}
+$T_f$ $\sqsubseteq$ \record{\tfield{bg}{\textit{RecType}}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+\end{quote}
+ and
+$s_i:_A T_i$ for some $T_i$ such that 
+\begin{quote}
+$T_i$ $\sqsubseteq$ \smallrecord{\smalltfield{ltm}{\textit{RecType}}\\
+                                 \smalltfield{gb}{\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{commitments}{\textit{RecType}}\\
+                                                                                                 \smalltfield{latest-move}{\smallrecord{\smallmfield{cont}{$f$}{$T_f$}}}}}}}}
+\end{quote}
+then \\
+\begin{quote}
+if there is some $\eta$ which is a relabelling of $\varphi$($f$.bg) such that 
+\begin{quote}
+\mbox{$\varphi$($s_i$.gb.shared.commitments) $\sqsubseteq$ $[\varphi(f.\mathrm{bg})]_\eta$}
+\end{quote}
+% and there is some $\eta'$ which is a labelling of $\mathcal{F}(f)$ such that $\eta'$ is an extension of
+% $\eta$,\\[.25\baselineskip]  
+then $s_{i+1} :_A
+T_i$\fbox{\d{$\wedge$}}\textbf{AccGB}($\eta$)($s_i$)($f$) is
+licensed\\[\baselineskip]
+else if there is some $\eta$ which is a relabelling of
+$\varphi$($f$.bg) such that $\varphi$($s_i$.ltm)
+$\sqsubseteq$ $[\varphi(f.\mathrm{bg})]_\eta$\\[.25\baselineskip]
+then $s_{i+1} :_A
+T_i$\fbox{\d{$\wedge$}}\textbf{AccLTM}($\eta$)($s_i$)($f$) is
+licensed\\[\baselineskip] 
+else $s_{i+1} :_A
+T_i$\fbox{\d{$\wedge$}}\textbf{AccNM}($s_i$)($f$) is
+licensed
+\end{quote} 
+\label{ex:propname-acc-lic}
+\end{ex}
+
+
+This account of accommodation for proper names where a new item is
+allowed to be created in memory when attempts at matching have failed
+is similar to a proposal by \cite{GrooteLebedeva2010} to treat
+accommodation as error handling when a match has failed to be found.
+Our information states can be thought of as corresponding to their
+environment which they consider to be not simply a list of individuals
+but individuals with their properties, thus providing objects similar
+to those like the record types which can be found in our information
+states.  One difference between the two proposals, apart from the
+obvious fact that our aim here has been to embed the theory in a more
+general theory of dialogue, is that
+\citeauthor{GrooteLebedeva2010} use a selection function to select the
+matches thus apparently assuming an algorithm which yields a unique
+result.  We, on the other hand, talk in terms of matches being licensed
+and thereby allow for the possibility of non-deterministic
+selection. What we have in common, though, is that in order to account
+for the way accommodation is carried out we both add an additional
+layer to a type
+theory based  semantics and talk in procedural terms of
+actions to be carried out:  we with our licensing conditions for type
+acts and \citeauthor{GrooteLebedeva2010} with their error handling mechanism.
+     
+\section{Paderewski}
+\label{sec:Paderewski}
+
+\cite{Kripke1979} discusses the case of Peter who hears about a
+pianist called Paderewski.  Later, in a different
+context, he learns of a Polish national leader and Prime Minister
+called Paderewski.  In reality there was a single (remarkable) man
+called Paderewski who was both a famous concert pianist and a
+distinguished statesman.  But Peter does not realize this and thinks
+that he has learned about two distinct people, both named Paderewski.
+Thus, in our terms, Peter's long term memory might be a subtype of
+\nexteg{} for some natural numbers $i$, $j$, $k$ and $l$.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_i$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_j$}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$id$_i$.x)}}}\\
+             \smalltfield{id$_k$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_l$}{\smallrecord{\smalltfield{e}{statesman($\Uparrow$id$_k$.x)}}}}
+\label{ex:paderewski-unlinked}
+\end{ex} 
+\preveg{} technically allows for the two Paderewskis to be the same
+individual but if there is nothing in Peter's long term memory that
+requires them to be the same individual we will count that as
+corresponding to his view of them as distinct.  If Peter were in this
+state and asked whether the pianist Paderewski and the statesman
+Paderewski were the same person Peter might reply, ``Well, I wouldn't
+have thought so, but I suppose they could be the same person.  I don't
+know.''  On being told that the two Paderewskis are in fact the same
+person he might update his long term memory by carrying out the 
+merge in \nexteg{a}, that is, his long term memory would now be
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \smallrecord{\smalltfield{id$_i$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_j$}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$id$_i$.x)}}}\\
+             \smalltfield{id$_k$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_l$}{\smallrecord{\smalltfield{e}{statesman($\Uparrow$id$_k$.x)}}}}\d{$\wedge$}\smallrecord{\smalltfield{id$_i$}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
+                        \smalltfield{id$_k$}{\smallrecord{\smallmfield{x}{$\Uparrow$id$_i$.x}{\textit{Ind}}}}} 
+ 
+\item \smallrecord{\smalltfield{id$_i$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_j$}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$id$_i$.x)}}}\\
+             \smalltfield{id$_k$}{\smallrecord{\smallmfield{x}{$\Uparrow$id$_i$.x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_l$}{\smallrecord{\smalltfield{e}{statesman($\Uparrow$id$_k$.x)}}}} 
+ 
+\end{subex} 
+\label{eg:Paderewski-linked}   
+\end{ex} 
+Eventually, his long term memory may be restructured to the type in
+\nexteg{} which is set equivalent to that in \preveg{}, though not
+multiset equivalent to it since in any record of this type the
+individual named Paderewski will only occur once, not twice as in
+\preveg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_i$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_j$}{\smallrecord{\smalltfield{e}{pianist($\Uparrow$id$_i$.x)}}}\\
+             
+             \smalltfield{id$_l$}{\smallrecord{\smalltfield{e}{statesman($\Uparrow$id$_i$.x)}}}}  
+\end{ex} 
+We might think of the two types (\ref{eg:Paderewski-linked}b) and \preveg{} as
+representing two subtly different states of mind which Peter could be
+in.  In (\ref{eg:Paderewski-linked}b) he has two concepts of Paderewski, one concept associated with him
+being a pianist and perhaps other associated properties, such as
+practicing hard, wearing tails when he is performing, and so on and
+the other concept where he is a statesman, and perhaps associated with
+other properties such as being a dynamic national leader, a driver of
+hard political bargains or whatever.  In \preveg{} he has a
+single concept of Paderewski including all he knows about him. The
+first state is perhaps a natural one to be in after just learning that
+the two Paderewskis are in fact the same, before you have fully
+assimilated the identity.  It is harder to discover contradictions
+between the two concepts here since it will only be the manifest field
+linking the two concepts which will reveal the contradiction.
+Suppose, for example, Peter's concept of the statesman Paderewski has
+him always late for appointments and pressed for time whereas his
+concept of the pianist Paderewski has him never late for appointments
+and not pressed for time.  There is no contradiction in the state when
+Peter believes there to be two Paderewskis.  Checking for the
+inconsistency in the two concept state involves reasoning about the
+identity expressed by the manifest field.  One could imagine a simple
+consistency checker that does not do this -- logically inadequate, of
+course, but human perhaps.  The single concept state could however
+involve a direct conflict between type and its negation which, one
+imagines, even the simplest of consistency checkers would find.  Thus
+if Peter finds himself in such a state he might need to refine the
+properties that he was ascribing to the two Paderewskis in order to
+make the unified concept of the single Paderewski consistent, for
+example, by modifying the properties to be always late for political
+meetings and pressed for time in his political life but never late to
+a musical event and not pressed for time in concerts.
+
+Note that the link that we have expressed between the two concepts in (\ref{eg:Paderewski-linked}b) 
+does not involve anything like an external anchor. An alternative
+offered us by the type theory to represent that the two Paderewskis
+are identical is \nexteg{}, where we are using $p$ to represent the
+individual Paderewski.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_i$}{\smallrecord{\smallmfield{x}{$p$}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_j$}{\smallrecord{\smalltfield{e}{pianist(id$_i$.x)}}}\\
+             \smalltfield{id$_k$}{\smallrecord{\smallmfield{x}{$p$}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Paderewski'')}}}\\
+             \smalltfield{id$_l$}{\smallrecord{\smalltfield{e}{statesman(id$_k$.x)}}}}  
+\end{ex} 
+Here the link between Peter's two concepts goes through the world
+since both his Paderewski concepts are linked to the individual
+$p$. If an agent's long term memory is a subtype of \preveg{}, then
+\textit{Ind}$_p$ figures in the long term memory type (recall that the
+manifest field \smallrecord{\smallmfield{x}{$p$}{\textit{Ind}}} is a
+notation for \smallrecord{\smalltfield{x}{\textit{Ind}$_p$}}, where
+\textit{Ind}$_p$ is a type whose only witness is $p$ (see
+Appendix~\ref{app:singletontypes})).  We take this to mean that the
+agent has a direct way of identifying Paderewski but that he has not
+in this case become conscious of the identity of the object involved
+in different perceptions of Paderewski.\footnote{One could choose to
+  interpret such types differently in cognitive terms.}  The situation
+could be that Peter observes Paderewski on the concert platform in
+tails and then sees him later in the parliament building.  His
+observations are connected to the same individual although without him
+realizing that he has observed the same Paderewski twice.  Thus the
+situation is similar to that decribed for \textit{Hesperus} and
+\textit{Phosphorus} in \cite{Frege1892}.  In Frege's case the agent
+was visually aware of the planet Venus on different occasions, conceived of as the Evening
+Star (Hesperus) and the Morning Star (Phosphorus) without being aware
+that the same heavenly body was being observed in the morning as in
+the evening.  The difference between Frege's example and that
+represented by \preveg{} is that in Frege's case two different proper
+names were associated with the different observations of the same
+individual whereas here the same proper name is being used for the
+same individual, though without awareness that the proper name is
+being associated with the same individual on both occasions.    
+
+\cite{Ludlow2014} has discussed Kripke's Paderewski recently and
+argues that the reason that proper names can be used to refer to
+different individuals can be due to the fact that our lexicons are
+dynamic and that we use different microlanguages on different
+occasions.  In this discussion he is building on previous work by
+\cite{LarsonLudlow1993} although in that work the emphasis is on
+interpreted logical forms (pairs of abstract syntactic representations
+and semantic values such as truth values for sentences) rather than on
+local microlanguages constructed for use in a particular situation as
+argued for on the basis of a number of different kinds of examples in
+\cite{Ludlow2014}.  In general the idea of local microlanguages being
+constructed on the fly during the course of dialogues and for the
+purposes at hand is something for which I have a great deal of
+sympathy and have argued for in the past
+\citep{CooperRanta2008,LarssonCooper2009,Cooper2010,Cooper2012}.  And
+indeed \cite{Ludlow2014} is right to argue that proper names provide
+support for this view of language.  The argument is straightforward in
+the case of proper names and does not involve the kinds of subtleties
+of meaning variation which can lead some people to suspicion of this view in the
+case of other words. If somebody says to me at a party, ``I'd like to
+introduce you to my friend Sam'' and indeed I have never met Sam
+before, I can, as a competent speaker of English, immediately form an
+association between the phonological type ``Sam'' and the individual
+to whom I have been introduced.  It is obviously not part of my
+competence as a speaker of English to know all of the individuals in
+the universe named Sam.  Our competence lies rather in our ability to
+make the connection between the phonological type (a name) and an
+individual as the need arises.  The competence involves a
+\textit{dynamic} process of acquiring a linguistic coupling of a
+speech event type with another part of the world and not a \textit{static}
+knowledge of all the available couplings.  Once I have added this
+pairing, modelled in our terms as a sign type, to my resources, I have in a technical
+sense modified my language.\footnote{In my case the resource is quite
+  likely to disappear again shortly afterwards.  People vary in their
+  ability to remember names.}  An advantage of sign-based approaches of
+the kind we are proposing is that you do not have to resort to
+subscripts in some logical language in order to distinguish between
+pairings of the same phonological type with different individuals.
+This is a trap which \cite{LarsonLudlow1993} fall into when they claim
+that there are two (or more) names in such cases distinguished by
+subscripts in logical form.  A disadvantage of this analysis is that
+no two individuals could have the same name in logical form and thus
+we would have to use something else to analyze sentences like \nexteg{}.
+\begin{ex} 
+My wife's sister, one of my graduate students and our
+  neighbour all have the same name: Karin 
+\end{ex} 
+\preveg{} describes a confusing situation
+which I have to contend with on a daily basis.  If the logical form
+theory with subscripts were correct this sentence would be necessarily
+false and one might have expected that the
+natural way to describe this situation would rather have been
+\nexteg{}.
+\begin{ex} 
+My wife's sister, one of my graduate students and our neighbour all
+have similar names in that they are pronounced ``Karin'' 
+\end{ex} 
+\preveg{}, according to my intuitions, is not a natural way of
+describing the situation.  This suggests to me that one would need
+something in addition to, or in place of, a logical form with subscripts to explain how
+speakers of natural languages individuate names.
+
+One interpretation of Ludlow's proposal is that when a proper name is
+used to refer to different individuals, different microlanguages
+are used for the references to the different individuals.  Thus when
+Elisabet says \textit{Karin} and means her sister, she is using a
+slightly different language than when she says \textit{Karin} and means
+our neighbour. While I am much in sympathy with the idea of different
+microlanguages in general it seems to me that such a proposal could
+not be quite right.  Consider dialogues like \nexteg{}, a kind of
+dialogue which is not infrequent in our house.
+\begin{ex} 
+\begin{tabular}[t]{ll}
+Elisabet: & Karin called \\
+Robin: & Karin? \\
+Elisabet: & My sister
+\end{tabular} 
+\end{ex} 
+My utterance in \preveg{} is an example of what is called a
+clarification request in the dialogue
+literature \citep[and much other
+literature]{GinzburgCooper2004,Ginzburg2012}.  According to that
+literature one of the uses of a clarification request such as
+\textit{Karin?} is to ask for further identification of the referent
+of the use of the proper name in the previous dialogue turn.  It might
+initially seem tempting to regard such a request as being in effect a
+request for (partial) identification of the microlanguage Elisabet is
+talking.  But if we take that route then we have to ask ourselves what
+language the clarification request itself is in.  Assuming that we
+have three variants of microlanguages available, one where
+\textit{Karin} refers to Elisabet's sister, one where it refers to our
+neighbour and one where it refers to my graduate student, then if the
+request is in any of those languages the answer to the question is
+selfevident and it is hard to see why I would ask it.  And in
+particular if I was thinking of Karin, my graduate student, I might be
+justified in saying that Elisabet's answer was wrong.  This, of
+course, is not at all what is going on.  It seems that the
+clarification request is part of a microlanguage in which
+\textit{Karin} can be used to refer to any of the three and I am
+interested in finding out which was meant here.  This is the kind of
+option that might be offered by our sign-based approach where a single
+(micro)language can contain several different signs with the same
+phonology but with different contents.  The exact treatment of this
+needs, of course, an account of questions and clarification questions
+in particular which we will not undertake here.
+
+One can understand, however, why the idea of a single referent for
+a proper name in a single microlanguage might seem attractive.  When
+\cite{Kripke1979} introduces the puzzle about Peter and Paderewski he
+is careful to point out the circumstances under which Peter came to
+the conclusion that there were two Paderewskis.  Peter first learns
+the name Paderewski in connection with the famous pianist.  Then:
+``Later, in a different circle, Peter learns of someone called
+`Paderewski' who was a Polish nationalist leader and prime minister.''
+Kripke's example would not have been at all as convincing if Peter had
+learned about Paderewski, the pianist and Paderewski, the statesman
+from the same person in the same conversation.  \cite{Ludlow2014} makes a similar
+point in criticising Kripke's construction of the apparent
+contradiction that Peter believes, namely that Paderewski both is and
+is not a pianist.  ``The fallacy involves the conjunction of two
+sentences that have the appearance of contradicting each other\ldots
+but they do not contradict because they come from different
+microlanguages.'' (p. 148).  The fact of the matter is that we do tend
+to use proper names to refer uniquely within the same dialogue, all
+other things being equal.  Suppose we are involved in a conversation about
+pianists and have been, say, comparing the relative merits of
+Paderewski and Ashkenazy, and at some point I say \nexteg{}
+\begin{ex} 
+Paderewski was a
+leading statesman in Poland 
+\end{ex} 
+You would naturally infer that I was
+talking about the same Paderewski, unless I explicitly point out that
+I intend to refer to a different person with the same name.   It
+is, of course, possible to refer to two different people with the same
+name within the same dialogue and even within the same sentence, even
+though it may lead to confusion.  The assumption is normally, though,
+that within the space of a dialogue a name will refer to a unique
+individual unless it is explicitly stated otherwise.  One way of being
+explicit is to say something like \nexteg{}
+\begin{ex} 
+I know another person named
+Paderewski 
+\end{ex} 
+If both dialogue participants are aware of the two
+people with the same name it is possible to use the names together in
+a construction which normally requires different intended referents as
+in \nexteg{}.\footnote{I am
+  grateful to Anders Tolland and Stellan Petersson for calling my
+  attention to the fact that the Churchlands are often referred to as
+  ``Churchland and Churchland''.}
+\begin{ex} 
+
+Churchland and Churchland think that replacement of symbol
+manipulation computer-like devices\ldots with connectionist machines
+hold (\textit{sic}) great promise 
+
+\hfill\citep[][p. 21]{Globus1995} 
+\end{ex} 
+Two people named John engaged in conversation with a third person can
+refer to each other with the name \textit{John} when addressing the
+third person without risk of confusion as in \nexteg{}
+\begin{ex} 
+\begin{tabular}[t]{ll}
+John E: & I remember John as an inspiring professor when I was a
+student \\
+John P: & Well, I remember John as an extremely bright student \\
+Third person: & I didn't realize you'd known each other that long
+\end{tabular} 
+\end{ex} 
+When addressing a person you can always use their name as a vocative
+even if the message you wish to convey involves a person with the same
+name as in \nexteg{}.
+\begin{ex} 
+\begin{tabular}[t]{ll}
+A: & John, I'd like to introduce you to my good friend John \\
+B: & Glad to meet you.  Another John, eh?
+\end{tabular} 
+\end{ex} 
+It is conceivable that somebody would want to argue that all of these
+cases where the same name is used twice to refer to different people
+are examples of code-switching between microlanguages within the space
+of a dialogue or sentence.  Since code-switching does take place even
+between different languages like English and Portuguese within single
+dialogues and sentences it is hard to say that such an analysis is
+impossible.  However, given that a sign-based analysis of proper names
+does not require these examples to be cases of code-switching perhaps
+the onus is on the proponent of the code-switching analysis to
+motivate this more complex analysis. 
+
+Puzzles about proper names and reference such as the Paderewski puzzle
+and Frege's (\citeyear{Frege1892}) original puzzle about
+\textit{Hesperus} and \textit{Phosphorus} are standardly presented as
+puzzles about belief reports.  Indeed the matters we have discussed in
+this section do give rise to puzzles in belief reports and we will
+return to this later.  However, we would like to claim that
+the discussion here shows that the basis of these puzzles does not lie in
+the analysis of belief reports \textit{per se} but in the nature of
+communication in dialogue and the resulting organization of memory.
+While these phenomena seem puzzling from a Fregean or Montagovian
+formal language perspective, from the point of view of a dialogic
+approach employing a sign-based analysis they seem to be a natural
+consequence of the way that communication takes place and knowledge
+gets stored.
+
+\section{Summary}
+
+In this chapter we have looked at the analysis of proper names.  We
+started by showing how Montague's analysis of proper names could be
+recast in TTR and we showed that there was an advantage in the
+sign-based approach that we have adopted in accounting for the fact
+that different individuals can have the same name.  Montague's
+original analysis did not say anything about the presupposition-like
+nature of proper names in that they seem to require interlocutors to
+be able to identify appropriate referents for the use of a proper name
+from among a number of potential referents which might be available.
+We showed how this could be treated by introducing parametric
+contents for proper names and we showed how accommodation phenomena
+could be accounted for including a simple-minded analysis of salience
+analyzed in terms of the information states of agents.  Finally, we
+discussed Kripke's puzzle concerning Paderewski and its possible
+relation to a theory of microlanguages as discussed recently by
+Ludlow.  While in general we find the idea of microlanguages appealing
+we suggested that it plays a role in the analysis of proper names in a
+rather different way to that suggested by Ludlow.  
+  
+  
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End: 

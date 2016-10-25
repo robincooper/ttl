@@ -1,0 +1,723 @@
+%[from infex]
+
+
+
+% We shall first characterize an abstract syntax which is (to some
+% extent) language neutral since we are interested in characterizing
+% multilingual grammar.  The abstract syntax (like tectogrammar) will
+% characterize general structural and categorial characteristics without
+% commiting to any particular phonological form.  It will also serve as
+% a base for deriving semantic content.  Abstract syntax will be refined
+% in order to obtain the concrete syntax for a particular language.
+
+% Our syntax will be quite simple in order to deal with our current
+% example.  However, we will discuss the kind of modularity that will be
+% useful for discussing more complex grammars.
+
+% In abstract syntax lexical items will be represented by record types
+% of the form
+
+% \record{\mfield{cat}{$c$}{\textit{Cat}} \\
+%         \mfield{id}{$\mathit{id}$}{\textit{Id}}}
+
+% where $c$ is some particular category like \textit{np} or \textit{s}
+% and $\mathit{id}$ is a unique identifier associated with the
+% particular item.
+% We will represent this type as
+
+% \{Lex $\mathit{id}$ $c$\}
+
+% The reason for this abbreviation is not just to save space.  The
+% characterization of which record types are associated with lexical
+% items is not merely a matter of individual grammars.  Their general
+% nature should be characterized in a (language) universal resource
+% which formally characterizes our linguistic theory in a language
+% independent way.  While we are not making the claim that the
+% association of a category and a unique identifier with lexical items
+% is any deep linguistic insight it is nevertheless something which is
+% more general than the characterization of any one language.  And
+% things will get more interesting later.
+
+These record types can be combined to form record types corresponding
+to abstract complex expressions.  This is done by functions which are
+to phrase structure rules in a context-free syntax except that, like
+the immediate dominance rules of generalized phrase structure grammar,
+they do not specify word order as there is no phonology associated
+with the abstract syntax.  A binary rule with ID $\mathit{id}$ whose mother category is $m$
+and whose daughter categories are $d_1$ and $d_2$ is modelled by the
+function
+
+\begin{ex}
+\label{eg:abstractbinary}
+$\lambda r_1$:\record{\mfield{cat}{$d_1$}{\textit{Cat}} \\
+                      \tfield{id}{\textit{Id}}} \\
+\hspace*{2em} $\lambda r_2$:\record{\mfield{cat}{$d_2$}{\textit{Cat}} \\
+                                    \tfield{id}{\textit{Id}}} \\
+\hspace*{4em} (\record{\mfield{cat}{$m$}{\textit{Cat}} \\
+                       \mfield{id}{$\mathit{id}$($r_1$.id)($r_2$.id)}{\textit{Id}} \\
+                       \tfield{daughters}{\record{\mfield{first}{$r_1$}{\record{\mfield{cat}{$d_1$}{\textit{Cat}}}} \\
+                                                  \tfield{rest}{\record{\mfield{first}{$r_2$}{\record{\mfield{cat}{$d_1$}{\textit{Cat}}}} \\
+                                                                        \mfield{rest}{[]}{[\textit{Rec}]}}}}}})
+\end{ex}
+
+Like update functions, functions representing phrase-structure map
+objects to a type.  Here the intuition is that if we believe that we
+have  two objects of certain types then we can conclude that there is
+an object of the type which is returned by the function.  The id-field in the type corresponding to the mother provides a
+convenient representation of the function-argument structure
+(corresponding to the abstract syntax tree in Ranta's (????) GF).  We
+abbreviate this function (for the same reasons as we abbreviated the
+lexical entries) as 
+
+\{RuleBinary $\mathit{id}$ $m$ $d_1$ $d_2$\}
+
+Similarly a unary rule with ID $\mathit{id}$ whose mother category is $m$
+and whose daughter category is $d$ is modelled by the
+function
+
+
+$\lambda r$:\record{\mfield{cat}{$d$}{\textit{Cat}} \\
+                                    \tfield{id}{\textit{Id}}} \\
+\hspace*{2em} (\record{\mfield{cat}{$m$}{\textit{Cat}} \\
+                       \mfield{id}{$\mathit{id}$($r$.id)}{\textit{Id}} \\
+                       \tfield{daughters}{\record{\mfield{first}{$r$}{\record{\mfield{cat}{$d$}{\textit{Cat}}}} \\
+                                                  \mfield{rest}{[]}{[\textit{Rec}]}}}})
+
+and is abbreviated as
+
+\{RuleUnary $\mathit{id}$ $m$ $d$\}
+
+
+\begin{quote}
+\{RuleBinary s\_np\_vp s np vp\} \\
+\{RuleBinary np\_det\_n np det n\} \\
+\{RuleBinary vp\_cop\_np vp cop np\} \\
+\{RuleBinary d\_d\_s d d s\} \\
+\{RuleUnary d\_s d s\}
+\end{quote}
+The last two rules are discourse rules which say that a discourse can
+either consist of a discourse and a sentence or just a single
+sentence.  The idea is that the grammar should give us enough
+information to be able to parse a turn as a single unit and that a
+turn may contain more than one sentence e.g. \textit{Ok. Dudamel is a
+  composer.}
+
+The concrete syntax for English refines these lexical entries and
+rules using information from the resource grammar for English.  The
+resource grammar provides phonological and morphological information,
+including information about word order.  We will treat semantics
+separately.  The resource grammar provides methods for refining
+whatever abstract syntax has been defined.  In the definition of the
+concrete syntax we will normally use abbreviations of the form
+
+\{ResGram.$a$ Abs.$a$\}
+
+where $a$ is some lexical item or rule introduced in the abstract
+syntax.  `ResGram.$a$' is the refinement method defined in the
+resource grammar for $a$ and `Abs.$a$' is the item defined in the
+abstract syntax for $a$.  (Mentioning $a$ twice in the formulation allows us the
+possibility of using different names in the resource grammar and
+abstract syntax if we wish: \{ResGram.$b$ Abs.$a$\}.)  `ResGram' and
+`Abs' are to be thought of as variables representing the particular
+resource grammar and abstract syntax in use for the concrete syntax we
+are defining.
+
+The resource grammar makes use of a universal grammar resource in
+defining the refinements.  Thus, for example, the English resource
+grammar defines the proper name `Beethoven' to be associated with the
+method
+
+\{LexItemPhon $\alpha$ [beethoven]\}
+
+where $\alpha$ is a record type (that provided by the abstract syntax)
+and `[beethoven]' is our mock representation of the phonology -- a
+list of words.  The universal grammar resource defines
+
+\{LexItemPhon $\alpha$ $a$\}
+
+to be
+
+$\alpha$\d{$\wedge$}{\record{\mfield{phon}{$a$}{\textit{Phon}}}}
+
+This is not particularly deep linguistic theory but it does allow us
+to separate out the language particular fact of the phonology
+associated with the proper name and the general theoretical decision
+that phonology should be represented in a field labelled ``phon''.
+And, as we pointed out before, our universal linguistic theory will
+get more interesting as we progress.  In the case of words which
+decline or conjugate the resource grammar yields a whole paradigm in
+the form of a record.  Thus the English resource grammar defines the
+word \textit{composer} to be associated with
+
+\{RegN $\alpha$ composer\}
+
+\{RegN $\alpha$ $w$\}
+
+is defined to be
+
+\record{\field{sg}{\{Singular \{LexItemPhon $\alpha$ [$w$] \}\}} \\
+        \field{pl}{\{Plural \{LexItemPhon $\alpha$ [\{AddS $w$\}]\}\}}}
+
+where \{Singular $\beta$\} and \{Plural $\beta$\} are defined in the
+universal grammar resource to be respectively:
+
+$\beta$\d{$\wedge$}\record{\tfield{agr}{\record{\mfield{num}{sg}{\textit{Number}}}}}
+
+$\beta$\d{$\wedge$}\record{\tfield{agr}{\record{\mfield{num}{pl}{\textit{Number}}}}}
+
+and \{AddS $w$\} abbreviates a morphophonological method defined in
+the English resource grammar which adds an \textit{s}-morpheme to a
+lexical item (which in turn makes use of phonological operations
+defined in a universal phonology resource).
+
+Each lexical entry in the concrete syntax chooses one element in the
+paradigm.  Thus the concrete lexicon for our small grammar is defined
+by\footnote{We ignore the fact that the indefinite article should
+  actually provide a paradigm consisting of \textit{a} and \textit{an}}:
+
+\{ResGram.Dudamel Abs.Dudamel\} \\
+\{ResGram.Beethoven Abs.Beethoven\} \\
+\{ResGram.IndefArt Abs.IndefArt\} \\
+\{ResGram.composer Abs.composer\}.sg \\
+\{ResGram.conductor Abs.conductor\}.sg \\
+\{ResGram.be Abs.be\}.pres.third.sg \\
+\{ResGram.ok Abs.ok\} \\
+\{ResGram.aha Abs.aha\}
+
+The refinement of rules also makes use of methods defined in the
+English resource grammar.
+
+\{ResGram.S\_NP\_VP Abs.S\_NP\_VP\} \\
+\{ResGram.NP\_Det\_N Abs.NP\_Det\_N\} \\
+\{ResGram.VP\_Cop\_NP Abs.VP\_Cop\_NP\} \\
+\{ResGram.D\_D\_S Abs.D\_D\_S\} \\
+\{ResGram.D\_S Abs.D\_S\}
+
+The binary rules defined in the resource grammar all make use of a
+universal resource which adds left-right concatenation of phonology to
+a rule.  Left-right concatenation of phonology for a binary rule is expressed by the
+function
+
+\begin{ex}
+\label{eg:lrconcatphon}
+$\lambda r_1$ \record{\tfield{phon}{\textit{Phon}}} \\
+\hspace*{2em} $\lambda r_2$ \record{\tfield{phon}{\textit{Phon}}} \\
+\hspace*{4em} (\record{\mfield{phon}{$r_1$.phon$^{\frown}r_2$.phon}{\textit{Phon}}})
+\end{ex}
+
+where $r_1$.phon$^{\frown}r_2$.phon is the left-right concatenation of the two
+phonologies. This function has to be merged with the function obtained
+from the abstract grammar.  The merging of two functions,
+$\mu(f_1,f_2)$ is defined by:
+\begin{quote}
+if $f_1$ is $\lambda v_1:T_1(\phi(v_1))$ and $f_2$ is $\lambda v_2:T_2(\psi(v_2))$ then $\mu(f_1,f_2)$ is $\lambda v_1:T_1$\d{$\wedge$}$T_2(\mu(\phi(v_1),\psi(v_1)))$
+
+if $f_1$ and $f_2$ are record types then $\mu(f_1,f_2)$ is
+$f_1$\d{$\wedge$}$f_2$
+
+otherwise $\mu(f_1,f_2)$ is undefined
+
+\end{quote}
+
+This means that if we have an abstract rule of the form
+(\ref{eg:abstractbinary}), the result of merging it with
+(\ref{eg:lrconcatphon}) will be:
+
+$\lambda r_1$:\record{\tfield{phon}{\textit{Phon}} \\
+                      \mfield{cat}{$d_1$}{\textit{Cat}} \\
+                      \tfield{id}{\textit{Id}}} \\
+\hspace*{2em} $\lambda r_2$:\record{\tfield{phon}{\textit{Phon}} \\
+                                    \mfield{cat}{$d_2$}{\textit{Cat}} \\
+                                    \tfield{id}{\textit{Id}}} \\
+\hspace*{4em} (\record{\mfield{phon}{$r_1$.phon$^{\frown}r_2$.phon}{\textit{Phon}} \\
+                       \mfield{cat}{$m$}{\textit{Cat}} \\
+                       \mfield{id}{$\mathit{id}$($r_1$.id)($r_2$.id)}{\textit{Id}} \\
+                       \tfield{daughters}{\record{\mfield{first}{$r_1$}{\record{\mfield{cat}{$d_1$}{\textit{Cat}}}} \\
+                                                  \tfield{rest}{\record{\mfield{first}{$r_2$}{\record{\mfield{cat}{$d_1$}{\textit{Cat}}}} \\
+                                                                        \mfield{rest}{[]}{[\textit{Rec}]}}}}}})
+
+This is the simplest kind of refinement from a rule of abstract syntax
+to a rule of concrete syntax, just adding basic phonological
+information to the rule.  Additional refinements for individual rules
+can, for example, include constraints on agreement.  The universal
+grammar resource provides us with a method for obtaining functions which require the second
+daughter to agree with the first daughter on a certain agr-field
+labelled $\ell$ associated with type $T$ (e.g. `num' and
+\textit{Number} respectively): 
+
+
+
+$\lambda r_1$: \smallrecord{\smalltfield{agr}{\smallrecord{\smalltfield{$\ell$}{$T$}}}} \\
+\hspace*{2em} $\lambda r_2$: \smallrecord{\smalltfield{agr}{\smallrecord{\smalltfield{$\ell$}{$T$}}}} \\
+\hspace*{4em} (\record{\tfield{daughters}{\record{\tfield{first}{\smallrecord{\smalltfield{agr}{\smallrecord{\smalltfield{$\ell$}{$T$}}}}} \\
+                                                  \tfield{rest}{\record{\tfield{first}{\record{\tfield{agr}{\smallrecord{\smallmfield{$\ell$}{daughters.first.agr.$\ell$}{$T$}}}}}}}}}})
+
+The English rule for subject-verb agreement will use this twice: once
+for number agreement and once for person agreement.  Putting all this
+together,  we obtain the following function as the instantiation of
+\{ResGram.S\_NP\_VP Abs.S\_NP\_VP\}:
+
+$\lambda r_1$: \record{\tfield{phon}{\textit{Phon}} \\
+                      \mfield{cat}{np}{\textit{Cat}} \\
+                      \tfield{agr}{\record{\tfield{num}{\textit{Number}} \\
+                                           \tfield{pers}{\textit{Person}}}} \\
+                      \tfield{id}{\textit{Id}}} \\
+\hspace*{2em} $\lambda r_2$: \record{\tfield{phon}{\textit{Phon}} \\
+                                    \mfield{cat}{vp}{\textit{Cat}} \\
+                                    \tfield{agr}{\record{\tfield{num}{\textit{Number}} \\
+                                                         \tfield{pers}{\textit{Person}}}} \\
+                                    \tfield{id}{\textit{Id}}} \\
+\hspace*{4em} (\smallrecord{\smallmfield{phon}{$r_1$.phon$^{\frown}r_2$.phon}{\textit{Phon}} \\
+                       \smallmfield{cat}{s}{\textit{Cat}} \\
+                       \smalltfield{daughters}{\smallrecord{\mfield{first}{$r_1$}{\record{\mfield{cat}{np}{\textit{Cat}} \\
+                                                                                \tfield{agr}{\record{\tfield{num}{\textit{Number}} \\
+                                                                                                     \tfield{pers}{\textit{Person}}}}}} \\
+                                                  \tfield{rest}{\record{\mfield{first}{$r_2$}{\record{\mfield{cat}{vp}{\textit{Cat}} \\
+                                                                                                      \tfield{agr}{\record{\mfield{num}{daughters.first.agr.num}{\textit{Number}} \\
+                                                                                                                           \mfield{pers}{daughters.first.agr.pers}{\textit{Person}}}}}} \\
+                                                                        \mfield{rest}{[]}{[\textit{Rec}]}}}}} \\
+                       \smallmfield{id}{s\_np\_vp($r_1$.id)($r_2$.id)}{\textit{Id}}})
+
+Now let us consider how to build a Swedish concrete syntax for this
+abstract syntax.  The basic idea is that the definition of the Swedish
+concrete syntax is the same as the definition of the English concrete
+syntax except that now `ResGram' refers to the Swedish resource
+grammar rather than the English one, with some adjustments for the
+different morphologies (utrum gender and indefinite forms of nouns), represented below.  
+
+
+\{ResGram.Dudamel Abs.Dudamel\} \\
+\{ResGram.Beethoven Abs.Beethoven\} \\
+\{ResGram.IndefArt Abs.IndefArt \}.utr \\
+\{ResGram.tonsättare Abs.composer\}.sg.indef \\
+\{ResGram.dirigent Abs.conductor\}.sg.indef \\
+\{ResGram.vara Abs.be\}.pres \\
+\{ResGram.ok Abs.ok\} \\
+\{ResGram.jaha Abs.aha\}
+
+
+There is, however, a slight
+complication with this simple picture when it comes to syntactic constructions.  Where English has
+
+\begin{quote}
+Dudamel is a conductor
+\end{quote}
+
+Swedish has
+
+\begin{quote}
+Dudamel \egstack{är \\ \textit{is}} \egstack{dirigent \\ \textit{conductor}}
+\end{quote}
+
+without the indefinite article.  And similarly:
+
+\begin{quote}
+Beethoven \egstack{är \\ \textit{is}} \egstack{tonsättare \\
+  \textit{composer}}
+\end{quote}
+
+In order to handle this we use the following rules:
+
+\{ResGram.S\_NP\_VP Abs.S\_NP\_VP\} \\
+\{ResGram.NP\_N \{UResAbs.ApplyRule Abs.NP\_Det\_N Abs.indefArt\}\} \\
+\{ResGram.VP\_Cop\_NP Abs.VP\_Cop\_NP\} \\
+\{ResGram.D\_D\_S Abs.D\_D\_S\} \\
+\{ResGram.D\_S Abs.D\_S\}
+
+With one exception these rules are the same as those we used for
+English except that now `ResGram' is being used to refer to the
+Swedish resource grammar.  The exception is that instead of the rule
+that says that NPs may consist of a determiner followed by a noun we
+are now using a rule that says that NPs may consist of just a noun.
+This means that there is a mismatch between our concrete syntax and
+the abstract syntax that we are using which has the rule with a
+determiner.  Thus the concrete syntax rule here is not strictly a
+refinement of the corresponding abstract syntax rule.  Rather it is a
+refinement of the result of applying the abstract syntax rule NP\_Det\_N to the
+abstract indefinite article.  The method for obtaining the result of
+such an application in given in a universal resource concerned with
+the construction and manipulation of abstract syntax representations.
+The resulting concrete rule is:
+
+$\lambda r:$\record{\tfield{phon}{\textit{Phon}} \\
+                    \mfield{cat}{n}{\textit{Cat}} \\
+                    \tfield{agr}{\textit{Rec}} \\
+                    \tfield{id}{\textit{Id}}} \\
+\hspace*{2em}(\record{\mfield{phon}{$r$.phon}{\textit{Phon}} \\
+                      \mfield{cat}{np}{\textit{Cat}} \\
+                      \mfield{agr}{daughters.first.agr}{\textit{Rec}} \\
+                      \tfield{daughters}{\record{\mfield{first}{$r$}{\record{\mfield{cat}{n}{\textit{Cat}}}} \\
+                                                 \mfield{rest}{[]}{\textit{Rec}}}} \\
+                      \mfield{id}{np\_det\_n(`IndefArt')($r$.id)}{\textit{Id}}})
+
+Note that the daughters-field reflects the concrete [$_\mathrm{NP}$ N]
+structure whereas the id-field reflects the abstract [$_\mathrm{NP}$
+Det N] structure with the indefinite article.  There is no particular
+motivation for having the [$_\mathrm{NP}$ Det N] structure in abstract
+syntax and then relating that to the [$_\mathrm{NP}$ N] in Swedish as
+opposed to having the [$_\mathrm{NP}$ N] structure in the abstract
+syntax and adding in the determiner in the concrete syntax of
+English.  The reason is simply that we built our abstract syntax first
+with English in mind.  We imagine that it might be the case that an
+agent which first learns English and then learns Swedish would have
+the analysis we have presented whereas an agent that learnt Swedish
+first would have the alternative solution.  The exact nature of the
+abstract syntax is not what is important for the characterization of
+linguistic theory.  Linguistic universals lie rather in the nature
+of the operations available to the language learner for relating
+abstract structures to natural language utterances.  Our theory is not
+so much about precisely which structures are associated with natural
+language expressions as about what tools are available to an agent for
+constructing representations and how these tools will be used given
+the agent's previous linguistic experience.
+
+This is, of course, a much simplified and stripped down discussion
+which touches on a very complex issue of Swedish concerning when the
+indefinite article is or is not to be used in such sentences.  For our
+little example we are just taking the option of not using the
+indefinite article but there is a great deal of subtlety in its use
+which as far as we know is still not completely understood.
+
+
+So far we have been representing the interpretation of the name
+\textit{Dudamel} by something that looks like a logical constant
+`Dudamel'.  Proper names in natural languages are context dependent.
+Even within a restricted musical domain it is quite likely that
+\textit{Strauss} can be used to refer to either Richard Strauss or
+Johann Strauss.  Without an appropriate context to identify the person
+being referred to we only get the information from a use of a proper
+name that some individual with that name is being referred to.  We
+know that an assumption is being made that we are in a context of a
+certain type, i.e. one which contains an individual bearing the name.
+This context type we will model as a record type such as:
+
+\begin{ex}
+\label{eg:dudamel-contexttype}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c}{named(x, ``Dudamel'')}}
+\end{ex}
+
+We will use models to help us formalize the notion of contexts of this
+type.  Our models will be very close to the kind of models which are
+used for the intepretation of first order logic.  A model will be a
+pair $\langle A,F \rangle$ where $A$ is a function which assigns sets
+to all our basic types, such as \textit{Ind}, and $F$ is a function
+which assigns a set of proof objects (possibly empty) to each
+combination of a predicate with appropriate arguments, that is
+arguments which correspond to the arity associated with the predicate,
+specifying number, order and type of arguments associated with the
+predicate.  In order to handle (\ref{eg:dudamel-contexttype}) we can
+assume two basic types: \textit{Ind} and \textit{Name}.  A minimal
+model to handle (\ref{eg:dudamel-contexttype}) could be one where $A$
+is defined by
+\begin{ex}
+\label{eg:dudamel-model}
+$A(\mathit{Ind})=\{d\}$ \\
+$A(\mathit{Name})=\{\mathrm{``Dudamel"}\}$
+\end{ex}
+Assuming that the arity of the predicate `named' is $\langle
+\mathit{Ind},\mathit{Named} \rangle$ the only type we can construct
+with this predicate based on this model is 
+\begin{quote}
+named($d$,``Dudamel'')
+\end{quote}
+This means that we can define $F$ by
+\begin{quote}
+$F(\mathrm{named}(d,\mathrm{``Dudamel"}))=\{p\}$
+\end{quote}
+The exact nature of the proof object $p$ is very often not important.  In many
+applications we are only interested in whether a given type
+constructed with a predicate as assigned the empty set or a non-empty
+set (corresponding to the two truth values of classical logic).
+However, our type theoretical framework gives us the power to make
+fine-grained distinctions among proof objects and to make distinctions
+according to the number of proof objects available (since we are
+dealing with sets of proof objects).
+
+The models are defined in order to define what objects are of certain
+types where this is not defined by the general type theory.  We have
+formulated them in this way in order to draw an obvious parallel with
+classical first order models.  However, the same effect can be
+achieved by adding the following judgements to our type theory
+\begin{quote}
+$d$ : \textit{Ind} \\
+``Dudamel'' : \textit{Name} \\
+$p$ : named($d$,``Dudamel'')
+\end{quote}
+together with a general requirement that nothing else belongs to these
+types except as required above.
+
+Now that we have a model we can \textit{instantiate}
+(\ref{eg:dudamel-contexttype}) in this model.  The only instantiation
+available to it in this model is
+
+\record{\field{x}{$d$} \\
+        \field{c}{$p$}}
+
+To instantiate a record type in a model we construct a record with
+fields with the same labels and with values which are instantiations
+of the types in the record-type fields.  The instantiation of a basic
+type or a type constructed with a predicate is one of the objects
+assigned to it in the model.  This, then is a record, based on the
+model, which represents a
+context of the type (\ref{eg:dudamel-contexttype}).  Note that this
+record does not occur in the model.  The model represents the world as
+it is.  When I go to a concert given by the Gothenburg Symphony
+Orchestra conducted by Gustavo Dudamel there are certainly many
+mysterious objects the exact nature and ontological status of which is
+still quite unclear to us, such as symphonies, performances, musical
+interpretations, an orchestra which seems to take on a different
+extension for different pieces of music.  Even Dudamel himself, an
+individual if ever there was one, is ontologically mysterious.  To
+what extent does his, or any other individual's, individuation depend
+on our cognition?  What seems clear, though, is that none of these
+objects, whatever they are, are records.  They do not come structured
+into collections of fields with labels attached.  Our idea is that the
+mathematical objects we are calling records model something that
+arises in cognition.  The labels give us handles (in the computational
+sense) that enable cognitive processes such as compositional
+interpretation and anaphora.
+
+This is not the only record of the type (\ref{eg:dudamel-contexttype})
+which is yielded by our model.  Even if we tie down the particular
+individual which is Dudamel and the particular proof that he is called
+by the name ``Dudamel'' there could be other fields in the record and
+these would not change the fact that the record is of the type
+(\ref{eg:dudamel-contexttype}).  When we determine that for a given
+utterance of the name \textit{Dudamel} the referent will be Gustavo
+Dudamel, among other things Music Director of the Gothenburg Symphony
+Orchestra, we do not thereby fix a specific context.  Rather we refine
+the context type from (\ref{eg:dudamel-contexttype}) to
+
+\record{\mfield{x}{$d$}{\textit{Ind}} \\
+        \mfield{c}{$p$}{named(x, ``Dudamel'')}}
+
+This is a \textit{fully specified} record type in that all its fields
+are manifest, but it is nevertheless not a singleton type because it
+has records with additional fields among its members.  
+
+It is important that we model reference resolution in terms of context
+type refinement rather than context type instantiation.  Suppose that
+we are interpreting something containing two occurrences of proper
+names, say \textit{Dudamel} and \textit{Järvi}.  At a certain point in
+the interpretation process we may have determined the referent of
+\textit{Dudamel} but not that of \textit{Järvi} (possibly Neeme Järvi,
+principal conductor emeritus of the Gothenburg Symphony Orchestra,
+possibly one of his children Paavo, Kristjan (both conductors) and
+Maarika (flautist) and so on).  We can model this partial resolution
+by the partially specified record type
+
+\begin{ex}
+\label{eg:DudamelJaervi-partialres}
+\record{\mfield{x$_1$}{$d$}{\textit{Ind}} \\
+        \mfield{c$_1$}{$p$}{named(x$_1$, ``Dudamel'')} \\
+        \tfield{x$_2$}{\textit{Ind}} \\
+        \tfield{c$_2$}{named($x_2$, ``Järvi'')}}
+\end{ex}
+
+Refining a type with respect to a model is like instantiating a type
+with respect to that model except that instead of constructing a
+record with appropriate values from the model we construct a new type
+with singleton types for the values in the way the we have shown
+above.  If no appropriate value is available from the model for any
+field in the type then the result of the refinement is the original
+type.  This means that the refinement of the type
+
+\begin{ex}
+\label{eg:DudamelJaervi-type}
+\record{\tfield{x$_1$}{\textit{Ind}} \\
+        \tfield{c$_1$}{named(x$_1$, ``Dudamel'')} \\
+        \tfield{x$_2$}{\textit{Ind}} \\
+        \tfield{c$_2$}{named($x_2$, ``Järvi'')}}
+\end{ex}
+
+in the model (\ref{eg:dudamel-model}) is (\ref{eg:DudamelJaervi-type})
+itself.  It cannot be refined further in (\ref{eg:dudamel-model}) since there is no individual
+named Järvi in the model.  How, then, can we go about obtaining
+partial specifications such as (\ref{eg:DudamelJaervi-partialres})?  Note
+that while (\ref{eg:DudamelJaervi-type}) cannot be refined further in
+(\ref{eg:dudamel-model}), (\ref{eg:dudamel-contexttype}) can.
+(\ref{eg:DudamelJaervi-partialres}) could be defined for example as
+
+\record{\tfield{x$_1$}{\textit{Ind}} \\
+        \tfield{c$_1$}{named(x$_1$,
+          ``Dudamel'')}}$_{(\ref{eg:dudamel-model})}$ \d{$\wedge$} \record{
+                                                                  \tfield{x$_2$}{\textit{Ind}} \\
+                                                                  \tfield{c$_2$}{named($x_2$,
+                                                                    ``Järvi'')}}$_{(\ref{eg:dudamel-model})}$
+
+where we use $T_M$ to represent a refinement of $T$ in model $M$.  The
+idea is that context type refinement will be carried out individually
+on natural language constituents such as noun-phrases and the results
+assembled by simplifying meets (i.e. \d{$\wedge$}).  Note that it is
+\textit{not} in general the case that
+${T_1}_M$\d{$\wedge$}${T_2}_M$=($T_1$\d{$\wedge$}$T_2$)$_M$.
+
+We are being a bit loose here in referring to $T_M$ as \textit{a}
+refinement of $T$ in $M$.  There could, of course, be several objects
+in $M$ fulfilling the constraints of $T$ and thus several different ways of
+refining it.  One way to make refinement in a model functional is to
+only look at unique refinements and to say that $T_M=T$ in cases where
+there is more than one possible way of doing the refinement.  Another
+way is to work with sets of refinements  and a third way is to have a choice function
+which picks out one particular refinement when there are many
+(possibly like an $\epsilon$ operator).  
+
+
+[from ddl-final]
+
+In order to illustrate how the content we have given for \textit{ran}
+in section~\ref{sec:TTR-verbs} figures in a grammar and compositional semantics we shall
+define a toy grammar which covers the sentence \textit{Sam ran}. 
+
+We will present our grammar in terms of signs (in a similar sense to
+HPSG, see, for example, \cite{Sag:Wasow:ea:03}).  Our signs will be
+records of type \textit{Sign} which for present purposes we will take
+to be the type:
+\begin{display}
+\record{\tfield{s-event}{\textit{SEvent}}
+                               \\
+        \tfield{synsem}{\record{\tfield{cat}{\textit{Cat}}\\
+                                \tfield{cnt}{\textit{Cnt}}}}}
+\end{display}
+\noindent We shall spell out the nature of the types \textit{SEvent},
+\textit{Cat} and \textit{Cnt} below.  A sign 
+has two main components, one corresponding to the physical nature of
+the speech event (`s-event') and the other to its interpretation
+(syntax and semantics, `synsem', using the label which is
+well-established in HPSG).
+
+\textit{SEvent} is the type 
+\begin{quote}
+\record{\tfield{phon}{\textit{Phon}}\\
+                                 \tfield{s-time}{\record{\tfield{start}{\textit{Time}}
+                                     \\
+                                                         \tfield{end}{\textit{Time}}}}\\
+                                 \tfield{utt$_\mathrm{at}$}{$\langle
+                                   \lambda v_1:$\textit{Str}$(\lambda
+                                   v_2:$\textit{Time}($\lambda
+                                   v_3:$\textit{Time}(uttered\_at($v_1$,$v_2$,$v_3$)))), \\
+                                   & &
+                                   \hspace*{2em}$\langle$s-event.phon,
+                                   s-event.s-time.start,
+                                   s-event.s-time.end$\rangle\rangle$}}
+\end{quote}
+
+   In the s-event component the
+phon-field represents the phonology of an expression. Here we will
+take phonology
+as a string of word utterances although in a complete treatment of spoken
+language we would need phonological and phonetic attributes.  That is
+we take \textit{Phon} to be \textit{Wrd}$^+$ where \textit{Wrd} (the
+type of word utterances) is defined in the lexicon.  The
+s-time (``speech time'') field represents the starting and ending time
+for the utterance.  We assume the existence of a predicate
+`uttered\_at' with arity
+$\langle\mathit{Phon},\mathit{Time},\mathit{Time}\rangle$.  An object of type
+`uttered\_at($a$,$t_1$,$t_2$)' could be an event where $a$ is uttered
+beginning at $t_1$ and ending at $t_2$ or a corresponding hypothesis
+produced by a speech recognizer with time-stamps, depending on the application of the
+theory.  In a more complete treatment we would need additional
+information about the physical nature of the speech event, such as the
+identity of the speaker and where it took place.  
+
+In the synsem component
+the cat-field introduces a category for the phrase.  For present
+purposes we will require that the following hold of the type
+\textit{Cat}:
+\begin{quote}
+s, np, vp, n$_{\mathrm{prop}}$, v$_{\mathrm{i}}$ : \textit{Cat}
+\end{quote}
+The objects of type \textit{Cat} (s, np, vp etc.) are regarded as
+convenient abstract objects which are used to categorize classes of
+speech events.
+
+The cnt-field represents the content or interpretation of the
+utterance.  
+Since the content types become rather long we will introduce
+abbreviations to make them readable:
+\begin{quote}
+\textit{Ppty}, ``property'' is to be
+\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType}
+  \\
+\textit{Quant}, ``quantifier'' is to be
+\textit{Ppty}$\rightarrow$\textit{RecType} %\\
+% if $T$ is a type then $^\sigma T$ is to be
+% \textit{Seq}$_{\mathit{Ind}}\rightarrow T$ 
+\end{quote}
+We only use a small finite number of function types for content
+types and thus we are able to define the type \textit{Cnt} for present
+purposes as
+\begin{quote}
+\textit{RecType}$\vee$(\textit{Ppty}$\vee$\textit{Quant})
+% \ignore{\smallrecord{\smalltfield{x}{\textit{Ind}}} $\vee$\\(}$^\sigma$\textit{RecType}
+% $\vee$\\($^\sigma$\textit{Prop} $\vee$\\($^\sigma$\textit{Quant}
+% %$\vee$\\($^\sigma$(\textit{Prop}$\rightarrow$\textit{Prop})
+% $\vee$\\($^\sigma$(\textit{Quant}$\rightarrow$\textit{Prop})
+% $\vee$\\($^\sigma$(\textit{RecType}$\rightarrow$\textit{Prop})
+% $\vee$\\($^\sigma$(\textit{Prop}$\rightarrow$\textit{Quant}) 
+% %$\vee$\\$^\sigma$(\textit{Quant}$\rightarrow$(\textit{Prop}$\rightarrow$\textit{Prop}))
+% )))))\ignore{))}
+\end{quote}
+This makes use of join types which are defined in a similar way to
+meet types:
+\textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has join types} if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $(T_1\vee T_2) \in \mathbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $a:_{\mathbf{TYPE_C}}(T_1\vee T_2)$ iff
+  $a:_{\mathbf{TYPE_C}}T_1$ or $a:_{\mathbf{TYPE_C}}T_2$ 
+ 
+\end{enumerate} 
+% This means that we can define \textit{Sign}, the type of signs, to be
+% \begin{display}
+% \record{\tfield{s-event}{\record{\tfield{phon}{\textit{Str}}\\
+%                                  \tfield{s-time}{\record{\tfield{start}{\textit{Time}}
+%                                      \\
+%                                                          \tfield{end}{\textit{Time}}}}\\
+%                                  \tfield{utt$_\mathrm{at}$}{$\langle
+%                                    \lambda v_1:$\textit{Str}$(\lambda
+%                                    v_2:$\textit{Time}($\lambda
+%                                    v_3:$\textit{Time}(uttered\_at($v_1$,$v_2$,$v_3$)))), \\
+%                                    & &
+%                                    \hspace*{2em}$\langle$s-event.phon,
+%                                    s-event.s-time.start, s-event.s-time.end$\rangle\rangle$}}}
+%                                \\
+%         \tfield{synsem}{\record{\tfield{cat}{\textit{Cat}}\\
+%                                 \tfield{cnt}{\textit{CntType}}}}}
+
+% \end{display}
+
+We will present first the lexicon and then rules for
+combining phrases.  
+
+\begin{ex} 
+If $T_1$ and $T_2$ are types and
+$f:(T_1\rightarrow(T_2\rightarrow\mathit{Type}))$ is a chart update
+function, $A$ is an agent, $s_i$ is $A$'s current information state and
+$s_i:_A T_i$ where $T_i\sqsubseteq T_1$, then an event $e:_A T_2$ (and
+$e:T_2$) licenses $s_{i+1}:_A T_i\oplus f(s_i)(e)$
+\end{ex} 
+Here we use `$\oplus$' as a variant of asymmetric merge
+(`\fbox{\d{$\wedge$}}').  It is defined by the clauses in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $(T_1^{\frown}\ldots{^{\frown}T_n})\oplus
+  ({T'_1}^{\frown}\ldots{^{\frown}T'_m}) = \\
+ T_1^{\frown}\ldots{^{\frown}(T_n}$\d{$\wedge$}$T'_1)^{\frown}\ldots{^{\frown}T'_m}$ 
+ 
+\item If either $T_1$ or $T_2$ is not a string type then $T_1\oplus
+  T_2 = T_1$\fbox{\d{$\wedge$}}$T_2$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

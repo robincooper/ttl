@@ -1,0 +1,162 @@
+% by
+% refining our update functions with the type which has been assigned to
+% the current information state.  If we have an update function
+% \nexteg{a} then an update-refinement of this function is another
+% function \nexteg{b} where both the domain type, $T_i'$, and the result type,$T_{i+1}'$ are
+% subtypes of the original domain type, $T_i$ and result type, $T_{i+1}$, that is, they
+% place more restrictions on what the current information state and the
+% new information state can be.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda r:T_i(\lambda u:T_{\mathit{utt}}(T_{i+1}))$ 
+ 
+% \item $\lambda r:T_i'(\lambda u:T_{\mathit{utt}}(T_{i+1}'))$ 
+ 
+% \end{subex} 
+   
+% \end{ex} 
+  
+
+
+and a hypothesized type of the current
+information state $T_{\mathit{curr}}$, (\ref{eg:updateFun}) will
+\textit{fire} only if $T_{\mathit{curr}} \sqsubseteq T_i$ and we can
+refine (\ref{eg:updateFun}) to 
+
+$\lambda r:T_{\mathit{curr}}$($\lambda
+e:T_e(r)$($T_{i+1}(r,e)$\d{$\wedge$}$(T_{\mathit{curr}}[r]-T_{i+1})$))
+
+That is, we require the new information state type to be a simplified
+conjunction\footnote{The meet (or conjunction) $T$ of two types $T_1\wedge
+  T_2$ is such that $a:T$ iff $a:T_1$ and $a:T_2$.  Suppose that $T_1$
+  and $T_2$ are record types.  Then $T_1$\d{$\wedge$}$T_2$ is a record
+  type which is equivalent to $T_1\wedge T_2$, that is
+  $a:T_1$\d{$\wedge$}$T_2$ iff $a:T_1\wedge T_2$.  As an example
+  consider
+  \smallrecord{\smalltfield{f}{$T_1$}}$\wedge$\smallrecord{\smalltfield{g}{$T_2$}}
+  which is equivalent to \smallrecord{\smalltfield{f}{$T_1$} \\
+                                      \smalltfield{g}{$T_2$}} which is
+  defined to be \smallrecord{\smalltfield{f}{$T_1$}}\d{$\wedge$}\smallrecord{\smalltfield{g}{$T_2$}}.}
+of what is required by the unrefined rule with the current information
+state type grounded in $r$ (i.e. with each path-name $\pi$ referring within
+$T_{\mathit{curr}}$ replaced with $r.\pi$) but minus any paths that
+occur in $T_{i+1}$.  Thus the refinement of
+(\ref{eg:updateFunIntegOwn}) with (\ref{eg:initialInfoDiac}) is
+
+$\lambda
+r$:\record{\tfield{private}{\record{\mfield{agenda}{$\left[\mbox{\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
+                                                              \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
+                                                              \smallmfield{i-force}{assert}{\textit{IForce}} \\
+                                                              \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
+                                                              \smalltfield{c}{move(actor, audience, i-force, content)}}}\right]$}{[\textit{RecType}]}}} \\
+        \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{$\emptyset$}{\{\textit{Move}\}} \\
+                                                                  \mfield{chart}{$\emptyset$}{\textit{Chart}}}}\\
+                               \mfield{commitments}{[]}{\textit{RecType}}}}}
+\\
+\hspace*{2em}$\lambda e$:\record{\tfield{moves}{\{\textit{Move}\}} \\
+                                \tfield{m}{$\in$moves$\wedge$fst($r$.private.agenda)$\wedge$\record{\mfield{actor}{User}{\textit{Ind}}}} \\
+                                \tfield{chart}{\textit{Chart}}} \\
+\hspace*{4em}(\record{\tfield{private}{\record{\mfield{agenda}{rst($r$.is.private.agenda)}{[\textit{Move}]}}}
+  \\
+                      \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{$e$.moves}{\{\textit{Move}\}} \\
+                                                                                \mfield{chart}{$e$.chart}{\textit{Chart}}}}}}}
+               \d{$\wedge$} \\
+ \hspace*{8em}             \record{\tfield{shared}{\record{\mfield{commitments}{[]}{\textit{RecType}}}}})
+
+which can be simplified to
+
+$\lambda
+r$:\record{\tfield{private}{\record{\mfield{agenda}{$\left[\mbox{\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
+                                                              \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
+                                                              \smallmfield{i-force}{assert}{\textit{IForce}} \\
+                                                              \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
+                                                              \smalltfield{c}{move(actor, audience, i-force, content)}}}\right]$}{[\textit{RecType}]}}} \\
+        \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{$\emptyset$}{\{\textit{Move}\}} \\
+                                                                  \mfield{chart}{$\emptyset$}{\textit{Chart}}}}\\
+                               \mfield{commitments}{[]}{\textit{RecType}}}}}
+\\
+\hspace*{2em}$\lambda e$:\record{\tfield{moves}{\{\textit{Move}\}} \\
+                                \tfield{m}{$\in$moves$\wedge$fst($r$.private.agenda)$\wedge$\record{\mfield{actor}{User}{\textit{Ind}}}} \\
+                                \tfield{chart}{\textit{Chart}}} \\
+\hspace*{4em}(\record{\tfield{private}{\record{\mfield{agenda}{rst($r$.is.private.agenda)}{[\textit{RecType}]}}}
+  \\
+                      \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{$e$.moves}{\{\textit{Move}\}} \\
+                                                                                \mfield{chart}{$e$.chart}{\textit{Chart}}}} \\
+                                              \mfield{commitments}{[]}{\textit{RecType}}}}})
+
+Given a supposition that the current information state is of type
+(\ref{eg:initialInfoDiac}) and that there is an event of type 
+
+\record{\mfield{moves}{\{$m$\}}{\{\textit{RecType}\}} \\
+        \mfield{m}{$m$}{\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
+                       \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
+                       \smallmfield{i-force}{assert}{\textit{IForce}} \\
+                       \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
+                       \smalltfield{c}{move(actor, audience, i-force,
+                         content)}}} \\
+        \mfield{chart}{$K$}{\textit{Chart}}}
+
+then we can come to the conclusion that the new information state is
+of type
+
+\record{\tfield{private}{\record{\mfield{agenda}{[]}{[\textit{RecType}]}}}
+  \\
+                      \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{\{$m$\}}{\{\textit{Move}\}} \\
+                                                                                \mfield{chart}{$K$}{\textit{Chart}}}} \\
+                                              \mfield{commitments}{[]}{\textit{RecType}}}}}
+
+
+
+Note that this
+function is specific to a particular agent `User' since it makes
+reference to the user in characterizing the actor of the perceived
+event.  In order to give an agent independent characterization of the
+update function we need to add another argument to it for the agent's
+``self'':
+
+$\lambda a$:\record{\tfield{self}{\textit{Ind}}} \\
+\hspace*{2em}$\lambda
+r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}}
+\\
+\hspace*{4em}$\lambda e$:\record{\tfield{moves}{\{\textit{Move}\}} \\
+                                \tfield{m}{$\in$moves$\wedge$fst($r$.private.agenda)$\wedge$\record{\mfield{actor}{$a$.self}{\textit{Ind}}}} \\
+                                \tfield{chart}{\textit{Chart}}} \\
+\hspace*{6em}(\record{\tfield{private}{\record{\mfield{agenda}{rst($r$.is.private.agenda)}{[\textit{RecType}]}}}
+  \\
+                      \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{$e$.moves}{\{\textit{Move}\}} \\
+                                                                                \mfield{chart}{$e$.chart}{\textit{Chart}}}}}}})
+
+The stock of update functions that an agent has available result from
+applying functions like this to a record representing the agent's view
+of itself.
+
+
+\\
+                                              \mfield{commitments}{$r$.shared.commitments\d{$\wedge$}$e$.m.content}{\textit{RecType}}
+
+
+ \\
+           \tfield{shared}{\record{\tfield{commitments}{\textit{RecType}}
+
+This raises, of course,  the question of how the user discovers what
+the content of the acknowledgement is, given that the system only says
+\textit{ok}.  This issue is not addressed by the update function.
+Rather we see this as a problem of assigning an appropriate move type
+to the system's utterance and thus we will return to this question
+below when we discuss semantics and we will treat it as a case of
+anaphora resolution which is to be solved by reference to content
+introduced in the latest-utterance field of the information state.
+
+% $\lambda a$:\record{\tfield{self}{\textit{Ind}}} \\
+% \hspace*{2em}$\lambda
+% r$:\record{\tfield{shared}{\record{\tfield{commitments}{\textit{RecType}}}}}
+% \\
+% \hspace*{4em}$\lambda e$:\record{\tfield{moves}{\{\textit{Move}\}} \\
+%                                 \tfield{m}{$\in$moves$\wedge$\record{\tfield{actor}{\textit{Ind}--\textit{Ind}$_{a.\mathrm{self}}$} \\
+%                                                                     \mfield{i-force}{acknowledge}{\textit{IForce}} \\
+%                                                                     \tfield{content}{\textit{RecType}}}} \\
+%                                 \tfield{chart}{\textit{Chart}}} \\
+% \hspace*{6em}(\record{\tfield{shared}{\record{\smalltfield{latest-utterance}{\record{\mfield{moves}{$e$.moves}{\{\textit{Move}\}} \\
+%                                                                                      \mfield{chart}{$e$.chart}{\textit{Chart}}}} \\
+%                                               \mfield{commitments}{$r$.shared.commitments\d{$\wedge$}$e$.m.content}{\textit{RecType}}}}})

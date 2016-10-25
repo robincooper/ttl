@@ -1,0 +1,71 @@
+We will argue below that it is very important that the complex types
+we introduce are structured which enables them to be compared and
+modified.  This is what makes it possible to account for how agents
+exploit and adapt the resources they have as they create new language
+during the course of interaction.  It is not quite enough, however, simply
+to have objects with components.  We also need a systematic way of
+accessing these components, a system of labelling which will provide
+us with handles for the various pieces.  This is where the record
+types of TTR come in.  There is a large literature on type theories
+with records in computer science, for example,
+\cite{Tasistro1997,Betarte1998,BetarteTasistro1998,CoquandPollackTakeyama2004}.
+Our notion of record type is closely related to those discussed in
+this literature, though (like the rest of TTR) couched in rather
+different terms.  For us a record type is a set of fields where each
+field is an ordered pair of a label and a type (or a pair consisting
+of a dependent type and a sequence of path names corresponding to what
+the type is to depend on).  A record belonging to such a type is a set
+of fields which includes fields with the same labels as those occurring
+in the type.  Each field in the record with a label matching one in
+the type must contain an object belonging to the type of the
+corresponding field in the type.  This is made precise in
+Section~\ref{sec-records}.
+
+It is an important aspect of human cognition that we not only appear
+to construct complex cognitive objects out of smaller ones as their
+components but that we also have ways of accessing the components and
+performing operations like substitutions, deletions and additions.
+Cognitive processing also appears to depend on similarity metrics
+which require us to compare components.  Thus labelling or the
+provision of handles pointing to the components of complex objects is
+an important part of a formal theory of human cognition and in TTR it
+is the records and record types which do this work for us.
+
+The importance of labelling has been reflected in the use of features
+in linguistic theorizing ranging from the early Prague school
+\cite{Trubetzkoy1939} to modern feature based grammar
+\cite{Sag:Wasow:ea:03}.  It appears in somewhat different form in the
+use of discourse referents in the treatment of discourse anaphora in
+formal semantics \cite{KampReyle1993}.  In \cite{Cooper2005a} we argue
+that record types can be used both to model the feature structures of
+feature based grammar and the discourse representation structures of
+discourse representation theory.  This is part of a general programme
+for developing TTR to be a general type theory which underlies all our
+linguistic cognitive processing and the way in which we state the
+lexicon and grammar
+rules in Section~\ref{sec:sentsem} reflects this.  In fact, what we
+would like to see in the future is a single type theory which
+underlies all of human cognitive processing and we would suggest that
+a step towards this is
+the discussion here concerning how accounts of modality and intensionality are
+built up on the basis of typing judgements linked to perception.
+
+Working out the formal details of this proposal involves us in
+considerable complexity, as will become apparent below.  In contrast
+to the statement of TTR in \cite{Cooper2005} we attempt here to
+present interacting modules which are not that complex in themselves.
+Nevertheless, knowing exactly what you have got when you put
+everything together is not an entirely trivial matter.  It would be
+nice from a logical point of view if human cognition presented itself
+to us in neat separate boxes which we could study independently.  But
+this is not the case.  We
+are after all involved in the study of a biological system and there
+is no reason in principle why our cognitive anatomy should be any
+simpler than our physical anatomy with its multiplicity of objects
+such as organs, nerves, muscles and arteries and complex dependencies
+between them, though all built up on the basis of general principles
+of cell structure and DNA.  Compared with what we know about physical
+anatomy,  TTR seems quite modest in the number of different kinds of
+objects it proposes and the interrelationships between them.  It is
+probably going to get more complicated as the research progresses in
+the future\ldots

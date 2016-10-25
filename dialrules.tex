@@ -1,0 +1,438 @@
+\chapter{Dialogue rules}
+\label{app:dialrules}
+
+\section{Universal resources}
+
+\subsection{Types of Information States}
+\label{app:infostate}
+
+\textit{InfoState} (Chapter~\ref{ch:infex})
+
+\smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{MoveType}(\textit{SELF})]}}} \\
+        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}(\textit{SELF})} \\
+                                                                  \smalltfield{chart}{\textit{Chart}}
+                                                                \\
+                                                                  \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
+                               \smalltfield{commitments}{\textit{RecType}}}}}
+
+[??We need other options than \textit{SELF}]
+
+\textit{InitInfoState} (Chapter~\ref{ch:infex})
+
+The type of initial or empty information states
+
+\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}} \\
+        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}} 
+
+\textit{GameBoard} (Chapter~\ref{ch:propnames})
+
+$T$ : \textit{GameBoard} iff $T\sqsubseteq$ \textit{InfoState}
+
+\textit{TotalInfoState} (Chapter~\ref{ch:propnames})
+
+\record{\tfield{ltm}{\textit{RecType}} \\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} 
+
+\subsection{Action functions}
+\label{app:actfuns}
+
+\paragraph{Licensing conditions on type acts}  
+
+If
+$f:(T\rightarrow\textit{Type})$ is an action function then for any
+object $a$ and agent $A$, $a:_A T$ licenses $:_A f(a)!$
+
+\textit{de se}: If
+$f:(T\rightarrow(\textit{Ind}\rightarrow\textit{Type}))$ is an action function then for any
+object $a$ and agent $A$, $a:_A T$ licenses $:_A f(a)(A)!$
+
+
+\paragraph{ExecTopAgenda} (Chapter~\ref{ch:infex})
+
+$\lambda
+r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}} \hspace*{.5em}.
+\\
+\hspace*{2em}\record{\tfield{move}{fst($r$.private.agenda)} \\
+                                \tfield{chart}{\textit{Chart}} \\
+                                \tfield{e}{m-interp(chart,move)}} 
+
+\subsection{Perception functions (type shifts)}
+
+\paragraph{Licensing conditions on type acts}
+
+If
+$f:(T\rightarrow\textit{Type})$ is a perception function then for any
+object $o$ and agent $A$, $o:_A T$ licenses $o:_A f(o)$
+
+\textit{de se}: If
+$f:(T\rightarrow(\textit{Ind}\rightarrow\textit{Type}))$ is a perception function then for any
+object $o$ and agent $A$, $o:_A T$ licenses $o:_A f(o)(A)$
+
+\textbf{PerceiveSpeechAct}($T$), $T$$\sqsubseteq$\textit{Phon}\ \ \ (Chapter~\ref{ch:infex})
+
+$\lambda e$:\smallrecord{\smalltfield{e}{$T$} \\
+                         \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}. \\
+\hspace*{2em}\record{\tfield{move}{\record{\tfield{e}{\textit{SpeechAct}
+      \d{$\wedge$}
+\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+      
+                                                          \\
+                                                          \tfield{cnt}{\textit{Cnt}}
+                                                          \\
+                                                          \tfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                                      \\
+                          \tfield{chart}{$\mathfrak{C}_T$} \\
+                          \tfield{e}{m-interp(chart,move)}}
+
+where $\mathfrak{C}_T$ is the type of charts assigned to utterances of
+type $T$ (as a result of parsing).  In Chapter~\ref{ch:infex}
+$\mathfrak{C}_T$ is equated with $\Sigma_T$, the type of signs
+associated with utterances of type $T$.
+
+\subsection{Update functions}
+\label{app:updatefuns}
+
+\paragraph{Licensing conditions on type acts}
+
+If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
+function, $A$ is an agent, $s_i$ is $A$'s current information state,
+$s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), then an event $e:_A
+T_2$ (and $e:T_2$) licenses $s_{i+1}:_A T_i$ \fbox{\d{$\wedge$}}
+$f(s_i)(e)$.
+
+%\samepage{
+
+\paragraph{IntegrateOwnAssertion} (Chapter~\ref{ch:infex})
+
+%\nopagebreak
+
+% \hspace*{-3em}\begin{minipage}{\textwidth}
+  $\lambda
+r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{MoveType}(\textit{SELF})]}}}}
+\\
+\hspace*{1em}$\lambda
+u$:\record{\tfield{move}{fst($r$.private.agenda)
+\d{$\wedge$}
+\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}
+      \\
+                                          \smalltfield{au}{\textit{Ind}}}}}
+\d{$\wedge$}
+\smallrecord{\smalltfield{e}{\textit{Assertion}}}} \\
+                                \tfield{chart}{\textit{Chart}} \\
+                                \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+\hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}
+\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u$.move.e.au}{\textit{Ind}}
+      \\
+                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+                                                                       \\
+             \smallmfield{cnt}{$u$.move.cnt}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}  \\
+\hspace*{10em}$\mid$ rst($r$.private.agenda) \end{tabular}}{[\textit{MoveType}(\textit{SELF})]}}}
+  \\
+                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}(\textit{SELF})} \\
+                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+                                                                              \\
+\smallmfield{e}{$u$.e}{m-interp(chart,move)}}}}}}
+% \end{minipage}
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}}
+% \\
+% \hspace*{2em}$\lambda u$:\record{\tfield{move}{fst($r$.private.agenda)$\wedge$\smallrecord{\smallmfield{i-force}{assert}{\textit{IForce}}}} \\
+%                                 \tfield{chart}{\textit{Chart}} \\
+%                                 \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{4em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}}}}
+
+%}
+
+%\pagebreak
+
+
+
+\paragraph{IntegrateOtherAssertion} (Chapter~\ref{ch:infex})\nopagebreak
+
+$\lambda
+r$:\record{\tfield{private}{\record{\tfield{agenda}{[\textit{RecType}]}}}}
+\\
+\hspace*{1em}$\lambda
+u$:\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}\smallrecord{\smalltfield{sp}{\textit{Ind}} \\
+                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
+                                \\
+                                \smalltfield{cnt}{\textit{RecType}}
+                                \\
+                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                            \\
+                \smalltfield{chart}{\textit{Chart}} \\
+                \smalltfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+\hspace*{3em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+\d{$\wedge$}\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
+                           \smallmfield{au}{$u$.move.e.sp}{\textit{Ind}}}} 
+                                \\
+                                \smallmfield{cnt}{$u$.move.cnt}{\textit{RecType}}
+                                \\
+                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}} \\
+\hspace*{12em}$|\ r$.private.agenda\end{tabular}}{[\textit{RecType}]}}}
+  \\
+                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+                                                                              \\
+\smallmfield{e}{$u$.e}{m-interp(chart,move)}}
+                                                                          }}}} 
+
+%\nopagebreak
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{[\textit{RecType}]}}}}
+% \\
+% \hspace*{1em}$\lambda
+% u$:\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}} \\
+%                                 \smalltfield{c$_{\mathrm{SELF}}$}{addressed(e,SELF)}
+%                                 \\
+%                                 \smalltfield{cnt}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+%                             \\
+%                 \smalltfield{chart}{\textit{Chart}} \\
+%                 \smalltfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{3em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}\smallrecord{\smalltfield{e}{\textit{Acknowledgement}} \\
+%                                 \smalltfield{c$_{\mathrm{SELF}}$}{actor(e,SELF)}
+%                                 \\
+%                                 \smallmfield{cnt}{$u$.move.cnt}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+% $|\ r$.private.agenda\end{tabular}}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}
+%                                                                           }}}} 
+
+
+%}
+
+\paragraph{IntegrateOwnAcknowledgement} (Chapter~\ref{ch:infex})
+\nopagebreak
+
+$\lambda
+r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
+           \tfield{shared}{\record{\tfield{latest-utterance}{
+                                      \record{\tfield{move}{
+                                            \record{\tfield{content}{\textit{RecType}}}}}}
+                                    \\
+                                   \tfield{commitments}{\textit{RecType}}}}}
+\\
+\hspace*{1em}$\lambda
+u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
+\smalltfield{e}{\textit{Acknowledgement}}}\d{$\wedge$}\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}}}
+} \\
+           \tfield{chart}{\textit{Chart}} \\
+           \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+\hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
+  \\
+                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+                                                                              \\
+\smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
+                        \\
+\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cnt}{\textit{RecType}}}}}
+
+
+
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
+%            \tfield{shared}{\record{\tfield{latest-utterance}{
+%                                       \record{\tfield{move}{
+%                                             \record{\tfield{content}{\textit{RecType}}}}}}
+%                                     \\
+%                                    \tfield{commitments}{\textit{RecType}}}}}
+% \\
+% \hspace*{2em}$\lambda
+% u$:\record{\tfield{move}{fst($r$.private.agenda)$\wedge$\smallrecord{
+% \smalltfield{e}{\textit{Acknowledgement}}}
+% } \\
+%            \tfield{chart}{\textit{Chart}} \\
+%            \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{4em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
+%                         \\
+% \smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$r$.latest-utterance.move.content}{\textit{RecType}}}}} 
+
+\newpage
+
+\paragraph{IntegrateOtherAcknowledgement}
+(Chapter~\ref{ch:infex})\nopagebreak
+
+$\lambda
+r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
+           \tfield{shared}{\record{\tfield{latest-utterance}{
+                                      \record{\tfield{move}{
+                                            \record{\tfield{content}{\textit{RecType}}}}}}
+                                    \\
+                                   \tfield{commitments}{\textit{RecType}}}}}
+\\
+\hspace*{1em}$\lambda
+u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
+\smalltfield{e}{\textit{Acknowledgement}}}\d{$\wedge$}\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}}
+} \\
+           \tfield{chart}{\textit{Chart}} \\
+           \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+\hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
+  \\
+                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+                                                                              \\
+\smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
+                        \\
+\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cnt}{\textit{RecType}}}}}
+
+
+
+% $\lambda
+% r$:\record{\tfield{shared}{\record{\tfield{latest-utterance}{
+%                                       \record{\tfield{move}{
+%                                             \record{\tfield{content}{\textit{RecType}}}}}}
+%                                     \\
+%                                    \tfield{commitments}{\textit{RecType}}}}}
+% \\
+% \hspace*{2em}$\lambda
+% u$:\record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgment}} \\
+%                                 \smalltfield{c$_{\mathrm{SELF}}$}{addressed(e,SELF)}
+%                                 \\
+%                                 \smalltfield{cnt}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}} 
+% } \\
+%            \tfield{chart}{\textit{Chart}} \\
+%            \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{4em}\smallrecord{
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
+%                         \\
+% \smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$r$.latest-utterance.move.content}{\textit{RecType}}}}}
+
+
+\paragraph{Licensing conditions on accommodation updates}
+(Chapter~\ref{ch:propnames})\nopagebreak
+
+If $A$ is an agent, $s_i$ is $A$'s current information state, $f$ is a
+parametric content of type $T_f$ such that
+\begin{quote}
+$T_f$ $\sqsubseteq$ \record{\tfield{bg}{\textit{RecType}}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+\end{quote}
+ and
+$s_i:_A T_i$ for some $T_i$ such that 
+\begin{quote}
+$T_i$ $\sqsubseteq$ \smallrecord{\smalltfield{ltm}{\textit{RecType}}\\
+                                 \smalltfield{gb}{\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{commitments}{\textit{RecType}}\\
+                                                                                                 \smalltfield{latest-move}{\smallrecord{\smallmfield{cont}{$f$}{$T_f$}}}}}}}}
+\end{quote}
+then \\
+\begin{quote}
+if there is some $\eta$ which is a relabelling of $\varphi$($f$.bg) such that 
+\begin{quote}
+\mbox{$\varphi$($s_i$.gb.shared.commitments) $\sqsubseteq$ $[\varphi(f.\mathrm{bg})]_\eta$}
+\end{quote}
+% and there is some $\eta'$ which is a labelling of $\mathcal{F}(f)$ such that $\eta'$ is an extension of
+% $\eta$,\\[.25\baselineskip]  
+then $s_{i+1} :_A
+T_i$\fbox{\d{$\wedge$}}\textbf{AccGB}($\eta$)($s_i$)($f$) is
+licensed\nopagebreak\\[\baselineskip]
+else if there is some $\eta$ which is a relabelling of
+$\varphi$($f$.bg) such that $\varphi$($s_i$.ltm)
+$\sqsubseteq$ $[\varphi(f.\mathrm{bg})]_\eta$\nopagebreak\\[.25\baselineskip]
+then $s_{i+1} :_A
+T_i$\fbox{\d{$\wedge$}}\textbf{AccLTM}($\eta$)($s_i$)($f$) is
+licensed\nopagebreak\\[\baselineskip] 
+else $s_{i+1} :_A
+T_i$\fbox{\d{$\wedge$}}\textbf{AccNM}($s_i$)($f$) is
+licensed
+\end{quote} 
+
+
+
+
+\paragraph{\textbf{AccLTM}($\eta$)} (``accommodate match with long
+term memory'', Chapter~\ref{ch:propnames})\nopagebreak
+
+$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+\hspace*{1em}$\lambda
+f$: \record{\tfield{bg}{\textit{RecType}}\\
+            \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
+\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r_1$:ltm
+          . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
+\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
+             \smalltfield{bg}{$f$.bg $\parallel_\eta r_1$}\\
+             \smalltfield{e}{$f$.fg(bg)}
+}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+
+
+
+
+\paragraph{\textbf{AccNM}} (``accommodate no match'',
+Chapter~\ref{ch:propnames})\nopagebreak 
+
+$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+\hspace*{1em}$\lambda
+f$: \record{\tfield{bg}{\textit{RecType}}\\
+            \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
+\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r_1$:ltm
+          . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
+\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
+             \smalltfield{bg}{$f$.bg}\\
+             \smalltfield{e}{$f$.fg(bg)}
+}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+
+
+% $\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+%                     \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+% \hspace*{1em}$\lambda
+% f$:$\displaystyle{\bigvee_{T\sqsubseteq [\mathrm{x}:\mathit{Ind}]}}(T\rightarrow \mathit{RecType})$ . \\
+% \hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+%                            \smallmfield{gb}{$\lambda r_1$:ltm
+%           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}}\d{$\wedge$}$\mathcal{B}(f)$}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+
+
+\paragraph{\textbf{AccGB}($\eta$)}
+(``accommodate match on gameboard'',
+Chapter~\ref{ch:propnames})\nopagebreak
+
+\textbf{AccGB}($\eta$) =\\ 
+$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} . \\
+\hspace*{1em} $\lambda
+f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+              . \\
+\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+        \smallmfield{gb}{$\lambda r_1$:ltm
+          . $r$.gb($r_1$)\fbox{\d{$\wedge$}} 
+\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.gb.shared.commitments}\\
+                                                                                      \smalltfield{bg}{$f$.bg
+                                                                                        $\parallel_\eta$
+                                                                                        prev}\\
+                                                                                      \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}}{\\\hspace*{30em}(ltm$\rightarrow$\textit{RecType})}}
+
+
+
+\section{English resources}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End: 

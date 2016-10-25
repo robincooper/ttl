@@ -1,0 +1,3305 @@
+\chapter[Common nouns, intransitive verbs, frames, the Partee puzzle
+  and passengers][Common Nouns and Frames]{Common nouns, intransitive verbs, frames, the Partee puzzle
+  and passengers}
+%\markboth{CHAPTER \thechapter. COMMON NOUNS AND FRAMES}{}
+\label{ch:commonnouns}
+\setcounter{examplectr}{0}
+
+\section[Montague's treatment of common nouns and individual
+concepts][Montague's treatment of common nouns]{Montague's treatment of
+  common nouns and  individual concepts}
+The treatment of common nouns in Chapter~\ref{ch:gram} is encapsulated
+in Lex$_{\mathrm{CommonNoun}}$ in Appendix~\ref{app:lexuniversal}.
+The idea is that for a common noun such as \textit{dog} there should
+be a corresponding predicate `dog' with arity
+$\langle$\textit{Ind}$\rangle$ as well as a phonological type
+``dog''.  Then an utterance event of the type ``dog'' will be
+associated with the content in \nexteg{a} which is of type \nexteg{b}.
+\begin{ex} 
+\begin{subex}
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{e}{dog($r$.x)}} 
+\item
+  (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType})
+\end{subex}
+\label{ex:dog}
+\end{ex} 
+\cite{Montague1973} introduces predicates corresponding to common
+nouns which in his type system are of the type $\langle\langle
+s,e\rangle,t\rangle$.  The type $\langle s,e\rangle$ for Montague is
+the type of individual concepts.  These are modelled as functions from
+world-time pairs (of type $s$) to individuals (of type $e$).  The
+reason that Montague used this type rather than the simpler type
+$\langle e,t\rangle$, that is, the type of functions from individuals
+to truth-values, has to do with his treatment of the Partee puzzle
+concerning temperatures and prices which we will take up below.  Much
+subsequent research has abandoned Montague's analysis using
+individual concepts and used the simpler type $\langle e,t\rangle$.
+This alternative would correspond to \nexteg{} in our terms.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda x$:\textit{Ind}
+  . \smallrecord{\smalltfield{e}{dog($x$)}}  
+ 
+\item (\textit{Ind} $\rightarrow$ \textit{RecType}) 
+ 
+\end{subex} 
+   
+\end{ex} 
+We will argue that (\ref{ex:dog}) is preferable to \preveg{} in that records which
+are arguments to such a function are frames and that, among other
+things, frames as arguments enable us to account for the Partee
+puzzle. We made this proposal in previous work
+\citep{Cooper2010,Cooper2012}.  Here we will present a modification of
+that proposal which uses frames to introduce scales and measure
+functions and yields a more general treatment of the semantics of
+verbs like \textit{rise} than we were able to give in the earlier
+treatment.  In addition it gives us a way of treating nouns like
+\textit{passenger} where, at least on some readings, we seem to be
+predicating of passenger events, rather than individual passengers.
+We will also relate our treatment to other recent work on the
+introduction of frame semantics into formal semantics.  
+
+\section{The Partee puzzle}
+
+Perhaps the most recent discussion of the Partee puzzle is that of
+\cite{Lobnerinprep}.  As we will see, his proposal is closely related
+to our own.  The puzzle is one that Barbara Partee raised while
+sitting in on an early presentation of the material that led to
+\cite{Montague1973}.  In its simplest form it is that \nexteg{c}
+should follow from \nexteg{a,b} given some otherwise apparently
+harmless assumptions.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The temperature is rising 
+ 
+\item The temperature is ninety
+
+\item Ninety is rising 
+ 
+\end{subex} 
+\label{ex:parteepuzzle}   
+\end{ex}
+Clearly, our intuitions are that \preveg{c} does not follow from
+\preveg{a,b}. The assumptions that the error relies on are those given
+in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \textit{temperature} is a
+predicate of individuals
+ 
+\item \textit{is} in (\ref{ex:parteepuzzle}b) represents identity
+between individuals
+ 
+\end{subex} 
+   
+\end{ex}
+Montague's solution was to abandon \preveg{a} and say that
+`temperature' is a predicate not of individuals but of
+individual \textit{concepts}, in his terms functions from world-time
+pairs to individuals, thus introducing intensionality into predication
+by common nouns.  When we say (\ref{ex:parteepuzzle}a) we are
+predicating `rise' not of an individual but of a function.
+When we say (\ref{ex:parteepuzzle}b) we are saying that the
+\textit{value} of the function at the current world and time is
+identical with ninety.  The technical machinery that Montague uses to
+achieve this involves his predilection for general treatments.  
+He treats all common nouns as being predicates of individual
+concepts.  But in the case of all nouns other than \textit{price} or
+\textit{temperature} in his fragment he requires that the individual
+concepts are rigid designators, that is, they are constant functions
+which return the same individual for every world-time pair.  Similarly
+intransitive verbs will correspond to predicates of individual
+concepts but in the case of verbs other than \textit{rise} and
+\textit{change} (in his fragment) there will be a predicate of the
+value of the individual concept which holds just in case the verb
+predicate holds of the individual concept.  Finally \textit{be} is
+treated as representing identity of the values of individual concepts
+and a given time and world
+and not identity of the individual concepts.  Thus two distinct
+individual concepts can have identical values at a given world and
+time.
+
+Given this machinery we can analyze the Partee puzzle represented in
+(\ref{ex:parteepuzzle}) as follows.  When we say that the temperature
+is rising we are predicating `rise' of an individual concept, a
+function from world-time pairs.  Montague does not say what it might
+mean for such a function to rise.  There is, however,  something
+obvious that we could say, namely that if $f$ is such that
+temperature($f$) at world $w$ and time $t$, then rise($f$) is true at world $w$ and time $t$ just
+in case there is some time $t'$, $t'< t$ (``$t'$ is earlier than $t$''), and some time $t''$,
+$t<t''$, such that $f(w,t')$ is less than $f(w,t'')$.  (We may assume
+that $f$ returns  a (real) number for any world and time.) When we say
+that the temperature $f$ is ninety at world $w$ and time $t$, what we
+mean is that $f(w,t)=90$ (assuming that the interpretation of
+\textit{ninety} is an individual concept $g$ such that for any world,
+$w$, and time, $t$, $g(w,t)=90$).  From this is does not follow that
+ninety is rising, that is, rise($g$).  After all, we have just said
+that \textit{ninety} corresponds to a constant function which always
+returns the same value and rising functions have to return different
+values at different times.
+
+We have now shown that Montague's analysis prevents the offending
+inference from going through but we must also show that the inference
+does go through in ``normal'' cases according to his analysis.
+Consider \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The dog is barking 
+ 
+\item The dog is Fido
+
+\item Fido is barking 
+ 
+\end{subex} 
+   
+\end{ex} 
+Here we do want \preveg{c} to follow as a conclusion from the premises
+\preveg{a,b}.  When we say that the dog is barking we are predicating
+`bark' of a constant function $f$ since for an individual
+concept to fall under the predicate `dog' it must be rigid,
+i.e. return the same object for each world and time.  Furthermore,
+there is a predicate, call it `bark$_*$', such that for any $w$ and $t$, `bark$_*$' holds of
+$f(w,t)$ just in case
+`bark' holds of $f$.  So in effect by predicating `bark'
+of $f$ at $w$ and $t$, we are predicating `bark$_*$' of $f(w,t)$.
+(Given Montague's notion of proposition, bark($f$) and
+bark$_*$($f(w,t)$) are the \textit{same} proposition since they are
+true at exactly the same possibles worlds and times.)  When we
+say that the dog is Fido at $w$ and $t$ what we mean is that
+$f(w,t)=g(w,t)$ where $g$ is the individual concept corresponding to
+\textit{Fido}.  According to Montague's theory of proper names $g$ too
+will be a constant function always returning the same individual, say,
+`fido'.  Is Fido barking given these assumptions, that is, is
+bark($g$) true at $w$ and $t$?  There are a couple of ways to make the
+argument.  Since both $f$ and $g$ are constant functions if they have
+the same value at any world and time they will have the same value at
+all worlds and times, that is, given the classical set theoretic view
+of functions that Montague is using, $f$ and $g$ will in fact be the
+same function.  Thus if we predicate anything of $f$ it will also hold
+of $g$, since they are identical.  The other argument involves the
+nature of the predicate `bark'.  Since bark($f$) is equivalent to
+bark$_*$($f(w,t)$) and, given that $f(w,t)=g(w,t)$, bark$_*$($f(w,t)$)
+is equivalent to bark$_*$($g(w,t)$), which in turn is equivalent to
+bark($g$), then bark($f$) and bark($g$) are equivalent.  Thus if
+bark($f$) is true, then so is bark($g$). 
+
+Despite the obvious ingenuity and formal correctness of this solution
+it fell into disuse.  As \cite{Lobnerinprep} points out one objection
+is to the interpretation of (\ref{ex:parteepuzzle}) as an identity
+statement rather than the location of the temperature value on a
+scale.  This point was made by \cite{Jackendoff1979}, a paper which
+has given rise to a trickle of remarks and replies in
+\textit{Linguistic Inquiry} over a period of thirty years:
+\cite{Lobner1981,Lasersohn2005a,Romero2008}.  Part of Jackendoff's
+argument is that in addition to \nexteg{a} we can also say \nexteg{b},
+just as we can say \nexteg{c}.  
+\begin{ex} 
+\begin{subex} 
+ 
+\item The temperature is ninety 
+ 
+\item The temperature is at ninety
+
+\item The airplane is at 6000 feet 
+ 
+\end{subex} 
+   
+\end{ex} 
+We do not, he argues, feel the temptation to conclude \nexteg{c} from
+\nexteg{a,b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The airplane is at 6000 feet 
+ 
+\item The airplane is rising
+
+\item 6000 feet is/are rising 
+ 
+\end{subex} 
+   
+\end{ex} 
+So neither should we feel the temptation to draw the offending
+conclusion in the temperature puzzle since even though we say
+\textit{the temperature is ninety} we mean \textit{the temperature is
+  at ninety}.  Jackendoff does not point out, however, that there is
+an important difference between the temperature and the airplane case,
+namely that \nexteg{} does not mean the same as \preveg{a}, and to the
+extent that it means anything it means something absurd which involves an
+equality between an airplane and 6000 feet.
+\begin{ex} 
+The airplane is 6000 feet 
+\end{ex} 
+If Jackendoff were right that \textit{is} can mean \textit{is at} why
+would this be the case?  \cite{Lobner1981} has a stronger argument
+against Jackendoff.  He points out that we cannot conclude \nexteg{c}
+from \nexteg{a,b}
+\begin{ex} 
+\begin{subex} 
+ 
+\item The temperature of the air in my refrigerator is the same as the
+  temperature of the air in your refrigerator
+
+ 
+\item The temperature of the air in my refrigerator is rising
+
+\item The temperature of the air in your refrigerator is rising  
+ 
+\end{subex} 
+   
+\end{ex} 
+\cite{Lasersohn2005a} gives the example in \nexteg{} based on Löbner's
+example.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The temperature in Chicago is rising 
+ 
+\item The temperature in Chicago is the very same as the temperature
+  in St. Louis
+
+\item The temperature in St. Louis is rising
+ 
+\end{subex} 
+   
+\end{ex} 
+These examples are meant to show that there are similar cases to the
+original Partee puzzle where the construction seems clearly equative
+rather than locative.  Note that we can mention identity explicitly as
+in \nexteg{}.
+\begin{ex} 
+The temperature in Chicago is identical with the temperature in St. Louis 
+\end{ex} 
+\cite{Romero2008} discusses examples with prices where it seems
+intuitive that there are two readings, one where the inference does
+not go through and one where it does.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The prices in supermarket $A$ are (the very same as) the prices
+  in supermarket $B$ 
+ 
+\item Most prices in supermarket $A$ are rising
+
+\item Most prices in supermarket $B$ are rising 
+ 
+\end{subex} 
+   
+\end{ex} 
+On one reading (not the preferred one, I think) \preveg{a} means that
+at the current time the prices just happen to be the same.  In this
+case the inference does not go through.  The other reading is that the
+prices in the two supermarkets are pegged to each other, perhaps
+because they are owned by the same chain even though they have
+different names.  (Note that this is not quite the same as saying that
+the prices are \textit{necessarily} the same which is the case that
+Romero discusses.  This is a matter of business strategy, not logic.
+The supermarket owners \textit{could} have chosen not to peg the
+prices to each other.)  In this case the inference does go
+through.\footnote{Actually, there is a further complication with these
+  examples involving plural quantifiers, which Romero does not
+  discuss.  We also need an assumption that the two supermarkets have
+  sufficiently similar stock.  If most of the prices are rising in
+  supermarket $A$ and supermarket $B$ only stocks those items whose
+  prices are not rising in supermarket $A$, then even though the
+  prices in the two supermarkets are the same (and pegged to each
+  other), the prices in supermarket $B$ are not rising.}  
+
+Despite all this discussion there is an important intuition in
+Jackendoff's observation that the interpretation of \textit{the
+  temperature is ninety} involves the placement of the temperature on
+a scale.  In a sense  Montague was recognizing this by modelling
+temperature in terms of his individual concepts.  He was giving us a
+function which returns for each world and time an individual
+(presumably a number) representing the temperature.  Thus he could
+account for the fact that the temperature is different at different
+times.  The problem is, though, that possible worlds (that is, total
+ways the universe could be) do not have a single temperature, even at
+a single point of time.  The notion of individual concept he has is
+simply not fine-grained enough to deal with temperature.  One can
+understand why Montague might not have wanted to pursue this matter
+further in PTQ.  He wanted to include the treatment of temperature in
+his general treatment of intensions (functions from possible worlds
+and times to objects of various types) but in order to get temperature
+right he would have had to change this.  One strategy would be to use
+possible situations (parts of possible worlds).  Another strategy
+would have been to use an additional index, not just worlds and times
+but also locations.  But if he had done this for temperature and
+maintained a general theory of intensions he would
+have had to make all intensions be functions defined on triples of worlds, times
+and locations and this would have raised issues about the relationship
+between intensionality and indexicality which he was probably wise to
+avoid at that point in the development.  Nevertheless, it is an
+important issue which nags at some of the central assumptions of 
+formal semantics as Montague was proposing it: namely, the use of possible worlds and evaluation
+with respect to a finite set of indices some of which are in the
+domain of intensions and some of which are contextual parameters.
+
+Löbner's early work on this topic \citep{Lobner1979,Lobner1981}
+treated this problem by removing what he called \textit{functional
+  concepts} (\textit{Funktionalbegriffe}) from the general notion of
+intension and allowing them to have different numbers and 
+types of argument roles.  These insights have led him in later work
+\citep{Lobner2014,Lobnerinprep} to adopt a frame semantic approach
+where the parameters that are relevant for interpretation can vary
+between different words and phrases and there is no fixed set of
+indices as there was in the original work on formal semantics.  This
+is very much the same kind of proposal as in
+\cite{Cooper2010,Cooper2012} although the historical precursors we had in
+mind were different.  In my case, the precursors were early work on
+situation semantics such as \cite{BarwisePerry1983} and frame
+semantics of the kind suggested in \cite{Fillmore1982,Fillmore1985}
+and taken as a foundation for FrameNet
+\citep[][\url{https://framenet.icsi.berkeley.edu}]{RuppenhoferEllsworthPetruckJohnsonScheffczyk2006}.
+In Löbner's case, the inspiration for frames comes from the
+psychological work of \cite{Barsalou1992,Barsalou1992a,Barsalou1999}.
+
+\section{Frames as records}
+
+Our leading idea in modelling frames is that they correspond to
+records and that the \textit{roles} (or \textit{frame elements} in the
+terminology of FrameNet) are represented by the record fields.
+Records are in turn what we use to model situations so frames and
+situations in our view turn out to be the same.  Given that we are
+working in a type theory which makes a clear distinction between types
+and the objects which belong to those types it is a little unclear
+whether what we call frame should be a record or a record type.  We
+need both and we will talk of frames (records) and frame types (record
+types).  For example, when we look up the frame Ambient\_temperature
+(\url{https://framenet2.icsi.berkeley.edu/fnReports/data/frameIndex.xml?frame=Ambient_temperature})
+in FrameNet we will take that to be an informal description of a frame
+type which can be instantiated by the kinds of situations which are
+described in the examples there.  In our terms we can characterize a
+type corresponding to a very stripped down version of FrameNet's
+Ambient\_temperature which is sufficient for us to make the argument
+we wish to make.  This is the type \textit{AmbTempFrame} defined in \nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{temp(loc, x)}}
+\label{ex:AmbTempFrame} 
+\end{ex} 
+This is different from the earlier proposal we made in
+\cite{Cooper2012} which is given in \nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{e-time}{\textit{Time}} \\
+        \tfield{e-location}{\textit{Loc}} \\
+        \tfield{c$_{\mathrm{temp\_at\_in}}$}{temp\_at\_in(e-time, e-location, x)}} 
+\end{ex} 
+The new proposal in (\ref{ex:AmbTempFrame}) differs from the old one in two
+ways.  Firstly we have removed the field for time.  This is because we
+now want to treat time in terms of strings of events rather than
+introducing time-points as such. This follows 
+Fernando's strategy (for example in \citealp{Fernando2011}) and
+relates to the discussion of the Russell-Wiener construction of time
+in \cite{Kamp1979}.  Secondly we have made the type in the `x'-field
+(the field which will contain `ninety' in our example) be
+\textit{Real} (``real number'')  rather than \textit{Ind}
+(``individual'').  As \cite{Lasersohn2005a} points out the issue was
+raised early in the literature as to whether numbers (or temperature
+measurements at any rate) should be treated
+as individuals in these examples or should be counted as belonging to
+a separate type \citep{Bennett1974,Thomason1979}.  In our earlier work
+we assumed that temperatures were to be considered as individuals
+because we had no reason to do otherwise.  In the current analysis,
+however, we want to build in a notion of scale which involves a
+mapping to real numbers and therefore we will model temperatures as
+real numbers.  As we will see this will lead to a slight complication
+in the compositional semantics so there is still an open issue as to
+whether this is the right decision.
+
+A scale is a function which maps frames (situations) to a real
+number.  Thus a scale for ambient temperature will be of the type
+\nexteg{a} and the obvious function to choose of that type is the
+function in \nexteg{b} which maps any ambient temperature frame to the
+real number in its `x'-field.
+\begin{ex} 
+\begin{subex} 
+ 
+\item (\textit{AmbTempFrame} $\rightarrow$ \textit{Real}) 
+ 
+\item $\lambda r$:\textit{AmbTempFrame} . $r$.x 
+ 
+\end{subex} 
+\label{ex:scaleambtempframe}   
+\end{ex} 
+Let us call \preveg{b} $\zeta_{\mathrm{temp}}$.  As a first approximation we can take an event of
+a temperature rise to be a string of two temperature frames,
+$r_1^\frown r_2$, where $\zeta_{\mathrm{temp}}(r_1) <
+\zeta_{\mathrm{temp}}(r_2)$.  Using a notation where $T^n$ is the type of
+strings of length $n$ each of whose members are of type $T$ and where
+for a given string, $s$, $s[0]$ is the first member of $s$, $s[1]$ the
+second and so on, a first approximation to the type of temperature
+rises could be \nexteg{}. 
+\begin{ex} 
+\record{\tfield{e}{\textit{AmbTempFrame}$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$\zeta_{\mathrm{temp}}$(e[0]) $<$ $\zeta_{\mathrm{temp}}$(e[1])}}
+\end{ex} 
+In the c$_{\mathrm{rise}}$-field of \preveg{} we are using $<$ as an
+infix notation for a predicate `less-than' with arity
+$\langle$\textit{Real}, \textit{Real}$\rangle$ which obeys the
+constraint in \nexteg{}.
+\begin{ex} 
+less-than($n$, $m$) is non-empty (``true'') iff $n<m$ 
+\end{ex} 
+A more general type for temperature rises is given by \nexteg{} where
+we abstract away from the particular temperature scale used by
+introducing a field for the scale into the record type.  This, for
+example, allows for an event to be a temperature rise independent of
+whether it is measured on the Fahrenheit or Celsius scales.  
+\begin{ex} 
+\record{\tfield{scale}{(\textit{AmbTempFrame} $\rightarrow$ \textit{Real})}\\
+        \tfield{e}{\textit{AmbTempFrame}$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{scale(e[0]) $<$ scale(e[1])}} 
+\label{ex:ambtempwithscale}
+\end{ex} 
+This type, though, is now too general to count as the type of
+temperature rising events.  To be of this type, it is
+enough for there to be some scale on which the rise condition holds
+and the scale is allowed to be any arbitrary function from temperature
+frames to real numbers.  Of course, it is possible to find some
+arbitrary function which will meet the rise condition even if the
+temperature is actually going down.  For example, consider a function
+which returns the number on the Celsius scale but with the sign (plus
+or minus)
+reversed making temperatures above 0 to be below 0 and \textit{vice
+  versa}. There are two ways we can approach this problem.  One is to
+make the type in the scale-field a subtype of (\textit{AmbTempFrame}
+$\rightarrow$ \textit{Real}) which limits the scale to be one of a
+number of standardly
+accepted scales.  This may be an obvious solution in the case of
+temperature where it is straightforward to identify the commonly used
+scales.  However, scales are much more generally used in linguistic
+meaning and people create new scales depending on the situation at
+hand. % (Horn ????)
+This makes it difficult to specify the
+nature of the relevant scales in advance and we therefore  prefer our
+second way of approaching this problem.
+
+The second way is to parametrize the type of temperature rising
+events.  By this we mean using a dependent type which maps a record
+providing a scale to
+a record type modelling the type of temperature rising events
+according to that scale.  The function in \nexteg{} is a dependent
+type which is related in an obvious way to the record type in
+\preveg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{scale}{(\textit{AmbTempFrame}
+    $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{\textit{AmbTempFrame}$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}
+\end{ex} 
+According to (\ref{ex:ambtempwithscale}) an event will be a
+temperature rise if there is some scale according to which the appropriate
+relation holds between the temperatures of the two stages of the event
+which we are comparing.  According to \preveg{} on the other hand,
+there is no absolute type of a temperature rise.  We can only say
+whether an event is a temperature rise with respect to some scale or
+other.  If we choose some non-standard scale like the one that
+reverses plus and minus temperatures as we suggested above then what
+we normally call a fall in temperature will in fact be a rise in
+temperature \textit{according to that scale}.  You are in principle
+allowed to choose whatever scale you like, though if you are using the
+type in a communicative situation you had better make clear to your
+interlocutor what scale you are using and perhaps also why you are
+using this scale as opposed to one of the standardly accepted ones.
+Like the parametric contents we introduced in
+Chapter~\ref{ch:propnames}, the dependent types introduce a
+presupposition-like component to communicative situations.  We are
+assuming the existence of some scale in the context.
+
+Why do we characterize the domain of the function in \preveg{} in
+terms of records containing a scale rather than just scales as in
+\nexteg{}?
+\begin{ex} 
+$\lambda \sigma$:(\textit{AmbTempFrame}
+    $\rightarrow$ \textit{Real}) .\\  
+\hspace*{2em}\record{\tfield{e}{\textit{AmbTempFrame}$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$\sigma$(e[0]) $<$ $\sigma$(e[1])}} 
+\end{ex} 
+The intuitive reason is that we want to think of the arguments to such
+functions as being contexts, that is situations (frames) modelled as
+records.  The scale will normally be only one of many informational
+components which can be provided by the context and the use of a
+record type allows for there to be more components present.  In
+practical terms of developing an analysis it is useful to use a record
+type to characterize the domain even if we have only isolated one
+parameter since if further analysis should show that additional
+parameters are relevant this will mean that we can add fields to the
+domain type thereby restricting the domain of the function rather than
+giving it a radically different type.
+
+And indeed in this case we will now show that there is at least one
+more relevant parameter that needs to be taken account of before we
+have anything like a reasonable account of the type of temperature
+rise events.  In (\ref{ex:AmbTempFrame}) we specified that an ambient
+temperature frame relates a real number (``the temperature'') to a
+spatial location.  And now we are saying that a temperature rise is a
+string of two such frames where the temperature is higher in the
+second frame.  But we have not said anything about how the locations
+in the two frames should be related.  For example, suppose I have a
+string of two temperature frames where the location in the first is
+London and the location in the second is Marrakesh.  Does that
+constitute a rise in temperature (assuming that the temperature in the
+second frame is higher than the one in the first)?  Certainly not a
+temperature rise in London, nor in Marrakesh.  If you want to talk
+about a temperature rise in a particular location then both frames
+have to have that location and we need a way of expressing that
+restriction.  Of course, you can talk about temperature rises which
+take place as you move from one place to another and which therefore
+seem to involve distinct locations.  However, it seems that even in
+these cases something has to be kept constant between the two frames.
+One might analyse it in terms of a constant path to which both
+locations have to belong or as a constant relative location such as
+the place where a particular person (or car, or airplane) is.  You
+cannot just pick two arbitrary temperature frames without holding
+something constant which ties them together.  We will deal here with
+the simple case where the location is kept constant.\footnote{Although
+  in astronomical terms, of course, even a location like London is a
+  relative location, that is, where London is according to the
+  rotation of the earth and its orbit around the sun.  Thus the simple
+  cases are not really different from the cases apparently involving
+  paths.}  We will say that the background information for judging an
+event as a temperature rise has to
+include not only a scale but also a location which is held constant in
+the two frames.  This is expressed in \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}}}\\
+                         \smalltfield{scale}{(\textit{AmbTempFrame}
+                             $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}\d{$\wedge$}\smallrecord{\smallmfield{loc}{$r$.fix.loc}{\textit{Loc}}})$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}} 
+\label{ex:temprisefixloc}
+\end{ex} 
+Here the `fix'-field in the context is required to be a record which
+provides a location.  One reason for making the `fix'-field a record
+rather than simply a location is that we will soon see an example
+where more than one parameter needs to be fixed.  It will also help us
+ultimately in characterizing a general type for a rising event (not
+just a rise in temperature) if we can refer to the type in the
+`fix'-field as \textit{Rec} (``record'') rather than to list a
+disjunction of all the various types of the parameters that can be
+held constant in different cases.
+
+The temperature rise event itself is now required to be a string of
+two frames which belong to a subtype of \textit{AmbTempFrame}, namely
+where the `loc'-field has been made manifest and is specified to have
+the value specified for `loc' in the `fix'-field.  Here we are using
+the record in the `fix'-field of the argument to the function to
+partially specify the type \textit{AmbTempFrame} by fixing values for
+some of its fields.  One can think of the `fix'-record as playing the
+role of a partial
+assignment of values to fields in the type.  To emphasize this
+important role and to facilitate making general statements without
+having to name the particular fields involved, we shall introduce an operation which maps a record
+type, $T$, and a record, $r$ to the result of specifying $T$ with $r$,
+which we will notate as $T\parallel r$.  \nexteg{} provides an abstract example of how it works. 
+\begin{ex} 
+\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+             \smalltfield{$\ell_2$}{$T_2$}\\
+             \smalltfield{$\ell_3$}{$T_3$}}$\parallel$
+\smallrecord{\field{$\ell_2$}{$a$}\\
+             \field{$\ell_3$}{$b$}\\
+             \field{$\ell_4$}{$c$}} = 
+\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+             \smallmfield{$\ell_2$}{$a$}{$T_2$}\\
+             \smallmfield{$\ell_3$}{$b$}{$T_3$}}
+
+provided that $a:T_2$ and $b:T_3$ 
+\end{ex} 
+In a case where for example $a:T_2$ but not $b:T_3$ we would have
+\nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+             \smalltfield{$\ell_2$}{$T_2$}\\
+             \smalltfield{$\ell_3$}{$T_3$}}$\parallel$
+\smallrecord{\field{$\ell_2$}{$a$}\\
+             \field{$\ell_3$}{$b$}\\
+             \field{$\ell_4$}{$c$}} = 
+\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+             \smallmfield{$\ell_2$}{$a$}{$T_2$}\\
+             \smalltfield{$\ell_3$}{$T_3$}}
+
+ 
+\end{ex}   
+The result \preveg{} would also have obtained if $T_3$ had not been a
+type but a pair consisting of a dependent type and a sequence of
+paths, that is, the kind of thing which in our standard abbreviation
+we represent as a predicate with a label as argument such as
+`walk($\ell_1$)'.  A precise definition of this operation is given in
+Appendix~\ref{app:specrec}.
+
+Using this notation we can now rewrite (\ref{ex:temprisefixloc}) as
+\nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}}}\\
+                         \smalltfield{scale}{(\textit{AmbTempFrame}
+                             $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}} 
+\label{ex:temprisespecfix}
+\end{ex} 
+
+This is still a very simple theory of what a temperature rise event
+may be but it will be sufficient for our current purposes.  We move on
+now to price rise events.  We will take \nexteg{} to be the type of
+price frames, \textit{PriceFrame}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{commodity}{\textit{Ind}} \\
+        \tfield{e}{price(commodity, loc, x)}} 
+\end{ex} 
+The fields represented here are based on a much stripped down version
+of the FrameNet frame \texttt{Commerce\_scenario} where our
+`commdodity'-field corresponds to the frame element called `goods' and
+the `x'-field corresponds to the frame element `money'. A price rise
+is a string of two price frames where the value in the `x'-field is
+higher in the second.  Here, as in the case of a temperature rise, we need to keep
+the location constant.  It does not make sense to say that a price
+rise has taken place if we compare a price in Marrakesh with a price
+in London, even though the price in London may be higher.  In the case
+of price we also need to keep the commodity constant, something that
+does not figure at all in ambient temperature.  We cannot say that a
+price rise has taken place if we have the price of tomatoes in the
+first frame and the price of oranges in the second frame.  Thus,
+following the model of (\ref{ex:temprisespecfix}), we can characterize
+the dependent type of price rises as \nexteg{}.
+\begin{ex} 
+$\lambda
+r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}\\
+                                               \smalltfield{commodity}{\textit{Ind}}}}\\
+                         \smalltfield{scale}{(\textit{PriceFrame}
+                             $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{PriceFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}  
+\end{ex} 
+
+Finally we consider a third kind of rising event discussed in
+\cite{Cooper2012} based on the example in \nexteg{}.
+\begin{ex} 
+As they get to deck, they see the Inquisitor, calling out to a Titan
+in the seas. The giant Titan rises through the waves, shrieking at the
+Inquisitor.
+
+\medskip
+
+\hfill {\footnotesize
+  \url{http://en.wikipedia.org/wiki/Risen_(video_game)}}
+
+\hfill {\footnotesize accessed 4th February, 2010} 
+\end{ex}   
+Here what needs to be kept constant in the rising event is the Titan.
+What needs to change between the two frames in the event is the height
+of the location of the Titan.  Thus in this example the
+location is \textit{not} kept constant. In order to analyze this we
+can use location frames of the type \textit{LocFrame} as given in
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{at(x, loc)}} 
+\end{ex} 
+The dependent type for a rise in location event is \nexteg{}.
+\begin{ex} 
+$\lambda
+r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{x}{\textit{Ind}}
+                                               }}\\
+                         \smalltfield{scale}{(\textit{LocFrame}
+                             $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{LocFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}  
+\end{ex} 
+Here the obvious scale function does not simply return the value of a
+field in the location frame.  What is needed is a scale based on the
+height of the location.  One way to do this would be to characterize
+the type of locations, \textit{Loc}, as the type of points in three-dimensional
+Euclidean space.  That is, we consider \textit{Loc} to be an
+abbreviation for \nexteg{}.
+\begin{ex} 
+\record{\tfield{x-coord}{\textit{Real}}\\
+        \tfield{y-coord}{\textit{Real}}\\
+        \tfield{z-coord}{\textit{Real}}}
+\end{ex} 
+Each of the fields in \preveg{} corresponds to a coordinate in
+Euclidean space.  A more adequate treatment would be to consider
+locations as regions in Euclidean space but we will not pursue that
+here.  Treating \textit{Loc} as \preveg{} means that we can
+characterize the scale function as returning the height of the
+location in the location frame, as in \nexteg{}.
+\begin{ex} 
+$\lambda r$:\textit{LocFrame} . $r$.loc.z-coord 
+\end{ex} 
+If we wish to restrict the dependent type of rising events to vertical
+rises we can fix the $x$ and $y$-coordinates of the location as in
+\nexteg{}.
+\begin{ex} 
+$\lambda
+r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{loc}{\smallrecord{\smalltfield{x-coord}{\textit{Real}}\\
+                                                                              \smalltfield{y-coord}{\textit{Real}}}}
+                                               }}\\
+                         \smalltfield{scale}{(\textit{LocFrame}
+                             $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{LocFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}  
+\end{ex}
+
+We have now characterized three kinds of rising events.  In
+\cite{Cooper2010,Cooper2012}  we argued that there is in principle no
+limit to the different kinds of rising events which can be referred to
+in natural language and that new types are created on the fly as the
+need arises.  The formulation in those works did not allow us to
+express what all these particular meanings have in common.  We were
+only able to say that the various meanings seem to have some kind of
+family resemblance. Now that we have abstracted out scales and
+parameters to be fixed we have an opportunity to formulate something
+more general.  There are two things that vary across the different
+dependent types that we have characterized for risings.  One is the
+frame type being considered and the other is the type of the record which
+contains the parameters held constant in the rising event. If we
+abstract over both of these we have a characterization of rising
+events in general. This is given in \nexteg{}.
+\begin{ex} 
+$\lambda
+r$:\smallrecord{\smalltfield{frame\_type}{\textit{RecType}}\\
+                \smalltfield{fix\_type}{\textit{RecType}}\\
+\smalltfield{fix}{fix\_type}\\
+                         \smalltfield{scale}{(frame\_type
+                             $\rightarrow$ \textit{Real})}} .\\  
+\hspace*{2em}\record{\tfield{e}{($r$.frame\_type$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}  
+\end{ex}
+
+\preveg{} is so general (virtually everything of content has been
+parametrized) that it may be hard to see it as being used in the
+characterization of the meaning of \textit{rise}.  What seems
+important for characterizing the meanings of \textit{rise} that a
+speaker has acquired is precisely the collection of frame types, and
+associated fix types and scales which an agent has developed through
+experience.  \preveg{} seems to be relevant to a kind of meta-meaning
+which specifies what kind of contents can be associated with the word
+\textit{rise}.  In this sense it seems related to the notion of
+\textit{meaning potential}, a term which has its origins in the work
+of \cite{Halliday1977} where meanings are spoken of informally as
+being ``created by the social system'' and charaterized as
+``integrated systems of meaning potential'' (p. 199).  The notion is much
+discussed in more recent literature, for example, \cite{Linell2009},
+where meaning potential is discussed in the following terms: ``Lexical
+meaning potentials are (partly) open meaning resources, where actual
+meanings can only emerge in specific, situated interactions''
+(p. 330).
+
+\section[Using frames in a compositional semantics for the Partee
+  puzzle][Using frames in compositional semantics]{Using frames in a compositional semantics for the Partee
+  puzzle}
+\label{sec:compsemPartee}
+
+A central aspect of our analysis of the Partee puzzle is that the
+contents of common nouns are functions that take frames, that is
+records, as arguments.  Nevertheless, we make a distinction between
+individual level predicates like `dog' whose arity is
+$\langle\textit{Ind}\rangle$ and frame level predicates like
+`temperature' whose arity is $\langle\textit{Rec}\rangle$.  Leaving
+aside for now the need for parametric contents, the content for
+associated with an utterance event of type ``dog'' would be
+(\ref{ex:dog}a) repeated here as \nexteg{a}.  This is contrasted with
+the content for an utterance of type ``temperature'' given in
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}  
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{temperature($r$.x)}} 
+ 
+\end{subex} 
+\label{ex:dogtemperaturecont}   
+\end{ex} 
+We make an exactly similar distinction between individual level and
+frame level verb phrases.  In \nexteg{} we present contents which can
+be associated with utterances of type ``run'' and ``rise''
+respectively.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{run($r$.x)}} 
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{rise($r$.x)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The types which we associate with the individual level and frame level properties in
+(\ref{ex:dogtemperaturecont}) and \preveg{} are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType})
+ 
+\item (\smallrecord{\smalltfield{x}{\textit{Rec}}} $\rightarrow$ \textit{RecType}) 
+ 
+\end{subex} 
+\label{ex:pptytypes}   
+\end{ex} 
+While these types are distinct, they are nevertheless related in that
+they both have the same range type and the domain types of \preveg{a}
+and \preveg{b} are both record types requiring a field with the label `x'.  Up until now we have
+used \textit{Ppty} (``property'') to designate \preveg{a}.  Now we
+might be more specific and designate it as \textit{IndPpty}
+(``property of individuals'') and use \textit{FramePpty} (``property
+of frames'') to designate \preveg{b}. In our previous treatment of the
+temperature puzzle both individual level and frame level properties
+were of the type \preveg{a} because we treated numbers as individuals,
+that is, as being of type \textit{Ind}.  On this view
+\textit{AmbTempFrame} can be
+defined as \nexteg{a} rather than our current proposal repeated in
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \record{\tfield{x}{\textit{Ind}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{temp(loc, x)}}
+ 
+\item \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{temp(loc, x)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+Choosing \preveg{a} rather than \preveg{b} would mean that the
+distinction between individual level and frame level properties would
+not be one of the type of properties as such (since they would both be
+of type (\ref{ex:pptytypes}a)) but rather in the arity of the
+predicate used within the record type that they returned, that is, for
+example, $\langle$\textit{Ind}$\rangle$ for `dog' and
+$\langle$\textit{Rec}$\rangle$ for `temperature'.  This represents an
+appealing feature of using record types with subtyping, namely that fine-grained type
+distinctions can be introduced by predicates within record types which
+all belong to the same type \textit{RecType}. For a compositional
+semantics this means  that fine grained type distinctions associated
+with lexical items need not be reflected in the types of the contents
+of the phrases in which those lexical items occur.  This is in
+significant contrast to the simple type theory used by Montague where
+there was not subtyping and any type distinction introduced in a
+constituent would be reflected as a type distinction in higher level
+phrases.  To exploit this feature of the type system here we would
+have to treat (real) numbers as individuals.  This would not
+necessarily mean abandoning the type \textit{Real} but it would mean
+stipulating that \textit{Real} is a subtype of \textit{Ind}.  For
+example, we could let \textit{AmbTempFrame} be \preveg{a} but require
+that the predicate `temp' used in this type have arity
+\mbox{$\langle$\textit{Loc}, \textit{Real}$\rangle$}.  This, together with the
+requirement \textit{Real}$\sqsubseteq$\textit{Ind}, would mean that
+\preveg{a} and \preveg{b} would be equivalent in the sense that they
+would have the same set of witnesses.
+
+The alternative sketched above where numbers are treated as
+individuals has much to commend it.  But nevertheless we have not
+chosen it here for a number of intuitive and practical reasons:
+\begin{enumerate} 
+ 
+\item There is a fairly robust intuition that numbers are not, in
+  fact, individuals. 
+ 
+\item The proposed solution involves stipulating a subtype relation
+  between basic types.  While this is not ruled out in TTR, we would
+  like to keep it to a minimum and not use it where there is an
+  alternative of analyzing the subtyping in terms of record types.
+  Using record types you can see (and compute) whether one type is a
+  subtype of another whereas subtyping between basic types is not
+  explicit in the representation of the types.
+
+\item There are types in TTR of which both types in
+  (\ref{ex:pptytypes}) are subtypes and these types are candidates for
+  the general type \textit{Ppty}, i.e. properties in general as
+  opposed to properties of particular types of objects. 
+ 
+\end{enumerate} 
+The last point here requires some explanation. Given that TTR has join
+(disjunctive) types (Appendix~\ref{app:jointypes}) we always have the
+option of forming the join of those types which we want to represent
+types of properties.  Thus, given the two types of properties we have
+seen so far we can form the join type in \nexteg{}.
+\begin{ex} 
+((\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
+\textit{RecType}) $\vee$ (\smallrecord{\smalltfield{x}{\textit{Rec}}} $\rightarrow$
+\textit{RecType}))
+\label{ex:indorrecppty} 
+\end{ex} 
+If there are more types of properties we wish to add to the general
+type of properties we can form a larger join type to include them.  We
+can always form a join type based on any finite collection of types.
+Using join types in this way we can create a type which has all the
+witnesses of any finite collection of types.  We cannot express a type
+corresponding to an infinite set of types.  Also it does not make
+explicit any relationship between the various types in the collection,
+in this case that all the types in the collection are function types
+whose range type is \textit{RecType} and whose domain type is a
+subtype of \textit{Rec} with an `x'-field.  In order to deal with this
+kind of case, we will use the same technique as we used for parametric
+contents in Chapter~\ref{ch:propnames}.  We will treat properties as a
+pair consisting of a type (labelled with `bg') and the function
+(labelled with `fg') which we have up to now
+been calling a property.  \nexteg{a} is an example of the new kind of
+property and \nexteg{b} is the new definition of the type,
+\textit{Ppty}, of properties.\footnote{% Many type
+  % theorists find types such as (\ref{ex:pptyT}) problematic since they
+  % involve quantification over subtypes.  If you are one of those and
+  % you do not mind there only being a finite number of property types then
+  % you can retract to the kind of join type in (\ref{ex:indorrecppty}).
+  % If you are a type theorist who also finds this kind of type
+  % problematic (and there are many) or you want to have a type
+  % corresponding to an infinite variety of properties then you can
+  % think of \textit{Ppty} as being a function of two arguments which is
+  % defined when the second argument is a subtype of
+  % \smallrecord{\smalltfield{x}{$T$}}, where $T$ is the first argument.  Thus
+  % \textit{Ppty}($T$)($T'$) would yield the type
+  % ($T'$ $\rightarrow$
+  % \textit{RecType}).
+  For a similar kind of case, though a different approach to treating
+  it, see the discussion in \cite{GinzburgCooperFernando2014}, p. 93,
+  of the type of Austinian questions.  We have also treated this kind
+  of case in terms of a limited kind of polymorphism, for example, in \cite{GinzburgCooper2014}.}
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\field{bg}{\textit{Ind}}\\
+              \field{fg}{$\lambda
+                r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{dog($r$.x)}}}} 
+ 
+\item \record{\tfield{bg}{\textit{Type}}\\
+              \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\rightarrow$\textit{RecType})}} 
+ 
+\end{subex} 
+\label{ex:dog-Ppty}   
+\end{ex} 
+  
+
+% TTR
+% introduces a restricted kind of polymorphism in function types which
+% allows for certain kinds of infinite joins of function types
+% (Appendix~\ref{app:funtypes}).  Given a type, $T$, we can
+% give the type to which a function belongs just in case its domain type
+% is a subtype of $T$ and its range is included among the witnesses of
+% \textit{RecType}.  This type is given in \nexteg{}.
+% \begin{ex} 
+% % $\displaystyle{\bigvee_{T:\textit{Type},
+% %     T'\sqsubseteq\text{\smallrecord{\smalltfield{x}{$T$}}}}}(T'\rightarrow
+% % \textit{RecType})$ 
+
+% $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow
+% \textit{RecType})$ 
+% \label{ex:pptyT}
+% \end{ex}
+% We can denote \preveg{} as \textit{Ppty}($T$) and let \textit{Ppty}
+% represent the function, a dependent type, in \nexteg{}.
+% \begin{ex} 
+% $\lambda T$:\textit{Type} .  $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow \textit{RecType})$
+% \end{ex}
+% Then we can say that $P$ is a property just in case for some type,
+% $T$, $P:\textit{Ppty}(T)$ and it is convenient to let the notation `$P$
+% : \textit{Ppty}' designate this.  (In general, we could let $a:T$,
+% where $T$ is a dependent type, mean ``there is some $b$ such that $a:T(b)$''.)  In this way
+% we are saying that a property is a function whose domain is
+% characterized by some record type with an 'x'-field and whose result for any
+% object in its domain will be a record type.
+
+
+Suppose that a situation $e$ is of type temperature($r$).  What does
+that tell us about $r$? Given what we have seen so far we might expect
+that $r$ is an ambient temperature frame, that is, \mbox{$r$ :
+\textit{AmbTempFrame}}.  We might be tempted to express this as a
+constraint on assignments to types, that is, a constraint on
+possibilities in the sense of Appendix~\ref{app:modal}.  This might be
+expressed as in \nexteg{}.
+\begin{ex} 
+We restrict attention to those assignments to types (possibilities)
+such that for any situations $e$ and $r$, if $e$ : temperature($r$) then
+$r$ : \textit{AmbTempFrame}. 
+\end{ex} 
+Intuitively \preveg{} is similar to Montague's
+(\citeyear{Montague1973}) constraints on the interpretations of
+intensional logic to which we should restrict attention.  These
+constraints are standardly referred to as \textit{meaning postulates}
+in the literature although Montague himself did not give them this
+label. \preveg{} is fine if we are only concerned with ambient
+temperature or wish the predicate `temperature' to relate only to
+ambient temperature.  In general, however, we must take account of the
+fact that there are other kinds of temperature such as the temperature
+of objects, substances and human bodies.  If we choose to have
+separate predicates for all of these then \preveg{} is a possible
+constraint to have.  On the other hand, if we want to have a single
+predicate that covers all of these cases then \preveg{} will have to
+be modified.  One thing we might be tempted to do in this case is turn
+the implication around.  Instead of saying ``If it's a temperature
+then it's an ambient temperature frame'' as in \preveg{} we say ``If
+it's an ambient temperature frame then it's a temperature''.  This
+might look like \nexteg{}.
+\begin{ex} 
+We restrict attention to those assignments to types (possibilities)
+such that for any situation $r$, if \mbox{$r$ :
+\textit{AmbTempFrame}} then there is a situation $e$, such that $e$ :
+temperature($r$). 
+\label{ex:ambtemptopos-prose}
+\end{ex}       
+Note that it is important here that we changed the quantification over
+$e$ to existential quantification with scope over the consequent of
+the conditional.  It would have been wrong to have universal
+quantification as in \nexteg{}.
+\begin{ex} 
+For any situations $r$ and $e$, if \mbox{$r$ :
+\textit{AmbTempFrame}} then $e$ : temperature($r$) 
+\end{ex} 
+\preveg{} would require that every situation would have to be of the
+type temperature($r$) if the antecedent holds and this would have the
+unintuitive consequence that every situation would be a proof object
+for the temperature in every available location.  This would be
+particularly unwieldy if we wish to consider uncountably many
+locations as would be natural when considering geometric spaces.
+
+One advantage of (\ref{ex:ambtemptopos-prose}) is that it fits well
+into the kind of cognitive approach to semantics that we are trying to
+promote where we focus on how an agent with limited knowledge will use
+language rather than on a complete mathematical treatment of how
+a language considered as an abstract object relates to the world at
+large as Montague did. (\ref{ex:ambtemptopos-prose}) expresses one way
+in which a situation can be considered to be a temperature situation.
+It leaves open whether there are other kinds of situations which can
+be considered as temperature situations.  Consider an agent acquiring
+the concept of temperature, that is, what the temperature predicate can
+be applied to.  Such an agent may first become aware of the relevance
+of ambient
+temperature as expressed by (\ref{ex:ambtemptopos-prose}) and then
+subsequently add similar constraints on the same predicate for, say,
+the temperature of food, body temperature and so on.  By adding
+constraints to its resources in this way, an agent can incrementally
+build up an increasingly rich appreciation of a concept like
+temperature.  Another advantage of this is that an agent which has a
+collection of such constraints as resources can focus on some subset
+of those constraints or one particular constraint in a given context.
+Thus in Montague's example \textit{The temperature is 90°} we
+know that the temperature that is being referred to is ambient
+temperature.  
+
+This suggests that the appropriate notion for these
+constraints is that of \textit{topos} as discussed by
+\cite{Breitholtz2014a}.  According to Breitholtz a topos can be
+modelled as a function returning a type, that is, a dependent type
+similar to those we have used as update functions in this work.  Thus
+we can replace the prose statement (\ref{ex:ambtemptopos-prose}) with
+the function in \nexteg{a} which is associated with the licensing
+condition \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}} . \record{\tfield{e}{temperature($r$.x)}} 
+ 
+\item If $f : (T\rightarrow Type)$ is a topos and $r$ is a record
+  (situation or frame) then for any
+  agent $A$, $r :_A T$ licenses $:_A f(r)$
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{}  absorbs the prose statement in
+(\ref{ex:ambtemptopos-prose}) into our theory of dependent types
+(which we assume can be implemented in memory) and our general theory
+of action which is supervenient on the type system.  The licensing
+condition \preveg{b} says that a topos will license an agent which
+judges a situation to be of the domain type of the topos to make a
+judgement that there is something of the type which the topos returns
+for that situation.  Different agents will have different topoi in
+their resources and may choose to act or not on the basis of a
+particular judgement and topos.  Different collections of the topoi
+available in an agent's resources may be activated in different
+circumstances.  And, of course, the collection of resources is dynamic
+in the sense that an agent may be learning new topoi or adjusting old
+ones depending on input from the environment.  Thus while topoi can
+be used to replace Montague's meaning postulates they represent a much
+more flexible tool which can be used to model the reasoning mechanisms
+available to an agent at a given time.
+
+Another advantage of \preveg{a} is that it is also the right kind of
+object to be used as a more specified content of \textit{temperature}.
+It represents a restriction of the function in
+(\ref{ex:dogtemperaturecont}b) obtained by replacing its domain type
+with a subtype.  This is a natural restriction of
+(\ref{ex:dogtemperaturecont}b) given that we have \preveg{a} as a resource.
+While it might seem intuitive that a particular utterance of the noun
+\textit{temperature} might be restricted to ambient temperature,
+something that might seem puzzling for a formulation of compositional
+semantics is that this restriction is passed on to the verb as well
+although intuitively obvious.  When we say \textit{the temperature is
+  rising} we are talking about an event which is a temperature rise,
+not a price rise or any other kind of rise.  Somehow we have to
+coordinate the frame which is chosen in connection with the
+interpretation of temperature with the frame which is chosen in
+connection with the interpretation of \textit{rise}.  The solution to
+this that we wish to propose rests on the treatment of generalized
+quantifiers proposed in \cite{Cooper2011,Cooper2013}. 
+
+\section{Definite descriptions as dynamic generalized quantifiers}
+\label{sec:dgqs}
+
+In Chapter~\ref{ch:gram} we showed how to treat indefinite
+descriptions (consisting of an indefinite article and a common noun
+phrase) as generalized quantifiers.  We will now do something similar
+for definite descriptions (consisting of a definite article and a
+common noun phrase). We will then show how to modify this static
+interpretation of generalized quantifiers so that it becomes a dynamic
+treatment as presented in \cite{Cooper2011}.  We will see that the
+dynamic treatment accounts for how the frame associated with the noun
+is passed to the verb.
+
+We introduce first a function `SemDefArt' on the model of `SemIndefArt'
+which was defined in Chapter~\ref{ch:gram}, example
+(\ref{ex:semindefart}).  Given the new definition of properties as
+pairs of a type and a function (labelled `bg' and `fg', respectively)
+we have to specify that the arguments to the quantifier relation are
+the functions (i.e. `fg').  This is given in \nexteg{}.
+\begin{ex} 
+$\lambda Q$:\textit{Ppty} . \\
+\hspace*{1em} $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{the(restr, scope)}} 
+\end{ex} 
+This is exactly the same as `SemIndefArt' except that instead of the
+predicate `exist' we have `the'.  The constraint on `the' which
+relates it to classical generalized quantifier theory is a refinement
+of the constraint given for `exist' in Chapter~\ref{ch:gram}, example
+(\ref{ex:constraintexist}).  This is given in \nexteg{}.
+\begin{ex} 
+$\down{\mathrm{the}(P,Q)}\not=\emptyset$ iff
+$\mid\downP{P}\mid\ =1$ and $\downP{P}\cap\downP{Q}\not=\emptyset$ 
+\end{ex} 
+\preveg{} is like the constraint on `exist' except that it adds the
+additional requirement that the property extension of the first
+argument to `the' has cardinality exactly one.  This replicates
+Montague's Russellian treatment of the definite article.  We could
+equivalently define this constraint as \nexteg{}.  
+\begin{ex} 
+$\down{\mathrm{the}(P,Q)}\not=\emptyset$ iff
+$\mid\downP{P}\mid\ =1$ and $\downP{P}\subseteq\downP{Q}$
+\label{ex:theconstruniv} 
+\end{ex}   
+Since we require
+that there be exactly one object which has $P$ it does not make a
+difference whether we require that there is some object which has $P$
+which also has $Q$ or that every object that has $P$ also has
+$Q$. \preveg{} is the way the constraint is stated in
+\cite{Cooper2013b}. 
+
+However, it is not quite right now that we have
+allowed \textit{Ppty} to be polymorphic.  The problem has to do with
+the definition of $[\downarrow\cdot]$, that is, property extension.  The definition we gave in
+Chapter~\ref{ch:gram}, example (\ref{ex:propext}), is repeated in
+\nexteg{}.\footnote{Recall that the notation $\down{T}$ is defined by
+\begin{quote}  
+$\down{T} = \{a\mid a:T\}$
+\end{quote} 
+}
+\begin{ex} 
+$\downP{P}$ = $\{a\mid\exists r[r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}
+$\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$ 
+\end{ex} 
+This definition is based on the assumption that all properties are of
+type (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
+\textit{RecType}).  Now we need to modify it so that we will have
+a notion of property extension for our new definition of
+\textit{Ppty}.  This is done in \nexteg{}.
+\begin{ex} 
+$\downP{P}$ = $\{a\mid\exists r[r:$\smallrecord{\smalltfield{x}{$P$.bg}}
+$\wedge\ r.\mathrm{x}=a\wedge\down{P.\mathrm{fg}(r)}\not=\emptyset]\}$  
+\end{ex} 
+  
+% Our strategy for doing this will build on a proposal in
+% \cite{Cooper2011} which had to do with different ways of counting
+% books (e.g. by physical volume, information content, exact text and so
+% on).  The technique was to relativize the notion of property extension
+% to different fields in frames. For example, the number of physical
+% volumes may be greater than the number of information contents, since
+% several volumes might have the same content (i.e. are different copies
+% of the \textit{same} book).  Further the number of information
+% contents might be smaller than the number of exact texts if, for
+% example, we count different translations as having the same
+% information contents.  Whether we count different translations as
+% being different books or different translations of the same book
+% depends on what is the most expedient way of counting in the situation
+% at hand.  In \cite{Cooper2011} we only proposed ways of counting by
+% different constituents in frames (that is, fields in records with a
+% particular label) but we did not propose a way of counting by the
+% frames themselves.  This we will add in the definitions given in
+% \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item If $P$:\textit{Ppty}, then
+%   \mbox{$\downP{P} = \{r\mid r:P.\mathrm{bg} \wedge \down{P.\mathrm{fg}(r)}\not=\emptyset\}$} 
+ 
+% \item If $P$:\textit{Ppty} and $\ell$ is a label in $P.\mathrm{bg}$, then $\downPl{P}{\ell} =
+%   \{a\mid\exists r[r:P.\mathrm{bg}\wedge
+%   r.\ell=a \wedge \down{P.\mathrm{fg}(r)}\not=\emptyset]\}$ 
+ 
+% \end{subex} 
+   
+% \end{ex} 
+% This means that given a particular property we may have the option of
+% computing its property extension as a set of frames or as a set of
+% particular constituents in those frames.  In
+% Section~\ref{sec:passengers} we will suggest that this corresponds to
+% a regular variation in content in natural language.  For now, we need
+% to adjust (\ref{ex:theconstruniv}) to accommodate the variation.
+
+% We need to adjust (\ref{ex:theconstruniv}) so that it is a conditional
+% rather than a biconditional since now the notations $\downP{P}$ and
+% $\downP{Q}$ will refer to the frame property extensions of $P$ and $Q$
+% and this constraint will represent one of several ways in which the
+% type can be instantiated.  The new version is given in \nexteg{a}.
+% The possibilities which allow for different labels to be chosen are
+% given in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item If $P,Q$:\textit{Ppty}, then 
+
+%  \hspace*{1em}$\down{\mathrm{the}(P,Q)}\not=\emptyset$ if  $\mid\downP{P}\mid\ =1$
+%   and $\downP{P}\subseteq\downP{Q}$
+ 
+% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in both
+%   $P.\mathrm{bg}$ and $Q.\mathrm{bg}$,  then 
+
+% \hspace*{1em}$\down{\mathrm{the}(P,Q)}\not=\emptyset$ if
+% $\mid\downPl{P}{\ell}\mid\ =1$
+%   and $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
+ 
+% \end{subex} 
+% \label{ex:therelconstrs}   
+% \end{ex} 
+We can meet the constraint in (\ref{ex:theconstruniv}) by defining the witness condition for
+the($P$, $Q$) as in \nexteg{}, using the definition of restricted
+properties introduced in Chapter~\ref{ch:gram} and Appendix~\ref{app:gramrulesuniv}.
+\begin{ex} 
+% \begin{subex} 
+ 
+% \item
+  If $P,Q$:\textit{Ppty} then, 
+
+ \hspace*{1em}$s:\mathrm{the}(P,Q)$ iff
+ $\mid\!\downP{P\!\!\restriction\!\!s}\!\mid\ = 1$
+  and $\downP{P\!\!\restriction\!\!s}\subseteq\downP{Q\!\!\restriction\!\!s}$
+ 
+% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in both
+%   $P.\mathrm{bg}$ and $Q.\mathrm{bg}$ then, 
+
+% \hspace*{1em}$a:\mathrm{the}(P,Q)$ if
+% $\downPl{P}{\ell}=\{a\}$
+%   and $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
+ 
+% \end{subex} 
+\label{ex:thewitcond}   
+\end{ex} 
+This gives the predicate `the' the flavour of Russell's
+\rotiota-operator.\footnote{An alternative is to maintain the intuition
+  that witnesses for ptypes are situation-like (i.e. records) and let
+  the witnesses be represented as \smallrecord{\field{x}{$r$}} and \smallrecord{\field{x}{$a$}} respectively.} (See \citealp{Elbourne2012} for recent discussion
+of the use of this in the semantics of definite
+descriptions.)
+%  The constraints and witness conditions in
+% (\ref{ex:therelconstrs}) and \preveg{} should be viewed as different
+% resources available to the language user which can be used separately
+% on different occasions as appropriate.  They correspond intuitively to
+% different ways of counting.  Thus we would want a definite description
+% to be able to fail or succeed with respect to a particular way of
+% counting rather than to succeed just in case there is some way of
+% counting with respect to which it succeeds.
+
+It is well-known that the uniqueness condition in
+the Russellian treatment of definite descriptions is not quite right
+for natural language.  (For a recent detailed discussion of the issues
+involved see \citealp{Elbourne2012}.)  We can, for example, use the
+definite description \textit{the dog} even though there are several
+dogs.  It is not a simple matter of restricting ourselves to a
+particular situation that we are describing since we may be describing
+a situation with several dogs but still refer to some particular dog
+in the situation as \textit{the dog}.  Such examples are discussed in
+\cite{Cooper1996a} citing \nexteg{} from \cite{McCawley1979}.
+\begin{ex} 
+The dog had a fight with another dog yesterday 
+\end{ex} 
+Our solution to this is to introduce resource situations
+\citep{BarwisePerry1983,Cooper1996a}.  (A similar proposal is made by
+\citealp{Elbourne2012}.) We follow the analysis in \cite{Cooper2013b}
+and exploit the fact that properties can be restricted to a particular
+situation by introducing a restricted field in the foreground as in \nexteg{}.
+\begin{ex}
+\record{\field{bg}{\textit{Ind}}\\ 
+        \field{fg}{$\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}}} 
+\end{ex} 
+For the restricted field notation \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}} see
+Chapter~\ref{ch:gram}, p.~\pageref{pg:restfld}.  \preveg{} can be glossed as ``the property of being a dog in $s$''.
+We will abbreviate this as `dog$'$$\restriction$$s$' where we use
+`dog$'$' to abbreviate the property without the restricted field.  These
+abbreviations are represented in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item dog$'$ abbreviates 
+\record{\field{bg}{\textit{Ind}}\\
+        \field{fg}{$\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smalltfield{e}{dog($r$.x)}}}} 
+ 
+\item dog$'$$\restriction$$s$ abbreviates 
+\record{\field{bg}{\textit{Ind}}\\
+        \field{fg}{$\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+General definitions of these abbreviations are given in
+Appendix~\ref{app:gramrulesuniv}.
+
+In \cite{Cooper2013b} we introduced a predicate `unique' which takes two arguments, a
+property and a record (situation).  That is, its arity is
+$\langle$\textit{Ppty}, \textit{Rec}$\rangle$.  
+We required that the constraint in \nexteg{} hold of `unique'. % As with
+% our characterization of the constraints on the predicate `the' we give
+% alternative contraints which can be employed depending on the way of
+% counting that is being employed.
+\begin{ex}
+% \begin{subex} 
+% \item
+  If $P$:\textit{Ppty}, $T$ is a type and $s$:$T$, 
+
+\hspace*{1em} then $\down{\textrm{unique}(P,s)} \not=\emptyset$ iff
+  $\mid\downP{P\!\restriction\!s}\mid\ =1$ 
+
+% \item If $P$:\textit{Ppty}, $T$ is a type,
+%   $s$:$T$ and $\ell$ is a label in $P.\mathrm{bg}$,
+
+% \hspace*{1em} then $\down{\textrm{unique}(P,s)} \not=\emptyset$ if
+%   $\mid\downPl{P\!\restriction\!s}{\ell}\mid\ =1$
+
+% \end{subex}
+\label{ex:uniqueconstraint} 
+\end{ex} 
+
+The constraint in (\ref{ex:uniqueconstraint}) expresses that uniqueness holds between a
+property and a situation just in case the result of restricting the
+property to that situation is a property whose property extension is a
+singleton set.  
+
+Here we will do things slightly differently.  We introduce a one-place
+predicate `unique' whose arity is $\langle$\textit{Ppty}$\rangle$ and
+which is associated with the witness condition in \nexteg{}.
+\begin{ex} 
+% \begin{subex} 
+% \item
+  If $P$:\textit{Ppty} and $s$:\textit{Rec}, 
+
+\hspace*{1em} then $s:\textrm{unique}(P)$ iff
+  $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$ 
+
+% \item If $P$:\textit{Ppty} and $\ell$ is a label in $P$.bg,
+
+% \hspace*{1em} then $a:\down{\textrm{unique}(P,s)}$ if
+%   $\downPl{P\!\restriction\!s}{\ell} =\{a\}$
+
+% \end{subex} 
+\end{ex}
+\preveg{} says that a situation, $s$, is of the type `unique($P$)'
+(where $P$ is a property) just in case there is exactly one component
+of $s$ which has the property $P$.
+ 
+The reason that we need a uniqueness predicate of this kind has to do
+with the nature of our type theory.  The typing mechanism allows us to
+say for example what is given in \nexteg{}.
+\begin{ex} 
+$s$ : dog($a$) 
+\end{ex} 
+One way to paraphrase \preveg{} is ``$a$ is a dog in $s$''.  It says
+that $s$ is of type `dog($a$)' but does not rule out that $s$ can be
+of other types as well including possibly `dog($b$)' where $b$ is
+distinct from $a$.  We do not have a way of saying that `dog($a$)' is
+the only type to which $s$ belongs. This would correspond to
+Schubert's (\citeyear{Schubert2000}) notion of characterizing a
+situation, that is, in our terms, presenting an exhaustive list of
+types to which it belongs, which given that we have meet types (Appendix~\ref{app:meettypes}),
+corresponds to providing a single type to which it belongs such that there is no
+other type to which it belongs.  We have made this choice because it would be very hard if
+not impossible to guarantee that anything belongs to just one type in
+the kind of type system we have introduced.  Consider, for example,
+join types. Given our definition of join types in
+Appendix~\ref{app:jointypes} if any object $a$ is of some type $T$ it
+will also be of type $(T\vee T')$ for any type $T'$.  Introduction
+of this classical kind of disjunction into the system makes it
+difficult to define a useful notion of a type that completely
+characterizes an object or situation in the way that Schubert
+wants.\footnote{Schubert's argument for needing the notion of
+  characterization has to do with defining a causation relation
+  between events.  It seems to me that an analysis of causality must
+  involve a type of the causing event.  Thus in addition to a
+  two-place cause relation between two events, ``$e_1$ caused
+  $e_2$'', we need a three-place cause relation between two events and
+  a type of the first event, ``$e_1$ caused $e_2$ in virtue of the fact that
+  $e_1:T$''. Thus, to take an example that Schubert discusses,
+  \textit{John's singing in the shower caused Mary to wake up in
+    virtue of the fact that it was a singing event} but not \textit{John's singing in the shower caused Mary to wake up in
+    virtue of the fact that it was an event in the shower}.  Allowing
+  types to be arguments to predicates in the way that we do provides a
+different solution to the problem that Schubert presents.} 
+
+
+Introducing the predicate `unique' in the way that we have allows us
+to place a constraint on the types to which a situation belongs
+without having to give a complete characterization of all the types to
+which it belongs.  Defining it as a predicate whose argument is a
+property means that it argument, the
+property, involves a type.  A property is a function which returns a type.
+Technically, we call it a dependent type.  In
+Chapter~\ref{ch:intensional} we will suggest that allowing types or
+dependent types as arguments to predicates is a characteristic of
+evolutionary higher organisms (at least humans).  It seems intuitive that the kind of
+uniqueness involved in the semantics of definite descriptions should
+belong to this higher kind of reasoning.  We can imagine simple
+organisms (perhaps even as simple as an amoeba) which respond to situations of certain types in certain
+ways, for example, eating  behaviour when confronted with a situation in which an item of food is present.
+However, it seems unintuitive that such a simple organism would be
+programmed to engage in eating behaviour when exactly one item of food
+is present and not otherwise.
+
+We shall use uniqueness to create a presuppositional account of
+definite descriptions using the techniques for parametric contents
+which we developed in Chapter~\ref{ch:propnames}.  The presupposition
+type (a version of that proposed in \citealp{Cooper2013b} adjusted to
+the new one-place predicate `unique') is given in \nexteg{}.
+\begin{ex} 
+ \smallrecord{\smalltfield{e}{unique(dog$'$)}}
+\label{ex:bgthedog}
+\end{ex} 
+This is the type that, according to the techniques developed in
+Chapter~\ref{ch:propnames}, will need to be matched against an agent's
+resources (gameboard or long term memory) or, if a match is not
+available, will need to be accommodated into the agent's gameboard.
+It requires there to be a situation which has exactly one dog in it.  Satisfying the uniqueness
+presupposition on this view is not so much a question of determining
+the way the world is (i.e. whether the dog is in some objective sense
+unique) as determining how the agent has carved up the world into
+situations.
+
+\preveg{} will, then, be the background of the
+parametric content of the noun-phrase \textit{the dog}. Three
+different options for the foreground of this parametric content present themselves, as
+in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{e}{unique(dog$'$)}} . \\
+\hspace*{2em}$\lambda P$:\textit{Ppty} .
+\record{\tfield{e}{the(dog$'$$\restriction$$r$.e, $P$)}} 
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{e}{unique(dog$'$)}} . \\
+\hspace*{2em}$\lambda P$:\textit{Ppty} .
+\record{\tfield{e}{exist(dog$'$$\restriction$$r$.e, $P$)}}
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{e}{unique(dog$'$)}} . \\
+\hspace*{2em}$\lambda P$:\textit{Ppty} .
+\record{\tfield{e}{every(dog$'$$\restriction$$r$.e, $P$)}} 
+ 
+\end{subex} 
+\label{ex:threethes}   
+\end{ex} 
+It does not make much difference which of these you choose for the
+analysis of singular definite descriptions.  Since we are relating the
+generalized quantifier predicates to the classical set relations given
+in \cite{BarwiseCooper1981} and we are requiring uniqueness by the
+presupposition, it will not make a difference in terms of which
+objects are required to have which properties whether we choose
+\preveg{a} (using the predicate constraint in
+(\ref{ex:theconstruniv})), \preveg{b} (using the predicate constraint
+in \nexteg{}, which repeats Chapter~\ref{ch:gram},
+example~(\ref{ex:constraintexist}))
+\begin{ex} 
+% \begin{subex} 
+ 
+% \item
+  If 
+  $P,Q$:\textit{Ppty} then 
+
+ \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff  $\downP{P}\cap\downP{Q}\not=\emptyset$
+ 
+% \item If $P,Q$:\textit{Ppty} and
+%   $\ell$ is a label in both $P$.bg and $Q$.bg then 
+
+% \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ if
+% $\downPl{P}{\ell}\cap\downPl{Q}{\ell}\not=\emptyset$ 
+ 
+% \end{subex} 
+   
+\end{ex} 
+or (\ref{ex:threethes}c) using the constraint in \nexteg{}.
+\begin{ex} 
+% \begin{subex} 
+ 
+% \item
+  If $P,Q$:\textit{Ppty} then 
+
+ \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ iff $\downP{P}\subseteq\downP{Q}$
+ 
+% \item If $P,Q$:\textit{Ppty} and
+%   $\ell$ is a label in both $P$.bg and $Q$.bg then 
+
+% \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
+%   $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
+ 
+% \end{subex} 
+   
+\end{ex} 
+In \cite{Cooper2013b} we chose the option corresponding to (\ref{ex:threethes}c), which offers
+some vague hope of being able to draw a parallel with plural
+definites.  Note that choosing (\ref{ex:threethes}b) or
+(\ref{ex:threethes}c) eliminates the need for the predicate `the'.
+
+What we have characterized so far is a static treatment of generalized
+quantifiers.  Dynamic generalized quantifiers as presented in
+\cite{Cooper2011} involving changing the
+constraint on the quantifier predicate so that the information
+represented by the first argument to the quantifier predicate is passed on as a
+restriction to the second argument of the predicate.  What we mean by
+the information associated with a property $P$ is the fixed point type
+$\mathcal{F}(P.\mathrm{fg})$ as introduced in Chapter~\ref{ch:propnames} and
+defined in Appendix~\ref{app:merge}, p.~\pageref{pg:fixedpointtype}.
+We shall use the fixed point type of the first argument to restrict
+the second argument.  We define the restriction of a function by a
+type as in \nexteg{}.
+\begin{ex} 
+If $f$ is a function $\lambda v\!:\!T_1\ .\ \phi$, then the
+\textit{restriction of} $f$ \textit{by a type} $T_2$, % \footnotemark
+$f|_{T_2}$, 
+is $\lambda v\!:\!(T_1$\d{$\wedge$}$T_2)\ .\ \phi$  
+\end{ex} 
+% \footnotetext{Note that we do not require that $T_2$ is a subtype of
+%   $T_1$.}
+We can extend this notation to properties as in \nexteg{}.
+\begin{ex} 
+If $P$:\textit{Ppty}, then $P|_T$ is the property
+\begin{quote}
+\record{\field{bg}{$P$.bg\d{$\wedge$}$T$}\\
+        \field{fg}{$P$.fg$|_T$}} 
+\end{quote}
+\end{ex} 
+  
+We can then define dynamic versions of the constraints on
+the quantifier predicates and their witness conditions as in \nexteg{}.  % Note that in \preveg{} if
+% a label $\ell$ is in $T$ then it will also be a label in $P|_T$.bg.
+% Thus in \nexteg{b,d} we only need to choose a label in the background
+% of the first argument to the quantifier.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $P,Q$:\textit{Ppty} then 
+
+ \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff  $\downP{P}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}}\not=\emptyset$ 
+ 
+% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in $P$.bg  then 
+
+% \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ if
+% $\downPl{P}{\ell}\cap\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}\not=\emptyset$ 
+
+\item If $P,Q$:\textit{Ppty} then 
+
+ \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ iff $\downP{P}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}}$
+
+% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in $P$.bg then 
+
+% \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
+%   $\downPl{P}{\ell}\subseteq\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}$ 
+
+\item If $P,Q$:\textit{Ppty} then
+
+\hspace*{1em} $s$ : exist($P$,$Q$) iff
+$\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+
+\item If $P,Q$:\textit{Ppty} then
+
+\hspace*{1em} $s$ : every($P$,$Q$) iff $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
+\label{subex:dynqconstr-every}  
+ 
+\end{subex} 
+\label{ex:dynqconstr}   
+\end{ex} 
+The original motivation for treating generalized quantifiers
+dynamically was to be able to treat the kind of ``donkey-anaphora''
+binding that occurs in sentences like \textit{every farmer who owns a
+  donkey likes it}.  Our version of dynamic generalized quantifiers
+essentially replicates the treatment in \cite{Chierchia1995}, though
+in our own terms.  A similar analysis of generalized quantifiers,
+exploiting contexts in type theory, is given in
+\cite{Fernando2001}. In order to see how our strategy here will
+facilitate the treatment of donkey anaphora we will have to wait until
+we have a treatment of anaphora in Chapter~\ref{ch:quant}.    The
+basic strategy is to exploit the conservativity of generalized
+quantifiers and treat \textit{every farmer who owns a donkey likes it}
+as \textit{every farmer who owns a donkey is a farmer who owns a
+  donkey and likes it}.  This is achieved by restricting the second
+argument of the quantifier predicate in the manner indicated in \preveg{}.
+
+For present purposes the advantage of dynamicizing the generalized
+quantifiers is that if the first argument property is restricted to be
+a property of ambient temperature then that restriction will be passed
+on to the second argument.  Let us look in detail at how this will
+happen.  Consider the type in \nexteg{}.
+\begin{ex}
+
+every(\record{\field{bg}{\textit{AmbTempFrame}}\\
+              \field{fg}{
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}} . 
+            \smallrecord{\smallrfield{e}{$s$}{temperature($r$.x)}}}}, \\ 
+\hspace*{2.4em} \record{\field{bg}{\textit{Rec}}\\
+                        \field{fg}{
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+            \smallrecord{\smalltfield{e}{rise($r$.x)}}}})
+
+\label{ex:thetemprises}
+\end{ex} 
+This type might arise as a result of determining the content of
+\textit{the temperature rises} using the parametric content for
+\textit{the temperature} in \nexteg{} (based on (\ref{ex:threethes})).
+\begin{ex} 
+\mbox{$\lambda r$:\smallrecord{\smalltfield{e}{unique(
+\smallrecord{\field{bg}{\textit{AmbTempFrame}}\\
+        \field{fg}{$\lambda
+                           r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}}
+                           . \smallrecord{\smalltfield{e}{temperature($r$.x)}}}})}} .} \\
+\hspace*{2em}$\lambda P$:\textit{Ppty}
+. \smallrecord{\smalltfield{e}{every(
+\smallrecord{\field{bg}{\textit{AmbTempFrame}}\\
+        \field{fg}{$\lambda
+    r_1$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}}
+    . \smallrecord{\smallrfield{e}{$r$.e}{temperature($r_1$.x)}}}}, $P$)}} 
+\label{ex:thetemp}
+\end{ex} 
+The result of applying $\mathcal{F}$ to the foreground of the first argument of (\ref{ex:thetemprises}) in
+order to obtain a fixed point type is given in \nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{AmbTempFrame}}\\
+        \rfield{e}{$s$}{temperature(x)}} 
+\end{ex} 
+The condition on `every' in
+(\ref{ex:dynqconstr}\ref{subex:dynqconstr-every}) requires that we
+compare the first argument to `every' with the result of restricting
+the second argument with \preveg{}.  The foreground of this is given in \nexteg{a},
+which is identical with \nexteg{b} (by the definition of restriction)
+and \nexteg{c} (by the definition of merge) and to 
+\nexteg{d} (by the definition of merge\footnote{For this step we need
+  to take the version of merge in Appendix~\ref{app:merge} which
+  contains the two additional clauses taking account of subtypes.} because \textit{AmbTempFrame} is a subtype of \textit{Rec}).
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+            \smallrecord{\smalltfield{e}{rise($r$.x)}}$|_\text{\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+        \smallrfield{e}{$s$}{temperature(x)}}}$ 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+                               \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smalltfield{e}{rise($r$.x)}} 
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Rec}\d{$\wedge$}\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smalltfield{e}{rise($r$.x)}}
+
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+                               \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smalltfield{e}{rise($r$.x)}} 
+ 
+\end{subex} 
+\label{ex:riserestrambtemp}  
+\end{ex} 
+Thus intuitively by choosing to restrict the first argument property
+to ambient temperature frames we are also restricting the second
+argument property to ambient temperature frames. 
+
+This technique for dynamic quantifiers also has an important
+consequence if we try to combine frame level and individual level
+properties.  Suppose for example that we are trying to compute the
+witness condition for \textit{the temperature runs} where
+\textit{runs} corresponds to the content given in
+(\ref{ex:dogtemperaturecont}a).  Then we will have \nexteg{}
+as the foreground of the second argument property.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+            \smallrecord{\smalltfield{e}{run($r$.x)}}$|_\text{\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+        \smallrfield{e}{$s$}{temperature(x)}}}$ 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+                               \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smalltfield{e}{run($r$.x)}}
+
+\item  $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}\d{$\wedge$}\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smalltfield{e}{run($r$.x)}}
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}$\wedge$\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smalltfield{e}{run($r$.x)}}
+
+
+ 
+\end{subex} 
+\label{ex:runrestrictedambtemp}   
+\end{ex}
+Here since neither \textit{Ind} nor \textit{AmbTempFrame} are a
+subtype of the other the final step of merging represented in
+\preveg{d} is the meet type (without the dot!) whose components are
+the two types which were merged.   The property represented in
+\preveg{} is thus necessarily empty (that is,
+its property extension is the empty set no matter what we assign to
+the basic types), if we have the assumption that
+individuals are non-records.  This would be a way of requiring that
+the content of \textit{runs} be coerced to something which could hold
+for temperature frames in order to prevent the sentence from being
+anomalous.  Similarly, if we wish to find a content for \textit{the
+  dog rises} then we have to associate \textit{rises} with an
+individual property or alternatively associate \textit{dog} with a
+frame property.
+ 
+What then should be the content of \textit{is ninety}?  An obvious
+modification to the treatment of \textit{be} in Chapter~\ref{ch:gram}
+(see Appendix~\ref{app:lexuniversal}), substituting the type \textit{Real} for the type \textit{Ind},
+would lead to the property foreground in \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Real}}}
+. \record{\mfield{x}{$r$.x, 90}{\textit{Ind}}\\
+          \tfield{e}{be(x)}} 
+\end{ex} 
+A property with this as foreground might be the content you need if you are treating a sentence like
+\textit{2 times 45 is 90}.  However, if we use this content with
+\textit{the temperature} we will run into a similar problem as that
+represented in \preveg{}.  This is spelled out in \nexteg{}
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Real}}} . 
+            \smallrecord{\smallmfield{x}{$r$.x, 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}$|_\text{\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+        \smallrfield{e}{$s$}{temperature(x)}}}$ 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Real}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+                               \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smallmfield{x}{$r$.x, 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}} 
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Real}\d{$\wedge$}\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smallmfield{x}{$r$.x, 90}{\textit{Ind}} \\
+                         \smalltfield{e}{be(x)}}
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Real}$\wedge$\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smallmfield{x}{$r$.x, 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}
+
+
+ 
+\end{subex} 
+   
+\end{ex}  
+Assuming that real numbers are not records, we have the same problem
+as we had in (\ref{ex:runrestrictedambtemp}) in that the property
+turns out to be necessarily empty.  What we need instead is a property of frames (records) that will make
+reference to a scale, $\zeta$, of the kind we defined for \textit{AmbTempFrame}
+in (\ref{ex:scaleambtempframe}), for example, a property with the
+foreground given in \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+            \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}
+\label{ex:isninety} 
+\end{ex} 
+If $\zeta$ is fixed to be the scale in (\ref{ex:scaleambtempframe})
+then \preveg{} is identical with \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+            \smallrecord{\smallmfield{x}{$r$.x.x, 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}
+\end{ex}          
+That is, what is checked for being identical with 90 is the `x'-field of the temperature frame which is in the
+`x'-field of the argument to the property.  If we choose this property
+as the content for \textit{is ninety} then the restriction of the
+property as second argument to the quantifier will give a property as
+result which is not necessarily empty.  The foreground of this property is shown in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+            \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}$|_\text{\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+        \smallrfield{e}{$s$}{temperature(x)}}}$ 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+                               \smallmfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}} 
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Rec}\d{$\wedge$}\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}
+
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+                  \smallrfield{e}{$s$}{temperature(x)}} . 
+            \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
+                         \smalltfield{e}{be(x)}}
+ 
+\end{subex}  
+\end{ex} 
+Now, as in (\ref{ex:riserestrambtemp}), \preveg{d} is equivalent
+ to \preveg{c} in the sense that exactly the same objects will
+have the properties of which these functions are the foreground.  This is because \textit{AmbTempFrame} is a
+subtype of \textit{Rec}.  In the functions in \preveg{} there are two
+parameters which will need to be determined by context in
+compositional semantics, that is, will need to be found by matching
+the domain type of a parametric content against an agent's resources.
+These are the resource situation, $s$, and the scale, $\zeta$. 
+
+\section{Individual vs. frame level nouns}
+\label{sec:indvsframe}
+
+We have made a distinction between individual level nouns like
+\textit{dog} and frame level nouns like \textit{temperature}, differentiating
+their contents as in (\ref{ex:dogtemperaturecont}) and motivating the
+distinction with the Partee puzzle.  Now consider \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The dog is nine 
+ 
+\item The dog is getting older/aging
+
+\item Nine is getting older/aging 
+ 
+\end{subex} 
+   
+\end{ex} 
+We have the same intuitions about \preveg{} as we do about the
+original temperature puzzle.  We cannot conclude \preveg{c} from
+\preveg{a,b}.  Does this mean that \textit{dog} is a frame level noun
+after all?  Certainly, if we think of frames as being like entries in
+relational databases it would be natural to think of age (or
+information allowing us to compute age such as date of birth) as being
+a natural field in a dog-frame.\footnote{Curiously, it does not seem
+  to figure in FrameNet for \textit{dog} (as of 2nd March, 2015).  The
+  noun \textit{dog} is associated with the frame Animals which
+  inherits from the frame Biological entity.  But in neither of these
+  frames is there a frame element corresponding to age or date of
+  birth.  There is a frame Age but this does not seem to be related to
+  Animals or Biological entity.} 
+
+Our strategy to deal with this will be to say that contents of individual level
+nouns can be coerced to frame level contents, whereas the contents of
+frame level nouns cannot be coerced ``down'' to individual level
+contents.  Thus in addition to (\ref{ex:dogtemperaturecont}a),
+repeated as \nexteg{a} we have \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}  
+ 
+\item  $\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{dog\_frame($r$.x)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The predicate `dog\_frame' is related to the predicate `dog' by the
+constraint in \nexteg{}.
+\begin{ex} 
+dog\_frame($r$) is non-empty implies $r$ : \smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}} 
+\end{ex} 
+There are several different kinds of dog frames
+with additional information about a dog which an agent may acquire or
+focus on.  Here we will consider just
+frames which contain a field labelled `age' as specified in \nexteg{}.
+\begin{ex} 
+If $r$ : \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                      \smalltfield{e}{dog(x)}\\
+                      \smalltfield{age}{\textit{Real}}\\
+                      \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+                    then dog\_frame($r$) is non-empty 
+\label{ex:dogframe}
+\end{ex} 
+An age scale, $\zeta_{\mathrm{age}}$, for individuals can then be
+defined as the function in \nexteg{}.
+\begin{ex} 
+$\zeta_{\mathrm{age}}$ = 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{age}{\textit{Real}}\\
+                         \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+                       . $r$.age
+  
+\label{ex:agescale}
+\end{ex} 
+The content foreground for \textit{is nine} in \textit{the dog is nine} is
+then like (\ref{ex:isninety}) with $\zeta$ set to
+$\zeta_{\mathrm{age}}$ and 9 replacing 90. Thus \textit{be} followed
+by a numeral can be coerced to a content depending on some scale which
+is available as a resource.  
+
+We can think of the sentence \textit{the dog is nine} as involving two
+coercions:  one coercing the content of \textit{dog} to a frame level
+property and the other coercing the  content of \textit{be} to a
+function which when applied to a number will return a frame level
+property depending on an available scale.  Such coercions do not appear to be
+universally available in languages.  For example, in German it is
+preferable to say \textit{die Temperatur ist 35 Grad} ``the
+temperature is 35 degrees'' rather than \textit{\#die Temperatur ist
+  35} ``the temperature is 35''.  Similarly \textit{der Hund ist neun
+  Jahre alt} ``the dog is nine years old'' is preferred over
+\textit{\#der Hund ist neun} ``the dog is nine''.  We will return to
+the matter of coercion or creation of new contents in Section~\ref{sec:passengers}.    
+
+ We now
+turn our attention to the formulation of the compositional semantics.
+
+\section{Defining a compositional semantics for the Partee
+  puzzle}
+
+We will now make precise the resources that are needed in order to
+account for the data expressed in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item a/the dog runs 
+ 
+\item the dog is nine
+
+\item the temperature is ninety
+
+\item the temperature rises 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+We start with the determiners.  The background type
+(``presupposition'') introduced by \textit{the}
+(\ref{ex:bgthedog}) depends on the common noun. This means that the
+contents of 
+\textit{the} and \textit{dog} cannot be combined by the S-combinator
+strategy for the combination of parametric contents that was
+introduced in Chapter~\ref{ch:propnames}, defined in
+Appendix~\ref{app:signcomb}.  This combination method passes up the
+background requirements of the two daughters without modifying them as
+depicted graphically in \nexteg{}.
+\newsavebox{\m}
+\newsavebox{\done}
+\newsavebox{\dtwo}
+\sbox{\m}{\smallrecord{\field{bg}{\smallrecord{\field{f}{$T_{F_\mathrm{bg}}$}\\
+                                            \field{a}{$T_{A_\mathrm{bg}}$}}}\\
+                    \field{fg}{$\lambda r$:\smallrecord{\field{f}{$T_{F_\mathrm{bg}}$}\\
+                                            \field{a}{$T_{A_\mathrm{bg}}$}}
+                                          . $F_{\mathrm{fg}}(r.\mathrm{f})(A_{\mathrm{fg}}(r.\mathrm{a}))$}} }
+\sbox{\done}{\smallrecord{\field{bg}{$T_{F_\mathrm{bg}}$}\\
+                             \field{fg}{$F_{\mathrm{fg}}$}}}
+\sbox{\dtwo}{\smallrecord{\field{bg}{$T_{A_\mathrm{bg}}$}\\
+                              \field{fg}{$A_{\mathrm{fg}}$}}}
+\begin{ex} 
+\Tree [.$X$\\\usebox{\m}
+                $F$\\\usebox{\done} 
+                $A$\\\usebox{\dtwo} ] 
+\label{ex:scombtree}
+\end{ex} 
+    
+Instead what we need is \nexteg{} where $\mathfrak{F}$ is a function
+from parametric contents to parametric contents and $\mathcal{A}$ is a
+parametric content.
+\begin{ex} 
+\Tree [.$X$\\$\mathfrak{F}(\mathcal{A})$ $F$\\$\mathfrak{F}$ $A$\\$\mathcal{A}$ ] 
+\end{ex} 
+Here the function $\mathfrak{F}$ has to do the S-combinator like work
+which was achieved by the combination method in
+(\ref{ex:scombtree}). In \nexteg{} we show a schematic version of the
+function and on the node $X$ we show the schematic result of applying
+the function to the argument.
+\sbox{\m}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(A_{\mathrm{fg}})$}\\
+                                               \smalltfield{a}{$T_{A_\mathrm{bg}}$}}}\\
+                       \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(A_{\mathrm{fg}})$}\\
+                                               \smalltfield{a}{$T_{A_\mathrm{bg}}$}}
+                                             . $F_{\mathrm{fn}}(A_{\mathrm{fg}}(r.\mathrm{a}))$}}}
+\sbox{\done}{$\lambda
+  p$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                  \smalltfield{f}{$T_{A_\mathrm{fg}}$}} . 
+\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(p.\mathrm{fg})$}\\
+                                     \smalltfield{a}{$p$.bg}}}\\
+             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(p.\mathrm{fg})$}\\
+                                     \smalltfield{a}{$p$.bg}}
+                                   . $F_{\mathrm{fn}}(p.\mathrm{fg}(r.\mathrm{a}))$}}
+}
+\begin{ex} 
+\Tree [.$X$\\\usebox{\m}
+                $F$\\\usebox{\done} 
+                $A$\\\usebox{\dtwo} ] 
+
+\end{ex} 
+We will call a function from parametric contents to parametric
+contents a \textit{dependent parametric content}.  That is, it depends
+on another parametric content to yield a parametric content. The
+content of definite articles, SemDefArt, will be defined as an
+instance of the schema under $F$ in \preveg{}.  The definition is
+given in \nexteg{a} whose type is \nexteg{b}.
+\begin{ex}
+\begin{subex} 
+\item $\lambda Q$:\textit{PPpty} . 
+\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{e}{unique($Q$.fg($\Uparrow$a))}}}\\
+                                     \smalltfield{a}{$Q$.bg}}}\\
+             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{e}{unique($Q$.fg($\Uparrow$a))}}}\\
+                                     \smalltfield{a}{$Q$.bg}} . 
+$\lambda P$:\textit{Ppty} . 
+\smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+             \smalltfield{e}{every(restr, scope)}}}}
+
+     \item (\textit{PPpty}$\to$\textit{PQuant})
+\end{subex}
+\end{ex} 
+The lexical resource we need to include in the English lexicon is
+\nexteg{a} where Lex$_{\mathrm{DefArt}}$ is a universal resource
+defined in \nexteg{b}. (Lex is defined in
+Appendix~\ref{app:lexuniversal}.)
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{DefArt}}$(``the'') 
+ 
+\item Lex$_{\mathrm{DefArt}}$($T_{\mathrm{phon}}$), where
+  $T_{\mathrm{phon}}$ is a phonological type, is defined as\\ 
+Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemDefArt}{(\textit{PPpty}$\to$\textit{PQuant})}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+ 
+For the sake of consistency we shall adjust the definition of the
+SemIndefArt so that it too is a dependent parametric content of the
+same form as SemDefArt even
+though it does not introduce a presupposition that depends on the
+following noun.  SemIndefArt is defined as \nexteg{}.
+\begin{ex} 
+$\lambda Q$:\textit{PPpty} . 
+\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+                                     \smalltfield{a}{$Q$.bg}}}\\
+             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+                                     \smalltfield{a}{$Q$.bg}} . 
+$\lambda P$:\textit{Ppty} . 
+\smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+             \smalltfield{e}{exist(restr, scope)}}}} 
+\end{ex} 
+The lexical resource we need to include in the English lexicon is
+\nexteg{a} where Lex$_{\mathrm{IndefArt}}$ is a universal resource
+defined in \nexteg{b}. 
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{IndefArt}}$(``a'') 
+ 
+\item Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$), where
+  $T_{\mathrm{phon}}$ is a phonological type, is defined as\\ 
+Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{PPpty}$\to$\textit{PQuant})}} 
+ 
+\end{subex} 
+   
+\end{ex}    
+
+We now move on to common nouns.  We define SemCommonNoun($p$,
+$T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+where $p$ is a predicate with arity $\langle T_{\mathrm{arg}}\rangle$,
+$T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
+$T_{\mathrm{bg}}$ is a record type representing the background requirements, as \nexteg{}.
+\begin{ex} 
+\record{\field{bg}{$T_{\mathrm{bg}}$}\\
+        \field{fg}{$\lambda c$:$T_{\mathrm{bg}}$ . \record{\field{bg}{$T_{\mathrm{restr}}$}\\
+                           \field{fg}{$\lambda r$:\smallrecord{\smalltfield{x}{$T_{\mathrm{restr}}$}} . 
+                      \smallrecord{\smalltfield{e}{$p$($r$.x)}}}}}} 
+\label{ex:semcommonnoun}
+\end{ex} 
+The lexical resources for common nouns we will include in the English
+lexicon are \nexteg{a} where Lex$_{\mathrm{CommonNoun}}$ is a
+universal resource defined in \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$(``dog'', dog, \textit{Ind},
+  \textit{Ind}, \textit{Rec})\\
+      Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
+      \textit{Rec}, \textit{Rec}, \textit{Rec}) 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$,
+  $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+  where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
+  with arity $\langle T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and $T_{\mathrm{bg}}$ is a record type, is defined as\\
+Lex($T_{\mathrm{phon}}$, $N$) \d{$\wedge$} 
+\smallrecord{\smallmfield{cnt}{SemCommonNoun($p$, $T_{\mathrm{arg}}$,
+    $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
+ 
+\end{subex} 
+\label{ex:lexdogtemp}   
+\end{ex}
+We can think of the common noun sign types in \preveg{a} as
+unmodulated in something like the sense of modulation discussed by
+\cite{Recanati2010} in that the restriction type yielding the type of
+the domain of the property is identical with the type that represents
+the arity of the predicate.  We will see a way to modulate the content
+of the noun by choosing a subtype of the type of the predicate
+argument as the domain type of the property (that is,
+$T_{\mathrm{restr}}$ above). 
+
+To this we add an operation CommonNounIndToFrame which is defined on 
+individual level common noun sign types and ``raises'' them to frame level common noun
+sign types.  This is defined in \nexteg{}.
+\begin{ex}
+If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
+$T_\mathrm{bg}$ is a record type (the ``background type'' or
+``presupposition'') then \\ 
+\mbox{CommonNounIndToFrame(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+$p$, \textit{Ind}, \textit{Ind}, $T_\mathrm{bg}$))} = Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+$p$\_frame, \textit{Rec}, \textit{Rec}, $T_\mathrm{bg}$)
+\label{ex:CommonNounIndToFrame} 
+\end{ex} 
+This operation is a universal resource which may or may not be used by
+individual languages.  Given the discussion in
+Section~\ref{sec:indvsframe}, we suggest that it is used productively
+in English but not in German, for example.  This gives us a way of
+generating new lexical resources from already existing resources.
+Similarly, we can think of $p$\_frame as being the result of applying
+a ``raising'' operation to the predicate $p$ where the new predicate
+is associated with the general constraint expressed in \nexteg{}.
+\begin{ex} 
+If $p$ is a predicate with arity $\langle$\textit{Ind}$\rangle$, then
+for any $e$ and $r$,  
+\begin{quote}
+$e$ : $p$\_frame($r$) implies $r$ : 
+\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+             \smalltfield{e}{$p$(x)}}
+\end{quote}
+\label{ex:predframe}
+\end{ex} 
+Another way to generate new lexical resources from basic common noun
+sign types is to restrict the domain of the common noun by some type
+(perhaps related to a topos as suggested in
+Section~\ref{sec:compsemPartee}).  This is formulated in \nexteg{}.
+\begin{ex} 
+If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate,
+$T_{\mathrm{arg}}$ is a type and that arity of $p$ is $\langle
+T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq
+T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$ is a record type and
+$T_{\mathrm{mod}}\sqsubseteq T_{\mathrm{restr}}$ then
+
+\mbox{RestrictCommonNoun(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+$p$, $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+$T_{\mathrm{mod}}$)} = Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+$p$, $T_{\mathrm{arg}}$, $T_{\mathrm{mod}}$, $T_{\mathrm{bg}}$)   
+\end{ex} 
+This will enable us, for example,  to restrict the basic lexical entry
+for \textit{temperature} (repeated in \nexteg{a}) to obtain the
+additional lexical resource \nexteg{b}, which is needed to produce the
+noun-phrase content in (\ref{ex:thetemp}).
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
+      \textit{Rec}, \textit{Rec}, \textit{Rec}) 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
+      \textit{Rec}, \textit{AmbTempFrame}, \textit{Rec}) 
+ 
+\end{subex} 
+   
+\end{ex}
+We can combine restriction coercion with frame coercion.  While frame
+coercion gives us a general frame level property of records we can
+restrict the frame to be of a certain type corresponding to a
+particular type of frame that we have as a resource.  For example,
+suppose that we have resource which is a frame type for dog frames, \textit{DogFrame} as introduced in
+(\ref{ex:dogframe}) repeated in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                      \smalltfield{e}{dog(x)}\\
+                      \smalltfield{age}{\textit{Real}}\\
+                      \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}} 
+\end{ex} 
+We can use \textit{DogFrame} to restrict the result of coercing our
+frame level dog sign type, that is there can be a two-step coercion
+from the basic lexical entry in (\ref{ex:lexdogtemp}a) as represented
+in \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{CommonNoun}}$(``dog'', dog, \textit{Ind},
+  \textit{Ind}, \textit{Rec}) $\leadsto$ Lex$_{\mathrm{CommonNoun}}$(``dog'', dog\_frame, \textit{Rec},
+  \textit{Rec}, \textit{Rec}) $\leadsto$ Lex$_{\mathrm{CommonNoun}}$(``dog'', dog\_frame, \textit{Rec},
+  \textit{DogFrame}, \textit{Rec})
+\end{ex} 
+    
+
+We treat intransitive verbs in a parallel fashion to common nouns.
+Thus 
+\begin{quote}
+SemIntransVerb($p$,
+$T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)
+\end{quote}
+where $p$ is a predicate with arity $\langle T_{\mathrm{arg}}\rangle$,
+$T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
+$T_{\mathrm{bg}}$ is the record type (\ref{ex:semcommonnoun}) as for
+common nouns.  We define  Lex$_{\mathrm{IntransVerb}}$ similarly to
+Lex$_{\mathrm{CommonNoun}}$ in \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $p$,
+  $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+  where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
+  with arity $\langle T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and $T_{\mathrm{bg}}$ is a record type, is defined as\\
+Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
+\smallrecord{\smallmfield{cnt}{SemIntransVerb($p$, $T_{\mathrm{arg}}$,
+    $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
+\end{ex} 
+The basic lexical resources that we need for \textit{runs} and
+\textit{rises} are given in \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{IntransVerb}}$(``runs'', run, \textit{Ind},
+  \textit{Ind}, \textit{Rec})\\
+      Lex$_{\mathrm{IntransVerb}}$(``rises'', rise,
+      \textit{Rec}, \textit{Rec}, \textit{Rec})  
+\end{ex} 
+
+
+We need a treatment of \textit{is} which will allow it to
+combine with numerals like \textit{nine} and \textit{ninety} to form a
+frame level predicate as indicated in (\ref{ex:isninety}).  We start
+from a parametrized version of the definition of SemBe which we
+introduced in Chapter~\ref{ch:gram} (repeated in
+Appendix~\ref{app:lexuniversal}).  We give the parametrized version in
+\nexteg{}. 
+\begin{ex} 
+$\lambda r$:\textit{Rec} . \\
+\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em}
+\record{\field{bg}{\textit{Ind}}\\
+             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \\
+& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\textit{Ind}}\\
+                           \field{fg}{$\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_1$.x,$r_2$.x}{\textit{Ind}}\\
+          \tfield{e}{be(x)}}
+}
+}
+)}}
+ 
+\end{ex} 
+Here the context represented by the first argument to the function,
+$r$, does not contribute anything to the final content of \textit{be}
+which represents straightforward equality.  In this chapter we want to
+allow equality not only between individuals but also objects of other
+types as well as introducing a type for the background.  We will thus
+give SemBe two arguments and represent \preveg{} as
+SemBe(\textit{Ind}, \textit{Rec}).  In general we will define
+SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$) to be \nexteg{}.
+\begin{ex}
+$\lambda r$:$T_{\mathrm{bg}}$ . \\
+\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em}
+\record{\field{bg}{$T_{\mathrm{arg}}$}\\
+             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+. \\
+& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{$T_{\mathrm{arg}}$}\\
+                           \field{fg}{$\lambda
+r_2$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+. \record{\mfield{x}{$r_1$.x, $r_2$.x}{$T_{\mathrm{arg}}$}\\
+          \tfield{e}{be(x)}}
+}
+}
+)}}
+ 
+
+
+\end{ex} 
+We will say that this holds if $T_{\mathrm{bg}}$ does not require a
+scale, more precisely if $T_{\mathrm{bg}}$ is not a subtype of 
+\smallrecord{\smalltfield{sc}{($T_{\mathrm{arg}}\to\textit{Real}$)}}. If
+$T_{\mathrm{bg}}\sqsubseteq$
+\smallrecord{\smalltfield{sc}{($T_{\mathrm{arg}}\to\textit{Real}$)}}
+then SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$) is \nexteg{}.
+\begin{ex}
+$\lambda r$:$T_{\mathrm{bg}}$ . \\
+\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em}
+\record{\field{bg}{$T_{\mathrm{arg}}$}\\
+             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+. \\
+& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Real}}}}\\
+                           \field{fg}{$\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Real}}}
+. \record{\mfield{x}{$r$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+          \tfield{e}{be(x)}}
+}
+}
+)}}
+ 
+
+
+\end{ex}
+Using the scale $\zeta_{\mathrm{age}}$ from (\ref{ex:agescale}),
+repeated as \nexteg{b}, we can
+use the domain type of that function, which we refer to as
+\textit{AgeFrame} (as specified in \nexteg{a}) as $T_{\mathrm{arg}}$ and construct a meaning for
+\textit{be} SemBe(\textit{AgeFrame},
+\smallrecord{\smalltfield{sc}{(\textit{AgeFrame}$\to\textit{Real}$)}}),
+given in \nexteg{c}.
+\begin{ex} 
+\begin{subex}
+
+\item \textit{AgeFrame} =  \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{age}{\textit{Real}}\\
+                         \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+ 
+\item $\zeta_{\mathrm{age}}$ = 
+$\lambda r$:\textit{AgeFrame}
+                       . $r$.age 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{sc}{(\textit{AgeFrame}$\to\textit{Real}$)}}
+  . \\
+\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em}
+\record{\field{bg}{\textit{AgeFrame}}\\
+             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{AgeFrame}}
+. \\
+& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Real}}}}\\
+                           \field{fg}{$\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Real}}}
+. \record{\mfield{x}{$r$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+          \tfield{e}{be(x)}}
+}
+}
+)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The idea is that \preveg{c} will be created as a resource on the basis
+of the existence of \preveg{b} which will in turn rely on the fact
+that \preveg{a} is a resource.  \preveg{c} is available as a meaning
+of \textit{be} in English but not for German.
+
+To complete the picture we need to account for \textit{nine} and
+\textit{ninety}.  We will treat these as logically proper names of
+real numbers.  Thus we will not treat them as introducing
+presuppositions in the manner in which we suggested in
+Chapter~\ref{ch:propnames} but rather in the Montague-like manner
+which we used for proper names in Chapter~\ref{ch:gram}, except that
+we now adjust it to take account of parametric contents and the new
+definition of \textit{Ppty} (property), repeated in \nexteg{}.
+\begin{ex} 
+\record{\tfield{bg}{\textit{Type}}\\
+        \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\to$\textit{RecType})}} 
+\end{ex} 
+If $T$ is a type we let \textit{Ppty}($T$) represent the partial
+specification of \textit{Ppty} presented in \nexteg{}.
+\begin{ex} 
+\record{\mfield{bg}{$T$}{\textit{Type}}\\
+        \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\to$\textit{RecType})}} 
+\end{ex}        
+In $n$ is a (real) number, then SemNumeral($n$) (the content for a
+number expression such as \textit{nine}) is as given in
+\nexteg{}.
+\begin{ex} 
+$\lambda r$:\textit{Rec} . \\
+\hspace*{1em}$\lambda P$:\textit{Ppty}(\textit{Real}) . \\
+\hspace*{2em}$P$.fg(\smallrecord{\field{x}{$n$}}) 
+\end{ex} 
+Then we can define Lex$_{\mathrm{numeral}}$ as an operation which
+takes a phonological type $T_{\mathrm{phon}}$ and a (real) number $n$
+and returns the sign type \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$) = \\
+\hspace*{1em}Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemNumeral($n$)}{\textit{PQuant}}}  
+\end{ex} 
+The two sign types that we need as resources for our small fragment are given in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{numeral}}$(``nine'', 9) 
+ 
+\item Lex$_{\mathrm{numeral}}$(``ninety'', 90)  
+ 
+\end{subex} 
+   
+\end{ex}
+
+Since we are now using two methods of semantic combination for
+contents, simple function application for \textit{Det N} constructions
+and our variant of S-combination for other constructions we need to
+use the variant of CntForwardApp from Chapter~\ref{ch:gram} for the
+former and the variant from Chapter~\ref{ch:propnames} for the latter.
+We will here call the Chapter~\ref{ch:gram} version CntForwardApp as
+before and rename the Chapter~\ref{ch:propnames} version to CntSForwardApp.  
+Details are given in Appendices~\ref{app:signcomb} and \ref{app:interpps}.        
+
+  
+
+\section{Passengers and ships}
+\label{sec:passengers}
+\cite{Gupta1980} points out examples such as \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item National Airlines served at least two million passengers in 1975 
+ 
+\item Every passenger is a person
+
+\item National Airlines served at least two million persons in 1975 
+ 
+\end{subex} 
+\label{ex:NA2mill}   
+\end{ex} 
+His claim is that we cannot conclude \preveg{c} from \preveg{a,b}.
+There is a reading of \preveg{a} where what is being counted is not
+passengers as individual people but passenger events, events of people
+taking flights, where possibly the same people are involved in several
+flights.  Gupta claims that it is the only reading that this
+sentence has.  While it is certainly the preferred reading for this
+sentence (say, in the context of National Airlines' annual report or
+advertizing campaign), I think the sentence also has a reading where
+individuals are being counted.  Consider \nexteg{}.
+\begin{ex} 
+National Airlines served at least two million passengers in 1975.
+Each one of them signed the petition.  
+\end{ex} 
+While \preveg{} could mean that a number of passengers signed the
+petition several times our knowledge that people normally only sign a
+given petition once makes a reading where there are two million
+distinct individuals involved more likely.  Similarly, while
+(\ref{ex:NA2mill}c) seems to prefer the individual reading where there
+are two million distinct individuals it is not impossible to get an
+event reading here.  \cite{Krifka1990} makes a similar point.
+Gupta's analysis of such examples involves individual concepts and is
+therefore reminiscent of the functional concepts used by
+\cite{Lobner1979,Lobner1981} to analyze the Partee puzzle.
+
+\cite{Carlson1982} makes a similar point about Gupta's examples in
+that nouns which appear to normally point to individual related
+readings can in the right context get the event related readings.  One
+of his examples is a traffic engineer's report as in \nexteg{}.
+\begin{ex}
+Of the 1,000 cars
+using Elm St. over the past 49 hours, only 12 cars made noise in
+excess of EPA recommended limits.
+\end{ex}
+It is easy to interpret this in terms of 1,000 and 12 car events
+rather than individual cars.  Carlson's suggestion is to use his
+notion of \textit{individual stage}, what he describes intuitively as
+``things-at-a-time''.  \cite{Krifka1990} remarks that ``Carlson's
+notion of a stage serves basically to reconstruct events''.  While
+this is not literally correct, the intuition is nevertheless right.
+Carlson was writing at a time when times and time intervals were used
+to attempt to capture phenomena that in more modern semantics would be
+analyzed in terms of events or situations.  Thus Carlson's notion of
+stage is related to a frame-theoretic approach which associates an
+individual with an event.  
+
+Consider the noun \textit{passenger}.  It would be natural to assume
+that passengers are associated with journey events.  FrameNet\footnote{As of 13th May 2015.}
+does not have an entry for \textit{passenger}.  The closest relevant
+frame appears to be TRAVEL which has frame elements for traveller,
+source, goal, path, direction, mode of transport, among others. The
+FrameNet lexical entry for \textit{journey} is associated with this
+frame.  Let us take the type \textit{TravelFrame} to be the stripped
+down version of the travel frame type in \nexteg{a}.  Then we could
+take the type \textit{PassengerFrame} to be \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{traveller}{\textit{Ind}}\\
+              \tfield{source}{\textit{Loc}}\\
+              \tfield{goal}{\textit{Loc}}}
+ 
+\item \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{passenger(x)}\\
+              \tfield{journey}{\textit{TravelFrame}}\\
+              \tfield{c$_{\mathrm{travel}}$}{take\_journey(x, journey)}}
+ 
+\end{subex} 
+   
+\end{ex} 
+A natural constraint to place on the predicate `take\_journey' is that
+in \nexteg{}.
+\begin{ex} 
+If $a$:\textit{Ind} and $e$:\textit{TravelFrame}, then the type
+take\_journey($a$, $e$) is non-empty just in case $e$.traveller = $a$. 
+\end{ex}
+
+Let us suppose that the basic lexical entry for \textit{passenger} is
+\nexteg{a}.  This will mean that its (parametric) content is
+\nexteg{b} (with vacuous dependence on the context).
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger,
+  \textit{Ind}, \textit{Ind}, \textit{Rec}) 
+ 
+\item \record{\field{bg}{\textit{Rec}}\\
+              \field{fg}{$\lambda c$:\textit{Rec} . 
+                            \record{\field{bg}{\textit{Ind}}\\
+                                    \field{fg}{$\lambda
+                                      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+                                      . passenger($r$.x)}}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+That is, its non-parametric content is a property of individuals.
+Given the coercion CommonNounIndToFrame we have defined we can coerce
+this lexical item to \nexteg{a} which means that its parametric
+content will be \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \mbox{Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger\_frame,
+  \textit{Rec}, \textit{Rec}, \textit{Rec})} 
+ 
+\item \record{\field{bg}{\textit{Rec}}\\
+              \field{fg}{$\lambda c$:\textit{Rec} . 
+                            \record{\field{bg}{\textit{Rec}}\\
+                                    \field{fg}{$\lambda
+                                      r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+                                      . passenger\_frame($r$.x)}}}} 
+ 
+\end{subex} 
+   
+\end{ex}    
+This means that the non-parametric content is a property of frames.  An agent who has the frame type \textit{PassengerFrame} available as a
+resource can use it to restrict the domain of the property using the
+coercion RestrictCommonNouns.  This produces \nexteg{a} which means
+that its parametric content will be \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \mbox{Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger\_frame,
+  \textit{Rec}, \textit{PassengerFrame}, \textit{Rec})} 
+ 
+\item \record{\field{bg}{\textit{Rec}}\\
+              \field{fg}{$\lambda c$:\textit{Rec} . 
+                            \smallrecord{\field{bg}{\textit{PassengerFrame}}\\
+                                    \field{fg}{$\lambda
+                                      r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}}
+                                      . \smallrecord{\smalltfield{e}{passenger\_frame($r$.x)}}}}}} 
+ 
+\end{subex} 
+\label{ex:passengerrestricted}   
+\end{ex}
+This means that the non-parametric content will now be a property of
+passenger frames of type \textit{PassengerFrame}.  This introduces not
+only a passenger but also a journey, an event in which in which the
+passenger is the traveller.
+
+It seems that we have now done something which \cite{Krifka1990}
+explicitly warned us against.  At the end of his discussion of
+Carlson's analysis he comes to the conclusion that it is wrong to look
+for an explanation of event-related readings of these sentences in
+terms of a noun ambiguity.  One of Krifka's examples is \nexteg{}
+(which gives the title to his paper).
+\begin{ex} 
+Four thousand ships passed through the lock 
+\end{ex} 
+This can either mean that four thousand distinct ships passed through
+the lock or that the there were four thousand
+ship-passing-through-the-lock events a number of which involved the
+same ships.  The problem he sees is that if we treat \textit{ship} as
+being ambiguous between denoting individual ships or ship stages in
+Carlson's sense then there will be too many stages which pass through
+the lock.  For example, suppose that a particular ship passes through
+the lock twice.  This gives us two stages of the ship which pass
+through the lock.  But then, Krifka claims, there will be a third
+stage, the sum of the first two, which also passes through the lock.
+It is not clear to me that this is an insuperable problem for the
+stage analysis.  We need to count stages that pass through the lock
+exactly once.  Let us see how the frame analysis fares.
+
+We will start with a singular example in order to avoid the additional
+problems offered by the plural.  Consider \nexteg{}.
+\begin{ex} 
+Every passenger gets a hot meal 
+\end{ex} 
+Suppose that an airline has this as part of its advertizing campaign.
+Smith, a frequent traveller,  takes a flight with the airline and as
+expected gets a hot meal.  A few weeks later she takes another flight
+with the same airline and does not get a hot meal.  She sues the
+airline for false advertizing.  At the hearing, her lawyer argues,
+citing \cite{Gupta1980}, that the advertizing campaign claims that
+every passenger gets a hot meal on every flight they take.  The lawyer for the
+airline company argues, citing \cite{Krifka1990}, that the sentence in
+question is ambiguous between an individual and an event reading, that
+the airline had intended the individual reading and thus the
+requirements of the advertizing campaign had been met by the meal that
+Smith was served on the first flight.  Smith's lawyer then calls an
+expert witness, a linguist who quickly crowdsources a survey of native
+speakers' interpretations of the sentence in the context of the
+campaign and discovers that there is an overwhelming preference for
+the meal-on-every-flight reading.  (The small percentage of
+respondents who preferred the individual reading over the event
+reading gave their occupation as professional logician.)  Smith wins
+the case and receives an additional hot meal.
+
+What is important for us at the moment is the fact that there is an
+event reading of this sentence.  We will return to the matter of
+preferred readings below. We will treat the content of \textit{every}
+on the model of the content of the indefinite article, except that the
+quantifier relation will be `every' instead of `exist'.  Thus we will
+define SemUniversal on the model of SemIndefArt in
+Appendix~\ref{app:lexuniversal}.\footnote{We leave to one side the
+  issue of whether \textit{every} should introduce a background
+  constraint that there are at least three objects which have the
+  property associated with the noun.}  This is given in \nexteg{}.
+\begin{ex} 
+$\lambda Q$:\textit{PPpty} . 
+\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+                                     \smalltfield{a}{$Q$.bg}}}\\
+             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+                                     \smalltfield{a}{$Q$.bg}} . 
+$\lambda P$:\textit{Ppty} . 
+\smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+             \smalltfield{e}{every(restr, scope)}}}} 
+\end{ex} 
+   
+
+
+If we use the content associated with
+\textit{passenger} in (\ref{ex:passengerrestricted}) the
+non-parametric content associated with \textit{every passenger} will
+be \nexteg{}.
+\begin{ex} 
+$\lambda P$:\textit{Ppty} . 
+\smallrecord{\smallmfield{restr}{\smallrecord{\field{bg}{\textit{PassengerFrame}}\\
+                                    \field{fg}{$\lambda
+                                      r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}}
+                                      . passenger\_frame($r$.x)}}}{\textit{Ppty}}\\
+             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+             \smalltfield{e}{every(restr, scope)}} 
+\label{ex:conteverypassenger}
+\end{ex} 
+In order to simplify matters let us treat \textit{gets a hot meal} as
+if it were an intransitive verb corresponding to a single predicate
+`get\_a\_hot\_meal'.  This is a predicate whose arity is
+$\langle$\textit{Ind}$\rangle$.  It is individuals, not frames
+(situations), that get hot meals.  Thus the non-parametric content of
+\textit{gets a hot meal} will be \nexteg{}.
+\begin{ex} 
+\smallrecord{\field{bg}{\textit{Ind}}\\
+             \field{fg}{$\lambda
+               r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal($r$.x)}}}} 
+\label{ex:contgetahotmeal}
+\end{ex} 
+While \preveg{} is the right type of argument for
+(\ref{ex:conteverypassenger}) since it is a property it will lead us
+eventually into problems because there is nothing which is both a
+passenger frame and an individual for the reasons discussed in
+Section~\ref{sec:dgqs}.  What we need is a coercion which will obtain
+a frame level intransitive verb to match the frame level noun.  This
+would be a coercion IntransVerbIndToFrame exactly parallel to
+CommonNounIndToFrame defined in (\ref{ex:CommonNounIndToFrame}).  Thus
+IntransVerbIndToFrame is defined as in \nexteg{}.
+\begin{ex}
+If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
+$T_\mathrm{bg}$ is a record type (the ``background type'' or
+``presupposition'') then \\ 
+\mbox{IntransVerbIndToFrame(Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+$p$, \textit{Ind}, \textit{Ind}, $T_\mathrm{bg}$))} = Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+$p$\_frame, \textit{Rec}, \textit{Rec}, $T_\mathrm{bg}$)
+\label{ex:IntransVerbIndToFrame} 
+\end{ex} 
+Thus the new non-parametric content derived for
+\textit{get\_a\_hot\_meal} will be \nexteg{}.
+\begin{ex} 
+\smallrecord{\field{bg}{\textit{Rec}}\\
+             \field{fg}{$\lambda
+               r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame($r$.x)}}}}
+\label{ex:contgetahotmealframe}  
+\end{ex} 
+Recall that if $p$ is a predicate of individuals then $p$\_frame is a
+predicate of frames that contain an individual of which $p$ holds (as
+required in (\ref{ex:predframe}).  This means that an argument, $r$, to
+`get\_a\_hot\_meal\_frame' which makes the type
+`get\_a\_hot\_meal\_frame($r$)' non-empty will be of type \nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e}{get\_a\_hot\_meal(x)}} 
+\end{ex} 
+Thus intuitively the `every'
+relation holding between the two frame-level coerced individual
+properties corresponding to \textit{passenger} and
+\textit{get\_a\_hot\_meal} will mean ``every frame (situation)
+containing an individual in the `x'-field who is a passenger taking a
+journey will be a frame where the individual in the `x'-field gets a
+hot meal''.  Or, more formally, \nexteg{}.
+\begin{ex} 
+every $r$ of type \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{passenger(x)}\\
+              \tfield{journey}{\textit{TravelFrame}}\\
+              \tfield{c$_{\mathrm{travel}}$}{take\_journey(x,
+                journey)}} 
+is of type  \record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e}{get\_a\_hot\_meal(x)}} 
+\end{ex} 
+This means that every frame of type \textit{PassengerFrame} will be of
+type \nexteg{a}, that is \nexteg{b} which is
+      identical with \nexteg{c}.
+\begin{ex} 
+\begin{subex}
+
+\item \textit{PassengerFrame}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{e}{get\_a\_hot\_meal(x)}} 
+ 
+\item  \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{passenger(x)}\\
+              \tfield{journey}{\textit{TravelFrame}}\\
+              \tfield{c$_{\mathrm{travel}}$}{take\_journey(x,
+                journey)}} \\ \d{$\wedge$}
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e}{get\_a\_hot\_meal(x)}}
+ 
+\item  \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{passenger(x)$\wedge$get\_a\_hot\_meal(x)}\\
+              \tfield{journey}{\textit{TravelFrame}}\\
+              \tfield{c$_{\mathrm{travel}}$}{take\_journey(x,
+                journey)}}
+ 
+\end{subex} 
+   
+\end{ex} 
+     
+
+Thus even though we have coerced to a frame-level reading
+it is still the passengers (i.e. individuals) in the frames who are getting
+the hot meal not the situation which is the frame.
+
+Things go less well with cardinality quantifiers, however.  Consider
+\textit{2000 passengers get a hot meal} which corresponds to
+\nexteg{}.
+\begin{ex} 
+2000 $r$ of type \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{passenger(x)}\\
+              \tfield{journey}{\textit{TravelFrame}}\\
+              \tfield{c$_{\mathrm{travel}}$}{take\_journey(x,
+                journey)}} 
+are of type  \record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e}{get\_a\_hot\_meal(x)}} 
+\end{ex} 
+The problem is not exactly the same as the problem which Krifka
+foresaw with the summing of stages although it is intuitively
+related.  It has to do with the way we have set up subtyping with
+record types.  Given a record of a type we can always add a new field
+to the record and obtain a distinct record of the same type.
+Trivially the field we add could contain an object already occurring
+in a field in the original record.  As we
+are assuming that the set of labels is countably infinite if there is
+one record of a given type there will be infinitely many records of
+the same type.  We illustrate this with an abstract example in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{$\ell_1$}{$T_1$}\\
+              \tfield{$\ell_2$}{$T_2$}} 
+ 
+\item \record{\tfield{$\ell_1$}{$a$}\\
+              \tfield{$\ell_2$}{$b$}}
+
+\item \record{\tfield{$\ell_1$}{$a$}\\
+              \tfield{$\ell_2$}{$b$}\\
+              \tfield{$\ell_3$}{$a$}}
+
+\item \record{\tfield{$\ell_1$}{$a$}\\
+              \tfield{$\ell_2$}{$b$}\\
+              \tfield{$\ell_3$}{$a$}\\
+              \tfield{$\ell_4$}{$a$}}
+
+\item \ldots
+ 
+\end{subex} 
+   
+\end{ex} 
+If \preveg{b} is of type \preveg{a} (i.e. $a:T_1$ and $b:T_2$), then so are \preveg{c} and
+\preveg{d} and so on as we successively ``grow'' the record without
+changing the fields that make the records a witness for the type and
+without necessarily adding anything new in the new fields. If records
+model events (situations) then this corresponds to the intuition that given any event there will always be a
+larger event of which it is a part.  For example, if I wash my hands that
+is part of an event in which I wash my hands and stand at the
+washbasin.  This is in turn part of an event in which I wash my hands,
+stand at the washbasin and breathe and so on.  We want this to be true
+but still there is the robust intuition that we are only talking about
+one event of washing my hands here which is part of infinitely many
+larger events.
+
+Fortunately, this problem is easy to fix.  Recall that records are
+sets of fields (Appendix~\ref{app:rectypes}).  As a first
+approximation we can say that a
+record, $r_1$, is a proper part of a record, $r_2$, $r_1<r_2$, just in
+case $r_1$ is a proper subset of $r_2$. This definition is not quite
+sufficient, however, since records can contain records and we wish the
+proper part of relation to be recursive.  Consider \nexteg{}.  We
+would like to say that \nexteg{a} is a proper part of \nexteg{b} even
+though \nexteg{a} is not a proper subset of \nexteg{b}.
+%We can then define a notion of
+% being a \textit{minimal witness} for a record type as in \nexteg{}.
+% \begin{ex} 
+% If $T$ is a record type, $r$ is a \textit{minimal witness} for $T$,
+% $r:_{\mathrm{min}}T$, iff $r:T$ and there is no $r'<\varphi(r)$ such
+% that $r':\varphi(T)$. 
+% \end{ex} 
+% The use of flattening (represented by $\varphi$, see
+% Appendix~\ref{app:rectypes}) is to get the minimality to recurse
+% inside the records.  For example, \nexteg{b} is not a minimal witness
+% for \nexteg{a} (where the $T_i$ are non-record types) even if $a:T_1$,
+% $b:T_2$ and $d:T_3$ because of \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+% \item \record{\tfield{$\ell_1$}{\record{\tfield{$\ell_1$}{$T_1$}\\
+%                                         \tfield{$\ell_2$}{$T_2$}}}\\
+%               \tfield{$\ell_3$}{$T_3$}}
+
+\item \record{\field{$\ell_1$}{\record{\field{$\ell_1$}{$a$}\\
+                                       \field{$\ell_2$}{$b$}
+                                       }}\\
+              \field{$\ell_3$}{$d$}}
+ 
+\item \record{\field{$\ell_1$}{\record{\field{$\ell_1$}{$a$}\\
+                                       \field{$\ell_2$}{$b$}\\
+                                       \field{$\ell_3$}{$c$}}}\\
+              \field{$\ell_3$}{$d$}} 
+
+% \item \record{\field{$\ell_1.\ell_1$}{$a$}\\
+%               \field{$\ell_1.\ell_2$}{$b$}\\
+%               \field{$\ell_1.\ell_3$}{$c$}\\
+%               \field{$\ell_3$}{$d$}}
+
+% is not a minimal record of type
+
+% \record{\tfield{$\ell_1.\ell_1$}{$T_1$}\\
+%         \tfield{$\ell_1.\ell_2$}{$T_2$}\\
+%         \tfield{$\ell_3$}{$T_3$}}
+ 
+\end{subex} 
+   
+\end{ex}
+We achieve this by defining the proper part of relation in terms of
+the flattening operation on records (represented by $\varphi$, see
+Appendix~\ref{app:rectypes}).  Thus if we take the flattenings of the
+records in \preveg{} as in \nexteg{} we see that\nexteg{a} is a proper
+subset of \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\field{$\ell_1.\ell_1$}{$a$}\\
+              \field{$\ell_1.\ell_2$}{$b$}\\
+              \field{$\ell_3$}{$d$}} 
+ 
+\item \record{\field{$\ell_1.\ell_1$}{$a$}\\
+              \field{$\ell_1.\ell_2$}{$b$}\\
+              \field{$\ell_1.\ell_3$}{$c$}\\
+              \field{$\ell_3$}{$d$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+We define the proper part of relation in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $r_1$ and $r_2$ are records then $r_1$ \textit{is a proper
+    part of} $r_2$, $r_1<r_2$, just in case $\varphi(r_1)\subset\varphi(r_2)$. 
+ 
+\item If $o_1$ and $o_2$ are objects of some type and at least one of
+  them is not of type \textit{Rec}, then $o_1$ is \textit{not} a
+  proper part of $o_2$, $o_1\not<o_2$ 
+ 
+\end{subex} 
+\label{ex:properpart}   
+\end{ex} 
+    
+% We can generalize the notion of minimal witness to types other than
+% record types by adding the clause in \nexteg{}.
+% \begin{ex} 
+% If $T$ is a type other than a record type, $a:_{\mathrm{min}}T$ iff $a:T$. 
+% \end{ex} 
+
+This notion yields a notion of minimal object of a given type which is related to Schubert's
+\citeyear{Schubert2000} notion of characterization discussed in
+Section~\ref{sec:dgqs}.  It is different from Schubert's notion in
+that we do not say that there are no other types to which the
+situation belongs but rather that no proper part of the situation is
+of the type.  In this way it is related to the notion of minimal
+situation discussed by \cite{Kratzer2014} and elsewhere in earlier
+work. It is also, of course, related to mereological approaches that
+have been used, for example,  in approaches to the analysis of the
+plural as in \cite{Krifka1990} and much other literature.  It is this
+we will exploit in our analysis of the plural cardinality quantifiers.
+
+We characterize a notion of plurality types as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T$ is a type, then $\{\!\mid T\mid\!\}$ is also a type (the
+  type of pluralities such that every element of the plurality is of
+  type $T$)
+ 
+\item $A:\{\!\mid T\mid\!\}$ iff
+\begin{enumerate} 
+ 
+\item $A : \{T\}$ 
+ 
+%\item $\mid A\mid\ \geq 2$
+
+\item if $a\in A$ then for any $b$ such that $a<b$, $b\not\in A$
+ 
+\end{enumerate} 
+  
+ 
+\end{subex} 
+   
+\end{ex} 
+The definition in \preveg{} requires that a plurality is a set of
+objects of the relevant type but that it does not contain two objects
+where one is a proper part of the other.  It might seem natural to
+require that a plurality contains at least two objects.  The choice
+not to place this requirement on a plurality makes this analysis
+number neutral in the sense of \cite{Zweig2008,Zweig2009}.
+\cite{Zweig2008} contains a useful overview of some of the variants of
+analyses of the plural that have been proposed in the literature,
+including the distinction between set-based and sum-based analyses.
+In the type theory we have proposed we have sets already available and
+a kind of mereology based on the structure of records, as illustrated
+in (\ref{ex:properpart}), and we have used a combination of these in
+our characterization of plurality.  Whether this proposal would
+survive an in-depth investigation of the plural in this framework is
+an open question.  In particular the work on mass terms by Sutton and
+Filip (????) suggests that we will in any case need an additional sum-structure.
+    
+We propose here a treatment of basic plural
+quantification cases involving cardinality quantification that will
+allow us to say something about the content of \textit{2000 passengers
+  get a hot meal}.  We first distinguish between singular and plural
+properties.  The definition of \textit{Ppty} given in
+(\ref{ex:dog-Ppty}b) and repeated in \nexteg{a} becomes our definition
+of the type of singular properties, \textit{SgPpty}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textit{SgPpty} $\equiv$ \record{\tfield{bg}{\textit{Type}}\\
+              \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\rightarrow$\textit{RecType})}}  
+ 
+\item \textit{PlPpty} $\equiv$ \record{\tfield{bg}{\textit{Type}}\\
+              \tfield{fg}{(\smallrecord{\smalltfield{x}{$\{\!\mid$bg$\mid\!\}$}}$\rightarrow$\textit{RecType})}}
+
+\item  \textit{Ppty} $\equiv$ \textit{SgPpty}$\vee$\textit{PlPpty}
+ 
+\end{subex} 
+   
+\end{ex} 
+The type of plural properties, \textit{PlPpty}, given in \preveg{b},
+requires the foreground of the property to be a function which has as
+its domain records whose `x'-field contains a plurality of objects of
+the background type.  We then redefine \textit{Ppty} in \preveg{c} as
+being the type of objects which are either singular or plural
+properties.
+
+Note that according to \preveg{} there is no constraint on the kinds
+of types which can be the backgrounds of either singular or plural
+properties.  Thus a singular property could have a plurality type as
+its background.  This could be used for nouns like \textit{committee}
+which seems to represent a property of a plurality of people.  Note
+that we can create a plurality type of any type including plurality
+types so we have an infinite hierarchy of plurality types.  This can
+be seen in examples like \textit{league} (of baseball teams) where
+each element in the league, i.e. a team, is itself a plurality of
+baseball players.  These kinds of examples were noted in the earliest
+literature on treating the plural in Montague semantics as problematic
+for Montague's approach since they appeared to involve an infinite
+hierarchy of types which would have to correspond to an infinite
+hierarchy of syntactic categories \citep{Bennett1974}.   Montague's type
+system lacked the option of creating a single type corresponding to
+the infinite hierarchy in the way we are doing here.  Plural
+properties too can have plurality types as their backgrounds and this
+could correspond to plural nouns like \textit{committees} and
+\textit{leagues}.  In terms of the domain of the foreground function
+of properties there is largely an overlap between singular and plural
+properties.  Singular properties allow for both pluralities and
+non-pluralities whereas plural properties allow only for pluralities.
+It may seem strange from a formal point of view not to make a
+non-overlapping division between the two, but this does seem to
+correspond to the way the plural works in natural
+languages.\footnote{It is not currently clear how \textit{pluralia
+    tantum} such as \textit{scissors} and \textit{trousers} fit into
+  this story.}
+
+We consider cardinality quantifiers such as \textit{two} and
+\textit{two thousand} to correspond to predicates whose arity is
+$\langle$\textit{PlPpty}, \textit{PlPpty}$\rangle$.  If $\nu$ is a
+natural number (that is, an object of type \textit{Nat}), let $\nu_{\mathrm{pred}}$ be such a predicate
+corresponding to $\nu$.  We also introduce a predicate `card'
+(``cardinality'') with arities $\langle\{T\},\textit{Card}\rangle$ for
+any type, $T$, where \textit{Card} is the type of cardinal numbers
+(the natural numbers together with the transfinite cardinals,
+$\aleph_0, \aleph_1, \ldots$).  
+This predicate obeys the constraint in \nexteg{}.
+\begin{ex} 
+$\down{\mathrm{card}(X,\nu)}\not=\emptyset$ iff $\mid\!X\!\mid\ =\nu$
+\end{ex} 
+The cardinality predicates obey the constraint in \nexteg{}.
+\begin{ex} 
+$\down{\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
+\begin{quote}
+$\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\wedge$}\smallrecord{\smalltfield{x}{$\{\!\mid\!
+        P$.bg$\mid\!\}$}\\
+                \smalltfield{c}{card(x, $\nu$)}}}}\not=\emptyset$
+\end{quote}
+\label{ex:cardconstr} 
+\end{ex} 
+Let us take this definition through our example \textit{2000
+  passengers get a hot meal}.  The relevant type corresponding to the
+content of this sentence is given in \nexteg{}.
+\begin{ex} 
+2000$_{\mathrm{pred}}$(\smallrecord{\field{bg}{\textit{PassengerFrame}}\\
+                                    \field{fg}{$\lambda
+                                      r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}}
+                                      . \smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}}}, 
+\hspace*{4em}\smallrecord{\field{bg}{\textit{Rec}}\\
+             \field{fg}{$\lambda
+               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{Rec}$\mid\!\}$}} . 
+                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}}}) 
+\label{ex:2kpassgahm}
+\end{ex} 
+The first argument to `2000$_{\mathrm{pred}}$' is a pluralized version
+of the property in the restriction field in (\ref{ex:conteverypassenger}). The
+second argument is a pluralized version of the property in
+(\ref{ex:contgetahotmealframe}). \preveg{} makes use of a
+pluralization operation, `\_pl' on predicates which can be introduced
+as in \nexteg{}.
+\begin{ex} 
+If $p$ is a predicate with arity $\langle T\rangle$, then $p$\_pl is a
+predicate with arity $\langle\{\!\mid T\mid\!\}\rangle$ 
+\end{ex} 
+The cases we are considering here are distributive plurals, that is,
+the constraint in \nexteg{} holds.
+\begin{ex} 
+$\down{p\mathrm{\_pl}(A)}\not=\emptyset$ iff $a\in A$ implies $\down{p(a)}\not=\emptyset$ 
+\end{ex} 
+Let us instantiate (\ref{ex:cardconstr}) bit by bit with
+(\ref{ex:2kpassgahm}).  We first compute the fixed point type of the
+foreground of the first argument.  That is, \nexteg{a} which is
+identical to \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\mathcal{F}$($\lambda
+                                      r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}}
+                                      . \\
+\hspace*{5em}\smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}) 
+ 
+\item
+  \record{\tfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \tfield{e}{passenger\_frame\_pl(x)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+Then we compute the result of restricting the second argument to the
+quantifier predicate by \preveg{b}.  This is given in \nexteg{a} which
+is identical to \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  $\lambda
+               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{Rec}$\mid\!\}$}} . 
+                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}$\!\mid_{\text{\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)}}}}$
+ 
+\item $\lambda
+               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)}} . \\
+\hspace*{5em}                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+We then compute the fixed point type of \preveg{b}, given in
+\nexteg{a} which is identical with \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\mathcal{F}$($\lambda
+               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)}} . \\
+\hspace*{5em}                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}) 
+ 
+\item  \smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
+ 
+\end{subex} 
+   
+\end{ex} 
+The final step specified in (\ref{ex:cardconstr}) involves merging
+\preveg{b} with \nexteg{a}, that is, \nexteg{b} which is identical
+with \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  \record{\tfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \tfield{c}{card(x,2000)}}
+ 
+\item \smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
+ \d{$\wedge$} 
+\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{c}{card(x,2000)}}
+
+\item \smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}\\
+          \smalltfield{c}{card(x,2000)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+It is thus the type \preveg{c} which is required to be non-empty by
+the content of an utterance of \textit{2000 passengers get a hot
+  meal}.  This means that it is required that there is a plurality of
+passenger frames where the passenger gets a hot meal and this
+plurality has the cardinality 2000, or slightly more colloquially,
+there are 2000 separate events of a passenger getting a hot meal.
+
+Requiring that there is a plurality with cardinality 2000 is to say
+that there are at least 2000 objects meeting whatever conditions are
+invoked.  It does not rule out the possibility of there being a larger
+plurality of objects meeting the same conditions.  If we want to
+express \textit{exactly $\nu$} we can use the condition in \nexteg{}.
+\begin{ex} 
+ $\down{\mathrm{exactly}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
+\begin{enumerate}
+\item $\down{\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$
+\item $\down{\mathrm{at\_most}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$
+\end{enumerate}
+\end{ex}
+where `at\_most\_$\nu$' obeys the constraint in \nexteg{}. 
+\begin{ex} 
+ $\down{\mathrm{at\_most}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
+\begin{quote}
+$\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\wedge$}\smallrecord{\smalltfield{x}{$\{\!\mid\!
+        P$.bg$\mid\!\}$}\\
+                \smalltfield{n}{\textit{Nat}}\\
+                \smalltfield{c$_{\mathrm{n}}$}{n $>\nu$}\\
+                \smalltfield{c}{card(x, n)}}}}=\emptyset$
+\end{quote}
+\end{ex} 
+  
+            
+              
+
+
+%\section{Comparison with other work on frames in semantics}
+
+\section{Conclusion}
+In this chapter we have proposed an analysis of frames as records
+which model situations (including events) and we have suggested that
+frame types (record types) are important in both the analysis of the
+Partee puzzle concerning rising temperatures and prices and in the
+analysis of quantification which involves counting events rather than
+individuals likes passengers or ships passing through a lock.
+
+Our original inspiration for frames comes from the work of
+\cite{Fillmore1982,Fillmore1985} and work on FrameNet
+(\url{https://framenet.icsi.berkeley.edu}).  An important aspect of
+our approach to frames is that we treat them as first class objects.
+That is, they can be arguments to predicates and can be quantified
+over.  While this is important, it is not surprising once we decide that
+frames are in fact situations (here modelled by records) or situation
+types (here modelled by record types).  The distinction between frames
+and frame types is not made in the literature deriving from Fillmore's
+work but it seems to be an important distinction to draw if we wish to
+apply the notion of frame to the kind of examples we have discussed in
+this chapter.
+
+The proposal that we have made for solving the Partee puzzle is
+closely related to the work of \cite{Lobner2014,Lobnerinprep} whose
+inspiration is from the work of
+\cite{Barsalou1992a,Barsalou1992,Barsalou1999} rather than Fillmore.
+Barsalou's approach embedded in a theory of cognition based on
+perception and a conception of cognition as dynamic, that is, a system
+in a constant state of flux \citep{PrinzBarsalou2014}, seems much in
+agreement with what we are proposing in this book.  Barsalou's
+(\citeyear{Barsalou1999}) characterization of basic frame properties
+constituting a frame as: ``(1) predicates, (2) attribute-value
+bindings, (3) constraints, and (4) recursion'' seem to have a strong
+family resemblance with our record types.  Our proposal for
+incorporating frames into natural language semantics is, however,
+different from Löbner's in that he sees the introduction of a
+psychological approach based on frames as a reason to abandon a formal
+semantic approach whereas we see type theory as a way of combining the
+insights we have gained from model theoretic semantics with a
+psychologically oriented approach.  
+
+Our approach to frames has much in common with that of
+\cite{KallmeyerOsswald2013} who use feature structures to characterize
+their semantic domain.  We have purposely used record types in a way
+that makes them correspond both to feature structures and discourse
+representation structures which allows us to relate our approach to
+more traditional model theoretic semantics at the same time as being
+able to merge record types corresponding to unification in
+feature-based systems.  However, our record types are included in a
+richer system of types including function types facilitates a
+treatment of quantification and binding which is not available in a
+system which treats feature structures as a semantic
+domain.\footnote{It is possible to code up a notation for
+  quantification in feature structures but that is not the same as
+  giving a semantics for it.}
+
+%Fernando (Muskens)
+
+ 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End: 

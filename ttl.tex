@@ -1,0 +1,430 @@
+\documentclass[a4paper,12pt,oldfontcommands]{memoir}
+\usepackage{a4wide}
+\usepackage{times}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{textcomp}
+%\usepackage[swedish]{babel} 
+\usepackage[latin1]{inputenc} 
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{memhfixc}
+\usepackage{natbib}
+\usepackage{rotating} 
+\usepackage[mathscr]{eucal}
+\usepackage{qtree}
+\usepackage{makeidx}
+% \usepackage{tikz}
+% \usepackage{tikz-qtree}
+%\usepackage{arcs}
+%\usepackage{accents}
+
+%\counterwithout{section}{chapter}
+
+\title{Type theory and language \\ From perception to linguistic communication}
+ 
+\author{Robin Cooper} 
+ 
+\date{Draft, \today \\ PLEASE QUOTE WITH CARE} 
+
+%\includeonly{intensional}
+
+%\includeonly{percint,infex,gram,propnames,commonnouns,ttr,gramrules,dialrules}
+
+\makeindex
+
+\parindent = 0pt
+\setlength{\parskip}{\baselineskip}
+%\setlength{\topmargin}{2.5cm}
+%\setlength{\oddsidemargin}{-0.7cm}
+%\setlength{\textwidth}{18cm}
+%\setlength{\textheight}{24cm}
+
+\setsecnumdepth{subsubsection}
+
+
+
+\newenvironment{display}{\begin{center}}{\end{center}}
+
+% \newenvironment{Bibliography}{
+% \begin{enumerate}}{\end{enumerate}}
+
+% \renewcommand{\bibitem}[0]{\item[] \hspace*{-\leftmargin}}
+
+%
+% Reference the next example in the text:
+%
+\newcommand{\nexteg}[1]{\addtocounter{examplectr}{1}(\arabic{examplectr}{#1})\addtocounter{examplectr}{-1}}
+%
+% Reference the previous example in the text:
+%
+\newcommand{\preveg}[1]{(\arabic{examplectr}{#1})}
+%
+% Reference examples by relative offsets:
+%
+\newcommand{\egnum}[2]{\addtocounter{examplectr}{#1}(\arabic{examplectr}{#2})\addtocounter{examplectr}{-#1}}
+%
+%
+% ENVIRONMENTS
+%
+% Examples Environments
+%
+\newcounter{examplectr}
+\newcounter{subexamplectr}[examplectr]
+\renewcommand{\thesubexamplectr}{\alph{subexamplectr}}
+%
+% Sub-example Macro:
+%
+\newenvironment{subex}%
+   {\vspace*{-.9\baselineskip}
+     \begin{list}
+       {\alph{subexamplectr}.}%
+       {\setlength{\topsep}{0in}
+        \setlength{\leftmargin}{1em}%{0.25in}
+        %\setlength{\listparindent}{-2em}
+        %\setlength{\labelsep}{\baselineskip}
+ \usecounter{subexamplectr} }
+       }%
+   {\end{list}}
+%
+% Single Example Macro
+%
+\newenvironment{ex}%
+   { \refstepcounter{examplectr}
+     
+\bigskip
+
+    % \begin{list}
+      % {
+       (\arabic{examplectr})%}%
+       % {%\setlength{\topsep}{0in}
+%         \setlength{\leftmargin}{4em}%{0.75in}
+%         \setlength{\labelsep}{\baselineskip}
+% }
+        \hspace*{1em}\begin{minipage}[t]{4in} 
+%\item
+   }%
+   {\end{minipage}
+
+\bigskip
+
+    %\end{list}
+}
+%
+% End of example macro
+%
+
+\newcommand{\subegref}[2]{(\ref{#1}\ref{#2})}
+
+\newcommand{\beg}{\begin{ex}}
+\newcommand{\eeg}{\end{ex}}
+\newcommand{\bseg}{\begin{subex}}
+\newcommand{\eseg}{\end{subex}}
+
+
+\newcommand{\egstack}[1]{\begin{tabular}[t]{@{}l@{}} #1 \\ \\
+  \end{tabular}}
+
+
+% %
+% % Reference the next example in the text:
+% %
+% \newcommand{\nexteg}[1]{\addtocounter{examplectr}{1}(\arabic{examplectr}{#1})\addtocounter{examplectr}{-1}}
+% %
+% % Reference the previous example in the text:
+% %
+% \newcommand{\preveg}[1]{(\arabic{examplectr}{#1})}
+% %
+% % Reference examples by relative offsets:
+% %
+% \newcommand{\egnum}[2]{\addtocounter{examplectr}{#1}(\arabic{examplectr}{#2})\addtocounter{examplectr}{-#1}}
+% %
+% %
+% % ENVIRONMENTS
+% %
+% % Examples Environments
+% %
+% \newcounter{examplectr}
+% \newcounter{subexamplectr}[examplectr]
+% \renewcommand{\thesubexamplectr}{\alph{subexamplectr}}
+% %
+% % Sub-example Macro:
+% %
+% \newenvironment{subex}%
+%    {\begin{list}
+%        {\alph{subexamplectr}.}%
+%        {\setlength{\topsep}{0in}
+%         \setlength{\leftmargin}{1em}%{0.25in}
+%         %\setlength{\listparindent}{-2em}
+%         %\setlength{\labelsep}{\baselineskip}
+%  \usecounter{subexamplectr} }
+%        }%
+%    {\end{list}}
+% %
+% % Single Example Macro
+% %
+% \newenvironment{ex}%
+%    { \refstepcounter{examplectr}
+     
+% %\bigskip
+
+%     % \begin{list}
+%       % {
+%        (\arabic{examplectr})%}%
+%        % {%\setlength{\topsep}{0in}
+% %         \setlength{\leftmargin}{4em}%{0.75in}
+% %         \setlength{\labelsep}{\baselineskip}
+% % }
+%         \hspace*{1em}\begin{minipage}[t]{4in} 
+% %\item
+%    }%
+%    {\end{minipage}
+
+% \bigskip
+
+%     %\end{list}
+% }
+% %
+% % End of example macro
+% %
+
+% \newcommand{\subegref}[2]{(\ref{#1}\ref{#2})}
+
+% \newcommand{\beg}{\begin{ex}}
+% \newcommand{\eeg}{\end{ex}}
+% \newcommand{\bseg}{\begin{subex}}
+% \newcommand{\eseg}{\end{subex}}
+
+
+% \newcommand{\egstack}[1]{\begin{tabular}[t]{@{}l@{}} #1 \\ \\
+%   \end{tabular}}
+
+% upside down iota
+
+\def\rotiota{\rotatebox[origin=C]{180}{$\iota$}}
+
+
+%Records
+
+\newcommand{\record}[1]{$\left[\mbox{\begin{tabular}{lcl} #1
+\end{tabular}}\right]$} 
+\newcommand{\smallrecord}[1]{$\left[\mbox{\begin{tabular}{@{}l@{}c@{}l@{}} #1
+\end{tabular}}\right]$}
+
+\newcommand{\field}[2]{#1 & = & #2}
+\newcommand{\tfield}[2]{#1 & : & #2}
+\newcommand{\smalltfield}[2]{#1:#2 & &}
+\newcommand{\mfield}[3]{#1=#2 & : & #3}
+\newcommand{\smallmfield}[3]{#1=#2:#3 & &}
+\newcommand{\rfield}[3]{#1$\underline{\varepsilon}$#2 & : & #3}
+\newcommand{\smallrfield}[3]{#1$\underline{\varepsilon}$#2:#3 & &}
+\newcommand{\hfield}[2]{{\sc #1} & & #2}
+
+\newcommand{\up}{\hat{}\, }
+
+\newcommand{\ignore}[1]{}
+ 
+\newcommand{\flconcat}[2]{#1$^{\textrm{---}}$#2}
+
+%Meaning
+
+\newcommand{\mng}[1]{\mbox {$[ \! [$ #1 $] \! ]$}}
+\newcommand{\apply}[2]{#1 @ #2}
+
+\newcommand{\fotrans}[1]{\mng{#1}$^{n,\pi,g}$}
+\newcommand{\iltrans}[1]{\mng{#1}$^{n,\pi,g,t,\mathscr{M},\omega}$}
+
+%Labelled brackets
+
+\newcommand{\lb}[2]{[$_{\mbox{#1}}$ #2]}
+
+%Complex category symbols
+
+\DeclareMathOperator*{\V}{\textit{V}}
+\DeclareMathOperator*{\VP}{\textit{VP}}
+\DeclareMathOperator*{\Sent}{\textit{S}} 
+
+\newsavebox{\boxone}
+
+%Signs
+
+\newcommand{\signtype}[1]{${\Sigma_{\textrm{#1}}}$}
+
+%Types
+
+\newcommand{\down}[1]{[\ \!\check{}\ \!#1]}
+\newcommand{\downP}[1]{[\downarrow\!#1]}
+\newcommand{\downPl}[2]{[\downarrow_{#2}\!#1]}
+
+\newcommand{\dspec}{/\!/}
+\newcommand{\drestr}{/\!\!\text{\rotatebox{-19}{$\restriction$}}}
+
+%Update rules
+
+\newcommand{\urule}[4]{{\sc rule:} {\bf #1} \\
+                       {\sc class:} #2 \\
+                       {\sc pre:} $\left\{\begin{tabular}{l}
+                                               #3
+                                         \end{tabular}\right .$\\
+                       {\sc eff:} $\left\{\begin{tabular}{l}
+                                               #4
+                                         \end{tabular}\right .$}
+%\includeonly{infex}
+
+
+
+\makeatletter
+\renewcommand{\part}{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi%
+  \thispagestyle{empty}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi%
+  \null\vfil%
+  \secdef\@part\@spart%
+}
+\makeatother
+
+\begin{document} 
+ 
+\maketitle
+
+\thispagestyle{empty}
+
+\frontmatter
+
+%\pagenumbering{roman} 
+
+\tableofcontents*
+
+
+\chapter*{Acknowledgements}
+
+
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\pagestyle{plain}
+
+I am grateful to many people for discussion which has led to
+significant changes in this material.  Among them are: Ellen
+Breitholtz, Liz Coppock, Simon Dobnik,
+Tim Fernando, Jonathan Ginzburg, Staffan Larsson, Bengt Nordström,
+Aarne Ranta, Kwong-Cheong Wong.  None of these people is responsible for what I have done
+with their ideas and suggestions.
+
+This research was supported in part by the following projects: Records, types
+and computational dialogue semantics, Vetenskapsrådet, 2002-4879,
+Library-based grammar engineering, Vetenskapsrådet, 2005-4211, and Semantic
+analysis of interaction and coordination in dialogue (SAICD),
+Vetenskapsrådet, 2009-1569.  
+
+\mainmatter
+
+\part{From perception and action to grammar}
+
+
+
+%\pagenumbering{arabic}
+
+% \chapter{From perception to intensionality}
+% \label{ch:percint}
+
+
+\include{percint}
+
+
+
+% \chapter{Information exchange}
+% \label{ch:infex}
+
+\include{infex}
+
+
+% \chapter{Grammar}
+% \label{ch:gram}
+
+
+\include{gram}
+
+\part{Towards a dialogical view of semantics}
+\label{part:sem}
+
+% \chapter{Proper names, salience and accommodation}
+% \label{ch:propnames}
+
+\include{propnames}
+
+
+% \chapter{Common nouns, frames and the Partee puzzle}
+% \label{ch:commonnouns}
+
+\include{commonnouns}
+
+% \chapter{Modality and intensionality without possible worlds}
+% \label{ch:intensional}
+
+\include{intensional}
+
+% \chapter{Quantification, anaphora and underspecification}
+% \label{ch:quant}
+
+\include{quant}
+
+% \chapter{Coordination and learning}
+% \label{ch:coord}
+
+%\include{coord}
+
+
+
+\appendix
+
+% \chapter{Type theory with records}
+% \label{app:ttr}
+
+\include{ttr}
+
+% \chapter{Grammar rules}
+% \label{app:gramrules}
+
+\include{gramrules}
+
+% \chapter{Dialogue rules}
+% \label{app:dialrules}
+
+\include{dialrules}
+
+% \chapter{First order logic}
+% \label{app:folog}
+
+%\include{folog}
+
+% \chapter{Intensional logic}
+% \label{app:intlog}
+
+%\include{intlog}
+
+%% \chapter{Combining compositional semantics and dialogue management in
+%%   a record based approach}
+
+% \chapter*{Bibliography}
+
+\bibliographystyle{/Users/cooper/LaTeX/bib/mybib}
+\bibliography{/Users/cooper/LaTeX/bib/bibliography}
+
+%\include{bibl}
+
+\printindex
+
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

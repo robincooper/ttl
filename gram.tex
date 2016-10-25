@@ -1,0 +1,2613 @@
+\chapter{Grammar}
+\label{ch:gram}
+\setcounter{examplectr}{0}
+
+In Chapter~\ref{ch:infex} we made the simplifying assumption that
+sentences come as single unanalyzed units (something like the
+assumption that is made in propositional logic).  In this chapter we
+will deal with the same simple examples but break the sentences down
+into their constituent parts.  (This will be something like moving
+from propositional logic to predicate logic without quantifiers.)
+In order to do this we will need more complex signs.  
+
+We will first consider how linguistic constituent structure is related
+to our general perception of events.  We have so far talked of events
+in terms of string types which we have related to finite state
+automata.  Finite state automata are equivalent to regular grammars.
+We will now consider an example of how we perceive events which
+suggest a more complex structure in terms of strings of regular
+types.  This gives us something which is equivalent to recursive
+transition networks (RTNs) which are in turn equivalent to context
+free grammars.\footnote{For a general introduction to automata theory
+  and its relation to the Chomsky hierarchy see, for example,
+  \cite{ParteeMeulenWall1990}.}  Consider an event type of bus trips,
+\textit{BusTrip}.  This could be defined as in \nexteg{}.
+\begin{ex} 
+\textit{BusTrip} $\equiv$
+\textit{GetBus}$^{\frown}$\textit{TravelOnBus}$^{\frown}$\textit{GetOffBus} 
+\label{ex:bustrip}
+\end{ex} 
+Each of the three event types which are concatenated in \preveg{}
+could be further broken down into strings of events.  For example,
+\textit{GetBus} might be defined as in \nexteg{}.
+\begin{ex} 
+\textit{GetBus} $\equiv$ \textit{WaitAtBusstop}*$^{\frown}$\textit{BusArrive}$^{\frown}$\textit{GetOnBus} 
+\end{ex} 
+The elements in \preveg{} could be broken down further.  For example,
+getting on the bus could be analyzed in terms of going towards a door
+on the bus, waiting for the door to open, placing one foot on the step
+into the bus and then the other, paying for your ticket and so on.
+There seems almost no limit to how finegrained an analysis of events
+we can give.  Which muscles do you have to move in order to place your
+right foot inside the bus?  What events are involved in the contraction
+of this muscle?  However, there seems to be a limit on the level of
+detail we need to be conscious of (or even are capable of being
+conscious of) in order to carry out a high level action like getting
+on a bus.  We can also build upwards from the type \textit{BusTrip}.
+For example, many bus trips are not direct in that we have to change
+buses in order to reach our destination.  Thus a bus trip can consist
+of a string of events where you get on a bus, travel on it and then
+get off it again.  A return bus trip involves a bus trip from one
+place to another followed (after intervening events) by a bus trip
+from the second place back to the first.  Both of those bus trips
+might involve several buses if the connection is not direct.   
+
+The notation we have used in (\ref{ex:bustrip}) and \preveg{} is used
+to mean that what occurs to the left of $\equiv$ is a convenient
+notational abbreviation for what occurs on the right.  That is,
+whenever we write the symbol on the left, that is just shorthand for
+the longer expression on the right.  Given the two definitions in
+(\ref{ex:bustrip}) and \preveg{}, \textit{BusTrip} is just an
+abbreviation for the regular string type in \nexteg{}.
+\begin{ex} 
+\textit{WaitAtBusstop}*$^{\frown}$\textit{BusArrive}$^{\frown}$\textit{GetOnBus}$^{\frown}$\textit{TravelOnBus}$^{\frown}$\textit{GetOffBus} 
+\end{ex} 
+Thus while our notation is giving us the beginnings of a hierarchical
+organization, the type that is represented by the notation is not
+hierarchically organized.  We are still in the realm of a finite state
+system.
+Compare this with the statements in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $e$ : \textit{BusTrip} iff $e$ : \textit{GetBus}$^{\frown}$\textit{TravelOnBus}$^{\frown}$\textit{GetOffBus} 
+ 
+\item $e$ : \textit{GetBus} iff $e$ : \textit{WaitAtBusstop}*$^{\frown}$\textit{BusArrive}$^{\frown}$\textit{GetOnBus} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The statements in \preveg{} claim that there are distinct types
+\textit{BusTrip} and \textit{GetBus} in addition to the regular types
+used on the right-hand side of `iff'.  These types are
+\textit{equivalent} to the regular types in the sense that anything of
+the one type will be of the other type.  Now the actual type system
+(not just the notation) is
+hierarchically organized and includes two additional ``higher''
+types \textit{BusTrip} and \textit{GetBus}.  On the face of it one
+might think that the type system with the additional higher types
+would be just a more complicated way of achieving the same result and
+would be less efficient than a system which just includes the regular
+types.  However, there seems to be good reason to suppose that an
+organism that organizes its event perception in terms of such a
+hierarchical type system would have serious advantages over an
+organism that lacks the hierachical organization.  These advantages
+include at least the following:
+\begin{description}
+\item[access and compact representation] Recall from
+  Chapter~\ref{ch:percint} that we want to consider the types that an
+  agent has available as resources as being represented in the brain
+  states of the agent.  Having higher types means
+  that something corresponding to a complex type can be stored as a
+  single element.  In a complex reasoning task this can give
+  considerable advantage in that the task can be represented in a more
+  compact fashion and it can be easier to access (search and find)
+  something which is a single element rather than something which is
+  represented in terms of a complex string each element of which has
+  to be checked in order to be sure that you have found the right element.
+\item[planning] Having a compact representation facilitates
+  planning.  It is feasible to plan to take a bus trip given that we
+  can conceive of it as such without having to plan for all the small
+  subevents that make it up, for example, all that is involved in
+  lifting your legs in the right way in order get on the bus.  The
+  ability to plan actions seems based on an ability to classify events
+  in a hierarchical way.
+\item[reuse] A hierarchical organization of event types means that
+  certain event types can be reused in other event types.  For
+  example, getting on a bus (waiting for the doors to open, putting
+  one foot inside and so on) can be very much like getting on a
+  train.  Similarly, paying for a ticket on a bus trip involves an
+  exchange of money for a ticket in much the same way for a bus, a
+  tram, a train, a theatre performance and so on.  An agent which is
+  not able to perceive this kind of generalization would at best use
+  up a lot of memory coding the same event types over and over as
+  parts of different larger event types.
+\item[learning] The hierarchical organization of event types and the reuse
+  capabilities it offers also facilitates learning of new event
+  types.  In learning to take the tram it can be useful to reuse what
+  you have learnt about buying tickets on buses and insert it ready
+  made into your type for tram trips.  If it turns out that the
+  procedure for buying tickets for trams is slightly different from
+  for buses (for example, you can buy a ticket on the bus but you have
+  to pay before you get on the tram) you nevertheless have a buying
+  ticket type which you can modify.  This might involve creating more
+  types corresponding to those strings which the two ticket buying
+  procedures have in common to separate out the differences between
+  the two procedures. 
+
+\end{description}   
+Related observations about the importance of hierarchical structure
+for behaviour and its relationship to hierarchical reinforcement
+learning and neurological structure have been
+made for example by
+\cite{Botvinick2008,BotvinickNivBarto2009,Ribas-FernandesSolwayDiukMcGuireBartoNivBotvinick2011}.
+
+Introducing hierarchical types in this way is an important step in our
+cognitive processing of events because of the computational and
+learning processes indicated above even if the class of events we are
+formally able to recognize is the same as what could be recognized by
+non-hierarchical regular string types, that is, technically, finite
+state languages.  An organism with hierarchically organized types will
+have important advantages in acquiring new finite state event
+patterns.  An evolutionary step from non-hierarchically organized
+string types to hierarchically organized types is a significant
+development and organisms with hierarchical types will have clear
+evolutionary advantages over those that do not.
+
+However, hierarchical organization brings with it, almost as a kind of
+side effect, something which means that the organism could recognize
+classes of events that are not finite state.  This is known as
+\textit{recursion}. Hierarchical organization means that we can give
+type definitions of the form in \nexteg{}.
+\begin{ex} 
+$a:T$ iff $a:T_1^{\frown}\ldots^{\frown}T_n$ 
+\end{ex} 
+If we do not explicitly rule it out there is nothing to say that one
+of the $T_i$ is not $T$ itself.  Of course, things will go badly wrong
+if we have a definition such as \nexteg{}.
+\begin{ex} 
+$a:T$ iff $a:T_1^{\frown}T^{\frown}T_2$ 
+\end{ex} 
+If we try to perceive or create something of this type we will not be
+able to terminate and get into an endless string of objects of type
+$T_1$ and never be able to move on to $T_2$. However, if we define $T$
+in terms of a join type where at least one of the types in the join
+does not contain $T$, things will work fine.  For example, \nexteg{}:
+\begin{ex} 
+$a:T$ iff $a:(T_1^{\frown}T^{\frown}T_2\vee T_1^{\frown}T_2)$
+\end{ex} 
+According to \preveg{} anything of type $T$ will be a string of
+objects of type $T_1$ followed by a string of equal length of objects
+of type $T_2$.  It is the requirement ``of equal length'' which means
+that this type is not a regular type.  For example, we could have the
+the regular type $T_1^{+\frown}T_2^+$ but this only expresses that we
+require a non-empty string of objects of type $T_1$ followed by a
+non-empty string of objects of type $T_2$ without the equal length
+requirement.   What we have done here is restate a basic result from
+formal language theory in terms of our types.  In formal language
+theory one talks of languages of the form $a^nb^m$ (the set of strings of $n$
+$a$'s followed by a string of $m$ $b$'s, for any $n$ and $m$ greater
+than 0) which is
+a regular or finite state language and $a^nb^n$ (the set of strings of
+$n$ $a$'s followed by $n$ $b$'s, for any $n$ greater than 0) which is
+context free.  While this possibility of recursion is offered as soon as we allow
+the hierarchical typing of events in this way, it is not clear that it
+is exploited to a great extent in non-linguistic events.  The clear
+examples that seem to exist are examples like opening and closing Chinese boxes, that is,
+boxes within boxes.  The type of opening and closing (reassembling) a
+Chinese box could be characterized as the $a^nb^n$-type in \nexteg{}.
+\begin{ex} 
+$e$ : \textit{OpenClose} iff \\
+$e$ : (\textit{Open}$^{\frown}$\textit{OpenClose}$^{\frown}$\textit{Close}
+$\vee$ \textit{Open}$^{\frown}$\textit{Close}) 
+\end{ex} 
+It is significant in this kind of example that the ordering of the
+events is forced on the agent by the physical reality of the boxes.
+There is only one order in which you can open all the boxes and only
+one order (the reverse order) in which you can close them if you are
+going to assemble all the boxes within a single box.  It is unclear
+that such ordering is required in non-linguistic event types when it
+is not dictated by physical reality.  
+
+
+
+     
+
+\section{Syntax}
+
+We now turn our attention to how this hierarchical organization is
+reflected in the nature of linguistic events.  In
+Chapter~\ref{ch:infex} we used \nexteg{} as our sign type.
+\begin{ex} 
+\record{\tfield{s-event}{\textit{SEvent}} \\
+        \tfield{cnt}{\textit{Cnt}}} 
+\end{ex} 
+This represents the pairing of a speech event with content in a
+Saussurean sign.  It does not, however, require the presence of any
+hierarchical information in the sign corresponding to what in
+linguistic theory is normally referred to as the \textit{constituent} (or
+\textit{phrase}) structure of the utterance.  To some extent it is
+arbitrary where we add this information.  We could, for example, add
+it under the label `s-event', perhaps by dividing `s-event.e' into two
+fields `phon' and `syn' (``syntax'').  However, it will be more
+convenient (in terms of keeping paths that we need to refer to often
+shorter) to add a third field labelled `syn' at the top level of the
+sign type as in \nexteg{}.
+\begin{ex} 
+ \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cnt}{\textit{Cnt}}} 
+\end{ex}
+However, as we will see below, \textit{Syn} will require a
+`daughters'-field for a string of signs.  This means that
+\textit{Sign} becomes a recursive type.  It will be a \textit{basic}
+type with its witnesses defined by \nexteg{}.
+\begin{ex} 
+$\sigma$ : \textit{Sign} iff $\sigma$ :  \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cnt}{\textit{Cnt}}} 
+\end{ex} 
+We shall take \textit{Syn} to be the type \nexteg{}.\footnote{One
+  might think that \textit{Syn} should also be defined as a recursive
+  type since it can contain \textit{Sign} which in its turn can
+  contain \textit{Syn}.  However, in the types we are currently
+  proposing the only way for \textit{Syn} to recur is through
+  \textit{Sign} and it is sufficient for \textit{Sign} to
+  be defined recursively to ensure that we do not introduce record
+  types that are non-well founded sets of ordered pairs.  That is, we
+  want to avoid the mathematical object which is the type being a set
+  which contains itself.  In contrast the set of witnesses for
+  a recursive type, while it will be infinite, will be well-founded.}
+\begin{ex} 
+\record{\tfield{cat}{\textit{Cat}} \\
+        \tfield{daughters}{\textit{Sign}$^*$}} 
+\end{ex}
+
+The type \textit{Sign}, as so far defined, can be seen as a
+\textit{universal resource}.  By this we mean that it is a type which
+is available for all languages. 
+\textit{Cat} is the type of names of syntactic categories.  In this chapter we
+will take the witnesses of \textit{Cat} to be: s (``sentence''), np (``noun phrase''),
+det (``determiner''), n (``noun''), v (``verb'') and vp (``verb
+phrase'').  These correspond to the categories we will use to cover
+the expressions of the fragment of English we introduced in
+Chapter~\ref{ch:infex}. We will use capitalized versions of these
+category names to represent types of signs with the appropriate path in a
+sign type as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+
+\item \textit{S} $\equiv$ \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}}
+ 
+\item \textit{NP} $\equiv$  \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}} 
+ 
+\item \textit{Det} $\equiv$
+   \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
+
+\item \textit{N} $\equiv$
+   \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}} 
+
+\item \textit{V} $\equiv$
+   \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}}
+
+\item \textit{VP} $\equiv$  \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
+ 
+\end{subex} 
+\label{ex:catsigntypes}   
+\end{ex}
+
+Recall that the symbol \d{$\wedge$} represents the merge operation on
+types as defined in Appendix~\ref{app:merge}.  This means that, for
+example, \preveg{a} is the type in \nexteg{}.
+\begin{ex} 
+\record{\tfield{s-event}{\record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{\textit{Phon}} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}}} \\
+         \tfield{syn}{\record{\mfield{cat}{s}{\textit{Cat}} \\
+        \tfield{daughters}{\textit{Sign}$^*$}}} \\
+        \tfield{cnt}{\textit{Cnt}}}  
+\end{ex} 
+  
+
+We might think that the type \textit{Cat} is a language specific
+resource and indeed if we were being more precise we might introduce
+separate types for different languages such as
+\textit{Cat}$_{\mathit{eng}}$, \textit{Cat}$_{\mathit{swe}}$ and
+\textit{Cat}$_{\mathit{tag}}$ for
+the type of category names of English, Swedish and Tagalog respectively.
+However, there is a strong intuition that categories in different
+languages are more or less related.  For example, we would not be
+surprised to find that the categories available for English and
+Swedish closely overlap (despite the fact that their internal
+syntactic structure differs) whereas the categories of English and Tagalog
+have less overlap.  (See \citealp{Gil2000} for discussion.)  For this
+reason we assume that there is a universal resource \textit{Cat} and
+that each language will have a subtype of \textit{Cat} which specifies
+which of the categories are used in that particular language.  This is
+related to the kind of view of linguistic universals as a kind of
+toolbox from which languages can choose which is put forward by
+\cite{Jackendoff2002}.
+
+The ontological status of objects of type \textit{Cat} as we have
+presented them is a little suspicious.  Intuitively, categories should
+be subtypes of \textit{Sign}, that is, like the types such as \textit{S},
+\textit{NP} and so on in (\ref{ex:catsigntypes}).  We have identified
+signs belonging to these types as containing a particular object in
+\textit{Cat} in their `cat'-field.  But one might try to characterize
+such signs in a different way, for example,as fulfilling certain conditions
+such as having  certain kinds of daughters.  However, this is not quite enough, for
+example, for lexical categories, which do not have daughters.  We have
+to have a way of assigning categories to words and we need to create
+something in the sign-type that will indicate the arbitrary assignment
+of a category to a word.  For want of a better solution we will
+introduce the category names which belong to the type \textit{Cat}
+as a kind of ``book-keeping'' device that will identify a sign-type as
+being one whose witnesses belong to category bearing that name.  
+
+The `daughters'-field is required to be a string of signs, possibly
+the empty string, since the type \textit{Sign}$^*$ uses the Kleene-*,
+that is the type of strings of signs including the empty string,
+$\varepsilon$.  (See Appendix~\ref{sec:regular}.) Lexical items, that is words and phrases which are
+entered in the lexicon, will be related to signs which have the empty
+string of daughters.  We will use \textit{NoDaughters} to represent
+the type
+\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}.
+
+@@Eliminate ``normally'' here.
+
+If $T_{\mathrm{phon}}$ is a type (normally a phonological type, that is,
+$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+is a type (normally a sign type, that is,$T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$  , then we shall use
+Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent \nexteg{}
+\begin{ex} 
+$T_{\mathrm{sign}}$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}}
+      \d{$\wedge$} \textit{NoDaughters} 
+\end{ex} 
+This means, for
+example, that \nexteg{a} represents the type in \nexteg{b}
+which, after spelling out the abbreviations, can be seen to be the
+type in \nexteg{c}.
+\begin{ex} 
+\begin{subex}
+
+\item  Lex(``Dudamel'', \textit{NP})
+ 
+\item \textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel''}}}}
+      \d{$\wedge$} \textit{NoDaughters} 
+ 
+\item \record{\tfield{s-event}{\record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{``Dudamel''} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}}} \\
+         \tfield{syn}{\record{\mfield{cat}{np}{\textit{Cat}} \\
+        \mfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}} \\
+        \tfield{cnt}{\textit{Cnt}}} 
+ 
+\end{subex} 
+\label{ex:DudamelLex}   
+\end{ex} 
+We can think of `Lex' as the function in \nexteg{}\footnote{We are
+  using the notational convention for function application as used,
+  for example, by
+  \cite{Montague1973} that if $f$ is a function $f(a,b)$ is $f(b)(a)$.}
+\begin{ex} 
+$\lambda T_1$:\textit{Type}\\
+\hspace*{.25em}$\lambda T_2$:\textit{Type} . \\
+\hspace*{.5em}\mbox{$T_1$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_2$}}}}
+      \d{$\wedge$} \textit{NoDaughters}}
+\end{ex} 
+This function, which creates sign types for lexical items in a
+language, associating types with a syntactic category, can be seen as
+a universal resource.  We can think of it as representing a (somewhat
+uninteresting, but nevertheless true) linguistic universal:  ``There
+can be speech events of given types which have 
+no daughters (lexical items)''.  
+  
+   
+
+@@Make clear that NP and S for aha etc. is arbitrary.
+
+The lexical resources needed to cover our example
+fragment is given in \nexteg{}.
+\begin{ex} 
+Lex(``Dudamel'', \textit{NP}) \\
+Lex(``Beethoven'', \textit{NP}) \\
+Lex(``a'', \textit{Det}) \\
+Lex(``composer'', \textit{N}) \\
+Lex(``conductor'', \textit{N}) \\
+Lex(``is'', \textit{V}) \\
+Lex(``ok'', \textit{S}) \\
+Lex(``aha'',\textit{S})
+\label{ex:gramlexres} 
+\end{ex} 
+The types in \preveg{} belong to the specific resources required for
+English. This is not to say that these resources cannot be shared with
+other languages.  Proper names like \textit{Dudamel} and
+\textit{Beethoven} have a special status in that they can be reused in
+any language, though often in modified form, at least in terms of the
+phonological type with which they are associated without this being
+perceived as quotation, code-switching or simply showing off that you
+know another language. 
+
+Resources like \preveg{} can be exploited by update rules.  If
+Lex($T_w$, $C$)
+is one of the lexical resources available to an agent $A$
+and $A$ judges an event $e$ to be of type $T_w$, then $A$ is
+licensed to update their gameboard with the type Lex($T_w$, $C$).
+Intuitively, this means that if the agent hears an utterance of the
+word ``composer'', then they can conclude that they have heard a sign
+which has the category noun.  This is the beginning of
+\textit{parsing}, which we will regard as the same kind of update
+involved in event perception as discussed in the previous chapters.
+The licensing condition corresponding to lexical resources
+like \preveg{} is given in \nexteg{}.  We will return below to how
+this relates to gameboard update.  
+\begin{ex}
+If Lex($T$, $C$) is a resource available to agent $A$, then for any
+$u$, $u:_A T$ licenses $:_A$ Lex($T$, $C$)
+\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$u$}{$T_1$}}}}
+
+\end{ex} 
+\preveg{} says that an agent with lexical resource Lex($T$, $C$) who
+judges a speech event, $u$, to be of type $T$ is licensed to judge that
+there is a sign of type Lex($T$, $C$) whose `s-event.e'-field contains
+$u$. 
+
+Strings of utterances of words can be classified as utterances of
+phrases.  That is, speech events are hierarchically organized into
+types of speech events in the way that we discussed at the beginning
+of this chapter.  Agents have resources which allow them to reclassify
+a string of signs of certain types (``the daughters'') into a single
+sign of another type (``the mother'').  So for example a string of
+type \textit{Det}$^{\frown}$\textit{N} can lead us to the conclusion
+that we have observed a sign of type \textit{NP} whose daughters are
+of the type \textit{Det}$^{\frown}$\textit{N}.  The resource that
+allows us to do this is a rule which we will
+model as the function in \nexteg{a} which we will represent as \nexteg{b}.
+\begin{ex}
+\begin{subex} 
+\item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} . \\
+\hspace*{1em}\textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+
+\item RuleDaughters(\textit{NP}, \textit{Det}$^{\frown}$\textit{N})
+\end{subex}
+\label{ex:NPDetNDaughters}
+\end{ex}
+`RuleDaughters' is to be the function in \nexteg{}.
+\begin{ex} 
+$\lambda T_1$ : \textit{Type} \\
+\hspace*{1em} $\lambda T_2$ : \textit{Type}\ . \\
+\hspace*{2em} $\lambda u : T_1$\ . $T_2$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_1$}}}} 
+\end{ex} 
+Thus `RuleDaughters', if provided with a subtype of \textit{Sign}$^+$
+and a subtype of \textit{Sign} as arguments, will return a function which 
+maps a string of signs of the first type to the second type with the
+restriction that the daughters field is filled by the string of
+signs. `RuleDaughters' is one of a number of sign type construction
+operations which we will introduce as universal resources which have
+the property of returning what we will call a sign combination function.  The licencing conditions
+associated with sign combination functions are as characterized in
+\nexteg{}.
+
+@@ Give names to such principles
+
+\begin{ex} 
+If $f:(T_1\rightarrow Type)$ is a sign combination function available to agent $A$, then for
+any $u$, $u :_A T_1$ licenses $:_A f(u)$ 
+\end{ex} 
+This means, for example, that if you categorize a string of signs as
+being of type \textit{Det}$^{\frown}$\textit{N} then you can conclude
+that there is a sign of type \textit{NP} with the additional
+restriction that its daughters are $u$.   
+
+`RuleDaughters' takes care of the `daughters'-field but it says
+nothing about the `s-event.e'-field, that is the phonological type
+associated with the new sign.  This should be required to be the
+concatenation of all the `s-event.e'-fields in the daughters. If
+$u:T^+$ where $T$ is a record type containing the path $\pi$, we will
+use concat$_i$($u[i].\pi$),
+the concatenation of all the values $u[i].\pi$ for each element in the
+string $u$ in the order in which they occur in the string. (This
+notation is made precise in Appendix~\ref{sec:regular}.) We can now
+formulate the function ConcatPhon as in \nexteg{}
+\begin{ex} 
+$\lambda
+u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
+. \\
+\hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}} 
+\end{ex} 
+ConcatPhon will map any string of speech events to the type of a
+single speech event whose phonology (that is the value of `s-event.e')
+is the concatenation of the phonologies of the individual speech
+events in the string.
+
+We want to combine the function \preveg{} with a function like that in
+(\ref{ex:NPDetNDaughters}). We do this by merging the domain types of
+the two functions and also merging the types that they return.  This
+is shown in \nexteg{a} which in deference to standard linguistic
+notation for phrase structure rules could be represented as
+\nexteg{b}.\footnote{Note that `$\longrightarrow$' used in the phrase
+  structure rule in \nexteg{b} is not the same arrow as `$\rightarrow$'
+  which is used in our notation for function types.  We trust that the
+  different contexts in which they occur will help to distinguish them.}
+\begin{ex} 
+\begin{subex}
+\item  $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ . \\
+\hspace*{1em}\textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+\\
+\hspace*{2.5em}\d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+
+\item \textit{NP} $\longrightarrow$ \textit{Det} \textit{N}
+\end{subex}
+\label{eg:NPDetN}
+\end{ex}
+In general we say that if $C,C_1,\ldots,C_n$ are category sign types
+as in (\ref{ex:catsigntypes}) then $C \longrightarrow C_1 \ldots C_n$ represents RuleDaughters($C$,
+${C_1}^{\frown}\ldots^{\frown}C_n$) \d{\d{$\wedge$}} ConcatPhon where
+for any type returning functions $\lambda r\!:\!T_1\ .\ T_2(r)$ and
+$\lambda r\!:\!T_3\ .\ T_4(r)$, $\lambda r\!:\!T_1\ .\ T_2(r)$ \d{\d{$\wedge$}} $\lambda r\!:\!T_3\ .\ T_4(r)$
+denotes the function $\lambda r\!:\!T_1$\d{$\wedge$}$T_3\ .\
+T_2(r)$\d{$\wedge$}$T_4(r)$.  
+
+@@Make the definition of function merging displayed.
+
+Thus the function in \preveg{} can be
+represented in a third way as in \nexteg{}.
+\begin{ex} 
+RuleDaughters(\textit{NP}, \textit{Det}$^{\frown}$\textit{N})
+\d{\d{$\wedge$}} ConcatPhon 
+\end{ex} 
+The hope is that the ability to factorize rules into ``bite-size''
+components will enable us to build a theory of resources
+that will allow us to study them in isolation and will also facilitate
+the development of theories of learning.  It gives us a clue to how agents can build new
+rules by combining existing components in novel ways.  It has implications for universality
+as well. For example, while the rule
+\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} is not universal
+(though it may be shared by a large number of languages), ConcatPhon
+is a universally available rule component, allbeit a trivial universal
+which says that you can have concatenations of speech events to make a
+larger speech event.    
+     
+
+The rules associated with our small grammar are given by \nexteg{}
+\begin{ex} 
+\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} \\
+\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \\
+\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} 
+\end{ex} 
+  
+It may seem that we have done an awful of work to arrive at simple
+phrase structure rules.  Some readers might wonder why it is worth all
+this trouble to ground the rules in a theory of events and action when
+what we come up with in the end is something that can be expressed in
+a standard notation which is one of the first things that a student of
+syntax learns.  One reason has to do with our desire to explore the
+relationship between the perception and processing of non-linguistics
+events and speech events as discussed at the beginning of this
+chapter.  Another reason has to do with placing natural constraints on
+syntax.  By grounding syntactic structure in types of events we
+provide a motivation for the kind of discussion in
+\cite{Cooper1982}.  An abstract
+syntax which proposes constituent structure which does not correspond
+to speech events is not grounded in the same way and thus presents a
+different kind of theory.
+
+ 
+\section{Semantics}
+We have so far specified our sign types in terms of phonology and
+syntax.  Now we need to specify the content in the `cnt'-field.  We
+shall start by accounting for the contents of the lexical items
+specified in (\ref{ex:gramlexres}).  We consider first the common
+nouns \textit{composer} and \textit{conductor}.  For each of these we
+introduce a predicate of arity $\langle$\textit{Ind}$\rangle$.  (See
+Appendix~\ref{app:comptypes} for discussion of predicates and
+arity.)  Our universal resources will include a function,
+`SemCommonNoun' which will construct a common noun content from such a
+predicate, $p$.  This is defined as in \nexteg{}.
+\begin{ex} 
+SemCommonNoun($p$) = $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{$p$($r$.x)}} 
+\end{ex} 
+The function in \preveg{} is of type
+(\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType}).
+That is, it is a function which maps any record containing a field
+labelled `x' with an individual as value to a record type.  We will
+abbreviate this type as \textit{Ppty} (for ``property'') and we will
+call functions of this type \textit{properties}.  In our compositional
+semantics, properties will play a similar role as functions from
+individuals to truth values ($\langle e,t\rangle$) in Montague
+semantics.  In place of individuals, we use records with an `x'-field
+containing an individual.  The motivation for this will become
+apparent in Chapter~\ref{ch:commonnouns} when we discuss the temperature
+puzzle. In place of Montague's truth-values (that is, objects of
+Montague's type $t$) we use record types.  Record types play the role
+of ``propositions'' in our system.  Types, thought of as types of
+situations, can be considered as truth-bearing objects.  They are true
+just in case there is something of the type and false otherwise, that
+is, if there is
+nothing of the type.  The fact that we use the ``proposition-like''
+objects as the results that our properties return is an essential
+ingredient in our intensional treatment of properties.  In this way it
+follows in the tradition of property theory
+\citep{ChierchiaTurner1988,FoxLappin2005}  and Thomason's intensional
+approach to propositional attitudes \citep{Thomason1980}.
+
+We can now combine the `Lex'-function which builds sign types
+excluding content information with our new way of constructing common
+noun content.  We define a function Lex$_{\mathrm{CommonNoun}}$ which
+takes a phonological type and a predicate and returns a sign type.
+This is defined in \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$) = \\
+\hspace*{1em}Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemCommonNoun($p$)}{\textit{Ppty}}} 
+\end{ex} 
+Note that the type of the content required here is \textit{Ppty}.  In
+Chapter~\ref{ch:infex} we defined the content type \textit{Cnt} to be
+identical with \textit{RecType}.  Now we have to revise the definition
+of \textit{Cnt} to be (\textit{RecType} $\vee$ \textit{Ppty}).  We
+will add further disjuncts to allow for more possibilities as we
+progress.
+
+In order to cover the two common nouns \textit{conductor} and
+\textit{composer} we can include the sign types in \nexteg{} among our
+resources.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$(``composer'', composer) 
+ 
+\item Lex$_{\mathrm{CommonNoun}}$(``conductor'', conductor) 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+Following Montague's (\citeyear{Montague1973}) original strategy we
+shall treat the contents of noun-phrases such as \textit{Dudamel} or
+\textit{a conductor} as being functions from properties to
+truth-bearing elements, that is, in our terms, record types.  That is,
+noun-phrase contents will be of type
+(\textit{Ppty}$\rightarrow$\textit{RecType}) which we will abbreviate
+as \textit{Quant} (for ``quantifier''). This means that we should now
+redefine the type of contents, \textit{Cnt}, as \textit{RecType}
+$\vee$ \textit{Ppty} $\vee$ \textit{Quant}.\footnote{Omitting
+  parentheses for clarity.}
+   
+
+\textit{Dudamel} and
+\textit{Beethoven} will receive proper name contents.  The recipe for
+constructing a proper name content based on a particular individual
+$a$ is given by SemPropName($a$) as defined in \nexteg{}.
+\begin{ex} 
+SemPropName($a$) = \\
+\hspace*{1em}$\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$a$}}) 
+\end{ex} 
+We define Lex$_{\mathrm{PropName}}$ which takes a phonological type (a
+name) and an individual (the referent of the name) and returns a sign
+type as in \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{PropName}}$($T_{\mathrm{Phon}}$, $a$) = \\
+\hspace*{1em}Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemPropName($a$)}{\textit{Quant}}} 
+\end{ex} 
+Resources to cover the proper names in our grammar could be as in
+\nexteg{} where $d,b$ : \textit{Ind} (two individuals, Dudamel and
+Beethoven).
+\begin{ex} 
+\begin{subex} 
+ 
+\item Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$) 
+ 
+\item Lex$_{\mathrm{PropName}}$(``Beethoven'', $b$) 
+ 
+\end{subex} 
+   
+\end{ex} 
+Note that there is nothing to prevent us from constructing sign types
+with the same phonological type but different contents.  Thus proper
+names are not required to be ``logically proper'' in the sense that
+there is one and only one individual which can be referred to by an
+utterance belonging to the phonological type.  Names can be ambiguous.
+For example, there are many composers named Bach and Strauss.  We have
+the means to construct sign types for all of them on an as needed
+basis.
+
+Now that we have both properties and quantifiers let us check at this
+point that we are on the right track for combining them in something
+like the kind of way that we will need for compositional semantics.
+Suppose we want to combine a proper name content for \textit{Dudamel}
+\nexteg{a} with the property of being a conductor \nexteg{b}.  The
+obvious way to do this is by applying the function in \nexteg{a} to
+the argument \nexteg{b} as represented in \nexteg{c}.  According to
+the definition of functional application in
+Appendix~\ref{app:funtypes}, \nexteg{c} is identical to \nexteg{d}
+which in turn is identical to \nexteg{e}.  In turn the dot notation
+for record path values defined in Appendix~\ref{app:rectypes} shows
+\nexteg{e} to be identical to \nexteg{f}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$d$}}) 
+ 
+\item $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}} 
+
+\item $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$d$}}) \\
+\hspace*{1em}($\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}})
+
+\item $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}(\smallrecord{\field{x}{$d$}})
+
+\item \record{\tfield{e}{conductor(\smallrecord{\field{x}{$d$}}.x)}}
+
+\item \record{\tfield{e}{conductor($d$)}}
+ 
+\end{subex} 
+\label{ex:diac}  
+\end{ex} 
+      
+
+This means that if we were dealing with a language like Russian where
+\textit{Dudamel is a conductor} corresponds to a proper name followed
+by a common noun we would have a good way of combining the two
+contents by applying the content of the proper name to the content of
+the common noun.\footnote{An alternative would be to treat the content
+  of a proper name as a record rather than a quantifier and apply the
+  property to the record as in \preveg{d}.  This would correspond to
+  the treatment of proper names as individual denoting as discussed,
+  for example, by \cite{Partee1986}.} However, things are not quite so
+straightforward in English.  Here we use an indefinite article to form
+the noun phrase \textit{a conductor}.  We shall treat the content of
+indefinite articles as a function that maps properties to quantifiers
+involving the existential relation between properties.  That is, it
+will be a function of type (\textit{Ppty}$\rightarrow$\textit{Quant}),
+a type which should be added to our definition of \textit{Cnt} which
+now becomes \textit{RecType}
+$\vee$ \textit{Ppty} $\vee$ \textit{Quant} $\vee$
+(\textit{Ppty}$\rightarrow$\textit{Quant}).  As part of our
+universal resources we introduce a function `SemIndefArt' which is
+defined as the function in \nexteg{}.
+\begin{ex} 
+$\lambda Q$:\textit{Ppty} . \\
+\hspace*{1em} $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+\label{ex:semindefart}
+\end{ex} 
+We can also define a universal resource, Lex$_{\mathrm{IndefArt}}$, which associates a
+phonological type (corresponding to an indefinite article in the
+language) with this content, as defined in \nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) = \\
+\hspace*{1em} Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}} 
+\end{ex} 
+The local resource for the English indefinite article would thus be
+\nexteg{}.
+\begin{ex} 
+Lex$_{\mathrm{IndefArt}}$(``a'') 
+\end{ex} 
+
+The compositional semantics of a noun-phrase consisting of a
+determiner followed by a noun will be the content of the determiner
+applied to the content of the noun.  This is a case of \textit{content
+  forward application}.  We define a function `CntForwardApp', which is
+part of the universal resources, as in \nexteg{}.
+\begin{ex} 
+$\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
+\hspace*{1em}$\lambda
+u$:\smallrecord{\smalltfield{cnt}{$(T_2\rightarrow
+    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{$T_2$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{$T_1$}} 
+\end{ex} 
+The intuition behind this function is that if you observe a string of
+two utterances, the first of which has a content of type
+$(T_2\rightarrow T_1)$ and the second of which has a content of type
+$T_2$ then you are licensed to conclude that there is an utterance
+whose content is the result of applying the content of the first
+element in the string to the content of the second element of the
+string. (For the notation $s[n]$ representing the $n$th element of a
+string $s$ see Appendix~\ref{app:strings}.)  We can use
+`CntForwardApp' to add constraints on content to a phrase structure
+rule as in the example in \nexteg{}.
+\begin{ex} 
+\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}} CntForwardApp(\textit{Ppty},\textit{Quant}) 
+\end{ex} 
+Recall from (\ref{eg:NPDetN}a) that  \textit{NP} $\longrightarrow$
+\textit{Det} \textit{N} is the function
+\nexteg{a}. CntForwardApp(\textit{Ppty},\textit{Quant}) is the
+function \nexteg{b}.  Merging these two functions yields \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ . \\
+\hspace*{1em}\textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+\\
+\hspace*{2.5em}\d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}} 
+ 
+\item $\lambda
+u$:\smallrecord{\smalltfield{cnt}{$(\mathit{Ppty}\rightarrow
+    \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{\textit{Ppty}}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{\textit{Quant}}} 
+
+\item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$}
+  \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ \\
+\hspace*{4.9em}  \d{$\wedge$} \smallrecord{\smalltfield{cnt}{$(\mathit{Ppty}\rightarrow
+    \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}
+. \\
+\hspace*{1em}\textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+\\
+\hspace*{2.5em}\d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+\\
+\hspace*{2.5em}\d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{\textit{Quant}}}
+ 
+\end{subex} 
+   
+\end{ex}
+A convenient abbreviatory notation for this interpreted phrase
+structure rule is given in \nexteg{}.
+\begin{ex} 
+\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$ \textit{Det}$'$(\textit{N}$'$)
+\end{ex} 
+Here \textit{Det}$'$ and \textit{N}$'$ represent the contents of the
+determiner and noun.
+  
+We can represent the type \nexteg{a} using an informal diagrammatic
+tree notation which is common in linguistics as in
+\nexteg{b}.\footnote{A similar use of tree notation, though relating
+  to typed feature structures rather than types, is used in HPSG
+  \citep[see, for example,][Chapter~2]{GinzburgSag2000}.}
+\begin{ex} 
+\begin{subex} 
+ 
+\item \hspace*{1em}\textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{syn.daughters[0].s-event.e$^{\frown}$syn.daughters[0].s-event.e}{\textit{Phon}}}}\\
+\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}$^{\frown}$\textit{N}}}}
+\\
+\smallmfield{cnt}{syn.daughters[0].cnt(syn.daughters[1].cnt)}{\textit{Quant}}}
+
+
+ 
+\item \Tree [.\textit{NP}\\$\alpha(\beta)$ 
+\textit{Det}\\$\alpha$ \textit{N}\\$\beta$ ]
+ 
+\end{subex} 
+   
+\end{ex}
+Here what is written under the category type (e.g. $\alpha$, $\beta$) represents the value in
+the `cnt'-field. 
+     
+The content of an utterance of \textit{a conductor}
+will be \nexteg{a} applied to \nexteg{b}, that is \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  $\lambda Q$:\textit{Ppty} . \\
+\hspace*{1em} $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+ 
+\item $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}} 
+
+\item $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+ 
+\end{subex} 
+\label{ex:a-conductor}   
+\end{ex} 
+
+We will now look in more detail at the nature of the generalized
+quantifier in \preveg{c}.  `exist' is a predicate with arity
+$\langle$\textit{Ppty},\textit{Ppty}$\rangle$, that is, it corresponds
+to a relation between two properties.  The classical account of
+generalized quantifiers \citep[][and much other
+literature]{BarwiseCooper1981,PetersWesterstahl2006} treats such
+quantifier relations as relations between sets.  Here we will follow
+\cite{Cooper2011,Cooper2013} in relating our treatment directly to the
+classical relation between sets, although, as argued in
+\cite{Cooper2012a} based on earlier work by \cite{KeenanStavi1986}, there are ultimately good reasons for exploiting
+the intensionality of properties.   If $P$ is a property the relevant
+set is the set of individuals which have the property, which we will
+represent as $\downP{P}$.  This is defined as in \nexteg{} where
+we use the notation $\down{T}$ to represent $\{a\mid a:T\}$.
+
+\begin{ex} 
+$\downP{P}$ = $\{a\mid\exists r[r:$\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}}
+\text {and} $\down{P(r)}\not=\emptyset]\}$ 
+\label{ex:propext}
+\end{ex} 
+Following the terminology of \cite{Cooper2011,Cooper2013} we will call
+$\downP{P}$ the property extension, or \textit{P-extension}, of
+property $P$. Intuitively the property extension of $P$ is the set of
+objects which have the property in some situation.  Let us compute
+this for a particular example of a property, the property of being a
+dog given in \nexteg{}. 
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}} 
+\end{ex}
+The property extension of \preveg{} is given in \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and \\
+\hspace*{2em}$\down{\lambda
+  r:\text{\smallrecord{\smalltfield{x}{\textit{Ind}}}}
+  . \text{\record{\tfield{e}{dog($r$.x)}}}(r)} \not=\emptyset]\}$ 
+\end{ex} 
+By $\beta$-reduction \preveg{} is the same set as \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
+$\down{\text{\record{\tfield{e}{dog($r$.x)}}}} \not=\emptyset]\}$  
+\end{ex} 
+Since $r$ is required to be of the type
+\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} we know that $r$.x
+must be $a$.  Therefore \preveg{} is identical to \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
+$\down{\text{\record{\tfield{e}{dog($a$)}}}} \not=\emptyset]\}$ 
+\end{ex} 
+By the definition of record types, a record
+\smallrecord{\field{e}{$s$}} is of type
+\smallrecord{\smalltfield{e}{dog($a$)}} just in case $s:\text{dog}(a)$.
+Therefore this type is non-empty just in case there is such an $s$.
+For this reason \preveg{} is the same set as \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
+$\exists s [s:\text{dog}(a)]]\}$ 
+\end{ex}
+Since $r$ is no longer bound in the second conjunct of \preveg{},
+\nexteg{} also defines the same set.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}}] and 
+$\exists s [s:\text{dog}(a)]\}$ 
+\end{ex} 
+Given the nature of records, there will be an $r$ of the required type
+just in case $a$:\textit{Ind}.  Therefore we can characterize the same set
+as in \nexteg{}.
+\begin{ex} 
+$\{a\mid a$:\textit{Ind} and 
+$\exists s [s:\text{dog}(a)]\}$ 
+\end{ex} 
+Finally, since the existence of a situation of type dog($a$) requires
+the $a$ is an individual given that the arity of `dog' is
+$\langle\textit{Ind}\rangle$ we can eliminate the first conjunct
+altogether so the minimal characterization of this set is \nexteg{}.
+\begin{ex} 
+$\{a\mid  
+\exists s [s:\text{dog}(a)]\}$  
+\end{ex} 
+       
+   
+   
+  
+
+If $P$ and $Q$ are properties we want exist($P$, $Q$)
+to be a type of situations which will be non-empty (that is, ``true'')
+just in case the P-extensions of $P$ and $Q$ have a non-empty overlap,
+that is there is some individual which has both property $P$ and
+property $Q$.  In symbols we can express this as \nexteg{}.
+\begin{ex} 
+$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff
+$\downP{P}\cap\downP{Q}\not=\emptyset$ 
+\label{ex:constraintexist}
+\end{ex} 
+This places a requirement on objects which are assigned to the type `exist($P$, $Q$)'
+without actually tying down what kind of object they have to be.  That
+is, it leaves it open as to which objects get assigned to the type, as
+long as they respect this requirement.  It places a constraint on $F$
+in the models discussed on p.~\pageref{pg:models}.  We can, however,
+go a step further and make precise exactly which objects these should
+be.  The intution is that a situation $e$ should be of type exist($P$,
+$Q$) just in case it is a witness (or ``proof'') of the fact that the
+``exist''-relation holds between $P$ and $Q$ (that is, that the
+P-extensions of $P$ and $Q$ have a non-empty overlap). We will say
+that a situation is such a witness just in case the P-extensions of
+the properties restricted to the situation in question stand in the
+required relation, that is, intuitively that the set of objects in the
+situation which have $P$ overlaps with the set of objects in the
+situation which have $Q$.  We will get at this notion by restricting
+properties to a particular situation (what we have called a
+resource situation in previous literature such as
+\citealp{BarwisePerry1983,Cooper1996a}). We will represent the
+restriction of property $P$ to situation $s$ as $P\!\restriction\!
+s$. We take our previous example of the property of being a dog,
+repeated in \nexteg{a}.  Its restriction to the situation $s$ is given
+in \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\rfield{e}{$s$}{dog($r$.x)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+In \preveg{b} the restricted field\label{pg:restfld}
+\smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}} requires that the
+object in `e'-field is not only of type `dog($r$.x)' but also that it
+is either $s$ itself or a component of $s$, that is, for some
+path $\pi$ in $s$ it is the object $s.\pi$.  See
+Appendix~\ref{app:rectypes} for the definition of components.  A definition of restriction for properties in general is given in
+Appendix~\ref{app:gramrulesuniv}.  We will not be concerned with the
+general definition here.  
+
+Now we can compute the property extension of
+\preveg{b} in a similar fashion to the calculation for the
+non-restricted property.   
+The property extension of \preveg{b} is given in \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and \\
+\hspace*{2em}$\down{\lambda
+  r:\text{\smallrecord{\smalltfield{x}{\textit{Ind}}}}
+  . \text{\record{\rfield{e}{$s$}{dog($r$.x)}}}(r)} \not=\emptyset]\}$ 
+\end{ex} 
+By $\beta$-reduction \preveg{} is the same set as \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
+$\down{\text{\record{\rfield{e}{$s$}{dog($r$.x)}}}} \not=\emptyset]\}$  
+\end{ex} 
+Since $r$ is required to be of the type
+\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} we know that $r$.x
+must be $a$.  Therefore \preveg{} is identical to \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
+$\down{\text{\record{\rfield{e}{$s$}{dog($a$)}}}} \not=\emptyset]\}$ 
+\end{ex} 
+By the definition of record types, a record
+\smallrecord{\field{e}{$s'$}} is of type
+\smallrecord{\smallrfield{e}{$s$}{dog($a$)}} just in case $s'\underline{\varepsilon}s$ and
+$s':\text{dog}(a)$.
+Therefore this type is non-empty just in case there is some $s'$ such
+that $s'\underline{\varepsilon}s$ and $s':\text{dog}(a)$.
+For this reason \preveg{} is the same set as \nexteg{}.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
+$\exists s'[s'\underline{\varepsilon}s \text{ and } s':\text{dog}(a)]\}$ 
+\end{ex}
+Since $r$ is no longer bound in the second conjunct of \preveg{},
+\nexteg{} also defines the same set.
+\begin{ex} 
+$\{a\mid\exists
+  r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}}] and 
+$\exists s'[s'\underline{\varepsilon}s \text{ and } s':\text{dog}(a)\}$ 
+\end{ex} 
+Given the nature of records, there will be an $r$ of the required type
+just in case $a$:\textit{Ind}.  Therefore we can characterize the same set
+as in \nexteg{}.
+\begin{ex} 
+$\{a\mid a$:\textit{Ind} and 
+$\exists s'[s'\underline{\varepsilon}s \text{ and } s':\text{dog}(a)\}$ 
+\end{ex} 
+Finally, since the existence of a situation of type dog($a$) requires
+the $a$ is an individual given that the arity of `dog' is
+$\langle\textit{Ind}\rangle$ we can eliminate the first conjunct
+altogether so the minimal characterization of this set is \nexteg{}.
+\begin{ex} 
+$\{a\mid  
+\exists s'[s'\underline{\varepsilon}s \text{ and } s':\text{dog}(a)\}$  
+\end{ex} 
+
+Now we can use the notion of property restriction to characterize the
+witness condition for ptypes constructed with `exist', as in
+\nexteg{}.
+\begin{ex} 
+$e$:exist($P$,$Q$) iff $\downP{P\!\restriction\!
+  e}\cap\downP{Q\!\restriction\! e}\not=\emptyset$ 
+\end{ex} 
+This will have the consequence that any record of the type \nexteg{a}
+will be of type \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{c}{dog(x)}\\
+              \tfield{e}{run(x)}}
+ 
+\item exist($\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{dog($r$.x)}},
+            $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{run($r$.x)}})
+ 
+\end{subex} 
+\label{ex:adogruns}
+   
+\end{ex} 
+In other words, \preveg{a} is a subtype of \preveg{b}.  Consider an
+arbitrary record of type \preveg{a} as given in \nexteg{}.
+\begin{ex} 
+\record{\field{x}{$a$}\\
+        \field{c}{$s_1$}\\
+        \field{e}{$s_2$}}
+
+\medskip
+
+where $s_1$ : dog($a$) and $s_2$ : run($a$)
+\end{ex} 
+The two relevant property extensions to be considered will both be the
+set $\{a\}$ and thus the conditions for \preveg{} being of type
+(\ref{ex:adogruns}b) will be fulfilled since the two property
+extensions have a non-empty overlap.   
+
+
+% Another
+% intuition is that a witness for the type would be the pair $\langle
+% P,Q\rangle$ just in case the
+% ``exist''-relation holds between $P$ and $Q$.  This is reminiscent of
+% the way in which $\Sigma$-types are treated in constructive type
+% theory (as discussed on p.~\pageref{pg:sigmatypes}).  There is a way
+% of combining these two intuitions.  We model situations as records and
+% we can model a pair as a record with two fields containing the
+% respective members of the pair.  Thus we can think of the pair as a
+% situation which has the two properties in appropriate roles.  Our
+% definition is given in \nexteg{}.\footnote{Note that this runs
+%   dangerously close to Russell's paradox.  In
+%   Appendix~\ref{app:comptypes} we say that ptypes are labelled
+%   sets.  The ptype we represent as exist($P$,$Q$) would be the
+%   labelled set
+%   $\{\langle\mathrm{pred},\mathrm{exist}\rangle,\langle\mathrm{arg}_1,P\rangle,\langle\mathrm{arg}_2,Q\rangle\}$.
+%   Records are also labelled sets.  The only thing that stops this
+%   labelled set from being a record and therefore according to
+%   \nexteg{} allowing for the possibility that exist($P$,$Q$) :
+%   exist($P$,$Q$) is that predicates are not technically assigned to a
+%   type according to our definitions.  They are considered as type
+%   constructors but not themselves objects of a type.  There are a
+%   number of other ways to avoid the problem if this way were to be
+%   deemed unacceptable for some reason.  We just flag here, that
+%   however one constructs ptypes and the objects that are of ptypes, we
+% should probably avoid allowing ptypes to be of themselves.  Doing so,
+% would not only run the risk of paradox, but would also not make much
+% intuitive sense.}
+% \begin{ex} 
+% $e$ : exist($P$, $Q$) iff $e$ :
+% \smallrecord{\smallmfield{arg$_1$}{$P$}{\textit{Ppty}} \\
+%              \smallmfield{arg$_2$}{$Q$}{\textit{Ppty}}} and $\downP{P}\cap\downP{Q}\not=\emptyset$ 
+% \end{ex} 
+Let us consider what we get when we apply the content we have for \textit{a
+conductor}, \nexteg{a} (repeated from (\ref{ex:a-conductor}c)), to the property of composing, \nexteg{b}.  The
+result which would correspond to \textit{a conductor composes} if we
+were to introduce \textit{composes} as an intransitive verb in our
+resources, is given in
+\nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+ 
+\item $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{compose($r$.x)}}
+
+\item \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{compose($r$.x)}}}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+What would it mean for there to be something of type \preveg{c}? In
+other words, what would be required to make the sentence \textit{a
+  conductor composes} true? There would have to be a record, $r^*$, which
+contains the three fields in the record in \nexteg{} and which meets
+the condition indicated.
+\begin{ex} 
+$r^*$ = \record{\field{restr}{$\lambda
+                      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+                        . \record{\tfield{e}{conductor($r$.x)}}} \\
+          \field{scope}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{compose($r$.x)}}} \\
+          \field{e}{$s$}}
+
+where $\downP{r^*.\mathrm{restr}\!\!\restriction\!\!s}$ and $\downP{r^*.\mathrm{scope}\!\!\restriction\!\!s}$
+                        have a non-empty overlap.    
+\end{ex} 
+% Given the availability of appropriate labels and predicates, the type
+% theory will guarantee that a record of the form in \preveg{} will
+% exist, but it will not necessarily guarantee that the condition is
+% met.  This will depend on what is assigned to the basic types and
+% ptype, that is, it will depend on the model.
+
+This gives us a version of the classical treatment of indefinite
+articles as involving the existential quantifier, expressed in terms
+of a generalized quantifier which compares sets.  There is, of course,
+a real and important question whether this is an appropriate content
+for the sentence \textit{a conductor composes} which tends to get a
+generic reading something like ``conductors, in general, compose''.
+We will return to this issue in Chapter~\ref{ch:quant} where we will
+deal with the indefinite article in more detail.  For now, we will
+ignore the sentence \textit{a conductor composes} since we are not
+considering syntactic resources for it anyway.  
+
+We are concerned
+with finding a way to interpret the verb phrase \textit{is a
+  conductor}.  Can we find a content for \textit{is} which could be
+combined with the content for \textit{a conductor} given in
+(\ref{ex:a-conductor}c) to produce an appropriate interpretation for
+the verb-phrase?  Montague's (\citeyear{Montague1973}) strategy for
+assigning a content to \textit{is} is reproduced in our terms in
+\nexteg{}.
+\begin{ex} 
+$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{1em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{2em} $\mathcal{Q}$($\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
+          \tfield{e}{be(x)}})
+\label{ex:cnt-is} 
+\end{ex} 
+Here we use a manifest field based on a multiple singleton type (a
+singleton type formed from a singleton type, see
+Appendices~\ref{app:singletontypes} and \ref{app:rectypes}) to require
+the identity of $r_1$.x and $r_2$.x.  In the `e'-field of the type
+with the manifest field we use the predicate 'be' which we will take
+to be polymorphic with the set of arities  as given in \nexteg{a}.  The witness
+condition associated with types constructed with `be' is given in
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item arity(be) = \{$\langle T\rangle\mid T$ is a type\} 
+ 
+\item $e:\text{be}(a)$ iff $a\varepsilon e$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+The intuition behind \preveg{b} could be expressed as ``To be is to be
+a component of a situation'', that is, more technically, $a$ ``is''
+just in case there is a path, $\pi$, 
+in some record, $r$, such that $r.\pi=a$.\footnote{This might be
+  compared with Quine's (\citeyear{Quine1948}) dictum:  ``To be is to
+  be the value of a variable''.}   
+  
+% take `=' to be a predicate (used in infix notation, that is
+% $a=b$ to mean $=(a,b)$) with arity
+% $\langle$\textit{Ind},\textit{Ind}$\rangle$.\footnote{Actually, we
+%   would want `=' to be polymorphic and assign it the set of arities
+%   \{$T\in$ \textbf{Type} $\mid$ $\langle T,T\rangle$\}}  The
+% conditions for being of this type could be expressed as \nexteg{}.
+% \begin{ex} 
+% $e$ : $a=b$ iff $e$ :
+% \smallrecord{\smallmfield{arg$_1$}{$a$}{\textit{Ind}} \\
+%              \smallmfield{arg$_2$}{$b$}{\textit{Ind}}} and $a$ is
+%            identical with $b$ 
+% \end{ex}
+We will call (\ref{ex:cnt-is}) `SemBe'.  It will be included among the
+universal resources, together with the `Lex$_{\mathrm{be}}$' as defined in
+\nexteg{}.
+\begin{ex} 
+If $T_{\mathrm{Phon}}$ is a phonological type, then
+Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$) is Lex($T_{\mathrm{Phon}}$,
+\textit{V}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}} 
+\end{ex} 
+Among the lexical resources for English we have Lex$_{\mathrm{be}}$(``is'').
+   
+Now let us see what we get when we combine  (\ref{ex:cnt-is}) with the content of
+\textit{a conductor}.  This involves applying (\ref{ex:cnt-is}),
+repeated as \nexteg{a}, to (\ref{ex:a-conductor}c), repeated as
+\nexteg{b}.  The result of this application is \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{1em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{2em} $\mathcal{Q}$($\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}} \\
+          \tfield{e}{be(x)}}) 
+ 
+\item $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+
+\item $\lambda
+r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{1em}\record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}} \\
+          \tfield{e}{be(x)}}}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+In order to obtain a content for \textit{Dudamel is a conductor} we
+apply the content of \textit{Dudamel}, (\ref{ex:diac}a), repeated as
+\nexteg{a}, to  \preveg{c}, repeated as \nexteg{b}, with result
+\nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$d$}})
+ 
+\item $\lambda
+r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{1em}\record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}} \\
+          \tfield{e}{be(x)}}}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}} 
+
+\item  \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $d$}{\textit{Ind}} \\
+          \tfield{e}{be(x)}}}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+ 
+\end{subex} 
+\label{ex:diac1}   
+\end{ex} 
+
+The type \preveg{c} is distinct from the type (\ref{ex:diac}f),
+repeated as \nexteg{}, which we obtained by applying the content of
+\textit{Dudamel} directly to the content of \textit{conductor}.
+\begin{ex} 
+\record{\tfield{e}{conductor($d$)}}
+\label{ex:diac-simple} 
+\end{ex} 
+There is, however, an equivalence that holds between (\ref{ex:diac1}c)
+and \preveg{}.  The equivalence is not that they share the same set of
+witnesses.  We can characterize the set of witnesses of
+(\ref{ex:diac1}c) and \nexteg{a} and the witnesses of \preveg{} as
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \{\record{\field{restr}{$P$} \\
+          \field{scope}{$Q$} \\
+          \field{e}{$s$}} $\mid$ \begin{tabular}{l}
+$P$ = $\lambda
+                      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+                        . \record{\tfield{e}{conductor($r$.x)}} \\
+                        and 
+$Q$ = $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r$.x, $d$}{\textit{Ind}} \\
+          \tfield{e}{be(x)}} \\ and  
+$\downP{P\!\!\restriction\!\!s}\cap\downP{Q\!\!\restriction\!\!s}\not=\emptyset$\end{tabular}\}
+ 
+\item \{\record{\field{e}{$s$}} $\mid$ $s$ : conductor($d$)\} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The sets in \preveg{} do not have any members in common.  The
+equivalence is a weaker ``truth-conditional'' equivalence.
+(\ref{ex:diac1}c) has a witness (``is true'') if and only if
+(\ref{ex:diac-simple}) has a witness.  This is because the
+P-extensions of the property of being a conductor and the property of
+being identical with Dudamel can have a non-empty overlap if and only
+if Dudamel is a conductor.  We might try to characterize the
+difference between the property associated with \textit{conductor} and
+the property associated with \textit{is a conductor} as ``the property
+of being an $x$ such that conductor($x$)'' and ``the property of being
+an $x$ such that there is a $y$ such that conductor($y$) and $y=x$''.
+The two are truth-conditionally equivalent and for this reason in
+Montague's system they turn out to be the same property.  For us,
+since we are taking a more intensional approach than Montague, they
+are distinct properties but they are nevertheless truth-conditionally
+equivalent.
+
+Since we have two distinct properties, the question is raised whether
+the property that is associated with the verb-phrase should be the
+same as the property associated with the common noun or whether it
+should be the property proposed here involving existential
+quantification. One way to do this is to create a type corresponding
+to the tree in \nexteg{}.
+\begin{ex} 
+
+\Tree [.\textit{VP}\\$\gamma$ 
+         [.\textit{V}\\$\alpha$ ``is'' ]
+         [.\textit{NP}\\$\beta(\gamma)$ 
+               [.\textit{Det}\\$\beta$ ``a'' ]
+               \textit{N}\\$\gamma$ ] ] 
+
+
+
+\end{ex} 
+This is not compositional in the standard sense because the content of
+the verb phrase is not defined as some operation applied to the
+contents of the verb and the noun phrase, but rather it makes the
+content of the verb phrase be the content of the noun.  Furthermore,
+it requires the verb and determiner utterances be of the specific
+types ``is'' and ``a'' respectively.  This gives \preveg{} the flavour
+of representing a construction type as discussed in a variety of
+approaches to Construction Grammar, see, for example,
+\cite{BoasSag2012}.  We can allow the type corresponding to
+\preveg{} by introducing the update function \nexteg{}.
+\begin{ex} 
+$\lambda
+u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+}}}. \\
+\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cnt}{$u$[2].syn.daughters[2].cnt}{\textit{Ppty}}} 
+\end{ex} 
+We can call this function CnstrIsA (``is-a construction'') and merge
+it with \textit{VP} $\longrightarrow$ \textit{V} \textit{NP}.   Thus
+one of the resources available for English is \nexteg{}.
+\begin{ex} 
+\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} \d{\d{$\wedge$}} CnstrIsA 
+\label{ex:ruleIsA}
+\end{ex} 
+This suggests that a phrase structure and construction based
+approach can be combined within a single framework.  Since we are
+working with a toy fragment where the only verb is \textit{is} and the
+only determiner is \textit{a}, we can make do with \preveg{} as the
+only resource for assigning content to verb-phrases.  In a more
+general grammar we would, of course, require in addition a rule that
+applies the content of the verb to the content of the object
+noun-phrase as in \nexteg{}.
+\begin{ex} 
+\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} \d{\d{$\wedge$}}
+CntForwardApp(\textit{Quant}, \textit{Ppty})  
+\label{ex:VPForwardApp}
+\end{ex} 
+Allowing both resources (\ref{ex:ruleIsA}) and \preveg{} simultaneously raises the issue of what the
+relationship should be between them.  Should the more specific rule
+(\ref{ex:ruleIsA}) take precedence and guarantee that the only content
+associated with the verb phrase \textit{is a conductor} is the
+property which is the content of \textit{conductor}?  Or should the
+verb phrase be ambiguous between this interpretation and the property
+obtained by applying the content of \textit{is} to the content of
+\textit{a conductor}?  
+
+A more pressing issue, perhaps, is what to do about the sentence in
+\nexteg{}.
+\begin{ex} 
+\#A conductor is Dudamel
+\label{ex:acid} 
+\end{ex} 
+We have used the marking `\#' in \preveg{} to indicate that an
+utterance of this sentence would under most, if not all, circumstances
+be considered to be odd, though it is difficult to rule it out as
+ungrammatical, particularly if we are to use something corresponding
+to context-free phrase structure rules as we are.  The oddness of
+\preveg{} may have something to do with the tendency to interpret noun
+phrases with indefinite articles in subject position as generic as in
+\nexteg{}.
+\begin{ex} 
+A conductor is a high-ranking individual in the musical hierarchy 
+\end{ex} 
+(\ref{ex:acid}) can be improved without becoming generic.  Examples
+are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item A conductor to reckon with is Dudamel 
+ 
+\item A conductor to consider is Dudamel
+
+\item A conductor who impresses me as a leader in his generation is
+  Dudamel
+
+\item A conductor I would like to see more often in Gothenburg is Dudamel 
+ 
+\end{subex} 
+   
+\end{ex} 
+This raises a lot of issues which we do not currently have tools to
+deal with.  There is, however, something we can say, if we choose to
+allow the is-a construction interpretation of \textit{is a conductor}.
+The content of the sentence \textit{Dudamel is a conductor} on the
+construction analysis becomes (\ref{ex:diac-simple}), repeated as
+\nexteg{a}, rather than (\ref{ex:diac1}c), repeated as \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{e}{conductor($d$)}} 
+ 
+\item \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $d$}{\textit{Ind}} \\
+          \tfield{e}{be(x)}}}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}} 
+
+\end{subex} 
+\label{ex:diacTwice}    
+\end{ex} 
+If we include the resource (\ref{ex:VPForwardApp}) then the
+content of \textit{is Dudamel} is \nexteg{a} applied to \nexteg{b},
+that is, \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{1em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{2em} $\mathcal{Q}$($\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}} \\
+          \tfield{e}{be(x)}})  
+ 
+\item $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$d$}})
+
+\item  $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$d$, $r_1$.x}{\textit{Ind}} \\
+          \tfield{e}{be(x)}})
+ 
+\end{subex} 
+   
+\end{ex}
+The content of \textit{A conductor is Dudamel} is \nexteg{a} applied
+to \nexteg{b} (identical with \preveg{c}), which is \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}} 
+ 
+\item $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$d$, $r_1$.x}{\textit{Ind}}})
+
+\item \record{\mfield{restr}{$\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{conductor($r$.x)}}}{\textit{Ppty}} \\
+          \mfield{scope}{$\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$d$, $r_1$.x}{\textit{Ind}} \\
+          \tfield{e}{be(x)}})}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{c} is almost exactly the same type as (\ref{ex:diacTwice}b).
+The difference between them is that $d$ is the first restrictor of
+\textit{Ind} in \preveg{c} whereas in (\ref{ex:diacTwice}b) it is
+the second restrictor.   In \preveg{c} we have, for some conductor,
+$c$, \textit{Ind}$_{d,c}$ whereas in (\ref{ex:diacTwice}b) we have
+\textit{Ind}$_{c,d}$.  Thus while an analysis that only uses the content of
+\textit{is} that is based on Montague's original interpretation does
+predict different contents for \textit{Dudamel is a conductor} and
+\textit{a conductor is Dudamel}, the difference between the types
+hardly seems enough to explain the difference in reaction we have to
+the two sentences.  Given the construction analysis for
+\textit{Dudamel is a conductor} we get a markedly different type
+(\ref{ex:diacTwice}a) which
+does not involve existential quantification (even though it is truth
+conditionally equivalent to both the types with existential
+quantification). The only way that  (\ref{ex:diacTwice}a) can be
+expressed according to the resources that we have developed in this
+chapter is by the sentence \textit{Dudamel is a conductor}, using the
+non-compositional construction `CnstrIsA'.  Thus if
+(\ref{ex:diacTwice}a) is the target content and we do not wish to
+express a content involving existential quantification, \textit{a
+  conductor is Dudamel} is not an option.  
+
+We thus have the beginnings of an explanation of the difference in
+acceptability between the two sentences.  It is not the whole story
+since we have not explained why the quantificational readings appear
+odd in these cases.  Note that the distinction we are making between a
+non-quantified reading and a reading involving an existential
+quantification is not available on Montague's \citeyear{Montague1973}
+original approach since the fact that the two contents are
+truth-conditionally equivalent means for Montague that they are
+identical.  The same holds for the kind of analysis discussed in
+\cite{Partee1986} where even though the content may not be built up
+using existential quantification the final result is still the same
+content that would be expressed by using existential quantification
+because of the truth-conditional equivalence.  One might try to
+introduce the distinction we are making by relating utterances to an expression
+in an artificial logical language in addition to the content.  This
+would correspond to the notion of logical form as discussed for
+example by \cite{HeimKratzer1998} and much current work in linguistic
+semantics.  The idea might be that there are two distinct logical
+forms such as \nexteg{} which correspond to identical contents in
+Montague's terms.
+\begin{ex} 
+\begin{subex} 
+ 
+\item conductor(dudamel) 
+ 
+\item $\exists x$ [conductor($x$) $\wedge$ $x$=dudamel] 
+ 
+\end{subex} 
+   
+\end{ex} 
+Here the challenge would be to give an explanatory account of why one
+expression in an artificial language \preveg{a} should be preferred
+over another \preveg{b} when they both express the same content.  An
+alternative is to follow \cite{Lewis1972} (further developed by
+\citealp{Cresswell1985}). The idea here is that we keep a record not
+only of the final content but the way in which that content is
+constructed -- that is we keep a record of the content of each of the syntactic
+constituents of the English sentence and the way these contents are
+combined.  This idea, which goes back to the notion of intensional
+isomorphism introduced by \cite{Carnap1956}, provides enough structure
+to make the distinction required here.  However, there are other
+problems with the proposal which we will take up in
+Chapter~\ref{ch:intensional} when we discuss intensionality. 
+
+@@Do we really want to say that ``ok'' and ``aha'' don't have content?
+
+Since acknowledgements like \textit{aha} and
+\textit{ok} do not have a specified content (\textit{cf.} the function
+`sign$_{\mathit{uc}}$' we used for these words in
+Chapter~\ref{ch:infex}), we do not need a function that specifies
+their content but can make do with the function `Lex' which associates
+them with a sign type in which the content is unspecified.
+
+\section{Building a chart type}
+
+In Chapter~\ref{ch:infex} we made the simplifying assumption that a
+chart was a sign.  Now we have a grammar we need to complicate this
+picture.  We will present here a version of chart parsing as it is
+used in computational linguistics.  For a recent textbook introduction
+to chart parsing see \cite{JurafskyMartin2009}, Chap.~13.  The idea of
+a chart is that it should store all the hypotheses that we make during
+the processing of an utterance and allow us to compute new hypotheses
+to be added to the chart
+on the basis of what is already present in the chart.  We will say
+that a chart is a record and we will use our resources to compute a
+chart type on the basis of utterance events.  We will first go through
+an example of the incremental construction of a chart type for an
+agent processing an utterance of the sentence \textit{Dudamel is a
+  conductor}.  Then we will consider what kind of update functions are
+needed in order to achieve this.  We will, as usual, make the
+simplifying assumption that what we have at bottom is a string of word
+utterances as we are not dealing with the details of phonology.  Thus
+we are giving a simplified view of incremental processing at the word
+level.
+
+Suppose that we have so far heard an utterance of the word
+\textit{Dudamel}.  At this point we will say that the type of the
+chart is \nexteg{}.
+\begin{ex} 
+\record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}}}} 
+\label{ex:Dudamelchart}
+\end{ex} 
+The main event of the chart type (represented by the e-field) breaks
+the phonological event of type ``Dudamel'' down into a string of two
+events, the start and the end of the ``Dudamel''-event.\footnote{These
+  starting and ending events correspond to what are standardly called
+  \textit{vertices} in the chart parsing literature.}  
+
+Why are the arguments to `start' and `end' in the string type prefixed
+by `$\Uparrow^2$'?  Recall from the discussion on
+p.~\pageref{pg:stringsasrecords} that a string of type \nexteg{a} will
+be a record of type \nexteg{b}.  
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \smallrecord{\smalltfield{e$_1$}{$T_1$}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{$T_2$}}
+ 
+\item
+  \record{\tfield{t$_0$}{\smallrecord{\smalltfield{e$_1$}{$T_1$}}}\\
+          \tfield{t$_1$}{\smallrecord{\smalltfield{e$_1$}{$T_2$}}}}
+ 
+\end{subex} 
+ 
+
+   
+\end{ex} 
+Thus a record of type (\ref{ex:Dudamelchart}) will be of the type
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e}{\smallrecord{\smalltfield{t$_0$}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)}}}\\
+                                \smalltfield{t$_1$}{\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}}}}}} 
+\end{ex} 
+Thus the arguments to the `start' and `end' predicates are to be found
+two levels up.  
+
+Thus (\ref{ex:Dudamelchart})
+records that we have observed an event of the phonological type
+``Dudamel'' and an event consisting of the start of that event
+followed by the end of that event.  Given that we have the resource
+the resource Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$) available
+(see Appendix~\ref{app:gramrules}), we can update \preveg{} to
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)}}}} 
+\end{ex} 
+That is, we add the information to the chart that there is an event
+(labelled `e$_2$') of
+the type which is the sign type corresponding to ``Dudamel'' and that
+the event which is the speech event referred to in that sign type is
+the utterance event, labelled by `e$_1$'.  Furthermore the duration of
+the event labelled `e$_2$' is the same as that labelled `e$_1$'.  One
+could discuss where there are two events which are contemporaneous or whether there is a single utterance event
+which is of both types.  The fact that we have presented two fields
+labelled `e$_1$' and `e$_2$' does not of itself prevent the two fields
+containing the same event.  However, the fact that we have analyzed
+the sign as containing the speech event as a part (corresponding to
+the basic intuition that signs are pairings of utterances and
+contents) decides the issue for us.  A sign is a record (a labelled
+set) which models a situation and we are not allowing sets to be members of themselves.  Thus
+records cannot be a part of themselves.\footnote{`e$_1$' and `e$_2$'
+  correspond to what are known as \textit{passive edges} in the chart
+  parsing literature.  They represent information about potential
+  constituents that have been found.}   
+
+The type Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$) is a subtype of
+\textit{NP}.  Thus the event labelled `e$_2$' could be the first item
+in a string that would be appropriate for the function which we have
+abbreviated as \nexteg{a} (see Appendix~\ref{app:gramrules}) which has the type \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$) 
+ 
+\item (\textit{NP}$^{\frown}$\textit{VP} $\rightarrow$ \textit{Type}) 
+ 
+\end{subex} 
+   
+\end{ex} 
+Thus in a way that is similar to the prediction by the dog in
+Chapter~\ref{ch:percint} that it should run after the stick which is
+help up and the
+kind of event that this will contribute to is a game of fetch so on
+observing a noun-phrase event we can predict that it might be followed
+by a verb phrase event thus creating a sentence event.  We will add a
+hypothesis event to our chart which takes place at the end of the
+noun-phrase event as in \nexteg{}.\footnote{In terms of the traditional chart parsing
+  terminology this corresponds to an \textit{active edge} involving a
+  \textit{dotted rule}.  The fact that the addition of this type to
+  the chart type is triggered by finding something of an appropriate
+  type to be the leftmost element in a string the would be an
+  appropriate argument to the rule corresponds to what is called a
+  \textit{left-corner} parsing strategy.} 
+\begin{ex} 
+\record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+       \tfield{e$_3$}{\smallrecord{\smallmfield{rule}{\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$)}{(\textit{NP}$^{\frown}$\textit{VP}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_2$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{VP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}} \\  
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
+         \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)}}}}  
+\end{ex}
+In the e$_3$-field the  `rule'-field is for a syntactic rule, that is,
+a function from a string of signs of a given type to a type.  The
+`fnd'-field is for a sign or string of signs so far found which match an initial
+segment of a string of the type required by the rule.  The `req'-field
+is the type of the remaining string required to satisfy the rule as
+expressed in the `e'-field.  This hypothesis event both starts and
+ends at the end of the event of the noun-phrase event
+e$_2$.\footnote{With respect to the word string event labelled by `e',
+  it is a \textit{punctual} event.} 
+
+We can now progress to the next word in the input string as shown in
+\nexteg{}.
+\begin{ex} 
+ \record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+       \tfield{e$_3$}{\smallrecord{\smallmfield{rule}{\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$)}{(\textit{NP}$^{\frown}$\textit{VP}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_2$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{VP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_4$}{``is''} \\  
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
+         \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)} \\
+         \smalltfield{e$_4$}{start($\Uparrow^2$e$_4$)}}$^{\frown}$\smallrecord{\smalltfield{e$_4$}{end($\Uparrow^2$e$_4$)}}}}   
+\end{ex} 
+Note that the start of the ``is''-event is aligned with the end of
+``Dudamel''-event.  This allows for the fact that there is no break
+between the words and that the exact pronunciation of the final /l/ in
+``Dudamel'' is influenced by the pronuniciation of the initial /i/ in
+``is'' through coarticulation.\footnote{It also means that the number
+  of elements in the string labelled `e' is the same as the number of
+  vertices in a standard chart.}
+
+We can now go through similar procedures as we did for
+\textit{Dudamel} adding both a lexical event based on our lexical
+resources and a hypothesis event based on the only rule for
+strings beginning with a $V$ that we have in our resources. The result
+of these two steps is given in \nexteg{}.
+\begin{ex} 
+ \record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+       \tfield{e$_3$}{\smallrecord{\smallmfield{rule}{\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$)}{(\textit{NP}$^{\frown}$\textit{VP}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_2$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{VP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_4$}{``is''} \\
+\tfield{e$_5$}{Lex$_{\mathrm{be}}$(``is'')\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_4$}{\textit{Phon}}}
+         }
+        }} \\
+\tfield{e$_6$}{\smallrecord{\smallmfield{rule}{\textit{VP} $\longrightarrow$ \lb{\textit{V}}{``is''}
+\lb{\textit{NP}}{\lb{\textit{Det}}{``a''} \textit{N}} $\mid$
+\textit{N}$'$}{\\ 
+\hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
+\hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+}}} \\
+\hspace*{12em}$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{NP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\  
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
+         \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)} \\
+         \smalltfield{e$_4$}{start($\Uparrow^2$e$_4$)} \\
+         \smalltfield{e$_5$}{start($\Uparrow^2$e$_5$)}}$^{\frown}$\smallrecord{\smalltfield{e$_4$}{end($\Uparrow^2$e$_4$)}\\
+                                                    \smalltfield{e$_5$}{end($\Uparrow^2$e$_5$)}\\
+                                                  \smalltfield{e$_6$}{start($\Uparrow^3$e$_6$)$^{\frown}$end($\Uparrow^3$e$_6$)}}}}  
+\end{ex} 
+Now we can add \textit{a} and \textit{conductor} in a similar way with
+the result shown in \nexteg{}.
+\begin{ex} 
+ \record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+       \tfield{e$_3$}{\smallrecord{\smallmfield{rule}{\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$)}{(\textit{NP}$^{\frown}$\textit{VP}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_2$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{VP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_4$}{``is''} \\
+\tfield{e$_5$}{Lex$_{\mathrm{be}}$(``is'')\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_4$}{\textit{Phon}}}
+         }
+        }} \\
+\tfield{e$_6$}{\smallrecord{\smallmfield{rule}{\textit{VP} $\longrightarrow$ \lb{\textit{V}}{``is''}
+\lb{\textit{NP}}{\lb{\textit{Det}}{``a''} \textit{N}} $\mid$
+\textit{N}$'$}{\\ 
+\hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
+\hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+}}} \\
+\hspace*{12em}$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{NP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_7$}{``a''} \\
+\tfield{e$_8$}{Lex$_{\mathrm{IndefArt}}$(``a'') }\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_7$}{\textit{Phon}}}
+         }
+        } \\ 
+\tfield{e$_9$}{\smallrecord{\smallmfield{rule}{\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} $\mid$
+\textit{Det}$'$(\textit{N}$'$)}{(\textit{Det}$^{\frown}$\textit{N}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_8$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{N}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_{10}$}{``conductor''}\\ 
+\tfield{e$_{11}$}{Lex$_{\mathrm{CommonNoun}}$(``conductor'', conductor)\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_{10}$}{\textit{Phon}}}
+         }
+        }}\\
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
+         \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)} \\
+         \smalltfield{e$_4$}{start($\Uparrow^2$e$_4$)} \\
+         \smalltfield{e$_5$}{start($\Uparrow^2$e$_5$)}}$^{\frown}$\smallrecord{\smalltfield{e$_4$}{end($\Uparrow^2$e$_4$)}\\
+                                                    \smalltfield{e$_5$}{end($\Uparrow^2$e$_5$)}\\
+                                                  \smalltfield{e$_6$}{start($\Uparrow^3$e$_6$)$^{\frown}$end($\Uparrow^3$e$_6$)}\\
+                                                  \smalltfield{e$_7$}{start($\Uparrow^2$e$_7$)}\\
+                                                  \smalltfield{e$_8$}{start($\Uparrow^2$e$_8$)}}$^{\frown}$\\
+& & \hspace{2em}\smallrecord{\smalltfield{e$_7$}{end($\Uparrow^2$e$_7$)}\\
+                             \smalltfield{e$_8$}{end($\Uparrow^2$e$_8$)}\\
+                             \smalltfield{e$_9$}{start($\Uparrow^3$e$_9$)$^{\frown}$end($\Uparrow^3$e$_9$)}\\
+                             \smalltfield{e$_{10}$}{start($\Uparrow^2$e$_{10}$)}\\
+                             \smalltfield{e$_{11}$}{start($\Uparrow^2$e$_{11}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_{10}$}{end($\Uparrow^2$e$_{10}$)}\\
+                                                                                           \smalltfield{e$_{11}$}{end($\Uparrow^2$e$_{11}$)}}}}  
+\end{ex}     
+Note that there is no possibility of adding a hypothesis event based
+on the utterance of \textit{conductor} given the resources we have
+since our small grammar does not include a phrase structure rule for
+strings whose first element is of type \textit{N}.  However, now for
+the first time we have found something which fulfills one of our
+hypotheses.  The hypothesis event labelled `e$_9$' has the type
+\textit{N} in its `req'-field.  The event labelled `e$_{11}$' is
+required to be of a subtype of \textit{N} and thus fulfils the
+requirement of `e$_9$'.  Furthermore, the start of e$_{11}$ is aligned
+with the end (and also the start) of `e$_9$'.  This means that we can
+update the chart-type by adding a new field for an event of the type
+returned by applying `e$_9$.rule' (a function) to the string
+e$_9$.fnd$^{\frown}$e$_{11}$.  The start of this new \textit{NP}-event
+will be aligned with the start of e$_9$.fnd (that is, e$_8$).  The end
+of the new event is aligned with the end of e$_{11}$.  The resulting
+chart-type is given in \nexteg{}.
+\begin{ex} 
+ \record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+       \tfield{e$_3$}{\smallrecord{\smallmfield{rule}{\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$)}{(\textit{NP}$^{\frown}$\textit{VP}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_2$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{VP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_4$}{``is''} \\
+\tfield{e$_5$}{Lex$_{\mathrm{be}}$(``is'')\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_4$}{\textit{Phon}}}
+         }
+        }} \\
+\tfield{e$_6$}{\smallrecord{\smallmfield{rule}{\textit{VP} $\longrightarrow$ \lb{\textit{V}}{``is''}
+\lb{\textit{NP}}{\lb{\textit{Det}}{``a''} \textit{N}} $\mid$
+\textit{N}$'$}{\\ 
+\hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
+\hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+}}} \\
+\hspace*{12em}$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{NP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_7$}{``a''} \\
+\tfield{e$_8$}{Lex$_{\mathrm{IndefArt}}$(``a'') }\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_7$}{\textit{Phon}}}
+         }
+        } \\ 
+\tfield{e$_9$}{\smallrecord{\smallmfield{rule}{\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} $\mid$
+\textit{Det}$'$(\textit{N}$'$)}{(\textit{Det}$^{\frown}$\textit{N}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_8$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{N}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_{10}$}{``conductor''}\\ 
+\tfield{e$_{11}$}{Lex$_{\mathrm{CommonNoun}}$(``conductor'', conductor)\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_{10}$}{\textit{Phon}}}
+         }
+        }}\\
+\tfield{e$_{12}$}{e$_9$.rule(e$_9$.fnd$^{\frown}$e$_{11}$)}\\
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
+         \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)} \\
+         \smalltfield{e$_4$}{start($\Uparrow^2$e$_4$)} \\
+         \smalltfield{e$_5$}{start($\Uparrow^2$e$_5$)}}$^{\frown}$\smallrecord{\smalltfield{e$_4$}{end($\Uparrow^2$e$_4$)}\\
+                                                    \smalltfield{e$_5$}{end($\Uparrow^2$e$_5$)}\\
+                                                  \smalltfield{e$_6$}{start($\Uparrow^3$e$_6$)$^{\frown}$end($\Uparrow^3$e$_6$)}\\
+                                                  \smalltfield{e$_7$}{start($\Uparrow^2$e$_7$)}\\
+                                                  \smalltfield{e$_8$}{start($\Uparrow^2$e$_8$)}\\
+                                                  \smalltfield{e$_{12}$}{start($\Uparrow^2$e$_{12}$)}}$^{\frown}$\\
+& & \hspace{2em}\smallrecord{\smalltfield{e$_7$}{end($\Uparrow^2$e$_7$)}\\
+                             \smalltfield{e$_8$}{end($\Uparrow^2$e$_8$)}\\
+                             \smalltfield{e$_9$}{start($\Uparrow^3$e$_9$)$^{\frown}$end($\Uparrow^3$e$_9$)}\\
+                             \smalltfield{e$_{10}$}{start($\Uparrow^2$e$_{10}$)}\\
+                             \smalltfield{e$_{11}$}{start($\Uparrow^2$e$_{11}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_{10}$}{end($\Uparrow^2$e$_{10}$)}\\
+                                                                                           \smalltfield{e$_{11}$}{end($\Uparrow^2$e$_{11}$)}\\
+                                                                                           \smalltfield{e$_{12}$}{end($\Uparrow^2$e$_{12}$)}}}}  
+\end{ex}
+
+The event labelled `e$_{12}$' will be of type \textit{NP} and thus
+satisfy the requirement of e$_6$.  By carrying out the same procedure
+as before we will obtain a new event (labelled `e$_{13}$') of type
+\textit{VP} which will satisfy the requirement of `e$_3$' which will
+allow us to add a new event (labelled `e$_{14}$') of type \textit{S}
+whose start is at the beginning of the string labelled `e' and whose
+end is at the end of that string.  The final chart type is given in
+\nexteg{}.
+\begin{ex} 
+ \record{\tfield{e$_1$}{``Dudamel''} \\
+        \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
+          \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_1$}{\textit{Phon}}}
+         }
+        }} \\
+       \tfield{e$_3$}{\smallrecord{\smallmfield{rule}{\textit{S} $\longrightarrow$ \textit{NP} \textit{VP} $\mid$
+\textit{NP}$'$(\textit{VP}$'$)}{(\textit{NP}$^{\frown}$\textit{VP}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_2$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{VP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_4$}{``is''} \\
+\tfield{e$_5$}{Lex$_{\mathrm{be}}$(``is'')\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_4$}{\textit{Phon}}}
+         }
+        }} \\
+\tfield{e$_6$}{\smallrecord{\smallmfield{rule}{\textit{VP} $\longrightarrow$ \lb{\textit{V}}{``is''}
+\lb{\textit{NP}}{\lb{\textit{Det}}{``a''} \textit{N}} $\mid$
+\textit{N}$'$}{\\ 
+\hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
+\hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+}}} \\
+\hspace*{12em}$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{NP}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_7$}{``a''} \\
+\tfield{e$_8$}{Lex$_{\mathrm{IndefArt}}$(``a'') }\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_7$}{\textit{Phon}}}
+         }
+        } \\ 
+\tfield{e$_9$}{\smallrecord{\smallmfield{rule}{\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} $\mid$
+\textit{Det}$'$(\textit{N}$'$)}{(\textit{Det}$^{\frown}$\textit{N}
+$\rightarrow$ \textit{Type})} \\
+                                   \smallmfield{fnd}{$\Uparrow$e$_8$}{\textit{Sign}}
+                                   \\
+                                   \smallmfield{req}{\textit{N}}{\textit{Type}}
+                                     \\
+                                   \smalltfield{e}{required(req,rule)}}}
+                               \\
+\tfield{e$_{10}$}{``conductor''}\\ 
+\tfield{e$_{11}$}{Lex$_{\mathrm{CommonNoun}}$(``conductor'', conductor)\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$\Uparrow^2$e$_{10}$}{\textit{Phon}}}
+         }
+        }}\\
+\tfield{e$_{12}$}{e$_9$.rule(e$_9$.fnd$^{\frown}$e$_{11}$)}\\
+\tfield{e$_{13}$}{e$_6$.rule(e$_6$.fnd$^{\frown}$e$_{12}$)}\\
+\tfield{e$_{14}$}{e$_3$.rule(e$_3$.fnd$^{\frown}$e$_{13}$)}\\
+        \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)} \\
+                                \smalltfield{e$_2$}{start($\Uparrow^2$e$_2$)}\\
+                                \smalltfield{e$_{14}$}{start($\Uparrow^2$e$_{14}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}
+                              \\
+         \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
+         \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)} \\
+         \smalltfield{e$_4$}{start($\Uparrow^2$e$_4$)} \\
+         \smalltfield{e$_5$}{start($\Uparrow^2$e$_5$)}\\
+         \smalltfield{e$_{13}$}{start($\Uparrow^2$e$_{13}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_4$}{end($\Uparrow^2$e$_4$)}\\
+                                                    \smalltfield{e$_5$}{end($\Uparrow^2$e$_5$)}\\
+                                                  \smalltfield{e$_6$}{start($\Uparrow^3$e$_6$)$^{\frown}$end($\Uparrow^3$e$_6$)}\\
+                                                  \smalltfield{e$_7$}{start($\Uparrow^2$e$_7$)}\\
+                                                  \smalltfield{e$_8$}{start($\Uparrow^2$e$_8$)}\\
+                                                  \smalltfield{e$_{12}$}{start($\Uparrow^2$e$_{12}$)}}$^{\frown}$\\
+& & \hspace{2em}\smallrecord{\smalltfield{e$_7$}{end($\Uparrow^2$e$_7$)}\\
+                             \smalltfield{e$_8$}{end($\Uparrow^2$e$_8$)}\\
+                             \smalltfield{e$_9$}{start($\Uparrow^3$e$_9$)$^{\frown}$end($\Uparrow^3$e$_9$)}\\
+                             \smalltfield{e$_{10}$}{start($\Uparrow^2$e$_{10}$)}\\
+                             \smalltfield{e$_{11}$}{start($\Uparrow^2$e$_{11}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_{10}$}{end($\Uparrow^2$e$_{10}$)}\\
+                                                                                           \smalltfield{e$_{11}$}{end($\Uparrow^2$e$_{11}$)}\\
+                                                                                           \smalltfield{e$_{12}$}{end($\Uparrow^2$e$_{12}$)}\\
+                                                                                           \smalltfield{e$_{13}$}{end($\Uparrow^2$e$_{13}$)}\\
+                                                                                           \smalltfield{e$_{14}$}{end($\Uparrow^2$e$_{14}$)}}}}  
+\end{ex}
+
+We now need to turn our attention to the update functions that will
+achieve this building of the chart type.  We will introduce a field
+`current-utterance' into the field `shared' on the gameboard.  This
+field will be used for the incremental construction of a chart during
+the course of an utterance.  We will not at this point include a
+`move'-field here but reserve that for the field `latest-utterance',
+though one could, of course, consider an alternative with incremental hypotheses about
+moves that have or about to be made formed on the basis of the
+utterance so far.  Here, however, we will restrict ourselves to the
+mechanisms involved in the construction of the chart.  We will add a
+field to the gameboard `shared.current-utterance' which will be used
+to store the chart during the course of processing an utterance.  The
+new type \textit{InfoState} is given in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}} \\
+        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}} \\
+                                                                  \smalltfield{chart}{\textit{RecType}}
+                                                                \\
+                                                                  \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
+                               \smalltfield{current-utterance}{\smallrecord{\smalltfield{chart}{\textit{RecType}}}} \\                               
+                               \smalltfield{commitments}{\textit{RecType}}}}} 
+\end{ex}
+The initial type \textit{InitInfoState} is now \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}} \\
+        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+\smalltfield{current-utterance}{\smallrecord{\smallmfield{chart}{\textit{Rec}}{\textit{RecType}}}} \\
+                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+\end{ex} 
+
+We first address update functions for integrating lexical events into
+the chart.  We introduce update functions defined by
+\textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
+$T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
+assigns to the
+phonological event perceived and $T_{\mathrm{chart}}$ is the type the
+agent assigns to the current chart.  This is governed by the clauses
+in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T_{\mathrm{phon}}$ is a lexical phonological resource and
+  $T_{\mathrm{chart}}$ is \textit{Rec}, then
+  \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
+  $T_{\mathrm{chart}}$) is
+
+$\lambda
+r$:\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
+\\
+\hspace*{1em} $\lambda u$:$T_{\mathrm{phon}}$ . \\
+\hspace*{2em}
+\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_1$}{$T_{\mathrm{phon}}$}\\
+                                                                                                                        \smalltfield{e}{\smallrecord{\smalltfield{e$_1$}{start(e$_1$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end(e$_1$)}}}}}}}}}}
+
+
+ 
+\item If $T_{\mathrm{phon}}$ is a lexical phonological resource,
+  $T_{\mathrm{chart}}$ is a record type such that `e$_n$' is the maximal
+  distinguished label `e$_i$' in $T_{\mathrm{chart}}$ and
+  $T_{\mathrm{chart}}$ is
+  $T_1$\d{$\wedge$}\smallrecord{\smalltfield{e}{${T_2}^{\frown}T_3$}}
+  where $T_1$ is a record type, $T_2$ is a string type and
+  $T_3\sqsubseteq$ \smallrecord{\smalltfield{e$_n$}{end(e$_n$)}}, \\
+then
+  \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
+  $T_{\mathrm{chart}}$) is
+
+  $\lambda
+r$:\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
+\\
+\hspace*{1em} $\lambda u$:$T_{\mathrm{phon}}$ . \\
+\hspace*{2em}
+\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_{n+1}$}{$T_{\mathrm{phon}}$}\\
+                                                                                                                        \smalltfield{e}{${T_2}^{\frown}$($T_3$
+                                                                                                                          \d{$\wedge$}
+\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$\\ \hspace*{1em}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}}}}}}}}}}
+ 
+\end{subex} 
+   
+\end{ex} 
+The licensing condition associated with chart update functions is the
+same as for other update functions (see Appendix~\ref{app:updatefuns}).
+
+We now need update rules that will add signs to the chart which are
+derived from the lexical resources for signs associated with
+phonological types.  For the lexical resources associated with this
+chapter in Appendix~\ref{app:lexeng} we will define the notion of a
+resource lexical sign type based on a phonological type as in
+\nexteg{}.
+\begin{ex} 
+$T_{\mathrm{lex}}$ is a \textit{resource lexical sign type based on
+  phonological type $T_{\mathrm{phon}}$ according to a
+  collection of resources $R$} just in case $T_{\mathrm{lex}}$ is in
+$R$ and is identical with either
+Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$, $a$), for some
+$a$:\textit{Ind},  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+$p$), for some predicate $p$,
+Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$) or Lex$_{\mathrm{be}}$($T_{\mathrm{phon}}$)
+\end{ex} 
+We introduce update functions for integrating such lexical resources
+into the chart.  These update functions are defined by
+\textbf{IntegrateLexicalResources}($T_{\mathrm{phon}}$,
+$T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
+assigns to the phonological event perceived and $T_{\mathrm{chart}}$
+is the type the agent assigns to the current chart.  This is governed
+by the clause in \nexteg{}.
+\begin{ex} 
+If 
+\begin{enumerate}
+\item $T_{\mathrm{phon}}$ is a resource phonological type
+\item $T_{\mathrm{event}}$ is either
+${T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ or
+${T_{\mathrm{evpref}}}^{\frown}{T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ 
+\hspace*{1em}(where $T_{\mathrm{start}}\sqsubseteq$
+\smallrecord{\smalltfield{e$_k$}{start(e$_k$)}},
+$T_{\mathrm{end}}\sqsubseteq$
+\smallrecord{\smalltfield{e$_k$}{end(e$_k$)}} and
+$T_{\mathrm{evpref}}$, ``event prefix'', is a type)
+\label{ex:integlexresTevent} 
+\item $T_{\mathrm{chart}}\sqsubseteq$
+  \smallrecord{\smalltfield{e$_k$}{$T_{\mathrm{phon}}$}\\
+               \smalltfield{e}{$T_{\mathrm{event}}$}} whose maximal
+             `e$_i$' label is `e$_n$' 
+\label{ex:integlexresTchart}
+\item $T_{\mathrm{sign}}$ is a resource lexical sign type based on
+$T_{\mathrm{phon}}$ such that for no $j$
+\begin{enumerate}
+\item $T_{\mathrm{chart}}\sqsubseteq$
+\smallrecord{\smalltfield{e$_j$}{$T_{\mathrm{sign}}$}},
+\item   $T_{\mathrm{start}}\sqsubseteq$
+  \smallrecord{\smalltfield{e$_j$}{start(e$_j$)}} and 
+\item   $T_{\mathrm{end}}\sqsubseteq$
+  \smallrecord{\smalltfield{e$_j$}{end(e$_j$)}} 
+\end{enumerate}
+\label{ex:integlexresTsign}
+\end{enumerate}
+then \textbf{IntegrateLexicalResources}($T_{\mathrm{phon}}$,
+$T_{\mathrm{chart}}$) is 
+
+\medskip
+
+$\lambda
+r:$\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
+. \\
+\hspace*{1em}\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_{n+1}$}{$T_{\mathrm{sign}}$}\\
+                                                                                                                                     \smalltfield{e}{$T_{\mathrm{newevent}}$}}}}}}}}
+
+\medskip                                                                                                                       
+
+where $T_{\mathrm{newevent}}$ is 
+\begin{enumerate}
+\item []\textbf{either} 
+($T_{\mathrm{start}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}})
+
+\item []\textbf{or} 
+${T_{\mathrm{evpref}}}^{\frown}$($T_{\mathrm{start}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}})
+\end{enumerate}
+depending on whether $T_{\mathrm{event}}$ is ${T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ or
+${T_{\mathrm{evpref}}}^{\frown}{T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ 
+\label{ex:integlexres}
+\end{ex} 
+There are several complexities in \preveg{} which need some
+explanation.  Firstly, notice that the update functions generated by
+\textbf{IntegrateLexicalResources} are of the form \nexteg{}.
+\begin{ex} 
+$\lambda r$:$T_1$ . $T_2$ 
+\end{ex} 
+That is, they are \textit{tacit} update functions which do not require
+a second event argument.  They map directly from an information state
+of a certain type to a type for the new information state.  An update
+using this update function is thus not driven by an agent-external
+event, merely by the state that the agent is currently in. An
+important issue in the design of tacit update functions is to develop
+mechanisms to prevent them from applying indefinitely many times
+adding the same information repeatedly and getting the agent carrying
+out the updates into a infinite loop.  We will discuss how this has
+been avoided here below.
+
+Condition~\ref{ex:integlexresTevent} in (\ref{ex:integlexres}) allows
+the `e'-field in the current chart to contain either a concatenation
+of just two events or to be a string of events ending in two events.
+The two final events of the event string are required to include the
+starting and ending respectively of some particular event labelled by
+`e$_k$' (for some natural number $k$).  Note that other things can
+also be going on in these two final events as indicated by the use of
+subtyping to characterize $T_{\mathrm{start}}$ and $T_{\mathrm{end}}$
+here.
+
+Condition~\ref{ex:integlexresTchart} in (\ref{ex:integlexres})
+requires that the event labelled `e$_k$' in the current information
+state is of the phonological type which we are going to use to construct
+the sign which we are going to add to the chart.  We might have required
+`e$_k$' to be the maximal `e$_i$', that is, we might have required
+that the field labelled `e$_k$' was the last to have been added.  This
+would have been one way of avoiding an infinite loop, since once we
+have added the new field with the sign type, `e$_k$' would no longer
+be maximal and \textbf{IntegrateLexicalResources} would not become
+applicable again until a further lexical event was entered into the
+chart.  This would in fact have worked given the restricted collection
+of resources we are considering in this chapter, since they only allow
+for one sign type to be associated with any phonological type
+corresponding to a word.  In general, this will not be the case since
+we want to allow for ambiguous words like \textit{bank} and
+\textit{can} to be associated with different sign types and we want to
+allow for all of the alternative sign types to be added to the same
+chart.  For this reason we want \textbf{IntegrateLexicalResources} to
+apply even if `e$_k$' is not maximal.
+
+As condition~\ref{ex:integlexresTchart} does not prevent looping we
+introduce a mechanism that will prevent it in
+condition~\ref{ex:integlexresTsign} in (\ref{ex:integlexres})
+instead.  This introduces a sign type based on the relevant
+phonological type which is going to be used for the update.  But it
+requires that the sign type has not already be introduced on the chart
+with the start and end of the sign at the end of the event string we
+are considering.  (We do not wish to prevent it having be associated
+with a previous part of the event, of course, since the same word can
+occur more than once in an utterance.)
+
+After integrating lexical sign types into the chart, the next step is to
+integrate rules from our resources that apply to strings which could
+begin with a lexical sign of this type.  We will use
+\textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$) to
+generate such update rules.  This is governed by the clause in
+\nexteg{}.
+\begin{ex} 
+If
+\begin{enumerate}
+\item $T_{\mathrm{chart}}$ $\sqsubseteq$ 
+\smallrecord{\smalltfield{e$_k$}{$T_{\mathrm{sign}}$}\\
+             \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}T_{\mathrm{end}}$}}
+
+where: 
+\begin{enumerate}
+
+\item [] $T_{\mathrm{sign}}$ $\sqsubseteq$ $T_{\mathrm{cat}}$
+($T_{\mathrm{cat}}$ is one of \textit{NP}, \textit{VP}, \ldots)
+
+\item [] $T_{\mathrm{end}}$ $\sqsubseteq$ 
+ \smallrecord{\smalltfield{e$_k$}{end(e$_k$)}}
+\end{enumerate}
+
+
+\item `e$_i$' max in $T_{\mathrm{chart}}$ is `e$_n$'
+
+\item $f_{\mathrm{rule}} :
+  (({T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type})$
+  where $T_{\mathrm{sign}}\sqsubseteq T_1$
+
+\item there is no $l$ such that 
+\begin{enumerate}
+\item []$T_{\mathrm{chart}}$ $\sqsubseteq$ 
+\smallrecord{\smalltfield{e$_l$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{((${T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type}$)}}}
+  \\
+\smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}$\smallrecord{\smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)$^{\frown}$end($\Uparrow^3$e$_l$)}}}}
+\end{enumerate}
+\end{enumerate}
+
+then \textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$)
+is
+
+$\lambda r$:$T_{\mathrm{chart}}$ . \\
+\hspace*{1em}
+\smallrecord{\smallmfield{e$_k$}{$r$.e$_k$}{$T_{\mathrm{sign}}$}\\
+             \smalltfield{e$_{n+1}$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{$(({T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type})$}\\
+                                                 \smallmfield{fnd}{$\Uparrow$e$_k$}{\textit{Sign}}\\
+                                                 \smallmfield{req}{${T_2}^{\frown}\ldots^{\frown}T_m$}{\textit{Type}}\\
+                                                 \smalltfield{e}{required(req,rule)}}}\\
+             \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)$^{\frown}$end($\Uparrow^3$e$_{n+1}$)}})}}
+
+\end{ex}
+
+Condition~1 in \preveg{} identifies a category field in the chart
+whose event is the latest event in the event string which has been
+processed.  Condition~2 identifies the label of the latest addition to
+the chart so that it can be incremented for what is now going to be
+added.  Condition~3 identifies a rule whose ``left corner'' ($T_1$) is
+a supertype of the type in the category field and Condition~4 requires
+that this rule has not already been added to the chart and related to
+the current final event in the event string --- this in order to
+prevent an infinite loop.  The result of
+\mbox{\textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$)} is
+then a function which adds a new field to the chart which contains a
+record of the rule, what has so far been found matching the ``left
+corner'' of the rule (that is, the category field that has been
+identified by Condition~1), and what is still required in order for the
+rule to be fully satisfied (that is, that is the type of strings
+required by the rule minus the ``left corner'').  Finally, the new
+event is added as both starting and ending at the current end of the
+event string (that is, it does not extend the length of the event
+string, but the new event starts and ends simultaneously with the end
+of the event matching the ``left corner'' of the rule.\footnote{The fact that
+the new event has a non-empty requirement for future events means that
+it corresponds to what is known in the chart parsing literature as an
+active edge and the new event encodes a dotted rule.}
+
+The final kind of update functions that we need in order to build charts
+involves combining an event with a non-empty requirement with an event
+of a type matching the requirement whose start coincides with the end
+of the first event.  In general there are two variants of such update
+functions that we need: one for the case where what is required is a
+string of category signs and one for the case where what is required
+is a single category sign.  In the first case we need to create a new
+event with a requirement which is the remainder of the requirement
+after removing the left corner of the original requirement and a found
+string which concatenates the found event at the end of the original
+found event string.  In the second case we need to add an event of the type
+which results from applying the rule to the concatenation of the found
+event to
+original found event string. As we only have binary rules in our small
+grammar the first case will not be necessary as we will only introduce
+a rule onto the chart when we have found an event matching its first
+element and the requirement result from this addition will thus be a
+single event of a given category type.  We will thus only introduce
+update functions for the second case.  We will use
+\textbf{Combine}($T_{\mathrm{chart}}$, $\ell_1$, $\ell_2$) to generate
+such update rules.  This is governed by the clause in \nexteg{}.
+\begin{ex} 
+If
+\begin{enumerate} 
+ 
+\item $T_{\mathrm{chart}}$ $\sqsubseteq$ 
+\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+             \smalltfield{e$_k$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}
+                 \\
+                                              \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}
+                                              \\
+                                              \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
+             \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+             \smalltfield{e}{${T_1}^{\frown}$\smallrecord{\smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}}$^{\frown}{T_2}^{\frown}$ \\
+                                             \hspace*{2.5em}\smallrecord{\smalltfield{e$_f$}{end($\Uparrow^3$e$_f$)}\\
+                                                                      \smalltfield{e$_k$}{start($\Uparrow^3${e$_k$})$^{\frown}$end($\Uparrow^3$e$_k$)}
+                               \\
+                                                                      \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}$^{\frown}{T_3}^{\frown}$ \\
+                             \hspace*{2.5em}\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}}$^{\frown}{T_4}$}}
+
+where
+
+\begin{enumerate} 
+ 
+\item [] $T_{\mathrm{sign}_1}$, $T_{\mathrm{sign}_2}$ and
+  $T_{\mathrm{sign}_3}$ are subtypes of one of \textit{NP},
+  \textit{VP}, \ldots, that is, they are types of category signs.
+
+\item [] $T_{\mathrm{sign}_3}$ $\sqsubseteq$ $T_{\mathrm{sign}_2}$
+ 
+\item [] $T$ is a type of strings of category signs
+ 
+ 
+\end{enumerate} 
+   
+ 
+\item `e$_i$' max in $T_{\mathrm{chart}}$ is `e$_n$'
+
+\item There is no $i$ such that
+
+\begin{enumerate}
+\item []$T_{\mathrm{chart}}\ \sqsubseteq$ 
+\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+             \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+             \smalltfield{e$_i$}{$f_{\mathrm{rule}}$({e$_f$}$^{\frown}$e$_l$)} \\
+             \smalltfield{e}{{\textit{Rec}$^*$}$^{\frown}$\smallrecord{\smalltfield{e$_i$}{start($\Uparrow$e$_i$)}
+                 \\
+                                                                    \smalltfield{e$_f$}{start($\Uparrow$e$_f$)}}$^{\frown}$\textit{Rec}$^*$}}
+\end{enumerate}
+ 
+\end{enumerate}
+
+then \textbf{Compose}($T_{\mathrm{chart}}$, e$_k$, e$_l$) is
+
+$\lambda r$:$T_{\mathrm{chart}}$ . \\
+\hspace*{1em}\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+                          \smalltfield{e$_k$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}
+                 \\
+                                                           \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}
+                                              \\
+                                                           \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
+             \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+                          \smalltfield{e$_{n+1}$}{$r$.e$_k$.rule({$r$.e$_f$}$^{\frown}r$.e$_l$)}
+    \\
+                          \smalltfield{e}{${T_1}^{\frown}$\smallrecord{\smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}\\
+                                                                      \smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)}}$^{\frown}{T_2}^{\frown}$\smallrecord{\smalltfield{e$_k$}{start($\Uparrow^3$e$_k$)$^{\frown}$end($\Uparrow^3$e$_k$)}\\
+                                                                                                                                                              \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}\\\hspace*{3em}$^{\frown}{T_3}^{\frown}$\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}\\
+                                                               \smalltfield{e$_{n+1}$}{end($\Uparrow^3$e$_{n+1}$)}}$^{\frown}T_4$}} 
+   
+\end{ex} 
+Condition~1 in \preveg{} requires that the chart to be updated has a
+rule event labelled `e$_k$' where the found event is labelled `e$_f$'
+and that there is an event `e$_l$', starting at the end of `e$_f$',
+simultaneously with `e$_k$'.  The type specified for `e$_l$' must be a
+subtype of the type identified as the required type in `e$_k$', that
+is $T_{\mathrm{sign}_2}$.
+
+Condition~2 identifies the maximum event index in the chart as $n$.
+
+Condition~3 requires that the result of applying the rule to the event
+string {e$_f$}$^{\frown}$e$_l$ has not already been added to the
+chart.  (This will prevent the creation of an infinite loop.)
+
+The resulting update function \textbf{Compose}($T_{\mathrm{chart}}$,
+e$_k$, e$_l$) is a function which adds a new event field labelled
+`e$_{n+1}$' for an event of the type returned by applying the rule to
+the event string consisting of the found event, `e$_f$', followed by the
+required event, `e$_l$'.  Event `e$_{n+1}$' starts at the beginning of
+`e$_f$' and ends at the end of `e$_l$'.    
+ 
+  
+\section{Summary}
+
+In this chapter we have explored how the type theoretical apparatus
+developed in Chapters~\ref{ch:percint} and \ref{ch:infex} can be
+applied to the notion of grammar, viewing grammatical phenomena in
+terms of event perception and information state update.  While we have
+included both syntax and semantics in this framework and taken a
+fairly detailed look at how incremental parsing can be incorporated in
+this approach, the actual grammatical phenomena that we have looked at
+are linguistically trivial. In Part~\ref{part:sem} we will look at
+a variety of linguistic phenomena and argue that this approach
+provides theoretically interesting insights into the way that they
+function in dialogue.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End: 

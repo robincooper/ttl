@@ -1,0 +1,709 @@
+\chapter{Intensional logic}
+\label{app:intlog}
+
+\section{Interpreting intensional logic in TTR}
+
+Montague's (\citeyear{Montague1974}, ch. 8\footnote{'The Proper
+  Treatment of Quantification in Ordinary English'}, PTQ) intensional logic
+extends first order logic in four ways:
+\begin{enumerate} 
+ 
+\item it adds a simply typed lambda calculus -- predicates are
+  reconstructed as function types and arguments to predicates can
+  be of any type 
+ 
+\item it allows quantification over variables of any type (making it
+  into a higher order logic)
+
+\item it adds modal and tense operators
+
+\item types corresponding to intensions are introduced together with
+  logical expressions which denote intensions as well as an operator
+  which maps an intension-denoting expression to the corresponding
+  extension and another operator which maps an expression, $\alpha$,
+  to an expression denoting the intension of $\alpha$.
+ 
+\end{enumerate} 
+Montague's system of types is defined by the following recursive
+definition:
+\begin{enumerate} 
+ 
+\item $e$ and $t$ are types (entities and truth values respectively) 
+ 
+\item if $T_1$ and $T_2$ are types then $\langle T_1,T_2\rangle$ is a
+  type (the type of functions from objects of type $T_1$ to objects of
+  type $T_2$)
+
+\item if $T$ is a type then $\langle s,T\rangle$ is a type (the type
+  of intensions corresponding to type $T$, functions from possible
+  worlds and times to objects of type $T$)
+ 
+\end{enumerate}
+We define a function $\tau$ that maps Montague's types to types in
+TTR:
+\begin{enumerate} 
+ 
+\item $\tau(e)=$\smallrecord{\smalltfield{x}{\textit{Ind}}}\footnote{Note that
+    `x' is a particular label, not a variable over labels.}
+
+$\tau(t)=$\textit{RecType} 
+ 
+\item $\tau(\langle T_1,T_2\rangle)=\tau(T_1)\rightarrow\tau(T_2)$
+
+\item $\tau(\langle s,T\rangle)=\tau(T)$
+ 
+\end{enumerate} 
+Note that Montague's type $e$ (entities) corresponds to a type of records
+containing an entity.  The fact that we have a whole structure here
+with potentially extra fields will become important in our treatment
+of Montague's examples involving individual concepts such as
+temperatures and prices. In place of truth values we have record
+types.  These are the intensional objects which will play the role of
+Montague's propositions. We rely on the structure and intensionality
+associated with these types rather than on the intensional types that Montague
+introduces which we collapse with the corresponding non-intensional type.    
+
+We will use the definition of the syntax of intensional logic given in PTQ with an
+infinite set of constants $C_T$ and a countably infinite set of
+variables $V_T$ for each Montague type $T$.  We shall use a particular
+set of labels $L$ and an
+intensional modal system of complex types based on a collection of
+stratified models, $\mathfrak{M}$, {\bf TYPE$_\mathit{IMC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$,
+$\mathscr{M}_n$$\rangle_{\mathscr{M}\in\mathfrak{M},n\in\mathit{Nat}}$,
+where for each $\mathscr{M}\in\mathfrak{M}$, $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\mathscr{M}_n$$\rangle_{n\in\mathit{Nat}}$ is an
+  intensional system of complex types with dependent record types
+  based on $\langle L,
+\mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ for 
+\textbf{RType}$^n$ as required by the definition of systems with
+dependent record types. We place the following conditions on this
+system:
+\begin{enumerate} 
+ 
+\item \textit{Ind}, \textit{Time} $\in$ \textbf{BType} (the types of
+  individuals and points of time) 
+
+\item for all $\mathscr{M},\mathscr{M'}\in\mathfrak{M}$,
+  $A_{\mathscr{M}}(\mathit{Time})=A_{\mathscr{M'}}(\mathit{Time})$ and
+  $A_{\mathscr{M}}(\mathit{Time})$ is totally ordered and dense using
+  the natural ``earlier than'' relation which we will represent by
+  $\leq$ and its strict version $<$.
+
+\item the set of labels $L$ includes the distinguished label
+ e-time (event time) 
+ 
+\item \textbf{Pred} contains distinguished predicates
+  corresponding to the tense and modal operators of intensional logic
+  and equality:
+\begin{itemize} 
+ 
+\item poss (``possible'') with arity
+  $\langle\mathit{Type}^n\rangle_{n>0}$\footnote{Montague did not
+    include the possibility operator in his definition of intensional logic.} 
+ 
+\item nec (``necessary'') with arity $\langle\mathit{Type}^n\rangle_{n>0}$
+
+\item fut (``future'') with arity
+  $\langle\mathit{RecType}^n,\mathit{Time}\rangle_{n>0}$
+
+\item past (``past'') with arity
+  $\langle\mathit{RecType}^n,\mathit{Time}\rangle_{n>0}$
+
+\item eq (``equals'') with arity $\langle
+  T,T\rangle_{T\in\bigcup_{n\in\mathit{Nat}}\mathbf{Type^n}}$
+
+\item pre (``precedes'') with arity $\langle \mathit{Time},\mathit{Time}\rangle$
+ 
+\end{itemize}
+We place the following constraints on these predicates:
+\begin{itemize} 
+ 
+\item
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathrm{poss}(T)$
+  iff for some $\mathscr{M}'\in\mathfrak{M}$, $a:_{\mathbf{TYPE}_{\mathit{IMC}_{{\mathscr{M}'}_n}}}T$ 
+ 
+\item $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathrm{nec}(T)$
+  iff for all $\mathscr{M}'\in\mathfrak{M}$,
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{{\mathscr{M}'}_n}}}T$\footnote{Montague
+    interpreted the necessity operator in intensional logic as
+    ``necessarily always'' quantifying over times in addition to
+    possibilities represented by possible worlds. We could define a
+    combined modal and tense predicate nec-alw with arity $\langle\mathit{RecType}^n,\mathit{Time}\rangle_{n>0}$.}
+
+\item $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathrm{fut}(T,t)$
+  iff \\ 
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}T$\d{$\wedge$}
+\record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathrm{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($t,v$)), $\langle$ e-time $\rangle\rangle$}}
+
+\ignore{for some
+  $t':_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathit{Time}$
+  such that $t<t'$,($t'$/\smallrecord{\smalltfield{e-time}{\textit{Time}}})}
+
+\item \label{ilrule:past} $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathrm{past}(T,t)$
+  iff \\
+ $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}T$\d{$\wedge$}
+\record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathrm{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($v,t$)), $\langle$ e-time $\rangle\rangle$}}
+
+\ignore{for some
+  $t':_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathit{Time}$
+  such that $t'<t$,
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}T$($t'$/\smallrecord{\smalltfield{e-time}{\textit{Time}}})}
+
+\item
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathrm{eq}(b,c)$
+  iff $a=b=c$
+
+\item
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\mathrm{pre}(t,t')$
+  iff $a=\langle t,t'\rangle$ and $t<t'$
+\end{itemize} 
+   
+  
+ 
+\item for any type of intensional logic, $T$,
+  we introduce a function $\kappa_T$ from $C_T$,
+  and $\mathfrak{M}$ to a partial function from \textit{Nat} such that for any $c\in C_T$,
+  $\mathscr{M}\in\mathfrak{M}$ and $n\in\mathit{Nat}$, 
+\begin{enumerate} 
+ 
+\item either
+  $\kappa_T(c,\mathscr{M})(n):_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_n}}}\tau(T)$
+  or $\kappa_T(c,\mathscr{M})(n)$ is undefined
+ 
+\item if $\kappa_T(c,\mathscr{M})(n)=a$ then
+  $\kappa_T(c,\mathscr{M})(n+1)=a$ 
+
+\item for $n>0$
+
+\begin{enumerate}
+\item if $\kappa_T(c,\mathscr{M})(n)=a$ and
+  $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_{n-1}}}}\tau(T)$, then
+  $\kappa_T(c,\mathscr{M})(n-1)=a$
+
+\item if $\kappa_T(c,\mathscr{M})(n)=a$ and
+  it is not the case that $a:_{\mathbf{TYPE}_{\mathit{IMC}_{\mathscr{M}_{n-1}}}}\tau(T)$, then
+  $\kappa_T(c,\mathscr{M})(n-1)$ is undefined
+
+\item if $\kappa_T(c,\mathscr{M})(n)$ is undefined, then
+  $\kappa_T(c,\mathscr{M})(n-1)$ is undefined
+
+\end{enumerate}
+
+
+
+ 
+\end{enumerate} 
+
+(That is, a constant of type $T$, can be interpreted as different
+objects of type $\tau(T)$ in different stratified models -- they may
+be ``non-rigid designators''.  Within a single stratified model,
+however, they may only correspond to one object and must designate
+that object at all levels at which it exists.  A constant is undefined
+at levels below which the object exists.)
+
+  
+ \item we introduce a one-one function, $\gamma$, from the union of all the sets,
+  $V_T$, of variables of all the types $T$ of intensional logic into
+  $L$ (a one-one function from variables of intensional logic into the
+  set of labels used in record types) 
+
+\item there is a countably infinite proper subset of $L$, $L_c$, whose
+  members are represented by $c_i$ where $i$ is a natural number.
+  (This is the set of labels used for ``constraints'' corresponding to
+  formulae of intensional logic.)  $L_c$, the range of $\gamma$ and
+  the set of distinguished labels we have introduced are
+  disjoint.
+ 
+\end{enumerate} 
+  
+We define a function \mng{.}$^{.,.,.,.,.,.}$ which maps an expression,
+$\alpha$, of intensional logic to a function from an assignment, $\sigma$, of
+countably infinite sequences to TTR types corresponding to intensional
+logic types (that is, the range of $\tau$), such that if $T$ is a type
+of intensional logic, $\sigma(\tau(T))$ is a sequence of objects of
+type $\tau(T)$. (Below we shall refer to $\sigma$ as a type-sequence
+assignment.  We shall use the notation $\sigma(a/T_n)$ to represent a
+type-sequence assignment like $\sigma$ except that $\sigma(T)(n)=a$.)  The mapping \mng{.}$^{.,.,.,.,.,.}$ is relative to a natural
+number, $n$, a path, $\pi$, a function, $g$, from the union of the sets of
+intensional logic variables, $V_T$, for intensional logic types $T$ to
+natural numbers, a
+time, $t$, a stratified model, $\mathscr{M}$, and order, $\omega$.  We define \iltrans{$\alpha$} as
+follows\footnote{following the characterization of the semantics of
+  intensional logic starting on p. 258 of \cite{Montague1974}}:
+\begin{enumerate} 
+ 
+\item \label{ilrule:constant} if $\alpha$ is a constant of intensional logic type $T$, then
+  \iltrans{$\alpha$} is that function $f$ such that for any
+  type-sequence assignment, $\sigma$, $f(\sigma)=\kappa_T(\alpha,\mathscr{M})(\omega)$. 
+ 
+\item \label{ilrule:variable} if $\alpha$ is a variable of intensional logic type $T$, then
+  \iltrans{$\alpha$} is that function $f$ such that for any
+  type-sequence assignment, $\sigma$,
+  $f(\sigma)=\sigma(\tau(T))_{g(\alpha)}$.
+
+\item \label{ilrule:abstraction} if $\alpha$ is an expression of intensional logic type $T_1$ and
+  $u$ is a variable of intensional logic type $T_2$, then
+  \iltrans{$\lambda u\alpha$} is that function $f$ such that for any
+  type-sequence assignment, $\sigma$, $f(\sigma)=\lambda
+  v_n:\tau(T_2)$(\mng{$\alpha$}$^{n+1,\pi,g(n/u),t,\mathscr{M},\omega}(\sigma(v_n/{\tau(T_1)}_n))$.
+
+\item \label{ilrule:application} if $\alpha$ is an expression of intensional logic type $\langle
+  T_1,T_2\rangle$ and $\beta$ is an expression of intensional logic
+  type $T_1$, then \iltrans{$\alpha(\beta)$} is that function $f$ such
+  that for any type-sequence assignment, $\sigma$, $f(\sigma)=$\iltrans{$\alpha$}($\sigma$)(\iltrans{$\beta$}($\sigma$)).
+
+\item if $\alpha$ and $\beta$ are expressions of intensional logic type
+  $T$, then \iltrans{$\alpha=\beta$} is that function $f$ such that
+  for any type-sequence assignment, $\sigma$, $f(\sigma)$=
+  \record{\tfield{c$_n$}{eq(\mng{$\alpha$}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$),\mng{$\beta$}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$))}}
+
+\item 
+\begin{enumerate} 
+ 
+\item \label{ilrule:negation} if $\phi$ is a formula of intensional logic and
+  $\alpha=\neg\phi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$, $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$) $\rightarrow$
+  $\bot$}}. 
+ 
+\item if $\phi$ and $\psi$ are formulae of first order logic and
+  $\alpha=\phi\wedge\psi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$) \d{$\wedge$}
+  \mng{$\psi$}$^{n+2,\pi,g,t,\mathscr{M},\omega}$($\sigma$)}. 
+
+\item if $\phi$ and $\psi$ are formulae of intensional logic and
+  $\alpha=\phi\vee\psi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$) $\vee$
+  \mng{$\psi$}$^{n+2,\pi,g,t,\mathscr{M},\omega}$($\sigma$)}}.
+
+\item if $\phi$ and $\psi$ are formulae of intensional logic and
+  $\alpha=\phi\rightarrow\psi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$) $\rightarrow$
+  \mng{$\psi$}$^{n+2,\pi,g,t,\mathscr{M},\omega}$($\sigma$)}}.
+
+\item if $\phi$ and $\psi$ are formulae of intensional logic and
+  $\alpha=\phi\leftrightarrow\psi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g,t,\mathscr{M},\omega}$($\sigma$) $\rightarrow$
+  \mng{$\psi$}$^{n+2,\pi,g,t,\mathscr{M},\omega}$($\sigma$)} \\
+                      \tfield{c$_{n+3}$}{\mng{$\psi$}$^{n+4,\pi,g,t,\mathscr{M},\omega}$($\sigma$) $\rightarrow$
+  \mng{$\phi$}$^{n+5,\pi,g,t,\mathscr{M},\omega}$($\sigma$)}}. 
+ 
+\end{enumerate} 
+
+\item 
+\begin{enumerate} 
+ 
+\item if $\phi$ is a formula of intensional logic and $u$ is a variable of intensional
+  logic of type $T$ and $\alpha=\exists u\phi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)=$
+\record{\tfield{$\gamma(u)$}{$T$} \\
+        \tfield{c$_n$}{$\langle\lambda v_n:T$
+          (\mng{$\phi$}$^{n+1,\pi.c_n,g(n/u),t,\mathscr{M},\omega}$($\sigma(v_n/T_n)$)),
+          $\langle\pi.\gamma(u)\rangle\rangle$}}. 
+ 
+\item if $\phi$ is a formula of intensional logic and $u$ is a
+  variable of type $T$ of intensional
+  logic and $\alpha=\forall u\phi$, then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)=$
+\smallrecord{\smalltfield{c$_n$}{($r_n$:\smallrecord{\smalltfield{$\gamma(u)$}{$T$}})
+    $\rightarrow$ $\lambda r_{n+1}:$\smallrecord{\smalltfield{$\gamma(u)$}{$T$}}(\mng{$\phi$}$^{n+2,\emptyset,g(n+1/u),t,\mathscr{M},\omega}$($\sigma(r_{n+1}.\gamma(u)/T_{n+1})$))($r_n$)}}. 
+ 
+\end{enumerate} 
+
+\item 
+\begin{enumerate} 
+ 
+\item if $\phi$ is a formula of intensional logic and
+  $\alpha=\Box\phi$ then \iltrans{$\alpha$} is that function $f$ such
+  that for any type-sequence assignment, $\sigma$, $f(\sigma)$ is \record{\tfield{c$_n$}{nec(\mng{$\phi$}$^{n+1,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$))}}
+ 
+\item if $\phi$ is a formula of intensional logic and
+  $\alpha=\Diamond\phi$\footnote{Montague does not include
+    $\Diamond\phi$ as an expression in his intensional logic but we
+    treat it here for the sake of completeness.} then
+  \iltrans{$\alpha$} is that function $f$ such that for any
+  type-sequence assignment, $\sigma$, $f(\sigma)$ is 
+  \record{\tfield{c$_n$}{poss(\mng{$\phi$}$^{n+1,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$))}}
+
+\item if $\phi$ is a formula of intensional logic and
+  $\alpha=W\phi$ then \iltrans{$\alpha$} is that function
+  $f$ such that for any type-sequence assignment, $\sigma$,
+  $f(\sigma)$ is
+  \record{\tfield{c$_n$}{fut(\mng{$\phi$}$^{n+1,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$),$t$)}} 
+
+\item \label{ilrule:H} if $\phi$ is a formula of intensional logic and
+  $\alpha=H\phi$ then \iltrans{$\alpha$} is that function $f$ such
+  that for any type-sequence assignment, $\sigma$, $f(\sigma)$ is
+  \record{\tfield{c$_n$}{past(\mng{$\phi$}$^{n+1,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$),$t$)}}
+ 
+\end{enumerate} 
+
+\item if $\alpha$ is an expression of intensional logic, then
+  \iltrans{$\hat{\ }\alpha$} is \iltrans{$\alpha$}.
+
+\item if $\alpha$ is an expression of intensional logic of type
+  $\langle s,T\rangle$, then \iltrans{$\check{\ }\alpha$} is \iltrans{$\alpha$}.
+ 
+\end{enumerate} 
+
+The \textit{TTR interpretation}, \mng{$\alpha$}$^{g,t,\mathscr{M},\omega}$, \textit{of an
+  expression}, $\alpha$, \textit{of intensional logic with respect to an
+  assignment}, $g$, \textit{of natural numbers to variables, a
+  moment of time}, $t$, a stratified model, $\mathscr{M}$, and an
+order, $\omega$,
+is \mng{$\alpha$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$.
+
+If $\alpha$ is a closed expression of intensional logic,
+then for any type-sequence assignments, $\sigma$ and $\sigma'$ and any
+assignments to variables $g$ and $g'$,
+\mng{$\alpha$}$^{g,t,\mathscr{M},\omega}$($\sigma$)=\mng{$\alpha$}$^{g,t,\mathscr{M},\omega}$($\sigma'$) and
+\mng{$\alpha$}$^{g,t,\mathscr{M},\omega}$($\sigma$)=\mng{$\alpha$}$^{g',t,\mathscr{M},\omega}$($\sigma$).
+Therefore we say that the \textit{TTR interpretation},
+\mng{$\alpha$}$^{t,\mathscr{M},\omega}$ \textit{of a closed expression}, $\alpha$, \textit{of
+  intensional logic with respect to a time}, $t$, a stratified model,
+$\mathscr{M}$, and order, $\omega$, is
+\mng{$\alpha$}$^{g,t,\mathscr{M},\omega}$($\sigma$) for some arbitrarily chosen $g$ and $\sigma$.
+
+
+\section{Examples of intensional logic interpretations}
+
+Montague (\citeyear{Montague1974}, p.259) notes that an expression,
+$\gamma$ of intensional logic type $\langle T,t\rangle$ will denote
+the characteristic function of a set of objects of type $T$ and that
+if $\alpha$ is an expression of type $T$, then the formula 
+$\gamma(\alpha)$ can be used to assert that the denotation of $\alpha$
+is a member of the set represented by $\gamma$.  We have replaced $t$
+with the type \textit{RecType}.  Record types play the role of
+intuitive propositions for us.  They are ``true'' if there is
+something of the type and ``false'' if they are empty.  In using types
+as intuitive propositions we are following the ``propositions as types
+principle'' which we have imported from Martin-Löf type theory
+\cite{Martin-Loef1984,NordstromPeterssonSmith1990}.  (For a useful
+brief account of the origins of the propositions as types principle
+see \cite{Ranta1994}, p. 39ff.)  In choosing to define predicates as
+functions from objects to propositions we are following the strategy
+used by, for example, \cite{Thomason1980} and it is similar to work by
+proponents of property theory,
+e.g. \cite{ChierchiaTurner1988,FoxLappin2005}, where sentences are taken to correspond
+directly to propositions rather than truth-values.  Despite the fact
+that we have increased the intensionality of our interpretations by
+replacing Montague's truth-values with types, we can regain the
+characteristic functions of sets associated with these types.  If $f$
+is a function of type $T\rightarrow\mathit{RecType}$ then we can
+define a corresponding characteristic function, $f_c$, of a subset of objects of
+type $T$ by 
+\begin{quote}
+if $a:T$, then $f_c(a)=1$ if $f(a)$ is a non-empty type and $f_c(a)=0$
+otherwise
+\end{quote}
+If $f$ is a function of type
+\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType},
+  then we can in addition define a characteristic function, $f_e$, of a set of
+  individuals corresponding to Montague's original function of type
+  $\langle e,t\rangle$:
+\begin{quote}
+if $a:\mathit{Ind}$, then $f_e(a)=1$ if $f$(\smallrecord{\field{x}{$a$}}) is a non-empty type and $f_e(a)=0$
+otherwise
+\end{quote}
+We can make similar definitions for recovering $n$-ary relations as
+sets of $n$-ary tuples from functions which yield a record type when
+supplied with all their arguments.  For example, is $f$ is a function
+of type
+\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$(\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+by defining a function $f_e$ such that
+\begin{quote}
+if $a,b:\mathit{Ind}$, then $f_e(\langle a,b\rangle)=1$ if $f$(\smallrecord{\field{x}{$b$}})(\smallrecord{\field{x}{$a$}}) is a non-empty type and $f_e(\langle a,b\rangle)=0$
+otherwise
+\end{quote}
+
+
+\section{Examples of inference in intensional logic}
+
+\paragraph{$\beta$-equivalence}
+In intensional logic we have
+\begin{display}
+$\lambda u\alpha(a)=\alpha(a/u)$
+\end{display}
+as long as $u$ does not occur freely within the scope of `$\hat{\ }$'
+in $\alpha$ and no free variables in $a$ become bound within $\alpha(a/u)$. Since for any intensional logic expression, $\beta$,
+\iltrans{$\beta$}=\iltrans{$\hat{\ }\beta$} the presence of `$\hat{\
+}$' in $\alpha$ will not create an exception to $\beta$-equivalence
+under the TTR interpretation.  In TTR we have \iltrans{$\lambda
+  u\alpha(a)$} as record type relettering equivalent to
+\iltrans{$\alpha(a/u)$} and in a number of cases where the TTR
+interpretation does not depend on $n$ we have exact equivalence.  It
+is perhaps instructive to go through two particular examples to see why
+this equivalence holds.  We first take a case of exact equivalence.
+Here $x$ is to be a variable of type $e$, $\mathrm{run}$ a constant of
+type $\langle e,t\rangle$ and $a$ a constant of type $e$.  Then,
+\begin{quote}
+\mng{$\lambda
+  x[\mathrm{run}(x)](a)$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)
+\\
+= \mng{$\lambda
+  x[\mathrm{run}(x)]$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)(\mng{$a$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$))
+(rule~\ref{ilrule:application}) \\
+= $\lambda
+v_0:$\smallrecord{\smalltfield{x}{\textit{Ind}}}(\mng{run($x$)}$^{1,\emptyset,g(0/x),t,\mathscr{M},\omega}$($\sigma$($v_0$/\smallrecord{\smalltfield{x}{\textit{Ind}}}$_0$)))(\mng{$a$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$))
+(rule~\ref{ilrule:abstraction}) \\
+= $\lambda
+v_0:$\smallrecord{\smalltfield{x}{\textit{Ind}}}($\kappa_{\langle
+  e,t\rangle}(\mathrm{run},\mathscr{M})(\omega)(v_0)$)($\kappa_e(a,\mathscr{M})(\omega)$)
+(rules~\ref{ilrule:application},~\ref{ilrule:variable},~\ref{ilrule:constant})
+\\
+= $\kappa_{\langle
+  e,t\rangle}(\mathrm{run},\mathscr{M})(\omega)(\kappa_e(a,\mathscr{M})(\omega))$
+(function application) \\
+= \mng{run($a$)}$^{0,\emptyset,g,t,\mathscr{M},\omega}$ (rules~\ref{ilrule:application},~\ref{ilrule:constant})
+\end{quote}
+In a similar way we can show that \mng{$\lambda
+  x[\neg\mathrm{run}(x)](a)$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)
+is \smallrecord{\smalltfield{c$_1$}{$\kappa_{\langle
+  e,t\rangle}(\mathrm{run},\mathscr{M})(\omega)(\kappa_e(a,\mathscr{M})(\omega))\rightarrow
+\bot$}}
+whereas \mng{$\neg$run($a$)}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)
+is \smallrecord{\smalltfield{c$_0$}{$\kappa_{\langle
+  e,t\rangle}(\mathrm{run},\mathscr{M})(\omega)(\kappa_e(a,\mathscr{M})(\omega))\rightarrow
+\bot$}} using rule~\ref{ilrule:negation}.  That is, in this case we
+have relettering rather than exact equivalence because negation
+introduces the labels c$_1$ and c$_0$ respectively into the
+interpretation.
+
+To complete the discussion of these examples we will consider what
+reasonable assignments to the two constants might be.  Let us say that
+for any $\mathscr{M}$ and $\omega$, 
+\begin{quote}
+$\kappa_{\langle
+  e,t\rangle}(\mathrm{run},\mathscr{M})(\omega)$=$\lambda
+r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}(\smallrecord{\smalltfield{c$_\mathit{run}$}{run$'$($r$.x)}}) \\
+  $\kappa_e(a,\mathscr{M})(\omega)$=\smallrecord{\field{x}{$a'$}}.
+\end{quote}
+Then we have \mng{$\lambda
+  x[\mathrm{run}(x)](a)$}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)=\mng{run($a$)}$^{0,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)=\smallrecord{\smalltfield{c$_\mathit{run}$}{run$'$($a'$)}}.
+Given that the ultimate contribution of the individual constant $a$ to
+the TTR interpretation is the individual $a'$ why have we made the
+type $e$ of intensional logic correspond to the TTR type
+\smallrecord{\smalltfield{x}{\textit{Ind}}} rather than simply
+\textit{Ind}?  The reason is that some predicates create types that
+depend on the record as a whole, not just the x-field.  Consider, for
+example, a noun such as \textit{price}.  This has a whole frame
+associated \label{pg:frame} with it in the sense of frame semantics
+\cite{Fillmore1982,Fillmore1985}.  In the FrameNet database
+(\url{http://framenet.icsi.berkeley.edu}, accessed 25th Aug, 2009)
+\textit{price} has four core frame elements or roles:  Buyer, Goods,
+Money and Seller.  For our present purposes we will not represent all
+of these roles but we will add a role for something like Reichenbach's (\citeyear{Reichenbach1947})
+event time (labelled with the distinguished label `e-time').  Thus
+price frames can be represented as records of the type:
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{e-time}{\textit{Time}} \\
+        \tfield{commodity}{\textit{Ind}} \\
+        \tfield{c$_{\mathit{price}}$}{$\langle\lambda
+          v:$\textit{Ind}(price($v$)),$\langle\mathrm{x}\rangle\rangle$}
+        \\
+        \tfield{c$_{\mathit{price\_of\_at}}$}{$\langle\lambda
+          v_1:$\textit{Ind}($\lambda v_2:$\textit{Ind}($\lambda
+          v_3:$\textit{Time}(price\_of\_at($v_1$,$v_2$,$v_3$)))),
+          $\langle$x,commodity,e-time$\rangle\rangle$}}
+
+\end{display}
+
+Consider now Montague's example \label{pg:temppuzzle} \textit{a price rises}.  Montague's
+  examples involving price and temperature result from a puzzle
+  presented to him by Barbara Partee.  The puzzle is, for example, how
+  to prevent the following inference:
+\begin{display}
+\begin{tabular}{l}
+The temperature/price is 90 \\
+The temperature/price is rising \\
+\hline
+90 is rising
+\end{tabular}
+\end{display}
+Montague's solution to this is to say that \textit{rise} is a
+predicate of individual concepts (that is, intensions of type $\langle
+s,e\rangle$) which does not ultimately cash out as a predicate of
+individuals.  We say, instead, that \textit{rise} is a predicate of
+frames which does not ultimately cash out as a predicate of an
+individual occuring in the frame.  Thus, for any $\mathscr{M}$ and
+$\omega$
+\begin{quote}
+$\kappa_{\langle
+  e,t\rangle}(\mathrm{rise},\mathscr{M})(\omega)$=$\lambda
+r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}(\smallrecord{\smalltfield{c$_\mathit{rise}$}{rise$'$($r$)}})
+\end{quote}
+This will prevent the offending inference.  But we can say more about what kind of objects might be of the type rise$'$($r$) if $r$ is a
+price frame?  A simple suggestion would be a pair of frames of the
+price frame type whose value for the commodity field is the same but
+where the e-time of the second frame is later than the e-time of the
+first frame and the value in the x-field of the second frame is higher (on the scale which
+we use to compare prices) than that in the first.  Thus \textit{rise}
+characterizes an event construed as a series of frames.  This view of
+events is taken from the notion of Fernando situation strings
+developed in a series of papers by Fernando, including
+\cite{Fernando2006,Fernando2009}.  Note that different kinds of frames
+will require rather different accounts of what series of frames
+constitute a ``rising''.  If $r$ is a temperature frame then there
+will not be a commodity field but there should be a field for spatial
+location.  If the temperature is rising then it is important to have
+two frames in which the location is the same but the time is later in
+the second frame and the temperature is higher.  The idea that
+predicates can take different interpretations depending on their
+arguments is central to generative lexicon theory \label{pg:gl}
+\cite{Pustejovsky1995,Pustejovsky2006} and much other literature.  Nevertheless, the different
+ways of rising of price and temperature are more closely related to
+each other (as is reflected in their both being characterized in
+FrameNet as related to the Change\_position\_on\_a\_scale frame) than to,
+for example, the rising of cakes (possibly related to FrameNet's
+Dough\_rising) or balloons (FrameNet's Motion\_directional frame).  Frames characterized in
+terms of record types will give us important tools for developing
+simple similarity metrics and spaces of interpretations which will
+become important later on when we talk about innovation in dialogue
+and learning.  We will return to these examples in future sections.
+
+\paragraph{Tense operators}
+In Montague's intensional logic tense operators are interpreted as
+Priorean \cite{Prior1957,Prior1967,Prior2003}.  Our interpretation of
+them is instead Reichenbachian \cite{Reichenbach1947}.  That is, we
+take the operators as providing information about an event time,
+rather than as shifting the time of evaluation.  This means that the
+logic of these operators is essentially different from the Montague's
+original interpretation.  For example,
+\begin{display}
+$WH\phi$
+\end{display}
+in Montague's version would be interpreted as being true if there is a
+time, $t$, in the future such that there is some time previous to $t$
+at which $\phi$ is true.  Our interpretation in contrast will require
+that there is an event time which is both in the future and in the
+past -- a contradiction, given that we are assuming non-circular
+time. Let us see why this is so.
+\begin{quote}
+\iltrans{$WH\phi$}($\sigma$) \\
+= 
+\record{\tfield{c$_n$}{fut(\mng{$H\phi$}$^{n+1,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$),$t$)}}
+(rule~\ref{ilrule:H}) \\
+=
+\record{\tfield{c$_n$}{fut(\record{\tfield{c$_{n+1}$}{past(\mng{$\phi$}$^{n+2,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$),$t$)}}, $t$)}}
+(rule~\ref{ilrule:H}) \\
+$\approx$
+(\mng{$\phi$}$^{n+2,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$)
+\d{$\wedge$} \record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathit{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($v,t$)), $\langle$ e-time
+          $\rangle\rangle$}}) \d{$\wedge$} \record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathit{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($t,v$)), $\langle$ e-time
+          $\rangle\rangle$}} (system condition \ref{ilrule:past})
+
+Suppose that
+\mng{$\phi$}$^{n+2,\emptyset,g,t,\mathscr{M},\omega}$($\sigma$) is
+\record{\tfield{c$_{n+2}$}{$T$}}.  \\
+Then \iltrans{$WH\phi$}($\sigma$) $\approx$
+\record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathit{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($v,t$)$\wedge$pre($t,v$)), $\langle$ e-time
+          $\rangle\rangle$} \\
+        \tfield{c$_{n+2}$}{$T$}} (by the definition of \d{$\wedge$})
+\end{quote}
+
+This means that we would need to use something other than a
+combination of $W$ and $H$ to treat examples of the future perfect
+such as \textit{The boy will have left}.  Following Reichenbach's
+analysis we would need to introduce operators which place constraints
+on reference times.
+
+The notion of frame discussed above becomes important in the treatment
+of tense here.  Suppose that the intensional logic predicate `run'
+corresponds to $\lambda
+r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}(\smallrecord{\smalltfield{c$_\mathit{run}$}{run$'$($r$.x)}})
+as suggested above and that j is of type \textit{Ind}.  This would
+mean that \iltrans{run(j)}($\sigma$)$\approx$
+\begin{display}
+\record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathit{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($v,t$)), $\langle$ e-time
+          $\rangle\rangle$} \\
+        \tfield{c$_{\mathit{run}}$}{run$'$(j)}}
+\end{display}
+Here the event time is required to be earlier than $t$ but this is in
+no way related to the running event.  According to FrameNet
+\textit{run} belongs to, among a number of others, the Self\_motion
+frame which has a role (allbeit non-core\footnote{According to
+  \cite{RuppenhoferEllsworthPetruckJohnsonScheffczyk2006} Time is
+  always treated as a non-core frame element since it does not introduce an
+  ``additional, independent or distinct'' event -- this despite the
+  fact that it appears to represent a ``conceptually necessary
+  component'' of a frame as is required for core frame elements.}) Time (``The time when the
+motion occurs'') corresponding to our e-time, together with many other
+roles (frame elements).  There are two ways to introduce dependence on
+e-time.  The first corresponds to what \cite{Dowty1989} calls ``the
+ordered-argument theory of predicates and arguments'':
+\begin{display}
+\record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathit{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($v,t$)), $\langle$e-time$\rangle\rangle$} \\
+        \tfield{c$_{\mathit{run}}$}{$\langle\lambda
+          v:$\textit{Time}(run$'$(j,$v$)), $\langle$e-time$\rangle\rangle$}}
+\end{display}
+This involves changing the arity of run$'$ to $\langle$\textit{Ind},\textit{Time}$\rangle$.
+The second corresponds to a Davidsonian \cite{Davidson1967} (or
+neo-Davidsonian \cite{Dowty1989}) approach to the treatment of time
+arguments for event predicates:
+\begin{display}
+\record{\tfield{e-time}{\textit{Time}} \\
+        \tfield{c$_{\mathit{tns}}$}{$\langle\lambda
+          v:$\textit{Time}(pre($v,t$)), $\langle$e-time$\rangle\rangle$} \\
+        \tfield{c$_{\mathit{run}}$}{run$'$(j)} \\
+        \tfield{c$_{\mathit{at}}$}{$\langle\lambda
+          v_1:$\textit{Sit}($\lambda
+          v_2:$\textit{Time}(at($v_1,v_2$))), $\langle$c$_{\mathit{run}}$,e-time$\rangle\rangle$}}
+\end{display}
+This second option would involve introducing an additional basic type
+\textit{Sit} (``situation'') and requiring that all types constructed
+with predicates are a subtype of \textit{Sit}.  This corresponds to
+Ranta's (\citeyear{Ranta1994}, p. 54) linking of the Davidsonian
+events to the propositions as types principle and also to the notion
+of situation type developed in situation theory
+\cite{BarwisePerry1983,Barwise1989}.  My inclination is to use the
+first option for arguments that are conceptually necessary.  
+It is impossible to imagine a running event which does not take place
+at some time.  The second option with (neo-)Davidsonian arguments can
+then be used for conceptually optional arguments.  Notice that this is
+not the same as syntactic optionality of arguments in natural
+languages where arguments can be omitted despite the fact that they
+are conceptually necessary.  According to FrameNet\footnote{Accessed
+  7th Sept 2009.} the Self\_motion frame to which \textit{run} belongs
+has six core roles (not including Time which is non-core) including
+frame elements like Area and Path.  We shall not represent all of
+these but just include a time role as an extra argument to the
+predicate run$'$.  Thus we can amend $\kappa_{\langle
+  e,t\rangle}(\mathrm{run},\mathscr{M})(\omega)$ to be
+\begin{display}
+$\lambda
+r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}(\record{
+\tfield{e-time}{\textit{Time}} \\
+\tfield{c$_\mathit{run}$}{$\langle\lambda v:$\textit{Time}(run$'$($r$.x,$v$)),$\langle$e-time$\rangle\rangle$}})
+\end{display}
+Note that this is a non-tensed interpretation.  When applied to an
+argument it will yield a type which requires there to be some time at
+which the running is taking place but does not relate that time to the
+present or moment of evaluation.  Taking this option means that,
+unlike the Priorean tense operators that Montague uses, lack of a
+tense operator does not correspond to the present tense.  Thus in
+order to obtain present tense interpretations we would need an
+additional tense operator.  We will return to these issues in the next
+section where we interpret English.

@@ -1,0 +1,314 @@
+\chapter{First order logic}
+\label{app:folog}
+
+\section{Interpreting first order logic in TTR}
+
+We assume a standard definition of the syntax of first order logic with a set of
+constants $C$, a countably infinite set of variables $V$ and sets of
+$n$-ary predicate symbols $\mathcal{P}^n$.  In order to embed first order
+logic we shall use an intensional system of complex types {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ with dependent record types
+based on $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$
+where:
+\begin{enumerate} 
+ 
+\item \textit{Ind} $\in$ \textbf{BType} (the type of individuals)
+ 
+\item we introduce a function $\kappa$ from $C$ to $A(\mathit{Ind})$
+  (a function from constants of first order logical to objects of type
+  \textit{Ind})
+
+\item we introduce a one-one function $\gamma$ from $V$ into $L$ (a
+  one-one function from variables of first order logic into the set of
+  labels used in record types)
+
+\item there is a countably infinite proper subset of $L$, $L_c$, whose members are
+  represented by c$_i$ where $i$ is a natural number.  (This is the
+  set of labels used for ``constraints'' corresponding to formulae of
+  first order logic.)  $L_c$ and the range of $\gamma$ are disjoint
+  (i.e. the labels used for constraints are distinct from those which
+  correspond to the variables of first order logic).
+
+\item we introduce a function $\rho$ from $\bigcup_n\mathcal{P}^n$ to
+  \textbf{Pred} such that if $P\in\mathcal{P}^n$ then
+  $\mathit{Arity}(\rho(P))\in\{\mathit{Ind}\}^n$ (a function from
+  predicate symbols of first order logic to predicates of corresponding arity
+  in the type theory)
+ 
+\end{enumerate} 
+
+We define a function \mng{.}$^{.,.,.}$ which maps an expression, $\alpha$ of first order
+logic to a function from a countably infinite sequence, $\sigma$, of members of $A(\mathit{Ind})$ to
+type theoretic objects.  (Below we shall refer to $\sigma$ simply as a
+sequence of individuals.)  The mapping is relative to a natural number,
+$n$, a path, $\pi$, and a function, $g$, from the set of first order
+logic variables, $V$, to natural numbers. We define \fotrans{$\alpha$}
+as follows:
+\begin{enumerate} 
+ 
+\item if $\alpha\in C$ (a constant), then \fotrans{$\alpha$} is that
+  function $f$ such that for any sequence of individuals, $\sigma$, $f(\sigma)=\kappa(\alpha)$.
+ 
+\item if $\alpha\in V$ (a variable),
+  then \fotrans{$\alpha$} is that function $f$ such that for any
+  sequence of individuals, $\sigma$, $f(\sigma)=\sigma_{g(\alpha)}$.
+
+\item if $\alpha\in\mathcal{P}^k$, for some $k$, (an $k$-place
+  predicate symbol), then \fotrans{$\alpha$} is that function $f$ such
+    that for any sequence of individuals, $\sigma$, $f(\sigma)=\rho(P)$.
+
+\item If $P$ is an $k$-place predicate symbol of first order logic and
+  $t_1,\ldots,t_k$ are terms (constants or variables) of first order
+  logic and $\alpha=P(t_1,\ldots,t_k)$, then \fotrans{$\alpha$} is
+  that function $f$ such that for any sequence of individuals,
+  $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\fotrans{$P$}($\sigma$)(\fotrans{$t_1$}($\sigma$),\ldots,\fotrans{$t_k$}($\sigma$))}}.
+
+\item if $\phi$ and $\psi$ are formulae of first order logic and
+  $\alpha=\phi\wedge\psi$, then \fotrans{$\alpha$} is that function
+  $f$ such that for any sequence of individuals, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}}$^{n+1,\pi,g}$($\sigma$) \d{$\wedge$}
+  \mng{$\psi$}$^{n+2,\pi,g}$($\sigma$)}.
+
+\item if $\phi$ and $\psi$ are formulae of first order logic and
+  $\alpha=\phi\vee\psi$, then \fotrans{$\alpha$} is that function
+  $f$ such that for any sequence of individuals, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g}$($\sigma$) $\vee$
+  \mng{$\psi$}$^{n+2,\pi,g}$($\sigma$)}}.
+
+\item \label{focl:implication} if $\phi$ and $\psi$ are formulae of first order logic and
+  $\alpha=\phi\rightarrow\psi$, then \fotrans{$\alpha$} is that function
+  $f$ such that for any sequence of individuals, $\sigma$,
+  $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g}$($\sigma$) $\rightarrow$
+  \mng{$\psi$}$^{n+2,\pi,g}$($\sigma$)}}.
+
+\item \label{focl:negation} if $\phi$ is a formula of first order logic and
+  $\alpha=\neg\phi$, then \fotrans{$\alpha$} is that function
+  $f$ such that for any sequence of individuals, $\sigma$, $f(\sigma)=$\record{\tfield{c$_n$}{\mng{$\phi$}$^{n+1,\pi,g}$($\sigma$) $\rightarrow$
+  $\bot$}}.
+
+\item if $\phi$ is a formula and $x$ is a variable of first order
+  logic and $\alpha=\exists x\phi$, then \fotrans{$\alpha$} is that function
+  $f$ such that for any sequence of individuals, $\sigma$,
+  $f(\sigma)=$
+\record{\tfield{$\gamma(x)$}{\textit{Ind}} \\
+        \tfield{c$_n$}{$\langle\lambda v_n:$
+          \textit{Ind}(\mng{$\phi$}$^{n+1,\pi.c_n,g(n/x)}$($\sigma(v_n/n)$)),
+          $\langle\pi.\gamma(x)\rangle\rangle$}}.
+
+\item if $\phi$ is a formula and $x$ is a variable of first order
+  logic and $\alpha=\forall x\phi$, then \fotrans{$\alpha$} is that function
+  $f$ such that for any sequence of individuals, $\sigma$,
+  $f(\sigma)=$
+\smallrecord{\smalltfield{c$_n$}{($r_n$:\smallrecord{\smalltfield{$\gamma(x)$}{\textit{Ind}}})
+    $\rightarrow$ $\lambda r_{n+1}:$\smallrecord{\smalltfield{$\gamma(x)$}{\textit{Ind}}}(\mng{$\phi$}$^{n+2,\emptyset,g(n+1/x)}$($\sigma(r_{n+1}.\gamma(x)/n+1)$))($r_n$)}}.
+
+
+  
+ 
+\end{enumerate}
+
+The \textit{TTR interpretation}, \mng{$\alpha$}$^g$, \textit{of a formula}, $\alpha$, \textit{of first
+order logic with respect to an assignment}, $g$, \textit{of natural numbers to
+variables} is \mng{$\alpha$}$^{0,\emptyset,g}$.
+
+If $\alpha$ is a sentence (a closed formula) of first order logic,
+then for any sequences $\sigma$ and $\sigma'$ and any assignments to
+variables $g$ and $g'$,
+\mng{$\alpha$}$^g$($\sigma$)=\mng{$\alpha$}$^g$($\sigma'$) and
+\mng{$\alpha$}$^g$($\sigma$)=\mng{$\alpha$}$^{g'}$($\sigma$). Therefore
+we say that the \textit{TTR interpretation}, \mng{$\alpha$} \textit{of a sentence},
+$\alpha$, \textit{of first order logic} is \mng{$\alpha$}$^g$($\sigma$) for
+some arbitrarily chosen $g$ and $\sigma$.
+
+\section{Examples of first order logic interpretations}
+
+For the sake of readability let us assume that any first order
+logic variable $x$ is mapped by $\gamma$ to a TTR label represented by
+`x'. Similarly any constant $c$ is mapped by $\kappa$ to a TTR object
+represented by `c' and any predicate symbol $P$ is mapped by $\rho$ to
+a predicate `P'.  Let us further assume that `j' and `m' are constants,
+`run' and `person' are one-place predicate symbols and `hug' is a
+two-place predicate symbol.  Then
+\mng{run(j)} is 
+\begin{display}
+\record{\tfield{c$_0$}{run(j)}}
+\end{display}
+\mng{run(j)$\wedge$run(m)} is
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{c$_1$}{run(j)} \\
+                               \tfield{c$_2$}{run(m)}}}}
+\end{display}
+which can be flattened and relabelled to
+\begin{display}
+\record{\tfield{c$_0$}{run(j)} \\
+        \tfield{c$_1$}{run(m)}}
+\end{display}
+\mng{(run(j)$\wedge$person(j))$\wedge$run(m)} is
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{c$_1$}{\record{\tfield{c$_2$}{run(j)} \\
+                                                      \tfield{c$_3$}{person(j)}}\\
+                               \tfield{c$_2$}{run(m)}}}}}
+\end{display}
+which can be flattened and relabelled to 
+\begin{display}
+\record{\tfield{c$_0$}{run(j)} \\
+        \tfield{c$_1$}{person(j)} \\
+        \tfield{c$_2$}{run(m)}}
+\end{display}
+\mng{run(j)$\vee$run(m)} is
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{c$_1$}{run(j)}}$\vee$\record{\tfield{c$_2$}{run(m)}}}}
+\end{display}
+\mng{run(j)$\rightarrow$run(m)} is
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{c$_1$}{run(j)}}$\rightarrow$\record{\tfield{c$_2$}{run(m)}}}}
+\end{display}
+\mng{$\exists x \mathrm{person}(x)\wedge\mathrm{run}(x)$} is
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_0$}{$\langle\lambda v_0:$\textit{Ind}
+                                 (\record{\tfield{c$_1$}{\record{\tfield{c$_2$}{person($v_0$)}
+                                       \\
+                                                                 \tfield{c$_3$}{run($v_0$)}}}}),
+                                                           $\langle$x$\rangle\rangle$}}
+\end{display}
+which by using the abbreviatory notation for dependencies within
+record types, flattening and relabelling can be reduced to
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_0$}{person(x)} \\
+        \tfield{c$_1$}{run(x)}}
+\end{display}
+\mng{$\forall x \mathrm{person}(x)\rightarrow\mathrm{run}(x)$} is
+\begin{display}
+\record{\tfield{c$_0$}{($r_0$:\smallrecord{\tfield{x}{\textit{Ind}}})$\rightarrow$
+                              $\lambda
+                              r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}(\smallrecord{\smalltfield{c$_2$}{\smallrecord{\smalltfield{c$_3$}{person($r_1$.x)}}$\rightarrow$\smallrecord{\smalltfield{c$_4$}{run($r_1$.x)}}}})($r_0$)}}
+\end{display}
+that is,
+\begin{display}
+\record{\tfield{c$_0$}{($r_0$:\smallrecord{\tfield{x}{\textit{Ind}}})$\rightarrow$
+                              \smallrecord{\smalltfield{c$_2$}{\smallrecord{\smalltfield{c$_3$}{person($r_0$.x)}}$\rightarrow$\smallrecord{\smalltfield{c$_4$}{run($r_0$.x)}}}}}}
+\end{display}
+
+\section{Examples of inference in first order logic}
+
+\paragraph{Implication.}  In classical first order logic implication
+is represented by the material condition, that is, we have:
+\begin{display}
+$\phi\rightarrow\psi \leftrightarrow \neg\phi\vee\psi$
+\end{display}
+Implication is interpreted in terms of a function type by
+clause~\ref{focl:implication} of our definition.  We obtain the
+material conditional if we assume that for each pair of types, $T_1,T_2$,
+$\{f\mid f:T_1\rightarrow T_2\}$ includes a function for each function
+graph (i.e. set of ordered pairs representing a function) from members
+of $T_1$ to members of $T_2$.  This means that there will be a
+function of type $T_1\rightarrow T_2$ just in case either $T_1$ has no
+members (the empty function) or $T_2$ is non-empty (in which case
+there will be some function which maps each member of $T_1$ to some
+member of $T_2$).  There will fail to be a function of type
+$T_1\rightarrow T_2$ just in case $T_1$ is non-empty and $T_2$ is
+empty.\footnote{In order to obtain an intuitionistic interpretation of
+  implication we need to make a different assumption about the
+  membership of function types, namely that there can be function
+  graphs for which there is no corresponding function.  There may be
+  certain sets of ordered pairs which are function graphs for which we
+  do not have a method of computing the second member of the ordered
+  pairs from the first and thus there is not a function in the
+  intuitionistic sense.}
+
+\paragraph{Negation.}  Classical negation gives us the following
+validities:
+\begin{display}
+$\phi\leftrightarrow\neg\neg\phi$
+
+$\phi\vee\neg\phi$
+
+\end{display}
+In clause~\ref{focl:negation} we have interpreted negation using the
+standard strategy from intuitionistic logic, though cast in terms of a
+function type.  However, the result will be classical negation if we
+make the same assumption about the function space as we did in order
+to obtain material implication.  A type $T\rightarrow\bot$ will be
+non-empty (witnessed by a function corresponding to the empty function
+graph) just in case $T$ is empty.  Thus $T$ will be empty just in case
+$(T\rightarrow\bot)\rightarrow\bot$ is empty.  Note that $T$ and
+$(T\rightarrow\bot)\rightarrow\bot$ are not the same type and will not
+have the same members.  From the perspective of type theory
+equivalence in classical logic only depends on whether types are empty
+or not.  Given this interpretation of negation we also get the law of
+the excluded middle since there is no third choice between a type
+being empty or not.\footnote{As negation is interpreted in terms of
+  function types, making an assumption about functions that would give
+  us an intuitionistic interpretation of implication would also give
+  us an intuitionistic interpretation of negation.}
+
+\paragraph{Existential quantification.}  In first order logic we have
+\begin{display}
+$\exists x \exists y R(x,y) \leftrightarrow \exists y
+\exists x R(x,y)$
+\end{display}
+\mng{$\exists x \exists y R(x,y)$} is
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_0$}{$\langle\lambda v_0:$\textit{Ind}
+                                 (\record{\tfield{y}{\textit{Ind}} \\
+\tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind}(\record{\tfield{c$_2$}{$R(v_0,v_1)$}}),
+                                                           $\langle$c$_0$.y$\rangle\rangle$}}),
+                                                           $\langle$x$\rangle\rangle$}}
+\end{display}
+and \mng{$\exists y \exists x R(x,y)$} is
+\begin{display}
+\record{\tfield{y}{\textit{Ind}} \\
+        \tfield{c$_0$}{$\langle\lambda v_0:$\textit{Ind}
+                                 (\record{\tfield{x}{\textit{Ind}} \\
+\tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind}(\record{\tfield{c$_2$}{$R(v_1,v_0)$}}),
+                                                           $\langle$c$_0$.x$\rangle\rangle$}}),
+                                                           $\langle$y$\rangle\rangle$}}
+\end{display}
+Both of these interpretations, using the abbreviatory notation for
+dependencies, flattening and relabelling, simplify to\footnote{Recall
+  that record types are sets of fields, thus the x and y-fields are
+  not ordered with respect to each other.} 
+\begin{display}
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{y}{\textit{Ind}}\\
+        \tfield{c$_0$}{$R$(x,y)}}
+\end{display}
+
+\paragraph{Universal quantification.}   In first order logic we have
+\begin{display}
+$\forall x \forall y R(x,y) \leftrightarrow \forall y
+\forall x R(x,y)$
+\end{display}
+\mng{$\forall x \forall y R(x,y)$} is
+\begin{display}
+\record{\tfield{c$_0$}{($r_0$:\smallrecord{\tfield{x}{\textit{Ind}}})$\rightarrow$
+                              $\lambda
+                              r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}(\smallrecord{\smalltfield{c$_2$}{($r_2$:\smallrecord{\tfield{y}{\textit{Ind}}})$\rightarrow
+                                \lambda r_3$:\smallrecord{\tfield{y}{\textit{Ind}}}(\smallrecord{\smalltfield{c$_3$}{$R$($r_1$.x,$r_3$.y)}})($r_0$)}})($r_2$)}}
+\end{display}
+that is,
+\begin{display}
+\record{\tfield{c$_0$}{($r_0$:\smallrecord{\tfield{x}{\textit{Ind}}})$\rightarrow$
+                              \smallrecord{\smalltfield{c$_2$}{($r_2$:\smallrecord{\tfield{y}{\textit{Ind}}})$\rightarrow$
+                                \smallrecord{\smalltfield{c$_3$}{$R$($r_0$.x,$r_2$.y)}}}}}}
+\end{display}
+ \mng{$\forall y \forall x R(x,y)$} is
+\begin{display}
+\record{\tfield{c$_0$}{($r_0$:\smallrecord{\tfield{y}{\textit{Ind}}})$\rightarrow$
+                              \smallrecord{\smalltfield{c$_2$}{($r_2$:\smallrecord{\tfield{x}{\textit{Ind}}})$\rightarrow$
+                                \smallrecord{\smalltfield{c$_3$}{$R$($r_2$.x,$r_0$.y)}}}}}}
+\end{display} 
+Both of these interpretations are equivalent to 
+\begin{display}
+\record{\tfield{c$_0$}{($r_0$:\smallrecord{\tfield{x}{\textit{Ind}}\\
+                                           \tfield{y}{\textit{Ind}}})$\rightarrow$
+                              \smallrecord{\smalltfield{c$_2$}{$R$($r_0$.x,$r_0$.y)}}}}
+\end{display}
+where there is no order between x and y. 
+

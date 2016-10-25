@@ -1,0 +1,2143 @@
+\chapter{Type theory with records}
+\label{app:ttr}
+
+Unless otherwise stated this is the version of TTR presented in 
+\cite{Cooper2012}.
+
+\section{Underlying set theory}
+\label{app:sets}
+In previous statements of this system such as \cite{Cooper2012} we
+tacitly assumed a standard underlying set theory such as ZF
+(Zermelo-Fraenkel) with urelements (as formulated for example in \citealp{Suppes1960}).  This is what we take to be the
+common or garden working set theory which is familiar from the core
+literature on formal semantics deriving from Montague's original work
+\citep{Montague1974}.  When we introduced complex
+objects and types
+other than records and record types we were not explicit about exactly which
+structured set-theoretic object they represented.  The reason for this
+was that, except in the case of records and record types, it did not
+seem important exactly how you code structured objects in the set
+theory and a detailed exposition would seem to provide another level
+of complication over and above an already complicated story.  
+
+In this
+version we will take advantage of the freedom provided by an appendix
+and spell out a set theoretic coding for all of our structured
+objects.  We will use \textit{labelled sets} to model our structured
+objects which is what we use for records and record types as well.  We
+will assume that our set theory comes equipped with a set of
+\textit{urelements} (objects which are not sets but which can be
+members of sets) which is partitioned into two countable subsets or
+\textit{urelements proper} (intuitively ``real atomic objects'') and
+\textit{labels} (intuitively ``objects that are used to label real
+objects, either atomic or sets'').  A \textit{labelled set} is a set
+of ordered pairs whose first member is a label and whose second
+element is either an urelement proper or a set (possibly a labelled
+set), such that no more than one ordered pair can contain any
+particular label as its first member.  This means that a labelled set
+is the traditional set theoretic construction of an extensional
+function from a set of labels onto some set.  Suppose that we have a
+set
+
+$\{a,b,c,d\}$
+
+and that $\ell_0,\ell_1,\ell_2,\ell_3$ are labels.  Then examples of
+labelled sets would be
+
+$\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$
+
+and
+
+$\{\langle\ell_0,\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle\}\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$
+
+Labelled sets where we identify particular distinguished labels will
+always give us enough structure to model the structured objects that
+we need and define operations on them as required by the type theory.
+
+
+\section{Basic types}
+\label{sec:basic}
+
+A {\it system of basic types\/} is a pair:
+\begin{display}
+{\bf TYPE$_B$} = $\langle${\bf Type}, $A$$\rangle$
+\end{display}
+where:
+\begin{enumerate} 
+ 
+\item \textbf{Type} is a non-empty set 
+ 
+\item $A$ is a function whose domain is \textbf{Type}
+
+\item for any $T\in\textbf{Type}$, $A(T)$ is a set disjoint from
+  \textbf{Type}
+
+\item for any $T\in\textbf{Type}$, $a:_{\mathbf{TYPE_B}}T$ iff $a\in A(T)$
+ 
+\end{enumerate}
+
+A \textit{modal system of basic types}\footnote{This definition was not present in \cite{Cooper2012}.} is a family of
+pairs:
+\begin{display}
+\textbf{TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
+$A\rangle_{A\in\mathcal{A}}$
+\end{display}
+where:
+\begin{enumerate} 
+ 
+\item $\mathcal{A}$ is a set of functions with domain \textbf{Type} 
+ 
+\item for each $A\in\mathcal{A}$, $\langle${\bf Type}, $A\rangle$ is a
+  system of basic types
+ 
+\end{enumerate} 
+
+This enables us to define some simple modal notions:
+
+If {\bf TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
+$A\rangle_{A\in\mathcal{A}}$
+is a modal system of basic types, we shall use the notation {\bf
+  TYPE$_{\mathit{MB}_A}$} (where $A\in\mathcal{A}$) to refer to that
+system of basic types in {\bf TYPE$_{\mathit{MB}}$} whose type assignment is
+$A$.    Then:  
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2\in\textbf{Type}$, $T_1$ \textit{is
+    (necessarily) equivalent
+    to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MB}}$},
+  $T_1\approx_{\mathbf{TYPE_{\mathit{MB}}}}T_2$,  iff for all
+  $A\in\mathcal{A}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_2\}$
+  
+ 
+\item for any $T_1,T_2\in\textbf{Type}$, $T_1$ \textit{is a subtype of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MB}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MB}}}}T_2$,  iff for all
+  $A\in\mathcal{A}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_2\}$
+
+\item for any $T\in\textbf{Type}$, $T$ \textit{is necessary in} {\bf TYPE$_{\mathit{MB}}$}  iff for all
+  $A\in\mathcal{A}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T\}\not=\emptyset$
+
+\item for any $T\in\textbf{Type}$, $T$ \textit{is possible in} {\bf TYPE$_{\mathit{MB}}$}  iff for some
+  $A\in\mathcal{A}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T\}\not=\emptyset$
+ 
+\end{enumerate}  
+
+\section{Complex types}
+
+\subsection{Predicates}
+\label{app:predicates}
+We start by introducing the notion of a predicate signature.
+
+A \textit{predicate signature} 
+is a triple
+\begin{display}
+$\langle$\textbf{Pred}, \textbf{ArgIndices}, \textit{Arity}$\rangle$
+\end{display}
+where:
+\begin{enumerate} 
+ 
+\item \textbf{Pred} is a set (of predicates)
+
+\item \textbf{ArgIndices} is a set (of indices for predicate
+  arguments, normally types)
+ 
+\item \textit{Arity} is a function with domain \textbf{Pred} and range
+  included in the set of finite sequences of members of \textbf{ArgIndices}. 
+ 
+\end{enumerate}
+
+\medskip
+
+A \textit{polymorphic predicate signature} 
+is a triple 
+\begin{display}
+$\langle$\textbf{Pred}, \textbf{ArgIndices}, \textit{Arity}$\rangle$
+\end{display}
+where:
+\begin{enumerate} 
+ 
+\item \textbf{Pred} is a set (of predicates)
+
+\item \textbf{ArgIndices} is a set (of indices for predicate
+  arguments, normally types)
+ 
+\item \textit{Arity} is a function with domain \textbf{Pred} and range
+  included in the powerset of the set of finite sequences of members
+  of \textbf{ArgIndices}. 
+ 
+\end{enumerate}
+ 
+
+\subsection{Systems of complex types}
+\label{app:comptypes}
+
+A {\it system of complex types\/} is a quadruple:
+\begin{display}
+{\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$
+\end{display}
+where:  
+\begin{enumerate} 
+ 
+\item $\langle$\textbf{BType}, $A$$\rangle$ is a system of basic types 
+ 
+\item \textbf{BType}$\subseteq$\textbf{Type}
+
+\item for any $T\in\textbf{Type}$, if $a:_{\langle\mathbf{BType},
+    A\rangle}T$ then $a:_{\mathbf{TYPE_C}}T$
+
+\item \label{cl:predtypes}$\langle${\bf Pred}, \textbf{ArgIndices},
+  {\it Arity\/}$\rangle$ is a (polymorphic) predicate
+  signature
+
+\item\hspace*{-1ex}\footnote{This clause has been modified since
+    \cite{Cooper2012} where it was a conditional rather than a biconditional.} %\sloppy  
+  $P(a_1,\ldots a_n)\in\textbf{PType}$ iff $P\in\textbf{Pred}$, $T_1\in \mathbf{Type},\ldots,T_n\in
+  \mathbf{Type}$, \textit{Arity}($P$)=$\langle
+  T_1,\ldots,T_n\rangle$  ($\langle
+  T_1,\ldots,T_n\rangle$$\in$\textit{Arity}($P$)) and $a_1:_{\mathbf{TYPE_C}}T_1,\ldots,a_n:_{\mathbf{TYPE_C}}T_n$
+
+% If $P\in\textbf{Pred}$, $T_1\in \mathbf{Type},\ldots,T_n\in
+%   \mathbf{Type}$, \textit{Arity}($P$)=$\langle
+%   T_1,\ldots,T_n\rangle$  ($\langle
+%   T_1,\ldots,T_n\rangle$$\in$\textit{Arity}($P$)) and $a_1:_{\mathbf{TYPE_C}}T_1,\ldots,a_n:_{\mathbf{TYPE_C}}T_n$ then
+%   $P(a_1,\ldots a_n)\in\textbf{PType}$
+
+
+
+\item \textbf{PType}$\subseteq$\textbf{Type}
+
+\item for any $T\in\textbf{PType}$, $F(T)$ is a set disjoint from \textbf{Type}
+
+\item for any $T\in\textbf{PType}$, $a:_{\mathbf{TYPE_C}}T$ iff $a\in F(T)$
+ 
+\end{enumerate}
+
+We call the pair $\langle A,F\rangle$ in a complex system of types the
+\textit{model} because of its similarity to first order models in
+providing values for the basic types and the ptypes constructed from
+predicates and arguments.  It is this pair which connects the system
+of types to the non-type theoretical world of objects and situations.
+
+In \cite{Cooper2012} we did not define exactly what object is
+represented by $P(a_1,\ldots a_n)$.  Here we will specify it to be the
+labelled set
+
+$\{\langle\mathrm{pred},P\rangle,\langle\mathrm{arg}_1,a_1\rangle,\ldots,\langle\mathrm{arg}_n,a_n\rangle\}$
+
+where `pred', `arg$_i$' are reserved labels (not used except as
+required here).
+
+What are the objects which belong to these types?  The intuition is
+that, for example,
+
+$e$ : run($a$)
+
+means that $e$ is an event or situation where the individual $a$ is
+running.  There are two competing intuitions about what $e$ could be.
+One is that it is a ``part of the world'', a non-set (urelement).  That is, from
+the perspective of set theory and type theory it is an unstructured
+atom.  The other intuition we have is that it is a structured object which
+contains $a$ as a component and in which a running activity is going
+on which involves smaller events such as picking feet up off the
+ground, spending certain time in each step cycle with neither foot
+touching the ground and so on.  We want to allow for both of these
+intuitions.  That is, a witness for a ptype can be a non-set
+corresponding to our notion of an event of a certain type.  Or it can
+be the kind of labelled set which we call a record.  That is $e$ does
+not only belong to the type `run($a$)' but also a record type which
+characterizes in more detail the structure of the event.  We will
+argue in the text that both intuitions are important and that
+observers of the world shift between type theories where certain
+ptypes are regarded as types of non-sets and type theories where those
+ptypes are types of records.
+
+%\section{Complex types in record types}
+
+\section{Function types}
+\label{app:funtypes}
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has function types} if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$, $(T_1\rightarrow T_2) \in \textbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$, $f:_{\mathbf{TYPE_C}}(T_1\rightarrow T_2)$ iff
+  $f$ is a function whose domain is $\{a\mid
+  a:_{\mathbf{TYPE_C}}T_1\}$ and whose range is included in $\{a\mid a:_{\mathbf{TYPE_C}}T_2\}$ 
+ 
+\end{enumerate}
+
+In \cite{Cooper2012} we did not specify exactly what object is
+represented by a function type $(T_1\rightarrow T_2)$.  Here we
+specify it to be the labelled set
+
+$\{\langle\mathrm{dmn},T_1\rangle,\langle\mathrm{rng},T_2\rangle\}$
+
+where `dmn' (``domain'') and `rng' (``range'') are reserved labels.
+
+We also introduce a limited kind of polymorphism is function types
+which we did not have in \cite{Cooper2012}.
+
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  polymorphic function types} if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$,
+  $\displaystyle{\bigvee_{T\sqsubseteq T_1}}(T\rightarrow T_2) \in \textbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$,
+  $f:_{\mathbf{TYPE_C}}\displaystyle{\bigvee_{T\sqsubseteq
+      T_1}}(T\rightarrow T_2)$ iff there is some type $T'$ such that
+  $f:(T'\rightarrow T_2)$ and $T'\sqsubseteq T_1$
+   
+ 
+\end{enumerate}
+
+We
+specify the type $\displaystyle{\bigvee_{T\sqsubseteq T_1}}(T\rightarrow T_2)$   to be the labelled set
+
+$\{\langle\mathrm{polydmn},T_1\rangle,\langle\mathrm{rng},T_2\rangle\}$
+
+where `polydmn' (``polymorphic domain'') and `rng' (``range'') are
+reserved labels (`rng' being the same reserved label that was used for
+non-polymorphic function types).
+
+
+In \cite{Cooper2012} we also left it open exactly what kind of object a
+function is and assumed there was some theory of functions which would
+allow us to characterize them in terms of their domain and range.  In
+a classical set theoretic setting where functions are modelled
+extensionally as sets of ordered pairs, little more needs to be said.
+Ideally, we want a notion of function
+that is more like a program or a procedure.  That is, functions can be
+intensional in the sense that two distinct functions can correspond to
+the same set of ordered pairs. However, it seems that for the purposes
+at hand the standard extensional notion of function as a set of
+ordered pairs is sufficient and a lot more straightforward to handle
+than a more intensional notion given the set-theoretic basis on which
+we are building.  There appears to be sufficient intensionality
+introduced by our notion of type and the of-type relation.  For this
+reason, we will model functions here as sets of ordered pairs in the
+classical set-theoretic way.  Ultimately, we suspect that a more
+computational and intensional notion of function should be
+substituted, but at this point it is unclear what consequences this
+might have for the rest of the system.
+
+This choice of modelling functions as sets of ordered pairs means that
+$f:_{\mathbf{TYPE_C}}(T_1\rightarrow T_2)$ iff $f\subseteq \{a\mid
+  a:_{\mathbf{TYPE_C}}T_1\} \times \{a\mid a:_{\mathbf{TYPE_C}}T_2\}$
+  such that if $b \in \{a\mid
+  a:_{\mathbf{TYPE_C}}T_1\}$ then there is exactly one $c$, such that
+  $\langle b,c\rangle\in f$.  We shall say that in this case the
+  result of applying the function $f$ to $b$, in symbols, $f(b)$, is
+  $c$.
+
+We introduce a notation for functions which is borrowed from the
+$\lambda$-calculus as used by \cite{Montague1973}.  Let $O[v]$ be the
+notation for some object of our type theory which uses the variable
+$v$ and let $T$ be a type.  Then the function
+
+$\lambda v:T\ .\ O[v]$ 
+
+is to be the function
+
+$\{\langle v,O[v]\rangle\mid v:T\}$
+
+(Here we suppress the subscript $\mathbf{TYPE_C}$ on the `:'.)  For
+example, the function
+
+$\lambda v$:\textit{Ind} . run($v$)
+
+is the set of ordered pairs
+
+$\{\langle v,\mathrm{run}(v)\rangle\mid v:\mathit{Ind}\}$
+
+Recall that `run($v$)' is itself a representation for the labelled
+set
+
+$\{\langle \mathrm{pred},\mathrm{run}\rangle, \langle
+\mathrm{arg}_1,v\rangle\}$
+
+Note that if $f$ is the function $\lambda v$:\textit{Ind} . run($v$)
+and $a$:\textit{Ind} then $f(a)$ (the result of applying $f$ to $a$)
+is `run($a$)'.  Our definition of function-argument application
+guarantees what is called $\beta$-equivalence in the
+$\lambda$-calculus.  When we discuss record types as arguments to
+functions we will need to introduce one slight complication to our
+notion of function application.  We will introduce that complication
+when we discuss record types.
+
+
+\section{List types}
+\label{app:listtypes}
+
+List types were not included in \cite{Cooper2012}.
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $[T] \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+\begin{enumerate} 
+ 
+\item $a\mid L:_{\mathbf{TYPE_C}}[T]$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}[T]$ 
+ 
+\item $[\ ]:_{\mathbf{TYPE_C}}[T]$ 
+ 
+\end{enumerate}
+
+\end{enumerate}
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  non-empty list types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $_{\mathit{ne}}[T] \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+\begin{enumerate} 
+ 
+\item $a\mid L:_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ 
+ 
+\item $[a]:_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ iff $a:T$
+ 
+\end{enumerate}
+
+\end{enumerate}
+
+If $a\mid L :_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ for some system of
+complex types {\bf TYPE$_C$} and type $T$, then we use fst($a\mid L$)
+to refer to $a$ and rst($a\mid L$) to refer to $L$.
+
+In contrast to \cite{Cooper2012} we here make it explcit that $[T]$
+represents $\{\langle\mathrm{lst},T\rangle\}$ and
+${_{\mathit{ne}}[T]}$ represents $\{\langle\mathrm{nelst},T\rangle\}$
+where `lst' and `nelst' are reserved labels. 
+
+Lists are a common data structure used in computer science but they
+are not normally defined in basic set theory, although it is
+straightforward to define them in terms of sets.  In \cite{Cooper2012}
+we did not specify an encoding of lists in terms of sets.  Here we
+will use an encoding with labelled sets using the reserved labels
+`fst' and `rst' for the first member of the list and the remainder
+(``rest'') of
+the list respectively.  We let the empty list, [], be the empty set,
+$\emptyset$.\footnote{If it is important to distinguish the empty list
+  from the empty set we could use an additional reserved label,
+  e.g. `lst',  and
+  have the empty list be the labelled set $\{\langle
+  \mathrm{lst},\emptyset\rangle\}$.}  If $L$ is a list then $a\mid L$
+is to be the labelled set $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
+
+\section{Set types}
+\label{app:settypes}
+
+Set types were not included in \cite{Cooper2012}.
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has set types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $\{T\} \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+$A:_{\mathbf{TYPE_C}}\{T\}$ iff  $A$ is a set and 
+  for all $a\in A$, $a:_{\mathbf{TYPE_C}}T$
+   
+ 
+\end{enumerate}
+
+We let $\{T\}$ represent the labelled set
+$\{\langle\mathrm{set},T\rangle\}$ where `set' is a reserved
+label.
+
+We also introduce a special kind of set type known as a plurality
+type.  The idea here is that a plurality is a set that does not contain any two
+objects such that one is a proper part of the other.  The notion of
+proper part is characterized by:
+\begin{enumerate}
+\item If $r_1$ and $r_2$ are records then $r_1$ \textit{is a proper
+    part of} $r_2$, $r_1<r_2$, just in case $\varphi(r_1)\subset\varphi(r_2)$. 
+ 
+\item If $o_1$ and $o_2$ are objects of some type and at least one of
+  them is not of type \textit{Rec}, then $o_1$ is \textit{not} a
+  proper part of $o_2$, $o_1\not<o_2$ 
+\end{enumerate}
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has plurality types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $\{\!\mid T\mid\!\} \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+$A:_{\mathbf{TYPE_C}}\{\!\mid T\mid\!\}$ iff  
+\begin{enumerate} 
+ 
+\item $A :_{\mathbf{TYPE_C}} \{T\}$ 
+ 
+\item if $a\in A$ then for any $b$ such that $a<b$, $b\not\in A$ 
+ 
+\end{enumerate} 
+  
+   
+ 
+\end{enumerate}
+
+We let $\{\!\mid T\mid\!\}$ represent the labelled set
+$\{\langle\mathrm{plurality},T\rangle\}$ where `plurality' is a reserved
+label. 
+
+\section{Singleton types}
+\label{app:singletontypes}
+
+Singleton types were not included in the formal definition in \cite{Cooper2012}.
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has singleton types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, $T_a \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, 
+$b:_{\mathbf{TYPE_C}}T_a$ iff  $a=b$
+   
+ 
+\end{enumerate}
+
+These clauses are those presented in \cite{Cooper2012}. A more general
+version of these clauses seems useful for the uses we wish to make of
+singleton types, for example, the restriction of properties discussed
+in Appendix~\ref{app:gramrulesuniv}.  The more general version allows
+singleton types to be created using an object of any type but will
+guarantee that the type is empty if the object is not of the type
+being restricted: 
+\begin{enumerate} 
+ 
+\item for any $T,T' \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T'$, $T_a \in \textbf{Type}$ 
+ 
+\item for any $T,T' \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T'$, 
+$b:_{\mathbf{TYPE_C}}T_a$ iff  $b:_{\mathbf{TYPE_C}}T$ and $a=b$
+   
+ 
+\end{enumerate}
+As we now allow singleton types that are empty (because the object
+used to restrict them is not of the required type) it may seem that
+the name ``singleton type'' is a misnomer.  The cases of empty types
+are those where we have failed to define a singleton type.
+
+Note that these definitions allow the formation of singleton types
+from singleton types.  We sometimes refer to these as
+\textit{multiple} singleton types and notate them as $T_{a,b,\ldots}$
+rather than the typographically unfortunate ${{T_a}_b}_{\ldots}$.
+Following the definition above an object $c$ will be of type $T_{a,b}$
+just in case $c:T$ and $a=b=c$.
+
+We let $T_a$ represent the labelled set
+$\{\langle\mathrm{singleton},T,a\rangle\}$ where `singleton' is a reserved
+label.
+ 
+\section{Join types}
+\label{app:jointypes}
+
+
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has join
+  types} if 
+
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $(T_1\vee T_2) \in \mathbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $a:_{\mathbf{TYPE_C}}(T_1\vee T_2)$ iff
+  $a:_{\mathbf{TYPE_C}}T_1$ or $a:_{\mathbf{TYPE_C}}T_2$ 
+ 
+\end{enumerate}
+
+Here, but not in \cite{Cooper2012}, we specify that $(T_1\vee T_2)$
+represents the labelled set
+$\{\langle\mathrm{disj}_1,T_1\rangle,\langle\mathrm{disj_2},T_2\rangle\}$
+where `disj$_1$' and `disj$_2$' are reserved labels (``disjunct'').
+
+\section{Meet types}
+\label{app:meettypes}
+
+A system of complex types \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has meet types} if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $(T_1\wedge T_2) \in \mathbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $a:_{\mathbf{TYPE_C}}(T_1\wedge T_2)$ iff
+  $a:_{\mathbf{TYPE_C}}T_1$ and $a:_{\mathbf{TYPE_C}}T_2$ 
+
+\end{enumerate}
+
+Here, but not in \cite{Cooper2012}, we specify that $(T_1\wedge T_2)$
+represents the labelled set
+$\{\langle\mathrm{conj}_1,T_1\rangle,\langle\mathrm{conj_2},T_2\rangle\}$
+where `conj$_1$' and `conj$_2$' are reserved labels (``conjunct'').
+
+\section{Models and modal systems of types}
+\label{app:modal}
+
+
+
+A modal system of complex types
+provides a collection of models, $\mathcal{M}$, so that we can talk about properties of the whole collection of
+type assignments provided by the various models $M\in\mathcal{M}$.
+
+A \textit{modal system of complex types based on $\mathcal{M}$} is a
+family of quadruples\footnote{This definition has been modified since
+  \cite{Cooper2012} to make \textbf{PType} and \textbf{Type} be
+  relativized to the model $M$.}:
+\begin{display}
+{\bf TYPE$_{\mathit{MC}}$} = $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle_{M\in\mathcal{M}}$
+\end{display}
+where for each $M\in \mathcal{M}$, $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle$ is
+a system of complex types.
+
+This enables us to define modal notions:
+
+If {\bf TYPE$_{\mathit{MC}}$} = $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle_{M\in\mathcal{M}}$
+is a modal system of complex types based
+on $\mathcal{M}$, we shall use the notation {\bf
+  TYPE$_{\mathit{MC}_M}$} (where $M\in\mathcal{M}$) to refer to that
+system of complex types in {\bf TYPE$_{\mathit{MC}}$} whose model is
+$M$.  Let \textbf{Type}$_{\mathit{MC}_{\mathit{restr}}}$ be
+  $\bigcap\limits_{M\in\mathcal{M}}\!\textbf{Type}_M$, the
+  ``restrictive'' set of
+  types which occur in all possibilities,  and \textbf{Type}$_{\mathit{MC}_{\mathit{incl}}}$ be
+  $\bigcup\limits_{M\in\mathcal{M}}\!\textbf{Type}_M$, the
+  ``inclusive'' set of
+  types which occur in at least one possibility.  Then we can define
+  modal notions either restrictively or inclusively (indicated by the
+  subscripts $r$ and $i$ respectively):
+
+\paragraph{restrictive modal notions}  
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T_1$ \textit{is
+    (necessarily) equivalent$_r$
+    to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\approx_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+  
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T_1$ \textit{is a subtype$_r$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T$ \textit{is necessary$_r$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for all
+  $M\in\mathcal{M}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T$ \textit{is possible$_r$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for some
+  $M\in\mathcal{M}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+ 
+\end{enumerate}
+
+\paragraph{inclusive modal notions}
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T_1$ \textit{is
+    (necessarily) equivalent$_i$
+    to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\approx_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
+  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+  
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T_1$ \textit{is a subtype$_i$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
+  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T$ \textit{is necessary$_i$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for all
+  $M\in\mathcal{M}$, if $T\in$\textbf{Type}$_M$, then \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T$ \textit{is possible$_i$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for some
+  $M\in\mathcal{M}$, if $T\in$\textbf{Type}$_M$, then\\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+ 
+\end{enumerate}
+
+It is easy to see that if any of the restrictive definitions holds for
+given types in a particular system then the corresponding inclusive
+definition will also hold for those types in that system.
+
+
+
+
+
+
+\section{The type \textit{Type} and stratification}
+
+\label{app:int}
+
+% An intensional type system is one in which the types themselves become
+% objects of a type. We introduce a distinguished type \textit{Type} to
+% which all the members of the set \textbf{Type} belong.  Things are a
+% little more complicated than this, though, since we want \textit{Type}
+% itself to be a type and therefore it should belong to the set
+% \textbf{Type}.  This would mean that \textit{Type} belongs to itself,
+% i.e. \textit{Type}:\textit{Type}.  Allowing types to belong to
+% themselves puts us in danger of creating a situation in which
+% Russell's paradox arises.  If some members of \textbf{Type} belong to
+% themselves then we should be able to talk of the set of types which do
+% not belong to themselves,
+% $\{T\in\mathbf{Type}\mid T\not\ : T\}$.  Suppose that some model
+% assigns this set to $T'$.  Then the question arises whether $T'$
+% belongs to itself and we can show that if $T':T'$ then $T'\not\ :T'$
+% and if $T'\not\ :T'$ then $T':T'$.  
+
+% In order to avoid this problem we
+% will \textit{stratify} (or \textit{ramify}) our type system by introducing types of
+% different \textit{orders}.   A type system of order 0 will be a
+% system of complex types in the way we have defined it.  The
+% set of types, \textbf{Type}$^1$ of a type
+% system of order 1 based on this system will contain in addition to
+% everything in the original type system a type, \textit{Type}$^1$, to
+% which all the types of order 0, members of the set \textbf{Type}$^0$, belong.  In general for all the natural
+% numbers $n$, \textit{Type}$^{n+1}$ will be a type to which all the
+% types in \textbf{Type}$^n$ belong.  But there may be more additional
+% types included in the higher sets of types.  Suppose, for example,
+% that we want to introduce a predicate $P$ expressing a relationship
+% between individuals and types.  (This will be our basic strategy for
+% the treatment of attitude predicates such as \textit{believe} and
+% \textit{know}.)  Then \textit{Arity}($P$) might be $\langle
+% \mathit{Ind},\mathit{Type}^n\rangle$.  In systems of any order less
+% than $n$, $P$ will not be able to be used to construct a type because
+% clause~\ref{cl:predtypes} in our definition of systems of complex
+% types requires that the types assigned to the arguments be types in
+% the system.  However, in systems of order $n$ or greater the required
+% type will be present and the predicate will form a type.
+
+% This avoids the risk of running into Russell's paradox but it
+% introduces another problem which it is best we deal with straight
+% away.  We will illustrate the problem by creating a small example.
+% Suppose that we have a system of complex types which includes the type
+% \textit{Ind} (``individuals'') to which the objects $a$, $b$ and $c$
+% belong.  Suppose further that we have three predicates
+% \textit{run},\textit{know} and \textit{believe} and that
+% \textit{Arity}(\textit{run})=$\langle\mathit{Ind}\rangle$ and
+% \textit{Arity}(\textit{know})=\textit{Arity}(\textit{believe})=$\langle\mathit{Ind},\mathit{Type}^1\rangle$. 
+% The set \textbf{Type}$^0$ will contain the types \textit{run}($a$),
+% \textit{run}($b$) and \textit{run}($c$) but no types constructed with
+% \textit{know} and \textit{believe}.  The set \textbf{Type}$^1$ will
+% contain types
+% such as \textit{believe}($a$, \textit{run}($a$)) and
+% \textit{know}($c$, \textit{run}($b$)) in addition, since \textit{run}($a$),
+% \textit{run}($b$) and \textit{run}($c$), being members of
+% \textbf{Type}$^0$ will belong to the type \textit{Type}$^1$.  The set
+% \textbf{Type}$^2$ will not get any additional types constructed with
+% predicates since the arity of the predicates restricts the second
+% argument to be of \textit{Type}$^1$.  But suppose we want to express
+% that $a$ believes that $b$ knows that $c$ runs, that is we want to
+% construct the type \textit{believe}($a$, \textit{know}($b$,
+% \textit{run}($c$))).  Perhaps we could solve this by saying that the
+% arity of \textit{know} and \textit{believe} is
+% $\langle\mathit{Ind},\mathit{Type}^2\rangle$.  But now
+% \textbf{Type}$^1$ will not contain any types constructed with these
+% predicates and \textbf{Type}$^2$ will again only contain types such as
+% \textit{know}($c$, \textit{run}($b$)).
+
+% In order to solve this problem we need to introduce a limited amount
+% of \textit{polymorphism} into our arities and assign these predicates
+% the arity $\langle\mathit{Ind},\mathit{Type}^n\rangle_{n>0}$ (that is,
+% the set of sequences $\langle\mathit{Ind},\mathit{Type}^n\rangle$
+% where $n$ is a natural number greater than 0).  Predicates with this
+% arity will be able to take arguments of any type \textit{Type}$^n$ where
+% $n>0$.  We will say that the predicates \textit{know} and
+% \textit{believe} have this arity.  Now it will be the case that
+% \textit{run}($c$):\textit{Type}$^1$, \textit{know}($b$,
+% \textit{run}($c$)):\textit{Type}$^2$, \textit{believe}($a$, \textit{know}($b$,
+% \textit{run}($c$))):\textit{Type}$^3$ and so on.
+
+% \bigskip
+
+An {\it intensional system of complex types\/} is a family of
+quadruples indexed by the natural numbers:
+\begin{display}
+{\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$
+\end{display}
+where (using $\mathbf{TYPE}_{\mathit{IC}_n}$ to refer to the quadruple
+indexed by $n$):
+\begin{enumerate} 
+ 
+\item for each $n$,$\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle$ is a 
+system of complex types  
+ 
+\item for each $n$, $\mathbf{Type}^n\subseteq\mathbf{Type}^{n+1}$ and
+  $\mathbf{PType}^n\subseteq\mathbf{PType}^{n+1}$
+
+\item for each $n$, if $T\in\mathbf{PType}^n$ and $p\in F^n(T)$ then
+  $p\in F^{n+1}(T)$
+
+\item for each $n>0$, $\mathit{Type}^n\in\mathbf{Type}^n$
+
+\item for each $n>0$,
+  $T:_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathit{Type}^n$ iff $T\in\mathbf{Type}^{n-1}$
+ 
+\end{enumerate}
+
+Here, but not in \cite{Cooper2012}, we make explicit that
+\textit{Type} is a distinguished urelement and that \textit{Type}$^n$
+represents the labelled set
+$\{\langle\mathrm{ord},n\rangle,\langle\mathrm{typ},\mathit{Type}\rangle\}$
+where `ord' and `typ' are reserved labels (``order'', ``type'').
+
+\label{pg:dep-fn-types}An intensional system of complex types \textbf{TYPE}$_\mathit{IC}$,
+\begin{display}
+{\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$
+\end{display} 
+\textit{has dependent function types} if
+\begin{enumerate} 
+ 
+\item for any $n>0$, $T \in \mathbf{Type}^n$ and
+  $\mathcal{F}:_{\mathbf{TYPE}_{\mathit{IC}_n}}(T\rightarrow\mathit{Type^n})$,
+  $((a:T)\rightarrow \mathcal{F}(a)) \in \mathbf{Type}^n$ 
+ 
+\item for each $n>0$,
+$f:_{\mathbf{TYPE}_{\mathit{IC}_n}}((a:T)\rightarrow \mathcal{F}(a))$
+iff $f$ is a function whose domain is $\{a\mid
+a:_{\mathbf{TYPE}_{\mathit{IC}_n}}T\}$ and such that for any $a$ in the
+domain of $f$, $f(a):_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathcal{F}(a)$.
+   
+ 
+\end{enumerate} 
+We might say that on this view dependent function types are
+``semi-intensional'' in that they depend on there being a type of
+types for their definition but they do not introduce types as
+arguments to predicates and do not involve the definition of orders of
+types in terms of the types of the next lower order.
+
+Here, in contrast to \cite{Cooper2012}, we make explicit that
+$((a:T)\rightarrow \mathcal{F}(a))$ represents the labelled set
+$\{\langle\mathrm{dmn},T\rangle,\langle\mathrm{deprng},\mathcal{F}\rangle\}$
+where `dmn' as before for function types is a reserved label
+corresponding to ``domain'' and `deprng' is a reserved label
+corresponding to ``dependent range''.
+
+Putting the definition of a modal type system and an intensional type
+system together we obtain:\footnote{This explicit definition was not
+  present in \cite{Cooper2012}.}
+
+An {\it intensional modal system of complex types based on $\mathfrak{M}$\/} is a family,
+indexed by the natural numbers, of families of quadruples indexed by
+members of $\mathfrak{M}$:
+\begin{display}
+{\bf TYPE$_\mathit{IMC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\mathscr{M}_n$$\rangle_{\mathscr{M}\in\mathfrak{M},n\in\mathit{Nat}}$
+\end{display}
+where:
+\begin{enumerate} 
+ 
+\item for each $n$, $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\mathscr{M}_n$$\rangle_{\mathscr{M}\in\mathfrak{M}}$ is a modal
+  system of complex types based on $\{\mathscr{M}_n\mid \mathscr{M}\in\mathfrak{M}\}$ 
+ 
+\item for each $\mathscr{M}\in\mathfrak{M}$, $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\mathscr{M}_n$$\rangle_{n\in\mathit{Nat}}$ is an
+  intensional system of complex types
+ 
+\end{enumerate} 
+ 
+
+
+\section{Record types}
+\label{app:rectypes}
+
+In this section we will define what it means for a system of complex
+types to have record types.  The objects of record types, that is,
+records, are themselves structured mathematical objects of a
+particular kind and we will
+start by characterizing them.
+
+A {\it record\/} is a finite set of ordered pairs (called {\it fields\/})
+which is the graph of a function.  If $r$ is a record and $\langle\ell,v\rangle$
+is a field in $r$ we call $\ell$ a {\it label\/} and $v$ a {\it value\/} in $r$
+and we use $r.\ell$ to denote $v$.  $r.\ell$ is called a \textit{path}
+in $r$.  This means that a record is a labelled set as introduced in Appendix~\ref{app:sets}.
+
+We will use a tabular format to
+represent records.  A record 
+$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ is displayed as
+\begin{display}
+\record{\field{$\ell_1$}{$v_1$} \\
+        \ldots \\
+        \field{$\ell_n$}{$v_n$}}
+\end{display}
+
+A value may itself be a record and paths may extend into embedded
+records.  A record which contains records as values is called a {\it
+  complex record\/} and otherwise a record is {\it simple\/}.  Values which are not records are called {\it
+  leaves\/}.  Consider a record $r$ \label{pg:record}
+\begin{display}
+\record{\field{$f$}{\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
+                                                \field{$\mathit{gg}$}{$b$}}}\\
+                            \field{$g$}{$c$}}}\\
+        \field{$g$}{\record{\field{$h$}{\record{\field{$g$}{$a$}\\
+                                                \field{$h$}{$d$}}}}}}
+\end{display}
+Among the paths in $r$ are $r.f$, $r.g.h$ and $r.f.f.\mathit{ff}$ which denote,
+respectively, 
+\begin{display}
+\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
+                                                \field{$\mathit{gg}$}{$b$}}}\\
+                            \field{$g$}{$c$}}
+\end{display}
+\begin{display} 
+\record{\field{$g$}{$a$}\\
+                                                \field{$h$}{$d$}}
+\end{display}
+and $a$.  We will make a distinction between \textit{absolute paths},
+such as those we have already mentioned, which consist of a record
+followed by a series of labels connected by dots and \textit{relative
+  paths} which are just a series of labels connected by dots,
+e.g. $g.h$.  Relative paths are useful when we wish to refer to
+similar paths in different records.  We will use \textit{path} to
+refer to either absolute or relative paths when it is clear from the
+context which is meant.  The set of leaves of $r$, also known as its {\it
+  extension\/} (those objects other than labels which it contains), is
+$\{a,b,c,d\}$.  The bag (or multiset) of leaves of $r$, also known as
+its {\it multiset extension\/}, is $\{a,a,b,c,d\}$.  A record may be
+regarded as a way of labelling and structuring its extension.
+
+An object, $a$, is a \textit{component} of a record, $r$, in symbols,
+$a\varepsilon r$, just in case there is some path, $\pi$, in $r$ such
+that $r.\pi=a$.  Thus the record, $r$, above has the following
+components: $r.f$, $r.f.f$, $r.f.f.\mathit{ff}$,
+$r.f.f.\mathit{gg}$, $r.f.g$, $r.g$, $r.g.h$, $r.g.h.g$ and
+$r.g.h.h$. An object, $a$, is \textit{present} in a record, $r$, in
+symbols, $a\underline{\varepsilon} r$, just in case either $a=r$ or
+$a\varepsilon r$.
+
+Two
+records are {\it (multiset) extensionally equivalent\/} if they have
+the same (multiset) extension.  Two important, though trivial, facts
+  about records are:
+\begin{quote}
+{\it Flattening.\/} \label{pg:flattening} For any record $r$, there is a multiset
+extensionally equivalent simple record.  We can define an operation of flattening on records which
+will always produce an equivalent simple record.  In the case of our
+example, the result of flattening is
+\begin{display}
+\record{\field{$f.f.\mathit{ff}$}{$a$} \\
+        \field{$f.f.\mathit{gg}$}{$b$} \\
+        \field{$f.g$}{$c$} \\
+        \field{$g.h.g$}{$a$} \\
+        \field{$g.h.h$}{$d$}}
+\end{display}
+assuming the flattening operation uses paths from the original record
+in a rather obvious way to create unique labels for the new record.
+
+{\it Relabelling.\/}  \label{pg:relabelling}For any record $r$, if $\pi_1.\ell.\pi_2$ is a
+path $\pi$ in $r$, and $\pi_1.\ell'.\pi{_2}'$ is {\it not\/} a path in
+$r$ (for any $\pi{_2}'$),
+then substituting $\ell'$ for the occurrence of $\ell$ in $\pi$ results in
+a record which is multiset equivalent to $r$.  We could, for example,
+substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our example record.
+
+\record{\field{$f$}{\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
+                                                \field{$\mathit{gg}$}{$b$}}}\\
+                            \field{$g$}{$c$}}}\\
+        \field{$g$}{\record{\field{$h$}{\record{\field{$k$}{$a$}\\
+                                                \field{$h$}{$d$}}}}}}
+
+\end{quote}
+
+A (proper) record \textit{type} is a labelled set 
+where the objects labelled are types or, in some cases, certain
+kinds of mathematical objects which can be used to construct types.
+
+A record $r$ is \textit{well-typed} with respect to a system of types
+\textbf{TYPE} with set of types \textbf{Type} and a set of labels $L$
+iff for each field $\langle\ell,a\rangle\in r$, $\ell\in L$ and
+either $a:_\mathbf{TYPE}T$ for some $T\in\mathbf{Type}$ or $a$ is
+itself a record which is well-typed with respect to \textbf{TYPE} and $L$.
+
+A system of complex types \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has record
+  types based on $\langle L, \mathbf{RType}\rangle$}, where $L$ is a countably infinite set (of labels)
+and \textbf{RType} $\subseteq$ \textbf{Type}, where \textbf{RType} is
+defined by:
+\begin{enumerate} 
+ 
+\item $\mathit{Rec}\in\mathbf{RType}$
+
+\item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a well-typed record with
+  respect to \textbf{TYPE$_C$} and $L$.
+
+\item $\mathit{ERec}\in\mathbf{RType}$
+
+\item $r:_{\mathbf{TYPE}_C}\mathit{ERec}$ iff $r=\emptyset$
+
+\item if $\ell\in L$ and $T\in\mathbf{Type}$, then
+  $\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
+
+\item $r:_{\mathbf{TYPE}_C}\{\langle\ell,T\rangle\}$ iff
+  $r:_{\mathbf{TYPE}_C}\mathit{Rec}$, $\langle\ell,a\rangle\in r$ and
+  $a:_{\mathbf{TYPE}_C}T$.
+
+\item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in L$, $\ell$ does not occur as a
+  label in $R$ (i.e. there is no field $\langle\ell',T'\rangle$ in $R$
+  such that $\ell'=\ell$), then
+  $R\cup\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
+
+\item $r:_{\mathbf{TYPE}_C}R\cup\{\langle\ell,T\rangle\}$ iff
+  $r:_{\mathbf{TYPE}_C}R$, $\langle\ell,a\rangle\in r$ and $a:_{\mathbf{TYPE}_C}T$.
+ 
+\end{enumerate}
+
+We say that $T$ is a \textit{proper} record type if it is a non-empty
+set of fields.\footnote{This terminology was not introduced in \cite{Cooper2012}.}\label{pg:proprectype} 
+
+This gives us non-dependent record types in a system of complex types.
+We can extend this to intensional systems of complex types (with
+stratification).  
+
+% We can introduce a limited
+% dependency into a system of complex types with record types by
+% requiring that the values associated with certain fields are the
+% results of applying an operation to the values of other fields. We
+% first define an operation signature based on a system of complex
+% types.
+
+% An \textit{operation signature} based on  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+% $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+%   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ is a set
+% $\mathcal{O}$ of
+% quadruples $\langle O, \langle T_1,\ldots,T_n\rangle, T, o\rangle$
+% such that
+% for any $\omega$ and $\omega'$ in $\mathcal{O}$, if
+%   $\omega_1=\omega'_1$ (that is, the first elements of the tuples
+%   are identical) then $\omega=\omega'$ (that is, $\mathcal{O}$
+%   defines a function on the first elements of the tuples).  
+%  Each quadruple is such that
+% \begin{enumerate} 
+ 
+% \item $O$ is a symbol (``operator symbol'') 
+ 
+% \item for some $n$, $\langle T_1,\ldots,T_n\rangle$ is a sequence of
+%   types in \textbf{Type} (``the arity of the operator'')
+
+% \item $T$ is a type in \textbf{Type} (``the type of the range of the operator'')
+
+% \item $o$ is an operator with domain $\{a\mid a:_{\mathbf{TYPE}_C}
+%   T_1\}\times\ldots\times\{a\mid a:_{\mathbf{TYPE}_C} T_n\}$ and range
+%   included in $\{a\mid a:_{\mathbf{TYPE}_C} T\}$
+ 
+% \end{enumerate} 
+
+% \sloppy{
+% A system of complex types \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+% $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+%   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with record
+%   types based on $\langle L, \mathbf{RType}\rangle$ \textit{has
+%   operator dependent record types based on $\mathcal{O}$}, where
+% $\mathcal{O}$ is an operation signature based on \textbf{TYPE}$_C$ if}
+% \begin{enumerate} 
+ 
+% \item  if $R$ is a member of {\bf RType}, $\ell\in L$ not occurring as a label in $R$, 
+%   $R.\pi_1,\ldots,R.\pi_n$ are paths in $R$  and for some
+%   $\omega\in\mathcal{O}$, $\omega_1$ is the operation symbol $O$ and
+%   $\omega_2$ is an $n$-place sequence
+%    $\langle
+%   T_1,\ldots,T_n\rangle$ (that is $O$ is an $n$-place operation symbol
+%   with arity $\langle
+%   T_1,\ldots,T_n\rangle$) such that if $r:R$ then
+%     $r.\pi_1:_{\mathbf{TYPE}_C}T_1,\ldots, r.\pi_n:_{\mathbf{TYPE}_C}T_n$ and $T$ is the range type $\omega_3$, then $R \cup \{\langle\ell, T_{O(\pi_1,\ldots,\pi_n)}\rangle\}$ is a
+%     member of {\bf RType}.
+    
+    
+
+ 
+% \item Using $o$ to represent the operator $\omega_4$, $r :_{\mathbf{TYPE}_C} R \cup \{\langle\ell, T_{O(\pi_1,\ldots,\pi_n)}\rangle\}$ iff $r :_{\mathbf{TYPE}_C}
+%     R$, $\langle\ell,a\rangle$ is a field in $r$ and $a :_{\mathbf{TYPE}_C} T_{o(r.\pi_1,\ldots,r.\pi_n)}$. 
+ 
+% \end{enumerate} 
+  
+    
+
+
+
+An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has record types
+  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ if
+for each $n$,  $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle$ has record types based on $\langle
+L,\mathbf{RType}^n\rangle$ and
+\begin{enumerate} 
+ 
+\item for each $n$, \textbf{RType}$^n$ $\subseteq$ \textbf{RType}$^{n+1}$ 
+ 
+\item for each $n>0$, \textit{RecType}$^n$ $\in$ \textbf{RType}$^n$
+
+\item for each $n>0$,
+  $T:_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathit{RecType}^n$ iff $T\in\mathbf{RType}^{n-1}$
+ 
+\end{enumerate} 
+
+Here, but not in \cite{Cooper2012}, we make explicit that
+\textit{RecType} is treated in a similar manner to 
+\textit{Type}, that is, it is a distinguished urelement and \textit{RecType}$^n$
+represents the labelled set
+$\{\langle\mathrm{ord},n\rangle,\langle\mathrm{typ},\mathit{RecType}\rangle\}$
+where `ord' and `typ' are reserved labels (``order'', ``type'').
+
+
+Intensional type systems 
+may in addition contain \textit{dependent} record types.  
+
+An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has dependent record types
+  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$,
+if it has records types based on $\langle L,
+\mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ and for each $n>0$
+\begin{enumerate} 
+ 
+\item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in
+    $R$  and
+    ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
+    
+
+
+ 
+\item $r :_{\mathbf{TYPE}_{\mathit{IC}_n}}R\cup\{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}$ iff $r :_{\mathbf{TYPE}_{\mathit{IC}_n}} R$, $\langle\ell, a\rangle$ is a field
+in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1,\ldots,r.\pi_m)$.  
+ 
+\end{enumerate} 
+
+
+
+
+We represent a record type $\{\langle\ell_1,T_1\rangle,\ldots,\langle\ell_n,T_n\rangle\}$
+graphically as
+\begin{display}
+\record{\tfield{$\ell_1$}{$T_1$} \\
+        \ldots \\
+        \tfield{$\ell_n$}{$T_n$}}
+\end{display}
+In the case of a manifest field, that is, one containing a singleton
+type, as in $\langle\ell,T_a\rangle$, we display this
+\begin{display}
+\record{\mfield{$\ell$}{$a$}{$T$}}
+\end{display}
+In the case of a multiple singleton type (a singleton type formed from
+a singleton type) as in $\langle\ell,T_{a,b,\ldots}\rangle$, we display
+\begin{display}
+\record{\mfield{$\ell$}{$a,b,\ldots$}{$T$}}
+\end{display}
+
+
+In the case of dependent record types
+we sometimes use a convenient notation representing e.g. 
+\begin{display}
+\mbox{$\langle\lambda u \lambda v\ 
+\textrm{love}(u,v), \langle\pi_1,\pi_2\rangle\rangle$}
+\end{display}
+ as 
+\begin{display}
+love($\pi_1,\pi_2$)
+\end{display}
+
+Our systems now allow both function types and dependent record types
+and allow dependent record types to be arguments to functions.  We
+have to be careful when considering what the result of applying a
+function to a dependent record type should be.  Consider the following
+simple example:
+\begin{display}
+$\lambda
+v_0:$\textit{RecType} (\smallrecord{\smalltfield{c$_0$}{$v_0$}})
+\end{display}
+What should be the result of applying this function to the record type
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind}(dog($v_1$)),
+          $\langle$x$\rangle\rangle$}}
+\end{display}
+Given normal assumptions about function application the result would
+be
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} (dog($v_1$)),
+          $\langle$x$\rangle\rangle$}}}} (incorrect!)
+\end{display}
+but this would be incorrect.  In fact it is not a well-formed record
+type since x is not a path in it.  Instead the result should be 
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} (dog($v_1$)),
+          $\langle$c$_0$.x$\rangle\rangle$}}}}
+\end{display}
+where the path from the top of the record type is specified.  However,
+in the abbreviatory notation we write just `x' when the label is used
+as an argument and interpret this as the path from the top of the
+record type to the field labelled `x' in the local record type.  Thus
+we will write
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{dog(x)}}
+\end{display}
+(where the `x' in `dog(x)' signifies the path consisting of just the
+single label `x') and
+\begin{display}
+\record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{dog(x)}}}}
+\end{display}
+(where the `x' in `dog(x)' signifies the path from the top of the
+record type down to `x' in the local
+record type, that is, `c$_0$.x').\footnote{This convention of
+  representing the path from the top of the record type to the
+  ``local'' field by the final label on the path is new since \cite{Cooper2012}.}
+
+Note
+that this adjustment of paths is only required when a record type is being
+substituted into a position that lies on a path within a resulting
+record type.  It will not, for example, apply in a case where a record
+type is to be substituted for an argument to a predicate such as when
+applying the function
+\begin{display}
+$\lambda v_0:$\textit{RecType} (\smallrecord{\tfield{c$_0$}{appear($v_0$)}})
+\end{display}
+to
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} (dog($v$)),
+          $\langle$x$\rangle\rangle$} \\
+        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} (approach($v$)),
+          $\langle$x$\rangle\rangle$}}
+\end{display}
+where the position of $v_0$ is in an ``intensional context'', that is,
+as the argument to a predicate and there is no path to this position
+in the record type resulting from applying the function.  Here the
+result of the application is
+\begin{display}
+\record{\tfield{c$_0$}{appear(
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} (dog($v$)),
+          $\langle$x$\rangle\rangle$} \\
+        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} (approach($v$)),
+          $\langle$x$\rangle\rangle$}}
+)}}
+\end{display}
+with no adjustment necessary to the paths representing the
+dependencies.\footnote{This record corresponds to the interpretation
+  of \textit{it appears that a dog is approaching}.}  (Note that `c$_0$.x' is not a path in this record
+type.) 
+
+Suppose that we wish to represent a type which requires that there is
+some dog such that it appears to be approaching (that is a \textit{de
+  re} reading).  In the abbreviatory notation we might be tempted to
+write
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{dog(x)} \\
+        \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{approach(x)}})}}
+      (incorrect!)
+\end{display}
+corresponding to
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} (dog($v$)),
+          $\langle$x$\rangle\rangle$} \\
+        \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{$\langle\lambda
+              v$:\textit{Ind} (approach($v$)),
+              $\langle$x$\rangle\rangle$}})}} (incorrect!)
+\end{display}
+This is, however, incorrect since it refers to a path `x' in the type
+which is the argument to `appear' which does not exist.  Instead we
+need to refer to the path `x' in the record type containing the field
+labelled `c$_0$':
+\begin{display}
+ \record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} (dog($v$)),
+          $\langle$x$\rangle\rangle$} \\
+        \tfield{c$_0$}{$\langle\lambda v$:\textit{Ind} (appear(\record{\tfield{c$_2$}{approach($v$)}})),
+              $\langle$x$\rangle\rangle$}}
+\end{display}
+In the abbreviatory notation we will use `$\Uparrow$' to indicate that
+the path referred to is in the ``next higher'' record
+type\footnote{This notation is new since \cite{Cooper2012}.}:
+\begin{display}
+\record{\tfield{x}{\textit{Ind}} \\
+        \tfield{c$_1$}{dog(x)} \\
+        \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{approach($\Uparrow$x)}})}}
+\end{display}
+
+These matters arise as a result of our choice of using paths to
+represent dependencies in record types (rather than, for example,
+introducing additional unique identifiers to keep track of the
+positions within a record type as has been suggested by Thierry Coquand).  It seems like a matter of implementation rather than a matter
+of substance and it is straightforward to define a path-aware notion
+of substitution which can be used in the definition of what it means
+to apply a TTR function to an argument.  If $f$ is a function
+represented by $\lambda v:T(\phi)$ and $\alpha$ is the representation
+of an object of type $T$, then the result of applying $f$ to $\alpha$,
+$f(\alpha)$, is represented by Subst($\alpha$,$v$,$\phi$,$\emptyset$),
+that is, the result of substituting $\alpha$ for $v$ in $\phi$ with
+respect to the empty path where for arbitrary
+$\alpha,v,\phi,\pi$,
+Subst($\alpha$,$v$,$\phi$,$\pi$) is defined as 
+\begin{enumerate} 
+ 
+\item extend-paths($\alpha$,$\pi$), if $\phi$ is $v$ 
+ 
+\item $\phi$, if $\phi$ is of the form $\lambda v:T(\zeta)$, for some
+  $T$ and $\zeta$ (i.e. don't do any substitution if $v$ is bound
+  within $\phi$)
+
+\item $\lambda u:T$(Subst($\alpha$,$v$,$\zeta$,$\pi$)), if $\phi$ is
+  of the form $\lambda u:T(\zeta)$ and $u$ is not $v$.
+
+\item
+  \record{\tfield{$\ell_1$}{Subst($\alpha$,$v$,$T_1$,$\pi.\ell_1$)} \\
+          \ldots \\
+          \tfield{$\ell_n$}{Subst($\alpha$,$v$,$T_n$,$\pi.\ell_n$)}},
+        if $\phi$ is \record{\tfield{$\ell_1$}{$T_1$} \\
+                             \ldots \\ 
+                             \tfield{$\ell_n$}{$T_n$}}
+
+\item $P$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
+  if $\alpha$ is $P(\beta_1,\ldots,\beta_n)$ for some predicate $P$
+
+% \item $O$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
+%   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
+
+\item $\phi$ otherwise
+ 
+\end{enumerate} 
+ 
+extend-paths($\alpha$,$\pi$) is
+\begin{enumerate} 
+ 
+\item $\langle f, \langle \pi.\pi_1,\ldots,\pi.\pi_n\rangle\rangle$,
+  if $\alpha$ is $\langle f, \langle \pi_1,\ldots,\pi_n\rangle\rangle$ 
+ 
+\item \record{\tfield{$\ell_1$}{extend-paths($T_1,\pi$)} \\
+              \ldots \\
+              \tfield{$\ell_n$}{extend-paths($T_n,\pi$)}} if $\alpha$
+            is \record{\tfield{$\ell_1$}{$T_1$} \\
+                       \ldots \\
+                       \tfield{$\ell_n$}{$T_n$}}
+
+\item
+  $P$(extend-paths($\beta_1,\pi$),\ldots,extend-paths($\beta_n,\pi$)),
+  if $\alpha$ is $P(\beta_1,\ldots,\beta_n)$ for some predicate $P$
+
+% \item $O$(extend-paths($\beta_1,\pi$),\ldots,extend-paths($\beta_n,\pi$)),
+%   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
+
+\item $\alpha$, otherwise
+ 
+\end{enumerate} 
+
+
+\section{Merges of record types}
+\label{app:merge}
+
+If $T_1$ and $T_2$ are record types then there will always be a record
+type (not a meet) 
+$T_3$ which is necessarily equivalent to $T_1\wedge T_2$.
+Let us consider some examples:
+
+\smallrecord{\smalltfield{f}{$T_1$}}$\wedge$\smallrecord{\smalltfield{g}{$T_2$}}
+$\approx$ 
+\smallrecord{\smalltfield{f}{$T_1$}\\
+        \smalltfield{g}{$T_2$}}
+
+\smallrecord{\smalltfield{f}{$T_1$}}$\wedge$\smallrecord{\smalltfield{f}{$T_2$}}
+$\approx$ 
+\smallrecord{\smalltfield{f}{$T_1\wedge T_2$}}
+
+\noindent We
+define a function $\mu$ which maps meets of record types to an
+equivalent record type, record types to equivalent types where meets
+in their values have been simplified by $\mu$ and any other types to themselves:
+\begin{enumerate} 
+ 
+\item If for some $T_1$, $T_2$, $T=T_1\wedge T_2$ then
+  $\mu(T)=\mu'(\mu(T_1)\wedge\mu(T_2))$. 
+ 
+\item If $T$ is a record type then $\mu(T)$ is $T'$ such that for any
+  $\ell$,$v$, $\langle\ell,\mu(v)\rangle\in T'$ iff
+  $\langle\ell,v\rangle\in T$.
+
+\item Otherwise $\mu(T)=T$.
+ 
+\end{enumerate} 
+
+$\mu'(T_1\wedge T_2)$ is defined by:
+\begin{enumerate} 
+ 
+\item if $T_1$ and $T_2$ are record types, then $\mu'(T_1\wedge
+  T_2)=T_3$ such that
+\begin{enumerate} 
+ 
+\item for any $\ell,v_1,v_2$, if $\langle\ell,v_1\rangle\in T_1$ and
+  $\langle\ell,v_2\rangle\in T_2$, then 
+
+\begin{enumerate} 
+ 
+\item if $v_1$ and $v_2$ are $\langle\lambda u_1:T'_1\ldots\lambda
+  u_i:T'_i(\phi),\langle\pi_1\ldots\pi_i\rangle\rangle$ and $\langle\lambda u'_1:T''_1\ldots\lambda
+  u'_k:T''_k(\psi),\langle\pi'_1\ldots\pi'_k\rangle\rangle$
+  respectively, then $\langle\lambda u_1:T'_1\ldots\lambda
+  u_i:T'_i,\lambda u'_1:T''_1\ldots\lambda
+  u'_k:T''_k(\mu(\phi\wedge\psi)), \langle\pi_1\ldots\pi_i,\pi'_1\ldots\pi'_k\rangle\rangle\in T_3$
+ 
+\item if $v_1$ is $\langle\lambda u_1:T'_1\ldots\lambda
+  u_i:T'_i(\phi),\langle\pi_1\ldots\pi_i\rangle\rangle$ and $v_2$ is a
+  type (i.e. not of the form $\langle f,\Pi\rangle$ for some function
+  $f$ and sequence of paths $\Pi$), then $\langle\lambda u_1:T'_1\ldots\lambda
+  u_i:T'_i(\mu(\phi\wedge
+  v_2)),\langle\pi_1\ldots\pi_i\rangle\rangle\in T_3$
+
+\item if $v_2$ is $\langle\lambda u'_1:T''_1\ldots\lambda
+  u'_k:T''_k(\psi),\langle\pi'_1\ldots\pi'_k\rangle\rangle$ and $v_1$
+  is a type, then $\langle\lambda u'_1:T''_1\ldots\lambda
+  u'_k:T''_k(\mu(v_1\wedge\psi)),\langle\pi'_1\ldots\pi'_k\rangle\rangle\in
+  T_3$
+
+\item otherwise $\langle\ell,\mu(v_1\wedge
+  v_2)\rangle\in T_3$ 
+ 
+\end{enumerate} 
+  
+
+
+ 
+\item for any $\ell,v_1$, if $\langle\ell,v_1\rangle\in T_1$ and there
+  is no $v_2$ such that $\langle\ell,v_2\rangle\in T_2$, then
+  $\langle\ell,v_1\rangle\in T_3$
+
+\item for any $\ell,v_2$, if $\langle\ell,v_2\rangle\in T_2$ and there
+  is no $v_1$ such that $\langle\ell,v_1\rangle\in T_1$, then
+  $\langle\ell,v_2\rangle\in T_3$
+ 
+\end{enumerate} 
+
+\item if $T_1$ is \textit{Rec} and $T_2$ is a record type, then
+  $\mu'(T_1\wedge T_2)=T_2$
+
+\item if $T_1$ is a record type  and $T_2$ is \textit{Rec}, then
+  $\mu'(T_1\wedge T_2)=T_1$
+
+\item If $T_1$ is $[T_1']$ ($\{T_1'\}$, $\{\!\mid T_1'\mid\!\}$) and
+  $T_2$ is $[T_2']$ ($\{T_2'\}$, $\{\!\mid T_2'\mid\!\}$), then
+  $\mu'(T_1\wedge T_2)=[\mu(T_1'\wedge T_2')]$ ($\{\mu(T_1'\wedge
+  T_2')\}$, $\{\!\mid\mu(T_1'\wedge T_2')\mid\!\}$)
+   
+ 
+\item \label{item:mergeotherwise} Otherwise $\mu'(T_1\wedge T_2)=T_1\wedge T_2$ 
+ 
+\end{enumerate} 
+
+$T_1$ \d{$\wedge$} $T_2$ is used to represent $\mu(T_1\wedge T_2)$.
+We call  $T_1$ \d{$\wedge$} $T_2$ the \textit{merge} of $T_1$ and $T_2$.   
+
+The following two clauses could be added at
+the beginning of the definition of $\mu$ (after providing a
+characterization of the subtype relation, $\sqsubseteq$).
+\begin{enumerate} 
+ 
+\item if for some $T_1,T_2$, $T=T_1\wedge T_2$ and $T_1\sqsubseteq T_2$
+  then $\mu(T)=T_1$ 
+ 
+\item if for some $T_1,T_2$, $T=T_1\wedge T_2$ and $T_2\sqsubseteq T_1$
+  then $\mu(T)=T_2$ 
+ 
+\end{enumerate} 
+
+The current first clause would then hold in case neither of the
+conditions of these two clauses are met.  The definition without these
+additional clauses only accounts for simplification of meets which
+have to do with merges of record types whereas the definition with the
+additional clauses would in addition have the effect, for example, that
+$\mu(T\wedge T_a)=T_a$ and $\mu(T_1\wedge(T_1\vee T_2))= T_1$
+(provided that we have an appropriate definition of $\sqsubseteq$)
+whereas the current definition without the additional clauses means
+that $\mu$ 
+leaves these types unchanged.
+
+We define also a notion of \textit{asymmetric merge} of $T_1$ and
+$T_2$ which is defined by a function exactly like $\mu$ except that
+clause~\ref{item:mergeotherwise} of the definition of $\mu'$ is replaced by 
+\begin{enumerate} 
+ 
+\item[\ref{item:mergeotherwise}$'$.] Otherwise $\mu'(T_1\wedge T_2)=T_2$ 
+ 
+\end{enumerate} 
+  
+We use $T_1$ \fbox{\d{$\wedge$}} $T_2$  to represent the asymmetric
+merge of $T_1$ and $T_2$.  
+
+These definitions do not in general avoid
+the formation of ill-formed record types since they allow record types
+to be replaced with non-record types within a record type thus
+potentially removing paths that might be included in dependent type
+fields elsewhere in the resulting type.  However, if merging is
+restricted to either two record types or two non-record types this
+problem should not occur since all paths from both types will be
+preserved.  In the case of asymmetric merges we can allow the
+replacement of non-record types by record types without risk.  Note
+that our definition of dependent record types in \ref{app:rectypes}
+allows for dependencies to fields that have conflicting types.  Such
+record types will be well-formed though will not have any witnesses.
+
+\paragraph{Merging functions which return types}
+
+$\lambda r\!:\!T_1\ .\ T_2(r)$ \d{\d{$\wedge$}} $\lambda r\!:\!T_3\ .\ T_4(r)$
+denotes the function $\lambda r\!:\!T_1$\d{$\wedge$}$T_3\ .\
+T_2(r)$\d{$\wedge$}$T_4(r)$.
+
+\paragraph{Constructing fixed point types for functions which return
+  types}
+\label{pg:fixedpointtype}
+
+If, for
+some type $T_1$, $f:(T_1\rightarrow\textit{Type})$ then $\mathcal{F}(f)$ is a \textit{fixed
+point type} for $f$, that is $a:\mathcal{F}(f)$ implies $a:f(a)$.
+$\mathcal{F}$ is defined by
+\begin{quote}
+$\mathcal{F}(\lambda r\!:\!T_1\ .\ T_2(r)) = T_1$\d{$\wedge$}$T'$
+
+where $T'$ is like $T_2(r)$ except that any path $r.\pi$ is
+replaced by $\pi$.
+\end{quote}
+
+Strictly speaking this definition is not quite correct since $T'$ may
+not be a type because there may be a path occurring as an argument to
+a predicate which is not introduced in $T'$.  A more correct, though
+less perspicuous, definition would be
+\begin{quote}
+$\mathcal{F}(\lambda r\!:\!T_1\ .\ T_2(r)) =
+[(\lambda r\!:\!T_1\ .\ T_1$\d{$\wedge$}$T_2(r))(r^*)]^{-r^*}$
+
+where $r^*$ is a record of type $T_1$ such that there is no path occurring as an
+argument to a predicate in $T_1$ or $T_2(r)$ of the form $r^*.\pi$ for
+any $\pi$ and $[T]^{-r}$ is the result of replacing any path of the
+form $r.\pi$, for any $\pi$, occurring as an argument to a predicate
+in $T$, with $\pi$.
+\end{quote}
+
+This definition, however, fails to capture that $\mathcal{F}$ must be
+defined as a partial function which is undefined on functions meeting
+a certain condition.  This is taken account of in the following final
+definition:
+\begin{quote}
+$\mathcal{F}$ is a partial function on functions such that if, for
+some type $T_1$, $f:(T_1\rightarrow \textit{Type})$, $f=\lambda
+r\!:\!T_1\ .\ T_2(r)$, $g$ is the function
+\begin{quote}
+$\lambda r\!:\!T_1\ .\ T_1$\d{$\wedge$}$T_2(r)$
+\end{quote}
+and for any $r_1,r_2:T_1$
+\begin{quote}
+$[g(r_1)]^{-r_1} = [g(r_2)]^{-r_2}$
+\end{quote}
+then if $r^*:T_1$,
+\begin{quote}
+$\mathcal{F}(f) = [g(r*)]^{-r^*}$
+\end{quote}
+
+For any function $f$ not covered by the above, $\mathcal{F}(f)$ is undefined.
+\end{quote}
+Let us take some concrete examples based on the discussion in
+Chapter~\ref{ch:commonnouns}, Section~\ref{sec:dgqs}.  Suppose that
+$f$ is the function
+\begin{quote}
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{dog($r$.x)}}
+\end{quote}
+Then $g$ will be
+\begin{quote}
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{x}{\textit{Ind}}} \d{$\wedge$} \smallrecord{\smalltfield{e}{dog($r$.x)}}
+\end{quote}
+That is,
+\begin{quote}
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{x}{\textit{Ind}}\\
+          \tfield{e}{dog($r$.x)}}
+\end{quote}
+If we now compute $[g(r^*)]^{-r^*}$ for some
+$r^*$:\smallrecord{\smalltfield{x}{\textit{Ind}}}, that is we apply
+$g$ to $r^*$ and then remove $r^*$ from all path-names that begin with
+it we will obtain
+\begin{quote}
+\record{\tfield{x}{\textit{Ind}}\\
+          \tfield{e}{dog(x)}}
+\end{quote}
+We would have obtained the same result no matter which record we chose
+to be $r^*$, since $r$ only occurs in $g$ at the head of path names.
+Now consider $f$ to be a variant of what we propose to be the content
+of \textit{temperature} in Chapter~\ref{ch:commonnouns} (in fact,
+similar to a
+variant that we have proposed in previous work):
+\begin{quote}
+$\lambda r$:\textit{Rec} . \record{\tfield{e}{temperature($r$)}}
+\end{quote}
+Now $g$ will be
+\begin{quote}
+$\lambda r$:\textit{Rec} . \textit{Rec} \d{$\wedge$} \smallrecord{\smalltfield{e}{temperature($r$)}}
+\end{quote}
+That is,
+\begin{quote}
+$\lambda r$:\textit{Rec} . \record{\tfield{e}{temperature($r$)}}
+\end{quote}
+which happens to be identical with $f$.  If we apply this to a record
+$r^*$ we will obtain
+\begin{quote}
+\record{\tfield{e}{temperature($r^*$)}}
+\end{quote}
+The result of removing all occurrences of $r^*$ at the head of a path
+will be identical since $r^*$ occurs here not as the head of a path
+but as an argument to a predicate. Consequently if we choose a
+different record for $r^*$ the result will be a different type.  Thus
+$\mathcal{F}$ is not defined on this function.  This is intuitively
+correct since defining fixed points for this function would involve a
+kind of non-well foundedness which we have not allowed in TTR.
+
+The moral of this tale is that if you wish to define a dependent type
+(that is, a function returning a type), $\lambda r\!:\!T_1\ .\ T_2(r)$,
+for which you will be able to compute a fixed point type, make sure
+that $T_2$ only depends on $r$ in that $r$ may be the head of path
+names in $T_2(r)$.  Normally, you will also want to ensure that $T_1$
+and $T_2$ do not share any labels in order to avoid unwanted clashes
+when $T_1$ and $T_2$ are merged.
+ 
+% \paragraph{Constructing backgrounding types corresponding to functions which return
+%   types}
+% \label{pg:backgroundingtype}
+% We introduced backgrounding types for dependent types (functions which
+% return types).  These are like the fixed point types generated by
+% $\mathcal{F}$ except that an additional label `bg' (``background'') is
+% placed before the domain type of the function in the resulting type.
+% If $f$ is a function returning a type (a dependent type) then we will
+% represent the corresponding backgrounding type as $\mathcal{B}(f)$.
+% Here is an example:
+% \begin{quote}
+% $\mathcal{B}$($\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                        \smalltfield{e}{female(x)}} . 
+% \smallrecord{\smalltfield{e}{leave($r$.x)}}) = 
+% \record{\tfield{bg}{\record{\tfield{x}{\textit{Ind}}\\
+%                             \tfield{e}{female(x)}}}\\
+%         \tfield{e}{leave(bg.x)}}
+% \end{quote}
+
+% More generally, if $f:(T_1\rightarrow\textit{Type})$ then $\mathcal{B}(f)$ is the
+% \textit{backgrounding type} for $f$.
+% $\mathcal{B}$ is defined by
+% \begin{quote}
+% $\mathcal{B}(\lambda r\!:\!T_1\ .\ T_2(r))$ = \smallrecord{\smalltfield{bg}{$T_1$}}\d{$\wedge$}$T'$
+
+% where $T'$ is like $T_2(r)$ except that any path $r.\pi$ is
+% replaced by bg.$\pi$.
+% \end{quote}
+
+% In an exactly parallel way to the definition of the function
+% $\mathcal{F}$ which creates fixed point types, this definition is strictly speaking not quite correct since $T'$ may
+% not be a type because there may be a path occurring as an argument to
+% a predicate which is not introduced in $T'$.  A more correct, though
+% less perspicuous, definition parallel to that for $\mathcal{F}$, would be
+% \begin{quote}
+% $\mathcal{B}(\lambda r\!:\!T_1\ .\ T_2(r))$ =
+% [($\lambda r$:$T_1$ . \smallrecord{\smalltfield{bg}{$T_1$}}\d{$\wedge$}$T_2(r)$)($r^*$)]$^{r^*/\mathrm{bg}}$
+
+% where $r^*$ is a record of type \smallrecord{\smalltfield{bg}{$T_1$}} such that there is no path occurring as an
+% argument to a predicate in $T_1$ or $T_2(r)$ of the form $r^*.\pi$ for
+% any $\pi$ and $[T]^{r^*/\mathrm{bg}}$ is the result of replacing any path of the
+% form $r^*.\pi$, for any $\pi$, occurring as an argument to a predicate
+% in $T$, with bg.$\pi$.
+% \end{quote}
+
+\section{Flattening and relabelling of record types}
+\label{app:flattening}
+
+We extend the notions of flattening and relabelling of records
+discussed in Appendix~\ref{app:rectypes} to types.\footnote{This was
+  not made explicit in \cite{Cooper2012}.}
+
+If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
+\begin{enumerate} 
+ 
+\item $\displaystyle{\bigcup_{f\in T}}\mathrm{FlattenField}(f)$,  if $T$ is a proper record type (see p.~\pageref{pg:proprectype}) 
+ 
+\item $T$, otherwise 
+ 
+\end{enumerate} 
+where $\mathrm{FlattenField}$ is defined as follows:
+
+$\mathrm{FlattenField}(\langle\ell, T\rangle)$ is
+\begin{enumerate} 
+ 
+\item $\varphi(\left\{\begin{array}{l}\langle\ell.\ell_1, T_1\rangle,\\
+                                 \langle\ell.\ell_2, T_2\rangle,\\
+                                 \vdots \\
+                                 \langle\ell.\ell_n, T_n\rangle
+                 \end{array}\right\})$, if $T$ is $\left\{\begin{array}{l}\langle\ell_1, T_1\rangle,\\
+                                 \langle\ell_2, T_2\rangle,\\
+                                 \vdots \\
+                                 \langle\ell_n, T_n\rangle
+                 \end{array}\right\}$
+ 
+\item $\langle\ell, T\rangle$, otherwise 
+ 
+\end{enumerate} 
+    
+Correspondingly, we can define a way of computing the inverse of
+flattening.  
+
+If $T$ is a type, $\varphi^-(T)$, \textit{the inverse flattening
+  (expansion) of} $T$ is
+\begin{enumerate} 
+ 
+\item $\left\{\begin{array}{l}\langle\ell_1,
+                                    \varphi^-(\left\{\begin{array}{l}\langle\pi_{1,1},T_{1,1}\rangle\\
+                                                                     \langle\pi_{1,2},T_{1,2}\rangle\\ 
+                                                                     \vdots\\
+                                                                     \langle\pi_{1,m_1},T_{1,m_1}\rangle
+                                                     \end{array}
+                                              \right\}\rangle,\\
+                               \langle\ell_2,
+                                    \varphi^-(\left\{\begin{array}{l}\langle\pi_{2,1},T_{2,1}\rangle\\
+                                                                     \langle\pi_{2,2},T_{2,2}\rangle\\ 
+                                                                     \vdots\\
+                                                                     \langle\pi_{2,m_2},T_{1,m_2}\rangle
+                                                     \end{array}
+                                              \right\}\rangle,\\
+                               \vdots\\
+                               \langle\ell_n,
+                                    \varphi^-(\left\{\begin{array}{l}\langle\pi_{n,1},T_{n,1}\rangle\\
+                                                                     \langle\pi_{n,2},T_{n,2}\rangle\\ 
+                                                                     \vdots\\
+                                                                     \langle\pi_{n,m_n},T_{n,m_n}\rangle
+                                                     \end{array}
+                                              \right\}\rangle\end{array}\right\}$,
+                                            if $T$ is 
+$\left\{\begin{array}{l}\langle\ell_1.\pi_{1,1},T_{1,1}\rangle\\
+                        \langle\ell_1.\pi_{1,2},T_{1,2}\rangle\\
+                        \vdots\\
+                        \langle\ell_1.\pi_{1,m_1},T_{1,m_1}\rangle\\
+                        \langle\ell_2.\pi_{2,1},T_{2,1}\rangle\\
+                        \langle\ell_2.\pi_{2,2},T_{2,2}\rangle\\
+                        \vdots\\
+                        \langle\ell_2.\pi_{2,m_2},T_{2,m_2}\rangle\\
+                        \vdots\\
+                        \langle\ell_n.\pi_{n,1},T_{n,1}\rangle\\
+                        \langle\ell_n.\pi_{n,2},T_{n,2}\rangle\\
+                        \vdots\\
+                        \langle\ell_n.\pi_{n,m_n},T_{1,m_n}\rangle\\
+         \end{array}\right\}$
+  
+\item $T$, otherwise 
+ 
+\end{enumerate}
+
+The set of \textit{complex labels} (or \textit{paths}), $L_\pi$,  \textit{based
+  on a set of labels}, $L$, is a set such that
+\begin{enumerate} 
+ 
+\item if $\ell\in L$, then $\ell\in L_\pi$ 
+ 
+\item if $\pi\in L_\pi$ and $\ell\in L$, then $\pi.\ell\in L_\pi$
+
+\item nothing else is a member of $L_\pi$
+ 
+\end{enumerate} 
+   
+
+
+If $T$ is a type in a system of types based on labels $L$, then a
+\textit{relabelling} for $T$ is a one-one function,
+$\eta$, whose domain is the set of labels of the flattened type
+$\varphi(T)$ and whose range is included in $L_\pi$ and such that for
+no $\pi_1$, $\pi_2$ and $\pi$, $\eta(\pi_2)=\eta(\pi_1).\pi$, that is,
+no new complex label can be assigned by the relabelling which is a
+proper initial part of another complex label assigned by the relabelling.  The result of
+\textit{relabelling} $T$ with $\eta$, a relabelling for $T$, is $\varphi^-([\varphi(T)]_\eta)$
+where for any flattened type $T$, $[T]_\eta$ is the result of replacing every
+occurrence of all the labels $\ell$ in $T$ (including those that occur as arguments to predicates,
+i.e. in dependent fields) with $\eta(\ell)$.
+
+\textbf{Alternative definition which should be used throughout [????]:}  The result of
+\textit{relabelling} $T$ with $\eta$, a relabelling for $T$, is
+denoted by  $[T]_\eta$ and is defined by $\varphi^-(\{\varphi(T)\}_\eta)$
+where for any flattened type $T$, $\{T\}_\eta$ is the result of replacing every
+occurrence of all the labels $\ell$ in $T$ (including those that occur as arguments to predicates,
+i.e. in dependent fields) with $\eta(\ell)$.
+
+The fact that a relabelling $\eta$ is one-one means that the inverse
+of $\eta$, $\eta^-$, is also a function which we can use to recover
+the original labelling.  This gives us the opportunity to relabel,
+carry out some operation on the relabelled type and then restore the
+original labelling.  This is, for example, exploited in the discussion
+of accommodation in Chapter~\ref{ch:propnames} on p.~\pageref{pg:inverserelabelling}.
+
+% If fields $f_1$ and $f_2$ have the same label, that is
+% $f_1=\langle\ell, T_1\rangle$ and $f_2=\langle\ell, T_2\rangle$ for
+% some $\ell$, $T_1$ and $T_2$, then the result of \textit{merging} the two
+% \textit{fields} is $\langle\ell,T_1$\d{$\wedge$}$T_2\rangle$. 
+
+\section{Using records to restrict and specify record types}
+\label{app:specrec}
+
+(These definitions were not included in \citealp{Cooper2012}.)
+
+If $T$ is a type and $r$ is a record, then $T\!\restriction\!r$ is a
+type. $a:T\!\restriction\!r$ iff $a\underline{\varepsilon} r$ (see
+Appendix~\ref{app:rectypes}) and $a:T$.
+
+If $T$ is a record type and $r$ is a record, then $T\!\mid\!\restriction\! r$, the
+\textit{restriction} of $T$ by
+$r$ is the result
+of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+$\ell$ is a label in $r$, with 
+\begin{enumerate}
+\item  $\langle\ell,T'\!\restriction\!r.\ell\rangle$\footnote{That is,
+    in an adaptation of our
+graphical notation for manifest fields, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
+replaced by \smallrecord{\smallrfield{$\ell$}{$r.\ell$}{$T'$}}}, if
+$T'$ is a type
+\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+  paths of length $n$ and for any
+  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+  f(a_1)\ldots(a_n)\!\restriction\!r.\ell$
+\end{enumerate}
+
+A variant of this notion of restriction is default restriction
+which will only require restriction of fields which are not already
+restricted. If $T$ is a record type and $r$ is a record, then
+$T\drestr r$, the
+\textit{default restriction} of $T$ by
+$r$ is the result
+of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+$\ell$ is a label in $r$, with 
+\begin{enumerate}
+\item  $\langle\ell,T'\!\restriction\!r.\ell\rangle$, if
+$T'$ is a type but not a restricted type. If $T'$ is a
+singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
+\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+  paths of length $n$ and for any
+  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+  f(a_1)\ldots(a_n)\!\restriction\!r.\ell$ if $f(a_1)\ldots(a_n)$ is not a
+  restricted type. Otherwise, $f'(a_1)\ldots(a_n) =
+  f(a_1)\ldots(a_n)$.
+\end{enumerate}  
+
+
+If $T$ is a record type and $r$ is a record, then $T\parallel r$, the
+\textit{specification} (or \textit{anchoring}) of $T$ by
+$r$\footnote{$r$ could also be referred to as a \textit{partial
+    specifier} or \textit{partial assignment} for $T$} is the result
+of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+$\ell$ is a label in $r$, with 
+\begin{enumerate}
+\item  $\langle\ell,T'_{r.\ell}\rangle$\footnote{That is, in our
+standard graphical notation, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
+replaced by \smallrecord{\smallmfield{$\ell$}{$r.\ell$}{$T'$}}}, if
+$T'$ is a type
+\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+  paths of length $n$ and for any
+  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+  f(a_1)\ldots(a_n)_{r.\ell}$
+\end{enumerate}
+
+A variant of this notion of specification is default specification
+which will only require specification of fields which are not already
+specified. If $T$ is a record type and $r$ is a record, then
+$T\dspec r$, the
+\textit{default specification} (or \textit{default anchoring}) of $T$ by
+$r$ is the result
+of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+$\ell$ is a label in $r$, with 
+\begin{enumerate}
+\item  $\langle\ell,T'_{r.\ell}\rangle$, if
+$T'$ is a type but not a singleton type.\footnote{That is, $\langle
+  \ell, T'\rangle$ is not already a manifest field.} If $T'$ is a
+singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
+\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+  paths of length $n$ and for any
+  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+  f(a_1)\ldots(a_n)_{r.\ell}$ if $f(a_1)\ldots(a_n)$ is not a
+  singleton type. Otherwise, $f'(a_1)\ldots(a_n) =
+  f(a_1)\ldots(a_n)$.
+\end{enumerate}  
+
+Types can also be specified by records which have different labels to
+the type by using a relabelling.  Thus $T\parallel_\eta r$ is the
+result of replacing each field in $T$, $\langle\ell,T'\rangle$,  such
+that $\eta(\ell)$ is a label in $r$ and $r.\eta(\ell):T'$, with a
+manifest field$\langle\ell,T'_{r.\eta(\ell)}\rangle$.  More exactly we
+will define $T\parallel_\eta r$ in terms of flattening, relabelling
+and specification by a record:
+\begin{quote}
+$T\parallel_\eta r$ =
+$\varphi^-([[\varphi(T)]_\eta\parallel\varphi(r)]_{\eta^-})$
+\end{quote}
+Here are two examples:  suppose that % $a:T_1$, $b:T_2$ and 
+$\eta$ is a
+function with domain $\{\ell_1,\ell_2\}$ such that
+$\eta(\ell_1)=\ell_3$ and $\eta(\ell_2)=\ell_4$.  Then:
+\begin{quote}
+\record{\tfield{$\ell_1$}{$T_1$}\\
+        \tfield{$\ell_2$}{$T_2$}} $\parallel_\eta$ 
+\record{\field{$\ell_3$}{$a$}\\
+        \field{$\ell_4$}{$b$}}
+=
+\record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
+        \mfield{$\ell_2$}{$b$}{$T_2$}}
+\end{quote}
+Suppose now that % $a$ and $b$ are as above and that 
+$\eta$ is a
+function with domain $\{\ell_5.\ell_1, \ell_5.\ell_2, \ell_6\}$ (where
+$\ell_5.\ell_1$ and $\ell_5.\ell_2$ are complex labels) such that
+$\eta(\ell_5.\ell_1)=\ell_7.\ell_3$,
+$\eta(\ell_5.\ell_2)=\ell_8.\ell_4$ and $\eta(\ell_6)=\ell_6$.  Then:
+\begin{quote}
+\record{\tfield{$\ell_5$}{\record{\tfield{$\ell_1$}{$T_1$}\\
+                                  \tfield{$\ell_2$}{$T_2$}}}\\
+        \tfield{$\ell_6$}{$T_3$}} $\parallel_\eta$
+\record{\field{$\ell_7$}{\record{\field{$\ell_3$}{$a$}}}\\
+        \field{$\ell_8$}{\record{\field{$\ell_4$}{$b$}\\
+                                 \field{$\ell_9$}{$c$}}}} =
+\begin{quote}
+\record{\tfield{$\ell_5$}{\record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
+                                  \mfield{$\ell_2$}{$b$}{$T_2$}}}\\
+        \tfield{$\ell_6$}{$T_3$}}
+\end{quote}
+\end{quote}  
+
+\section{Strings and regular types}
+\label{sec:regular}
+\label{app:strings}
+
+A \textit{string algebra over a set of objects} $O$ is a pair $\langle S,
+^{\frown}\rangle$ where:
+\begin{enumerate} 
+ 
+\item $S$ is the closure of $O\cup\{\varepsilon\}$ ($\varepsilon$ is the empty string) under the binary operation `$^{\frown}$' (``concatenation'') 
+ 
+\item for any $s$ in $S$, $\varepsilon^{\frown}s = s^{\frown}\varepsilon = s$
+
+\item for any $s_1,s_2,s_3$ in $S$,
+  $(s_1^{\frown}s_2)^{\frown}s_3=s_1^{\frown}(s_2^{\frown}s_3)$.  For
+  this reason we normally write $s_1^{\frown}s_2^{\frown}s_3$ or more
+  simply $s_1s_2s_3$.
+ 
+\end{enumerate}
+
+The objects in $S$ are called strings.  Strings have length.  $\varepsilon$ has
+length 0.  If $s$ is a string in $S$
+with length $n$ and $a$ is an object in $O$ then $s^{\frown}a$ has
+length $n+1$.  We use $s[n]$ to represent the $n$th element of string
+$s$.
+
+In TTR strings are records\footnote{This is new since \cite{Cooper2012}.} with fields labelled by a distinguished
+ordered countably infinite set of labels (corresponding to the natural
+numbers):  t$_0$,t$_1$,\ldots.  $\varepsilon$ is the empty record,
+that is the empty set.  This has length 0.  (Recall that records are sets of ordered
+pairs.)  A string with one element $a$ (of some type) is the
+record \smallrecord{\field{t$_0$}{$a$}}. If $s$ is a string whose
+highest label in the order is t$_n$ ($n\geq 0$) and $a$ is an object of
+some type then $s^{\frown}a$ is $s\cup\{\langle t_{n+1},a\rangle\}$.  If
+$s$ is a string whose highest label in the order is t$_n$ then the
+length of $s$ is $n+1$.  $s[n]$ is defined to be $s$.t$_n$.
+Concatenation (`$^{\frown}$') can be extended to include concatenation
+of strings of arbitrary length.  If $s$ is a string and $s_n$ is a
+string of length $n$, then $s^{\frown}s_n$ is
+$s^{\frown}s_n[0]^{\frown}\ldots^{\frown}s_n[n-1]$. 
+
+If $s$ is a string of length $n$ of records such that for each $i$,
+$0\leq i<n$, $s[i].\pi$ is a defined path, 
+$\displaystyle\mathop{\mathrm{concat}}_{0\leq i<n}(s[i].\pi)$ denotes
+$s[0].\pi^{\frown}\ldots^{\frown}s[n-1].\pi$.  We use
+concat$_i$($s[i].\pi$) to represent $\displaystyle\mathop{\mathrm{concat}}_{0\leq i<\mathrm{length}(s)}(s[i].\pi)$.
+
+A system of complex types  \textbf{TYPE}$_S$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with record types
+based on $\langle L, \mathbf{RType}\rangle$ \textit{has string types}
+if
+\begin{enumerate} 
+ 
+\item for each natural number $i$, t$_i\in L$
+ 
+\item \textit{String} $\in$ \textbf{BType}
+
+\item $\emptyset\in$ \textit{String}
+
+\item if $T \in$ \textbf{Type} and $a:_{\mathbf{TYPE}_S}T$ then
+  \smallrecord{\field{t$_0$}{a}} : \textit{String}
+
+\item if $s$ :$_{\mathbf{TYPE}_S}$ \textit{String}, t$_n$ is a label in $s$ such that
+  there is no $i>n$ where t$_i$ is a label in $s$, $T \in$ \textbf{Type}
+  and $a:_{\mathbf{TYPE}_S}T$ then $s\cup\{\langle \mathrm{t}_{n+1},a\rangle\}$ :$_{\mathbf{TYPE}_S}$
+  \textit{String}
+
+\item Nothing is of type \textit{String} except as required above.
+ 
+\end{enumerate} 
+  
+ 
+We can define types whose elements are strings.  Such types correspond
+to regular expressions and we will call them \textit{regular types}.
+Here we will define just two kinds of such types:  concatenation types
+and Kleene-+ types.
+
+A system of complex types with string types \textbf{TYPE}$_S$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  concatenation types} if 
+\begin{enumerate} 
+ 
+\item 
+\begin{enumerate}
+\item for any $T_1$, $T_2$ $\in$ {\bf Type},  $({T_1}^\frown\!T_2)$
+  $\in$ {\bf Type}
+
+\item for any $T_1$, $T_2$, $T_3$ $\in$ \textbf{Type},
+  $({T_1}^{\frown}T_2)^{\frown}T_3 =
+  {T_1}^{\frown}({T_2}^{\frown}T_3)$\footnote{This has been added to
+    the definition in \cite{Cooper2012} to make associativity explicit.}
+\end{enumerate}
+ 
+\item $a :_{\mathbf{TYPE}_S} {T_1}^\frown\!T_2$ iff $a=x^\frown\!y$, $x:_{\mathbf{TYPE}_S}T_1$ and $y:_{\mathbf{TYPE}_S}T_2$ 
+ 
+\end{enumerate} 
+\textbf{TYPE}$_S$ \textit{has Kleene-+ types} if
+\begin{enumerate} 
+ 
+\item 
+for any $T$ $\in$ {\bf Type},  $T^+$ $\in$ {\bf Type} 
+ 
+\item $a:_{\mathbf{TYPE}_S}T^+$ iff $a=x_1^\frown\!\ldots^\frown\!x_n$, $n>0$ and for $i$, $1\leq
+i\leq n$, $x_i:_{\mathbf{TYPE}_S}T$ 
+ 
+\end{enumerate} 
+
+\textbf{TYPE}$_S$ \textit{has Kleene-* types} if
+\begin{enumerate} 
+ 
+\item 
+for any $T$ $\in$ {\bf Type},  $T^*$ $\in$ {\bf Type} 
+ 
+\item $a:_{\mathbf{TYPE}_S}T^*$ iff
+  $a=x_1^\frown\!\ldots^\frown\!x_n$, $n\geq 0$ and for $i$, $1\leq
+i\leq n$, $x_i:_{\mathbf{TYPE}_S}T$ 
+ 
+\end{enumerate} 
+
+Note that this definition distinguishes and object $a$ and the unit
+string consisting of $a$, that is, \smallrecord{\field{$t_0$}{$a$}}.
+We will use $\overset{\frown}{a}$ to represent this.
+
+   
+Strings are used standardly in formal language theory where strings of
+symbols or strings of words are normally considered.  Following
+important insights by Tim Fernando
+\cite{Fernando2004,Fernando2006,Fernando2008,Fernando2009} we shall be
+concerned rather with strings of events.   We use informal notations
+like ` ``sam'' ' and ` ``ran'' '  to represent phonological types of
+speech events (utterances of \textit{Sam} and \textit{ran}).  Thus `
+``sam''$^{\frown}$``ran'' ' is the type of speech events which are
+concatenations of an utterance of \textit{Sam} and an utterance of \textit{ran}.
+
+\subsection*{Predicates which relate strings}
+
+We introduce a number of distinguished predicates which are used to
+relate strings.  The following predicates all have arity
+[\textit{String},\textit{String}]: init, final, final\_align
+\begin{description}
+\item[init] ``$s_1$ is an initial substring of $s_2$''
+
+If $s_1$ is a string of length $n$ and $s_2$ is a string of any
+length, then $s$ : init($s_1$,$s_2$) iff the length of $s_2$ is
+greater than or equal to $n$ and for each $i$, $0\leq i<n$,
+$s_1[i]=s_2[i]$ and $s=s_2$.
+
+\item[final] ``$s_1$ is an final substring of $s_2$''
+
+If $s_1$ is a string of length $n$ and $s_2$ is a string of 
+length $m$, then $s$ : final($s_1$,$s_2$) iff $m$ is
+greater than or equal to $n$ and for each $i$, $0\leq i<n$,
+$s_1[i]=s_2[(m-n)+i]$ and $s=s_2$.
+
+\item[final\_align] ``$s_1$ is aligned with a final substring of
+  $s_2$''
+
+If $s_1$:\textit{Rec}$^+$ is a string of length $n$ and $s_2$:\textit{Rec}$^+$ is a string of 
+length $m$, then $s$ : final\_align($s_1$,$s_2$) iff 
+\begin{enumerate} 
+ 
+\item $m$ is
+greater than or equal to $n$ 
+ 
+\item  $s$ is a string of length $m$
+
+\item for each
+$i$, $0\leq i<n$, 
+
+\begin{enumerate} 
+ 
+\item  $s[(m-n)+i]$ :
+\smallrecord{\smalltfield{e$_1$}{\textit{Rec}} \\
+             \smalltfield{e$_2$}{\textit{Rec}}} 
+\item  $s[(m-n)+i]$.e$_1$ =
+$s_1[i]$
+
+\item $s[(m-n)+i]$.e$_2$ = $s_2[(m-n)+i]$
+ 
+\end{enumerate} 
+
+\item  otherwise for each
+$i$, $0\leq i<m$, $s[i]=s_2[i]$ 
+ 
+\end{enumerate} 
+
+
+\end{description}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End: 
