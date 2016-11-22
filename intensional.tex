@@ -2725,8 +2725,8 @@ $e$ : want$_Q$($a$,$Q$) iff \\
 \hspace*{2em}$e$ : want$^\dagger$($a$, $Q$($\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)))
 \end{quote} 
- 
 \end{subex} 
+\label{ex:want-witcond} 
    
 \end{ex} 
 
@@ -2764,7 +2764,9 @@ $e$ : want$^{\dagger}$($a$, $T$) if\\
 $e$ : want$^{\dagger}$($a$, $T$) if\\
 \hspace*{2em} $e$ : want$^{\dagger}$($a$, $T_1$)\\
 \hspace*{2em} $e$ : pov($T_2$, $T_1$) \\
-\hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
+\hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2
+\sqsubseteq_{\leadsto}T$
+\label{ex:wantdagger-witcond}
 \end{ex} 
       
 Our analysis of Fodor's example is similar to \cite{Schwager2009} in
@@ -2903,7 +2905,7 @@ literature presented by \cite{Prossms} in Section~1.2 of his paper.
 In order to do this we will first say in a little more detail what the
 content of an utterance of \textit{Charlie wants to buy a coat like
   Bill's} will be.  Let us first look at the (non-parametric) content of
-\textit{Charlie bought a coat like Bill's}, given in \nexteg{}.
+\textit{Charlie bought a coat like Bill's} (ignoring issues of tense), given in \nexteg{}.
 \begin{ex} 
 \record{\tfield{e}{buy(charlie, $\lambda P$:\textit{Ppty}
     . \record{\tfield{e}{exist(coat\_like\_Bill's$'$, $P$)}})}}
@@ -2915,7 +2917,7 @@ Here we use `coat\_like\_Bill's$'$' to represent the property in
 $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{coat\_like\_Bill's(x)}} 
 \end{ex} 
 Since `buy' is an extensional predicate it will obey the constraint in
-\nexteg{} which relates `buy' to the correspond predicate with two
+\nexteg{} which relates `buy' to the corresponding predicate with two
 individual arguments, `buy$^\dagger$'.
 \begin{ex} 
 $e$ : buy($a$,$Q$) iff $e$ : $Q$($\lambda
@@ -2929,12 +2931,48 @@ type and \textit{vice versa}.
 \record{\tfield{e}{exist(coat\_like\_Bill's$'$, $\lambda
     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
     . \record{\tfield{e}{buy$^\dagger$(charlie, $r$.x)}})}} 
+\label{ex:cbaclb-cont}
 \end{ex} 
 Suppose $e$ is of the type in \nexteg{}.
 \begin{ex} 
+\record{\tfield{e}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{c}{coat\_like\_Bill's(x)}\\
+                           \tfield{e}{buy$^\dagger$(charlie,x)}}}}
+\end{ex}
+Then, by the witness condition associated with `exist' introduced in
+Chapter~\ref{ch:gram}, example~(\ref{ex:existwitcond}), $e$ will also
+be of the type (\ref{ex:cbaclb-cont}).  Here we may assume that if the
+speaker who is asserting this content is speaking truthfully then she
+judges the coat the Charlie bought to be a coat like Bill's (by Grice's
+maxim of quality).  One may, of course, disagree since the degree of
+similarity between two objects may be a matter of personal taste.
+
+Now let us consider the non-parametric content of \textit{Charlie
+  wants to buy a coat like Bill's} given in \nexteg{a} which, by
+(\ref{ex:want-witcond}a), is equivalent to \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
  
+\item \smallrecord{\smalltfield{e}{want$_P$(charlie, $\lambda
+      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+        . \smallrecord{\smalltfield{e}{buy($r$.x, $\lambda P$:\textit{Ppty} . \smallrecord{\smalltfield{e}{exist(coat\_like\_Bill's$'$,$P$)}})}})}} 
+ 
+\item \smallrecord{\smalltfield{e}{want$^\dagger$(charlie,
+      \smallrecord{\smalltfield{e}{buy(charlie, $\lambda
+          P$:\textit{Ppty}
+          . \smallrecord{\smalltfield{e}{exist(coat\_like\_Bill's$'$, $P$)}})}})}} 
+ 
+\end{subex} 
+   
 \end{ex} 
-[See note 18 Nov]        
+Note that `want$^\dagger$', in virtue of
+(\ref{ex:wantdagger-witcond}), introduces the possibility of a point
+of view.
+
+We will now examine whether the kind of content expressed in \preveg{a} can be
+matched to a number of scenarios for Fodorean readings which have been
+discussed in the literature.   
+ 
   
 
 @@
