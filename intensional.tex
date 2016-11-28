@@ -2685,7 +2685,7 @@ long term memory of some agent.
                                                \smalltfield{e}{coat(x)}}}\\
              \smalltfield{id$_2$}{\smallrecord{\smalltfield{e}{trenchcoat($\Uparrow$id$_1$.x)}}}\\
 \smalltfield{id$_3$}{\smallrecord{\smalltfield{e}{has\_big\_pockets($\Uparrow$id$_1$.x)}}}\\
-\smalltfield{id$_4$}{\smallrecord{\smalltfield{e}{buy($\Uparrow^3$.x, $\Uparrow$id$_1$.x)}}}}
+\smalltfield{id$_4$}{\smallrecord{\smalltfield{e}{buy$^\dagger$($\Uparrow^3$id$_1$.x, $\Uparrow$id$_1$.x)}}}}
 }
 \newsavebox{\despov}
 \sbox{\despov}{
@@ -2702,7 +2702,8 @@ long term memory of some agent.
 \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}
 } 
 \end{ex} 
-Here we use the predicate `want$^\dagger$' which has arity
+Here we use the predicate `buy$^\dagger$' which is the buy-relation between
+individuals and the predicate `want$^\dagger$' which has arity
 $\langle$\textit{Ind}, \textit{RecType}$\rangle$.  It is related to
 two other want-predicates: `want$_P$' with arity
 $\langle$\textit{Ind}, \textit{Ppty}$\rangle$ and `want$_Q$' with
@@ -2870,7 +2871,7 @@ For any agents $A$ and $B$, types $T_1$ and $T_2$ and object
 (situation) $s$, \\
 \hspace*{2em}if :$_A$
 pov($T_1$, $T_2$) and $s:_BT_2$, then $s:_AT_2$\fbox{\d{$\wedge$}}$T_1$
- 
+\label{ex:pov-constr} 
 \end{ex} 
 \preveg{} says that if $A$ judges pov($T_1$, $T_2$) to be witnessed
 (that is, $A$ judges that $T_1$ is a point of view of $T_2$) and $B$
@@ -2900,8 +2901,7 @@ Rather we are concerned with how different agents might judge
 situations of certain types.  Whether there are situations of the
 relevant types is not a question which is of relevance to the
 analysis.  Let us see how this relates to examples which have been
-discussed in the literature.  Here we follow the recent survey of the
-literature presented by \cite{Prossms} in Section~1.2 of his paper.
+discussed in the literature.  
 In order to do this we will first say in a little more detail what the
 content of an utterance of \textit{Charlie wants to buy a coat like
   Bill's} will be.  Let us first look at the (non-parametric) content of
@@ -2971,9 +2971,167 @@ of view.
 
 We will now examine whether the kind of content expressed in \preveg{a} can be
 matched to a number of scenarios for Fodorean readings which have been
-discussed in the literature.   
+discussed in the literature.  Here we follow the recent survey of the
+literature presented by \cite{Prossms} in Section~1.2 of his paper.
+Consider the scenario in \nexteg{}.
+\begin{ex} 
+Suppose a store sells some jackets that all look like Malte's and that
+Adrian does not know anything about Malte. Assume further that Adrian
+wants one of those jackets and any of them is an option. 
+
+\hfill (\cite{RomoliSudo2009})
+\end{ex} 
+In \nexteg{} we exhibit a type which corresponds to how the speaker
+might represent this scenario in memory.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Adrian'')}}}\\
+             \smalltfield{id$_2$}{\smallrecord{\smallmfield{id$_1$}{\smallrecord{\smallmfield{id$_1$}{jacket\_in\_the\_shop$'$}{\textit{Ppty}}\\
+                                                                                 \smalltfield{id$_2$}{\smallrecord{\smalltfield{e}{buy($\Uparrow^3$id$_1$.x,
+                                                                                       $\lambda
+                                                                                       P$:\textit{Ppty}
+                                                                                       . \smallrecord{\smalltfield{e}{exist($\Uparrow$id$_1$,
+                                                                                           $P$)}})}}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_2$}{want$^\dagger$($\Uparrow^2$id$_1$.x,
+                                                 id$_1$)}\\
+                                               \smallmfield{id$_3$}{\smallrecord{\smallmfield{id$_1$}{jacket\_like\_Malte's$'$}{\textit{Ppty}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}}
+\end{ex} 
+\preveg{} requires that Adrian's desire is to buy something with the
+property of being a jacket in the shop.  The alternative point of view
+is that the property of being a jacket in the shop can be replaced
+with the property of being a jacket like Malte's.  If the world
+matches this type then the sentence \textit{Adrian wants to buy a
+  jacket like Malte's} is true.  
+
+The next scenario Pross considers is \nexteg{}.
+\begin{ex} 
+Suppose a store offers some jackets that all look like Malte's and that Adrian does not know anything about Malte. Assume that some of the jackets are on sale while others are not and that Adrian is aware of this. Assume further that Adrian wants one of the jackets on sale and any of them is an option. 
+\end{ex} 
+The point of this is that it emphasizes that the property of jackets
+involved in Adrian's desire need not be coextensive with the property
+in the point of view.  That is, it is still the case that all the
+jackets in the shop are like Malte's but Adrian has his sights set on
+a subset of them (those on sale) although he has not chosen any
+particular jacket among those.  The type we exhibit for this scenario
+(in \nexteg{})
+is almost exactly the same as the previous one.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Adrian'')}}}\\
+             \smalltfield{id$_2$}{\smallrecord{\smallmfield{id$_1$}{\smallrecord{\smallmfield{id$_1$}{jacket\_on\_sale\_in\_the\_shop$'$}{\textit{Ppty}}\\
+                                                                                 \smalltfield{id$_2$}{\smallrecord{\smalltfield{e}{buy($\Uparrow^3$id$_1$.x,
+                                                                                       $\lambda
+                                                                                       P$:\textit{Ppty}
+                                                                                       . \smallrecord{\smalltfield{e}{exist($\Uparrow$id$_1$,
+                                                                                           $P$)}})}}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_2$}{want$^\dagger$($\Uparrow^2$id$_1$.x,
+                                                 id$_1$)}\\
+                                               \smallmfield{id$_3$}{\smallrecord{\smallmfield{id$_1$}{jacket\_like\_Malte's$'$}{\textit{Ppty}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}} 
+\end{ex} 
+The only difference between this and the previous type is that we have
+replaced the property `jacket\_in\_the\_shop$'$' with
+`jacket\_on\_sale\_in\_the\_shop$'$'.  Note that the constraint on
+`pov' that we introduced in (\ref{ex:pov-constr}) did not require
+coextension in any way, only that if  an agent were to judge a
+situation as of type $T_1$ then the agent with the point of view would
+judge the situation to be of the point of view type.  This allows for
+the possibility that there could be additional situations of the point
+of view type which the first agent would not judge to be of type
+$T_1$.  This view of things was in fact already important for the
+first scenario, since, while Adrian is focussed on the jackets in the
+shop, the speaker presumably could consider that there are other
+jackets in addition to those in the shop which are like Malte's.  That
+is, the sentence would not be falsified by discovering a jacket like
+Malte's which is not in the shop. 
+
+Pross's third scenario is \nexteg{} which he offers as problematic for
+the proposal in \cite{FintelHeim2011} because there are no actual
+jackets like Malte's as would be required by their analysis.
+\begin{ex} 
+Suppose Adrian has seen a picture of a certain green Burberry jacket in a catalogue and wants to buy one. Unbeknownst to Adrian, Malte happens
+to own exactly such a green Burberry jacket. Unbeknownst to Adrian, the type of jacket in the picture which Adrian has seen is sold out and no further jackets of this type have been produced yet: there are no actual jackets like Malte's. 
+\end{ex} 
+This scenario could correspond to the type in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Adrian'')}}}\\
+             \smalltfield{id$_2$}{\smallrecord{\smallmfield{id$_1$}{\smallrecord{\smallmfield{id$_1$}{jacket\_like\_the\_one\_in\_the\_catalogue$'$}{\textit{Ppty}}\\
+                                                                                 \smalltfield{id$_2$}{\smallrecord{\smalltfield{e}{buy($\Uparrow^3$id$_1$.x,
+                                                                                       $\lambda
+                                                                                       P$:\textit{Ppty}
+                                                                                       . \smallrecord{\smalltfield{e}{exist($\Uparrow$id$_1$,
+                                                                                           $P$)}})}}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_2$}{want$^\dagger$($\Uparrow^2$id$_1$.x,
+                                                 id$_1$)}\\
+                                               \smallmfield{id$_3$}{\smallrecord{\smallmfield{id$_1$}{jacket\_like\_Malte's$'$}{\textit{Ppty}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}}  
+\end{ex} 
+The only difference between this and the previous type is that we have
+replaced the property `jacket\_on\_sale\_in\_the\_shop$'$' with the
+property `jacket\_like\_the\_one\_in\_the\_catalogue$'$'.  Note that the constraint on
+`pov' that we introduced in (\ref{ex:pov-constr}) does not require
+that anything have either the property
+`jacket\_like\_the\_one\_in\_the\_catalogue$'$' or `jacket\_like\_Malte's$'$', only that if  an agent were to judge a
+situation as of the type involving the first property then the agent with the point of view would
+judge the situation to be of the type involving the second property.
+Whether there actually are such jackets is an independent question.  
+
+\cite{Prossms} introduces a further scenario for the Fodorian reading
+in Section~3.5 of his paper which we reproduce in \nexteg{}.
+\begin{ex} 
+Adrian has seen a jacket which has three stripes on its sleeves and wants to buy such a jacket. However, he has read that Adidas uses child labour in the production of its jackets, so the additional condition for his purchase is that the jacket is not from Adidas. If Adrian does not know that Adidas is the brand with the three stripes, he has a desire that he would paraphrase as
+``I want to buy a jacket from the brand with the three stripes but not from Adidas.'' Fritz hears Adrian's utterance and as he has seen Malte's jacket which has three stripes and as he also knows about the problem with child labour and Adidas he believes that Malte would never buy a jacket which is made using child labour. Fritz also doesn't know that Adidas is the brand with the three stripes. He reports Adrian's desire as ``Adrian wants to buy a jacket like Malte's''.
  
-  
+\end{ex} 
+This mixes in the problem of contradictory beliefs with that of
+Fodorean readings.  The type corresponding to Fritz's information
+state could be represented by the type in \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                               \smalltfield{e}{named(x,
+                                                 ``Adrian'')}}}\\
+             \smalltfield{id$_2$}{\smallrecord{\smallmfield{id$_1$}{\smallrecord{\smallmfield{id$_1$}{jacket\_with\_three\_stripes\_on\_its\_sleeves$'$}{\textit{Ppty}}\\
+\smallmfield{id$_2$}{not\_Adidas$'$}{\textit{Ppty}}\\
+                                                                                 \smalltfield{id$_3$}{\smallrecord{\smalltfield{e}{buy($\Uparrow^3$id$_1$.x,
+                                                                                       $\lambda
+                                                                                       P$:\textit{Ppty}
+                                                                                       . \smallrecord{\smalltfield{e}{exist($\Uparrow$id$_1$$\wedge$$\Uparrow$id$_2$,
+                                                                                           $P$)}})}}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_2$}{want$^\dagger$($\Uparrow^2$id$_1$.x,
+                                                 id$_1$)}\\
+                                               \smallmfield{id$_3$}{\smallrecord{\smallmfield{id$_1$}{jacket\_like\_Malte's$'$}{\textit{Ppty}}}}{\textit{RecType}}\\
+                                               \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}}  
+\end{ex} 
+Adrian's desire is perfectly rational given that he does not know that
+a jacket with three stripes on its sleeves is made by Adidas.  Note
+that we can also truthfully report his desire even when we know about
+Adidas and the three stripes, as in \nexteg{}.
+\begin{ex} 
+Adrian wants to buy a jacket like Malte's but not from Adidas.  He
+doesn't realize that having three stripes on the sleeve means that the
+jacket is from Adidas. 
+\end{ex} 
+
+It seems that none of these successive complications of the scenario,
+increasing, so to speak, the degree of intensionality involved,
+provide a problem when you combine an theory of intensional types with
+the notion of point of view as we have described it.             
+ 
+\section{Compositional semantics}
+
+\section{Conclusion}  
+
+In this chapter we first pointed out some conceptual and technical
+problems involving possible worlds as they are standardly used in semantics.
+We have considered the two main areas where possible
+worlds have been used: modality and intensionality involving the
+attitudes.  We have suggested that both benefit from an analysis in
+terms of intensional types instead of possible worlds.
 
 @@
 
@@ -2985,11 +3143,6 @@ to buy a coat like mine}]
 \textit{Charley thinks it's like mine},
 \textit{Charley doesn't think it's like mine},
 \textit{Charley denies it's like mine}]
-
-[Comparison with Pross]
-
-[Putting this into a grammar]    
-
 
 
 
