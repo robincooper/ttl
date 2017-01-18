@@ -2,7 +2,7 @@
 \label{ch:quant}
 \setcounter{examplectr}{0}
 
-\section{The interpretation of pronouns}
+\section{The interpretation of unbound pronouns}
 We will consider how to recreate a simple interpretation of pronouns
 ranging over individuals, first treating them in a similar way to free
 variables in logic and then showing how they can be bound by
@@ -52,11 +52,81 @@ $\lambda\sigma$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} .
 \end{quote} 
 for any natural number $i$.  Thus considering the boy and the dog, a
 content for \nexteg{a} will be \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item he hugged it 
+ 
+\item $\lambda\sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+                                   \smalltfield{x$_1$}{\textit{Ind}}}
+                                 . 
+\record{\tfield{e}{hug($\sigma$.x$_0$, $\sigma$.x$_1$)}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+An advantage of using record types to characterize pronominal contexts
+rather than variable assignments is that we can add further
+information represented by the pronoun such as gender.   Thus a simple
+treatment of gender for \preveg{} might be given by making the content
+be \nexteg{}.
+\begin{ex} 
+$\lambda\sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+                             \smalltfield{c$_0$}{male(x$_0$)}\\
+                             \smalltfield{x$_1$}{\textit{Ind}}\\
+                             \smalltfield{c$_1$}{neuter(x$_1$)}}
+                                 . 
+\record{\tfield{e}{hug($\sigma$.x$_0$, $\sigma$.x$_1$)}} 
+\end{ex} 
+As we will see below, there are some complications with this simple
+idea when it comes to the interpretation of pronouns which are bound
+by quantifiers.  Even for deictic pronouns there are problems
+determining which predicates should be used in a semantic treatment of
+gender.  Even for a language like English which apparently has
+semantic gender (as opposed to grammatical gender like German or
+French), neuter can be used for objects which do not have gender (like
+tables) and for animals other than humans which do have gender and
+which can be referred to with masculine and feminine pronouns.
+
+\section{Quantifier scope and underspecification}
+
+Given the kind of interpretation rules we have so far we can obtain a
+reading for \nexteg{a} which corresponds to the kind of parametric
+content using pronominal contexts
+in \nexteg{b}, using the abbreviations `boy$'$' and `dog$'$' as
+introduced in Chapter~\ref{ch:commonnouns}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item a boy hugged every dog 
+ 
+\item $\lambda \sigma$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{every(dog$'$, 
+$\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
+ 
+\end{subex} 
+   
+\end{ex} 
+This, of course, represents the reading where there is a boy such that
+he hugs every dog.  Notice that here we have vacuous abstraction over
+pronominal contexts and the constraint on them is that are a record of
+some kind without requiring any particular fields.    
+
+In order to obtain the reading where \textit{every dog} has wide
+scope, we follow Montague and pretty much everybody else in basing our
+treatment of quantifier scope on the treatment of free pronouns,
+though without the contribution of any gender information.  Let us
+imagine just for a moment that such a pronoun existed in English and
+is written as `x'.  Then the content for \nexteg{a} could be
+\nexteg{b}.
+   
   
 
 \section{Generalized quantifiers}
 
-\section{Quantifier scope and underspecification}
+
 
 \section{Anaphora}
 
