@@ -44,12 +44,13 @@ in \nexteg{c}.
    
 \end{ex}
 We follow Montague's strategy in allowing the content of \textit{he}
-to be 
-\begin{quote}
+to be \nexteg{}.
+\begin{ex}
 $\lambda\sigma$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
         $\lambda P$:\textit{Ppty}
         . $P$(\smallrecord{\field{x}{$\sigma$.x$_i$}})
-\end{quote} 
+\label{ex:pronoun-cont}
+\end{ex} 
 for any natural number $i$.  Thus considering the boy and the dog, a
 content for \nexteg{a} will be \nexteg{b}.
 \begin{ex} 
@@ -119,9 +120,64 @@ scope, we follow Montague and pretty much everybody else in basing our
 treatment of quantifier scope on the treatment of free pronouns,
 though without the contribution of any gender information.  Let us
 imagine just for a moment that such a pronoun existed in English and
-is written as `x'.  Then the content for \nexteg{a} could be
+is written as \textit{it$^*$} with the kind of pronoun interpretations
+given in (\ref{ex:pronoun-cont}).  Then the content for \nexteg{a} could be
 \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item a boy hugged it$^*$
+ 
+\item $\lambda \sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{hug($r$.x, $\sigma$.x$_0$)}})}} 
+ 
+\end{subex} 
    
+\end{ex}
+Let us further imagine, contrary to fact, that English represented
+that a noun phrase has wide scope over a sentence by placing it at the
+beginning of a sentence as in \nexteg{a} and giving it an
+interpretation where the interpretation of \textit{it$^*$} gets bound
+as in \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item every dog, a boy hugged it$^*$ 
+ 
+\item $\lambda\sigma$:\textit{Rec} . 
+\smallrecord{\smalltfield{e}{every(dog$'$,
+$\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+    r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x$_0$)}})}})}} 
+ 
+\end{subex} 
+\label{ex:edabhi}   
+\end{ex} 
+The imaginary English expression \preveg{a} corresponds quite closely
+to the kind of representation for wide scope readings that are used in
+various theories of logical form.  A major difference is that in
+logical form there is an index corresponding to the label `x$_0$' that
+we use in the interpretation which shows that \textit{every dog} binds
+\textit{it$^*$}.  This might be represented something like in
+\nexteg{}.
+\begin{ex} 
+every dog$_{x_0}$, a boy hugged it$^*_{x_0}$ 
+\end{ex} 
+The imaginary sentence (\ref{ex:edabhi}a) also corresponds closely to
+Montague's (\citeyear{Montague1973}) treatment of scope phenomena.
+Montague would also index the pronoun and use a quantification rule
+with the same index which would replace the pronoun with the
+noun-phrase being quantified in.
+
+Neither of these options are open to us since our syntax is defined in
+terms of types of utterance situations and signs which related
+utterance situations to contents.  Our realistic strategy does not
+allow for the use of additional imaginary structures.  For this reason
+we will adapt the kind of storage technique used in     
+     
   
 
 \section{Generalized quantifiers}
