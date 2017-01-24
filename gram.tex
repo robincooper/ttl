@@ -220,7 +220,7 @@ reflected in the nature of linguistic events.  In
 Chapter~\ref{ch:infex} we used \nexteg{} as our sign type.
 \begin{ex} 
 \record{\tfield{s-event}{\textit{SEvent}} \\
-        \tfield{cnt}{\textit{Cnt}}} 
+        \tfield{cont}{\textit{Cont}}} 
 \end{ex} 
 This represents the pairing of a speech event with content in a
 Saussurean sign.  It does not, however, require the presence of any
@@ -236,7 +236,7 @@ sign type as in \nexteg{}.
 \begin{ex} 
  \record{\tfield{s-event}{\textit{SEvent}} \\
          \tfield{syn}{\textit{Syn}} \\
-        \tfield{cnt}{\textit{Cnt}}} 
+        \tfield{cont}{\textit{Cont}}} 
 \end{ex}
 However, as we will see below, \textit{Syn} will require a
 `daughters'-field for a string of signs.  This means that
@@ -245,7 +245,7 @@ type with its witnesses defined by \nexteg{}.
 \begin{ex} 
 $\sigma$ : \textit{Sign} iff $\sigma$ :  \record{\tfield{s-event}{\textit{SEvent}} \\
          \tfield{syn}{\textit{Syn}} \\
-        \tfield{cnt}{\textit{Cnt}}} 
+        \tfield{cont}{\textit{Cont}}} 
 \end{ex} 
 We shall take \textit{Syn} to be the type \nexteg{}.\footnote{One
   might think that \textit{Syn} should also be defined as a recursive
@@ -309,7 +309,7 @@ example, \preveg{a} is the type in \nexteg{}.
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}}} \\
          \tfield{syn}{\record{\mfield{cat}{s}{\textit{Cat}} \\
         \tfield{daughters}{\textit{Sign}$^*$}}} \\
-        \tfield{cnt}{\textit{Cnt}}}  
+        \tfield{cont}{\textit{Cont}}}  
 \end{ex} 
   
 
@@ -390,7 +390,7 @@ type in \nexteg{c}.
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}}} \\
          \tfield{syn}{\record{\mfield{cat}{np}{\textit{Cat}} \\
         \mfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}} \\
-        \tfield{cnt}{\textit{Cnt}}} 
+        \tfield{cont}{\textit{Cont}}} 
  
 \end{subex} 
 \label{ex:DudamelLex}   
@@ -609,7 +609,7 @@ different kind of theory.
  
 \section{Semantics}
 We have so far specified our sign types in terms of phonology and
-syntax.  Now we need to specify the content in the `cnt'-field.  We
+syntax.  Now we need to specify the content in the `cont'-field.  We
 shall start by accounting for the contents of the lexical items
 specified in (\ref{ex:gramlexres}).  We consider first the common
 nouns \textit{composer} and \textit{conductor}.  For each of these we
@@ -653,12 +653,12 @@ takes a phonological type and a predicate and returns a sign type.
 This is defined in \nexteg{}.
 \begin{ex} 
 Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$) = \\
-\hspace*{1em}Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemCommonNoun($p$)}{\textit{Ppty}}} 
+\hspace*{1em}Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{Ppty}}} 
 \end{ex} 
 Note that the type of the content required here is \textit{Ppty}.  In
-Chapter~\ref{ch:infex} we defined the content type \textit{Cnt} to be
+Chapter~\ref{ch:infex} we defined the content type \textit{Cont} to be
 identical with \textit{RecType}.  Now we have to revise the definition
-of \textit{Cnt} to be (\textit{RecType} $\vee$ \textit{Ppty}).  We
+of \textit{Cont} to be (\textit{RecType} $\vee$ \textit{Ppty}).  We
 will add further disjuncts to allow for more possibilities as we
 progress.
 
@@ -683,7 +683,7 @@ truth-bearing elements, that is, in our terms, record types.  That is,
 noun-phrase contents will be of type
 (\textit{Ppty}$\rightarrow$\textit{RecType}) which we will abbreviate
 as \textit{Quant} (for ``quantifier''). This means that we should now
-redefine the type of contents, \textit{Cnt}, as \textit{RecType}
+redefine the type of contents, \textit{Cont}, as \textit{RecType}
 $\vee$ \textit{Ppty} $\vee$ \textit{Quant}.\footnote{Omitting
   parentheses for clarity.}
    
@@ -701,7 +701,7 @@ name) and an individual (the referent of the name) and returns a sign
 type as in \nexteg{}.
 \begin{ex} 
 Lex$_{\mathrm{PropName}}$($T_{\mathrm{Phon}}$, $a$) = \\
-\hspace*{1em}Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemPropName($a$)}{\textit{Quant}}} 
+\hspace*{1em}Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemPropName($a$)}{\textit{Quant}}} 
 \end{ex} 
 Resources to cover the proper names in our grammar could be as in
 \nexteg{} where $d,b$ : \textit{Ind} (two individuals, Dudamel and
@@ -778,7 +778,7 @@ the noun phrase \textit{a conductor}.  We shall treat the content of
 indefinite articles as a function that maps properties to quantifiers
 involving the existential relation between properties.  That is, it
 will be a function of type (\textit{Ppty}$\rightarrow$\textit{Quant}),
-a type which should be added to our definition of \textit{Cnt} which
+a type which should be added to our definition of \textit{Cont} which
 now becomes \textit{RecType}
 $\vee$ \textit{Ppty} $\vee$ \textit{Quant} $\vee$
 (\textit{Ppty}$\rightarrow$\textit{Quant}).  As part of our
@@ -797,7 +797,7 @@ phonological type (corresponding to an indefinite article in the
 language) with this content, as defined in \nexteg{}.
 \begin{ex} 
 Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) = \\
-\hspace*{1em} Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}} 
+\hspace*{1em} Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}} 
 \end{ex} 
 The local resource for the English indefinite article would thus be
 \nexteg{}.
@@ -808,14 +808,14 @@ Lex$_{\mathrm{IndefArt}}$(``a'')
 The compositional semantics of a noun-phrase consisting of a
 determiner followed by a noun will be the content of the determiner
 applied to the content of the noun.  This is a case of \textit{content
-  forward application}.  We define a function `CntForwardApp', which is
+  forward application}.  We define a function `ContForwardApp', which is
 part of the universal resources, as in \nexteg{}.
 \begin{ex} 
 $\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
 \hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{cnt}{$(T_2\rightarrow
-    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{$T_2$}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{$T_1$}} 
+u$:\smallrecord{\smalltfield{cont}{$(T_2\rightarrow
+    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_2$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{$T_1$}} 
 \end{ex} 
 The intuition behind this function is that if you observe a string of
 two utterances, the first of which has a content of type
@@ -825,14 +825,14 @@ whose content is the result of applying the content of the first
 element in the string to the content of the second element of the
 string. (For the notation $s[n]$ representing the $n$th element of a
 string $s$ see Appendix~\ref{app:strings}.)  We can use
-`CntForwardApp' to add constraints on content to a phrase structure
+`ContForwardApp' to add constraints on content to a phrase structure
 rule as in the example in \nexteg{}.
 \begin{ex} 
-\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}} CntForwardApp(\textit{Ppty},\textit{Quant}) 
+\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}} ContForwardApp(\textit{Ppty},\textit{Quant}) 
 \end{ex} 
 Recall from (\ref{eg:NPDetN}a) that  \textit{NP} $\longrightarrow$
 \textit{Det} \textit{N} is the function
-\nexteg{a}. CntForwardApp(\textit{Ppty},\textit{Quant}) is the
+\nexteg{a}. ContForwardApp(\textit{Ppty},\textit{Quant}) is the
 function \nexteg{b}.  Merging these two functions yields \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
@@ -845,14 +845,14 @@ function \nexteg{b}.  Merging these two functions yields \nexteg{c}.
 \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}} 
  
 \item $\lambda
-u$:\smallrecord{\smalltfield{cnt}{$(\mathit{Ppty}\rightarrow
-    \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{\textit{Ppty}}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{\textit{Quant}}} 
+u$:\smallrecord{\smalltfield{cont}{$(\mathit{Ppty}\rightarrow
+    \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{\textit{Ppty}}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{\textit{Quant}}} 
 
 \item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$}
   \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ \\
-\hspace*{4.9em}  \d{$\wedge$} \smallrecord{\smalltfield{cnt}{$(\mathit{Ppty}\rightarrow
-    \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}
+\hspace*{4.9em}  \d{$\wedge$} \smallrecord{\smalltfield{cont}{$(\mathit{Ppty}\rightarrow
+    \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{\textit{Ppty}}}
 . \\
 \hspace*{1em}\textit{NP} \d{$\wedge$}
 \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
@@ -861,7 +861,7 @@ u$:\smallrecord{\smalltfield{cnt}{$(\mathit{Ppty}\rightarrow
 \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
 \\
 \hspace*{2.5em}\d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{\textit{Quant}}}
+\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{\textit{Quant}}}
  
 \end{subex} 
    
@@ -886,7 +886,7 @@ tree notation which is common in linguistics as in
 \smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{syn.daughters[0].s-event.e$^{\frown}$syn.daughters[0].s-event.e}{\textit{Phon}}}}\\
 \smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}$^{\frown}$\textit{N}}}}
 \\
-\smallmfield{cnt}{syn.daughters[0].cnt(syn.daughters[1].cnt)}{\textit{Quant}}}
+\smallmfield{cont}{syn.daughters[0].cont(syn.daughters[1].cont)}{\textit{Quant}}}
 
 
  
@@ -897,7 +897,7 @@ tree notation which is common in linguistics as in
    
 \end{ex}
 Here what is written under the category type (e.g. $\alpha$, $\beta$) represents the value in
-the `cnt'-field. 
+the `cont'-field. 
      
 The content of an utterance of \textit{a conductor}
 will be \nexteg{a} applied to \nexteg{b}, that is \nexteg{c}.
@@ -1280,7 +1280,7 @@ $\lambda\mathcal{Q}$:\textit{Quant} . \\
 r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
           \tfield{e}{be(x)}})
-\label{ex:cnt-is} 
+\label{ex:cont-is} 
 \end{ex} 
 Here we use a manifest field based on a multiple singleton type (a
 singleton type formed from a singleton type, see
@@ -1319,18 +1319,18 @@ in some record, $r$, such that $r.\pi=a$.\footnote{This might be
 %              \smallmfield{arg$_2$}{$b$}{\textit{Ind}}} and $a$ is
 %            identical with $b$ 
 % \end{ex}
-We will call (\ref{ex:cnt-is}) `SemBe'.  It will be included among the
+We will call (\ref{ex:cont-is}) `SemBe'.  It will be included among the
 universal resources, together with the `Lex$_{\mathrm{be}}$' as defined in
 \nexteg{}.
 \begin{ex} 
 If $T_{\mathrm{Phon}}$ is a phonological type, then
 Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$) is Lex($T_{\mathrm{Phon}}$,
-\textit{V}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}} 
+\textit{V}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}} 
 \end{ex} 
 Among the lexical resources for English we have Lex$_{\mathrm{be}}$(``is'').
    
-Now let us see what we get when we combine  (\ref{ex:cnt-is}) with the content of
-\textit{a conductor}.  This involves applying (\ref{ex:cnt-is}),
+Now let us see what we get when we combine  (\ref{ex:cont-is}) with the content of
+\textit{a conductor}.  This involves applying (\ref{ex:cont-is}),
 repeated as \nexteg{a}, to (\ref{ex:a-conductor}c), repeated as
 \nexteg{b}.  The result of this application is \nexteg{c}.
 \begin{ex} 
@@ -1482,9 +1482,9 @@ approaches to Construction Grammar, see, for example,
 $\lambda
 u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
                                                                     \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
 }}}. \\
-\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cnt}{$u$[2].syn.daughters[2].cnt}{\textit{Ppty}}} 
+\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
 \end{ex} 
 We can call this function CnstrIsA (``is-a construction'') and merge
 it with \textit{VP} $\longrightarrow$ \textit{V} \textit{NP}.   Thus
@@ -1503,7 +1503,7 @@ applies the content of the verb to the content of the object
 noun-phrase as in \nexteg{}.
 \begin{ex} 
 \textit{VP} $\longrightarrow$ \textit{V} \textit{NP} \d{\d{$\wedge$}}
-CntForwardApp(\textit{Quant}, \textit{Ppty})  
+ContForwardApp(\textit{Quant}, \textit{Ppty})  
 \label{ex:VPForwardApp}
 \end{ex} 
 Allowing both resources (\ref{ex:ruleIsA}) and \preveg{} simultaneously raises the issue of what the
@@ -1920,7 +1920,7 @@ $\rightarrow$ \textit{Type})} \\
 \hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
 \hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
                                                                     \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
 }}} \\
 \hspace*{12em}$\rightarrow$ \textit{Type})} \\
                                    \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
@@ -1966,7 +1966,7 @@ $\rightarrow$ \textit{Type})} \\
 \hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
 \hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
                                                                     \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
 }}} \\
 \hspace*{12em}$\rightarrow$ \textit{Type})} \\
                                    \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
@@ -2051,7 +2051,7 @@ $\rightarrow$ \textit{Type})} \\
 \hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
 \hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
                                                                     \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
 }}} \\
 \hspace*{12em}$\rightarrow$ \textit{Type})} \\
                                    \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}
@@ -2132,7 +2132,7 @@ $\rightarrow$ \textit{Type})} \\
 \hspace*{9.5em}(\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\\
 \hspace*{10em}\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
                                                                     \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
 }}} \\
 \hspace*{12em}$\rightarrow$ \textit{Type})} \\
                                    \smallmfield{fnd}{$\Uparrow$e$_5$}{\textit{Sign}}

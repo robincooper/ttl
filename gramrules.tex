@@ -42,7 +42,7 @@ $\lambda r$:\textit{AgeFrame}
 \textit{Sign} (Chapter~\ref{ch:infex})
 
 \record{\tfield{s-event}{\textit{SEvent}} \\
-        \tfield{cnt}{\textit{Cnt}}}
+        \tfield{cont}{\textit{Cont}}}
 
 \textit{Sign} (Chapter~\ref{ch:gram})
 
@@ -50,7 +50,7 @@ a recursive type
 
 $\sigma$ : \textit{Sign} iff $\sigma$ :\record{\tfield{s-event}{\textit{SEvent}} \\
          \tfield{syn}{\textit{Syn}} \\
-        \tfield{cnt}{\textit{Cnt}}} 
+        \tfield{cont}{\textit{Cont}}} 
 
 \textit{SEvent} (Chapter~\ref{ch:infex})
 
@@ -66,11 +66,11 @@ $\sigma$ : \textit{Sign} iff $\sigma$ :\record{\tfield{s-event}{\textit{SEvent}}
 
 \textit{Word}$^+$
 
-\textit{Cnt} (Chapter~\ref{ch:infex})
+\textit{Cont} (Chapter~\ref{ch:infex})
 
 \textit{RecType}
 
-\textit{Cnt} (Chapter~\ref{ch:gram})
+\textit{Cont} (Chapter~\ref{ch:gram})
 
 \textit{RecType} $\vee$ \textit{Ppty} $\vee$ \textit{Quant} $\vee$ (\textit{Ppty}$\rightarrow$\textit{Quant})
 
@@ -214,14 +214,14 @@ sign (Chapter~\ref{ch:infex})
 If $\sigma$ is a type of speech event and $\kappa$ is a type (of
 situation) then \\
 sign($\sigma$,$\kappa$)= \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$\sigma$}} } \\
-        \mfield{cnt}{\smallrecord{\smalltfield{e}{$\kappa$} \\
+        \mfield{cont}{\smallrecord{\smalltfield{e}{$\kappa$} \\
                              \smalltfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}{\textit{RecType}}}
 
 sign$_{\mathit{uc}}$ (Chapter~\ref{ch:infex})
 
 If $\sigma$ is a type of speech event then \\
 sign$_{\mathit{uc}}$($\sigma$)= \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$\sigma$}} } \\
-        \smalltfield{cnt}{\textit{RecType}}}
+        \smalltfield{cont}{\textit{RecType}}}
 
 Lex (Chapter~\ref{ch:gram})
 
@@ -435,7 +435,7 @@ $T_{\mathrm{phon}}$ is a phonological type and $p$ is a predicate with
 arity $\langle$\textit{Ind}$\rangle$ (Chapter~\ref{ch:gram})\\
 is defined as \\
 Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemCommonNoun($p$)}{\textit{Ppty}}}
+\smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{Ppty}}}
 
 Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$,
   $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
@@ -445,7 +445,7 @@ Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$,
   $T_{\mathrm{bg}}$ is a record type (Chapter~\ref{ch:commonnouns}) \\
  is defined as\\
 Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$} 
-\smallrecord{\smallmfield{cnt}{SemCommonNoun($p$, $T_{\mathrm{arg}}$,
+\smallrecord{\smallmfield{cont}{SemCommonNoun($p$, $T_{\mathrm{arg}}$,
     $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
 
 Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$, $p$), where
@@ -453,7 +453,7 @@ $T_{\mathrm{phon}}$ is a phonological type and $p$ is a predicate with
 arity $\langle$\textit{Ind}$\rangle$ (Chapter~\ref{ch:propnames})\\
 is defined as \\
 Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$,
+\smallrecord{\smallmfield{cont}{SemIntransVerb($T_{\mathrm{bg}}$,
     $p$)}{\textit{PPpty}}} 
 
 Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $p$,
@@ -464,7 +464,7 @@ Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $p$,
   $T_{\mathrm{bg}}$ is a record type (Chapter~\ref{ch:commonnouns})\\ 
 is defined as\\
 Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
-\smallrecord{\smallmfield{cnt}{SemIntransVerb($p$, $T_{\mathrm{arg}}$,
+\smallrecord{\smallmfield{cont}{SemIntransVerb($p$, $T_{\mathrm{arg}}$,
     $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}}
 
 
@@ -473,45 +473,45 @@ $T_{\mathrm{Phon}}$ is a phonological type and $a$:\textit{Ind}
 (Chapter~\ref{ch:gram}) \\
 is defined as \\
 Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemPropName($a$)}{\textit{Quant}}}
+\smallrecord{\smallmfield{cont}{SemPropName($a$)}{\textit{Quant}}}
 
 Lex$_{\mathrm{PropName}}$($T_{\mathrm{Phon}}$), where
 $T_{\mathrm{Phon}}$ is a phonological type
 (Chapter~\ref{ch:propnames}) \\
 is defined as \\
 Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{Phon}}$)}{\textit{PQuant}}}
+\smallrecord{\smallmfield{cont}{SemPropName($T_{\mathrm{Phon}}$)}{\textit{PQuant}}}
 
 Lex$_{\mathrm{numeral}}$, where
 $T_{\mathrm{phon}}$ is a phonological type  and $n$ is a (real) number
 (Chapter~\ref{ch:commonnouns}) \\
 is defined as \\
-Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemNumeral($n$)}{\textit{PQuant}}}
+Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemNumeral($n$)}{\textit{PQuant}}}
 
 Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$), where
 $T_{\mathrm{Phon}}$ is a phonological type (Chapter~\ref{ch:gram}) \\
 is defined as \\
 Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
+\smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
 
 Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$), where
   $T_{\mathrm{phon}}$ is a phonological type
   (Chapter~\ref{ch:commonnouns}) \\
  is defined as\\ 
-Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{PPpty}$\to$\textit{PQuant})}}
+Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{PPpty}$\to$\textit{PQuant})}}
 
 Lex$_{\mathrm{DefArt}}$($T_{\mathrm{phon}}$), where
   $T_{\mathrm{phon}}$ is a phonological type
   (Chapter~\ref{ch:commonnouns})\\
  is defined as\\ 
-Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemDefArt}{(\textit{PPpty}$\to$\textit{PQuant})}}
+Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cont}{SemDefArt}{(\textit{PPpty}$\to$\textit{PQuant})}}
 
 Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$), where
 $T_{\mathrm{Phon}}$ is a phonological type (Chapter~\ref{ch:gram}) \\
 is defined as \\
 Lex($T_{\mathrm{Phon}}$,
 \textit{V}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}} 
+\smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}} 
 
 Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$, $T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$), where
 $T_{\mathrm{Phon}}$ is a phonological type and $T_{\mathrm{arg}}$ and
@@ -519,7 +519,7 @@ $T_{\mathrm{bg}}$ are types  (Chapter~\ref{ch:commonnouns}) \\
 is defined as \\
 Lex($T_{\mathrm{Phon}}$,
 \textit{V}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$)}{(\textit{Quant}$\rightarrow$\textit{PPpty})}} 
+\smallrecord{\smallmfield{cont}{SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$)}{(\textit{Quant}$\rightarrow$\textit{PPpty})}} 
 
 \textit{Universal resources for coercing lexical sign types to new
   lexical sign types}
@@ -611,42 +611,42 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 where $[T]^\pi$ represents the result of prefixing each path-name
 occurring as an argument to a predicate in $T$ with $\pi$.
 
-CntForwardApp (Chapter~\ref{ch:gram})
+ContForwardApp (Chapter~\ref{ch:gram})
 
 $\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
 \hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{cnt}{$(T_2\rightarrow
-    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{$T_2$}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{$T_1$}}
+u$:\smallrecord{\smalltfield{cont}{$(T_2\rightarrow
+    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_2$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{$T_1$}}
 
-CntForwardApp (Chapter~\ref{ch:propnames})
+ContForwardApp (Chapter~\ref{ch:propnames})
 
 $\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
 \hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{cnt}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                                                \smalltfield{fg}{(bg$\rightarrow$($T_2\rightarrow T_1$))}}}}$^{\frown}$
-   \smallrecord{\smalltfield{cnt}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                                                \smalltfield{fg}{(bg$\rightarrow T_2$)}}}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt@$u$[1].cnt}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                                                                                 \smalltfield{fg}{(bg$\rightarrow T_1$)}}}} 
 
-CntForwardApp (Chapter~\ref{ch:commonnouns})
+ContForwardApp (Chapter~\ref{ch:commonnouns})
 
 $\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
 \hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{cnt}{$(T_2\rightarrow
-    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cnt}{$T_2$}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt($u$[1].cnt)}{$T_1$}}
+u$:\smallrecord{\smalltfield{cont}{$(T_2\rightarrow
+    T_1)$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_2$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{$T_1$}}
 
-CntSForwardApp (Chapter~\ref{ch:commonnouns})
+ContSForwardApp (Chapter~\ref{ch:commonnouns})
 
 $\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
 \hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{cnt}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                                                \smalltfield{fg}{(bg$\rightarrow$($T_2\rightarrow T_1$))}}}}$^{\frown}$
-   \smallrecord{\smalltfield{cnt}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                                                \smalltfield{fg}{(bg$\rightarrow T_2$)}}}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cnt}{$u$[0].cnt@$u$[1].cnt}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                                                                                 \smalltfield{fg}{(bg$\rightarrow T_1$)}}}} 
 
 \section{English resources}
@@ -737,10 +737,10 @@ CnstrIsA (Chapter~\ref{ch:gram})
 $\lambda
 u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
                                                                     \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cnt}{\textit{Ppty}}}}
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
 }}}. \\
 \hspace*{1em}
-\textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cnt}{$u$[2].syn.daughters[2].cnt}{\textit{Ppty}}}
+\textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}}
 
 \subsection{Interpreted phrase structure}
 \label{app:interpps}
@@ -748,10 +748,10 @@ u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallt
 (Chapter~\ref{ch:gram})
 
 \textit{S} $\longrightarrow$ \textit{NP} \textit{VP} \d{\d{$\wedge$}}
-CntForwardApp(\textit{Ppty}, \textit{RecType}) 
+ContForwardApp(\textit{Ppty}, \textit{RecType}) 
 
 \textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}}
-CntForwardApp(\textit{Ppty}, \textit{Quant}) 
+ContForwardApp(\textit{Ppty}, \textit{Quant}) 
 
 \textit{VP} $\longrightarrow$ \textit{V} \textit{NP} \d{\d{$\wedge$}}
 CnstrIsA
@@ -774,13 +774,13 @@ phrase-structure rule.
 (Chapter~\ref{ch:commonnouns})
 
 \textit{S} $\longrightarrow$ \textit{NP} \textit{VP} \d{\d{$\wedge$}}
-CntSForwardApp(\textit{Ppty}, \textit{RecType}) 
+ContSForwardApp(\textit{Ppty}, \textit{RecType}) 
 
 \textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}}
-CntForwardApp(\textit{PPpty}, \textit{PQuant}) 
+ContForwardApp(\textit{PPpty}, \textit{PQuant}) 
 
 \textit{VP} $\longrightarrow$ \textit{V} \textit{NP} \d{\d{$\wedge$}}
-CntSForwardApp(\textit{Quant}, \textit{Ppty})
+ContSForwardApp(\textit{Quant}, \textit{Ppty})
 
 A more readable abbreviatory notation for these rules is:
 

@@ -21,7 +21,7 @@ function from a context assigning a value to the pronoun to a
 type.\footnote{We will consider later how to combine types of context
   which assign values to pronouns with other context types which we
   have introduced with parametric contents.}  We will use the variable
-`$\sigma$' to represent such contexts.  Thus a parametric content for
+`$\frak{s}$' to represent such contexts.  Thus a parametric content for
 \textit{he} could be that given in \nexteg{a}, for \textit{left}
 (ignoring tense) as \nexteg{b} and their combination, using a variant
 of S-combination which we will discuss as we progress, is represented
@@ -29,16 +29,16 @@ in \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda\sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\sigma$.x$_0$}})
+\item $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\frak{s}$.x$_0$}})
  
-\item $\lambda\sigma$:\textit{Rec} . 
+\item $\lambda\frak{s}$:\textit{Rec} . 
         $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
               \record{\tfield{e}{leave($r$.x)}}
 
-\item $\lambda\sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+\item $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
   . 
-         \record{\tfield{e}{leave($\sigma$.x$_0$)}}
+         \record{\tfield{e}{leave($\frak{s}$.x$_0$)}}
  
 \end{subex} 
    
@@ -46,9 +46,9 @@ in \nexteg{c}.
 We follow Montague's strategy in allowing the content of \textit{he}
 to be \nexteg{}.
 \begin{ex}
-$\lambda\sigma$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
+$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
         $\lambda P$:\textit{Ppty}
-        . $P$(\smallrecord{\field{x}{$\sigma$.x$_i$}})
+        . $P$(\smallrecord{\field{x}{$\frak{s}$.x$_i$}})
 \label{ex:pronoun-cont}
 \end{ex} 
 for any natural number $i$.  Thus considering the boy and the dog, a
@@ -58,10 +58,10 @@ content for \nexteg{a} will be \nexteg{b}.
  
 \item he hugged it 
  
-\item $\lambda\sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+\item $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
                                    \smalltfield{x$_1$}{\textit{Ind}}}
                                  . 
-\record{\tfield{e}{hug($\sigma$.x$_0$, $\sigma$.x$_1$)}} 
+\record{\tfield{e}{hug($\frak{s}$.x$_0$, $\frak{s}$.x$_1$)}} 
  
 \end{subex} 
    
@@ -72,12 +72,12 @@ information represented by the pronoun such as gender.   Thus a simple
 treatment of gender for \preveg{} might be given by making the content
 be \nexteg{}.
 \begin{ex} 
-$\lambda\sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
                              \smalltfield{c$_0$}{male(x$_0$)}\\
                              \smalltfield{x$_1$}{\textit{Ind}}\\
                              \smalltfield{c$_1$}{neuter(x$_1$)}}
                                  . 
-\record{\tfield{e}{hug($\sigma$.x$_0$, $\sigma$.x$_1$)}} 
+\record{\tfield{e}{hug($\frak{s}$.x$_0$, $\frak{s}$.x$_1$)}} 
 \end{ex} 
 As we will see below, there are some complications with this simple
 idea when it comes to the interpretation of pronouns which are bound
@@ -101,7 +101,7 @@ introduced in Chapter~\ref{ch:commonnouns}.
  
 \item a boy hugged every dog 
  
-\item $\lambda \sigma$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+\item $\lambda \frak{s}$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
       r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
 \smallrecord{\smalltfield{e}{every(dog$'$, 
 $\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} . 
@@ -128,10 +128,10 @@ given in (\ref{ex:pronoun-cont}).  Then the content for \nexteg{a} could be
  
 \item a boy hugged it$^*$
  
-\item $\lambda \sigma$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+\item $\lambda \frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
 \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{hug($r$.x, $\sigma$.x$_0$)}})}} 
+    . \smallrecord{\smalltfield{e}{hug($r$.x, $\frak{s}$.x$_0$)}})}} 
  
 \end{subex} 
    
@@ -146,7 +146,7 @@ as in \nexteg{b}.
  
 \item every dog, a boy hugged it$^*$ 
  
-\item $\lambda\sigma$:\textit{Rec} . 
+\item $\lambda\frak{s}$:\textit{Rec} . 
 \smallrecord{\smalltfield{e}{every(dog$'$,
 $\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
 \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
@@ -176,7 +176,76 @@ Neither of these options are open to us since our syntax is defined in
 terms of types of utterance situations and signs which related
 utterance situations to contents.  Our realistic strategy does not
 allow for the use of additional imaginary structures.  For this reason
-we will adapt the kind of storage technique used in     
+we will adapt the kind of storage technique used in \cite{Cooper1983}.
+In the original version of storage we moved from assigning a
+single content to a syntactic structure to assigning a set of contents
+in order to allow for the ambiguous interpretation of a single
+syntactic structure.  In our sign-based approach using types the
+corresponding move is not such a major change and the result yields a
+theory involving underspecified content rather than a set of contents.
+
+To see this consider the type \textit{Sign} introduced in
+Chapter~\ref{ch:gram}.  Any object of type \textit{Sign} will be of
+the type in \nexteg{}.
+\begin{ex} 
+\record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}}}  
+\end{ex} 
+The type in \preveg{} is completely underspecified.  Any sign will be
+of this type.  We could specify it with respect to content by making
+the `cont'-field be a manifest field as in \nexteg{b}, where $c$ is as
+given in \nexteg{a}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $c$ = \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+        . \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
+            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+              . \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
+ 
+\item  \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \mfield{cont}{$c$}{\textit{Cont}}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+Now recall that the manifest field
+\smallrecord{\smallmfield{cont}{$c$}{\textit{Cont}}} is just a
+convenient way of writing
+\smallrecord{\smalltfield{cont}{\textit{Cont}$_c$}} where
+\textit{Cont}$_c$ is a singleton type whose only witness is $c$.  It
+is in this sense that the content has been specified to be $c$.
+Suppose now that we do not have enough information to fully specify
+the content, that is, tie it down to be one particular content, but we
+know that it has to be one of either $c$ or $c'$ (as characterized in
+\nexteg{a}).  This could be represented by using a join type of two
+singleton types, \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, as in
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $c'$ =  \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
+      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+        . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+              . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x)}})}})}}
+ 
+\item  \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{} is the type of signs whose contents are either $c$ or $c'$.
+This is, then, a single type, which corresponds to an ``underspecified
+content''.  Of course, the set of witnesses of the join type,
+$\{c,c'\}$, corresponds to the set of contents that could be generated
+by a storage algorithm.  Our strategy, then, is to devise a way of
+computing such types on the basis of compositional interpretation.     
      
   
 
