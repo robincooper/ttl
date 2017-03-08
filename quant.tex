@@ -1,6 +1,6 @@
 \chapter{Quantification, anaphora and underspecification}
 \label{ch:quant}
-\setcounter{examplectr}{0}
+\setcounter{equation}{0}
 
 \section{The interpretation of unbound pronouns}
 We will consider how to recreate a simple interpretation of pronouns
@@ -44,14 +44,14 @@ in \nexteg{c}.
    
 \end{ex}
 We follow Montague's strategy in allowing the content of \textit{he}
-to be \nexteg{}.
+to be \nexteg{} for any natural number $i$.
 \begin{ex}
 $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
         $\lambda P$:\textit{Ppty}
         . $P$(\smallrecord{\field{x}{$\frak{s}$.x$_i$}})
 \label{ex:pronoun-cont}
 \end{ex} 
-for any natural number $i$.  Thus considering the boy and the dog, a
+Thus considering the boy and the dog, a
 content for \nexteg{a} will be \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
@@ -112,7 +112,7 @@ $\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} .
 \end{ex} 
 This, of course, represents the reading where there is a boy such that
 he hugs every dog.  Notice that here we have vacuous abstraction over
-pronominal contexts and the constraint on them is that are a record of
+pronominal contexts and the constraint on them is that they are a record of
 some kind without requiring any particular fields.    
 
 In order to obtain the reading where \textit{every dog} has wide
@@ -136,7 +136,7 @@ given in (\ref{ex:pronoun-cont}).  Then the content for \nexteg{a} could be
 \end{subex} 
    
 \end{ex}
-Let us further imagine, contrary to fact, that English represented
+Let us further imagine, contrary to fact, that English represented the fact
 that a noun phrase has wide scope over a sentence by placing it at the
 beginning of a sentence as in \nexteg{a} and giving it an
 interpretation where the interpretation of \textit{it$^*$} gets bound
@@ -246,8 +246,28 @@ content''.  Of course, the set of witnesses of the join type,
 $\{c,c'\}$, corresponds to the set of contents that could be generated
 by a storage algorithm.  Our strategy, then, is to devise a way of
 computing such types on the basis of compositional interpretation.     
-     
-  
+Notice that saying that the content is of type
+\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, that is, that it is
+either $c$ or $c'$ is distinct from saying that the content is the
+disjunction of $c$ and $c'$, that is, if $c$ and $c'$ are types, the
+type $c\vee c'$.  The witnesses for $c\vee c'$ will be situations $s$
+such that either $s:c$ or $s:c'$ whereas the witness for
+\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ will be the contents $c$
+and $c'$.  This will make an important different in compositional
+interpretation.  For example, if a sentence $S$ has a content of type     
+\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ we would want to say that
+the sentence \textit{Sam believes $S$} has a content of type
+\textit{Cont}$_{believe(sam,c)}$$\vee$\textit{Cont}$_{believe(sam,c')}$
+rather than that it has the content `believe(sam,$c\vee c'$)'.
+
+In order to make the relationship between sets of contents and join
+types smoother we will use generalized join types
+(Appendix~\ref{app:jointypes}).  Suppose we have computed a set of
+possible contents, $\{c_1,\ldots,c_n\}$, for a phrase, then the type
+of the content for that phrase is
+$\bigvee\{\textit{Cont}_{c_1},\ldots,\textit{Cont}_{c_n}\}$.  If
+$\mathbb{C}$ represents the set of contents we have computed, we can
+use the more convenient notation $\displaystyle{\bigvee_{c\in\mathbb{C}}}\{\textit{Cont}_c\}$.
 
 \section{Generalized quantifiers}
 

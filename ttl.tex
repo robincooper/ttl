@@ -15,6 +15,7 @@
 \usepackage[mathscr]{eucal}
 \usepackage{qtree}
 \usepackage{makeidx}
+\usepackage{covington}
 % \usepackage{tikz}
 % \usepackage{tikz-qtree}
 %\usepackage{arcs}
@@ -55,11 +56,14 @@
 %
 % Reference the next example in the text:
 %
-\newcommand{\nexteg}[1]{\addtocounter{examplectr}{1}(\arabic{examplectr}{#1})\addtocounter{examplectr}{-1}}
+%\newcommand{\nexteg}[1]{\addtocounter{examplectr}{1}(\arabic{examplectr}{#1})\addtocounter{examplectr}{-1}}
+\def\theequation{\arabic{equation}}
+\newcommand{\nexteg}[1]{\addtocounter{equation}{1}(\arabic{equation}{#1})\addtocounter{equation}{-1}}
 %
 % Reference the previous example in the text:
 %
-\newcommand{\preveg}[1]{(\arabic{examplectr}{#1})}
+%\newcommand{\preveg}[1]{(\arabic{examplectr}{#1})}
+\newcommand{\preveg}[1]{(\arabic{equation}{#1})}
 %
 % Reference examples by relative offsets:
 %
@@ -70,14 +74,15 @@
 %
 % Examples Environments
 %
-\newcounter{examplectr}
-\newcounter{subexamplectr}[examplectr]
+%\newcounter{examplectr}
+%\newcounter{subexamplectr}[examplectr]
+\newcounter{subexamplectr}[equation]
 \renewcommand{\thesubexamplectr}{\alph{subexamplectr}}
 %
 % Sub-example Macro:
 %
 \newenvironment{subex}%
-   {\vspace*{-.9\baselineskip}
+   {%\vspace*{-.9\baselineskip}
      \begin{list}
        {\alph{subexamplectr}.}%
        {\setlength{\topsep}{0in}
@@ -90,30 +95,32 @@
 %
 % Single Example Macro
 %
-\newenvironment{ex}%
-   { \refstepcounter{examplectr}
+% \newenvironment{ex}%
+%    { \refstepcounter{examplectr}
      
-\bigskip
+% \bigskip
 
-    % \begin{list}
-      % {
-       (\arabic{examplectr})%}%
-       % {%\setlength{\topsep}{0in}
-%         \setlength{\leftmargin}{4em}%{0.75in}
-%         \setlength{\labelsep}{\baselineskip}
+%     % \begin{list}
+%       % {
+%        (\arabic{examplectr})%}%
+%        % {%\setlength{\topsep}{0in}
+% %         \setlength{\leftmargin}{4em}%{0.75in}
+% %         \setlength{\labelsep}{\baselineskip}
+% % }
+%         \hspace*{1em}\begin{minipage}[t]{4in} 
+% %\item
+%    }%
+%    {\end{minipage}
+
+% \bigskip
+
+%     %\end{list}
 % }
-        \hspace*{1em}\begin{minipage}[t]{4in} 
-%\item
-   }%
-   {\end{minipage}
-
-\bigskip
-
-    %\end{list}
-}
 %
 % End of example macro
 %
+
+\renewenvironment{ex}{\begin{example}}{\end{example}}
 
 \newcommand{\subegref}[2]{(\ref{#1}\ref{#2})}
 

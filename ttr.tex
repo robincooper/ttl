@@ -570,6 +570,28 @@ represents the labelled set
 $\{\langle\mathrm{disj}_1,T_1\rangle,\langle\mathrm{disj_2},T_2\rangle\}$
 where `disj$_1$' and `disj$_2$' are reserved labels (``disjunct'').
 
+We add generalized join types which were not present in
+\cite{Cooper2012}.  A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  generalized join
+  types} if 
+
+\begin{enumerate} 
+ 
+\item for any finite set of types, $\mathbb{T}$, such that $\mathbb{T}
+  \subseteq\mathbf{Type}$, $\bigvee\mathbb{T} \in \mathbf{Type}$ 
+ 
+\item for any finite $\mathbb{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigvee\mathbb{T}$ iff
+  $a:_{\mathbf{TYPE_C}}T$ for some $T\in\mathbb{T}$
+ 
+\end{enumerate}
+
+We specify that $\bigvee\mathbb{T}$
+represents the labelled set
+$\{\langle\mathrm{disj},\mathbb{T}\rangle\}$
+where `disj' is a reserved label (``disjunction'').
+
 \section{Meet types}
 \label{app:meettypes}
 
@@ -589,6 +611,29 @@ Here, but not in \cite{Cooper2012}, we specify that $(T_1\wedge T_2)$
 represents the labelled set
 $\{\langle\mathrm{conj}_1,T_1\rangle,\langle\mathrm{conj_2},T_2\rangle\}$
 where `conj$_1$' and `conj$_2$' are reserved labels (``conjunct'').
+
+We add generalized meet types which were not present in
+\cite{Cooper2012}.  A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  generalized meet
+  types} if 
+
+\begin{enumerate} 
+ 
+\item for any finite set of types, $\mathbb{T}$, such that $\mathbb{T}
+  \subseteq\mathbf{Type}$, $\bigwedge\mathbb{T} \in \mathbf{Type}$ 
+ 
+\item for any finite $\mathbb{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigwedge\mathbb{T}$ iff
+  $a:_{\mathbf{TYPE_C}}T$ for all $T\in\mathbb{T}$
+ 
+\end{enumerate}
+
+We specify that $\bigwedge\mathbb{T}$
+represents the labelled set
+$\{\langle\mathrm{conj},\mathbb{T}\rangle\}$
+where `conj' is a reserved label (``conjunction'').
+
 
 \section{Models and modal systems of types}
 \label{app:modal}
