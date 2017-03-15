@@ -267,7 +267,67 @@ possible contents, $\{c_1,\ldots,c_n\}$, for a phrase, then the type
 of the content for that phrase is
 $\bigvee\{\textit{Cont}_{c_1},\ldots,\textit{Cont}_{c_n}\}$.  If
 $\mathbb{C}$ represents the set of contents we have computed, we can
-use the more convenient notation $\displaystyle{\bigvee_{c\in\mathbb{C}}}\{\textit{Cont}_c\}$.
+use the more convenient notation
+$\displaystyle{\bigvee_{c\in\mathbb{C}}}\textit{Cont}_c$ to mean
+$\bigvee\{\textit{Cont}_c\mid c\in\mathbb{C}\}$.
+
+We will take content now to be divided into two fields labelled
+`unplugged' and `plugged'.  This terminology goes back to
+\cite{Bos1996}.  The `unplugged'-field contains a set of unplugged
+interpretations consisting of a set of parametric quantifiers
+(possibly empty) and a core interpretation consisting of a parametric
+content.  Thus we define a type \textit{UInterp} of unplugged
+interpretations as in \nexteg{}.
+\begin{ex} 
+\textit{UInterp} = \record{\tfield{quants}{\{\textit{PQuant}\}}\\
+                           \tfield{core}{\textit{PCont}}}
+\end{ex} 
+The `cont'-field in a sign will now be required to be of the type in
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{unplugged}{\{\textit{UInterp}\}}\\
+        \tfield{plugged}{$\displaystyle{\bigvee_{c\in\mathrm{unplugged},\
+              c.\mathrm{quants}=\emptyset}\textit{Cont}_{c.\mathrm{core}}}$}}
+\end{ex} 
+That is, the `unplugged'-field in the content will contain a set of
+unplugged interpretations (consisting of a quantifier store and a core
+interpretation) and the `plugged'-field will contain one of the cores
+of those unplugged interpretations whose quantifier store is
+empty.
+
+Let us consider what this will look like for the example \textit{every
+  boy wants a dog} using \textit{every}$'$, \textit{boy}$'$ etc. as
+abbreviations for non-parametric contents for these words.  We show
+the `cont'-field of the sign type associated with constituents of this
+sentence.
+\begin{ex} 
+\begin{subex} 
+ 
+\item a dog 
+ 
+\item
+  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
+                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                        . \textit{a}$'$(\textit{dog}$'$)}}}}, \\
+   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . $\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . $P(\frak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
+                                                            \\
+          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                        . \textit{a}$'$(\textit{dog}$'$)}}}}$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+    
 
 \section{Generalized quantifiers}
 
