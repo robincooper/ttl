@@ -388,64 +388,231 @@ sentence.
  
 \item every boy wants a dog 
  
-% \item
-%   \smallrecord{ \smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
-%                                                        \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-%                                                                                  \field{fg}{$\lambda\frak{s}$:\textit{Rec}
-%                                                                          . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}}}, \\
-%     \hspace*{5em}                         \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-%                                                                            \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-%                                                                             . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
-%                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-%                                                 \\
-%                                                                       \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-%                                                                         . $\lambda
-%                                                                         P$:\textit{Ppty}
-%                                                                         . $P(\frak{s}.\textrm{x}_0)$(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}}} \\
-%    \hspace*{5em}                          \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-%                                                                           \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-%                                                                             . \textit{every}$'$(\textit{boy}$'$)}}, \\
-%                                                                         \hspace*{1em}\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
-%                                                                           \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-%                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
-%                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-%                                                                                               \smalltfield{x$_1$}{\textit{Ind}}}}
-%                                                 \\
-%                                                                       \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}} \\
-%                                                                                                                 \smalltfield{x$_1$}{\textit{Ind}}}
-%                                                                         . $\lambda
-%                                                                         P$:\textit{Ppty}
-%                                                                         . $P(\frak{s}.\textrm{x}_0)$(\textit{want}$'$($\lambda P$:\textit{Ppty} .            $P(\frak{s}.\textrm{x}_1)$))}}}} \\
-%    \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
-%                                                                           \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-%                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
-%                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}}
-%                                                 \\
-%                                                                       \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-%                                                                         . \textit{every}$'$(\textit{boy}$'$) \\ 
-% \hspace*{1em}($\lambda r$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . $\lambda P$:\textit{Ppty} . $P$($r$.x$_0$)(\textit{want}$'$($\lambda
-%                                                                         P$:\textit{Ppty}
-%                                                                         . $P(\frak{s}.\textrm{x}_1)$)})}}}}
-%                                                             \\
-          
-%    \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-%                                                                           \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-%                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
-%                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-%                                                 \\
-%                                                                       \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-%                                                                         . \textit{want}$'$($\lambda
-%                                                                         P$:\textit{Ppty}
-%                                                                         . $P(\frak{s}.\textrm{x}_0)$)}}}}\}} 
-% {\{\textit{UInterp}\}}
-%                                                             \\
-%           \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-%                                                                       \field{fg}{$\lambda\frak{s}$:\textit{Rec} . 
-%                                                                       \textit{want}(\textit{a}$'$(\textit{dog}$'$))}}}}$}}
+\item
+% \newsavebox{\test}
+% \sbox\test{\begin{tabular}{l}a,\\b\end{tabular}}
+% \usebox{\test}
+
+% \newsavebox{\unplugged}
+% \sbox\unplugged{$\left\{ \text{\begin{tabular}{l}\usebox{\unpluggeda},\\
+%                                     \usebox{\unpluggedb},\\
+%                                     \usebox{\unpluggedc},\\
+%                                     \usebox{\unpluggedd},\\
+%                                     \usebox{\unpluggede},\\
+%                                     \usebox{\unpluggedf},\\
+%                                     \usebox{\unpluggedg}
+%                   \end{tabular}}\right\}$}
+
+\newsavebox{\plugged}
+\sbox\plugged{$\displaystyle{\bigvee_{c\in\mathbb{C}_{\mathrm{plugged}}}\textit{Cont}_c}$}
+                              
+
+\smallrecord{\smallmfield{unplugged}{$\mathbb{C}_{\mathrm{unplugged}}$}{\{\textit{UInterp}\}}\\
+             \smalltfield{plugged}{\usebox{\plugged}}}
+
  
 \end{subex} 
    
 \end{ex} 
+where $\mathbb{C}_{\mathrm{unplugged}}$ is the set whose members are
+listed in \nexteg{} and $\mathbb{C}_{\mathrm{plugged}}$ is the set
+whose members are listed in (\ref{ex:plugged}).
+\newsavebox{\unpluggeda}
+\sbox\unpluggeda{\smallrecord{\field{quants}{$\emptyset$}\\
+                                                       \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                                 \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                         . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}}}}
+
+\newsavebox{\unpluggedb}
+\sbox\unpluggedb{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                           \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                   \hspace*{1em}$\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . \\
+                                                                                   \hspace*{2em}$P(\frak{s}.\textrm{x}_0)$(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))\end{tabular}}}}}}
+
+\newsavebox{\unpluggedc}
+\sbox\unpluggedc{\smallrecord{\field{quants}{\{\begin{tabular}{l}\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}, \\
+                                                                        \smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\end{tabular}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+                                                                                              \smalltfield{x$_1$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}} \\
+                                                                                                                \smalltfield{x$_1$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                                       \hspace*{1em}$\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . \\
+                                                                                   \hspace*{2em}$P(\frak{s}.\textrm{x}_0)$(\textit{want}$'$($\lambda
+                                                                                   P$:\textit{Ppty}
+                                                                                   .
+                                                                                   $P(\frak{s}.\textrm{x}_1)$))\end{tabular}}}}}}
+
+\newsavebox{\unpluggedd}
+\sbox\unpluggedd{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                   \hspace*{1em}\textit{every}$'$(\textit{boy}$'$) \\ 
+\hspace*{2em}($\lambda
+   r$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \\
+   \hspace*{3em}$\lambda P$:\textit{Ppty} .  $P$($r$.x$_0$)\\
+                                                                                   \hspace*{4em}(\textit{want}$'$\\ \hspace*{5em}($\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        .
+                                                                                
+$P(\frak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
+
+\newsavebox{\unpluggede}
+\sbox\unpluggede{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                   \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)\\
+                                                                                   \hspace*{2em}($\lambda
+                                                                        r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                          . \\
+                                                                                   \hspace*{3em}$\lambda
+                                                                          P$:\textit{Ppty}
+                                                                          . \\
+                                                                                   \hspace*{4em}$P$($r$.x$_1$)\\
+                                                                                   \hspace*{5em}(\textit{want}$'$($\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . $P(\frak{s}.\textrm{x}_0)$))})\end{tabular}}}}}
+
+\newsavebox{\unpluggedf}
+\sbox\unpluggedf{\smallrecord{\field{quants}{\{\}}\\
+                              \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                        \field{fg}{\begin{tabular}{l}
+                                                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                     \\
+                                                                    \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
+                                                                      \\
+                                                                    \hspace*{2em}($\lambda
+                                                                     r_1$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{3em}\textit{every}$'$(\textit{boy}$'$)\\
+                                                                    \hspace*{4em}($\lambda
+                                                                     r_2$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{5em}$\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}}}}
+
+\newsavebox{\unpluggedg}
+\sbox\unpluggedg{\smallrecord{\field{quants}{\{\}}\\
+                              \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                        \field{fg}{\begin{tabular}{l}
+                                                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                     \\
+                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
+                                                                      \\
+                                                                    \hspace*{2em}($\lambda
+                                                                     r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{3em}\textit{a}$'$(\textit{dog}$'$)\\
+                                                                    \hspace*{4em}($\lambda
+                                                                     r_2$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{5em}$\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}}}}
+
+
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item \usebox{\unpluggeda} 
+ 
+\item \usebox{\unpluggedb}
+
+\item \usebox{\unpluggedc}
+
+\item \usebox{\unpluggedd}
+
+\item \usebox{\unpluggede}
+
+\item \usebox{\unpluggedf}
+
+\item \usebox{\unpluggedg} 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item \smallrecord{\field{bg}{\textit{Rec}}\\
+                   \field{fg}{$\lambda\frak{s}$:\textit{Rec} . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}
+                               
+\item  \smallrecord{\field{bg}{\textit{Rec}}\\
+                    \field{fg}{\begin{tabular}{l}
+                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                     \\
+                                      \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
+                                                                      \\
+                                      \hspace*{2em}($\lambda
+                                                           r_1$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                      \hspace*{3em}\textit{every}$'$(\textit{boy}$'$)\\
+                                      \hspace*{4em}($\lambda
+                                                          r_2$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                      \hspace*{5em}$\lambda
+                                                        P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                       \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}
+ 
+\item  \smallrecord{\field{bg}{\textit{Rec}}\\
+                                                        \field{fg}{\begin{tabular}{l}
+                                                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                     \\
+                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
+                                                                      \\
+                                                                    \hspace*{2em}($\lambda
+                                                                     r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{3em}\textit{a}$'$(\textit{dog}$'$)\\
+                                                                    \hspace*{4em}($\lambda
+                                                                     r_2$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{5em}$\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}
+ 
+\end{subex} 
+\label{ex:plugged}   
+\end{ex} 
+  
+  
 
 
 
