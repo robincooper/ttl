@@ -618,7 +618,47 @@ constraints on linguistically allowable sign types.  As a preliminary
 we will define a bookkeeping function, max$_x$, which enables us to determine
 the maximum $i$ such that `x$_i$' is used as a label in a set of
 records, $R$.  This will enable us to store quantifiers using labels
-`x$_0$', `x$_1$' and so on in order as in the examples discussed above. 
+`x$_0$', `x$_1$' and so on in order as in the examples discussed
+above. `max$_x$' is defined as in \nexteg{} where $R$ is an arbitrary
+set of records.
+\begin{ex} 
+max$_x$($R$) = 
+\begin{quote}
+max($\{i\mid\exists r\in R\ \exists v\ \langle \mathrm{x}_i,v\rangle\in r.\mathrm{bg}\}$), if
+defined
+
+otherwise: -1 
+\end{quote}
+\end{ex}
+That is, max$_x$($R$) is the maximum $i$ such that `x$_i$' is a label
+in the `bg'-field of one of the records in $R$.  If there is no such label max$_x$($R$)
+returns -1. Thus in adding to a quantifier store, $R$, (as in the
+`quants'-fields in the examples above) we will always add a new
+quantifier indexed by max$_x$($R$)+1.  For brevity we will denote thie
+incr$_x$($R$).  We can now define storage as in
+\nexteg{}, where $\sigma$ is an arbitrary sign.
+\begin{ex} 
+\textbf{Storage}
+
+If $\alpha\in\sigma$.cont.unplugged, $\alpha$.core : \textit{PQuant}
+and for any $i$, $\alpha$.core.fg $\not=$
+$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+  . $\lambda P$:\textit{Ppty} . $P$($\frak{s}$.x$_i$), then
+
+\record{\field{quants}{$\alpha$.quants $\cup$ \{
+                              \record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
+        \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
+          . $\alpha$.core.fg($\frak{s}$)}}\}}\\
+\field{core}{\record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
+                     \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
+                       . $\lambda P$:\textit{Ppty}
+                       . $P$($\frak{s}$.x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$)}}}}
+
+$\in$ $\sigma$.cont.unplugged
+                                 
+\end{ex} 
+  
+   
 
 
 
