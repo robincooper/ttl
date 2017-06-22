@@ -21,7 +21,7 @@ function from a context assigning a value to the pronoun to a
 type.\footnote{We will consider later how to combine types of context
   which assign values to pronouns with other context types which we
   have introduced with parametric contents.}  We will use the variable
-`$\frak{s}$' to represent such contexts.  Thus a parametric content for
+`$\mathfrak{s}$' to represent such contexts.  Thus a parametric content for
 \textit{he} could be that given in \nexteg{a}, for \textit{left}
 (ignoring tense) as \nexteg{b} and their combination, using a variant
 of S-combination which we will discuss as we progress, is represented
@@ -29,16 +29,16 @@ in \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\frak{s}$.x$_0$}})
+\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_0$}})
  
-\item $\lambda\frak{s}$:\textit{Rec} . 
+\item $\lambda\mathfrak{s}$:\textit{Rec} . 
         $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
               \record{\tfield{e}{leave($r$.x)}}
 
-\item $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
   . 
-         \record{\tfield{e}{leave($\frak{s}$.x$_0$)}}
+         \record{\tfield{e}{leave($\mathfrak{s}$.x$_0$)}}
  
 \end{subex} 
    
@@ -46,9 +46,9 @@ in \nexteg{c}.
 We follow Montague's strategy in allowing the content of \textit{he}
 to be \nexteg{} for any natural number $i$.
 \begin{ex}
-$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
         $\lambda P$:\textit{Ppty}
-        . $P$(\smallrecord{\field{x}{$\frak{s}$.x$_i$}})
+        . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_i$}})
 \label{ex:pronoun-cont}
 \end{ex} 
 Thus considering the boy and the dog, a
@@ -58,10 +58,10 @@ content for \nexteg{a} will be \nexteg{b}.
  
 \item he hugged it 
  
-\item $\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
                                    \smalltfield{x$_1$}{\textit{Ind}}}
                                  . 
-\record{\tfield{e}{hug($\frak{s}$.x$_0$, $\frak{s}$.x$_1$)}} 
+\record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
  
 \end{subex} 
    
@@ -72,12 +72,12 @@ information represented by the pronoun such as gender.   Thus a simple
 treatment of gender for \preveg{} might be given by making the content
 be \nexteg{}.
 \begin{ex} 
-$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
                              \smalltfield{c$_0$}{male(x$_0$)}\\
                              \smalltfield{x$_1$}{\textit{Ind}}\\
                              \smalltfield{c$_1$}{neuter(x$_1$)}}
                                  . 
-\record{\tfield{e}{hug($\frak{s}$.x$_0$, $\frak{s}$.x$_1$)}} 
+\record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
 \end{ex} 
 As we will see below, there are some complications with this simple
 idea when it comes to the interpretation of pronouns which are bound
@@ -101,7 +101,7 @@ introduced in Chapter~\ref{ch:commonnouns}.
  
 \item a boy hugged every dog 
  
-\item $\lambda \frak{s}$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+\item $\lambda \mathfrak{s}$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
       r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
 \smallrecord{\smalltfield{e}{every(dog$'$, 
 $\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} . 
@@ -128,10 +128,10 @@ given in (\ref{ex:pronoun-cont}).  Then the content for \nexteg{a} could be
  
 \item a boy hugged it$^*$
  
-\item $\lambda \frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+\item $\lambda \mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
 \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{hug($r$.x, $\frak{s}$.x$_0$)}})}} 
+    . \smallrecord{\smalltfield{e}{hug($r$.x, $\mathfrak{s}$.x$_0$)}})}} 
  
 \end{subex} 
    
@@ -146,7 +146,7 @@ as in \nexteg{b}.
  
 \item every dog, a boy hugged it$^*$ 
  
-\item $\lambda\frak{s}$:\textit{Rec} . 
+\item $\lambda\mathfrak{s}$:\textit{Rec} . 
 \smallrecord{\smalltfield{e}{every(dog$'$,
 $\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
 \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
@@ -308,20 +308,20 @@ sentence.
 \item
   \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
                                             \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                         . \textit{a}$'$(\textit{dog}$'$)}}}}, \\
    \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                         . $\lambda
                                                                         P$:\textit{Ppty}
-                                                                        . $P(\frak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
                                                             \\
           \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                         . \textit{a}$'$(\textit{dog}$'$)}}}}$}}
  
 \end{subex} 
@@ -335,20 +335,20 @@ sentence.
 \item
   \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
                                             \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                         . \textit{want}$'$(\textit{a}$'$(\textit{dog}$'$))}}}}, \\
    \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                         . \textit{want}$'$($\lambda
                                                                         P$:\textit{Ppty}
-                                                                        . $P(\frak{s}.\textrm{x}_0)$)}}}}\}} {\{\textit{UInterp}\}}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$)}}}}\}} {\{\textit{UInterp}\}}
                                                             \\
           \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                         . \textit{want}(\textit{a}$'$(\textit{dog}$'$))}}}}$}}
  
 \end{subex} 
@@ -363,20 +363,20 @@ sentence.
 \item
   \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
                                             \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                         . \textit{every}$'$(\textit{boy}$'$)}}}}, \\
    \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                             . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                         . $\lambda
                                                                         P$:\textit{Ppty}
-                                                                        . $P(\frak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
                                                             \\
           \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                         . \textit{every}$'$(\textit{boy}$'$)}}}}$}}
  
 \end{subex} 
@@ -420,50 +420,50 @@ whose members are listed in (\ref{ex:plugged}).
 \newsavebox{\unpluggeda}
 \sbox\unpluggeda{\smallrecord{\field{quants}{$\emptyset$}\\
                                                        \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                                 \field{fg}{$\lambda\frak{s}$:\textit{Rec}
+                                                                                 \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
                                                                          . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}}}}
 
 \newsavebox{\unpluggedb}
 \sbox\unpluggedb{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                           \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                           \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                             . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                         . \\
                                                                                    \hspace*{1em}$\lambda
                                                                         P$:\textit{Ppty}
                                                                         . \\
-                                                                                   \hspace*{2em}$P(\frak{s}.\textrm{x}_0)$(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))\end{tabular}}}}}}
+                                                                                   \hspace*{2em}$P(\mathfrak{s}.\textrm{x}_0)$(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))\end{tabular}}}}}}
 
 \newsavebox{\unpluggedc}
 \sbox\unpluggedc{\smallrecord{\field{quants}{\{\begin{tabular}{l}\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                             . \textit{every}$'$(\textit{boy}$'$)}}, \\
                                                                         \smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\end{tabular}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
                                                                                               \smalltfield{x$_1$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}} \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}} \\
                                                                                                                 \smalltfield{x$_1$}{\textit{Ind}}}
                                                                         . \\
                                                                                                        \hspace*{1em}$\lambda
                                                                         P$:\textit{Ppty}
                                                                         . \\
-                                                                                   \hspace*{2em}$P(\frak{s}.\textrm{x}_0)$(\textit{want}$'$($\lambda
+                                                                                   \hspace*{2em}$P(\mathfrak{s}.\textrm{x}_0)$(\textit{want}$'$($\lambda
                                                                                    P$:\textit{Ppty}
                                                                                    .
-                                                                                   $P(\frak{s}.\textrm{x}_1)$))\end{tabular}}}}}}
+                                                                                   $P(\mathfrak{s}.\textrm{x}_1)$))\end{tabular}}}}}}
 
 \newsavebox{\unpluggedd}
 \sbox\unpluggedd{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
                                                                             . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
                                                                         . \\
                                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$) \\ 
 \hspace*{2em}($\lambda
@@ -473,15 +473,15 @@ whose members are listed in (\ref{ex:plugged}).
                                                                         P$:\textit{Ppty}
                                                                         .
                                                                                 
-$P(\frak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
+$P(\mathfrak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
 
 \newsavebox{\unpluggede}
 \sbox\unpluggede{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                             . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
                                             \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
                                                 \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
                                                                         . \\
                                                                                    \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)\\
                                                                                    \hspace*{2em}($\lambda
@@ -493,13 +493,13 @@ $P(\frak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
                                                                                    \hspace*{4em}$P$($r$.x$_1$)\\
                                                                                    \hspace*{5em}(\textit{want}$'$($\lambda
                                                                         P$:\textit{Ppty}
-                                                                        . $P(\frak{s}.\textrm{x}_0)$))})\end{tabular}}}}}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$))})\end{tabular}}}}}
 
 \newsavebox{\unpluggedf}
 \sbox\unpluggedf{\smallrecord{\field{quants}{\{\}}\\
                               \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
                                                         \field{fg}{\begin{tabular}{l}
-                                                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
                                                                      \\
                                                                     \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
                                                                       \\
@@ -521,7 +521,7 @@ $P(\frak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
 \sbox\unpluggedg{\smallrecord{\field{quants}{\{\}}\\
                               \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
                                                         \field{fg}{\begin{tabular}{l}
-                                                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
                                                                      \\
                                                                     \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
                                                                       \\
@@ -566,11 +566,11 @@ $P(\frak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
 \begin{subex} 
  
 \item \smallrecord{\field{bg}{\textit{Rec}}\\
-                   \field{fg}{$\lambda\frak{s}$:\textit{Rec} . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}
+                   \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec} . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}
                                
 \item  \smallrecord{\field{bg}{\textit{Rec}}\\
                     \field{fg}{\begin{tabular}{l}
-                                    $\lambda\frak{s}$:\textit{Rec}
+                                    $\lambda\mathfrak{s}$:\textit{Rec}
                                                                      \\
                                       \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
                                                                       \\
@@ -590,7 +590,7 @@ $P(\frak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
  
 \item  \smallrecord{\field{bg}{\textit{Rec}}\\
                                                         \field{fg}{\begin{tabular}{l}
-                                                                    $\lambda\frak{s}$:\textit{Rec}
+                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
                                                                      \\
                                                                     \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
                                                                       \\
@@ -641,23 +641,68 @@ incr$_x$($R$).  We can now define storage as in
 \textbf{Storage}
 
 If $\alpha\in\sigma$.cont.unplugged, $\alpha$.core : \textit{PQuant}
-and for any $i$, $\alpha$.core.fg $\not=$
-$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-  . $\lambda P$:\textit{Ppty} . $P$($\frak{s}$.x$_i$), then
+and \\ $\alpha$.core.fg $\not=$
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+  . $\lambda P$:\textit{Ppty} . $P$($\mathfrak{s}$.x$_i$) for any $i$, \\then
 
-\record{\field{quants}{$\alpha$.quants $\cup$ \{
+\hspace*{1em}\record{\field{quants}{$\alpha$.quants $\cup$ \{
                               \record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
-        \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
-          . $\alpha$.core.fg($\frak{s}$)}}\}}\\
+        \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
+          . $\alpha$.core.fg($\mathfrak{s}$)}}\}}\\
 \field{core}{\record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
-                     \field{fg}{$\lambda\frak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
+                     \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
                        . $\lambda P$:\textit{Ppty}
-                       . $P$($\frak{s}$.x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$)}}}}
+                       . $P$($\mathfrak{s}$.x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$)}}}}
 
-$\in$ $\sigma$.cont.unplugged
+\hspace*{4em}$\in$ $\sigma$.cont.unplugged
                                  
 \end{ex} 
-  
+If $\sigma$ is a sign, $\sigma$.cont.unplugged is a set of unplugged interpretations.
+\preveg{} says that if any
+of those is a noun-phrase interpretation, that is, its core is of type
+\textit{PQuant}, and is not the result of applying storage, that is,
+the foreground of its core is not an interpretation depending on a
+context, $\mathfrak{s}$, as introduced by storage, then
+$\sigma$.cont.unplugged also contains an unplugged interpretation
+where the core has been stored. 
+
+We now characterize retrieval (in a version corresponding to
+quantification with scope over sentences, as opposed to verb phrases
+or common nouns) in \nexteg{}, where again $\sigma$ is an arbitrary
+sign.
+\begin{ex} 
+\textbf{Retrieval (S)} 
+
+If $\alpha\in\sigma$.cont.unplugged, for some $i$,
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+. $Q$ $\in$ $\alpha$.quants and $\alpha$.core : ($T$ $\rightarrow$
+\textit{Type}), where $T$ $\sqsubseteq$
+\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, then \\
+
+\hspace*{1em}\record{\field{quants}{$\alpha$.quants $-$
+    $\{\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+    . $Q\}$} \\
+        \field{core}{$\lambda\mathfrak{s}$:$T-$\{\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}\}
+          . $Q$($\lambda
+          r$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+          . $\alpha$.core($\mathfrak{s}\cup$\{\smallrecord{\field{x$_i$}{$r$.x$_i$}}\}))}}
+
+\hspace*{4em}$\in$ $\sigma$.cont.unplugged
+\end{ex} 
+\preveg{} says that if any of the unplugged interpretations in a sign
+contains a quantifiers indexed by $i$, that is, it is a parametric
+quantifier whose domain type is
+\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, and the core of this
+unplugged interpretation is a function from contexts to a type, that
+is, it corresponds to a (declarative) sentence interpretation, where
+the context is required to provide a value for `x$_i$', that is, the
+domain type is a subtype of
+\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}},\footnote{Note that
+  this requirement will prevent the kind of vacuous binding that
+  Keller storage \citep{Keller1988} avoided.} then the quantifier is
+removed from the store and given scope over the sentence
+interpretation in the core binding `x$_i$'.  The dependence on `x$_i$'
+in the context is removed from the core interpretation. 
    
 
 
