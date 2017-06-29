@@ -713,10 +713,30 @@ when the basic semantic composition involves function application.
 
 If $\alpha\in\sigma_1$.cont.unplugged and
 $\beta\in\sigma_2$.cont.unplugged and $\eta$ is a relabelling of
-$\beta$.quants such that $\eta$(x$_n$) = x$_{\mathrm{max}_x(\alpha.\mathrm{quants})+n+1}$, 
+$\beta$.quants such that $\eta$(x$_n$) =
+x$_{\mathrm{max}_x(\alpha.\mathrm{quants})+n+1}$, then \\
+\hspace*{2em} $\alpha @@\beta$ = 
+\record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_\eta$}\\
+        \field{core}{$\alpha$.core@[$\beta$.core]$_\eta$}}
 \end{ex} 
+\preveg{} says that the application of an unplugged content, $\alpha$,
+to another unplugged content, $\beta$, involves first relabelling the
+quantifier indices in $\beta$ so that they increment the quantifier
+indices in $\alpha$ in the way that is illustrated in the examples
+discussed above.  For example, if both $\alpha$ and $\beta$ contain
+the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
+`x$_0$' will be relabelled to `x$_1$' in $\beta$.  Now the result of
+application is an unplugged content whose `quants' are the union of
+$\alpha$'s `quants' and the relabelled `quants' of $\beta$.  The core
+is the result of applying $\alpha$'s core to $\beta$'s core under the
+same relabelling. 
   
-   
+
+[Grammar to be added.]
+
+\section{Long distance dependencies}
+
+ 
 
 
 
