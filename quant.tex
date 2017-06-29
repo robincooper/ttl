@@ -690,7 +690,7 @@ $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
 \hspace*{4em}$\in$ $\sigma$.cont.unplugged
 \end{ex} 
 \preveg{} says that if any of the unplugged interpretations in a sign
-contains a quantifiers indexed by $i$, that is, it is a parametric
+contains a quantifier indexed by $i$, that is, it is a parametric
 quantifier whose domain type is
 \smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, and the core of this
 unplugged interpretation is a function from contexts to a type, that
@@ -703,6 +703,19 @@ domain type is a subtype of
 removed from the store and given scope over the sentence
 interpretation in the core binding `x$_i$'.  The dependence on `x$_i$'
 in the context is removed from the core interpretation. 
+
+Finally, we show one way in which stored quantifiers can be
+``percolated'' to higher constituents by showing in \nexteg{} how to
+construct an unplugged content from two constituent unplugged contents
+when the basic semantic composition involves function application.
+\begin{ex} 
+\textbf{Application}
+
+If $\alpha\in\sigma_1$.cont.unplugged and
+$\beta\in\sigma_2$.cont.unplugged and $\eta$ is a relabelling of
+$\beta$.quants such that $\eta$(x$_n$) = x$_{\mathrm{max}_x(\alpha.\mathrm{quants})+n+1}$, 
+\end{ex} 
+  
    
 
 
