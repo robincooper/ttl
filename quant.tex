@@ -635,7 +635,53 @@ in the `bg'-field of one of the records in $R$.  If there is no such label max$_
 returns -1. Thus in adding to a quantifier store, $R$, (as in the
 `quants'-fields in the examples above) we will always add a new
 quantifier indexed by max$_x$($R$)+1.  For brevity we will denote thie
-incr$_x$($R$).  We can now define storage as in
+incr$_x$($R$). 
+
+It will also be useful to define an operation that adds a field
+\smallrecord{\field{$\ell$}{$v$}} to a record $r$ if there is no field
+with the label $\ell$ or replaces the $\ell$-field in $r$ with
+\smallrecord{\field{$\ell$}{$v$}}.  We will represent the new record
+thus derived as $r\oplus$\smallrecord{\field{$\ell$}{$v$}}.  This
+is defined in \nexteg{}.
+\begin{ex} 
+$r\oplus$\smallrecord{\field{$\ell$}{$v$}} is \\
+\hspace*{1em}$r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$ such
+that $\langle\ell,v'\rangle\in\mathfrak{s}$\\
+\hspace*{1em}$(r-\{\langle\ell,r.l\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
+\end{ex} 
+Similarly we define $T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}}
+for record types, $T$, in
+\nexteg{}.
+\begin{ex} 
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
+\hspace*{1em}$T-\{\langle\ell,v\rangle\}$ 
+\end{ex} 
+Note that this version of subtraction for record types will only
+result in a well-formed record type if there are not fields in $T$
+which depend on $\ell$.  In order to rectify this we need to make
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} remove in addition
+all fields which depend on $\ell$.  A field, $f$, is dependent on $\ell$
+just in case it is of the form
+$\langle\ell',\langle\mathcal{F},\pi\rangle\rangle$ where $\pi$ is a
+sequence of paths containing $\ell$. Therefore we can refine the
+definition in \preveg{} as that in \nexteg{}.
+\begin{ex} 
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
+\hspace*{1em}$T-(\{\langle\ell,v\rangle\}\cup\{f\in T\mid f\
+\text{dependent on}\ \ell\})$ 
+\end{ex} 
+This is technically not enough, since there may still be fields left
+which are dependent on the dependent fields we have removed.
+Therefore we need to make the definition recursive as in \nexteg{}.
+\begin{ex} 
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
+\hspace*{1em}$(\ldots(T-\{\langle\ell,v\rangle\}\ominus
+f_0)\ldots)\ominus f_n$ where $\{f_0,\ldots,f_n\}$ is $\{f\in T\mid f\
+\text{dependent on}\ \ell\}$ 
+\end{ex}   
+
+
+We can now define storage as in
 \nexteg{}, where $\sigma$ is an arbitrary sign.
 \begin{ex} 
 \textbf{Storage}
@@ -685,7 +731,7 @@ $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
         \field{core}{$\lambda\mathfrak{s}$:$T-$\{\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}\}
           . $Q$($\lambda
           r$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-          . $\alpha$.core($\mathfrak{s}\cup$\{\smallrecord{\field{x$_i$}{$r$.x$_i$}}\}))}}
+          . $\alpha$.core($\mathfrak{s}\oplus$\smallrecord{\field{x$_i$}{$r$.x$_i$}}))}}
 
 \hspace*{4em}$\in$ $\sigma$.cont.unplugged
 \end{ex} 
