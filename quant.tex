@@ -782,7 +782,41 @@ same relabelling.
 
 \section{Long distance dependencies}
 
- 
+Let us consider how to derive the content of \textit{who Sam hugged}
+as a relative clause.  We use \textbf{hug}$_V$ to represent the
+foreground of the content of \textit{hug} as a transitive verb,
+characterized as in \nexteg{}.
+\begin{ex} 
+\textbf{hug}$_V$ = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} . $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}} 
+\end{ex} 
+Our theory of syntax in terms of event types means that what have been
+called ``gaps'' or ``traces'' in other theories of syntax would
+somehow have to correspond to non-events in which nothing happens and
+do not have any temporal extent.  This strongly suggests that they do
+not exist.  Instead we will take a strategy similar to that pursued,
+for example, in combinatory categorial grammar (see, for example,
+\citealp{Steedman2012}) where \textit{hug} can also be interpreted as
+a verb phrase whose content is ``looking for'' a \textit{wh}-phrase
+content.  We will represent the foreground of this content as
+\textbf{hug}$_{\mathit{VP}}$ and characterize it in terms of
+\textbf{hug}$_V$ as in \nexteg{a} which is identical with \nexteg{b}.
+\begin{ex} 
+\begin{subex}
+\item \textbf{hug}$_{\mathit{VP}}$ = $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+. \textbf{hug}$_V$($\mathfrak{s}$)($\lambda P$:\textit{Ppty}
+. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}})) 
+
+\item
+  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+  . $\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{e}{hug($r_1$.x, $\lambda P$:\textit{Ppty}
+. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
+\end{subex}
+\end{ex} 
+    
 
 
 
