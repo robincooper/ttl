@@ -830,7 +830,7 @@ where `sam' is a particular individual named Sam.
 \textbf{Sam} = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{sam}}) 
 \end{ex}
 The foreground of the content of \textit{Sam hugged}, which we will
-represent as \textbf{Sam$^\frown$hugged} is \nexteg{a} which is
+represent as \textbf{Sam$^\frown$hugged}, is \nexteg{a} which is
 identical with \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
@@ -845,7 +845,57 @@ identical with \nexteg{b}.
  
 \end{subex} 
    
+\end{ex}
+The foreground of the content of \textit{who}, which we will represent
+as \textbf{who}, is given in \nexteg{}.
+\begin{ex} 
+\textbf{who} =
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
+. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh}}) 
 \end{ex} 
+In order to be able to characterize the kind of binding involved in
+combining \textit{who} with \textit{Sam hugged} we will define an
+operation, $\oplus$, which adds a field to a record or, if the label
+of the field being added
+is already present in the record, will replace that field with the new
+field.  This operation is characterized in \nexteg{}.
+\begin{ex} 
+If $r$ is a record, $\ell$ is a label and $v$ is some TTR object, then
+\\
+\hspace*{1em} $r\oplus[\ell=v]$ is \\
+\hspace*{2em} $r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$
+such that $\langle\ell,v'\rangle\in r$\\
+\hspace*{2em}
+$(r-\{\langle\ell,r.\ell\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
+\end{ex} 
+We are using records here to do the work of partial variable
+assignments in logic and the $\oplus$-operation carries out the kind
+of modification which is performed on variable assignments when
+defining binding in the logical treatment.  This now gives us what we
+need to characterize the foreground of the content of the relative
+clause \textit{who Sam hugged}, which we will represent as
+\textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged}, as in
+\nexteg{a} which is identical with \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged} = \\
+  \hspace*{1em}$\lambda\mathfrak{s}$:\textit{Rec} . \\
+\hspace*{2em}$\lambda
+  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \\
+\hspace*{3em}\textbf{who}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}]$)
+($\lambda
+  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$)) 
+ 
+\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$r_1$.x}}))}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+     
    
     
     
@@ -860,10 +910,10 @@ identical with \nexteg{b}.
 
 [donkey anaphora]
 
-\section{Structured contexts}
+\section{Structured contexts, binding principles and projection}
 \label{sec:struc-cntxt}
 
-\section{Compositional semantics}
+\section{Compositional semantics and incremental processing}
 
 %%% Local Variables: 
 %%% mode: latex
