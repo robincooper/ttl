@@ -1014,6 +1014,87 @@ substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our examp
 
 \end{quote}
 
+We will first look in more detail at flattening.  Flattened records
+have \textit{complex labels} (or \textit{paths}) of the form
+$\ell_1.\ell_2.\ldots.\ell_n$.  If $L$ is a set of labels, the set of
+\textit{complex labels}, $L_\pi$, \textit{based on} $L$ is the minimal
+set such that:
+\begin{enumerate} 
+ 
+\item if $\ell\in L$, then $\ell\in L_\pi$ 
+ 
+\item if $\pi\in L_\pi$ and $\ell\in L$, then $\pi.\ell\in L_\pi$ 
+ 
+\end{enumerate}
+
+Recall that a record, $r$, is a set of fields, $f$, where each $f$, is
+an ordered pair, $\langle\ell,v\rangle$ where $\ell$ is a (complex)
+label and $v$ is the value of the field which may itself be a record
+or some other object.  If $r$ is a record, then $\varphi(r)$,
+\textit{the flattening of} $r$, is
+\begin{quote}
+$\displaystyle{\bigcup_{f\in r}}\mathrm{FlattenField}(f)$
+\end{quote}
+where $\mathrm{FlattenField}(\langle\ell,v\rangle)$ is
+\begin{quote}
+$\varphi(\{\langle\ell.\ell_1,v_1\rangle,
+           \langle\ell.\ell_2,v_2\rangle,
+           \ldots,
+           \langle\ell.\ell_n,v_n\rangle\})$
+\end{quote}
+if $v$ is the record
+$\{\langle\ell_1,v_1\rangle,
+   \langle\ell_2,v_2\rangle,
+   \ldots,
+   \langle\ell_n,v_n\rangle\}$
+and
+$\langle\ell,v\rangle$
+otherwise.
+
+If $r$ is the record 
+\begin{quote}
+$\left\{\begin{array}{l}
+          \langle\ell_1.\pi_{1,1},v_{1,1}\rangle,
+          \langle\ell_1.\pi_{1,2},v_{1,2}\rangle,
+          \ldots,
+          \langle\ell_1.\pi_{1,m_1},v_{1,m_1}\rangle,\\
+          \langle\ell_2.\pi_{2,1},v_{2,1}\rangle,
+          \langle\ell_2.\pi_{2,2},v_{2,2}\rangle,
+          \ldots,
+          \langle\ell_2.\pi_{2,m_2},v_{2,m_2}\rangle,\\
+          \vdots\\
+          \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
+          \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
+          \ldots
+          \langle\ell_n.\pi_{n,m_n},v_{n,m_n}\rangle
+          \end{array}
+\right\}$
+\end{quote}
+then $\varphi^-(r)$, the \textit{inverse
+  flattening} (or \textit{expansion}) \textit{of} $r$, is
+\begin{quote}
+$\left\{\begin{array}{l}
+          \langle\ell_1,\varphi^-(\{\langle\pi_{1,1},v_{1,1}\rangle,
+                                    \langle\pi_{1,2},v_{1,2}\rangle,
+                                    \ldots,
+                                    \langle\pi_{1,m_1},v_{1,m_1}\rangle\})
+                 \rangle,\\
+          \langle\ell_2,\varphi^-(\{\langle\pi_{2,1},v_{2,1}\rangle,
+                                    \langle\pi_{2,2},v_{2,2}\rangle,
+                                    \ldots,
+                                    \langle\pi_{2,m_2},v_{2,m_2}\rangle\})
+                 \rangle,\\
+          \vdots \\
+          \langle\ell_n,\varphi^-(\{\langle\pi_{n,1},v_{n,1}\rangle,
+                                    \langle\pi_{n,2},v_{n,2}\rangle,
+                                    \ldots,
+                                    \langle\pi_{n,m_n},v_{n,m_n}\rangle\})
+                 \rangle
+        \end{array}\right\}$
+\end{quote}
+
+  
+
 A (proper) record \textit{type} is a labelled set 
 where the objects labelled are types or, in some cases, certain
 kinds of mathematical objects which can be used to construct types.
