@@ -1065,7 +1065,7 @@ $\left\{\begin{array}{l}
           \vdots\\
           \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
           \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
-          \ldots
+          \ldots,
           \langle\ell_n.\pi_{n,m_n},v_{n,m_n}\rangle
           \end{array}
 \right\}$
@@ -1093,7 +1093,94 @@ $\left\{\begin{array}{l}
         \end{array}\right\}$
 \end{quote}
 
-  
+We now turn our attention to relabelling.  If $L$ is a set of labels,
+then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
+based on $L$ is the minimal set such that
+\begin{enumerate} 
+ 
+\item if $\ell\in L$, then $\ell\in L_+$ 
+ 
+\item if $\pi\in L_+$ and $\ell\in L$, then $\pi.\ell\in L_+$ 
+ 
+\end{enumerate} 
+An $L$\textit{-relabelling} is a one-one function whose domain and range
+are included in $L_+$. We will standardly represent a relabelling,
+$\eta$, whose domain is $\{\pi_1,\ldots,\pi_n\}$ and which is defined
+by $\eta(\pi_1)=\pi'_1,\ldots,\eta(\pi_n)=\pi'_n$ as:
+\begin{quote}
+$\pi_1\leadsto\pi'_1$\\
+\vdots \\
+$\pi_n\leadsto\pi'_n$
+\end{quote} 
+
+If $r$ is a record
+$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$, then
+the \textit{set of labels of} $r$, $\mathrm{labels}(r)$, is
+$\{\ell_1,\ldots,\ell_n\}$.  For example, if $r$ is the record
+\begin{quote}
+\record{\field{x}{\record{\field{z}{$a$}\\
+                          \field{w}{$b$}}}\\
+        \field{y}{$c$}}
+\end{quote}
+then $\mathrm{labels}(r)$ is $\{\mathrm{x},\mathrm{y}\}$. That is, `labels' picks out
+the ``highest level'' of labels in a complex record.
+
+If $r$ is a record
+$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ and
+$\eta$ is a relabelling, the \textit{application of $\eta$ to $r$},
+$\eta*r$ is
+$\{\langle\ell'_1,v_1\rangle,\ldots,\langle\ell'_n,v_n\rangle\}$ where
+for each $i$ such that $1\leq i\leq n$, $\ell'_i$ is $\eta(\ell_i)$ if
+$\ell_i$ is in the domain of $\eta$ and $\ell_i$ otherwise.  Suppose
+$\eta$ is the relabelling $\mathrm{x}\leadsto\mathrm{xx},
+\mathrm{z}\leadsto\mathrm{zz}$ and $r$ is as above.  Then $\eta*r$ is
+\begin{quote}
+\record{\field{xx}{\record{\field{z}{$a$}\\
+                          \field{w}{$b$}}}\\
+        \field{y}{$c$}}
+\end{quote}
+That is, the label `x' is changed, but nothing else.
+
+We are, however, mainly interested in replacing complete paths in a
+record which is why we have defined relabellings on the set of paths,
+$L_+$ rather than the set of labels, $L$.  The \textit{result of
+  relabelling a record, $r$, with a relabelling, $\eta$}, in symbols,
+$[r]_\eta$, is $\varphi^-(\eta*\varphi(r))$.  We say that $\eta$ is a
+\textit{proper relabelling} for $r$ just in case $[r]_\eta$ is a
+record.
+
+Suppose $r$ is the record
+\begin{quote}
+\record{\field{x}{\record{\field{x}{$a$}\\
+                          \field{y}{$b$}}}\\
+        \field{y}{\record{\field{x}{$c$}}}}
+\end{quote}
+and $\eta$ is the relabelling
+\begin{quote}
+x.x $\leadsto$ y.z\\
+x.y $\leadsto$ x\\
+\end{quote}
+$\varphi(r)$ is the flattened record
+\begin{quote}
+\record{\field{x.x}{$a$}\\
+        \field{x.y}{$b$}\\
+        \field{y.x}{$c$}}
+\end{quote}
+$\eta*\varphi(r)$ is
+\begin{quote}
+\record{\field{y.z}{$a$}\\
+        \field{x}{$b$}\\
+        \field{y.x}{$c$}}
+\end{quote}
+Then $[r]_\eta$ is the expansion of this record, that is, the record
+\begin{quote}
+\record{\field{x}{$b$}\\
+        \field{y}{\record{\field{x}{$c$}\\
+                          \field{z}{$a$}}}}
+\end{quote}
+and $\eta$ is a proper relabelling for $r$.  
+
+Now let us consider a case where the relabelling is not proper.
 
 A (proper) record \textit{type} is a labelled set 
 where the objects labelled are types or, in some cases, certain
