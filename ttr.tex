@@ -1051,47 +1051,61 @@ and
 $\langle\ell,v\rangle$
 otherwise.
 
-If $r$ is the record 
-\begin{quote}
-$\left\{\begin{array}{l}
-          \langle\ell_1.\pi_{1,1},v_{1,1}\rangle,
-          \langle\ell_1.\pi_{1,2},v_{1,2}\rangle,
-          \ldots,
-          \langle\ell_1.\pi_{1,m_1},v_{1,m_1}\rangle,\\
-          \langle\ell_2.\pi_{2,1},v_{2,1}\rangle,
-          \langle\ell_2.\pi_{2,2},v_{2,2}\rangle,
-          \ldots,
-          \langle\ell_2.\pi_{2,m_2},v_{2,m_2}\rangle,\\
-          \vdots\\
-          \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
-          \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
-          \ldots,
-          \langle\ell_n.\pi_{n,m_n},v_{n,m_n}\rangle
-          \end{array}
-\right\}$
-\end{quote}
-then $\varphi^-(r)$, the \textit{inverse
-  flattening} (or \textit{expansion}) \textit{of} $r$, is
-\begin{quote}
-$\left\{\begin{array}{l}
-          \langle\ell_1,\varphi^-(\{\langle\pi_{1,1},v_{1,1}\rangle,
-                                    \langle\pi_{1,2},v_{1,2}\rangle,
-                                    \ldots,
-                                    \langle\pi_{1,m_1},v_{1,m_1}\rangle\})
-                 \rangle,\\
-          \langle\ell_2,\varphi^-(\{\langle\pi_{2,1},v_{2,1}\rangle,
-                                    \langle\pi_{2,2},v_{2,2}\rangle,
-                                    \ldots,
-                                    \langle\pi_{2,m_2},v_{2,m_2}\rangle\})
-                 \rangle,\\
-          \vdots \\
-          \langle\ell_n,\varphi^-(\{\langle\pi_{n,1},v_{n,1}\rangle,
-                                    \langle\pi_{n,2},v_{n,2}\rangle,
-                                    \ldots,
-                                    \langle\pi_{n,m_n},v_{n,m_n}\rangle\})
-                 \rangle
-        \end{array}\right\}$
-\end{quote}
+If $r$ is a record such that $\mathrm{labels}(r)\subseteq L_+$, then
+the \textit{inverse flattening} (or \textit{expansion}) \textit{of}
+$r$, $\varphi^-(r)$, is the minimal set such that
+\begin{enumerate} 
+ 
+\item if $\langle\ell,v\rangle\in r$ and $\ell\in L$, then $\langle\ell,v\rangle\in\varphi^-(r)$ 
+ 
+\item if $\ell\in L$, $\pi\in L_+$ and $\langle\ell.\pi,v\rangle\in
+  r$, then 
+$\langle\ell,\varphi^-(\{\langle\pi',v'\rangle\mid\langle\ell.\pi',v'\rangle\in r\})\rangle\in\varphi^-(r)$
+ 
+\end{enumerate} 
+  
+
+% If $r$ is the record 
+% \begin{quote}
+% $\left\{\begin{array}{l}
+%           \langle\ell_1.\pi_{1,1},v_{1,1}\rangle,
+%           \langle\ell_1.\pi_{1,2},v_{1,2}\rangle,
+%           \ldots,
+%           \langle\ell_1.\pi_{1,m_1},v_{1,m_1}\rangle,\\
+%           \langle\ell_2.\pi_{2,1},v_{2,1}\rangle,
+%           \langle\ell_2.\pi_{2,2},v_{2,2}\rangle,
+%           \ldots,
+%           \langle\ell_2.\pi_{2,m_2},v_{2,m_2}\rangle,\\
+%           \vdots\\
+%           \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
+%           \langle\ell_n.\pi_{n,1},v_{n,1}\rangle,
+%           \ldots,
+%           \langle\ell_n.\pi_{n,m_n},v_{n,m_n}\rangle
+%           \end{array}
+% \right\}$
+% \end{quote}
+% then $\varphi^-(r)$, the \textit{inverse
+%   flattening} (or \textit{expansion}) \textit{of} $r$, is
+% \begin{quote}
+% $\left\{\begin{array}{l}
+%           \langle\ell_1,\varphi^-(\{\langle\pi_{1,1},v_{1,1}\rangle,
+%                                     \langle\pi_{1,2},v_{1,2}\rangle,
+%                                     \ldots,
+%                                     \langle\pi_{1,m_1},v_{1,m_1}\rangle\})
+%                  \rangle,\\
+%           \langle\ell_2,\varphi^-(\{\langle\pi_{2,1},v_{2,1}\rangle,
+%                                     \langle\pi_{2,2},v_{2,2}\rangle,
+%                                     \ldots,
+%                                     \langle\pi_{2,m_2},v_{2,m_2}\rangle\})
+%                  \rangle,\\
+%           \vdots \\
+%           \langle\ell_n,\varphi^-(\{\langle\pi_{n,1},v_{n,1}\rangle,
+%                                     \langle\pi_{n,2},v_{n,2}\rangle,
+%                                     \ldots,
+%                                     \langle\pi_{n,m_n},v_{n,m_n}\rangle\})
+%                  \rangle
+%         \end{array}\right\}$
+% \end{quote}
 
 We now turn our attention to relabelling.  If $L$ is a set of labels,
 then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
@@ -1181,6 +1195,43 @@ Then $[r]_\eta$ is the expansion of this record, that is, the record
 and $\eta$ is a proper relabelling for $r$.  
 
 Now let us consider a case where the relabelling is not proper.
+Suppose we start with the same record, $r$, as above but take a new
+relabelling, $\eta'$:
+\begin{quote}
+x.x $\leadsto$ x
+\end{quote}
+Now $\eta'*\varphi(r)$ is the record
+\begin{quote}
+\record{\field{x}{$a$}\\
+        \field{x.y}{$b$}\\
+        \field{y.x}{$c$}}
+\end{quote}
+However, the expansion $\varphi^-(\eta'*\varphi(r))$ is the set of
+ordered pairs:
+\begin{quote}
+$\{\langle\mathrm{x},a\rangle,
+   \langle\mathrm{x},\{\langle\mathrm{y},b\rangle\}\rangle,
+   \langle\mathrm{y},\{\langle\mathrm{x},c\rangle\}\rangle\}$
+\end{quote}
+which is not a record since it is not the graph of a function:  it has
+two order pairs whose first member is `x'.  We can read the problem
+already from the flattened record since it has a label, `x', which is a
+proper initial segment of another of its labels, `x.y'.  Therefore
+$\eta'$ is not a proper relabelling for $r$.  Note that we cannot read
+the improperness off $\eta'$ alone.  $\eta'$ is a proper relabelling
+for the record $r'$:
+\begin{quote}
+\record{\field{x}{\record{\field{x}{$a$}}}\\
+        \field{y}{\record{\field{x}{$c$}}}}
+\end{quote}
+$[r']_{\eta'}$ is the record:
+\begin{quote}
+\record{\field{x}{$a$}\\
+        \field{y}{\record{\field{x}{$c$}}}}
+\end{quote}
+We use $\eta^-$ to represent the inverse of the labelling $\eta$.  If
+$\eta$ is a proper relabelling for $r$ then $\eta^-$ is a proper
+relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  [Is this true?]
 
 A (proper) record \textit{type} is a labelled set 
 where the objects labelled are types or, in some cases, certain
