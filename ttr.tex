@@ -912,7 +912,7 @@ $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
  
 
 
-\section{Record types}
+\section{Records and Record types}
 \label{app:rectypes}
 
 In this section we will define what it means for a system of complex
@@ -920,6 +920,8 @@ types to have record types.  The objects of record types, that is,
 records, are themselves structured mathematical objects of a
 particular kind and we will
 start by characterizing them.
+
+\subsection{Records}
 
 A {\it record\/} is a finite set of ordered pairs (called {\it fields\/})
 which is the graph of a function.  If $r$ is a record and $\langle\ell,v\rangle$
@@ -1050,6 +1052,13 @@ $\{\langle\ell_1,v_1\rangle,
 and
 $\langle\ell,v\rangle$
 otherwise.
+
+We can show that if $r$ is a record then $\varphi(r)$ is a record.  It
+follows trivially from the requirement that records are graphs of
+functions from labels to values.  If $r$ is the record
+$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ then we
+define $\mathrm{labels}(r)$ to be the set $\{\ell_1,\ldots,\ell_n\}$.
+We use $\mathrm{paths}(r)$ to represent the set of paths of $r$, $\mathrm{labels}(\varphi(r))$.
 
 If $r$ is a record such that $\mathrm{labels}(r)\subseteq L_+$, then
 the \textit{inverse flattening} (or \textit{expansion}) \textit{of}
@@ -1229,9 +1238,14 @@ $[r']_{\eta'}$ is the record:
 \record{\field{x}{$a$}\\
         \field{y}{\record{\field{x}{$c$}}}}
 \end{quote}
-We use $\eta^-$ to represent the inverse of the labelling $\eta$.  If
+We use $\eta^-$ to represent the inverse of the labelling $\eta$.
+That is, for any $\pi$, $\pi'$, $\pi\leadsto\pi'$ is in $\eta$ just in
+case $\pi'\leadsto\pi$ is in $\eta^-$. If
 $\eta$ is a proper relabelling for $r$ then $\eta^-$ is a proper
-relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  [Is this true?]
+relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  [Is this
+true?]
+
+\subsection{Record types}
 
 A (proper) record \textit{type} is a labelled set 
 where the objects labelled are types or, in some cases, certain
