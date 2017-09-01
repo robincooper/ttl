@@ -1055,10 +1055,30 @@ otherwise.
 
 We can show that if $r$ is a record then $\varphi(r)$ is a record.  It
 follows trivially from the requirement that records are graphs of
-functions from labels to values.  If $r$ is the record
-$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ then we
-define $\mathrm{labels}(r)$ to be the set $\{\ell_1,\ldots,\ell_n\}$.
-We use $\mathrm{paths}(r)$ to represent the set of paths of $r$, $\mathrm{labels}(\varphi(r))$.
+functions from labels to values.  If $r$ is a record
+$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$, then
+the \textit{set of labels of} $r$, $\mathrm{labels}(r)$, is
+$\{\ell_1,\ldots,\ell_n\}$.  For example, if $r$ is the record
+\begin{quote}
+\record{\field{x}{\record{\field{z}{$a$}\\
+                          \field{w}{$b$}}}\\
+        \field{y}{$c$}}
+\end{quote}
+then $\mathrm{labels}(r)$ is $\{\mathrm{x},\mathrm{y}\}$. That is, `labels' picks out
+the ``highest level'' of labels in a complex record.
+We use $\mathrm{tpaths}(r)$ to represent the \textit{set of total
+  paths} of $r$, $\mathrm{labels}(\varphi(r))$.
+
+If $L$ is a set of labels,
+then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
+based on $L$ is the minimal set such that
+\begin{enumerate} 
+ 
+\item if $\ell\in L$, then $\ell\in L_+$ 
+ 
+\item if $\pi\in L_+$ and $\ell\in L$, then $\pi.\ell\in L_+$ 
+ 
+\end{enumerate}
 
 If $r$ is a record such that $\mathrm{labels}(r)\subseteq L_+$, then
 the \textit{inverse flattening} (or \textit{expansion}) \textit{of}
@@ -1116,16 +1136,7 @@ $\langle\ell,\varphi^-(\{\langle\pi',v'\rangle\mid\langle\ell.\pi',v'\rangle\in 
 %         \end{array}\right\}$
 % \end{quote}
 
-We now turn our attention to relabelling.  If $L$ is a set of labels,
-then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
-based on $L$ is the minimal set such that
-\begin{enumerate} 
- 
-\item if $\ell\in L$, then $\ell\in L_+$ 
- 
-\item if $\pi\in L_+$ and $\ell\in L$, then $\pi.\ell\in L_+$ 
- 
-\end{enumerate} 
+We now turn our attention to relabelling.   
 An $L$\textit{-relabelling} is a one-one function whose domain and range
 are included in $L_+$. We will standardly represent a relabelling,
 $\eta$, whose domain is $\{\pi_1,\ldots,\pi_n\}$ and which is defined
@@ -1136,17 +1147,7 @@ $\pi_1\leadsto\pi'_1$\\
 $\pi_n\leadsto\pi'_n$
 \end{quote} 
 
-If $r$ is a record
-$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$, then
-the \textit{set of labels of} $r$, $\mathrm{labels}(r)$, is
-$\{\ell_1,\ldots,\ell_n\}$.  For example, if $r$ is the record
-\begin{quote}
-\record{\field{x}{\record{\field{z}{$a$}\\
-                          \field{w}{$b$}}}\\
-        \field{y}{$c$}}
-\end{quote}
-then $\mathrm{labels}(r)$ is $\{\mathrm{x},\mathrm{y}\}$. That is, `labels' picks out
-the ``highest level'' of labels in a complex record.
+
 
 If $r$ is a record
 $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ and
@@ -1164,7 +1165,10 @@ $\eta$ is the relabelling $\mathrm{x}\leadsto\mathrm{xx},
 \end{quote}
 That is, the label `x' is changed, but nothing else.
 
-We are, however, mainly interested in replacing complete paths in a
+We say that a relabelling, $\eta$, is \textit{limited} to a record,
+$r$, just in case $\mathrm{dom}(\eta)\subseteq\mathrm{labels}(r)$.
+
+We are, however, mainly interested in replacing total paths in a
 record which is why we have defined relabellings on the set of paths,
 $L_+$ rather than the set of labels, $L$.  The \textit{result of
   relabelling a record, $r$, with a relabelling, $\eta$}, in symbols,
@@ -1223,7 +1227,7 @@ $\{\langle\mathrm{x},a\rangle,
    \langle\mathrm{y},\{\langle\mathrm{x},c\rangle\}\rangle\}$
 \end{quote}
 which is not a record since it is not the graph of a function:  it has
-two order pairs whose first member is `x'.  We can read the problem
+two ordered pairs whose first member is `x'.  We can read the problem
 already from the flattened record since it has a label, `x', which is a
 proper initial segment of another of its labels, `x.y'.  Therefore
 $\eta'$ is not a proper relabelling for $r$.  Note that we cannot read
@@ -1238,12 +1242,56 @@ $[r']_{\eta'}$ is the record:
 \record{\field{x}{$a$}\\
         \field{y}{\record{\field{x}{$c$}}}}
 \end{quote}
+
+
+
 We use $\eta^-$ to represent the inverse of the labelling $\eta$.
 That is, for any $\pi$, $\pi'$, $\pi\leadsto\pi'$ is in $\eta$ just in
-case $\pi'\leadsto\pi$ is in $\eta^-$. If
-$\eta$ is a proper relabelling for $r$ then $\eta^-$ is a proper
-relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  [Is this
-true?]
+case $\pi'\leadsto\pi$ is in $\eta^-$. 
+\paragraph{Claim:} If
+$\eta$ is a proper relabelling for $r$ limited to $\varphi(r)$, then $\eta^-$ is a proper
+relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  
+
+The
+requirement that $\eta$ is limited to $\varphi(r)$ is important here
+since it prevents cases where $\eta^-$ would change labelling not
+changed by $\eta$.  Consider an example where $\eta$ is 
+\begin{quote}
+x $\leadsto$ z\\
+x.x $\leadsto$ y
+\end{quote}
+and $r$ is
+\begin{quote}
+\record{\field{x}{\record{\field{x}{$a$}}}\\
+        \field{z}{$b$}}
+\end{quote}
+Note that in this case $\eta$ is \textit{not} limited to $\varphi(r)$ whose
+labels are `x.x' and `z' but do not include `x'.  $\eta$ is
+proper for $r$ and $[r]_\eta$ is
+\begin{quote}
+\record{\field{y}{$a$}\\
+        \field{z}{$b$}}
+\end{quote}
+Now consider $\eta^-$ which is
+\begin{quote}
+z $\leadsto$ x\\
+y $\leadsto$ x.x
+\end{quote}
+The relabelling of $[r]_\eta$ by $\eta^-$ will be the set of ordered
+pairs
+\begin{quote}
+$\{\langle\mathrm{x},b\rangle,\langle\mathrm{x},\{\langle\mathrm{x},a\rangle\}\rangle\}$
+\end{quote}
+which is not a record (since `x' occurs twice as a label).  Hence in
+this case $\eta^-$ is not a proper relabelling for $[r]_\eta$ and
+$[[r]_\eta]_{\eta^-}$ is not identical with $r$.  The reason for this
+is that $\eta^-$ relabels a field that was not relabelled by $\eta$.
+Hence it is doing more than simply ``undoing'' the relabelling
+performed by $\eta$.  This state of affairs will be prevented by
+requiring that $\eta$ is limited to $r$, for example by removing `x
+$\leadsto$ z' from $\eta$.  Only paths changed by $\eta$ will be
+changed back by $\eta^-$ and our claim will hold true.
+
 
 \subsection{Record types}
 
