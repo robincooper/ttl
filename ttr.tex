@@ -1091,7 +1091,58 @@ $r$, $\varphi^-(r)$, is the minimal set such that
   r$, then 
 $\langle\ell,\varphi^-(\{\langle\pi',v'\rangle\mid\langle\ell.\pi',v'\rangle\in r\})\rangle\in\varphi^-(r)$
  
+\end{enumerate}
+
+\paragraph{Claim:} If $r$ is a record, then $\varphi^-(\varphi(r))=r$.
+
+The \textit{set of total paths of} $r$, $\mathrm{tpaths}(r)$, is
+$\mathrm{labels}(\varphi(r))$.
+
+If $r$ is a record and $\mathrm{tpaths}(r)=\Pi$ then the \textit{set
+  of paths of} $r$, $\mathrm{paths}(r)$, is the minimal set such that
+\begin{enumerate} 
+ 
+\item If $\pi\in\Pi$, then $\pi\in\mathrm{paths(r)}$ 
+ 
+\item If $\ell$ is a label (in $L$) and
+  $\pi.\ell\in\mathrm{paths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
+ 
 \end{enumerate} 
+
+If $\Pi$ is a set of paths (in $L_+$), then the \textit{set of longest
+  paths in} $\Pi$, $\mathrm{longest}(\Pi)$ is such that
+$\pi\in\mathrm{longest}(\Pi)$ iff $\pi\in\Pi$ and there is no $\pi'$
+such that $\pi.\pi'\in\Pi$.
+
+\paragraph{Claim:}
+$\mathrm{longest}(\mathrm{paths}(r))=\mathrm{tpaths}(r)$
+
+If $R$ is a set of records, then the \textit{set of longest common
+  paths of} $R$, $\mathrm{lcpaths}(R)$, is
+\begin{quote}
+$\mathrm{longest}(\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r))$
+\end{quote} 
+
+Consider the records
+\begin{quote}
+$r_1$ = \record{\field{x}{\record{\field{x}{$a$}\\
+                                  \field{y}{$b$}}}\\
+                \field{y}{\record{\field{x}{$c$}\\
+                                  \field{y}{$d$}}}}
+
+$r_2$ = \record{\field{x}{\record{\field{z}{$e$}\\
+                                  \field{w}{$f$}}}\\
+                \field{y}{\record{\field{x}{$g$}\\
+                                  \field{y}{$h$}}}}
+\end{quote}
+The following hold true:
+\begin{quote}
+$\mathrm{paths}(r_1) = \{\mathrm{x},\mathrm{x.x},\mathrm{x.y},\mathrm{y},\mathrm{y.x},\mathrm{y.y}\}$\\
+$\mathrm{paths}(r_2) = \{\mathrm{x},\mathrm{x.z},\mathrm{x.w},\mathrm{y},\mathrm{y.x},\mathrm{y.y}\}$\\
+$\mathrm{lcpaths}(\{r_1,r_2\}) = \{\mathrm{x},\mathrm{y.x},\mathrm{y.y}\}$
+\end{quote} 
+The notion of longest common paths for a set of records will be
+important when we discuss paths in record types below. 
   
 
 % If $r$ is the record 
