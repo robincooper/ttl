@@ -1142,7 +1142,7 @@ $\mathrm{paths}(r_2) = \{\mathrm{x},\mathrm{x.z},\mathrm{x.w},\mathrm{y},\mathrm
 $\mathrm{lcpaths}(\{r_1,r_2\}) = \{\mathrm{x},\mathrm{y.x},\mathrm{y.y}\}$
 \end{quote} 
 The notion of longest common paths for a set of records will be
-important when we discuss paths in record types below. 
+important when we discuss paths in record types below.  [Is this still true?] 
   
 
 % If $r$ is the record 
@@ -1555,26 +1555,26 @@ function to a dependent record type should be.  Consider the following
 simple example:
 \begin{display}
 $\lambda
-v_0:$\textit{RecType} (\smallrecord{\smalltfield{c$_0$}{$v_0$}})
+v_0:$\textit{RecType} . \smallrecord{\smalltfield{c$_0$}{$v_0$}}
 \end{display}
 What should be the result of applying this function to the record type
 \begin{display}
 \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind}(dog($v_1$)),
+        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
           $\langle$x$\rangle\rangle$}}
 \end{display}
 Given normal assumptions about function application the result would
 be
 \begin{display}
 \record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} (dog($v_1$)),
+        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
           $\langle$x$\rangle\rangle$}}}} (incorrect!)
 \end{display}
 but this would be incorrect.  In fact it is not a well-formed record
 type since x is not a path in it.  Instead the result should be 
 \begin{display}
 \record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} (dog($v_1$)),
+        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
           $\langle$c$_0$.x$\rangle\rangle$}}}}
 \end{display}
 where the path from the top of the record type is specified.  However,
@@ -1605,14 +1605,14 @@ record type.  It will not, for example, apply in a case where a record
 type is to be substituted for an argument to a predicate such as when
 applying the function
 \begin{display}
-$\lambda v_0:$\textit{RecType} (\smallrecord{\tfield{c$_0$}{appear($v_0$)}})
+$\lambda v_0:$\textit{RecType} . \smallrecord{\tfield{c$_0$}{appear($v_0$)}}
 \end{display}
 to
 \begin{display}
 \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} (dog($v$)),
+        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} . dog($v$),
           $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} (approach($v$)),
+        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} . approach($v$),
           $\langle$x$\rangle\rangle$}}
 \end{display}
 where the position of $v_0$ is in an ``intensional context'', that is,
@@ -1622,9 +1622,9 @@ result of the application is
 \begin{display}
 \record{\tfield{c$_0$}{appear(
 \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} (dog($v$)),
+        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} . dog($v$),
           $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} (approach($v$)),
+        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} . approach($v$),
           $\langle$x$\rangle\rangle$}}
 )}}
 \end{display}
@@ -1646,10 +1646,10 @@ write
 corresponding to
 \begin{display}
 \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} (dog($v$)),
+        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
           $\langle$x$\rangle\rangle$} \\
         \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{$\langle\lambda
-              v$:\textit{Ind} (approach($v$)),
+              v$:\textit{Ind} . approach($v$),
               $\langle$x$\rangle\rangle$}})}} (incorrect!)
 \end{display}
 This is, however, incorrect since it refers to a path `x' in the type
@@ -1658,9 +1658,9 @@ need to refer to the path `x' in the record type containing the field
 labelled `c$_0$':
 \begin{display}
  \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} (dog($v$)),
+        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
           $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_0$}{$\langle\lambda v$:\textit{Ind} (appear(\record{\tfield{c$_2$}{approach($v$)}})),
+        \tfield{c$_0$}{$\langle\lambda v$:\textit{Ind} . appear(\record{\tfield{c$_2$}{approach($v$)}}),
               $\langle$x$\rangle\rangle$}}
 \end{display}
 In the abbreviatory notation we will use `$\Uparrow$' to indicate that
@@ -1679,29 +1679,29 @@ positions within a record type as has been suggested by Thierry Coquand).  It se
 of substance and it is straightforward to define a path-aware notion
 of substitution which can be used in the definition of what it means
 to apply a TTR function to an argument.  If $f$ is a function
-represented by $\lambda v:T(\phi)$ and $\alpha$ is the representation
+represented by $\lambda v:T\ .\ \varphi$ and $\alpha$ is the representation
 of an object of type $T$, then the result of applying $f$ to $\alpha$,
-$f(\alpha)$, is represented by Subst($\alpha$,$v$,$\phi$,$\emptyset$),
-that is, the result of substituting $\alpha$ for $v$ in $\phi$ with
+$f(\alpha)$, is represented by Subst($\alpha$,$v$,$\varphi$,$\emptyset$),
+that is, the result of substituting $\alpha$ for $v$ in $\varphi$ with
 respect to the empty path where for arbitrary
-$\alpha,v,\phi,\pi$,
-Subst($\alpha$,$v$,$\phi$,$\pi$) is defined as 
+$\alpha,v,\varphi,\pi$,
+Subst($\alpha$,$v$,$\varphi$,$\pi$) is defined as 
 \begin{enumerate} 
  
-\item extend-paths($\alpha$,$\pi$), if $\phi$ is $v$ 
+\item extend-paths($\alpha$,$\pi$), if $\varphi$ is $v$ 
  
-\item $\phi$, if $\phi$ is of the form $\lambda v:T(\zeta)$, for some
+\item $\varphi$, if $\varphi$ is of the form $\lambda v:T\ .\ \zeta$, for some
   $T$ and $\zeta$ (i.e. don't do any substitution if $v$ is bound
-  within $\phi$)
+  within $\varphi$)
 
-\item $\lambda u:T$(Subst($\alpha$,$v$,$\zeta$,$\pi$)), if $\phi$ is
-  of the form $\lambda u:T(\zeta)$ and $u$ is not $v$.
+\item $\lambda u:T$ . Subst($\alpha$,$v$,$\zeta$,$\pi$), if $\varphi$ is
+  of the form $\lambda u:T . \zeta$ and $u$ is not $v$.
 
 \item
   \record{\tfield{$\ell_1$}{Subst($\alpha$,$v$,$T_1$,$\pi.\ell_1$)} \\
           \ldots \\
           \tfield{$\ell_n$}{Subst($\alpha$,$v$,$T_n$,$\pi.\ell_n$)}},
-        if $\phi$ is \record{\tfield{$\ell_1$}{$T_1$} \\
+        if $\varphi$ is \record{\tfield{$\ell_1$}{$T_1$} \\
                              \ldots \\ 
                              \tfield{$\ell_n$}{$T_n$}}
 
@@ -1711,7 +1711,7 @@ Subst($\alpha$,$v$,$\phi$,$\pi$) is defined as
 % \item $O$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
 %   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
 
-\item $\phi$ otherwise
+\item $\varphi$ otherwise
  
 \end{enumerate} 
  
@@ -2064,123 +2064,129 @@ when $T_1$ and $T_2$ are merged.
 
 We extend the notions of flattening and relabelling of records
 discussed in Appendix~\ref{app:rectypes} to types.\footnote{This was
-  not made explicit in \cite{Cooper2012}.}
+  not made explicit in \cite{Cooper2012}.}  For non-dependent record
+types flattening and relabelling are exactly parallel to that of
+records since non-dependent record types are sets of ordered pairs of
+labels and types.  They are just like records except that the second
+members of the pairs are types.  This introduces some complications
+which need to be taken account of.  We shall start with an informal
+discussion of each of the complications in turn. 
 
-If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
-\begin{enumerate} 
+% If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
+% \begin{enumerate} 
  
-\item $\displaystyle{\bigcup_{f\in T}}\mathrm{FlattenField}(f)$,  if $T$ is a proper record type (see p.~\pageref{pg:proprectype}) 
+% \item $\displaystyle{\bigcup_{f\in T}}\mathrm{FlattenField}(f)$,  if $T$ is a proper record type (see p.~\pageref{pg:proprectype}) 
  
-\item $T$, otherwise 
+% \item $T$, otherwise 
  
-\end{enumerate} 
-where $\mathrm{FlattenField}$ is defined as follows:
+% \end{enumerate} 
+% where $\mathrm{FlattenField}$ is defined as follows:
 
-$\mathrm{FlattenField}(\langle\ell, T\rangle)$ is
-\begin{enumerate} 
+% $\mathrm{FlattenField}(\langle\ell, T\rangle)$ is
+% \begin{enumerate} 
  
-\item $\varphi(\left\{\begin{array}{l}\langle\ell.\ell_1, T_1\rangle,\\
-                                 \langle\ell.\ell_2, T_2\rangle,\\
-                                 \vdots \\
-                                 \langle\ell.\ell_n, T_n\rangle
-                 \end{array}\right\})$, if $T$ is $\left\{\begin{array}{l}\langle\ell_1, T_1\rangle,\\
-                                 \langle\ell_2, T_2\rangle,\\
-                                 \vdots \\
-                                 \langle\ell_n, T_n\rangle
-                 \end{array}\right\}$
+% \item $\varphi(\left\{\begin{array}{l}\langle\ell.\ell_1, T_1\rangle,\\
+%                                  \langle\ell.\ell_2, T_2\rangle,\\
+%                                  \vdots \\
+%                                  \langle\ell.\ell_n, T_n\rangle
+%                  \end{array}\right\})$, if $T$ is $\left\{\begin{array}{l}\langle\ell_1, T_1\rangle,\\
+%                                  \langle\ell_2, T_2\rangle,\\
+%                                  \vdots \\
+%                                  \langle\ell_n, T_n\rangle
+%                  \end{array}\right\}$
  
-\item $\langle\ell, T\rangle$, otherwise 
+% \item $\langle\ell, T\rangle$, otherwise 
  
-\end{enumerate} 
+% \end{enumerate} 
     
-Correspondingly, we can define a way of computing the inverse of
-flattening.  
+% Correspondingly, we can define a way of computing the inverse of
+% flattening.  
 
-If $T$ is a type, $\varphi^-(T)$, \textit{the inverse flattening
-  (expansion) of} $T$ is
-\begin{enumerate} 
+% If $T$ is a type, $\varphi^-(T)$, \textit{the inverse flattening
+%   (expansion) of} $T$ is
+% \begin{enumerate} 
  
-\item $\left\{\begin{array}{l}\langle\ell_1,
-                                    \varphi^-(\left\{\begin{array}{l}\langle\pi_{1,1},T_{1,1}\rangle\\
-                                                                     \langle\pi_{1,2},T_{1,2}\rangle\\ 
-                                                                     \vdots\\
-                                                                     \langle\pi_{1,m_1},T_{1,m_1}\rangle
-                                                     \end{array}
-                                              \right\}\rangle,\\
-                               \langle\ell_2,
-                                    \varphi^-(\left\{\begin{array}{l}\langle\pi_{2,1},T_{2,1}\rangle\\
-                                                                     \langle\pi_{2,2},T_{2,2}\rangle\\ 
-                                                                     \vdots\\
-                                                                     \langle\pi_{2,m_2},T_{1,m_2}\rangle
-                                                     \end{array}
-                                              \right\}\rangle,\\
-                               \vdots\\
-                               \langle\ell_n,
-                                    \varphi^-(\left\{\begin{array}{l}\langle\pi_{n,1},T_{n,1}\rangle\\
-                                                                     \langle\pi_{n,2},T_{n,2}\rangle\\ 
-                                                                     \vdots\\
-                                                                     \langle\pi_{n,m_n},T_{n,m_n}\rangle
-                                                     \end{array}
-                                              \right\}\rangle\end{array}\right\}$,
-                                            if $T$ is 
-$\left\{\begin{array}{l}\langle\ell_1.\pi_{1,1},T_{1,1}\rangle\\
-                        \langle\ell_1.\pi_{1,2},T_{1,2}\rangle\\
-                        \vdots\\
-                        \langle\ell_1.\pi_{1,m_1},T_{1,m_1}\rangle\\
-                        \langle\ell_2.\pi_{2,1},T_{2,1}\rangle\\
-                        \langle\ell_2.\pi_{2,2},T_{2,2}\rangle\\
-                        \vdots\\
-                        \langle\ell_2.\pi_{2,m_2},T_{2,m_2}\rangle\\
-                        \vdots\\
-                        \langle\ell_n.\pi_{n,1},T_{n,1}\rangle\\
-                        \langle\ell_n.\pi_{n,2},T_{n,2}\rangle\\
-                        \vdots\\
-                        \langle\ell_n.\pi_{n,m_n},T_{1,m_n}\rangle\\
-         \end{array}\right\}$
+% \item $\left\{\begin{array}{l}\langle\ell_1,
+%                                     \varphi^-(\left\{\begin{array}{l}\langle\pi_{1,1},T_{1,1}\rangle\\
+%                                                                      \langle\pi_{1,2},T_{1,2}\rangle\\ 
+%                                                                      \vdots\\
+%                                                                      \langle\pi_{1,m_1},T_{1,m_1}\rangle
+%                                                      \end{array}
+%                                               \right\}\rangle,\\
+%                                \langle\ell_2,
+%                                     \varphi^-(\left\{\begin{array}{l}\langle\pi_{2,1},T_{2,1}\rangle\\
+%                                                                      \langle\pi_{2,2},T_{2,2}\rangle\\ 
+%                                                                      \vdots\\
+%                                                                      \langle\pi_{2,m_2},T_{1,m_2}\rangle
+%                                                      \end{array}
+%                                               \right\}\rangle,\\
+%                                \vdots\\
+%                                \langle\ell_n,
+%                                     \varphi^-(\left\{\begin{array}{l}\langle\pi_{n,1},T_{n,1}\rangle\\
+%                                                                      \langle\pi_{n,2},T_{n,2}\rangle\\ 
+%                                                                      \vdots\\
+%                                                                      \langle\pi_{n,m_n},T_{n,m_n}\rangle
+%                                                      \end{array}
+%                                               \right\}\rangle\end{array}\right\}$,
+%                                             if $T$ is 
+% $\left\{\begin{array}{l}\langle\ell_1.\pi_{1,1},T_{1,1}\rangle\\
+%                         \langle\ell_1.\pi_{1,2},T_{1,2}\rangle\\
+%                         \vdots\\
+%                         \langle\ell_1.\pi_{1,m_1},T_{1,m_1}\rangle\\
+%                         \langle\ell_2.\pi_{2,1},T_{2,1}\rangle\\
+%                         \langle\ell_2.\pi_{2,2},T_{2,2}\rangle\\
+%                         \vdots\\
+%                         \langle\ell_2.\pi_{2,m_2},T_{2,m_2}\rangle\\
+%                         \vdots\\
+%                         \langle\ell_n.\pi_{n,1},T_{n,1}\rangle\\
+%                         \langle\ell_n.\pi_{n,2},T_{n,2}\rangle\\
+%                         \vdots\\
+%                         \langle\ell_n.\pi_{n,m_n},T_{1,m_n}\rangle\\
+%          \end{array}\right\}$
   
-\item $T$, otherwise 
+% \item $T$, otherwise 
  
-\end{enumerate}
+% \end{enumerate}
 
-The set of \textit{complex labels} (or \textit{paths}), $L_\pi$,  \textit{based
-  on a set of labels}, $L$, is a set such that
-\begin{enumerate} 
+% The set of \textit{complex labels} (or \textit{paths}), $L_\pi$,  \textit{based
+%   on a set of labels}, $L$, is a set such that
+% \begin{enumerate} 
  
-\item if $\ell\in L$, then $\ell\in L_\pi$ 
+% \item if $\ell\in L$, then $\ell\in L_\pi$ 
  
-\item if $\pi\in L_\pi$ and $\ell\in L$, then $\pi.\ell\in L_\pi$
+% \item if $\pi\in L_\pi$ and $\ell\in L$, then $\pi.\ell\in L_\pi$
 
-\item nothing else is a member of $L_\pi$
+% \item nothing else is a member of $L_\pi$
  
-\end{enumerate} 
+% \end{enumerate} 
    
 
 
-If $T$ is a type in a system of types based on labels $L$, then a
-\textit{relabelling} for $T$ is a one-one function,
-$\eta$, whose domain is the set of labels of the flattened type
-$\varphi(T)$ and whose range is included in $L_\pi$ and such that for
-no $\pi_1$, $\pi_2$ and $\pi$, $\eta(\pi_2)=\eta(\pi_1).\pi$, that is,
-no new complex label can be assigned by the relabelling which is a
-proper initial part of another complex label assigned by the relabelling.  The result of
-\textit{relabelling} $T$ with $\eta$, a relabelling for $T$, is $\varphi^-([\varphi(T)]_\eta)$
-where for any flattened type $T$, $[T]_\eta$ is the result of replacing every
-occurrence of all the labels $\ell$ in $T$ (including those that occur as arguments to predicates,
-i.e. in dependent fields) with $\eta(\ell)$.
+% If $T$ is a type in a system of types based on labels $L$, then a
+% \textit{relabelling} for $T$ is a one-one function,
+% $\eta$, whose domain is the set of labels of the flattened type
+% $\varphi(T)$ and whose range is included in $L_\pi$ and such that for
+% no $\pi_1$, $\pi_2$ and $\pi$, $\eta(\pi_2)=\eta(\pi_1).\pi$, that is,
+% no new complex label can be assigned by the relabelling which is a
+% proper initial part of another complex label assigned by the relabelling.  The result of
+% \textit{relabelling} $T$ with $\eta$, a relabelling for $T$, is $\varphi^-([\varphi(T)]_\eta)$
+% where for any flattened type $T$, $[T]_\eta$ is the result of replacing every
+% occurrence of all the labels $\ell$ in $T$ (including those that occur as arguments to predicates,
+% i.e. in dependent fields) with $\eta(\ell)$.
 
-\textbf{Alternative definition which should be used throughout [????]:}  The result of
-\textit{relabelling} $T$ with $\eta$, a relabelling for $T$, is
-denoted by  $[T]_\eta$ and is defined by $\varphi^-(\{\varphi(T)\}_\eta)$
-where for any flattened type $T$, $\{T\}_\eta$ is the result of replacing every
-occurrence of all the labels $\ell$ in $T$ (including those that occur as arguments to predicates,
-i.e. in dependent fields) with $\eta(\ell)$.
+% \textbf{Alternative definition which should be used throughout [????]:}  The result of
+% \textit{relabelling} $T$ with $\eta$, a relabelling for $T$, is
+% denoted by  $[T]_\eta$ and is defined by $\varphi^-(\{\varphi(T)\}_\eta)$
+% where for any flattened type $T$, $\{T\}_\eta$ is the result of replacing every
+% occurrence of all the labels $\ell$ in $T$ (including those that occur as arguments to predicates,
+% i.e. in dependent fields) with $\eta(\ell)$.
 
-The fact that a relabelling $\eta$ is one-one means that the inverse
-of $\eta$, $\eta^-$, is also a function which we can use to recover
-the original labelling.  This gives us the opportunity to relabel,
-carry out some operation on the relabelled type and then restore the
-original labelling.  This is, for example, exploited in the discussion
-of accommodation in Chapter~\ref{ch:propnames} on p.~\pageref{pg:inverserelabelling}.
+% The fact that a relabelling $\eta$ is one-one means that the inverse
+% of $\eta$, $\eta^-$, is also a function which we can use to recover
+% the original labelling.  This gives us the opportunity to relabel,
+% carry out some operation on the relabelled type and then restore the
+% original labelling.  This is, for example, exploited in the discussion
+% of accommodation in Chapter~\ref{ch:propnames} on p.~\pageref{pg:inverserelabelling}.
 
 % If fields $f_1$ and $f_2$ have the same label, that is
 % $f_1=\langle\ell, T_1\rangle$ and $f_2=\langle\ell, T_2\rangle$ for
