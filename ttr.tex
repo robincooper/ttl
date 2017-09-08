@@ -2070,7 +2070,23 @@ records since non-dependent record types are sets of ordered pairs of
 labels and types.  They are just like records except that the second
 members of the pairs are types.  This introduces some complications
 which need to be taken account of.  We shall start with an informal
-discussion of each of the complications in turn. 
+discussion of each of the complications in turn.
+
+\paragraph{Labels occur in dependent fields.} First of all we need to
+note that labels not only occur as the first members of the ordered
+pairs that constitute the record type but also in the paths which
+occur in dependent fields.  For the discussion of flattening we need
+to make sure that we represent these paths in an appropriate way so
+that they are correct in the representation of the flattened type.
+Also in relabelling we need to make sure that the relabelling applies
+to the paths in the dependent fields as well as the labels of the
+record type.  Consider the record type which in abbreviatory notation
+we write as:
+\begin{quote}
+\record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{e}{dog(x)}}}}
+\end{quote}
+ 
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
