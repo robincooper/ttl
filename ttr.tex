@@ -2068,9 +2068,10 @@ discussed in Appendix~\ref{app:rectypes} to types.\footnote{This was
 types flattening and relabelling are exactly parallel to that of
 records since non-dependent record types are sets of ordered pairs of
 labels and types.  They are just like records except that the second
-members of the pairs are types.  This introduces some complications
+members of the pairs are types.  However, in the case of dependent
+record types, flattening and relabelling introduces some complications
 which need to be taken account of.  We shall start with an informal
-discussion of each of the complications in turn.
+discussion of the complications.
 
 \paragraph{Labels occur in dependent fields.} First of all we need to
 note that labels not only occur as the first members of the ordered
@@ -2086,6 +2087,59 @@ we write as:
 \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
                            \tfield{e}{dog(x)}}}}
 \end{quote}
+It would be incorrect to represent the flattening of this type as:
+\begin{quote}
+\record{\tfield{x.x}{\textit{Ind}}\\
+        \tfield{x.e}{dog(x)}}
+\end{quote}
+The `x' in `dog(x)' does not represent a path in the flattened record
+type.  The full official notation for the unflattened record type is:
+\begin{quote}
+\record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{e}{$\langle\lambda v$:\textit{Ind}
+                             .  dog($v$), $\langle$x.x$\rangle\rangle$}}}}
+\end{quote}
+This we can now flatten using the same algorithm as we use for records
+obtaining:
+\begin{quote}
+\record{\tfield{x.x}{\textit{Ind}}\\
+        \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
+                             .  dog($v$), $\langle$x.x$\rangle\rangle$}}
+\end{quote}
+or, in abbreviatory notation:
+\begin{quote}
+\record{\tfield{x.x}{\textit{Ind}}\\
+        \tfield{x.e}{dog(x.x)}}
+\end{quote}
+Note that a relabelling such as:
+\begin{quote}
+x.x $\leadsto$ y
+\end{quote}
+must replace labels in the dependent fields as well as the labels to
+the left of the colon.  Thus the relabelled flattened record would be:
+\begin{quote}
+\record{\tfield{y}{\textit{Ind}}\\
+        \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
+                             .  dog($v$), $\langle$y$\rangle\rangle$}}
+\end{quote}
+or, in abbreviatory notation:
+\begin{quote}
+\record{\tfield{y}{\textit{Ind}}\\
+        \tfield{x.e}{dog(y)}}
+\end{quote}
+
+Expanding the relabelled flattened type will result in:
+\begin{quote}
+\record{\tfield{y}{\textit{Ind}}\\
+        \tfield{x}{\record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
+                             .  dog($v$), $\langle$y$\rangle\rangle$}}}}
+\end{quote}
+This is well-formed when we consider that the `y' in the dependent
+field is a total path beginning at the top of the record.  [Is this
+true?  What happens with ``appears to be approaching''?  Should we
+push the label inside the function?]
+
+\paragraph{Dependencies involving paths which are not total}
  
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
