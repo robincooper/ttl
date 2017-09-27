@@ -2073,7 +2073,8 @@ record types, flattening and relabelling introduces some complications
 which need to be taken account of.  We shall start with an informal
 discussion of the complications.
 
-\paragraph{Labels occur in dependent fields.} First of all we need to
+\paragraph{Labels in dependent fields need to be adjusted in
+  flattening and unflattening.} First of all we need to
 note that labels not only occur as the first members of the ordered
 pairs that constitute the record type but also in the paths which
 occur in dependent fields.  For the discussion of flattening we need
@@ -2093,51 +2094,79 @@ It would be incorrect to represent the flattening of this type as:
         \tfield{x.e}{dog(x)}}
 \end{quote}
 The `x' in `dog(x)' does not represent a path in the flattened record
-type.  The full official notation for the unflattened record type is:
+type. Rather the flattened type should be, in abbreviatory notation:
+\begin{quote}
+\record{\tfield{x.x}{\textit{Ind}}\\
+        \tfield{x.e}{dog(x.x)}}
+\end{quote}
+We need also to guarantee that the unflattening of this type returns
+the original unflattened type.  We will, of course, work to achieve
+this, not with the abbreviatory notation but with the official
+notation, or rather with the set theoretic objects which the official
+notation represents.  That is, we need to convert: 
 \begin{quote}
 \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
                            \tfield{e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$x.x$\rangle\rangle$}}}}
+                             .  dog($v$), $\langle$x$\rangle\rangle$}}}}
 \end{quote}
-This we can now flatten using the same algorithm as we use for records
-obtaining:
+to:
 \begin{quote}
 \record{\tfield{x.x}{\textit{Ind}}\\
         \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
                              .  dog($v$), $\langle$x.x$\rangle\rangle$}}
 \end{quote}
-or, in abbreviatory notation:
-\begin{quote}
-\record{\tfield{x.x}{\textit{Ind}}\\
-        \tfield{x.e}{dog(x.x)}}
-\end{quote}
-Note that a relabelling such as:
+and back again.
+
+
+
+% or, in abbreviatory notation:
+% \begin{quote}
+% \record{\tfield{x.x}{\textit{Ind}}\\
+%         \tfield{x.e}{dog(x.x)}}
+% \end{quote}
+\paragraph{Relabelling can require adjustment of dependent fields}
+A relabelling such as:
 \begin{quote}
 x.x $\leadsto$ y
 \end{quote}
-must replace labels in the dependent fields as well as the labels to
-the left of the colon.  Thus the relabelled flattened record would be:
+applied to the flattened type leads to a different problem involved in
+expansion.  
+The relabelled flattened record would be:
 \begin{quote}
 \record{\tfield{y}{\textit{Ind}}\\
         \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
                              .  dog($v$), $\langle$y$\rangle\rangle$}}
 \end{quote}
-or, in abbreviatory notation:
-\begin{quote}
-\record{\tfield{y}{\textit{Ind}}\\
-        \tfield{x.e}{dog(y)}}
-\end{quote}
-
-Expanding the relabelled flattened type will result in:
+% or, in abbreviatory notation:
+% \begin{quote}
+% \record{\tfield{y}{\textit{Ind}}\\
+%         \tfield{x.e}{dog(y)}}
+% \end{quote}
+Expanding the relabelled flattened type in the way we did for records will result in:
 \begin{quote}
 \record{\tfield{y}{\textit{Ind}}\\
         \tfield{x}{\record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
                              .  dog($v$), $\langle$y$\rangle\rangle$}}}}
 \end{quote}
-This is well-formed when we consider that the `y' in the dependent
-field is a total path beginning at the top of the record.  [Is this
-true?  What happens with ``appears to be approaching''?  Should we
-push the label inside the function?]
+This is incorrect because the label `y' is not present in 
+\begin{quote}
+\record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
+                             .  dog($v$), $\langle$y$\rangle\rangle$}}
+\end{quote}
+Rather the correct result should be:
+\begin{quote}
+\record{\tfield{y}{\textit{Ind}}\\
+        \tfield{x}{$\langle\lambda v$:\textit{Ind}
+                             . \record{\tfield{e}{dog($v$)}},
+                             $\langle$y$\rangle\rangle$}}
+\end{quote}
+In abbreviatory notation this is:
+
+
+% This is well-formed when we consider that the `y' in the dependent
+% field is a total path beginning at the top of the record.  [Is this
+% true?  What happens with ``appears to be approaching''?  Should we
+% push the label inside the function?]
 
 \paragraph{Dependencies involving paths which are not total}
  
