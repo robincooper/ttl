@@ -2161,6 +2161,10 @@ Rather the correct result should be:
                              $\langle$y$\rangle\rangle$}}
 \end{quote}
 In abbreviatory notation this is:
+\begin{quote}
+\record{\tfield{y}{\textit{Ind}}\\
+        \tfield{x}{\record{\tfield{e}{dog($\Uparrow$y)}}}}
+\end{quote}
 
 
 % This is well-formed when we consider that the `y' in the dependent
@@ -2168,8 +2172,46 @@ In abbreviatory notation this is:
 % true?  What happens with ``appears to be approaching''?  Should we
 % push the label inside the function?]
 
-\paragraph{Dependencies involving paths which are not total}
- 
+\paragraph{Dependencies involving paths which are not total}  
+In the examples above the dependencies involve objects at the end of
+paths.  It is also possible to have dependencies on records
+corresponding to the value of a partial path.  Consider the following
+example:
+\begin{quote}
+\record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{c}{dog(x)}\\
+                           \tfield{e}{run(x)}}}\\
+        \tfield{e}{see(sam,s)}}
+\end{quote}
+which might be a way of representing the type which is the content of
+\textit{Sam saw a dog run}.  The official notation for this type is:
+\begin{quote}
+\record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{c}{$\langle\lambda v$:\textit{Ind}
+                             . dog($v$), $\langle$x$\rangle\rangle$}\\
+                           \tfield{e}{$\langle\lambda v$:\textit{Ind}
+                             . run($v$),
+                             $\langle$x$\rangle\rangle$}}}\\
+        \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
+\end{quote}
+Assuming that we have a way of making sure that we have a way of
+making sure that paths in dependent fields start from the root of the
+type as discussed above, we might think that the flattening of this type is:
+\begin{quote}
+\record{\tfield{s.x}{\textit{Ind}}\\
+        \tfield{s.c}{$\langle\lambda v$:\textit{Ind}
+                             . dog($v$), $\langle$s.x$\rangle\rangle$}\\
+        \tfield{s.e}{$\langle\lambda v$:\textit{Ind}
+                             . run($v$),
+                             $\langle$s.x$\rangle\rangle$}\\
+        \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
+\end{quote} 
+But this is, of course, not correct since the path `s' in the
+`e'-field is not a path in the flattened type.  Instead we will use an
+equivalent type where all the dependencies involve total paths in the
+original type:
+
+[Not obvious this is going to work!!]
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
