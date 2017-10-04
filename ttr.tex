@@ -2207,11 +2207,28 @@ type as discussed above, we might think that the flattening of this type is:
         \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
 \end{quote} 
 But this is, of course, not correct since the path `s' in the
-`e'-field is not a path in the flattened type.  Instead we will use an
-equivalent type where all the dependencies involve total paths in the
-original type:
+`e'-field is not a path in the flattened type.  Instead we will make
+the flattened type depend on a record of the type required for the
+argument to `see' in the original unflattened type:
+\begin{quote}
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{c}{dog(x)}\\
+                         \smalltfield{e}{run(x)}} . 
+\record{\mfield{s.x}{$r$.x}{\textit{Ind}}\\
+        \mfield{s.c}{$r$.c}{dog(s.x)}\\
+        \mfield{s.e}{$r$.e}{run(s.x)}\\
+        \tfield{e}{see(sam, $r$)}}
+\end{quote}
+We are now free to apply flattening or relabelling to the domain or
+range of this function without creating the problem that the second
+argument of `see' will not be defined.  Note that there may be several
+dependencies in the flattened type depending on how many partial paths
+occur in the dependent fields of the unflattened type.  Thus the
+dependent type which is the flattening may take several arguments.
 
-[Not obvious this is going to work!!]
+[How does expansion work.  Have we given up identity between the
+original type and the expansion of the flattening of the type?  Not
+quite but there may be several flattenings, expansions]
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
