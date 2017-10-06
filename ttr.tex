@@ -2209,22 +2209,26 @@ type as discussed above, we might think that the flattening of this type is:
 But this is, of course, not correct since the path `s' in the
 `e'-field is not a path in the flattened type.  Instead we will make
 the flattened type depend on a record of the type required for the
-argument to `see' in the original unflattened type:
+argument to `see' in the original unflattened type (and also on any
+objects on which that type depends):
 \begin{quote}
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+$\lambda r$:\smallrecord{\smalltfield{s}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{c}{dog(x)}\\
-                         \smalltfield{e}{run(x)}} . 
-\record{\mfield{s.x}{$r$.x}{\textit{Ind}}\\
-        \mfield{s.c}{$r$.c}{dog(s.x)}\\
-        \mfield{s.e}{$r$.e}{run(s.x)}\\
-        \tfield{e}{see(sam, $r$)}}
+                         \smalltfield{e}{run(x)}}}} . 
+\record{\tfield{e}{see(sam, $r$.s)}}
 \end{quote}
-We are now free to apply flattening or relabelling to the domain or
-range of this function without creating the problem that the second
-argument of `see' will not be defined.  Note that there may be several
-dependencies in the flattened type depending on how many partial paths
-occur in the dependent fields of the unflattened type.  Thus the
-dependent type which is the flattening may take several arguments.
+Call this $\mathcal{T}$.  This is, of course, not a type to which the flattening of a record
+belonging to the unflattened type can belong.  Instead we say if $r$
+is of the non-flattened type, then there is some $r'$ such that
+$\varphi(r):\mathcal{T}(r')$ and there is some flattening, $T_{\varphi}$, of the
+domain type of $\mathcal{T}$ such that $\varphi(r):T_{\varphi}$.
+% We are now free to apply flattening or relabelling to the domain or
+% range of this function without creating the problem that the second
+% argument of `see' will not be defined.  Note that there may be several
+% dependencies in the flattened type depending on how many partial paths
+% occur in the dependent fields of the unflattened type and what the
+% dependencies of the types pointed at by those partial paths are.  Thus the
+% dependent type which is the flattening may take several arguments.
 
 [How does expansion work.  Have we given up identity between the
 original type and the expansion of the flattening of the type?  Not
