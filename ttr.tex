@@ -1217,14 +1217,14 @@ $\eta$ is the relabelling $\mathrm{x}\leadsto\mathrm{xx},
 That is, the label `x' is changed, but nothing else.
 
 We say that a relabelling, $\eta$, is \textit{limited} to a record,
-$r$, just in case $\mathrm{dom}(\eta)\subseteq\mathrm{labels}(r)$.
+$r$, just in case $\mathrm{dom}(\eta)\subseteq\mathrm{labels}(r)$.\label{pg:limited}
 
 We are, however, mainly interested in replacing total paths in a
 record which is why we have defined relabellings on the set of paths,
 $L_+$ rather than the set of labels, $L$.  The \textit{result of
   relabelling a record, $r$, with a relabelling, $\eta$}, in symbols,
 $[r]_\eta$, is $\varphi^-(\eta*\varphi(r))$.  We say that $\eta$ is a
-\textit{proper relabelling} for $r$ just in case $[r]_\eta$ is a
+\textit{proper relabelling}\label{pg:proper-relabelling} for $r$ just in case $[r]_\eta$ is a
 record.
 
 Suppose $r$ is the record
@@ -2062,6 +2062,9 @@ when $T_1$ and $T_2$ are merged.
 \section{Flattening and relabelling of record types}
 \label{app:flattening}
 
+\subsection{Some considerations}
+\label{app:flattening-considerations}
+
 We extend the notions of flattening and relabelling of records
 discussed in Appendix~\ref{app:rectypes} to types.\footnote{This was
   not made explicit in \cite{Cooper2012}.}  For non-dependent record
@@ -2071,7 +2074,7 @@ labels and types.  They are just like records except that the second
 members of the pairs are types.  However, in the case of dependent
 record types, flattening and relabelling introduces some complications
 which need to be taken account of.  We shall start with an informal
-discussion of the complications.
+discussion of the complications.  
 
 \paragraph{Labels in dependent fields need to be adjusted in
   flattening and unflattening.} First of all we need to
@@ -2230,9 +2233,52 @@ domain type of $\mathcal{T}$ such that $\varphi(r):T_{\varphi}$.
 % dependencies of the types pointed at by those partial paths are.  Thus the
 % dependent type which is the flattening may take several arguments.
 
+\subsection{Basic definitions of flattening and
+  relabelling of record types}
+
+We start with a definition of what it means for a relabelling to be
+limited to a type.  This is given in terms of the notion of a
+relabelling being limited to a record (p.~\pageref{pg:limited}).
+\begin{quote}
+A relabelling, $\eta$, is \textit{limited to} a record type, $T$, just
+in case for any record, $r$, $r:T$ implies $\eta$ is limited to
+$\varphi(r)$.
+\end{quote}
+We can then define the notion of relabelling of record types as
+follows:
+\begin{quote}
+If $T_1$ and $T_2$ are record types and $\eta$ is a relabelling
+limited to $T_1$, then $T_2$ \textit{is an $\eta$-relabelling of}
+$T_1$ just in case for any record, $r$, such that $\eta$ is a proper
+relabelling (see p.~\pageref{pg:proper-relabelling}) of $r$, $r:T_1$
+implies $[r]_\eta:T_2$.
+\end{quote}
+Note that this definition does not require a definition of the
+flattening of types but relies of the notion of flattening of records
+which is necessary to define relabelling of records.  Thus if all we
+are interested in is the relabelling of types as in the notions of
+matching discussed in Chapter~\ref{ch:intensional}, then we do not
+have to address the problem of dependence involving partial paths
+discussed in Appendix~\ref{app:flattening-considerations}.
+
+However, for the sake of completeness we give definitions of
+flattening and unflattening of record types.  There are two cases to
+consider: that where the flattening is a record type and that where
+the flattening is a dependent type which returns a record type when
+applied to an appropriate argument.  We first give the definitions for
+the case where the flattening is a record type.
+\begin{quote}
+If $T_1$ and $T_2$ are record types, $T_2$ \textit{is a flattening of} $T_1$
+
+@@
+
+
 [How does expansion work.  Have we given up identity between the
 original type and the expansion of the flattening of the type?  Not
 quite but there may be several flattenings, expansions]
+
+\subsection{Computing flattenings and relabellings of record types}
+
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
