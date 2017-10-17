@@ -2268,7 +2268,28 @@ the flattening is a dependent type which returns a record type when
 applied to an appropriate argument.  We first give the definitions for
 the case where the flattening is a record type.
 \begin{quote}
-If $T_1$ and $T_2$ are record types, $T_2$ \textit{is a flattening of} $T_1$
+If $T_1$ and $T_2$ are record types, 
+
+$T_2$ \textit{is a flattening of}
+$T_1$ just in case for any record, $r$, $r:T_1$ implies
+$\varphi(r):T_2$
+
+$T_2$ \textit{is an unflattening of} $T_1$ just in case for any
+record, $r$, $r:T_1$ implies $\varphi^-(r):T_2$.
+
+\end{quote}
+For the cases where the flattening is a dependent type we have the
+following definitions:
+\begin{quote}
+If $T_1$, $T_2$ and ${T_2}_\varphi$ are record types such that ${T_2}_\varphi$ is a
+flattening of $T_2$ and
+$\mathcal{T}:(T_2\rightarrow\textit{RecType})$, $\mathcal{T}$
+\textit{is a flattening of} $T_1$ just in case for any record, $r$,
+$r:T_1$ implies that for some record, $r'$, such that  $r':T_2$,
+$\varphi(r):\mathcal{T}(r')\wedge {T_2}_\varphi$
+\end{quote}
+
+
 
 @@
 
