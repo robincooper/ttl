@@ -2235,6 +2235,7 @@ domain type of $\mathcal{T}$ such that $\varphi(r):T_{\varphi}$.
 
 \subsection{Basic definitions of flattening and
   relabelling of record types}
+\label{app:flattening-def}
 
 We start with a definition of what it means for a relabelling to be
 limited to a type.  This is given in terms of the notion of a
@@ -2283,22 +2284,31 @@ following definitions:
 \begin{quote}
 If $T_1$, $T_2$ and ${T_2}_\varphi$ are record types such that ${T_2}_\varphi$ is a
 flattening of $T_2$ and
-$\mathcal{T}:(T_2\rightarrow\textit{RecType})$, $\mathcal{T}$
+$\mathcal{T}:(T_2\rightarrow\textit{RecType})$, 
+
+$\mathcal{T}$
 \textit{is a flattening of} $T_1$ just in case for any record, $r$,
 $r:T_1$ implies that for some record, $r'$, such that  $r':T_2$,
-$\varphi(r):\mathcal{T}(r')\wedge {T_2}_\varphi$
+$\varphi(r):(\mathcal{T}(r')\wedge {T_2}_\varphi)$
+
+$T_1$ \textit{is an unflattening of} $\mathcal{T}$ just in case for
+any record, $r$, $r:({T_2}_\varphi\wedge\mathcal{T}(\varphi^-(r))$
+implies $\varphi^-(r):T_1$
 \end{quote}
 
+Note that if $T_1$ ($\mathcal{T}$) is a flattening of $T_2$ if and
+only if $T_2$ is an unflattening of $T_1$ ($\mathcal{T}$).
 
 
-@@
-
-
-[How does expansion work.  Have we given up identity between the
-original type and the expansion of the flattening of the type?  Not
-quite but there may be several flattenings, expansions]
 
 \subsection{Computing flattenings and relabellings of record types}
+
+The definitions in Section~\ref{app:flattening-def} enable us to tell
+whether one type is a flattening or relabelling of another but they do
+not give us an algorithm for constructing a flattening or relabelling
+of a particular type. 
+
+@@
 
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
