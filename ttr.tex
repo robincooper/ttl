@@ -1098,13 +1098,14 @@ $\langle\ell,\varphi^-(\{\langle\pi',v'\rangle\mid\langle\ell.\pi',v'\rangle\in 
 The \textit{set of total paths of} $r$, $\mathrm{tpaths}(r)$, is
 $\mathrm{labels}(\varphi(r))$.
 
-If $r$ is a record and $\mathrm{tpaths}(r)=\Pi$ then the \textit{set
+If $r$ is a record, then the \textit{set
   of paths of} $r$, $\mathrm{paths}(r)$, is the minimal set such that
 \begin{enumerate} 
  
-\item If $\pi\in\Pi$, then $\pi\in\mathrm{paths(r)}$ 
+\item If $\pi\in\mathrm{tpaths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
  
-\item If $\ell$ is a label (in $L$) and
+\item If $\ell$ is a label (in $L$), $\pi$ is a non-empty path based
+  on $L$ and
   $\pi.\ell\in\mathrm{paths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
  
 \end{enumerate} 
@@ -1117,11 +1118,26 @@ such that $\pi.\pi'\in\Pi$.
 \paragraph{Claim:}
 $\mathrm{longest}(\mathrm{paths}(r))=\mathrm{tpaths}(r)$
 
-If $R$ is a set of records, then the \textit{set of longest common
+If $R$ is a set of records, then 
+the \textit{set of common paths of} $R$,
+$\mathrm{cpaths}(R)$,\label{pg:cpaths} is
+\begin{quote}
+$\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r)$,
+\end{quote}
+the \textit{set of longest common
   paths of} $R$, $\mathrm{lcpaths}(R)$, is
 \begin{quote}
 $\mathrm{longest}(\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r))$
 \end{quote} 
+and the \textit{set of common total paths of} $R$,
+$\mathrm{ctpaths}(R)$,\label{pg:ctpaths} is
+\begin{quote}
+$\displaystyle{\bigcap_{r\in R}}\mathrm{tpaths}(r)$
+\end{quote}
+
+\paragraph{Claim:} $\mathrm{lcpaths}(R)=\mathrm{ctpaths}(R)$
+
+
 
 Consider the records
 \begin{quote}
@@ -2306,7 +2322,27 @@ only if $T_2$ is an unflattening of $T_1$ ($\mathcal{T}$).
 The definitions in Section~\ref{app:flattening-def} enable us to tell
 whether one type is a flattening or relabelling of another but they do
 not give us an algorithm for constructing a flattening or relabelling
-of a particular type. 
+of a particular type. Here we will consider how, for a given record
+type, $T$, to compute a flattening, $\varphi(T)$, an unflattening,
+$\varphi^-(T)$ and an $\eta$-relabelling, $[T]_\eta$.
+
+We start by defining the notion of paths for record types.  This can
+be defined in terms of the paths which are common to all witnesses for
+the types.  If $T$ is a record type, then the \textit{set of paths of}
+$T$, $\mathrm{paths}(T)$, is
+\begin{quote}
+$\mathrm{cpaths}(\down{T})$
+\end{quote}
+where $\mathrm{cpaths}$ is as defined on p.~\pageref{pg:cpaths} and the
+\textit{set of total paths of} $T$, $\mathrm{tpaths}(T)$, is
+\begin{quote}
+$\mathrm{ctpaths}(\down{T})$
+\end{quote}
+where $\mathrm{ctpaths}$ is as defined on p.~\pageref{pg:ctpaths}.
+
+It may look from these definitions as if you have to compute all the
+witnesses for a record type before you can compute its paths, but in
+fact this is not true.
 
 @@
 
