@@ -938,6 +938,16 @@ $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ is displayed as
         \field{$\ell_n$}{$v_n$}}
 \end{display}
 
+An alternative notation is as a tree (or directed graph) whose root is
+unlabelled:
+\begin{quote}
+\Tree [ [.$\ell_1$ $v_1$ ]  {\mbox{}} {\ldots}  {\mbox{}}  [.$\ell_n$
+$v_n$ ] ]   
+\end{quote}
+
+We will sometime says that the occurrences $\ell_1,\ldots,\ell_n$ are
+\textit{sisters} in the record.\label{pg:sisters} 
+
 A value may itself be a record and paths may extend into embedded
 records.  A record which contains records as values is called a {\it
   complex record\/} and otherwise a record is {\it simple\/}.  Values which are not records are called {\it
@@ -2342,7 +2352,33 @@ where $\mathrm{ctpaths}$ is as defined on p.~\pageref{pg:ctpaths}.
 
 It may look from these definitions as if you have to compute all the
 witnesses for a record type before you can compute its paths, but in
-fact this is not true.
+fact this is not true.  For any type, we can compute what paths are
+witness of that type must have. For example, any witness of the type
+\begin{quote}
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{c}{$\langle\lambda v$:\textit{Ind}
+          . \smallrecord{\smalltfield{e}{dog($v$)}},
+          $\langle$x$\rangle\rangle$}}
+\end{quote}
+must be a record of the form
+\begin{quote}
+\record{\field{x}{$a$}\\
+        \field{c}{\record{\field{e}{$s$}\\
+                          \ldots}}\\
+        \ldots}
+
+where:
+
+$a$ : \textit{Ind}\\
+$s$ : dog($a$)
+\end{quote}
+Hence, any record of this type must have `x' and `c.e' among its total
+paths and these will be the only total paths that are common to all
+witnesses for the type.
+
+
+
+ 
 
 @@
 
