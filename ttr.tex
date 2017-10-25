@@ -941,7 +941,7 @@ $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ is displayed as
 An alternative notation is as a tree (or directed graph) whose root is
 unlabelled:
 \begin{quote}
-\Tree [ [.$\ell_1$ $v_1$ ]  {\mbox{}} {\ldots}  {\mbox{}}  [.$\ell_n$
+\Tree [ [.$\ell_1$ $v_1$ ]  {\hspace*{4em}\ldots}   {\mbox{}}  [.$\ell_n$
 $v_n$ ] ]   
 \end{quote}
 
@@ -991,6 +991,29 @@ $r.f.f.\mathit{gg}$, $r.f.g$, $r.g$, $r.g.h$, $r.g.h.g$ and
 $r.g.h.h$. An object, $a$, is \textit{present} in a record, $r$, in
 symbols, $a\underline{\varepsilon} r$, just in case either $a=r$ or
 $a\varepsilon r$.
+
+We can, of course, also think of complex records as trees, for
+example:
+\begin{quote}
+\Tree [ [.\textit{f} 
+          [.\textit{f}
+              [.\textit{ff} $a$ ]
+              [.\textit{gg} $b$ ]
+          ]
+        [.\textit{g} $c$ ]
+        ]
+        [.\textit{g}
+          [.\textit{h}
+              [.\textit{g} $a$ ]
+              [.\textit{h} $d$ ]
+          ]
+        ]        
+      ] 
+\end{quote}
+We can thus use tree terminology to describe relationships between
+occurrences of labels.  For example, we can say that the topmost
+occurrence of \textit{f} immediately dominates another occurrence of
+\textit{f} and an occurrence of \textit{g}.\label{pg:imm-dom}
 
 Two
 records are {\it (multiset) extensionally equivalent\/} if they have
@@ -2374,7 +2397,32 @@ $s$ : dog($a$)
 \end{quote}
 Hence, any record of this type must have `x' and `c.e' among its total
 paths and these will be the only total paths that are common to all
-witnesses for the type.
+witnesses for the type.  
+
+In a similar way, we can say that tree relations holding in all
+witnesses of a type hold for the types (see
+p.~\pageref{pg:imm-dom}). Thus, for example, we can say that `c'
+immediately dominates `e' in the type in virtue of the fact that the
+relation holds in all witnesses of the type, despite the fact the `e'
+is embedded in a function below `c' in the type.
+
+It will be convenient to define the computation of flattenings and
+relabellings of types in terms of a notation which gives unique
+identifiers to the occurrences of labels and which eshews representing
+the functions in dependent fields explicitly, rather representing the
+dependencies by using the unique identifiers.  To increase
+readability, we will only represent the unique identifiers on those
+labels which are referenced in some dependent field.  As an example,
+consider the following type, presented in official notation.
+\begin{quote}
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{c}{$\langle\lambda v$:\textit{Ind} . dog($v$),
+          $\langle$x$\rangle\rangle$}\\
+        \tfield{e}{$\langle\lambda v$:\textit{Ind} . 
+                             appear(\smallrecord{\smalltfield{e}{approach($v$)}}),
+                             $\langle$x$\rangle\rangle$}}
+\end{quote}
+
 
 
 
