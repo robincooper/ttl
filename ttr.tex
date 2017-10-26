@@ -2421,9 +2421,82 @@ consider the following type, presented in official notation.
         \tfield{e}{$\langle\lambda v$:\textit{Ind} . 
                              appear(\smallrecord{\smalltfield{e}{approach($v$)}}),
                              $\langle$x$\rangle\rangle$}}
+
+\bigskip
+
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{c}{$\langle\lambda v$:\textit{Ind}
+          . \smallrecord{\smalltfield{e}{dog($v$)}},
+          $\langle$x$\rangle\rangle$}}
 \end{quote}
+In the unique identfier notation these will be:
+\begin{quote}
+\record{\tfield{x\{0\}}{\textit{Ind}}\\
+        \tfield{c}{dog(\{0\}:\textit{Ind})}\\
+        \tfield{e}{appear(\smallrecord{\smalltfield{e}{approach(\{0\}:\textit{Ind})}})}}
 
+\bigskip
 
+\record{\tfield{x\{0\}}{\textit{Ind}}\\
+        \tfield{c}{\smallrecord{\smalltfield{e}{dog(\{0\}:\textit{Ind})}}}}
+
+\end{quote}
+The unique identifier notation can be obtained from the official
+notation by 
+\begin{enumerate} 
+ 
+\item adding a unique identifier $\{i\}$ (where $i$ is a natural
+  number) to each occurrence of a label in the type, other than in the paths
+  following a function in dependent fields.  In practice we only add
+  identifiers to those labels which are addressed in some dependent
+  field. 
+
+\item replacing any path in a dependent field with the unique identifier
+  associated with the final label occurrence on the path which it references.
+ 
+\item replacing any pair in a dependent field of the form 
+\begin{quote}
+$\langle\lambda v_1:T_1\ldots\lambda v_n:T_n\
+.\ \varphi[v_1,\ldots,v_n], \langle \{i_1\},...,\{i_n\}\rangle\rangle$
+\end{quote}
+with
+\begin{quote}
+$\varphi[\{i_1\}:T_1,\ldots,\{i_n\}:T_n]$
+\end{quote}
+ 
+\end{enumerate} 
+The final step involves a variant of $\beta$-conversion.  It is
+important to represent the type restriction associated with the unique
+identifier by the domain type of the function since the domain type of
+the function may be distinct from the type associated with the
+identifier in the field labelled by the identifier.
+
+We also need to show how to convert back from unique identifier
+notation to official notation.   We can do this by carrying out the
+following for each occurrence of a label, $\ell$, in the type associated with
+an identifier,$\{i\}$, which is referenced elsewhere in the type:
+\begin{enumerate} 
+ 
+\item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
+  dominates
+  a subtree, $\tau$, containing $\{i\}:T$ for some type, $T$, then:
+\begin{quote}
+if $\tau$ is not an ordered pair consisting of a function and a
+sequence of paths:
+\begin{quote}
+replace $\tau$ with $\lambda v_i:T\ .\ \tau[\{i\}:T\leadsto v_i]$
+\end{quote}
+otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+\begin{quote}
+replace $\tau$ with $\lambda v_i:T\ . \ f[\{i\}:T\leadsto v_i],
+\langle\ell,\pi_1,\ldots,\pi_n\rangle\rangle$
+\end{quote}
+\end{quote}
+ 
+\item  
+ 
+\end{enumerate} 
+   
 
 
  
