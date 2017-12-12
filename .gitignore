@@ -74,3 +74,5 @@
 *.gz(busy)
 
 *.fls
+
+*.sav

@@ -1,0 +1,19 @@
+Hej Robin!
+
+Det är något lurt med possible_i. ”T is possible_i iff for some M\in\mathcal{M}, if T\in Type_M then T (is nonempty).” Men om det finns ett M i \mathcal{M} sådant att T inte finns i Type_M så gäller detta trivialt. Dvs för varje familj av modeller finns en oändligt mängd typer som är possible_i i denna familj, nämligen de som består av predikat och individer som inte finns någonstans i \mathcal{M}.
+
+Hälsningar
+Staffan
+
+Mm, bra poäng.  Hur vore det med:
+
+T is possible_i iff for some M\in\mathcal{M}, T\in Type_M and T is nonempty.
+
+?
+
+Robin
+
+-------------------------------------------------
+
+See also mail box ttr-comments
+

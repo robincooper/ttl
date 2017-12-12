@@ -2413,7 +2413,7 @@ the functions in dependent fields explicitly, rather representing the
 dependencies by using the unique identifiers.  To increase
 readability, we will only represent the unique identifiers on those
 labels which are referenced in some dependent field.  As an example,
-consider the following type, presented in official notation.
+consider the following types, presented in official notation.
 \begin{quote}
 \record{\tfield{x}{\textit{Ind}}\\
         \tfield{c}{$\langle\lambda v$:\textit{Ind} . dog($v$),
@@ -2472,9 +2472,13 @@ the function may be distinct from the type associated with the
 identifier in the field labelled by the identifier.
 
 We also need to show how to convert back from unique identifier
-notation to official notation.   We can do this by carrying out the
-following for each occurrence of a label, $\ell$, in the type associated with
-an identifier,$\{i\}$, which is referenced elsewhere in the type:
+notation for a type, $T^*$, to official notation.   We can do this by
+first replacing all the dependencies on unique identifiers with
+appropriate pairs of functions and sequences of paths and then
+removing the unique identifiers.  We replace all the dependencies on
+unique identifiers by carrying out the
+following for each occurrence of a label, $\ell$, in $T^*$ associated with
+an identifier,$\{i\}$, which is referenced elsewhere in $T^*$:
 \begin{enumerate} 
  
 \item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
@@ -2484,7 +2488,7 @@ an identifier,$\{i\}$, which is referenced elsewhere in the type:
 if $\tau$ is not an ordered pair consisting of a function and a
 sequence of paths:
 \begin{quote}
-replace $\tau$ with $\lambda v_i:T\ .\ \tau[\{i\}:T\leadsto v_i]$
+replace $\tau$ with $\langle\lambda v_i:T\ .\ \tau[\{i\}:T\leadsto v_i],\langle\ell\rangle\rangle$
 \end{quote}
 otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
 \begin{quote}
@@ -2493,7 +2497,24 @@ replace $\tau$ with $\lambda v_i:T\ . \ f[\{i\}:T\leadsto v_i],
 \end{quote}
 \end{quote}
  
-\item  
+\item Let $\ell_0.\ldots.\ell_n.\ell\{i\}$ be the path ending in
+  $\ell\{i\}$ in $T^*$.  For each $\ell_k$ in order in
+  $\langle\ell_n,\ldots,\ell_0\rangle$, where $\pi^*$ is the path starting
+  with $\ell_k$ and ending with $\ell\{i\}$, then for each sister,
+  $\ell'$, of $\ell_k$, if $\ell'$ immediately dominates a subtree,
+  $\tau$, containing $\{i\}:T$ for some type, $T$, then:
+ \begin{quote}
+if $\tau$ is not an ordered pair consisting of a function and a
+sequence of paths:
+\begin{quote}
+replace $\tau$ with $\langle\lambda v_i:T\ .\ \tau[\{i\}:T\leadsto v_i],\langle\pi^*\rangle\rangle$
+\end{quote}
+otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+\begin{quote}
+replace $\tau$ with $\lambda v_i:T\ . \ f[\{i\}:T\leadsto v_i],
+\langle\pi^*,\pi_1,\ldots,\pi_n\rangle\rangle$
+\end{quote}
+\end{quote}
  
 \end{enumerate} 
    
@@ -2501,7 +2522,7 @@ replace $\tau$ with $\lambda v_i:T\ . \ f[\{i\}:T\leadsto v_i],
 
  
 
-@@
+@@ [Example, p. 86 in notes]
 
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
