@@ -2538,9 +2538,37 @@ written as:
 This is a type which relates to our discussion of long term memory in
 Chapters~\ref{ch:propnames}--\ref{ch:intensional}.  In official
 notation this type is represented as:
- 
+\begin{quote}
 
- 
+\record{\tfield{id$_0$}{\record{\tfield{x}{\textit{Ind}}\\
+                                \tfield{e}{$\langle\lambda
+                                  v$:\textit{Ind} . dog($v$),
+                                  $\langle$x$\rangle\rangle$}}}\\
+        \tfield{id$_1$}{$\langle\lambda v$:\textit{Ind}
+          . \record{\tfield{e}{run($v$)}},
+          $\langle$id$_0$.x$\rangle\rangle$}}
+
+\end{quote}
+In the unique identifier notation this would be
+\begin{quote}
+
+\record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+                                \tfield{e}{dog(x\{0\}:\textit{Ind})}}}\\
+        \tfield{id$_1$}{\record{\tfield{e}{run(x\{0\}:\textit{Ind})}}}}
+
+\end{quote}
+This in turn can be represented in tree-notation to make the
+sisterhood relations clear.
+\begin{quote}
+
+\Tree [ [.id$_0$
+          [.x\{0\} \textit{Ind} ]
+          [.e dog(x\{0\}:\textit{Ind}) ] ]
+        [.id$_1$
+          [.e run(x\{0\}:\textit{Ind}) ] ] ]
+
+\end{quote}
+To convert this back to official notation, we first 
 
 @@ [Example, p. 86 in notes]
 
