@@ -2568,9 +2568,45 @@ sisterhood relations clear.
           [.e run(x\{0\}:\textit{Ind}) ] ] ]
 
 \end{quote}
-To convert this back to official notation, we first 
+To convert this back to official notation, we first look at the sister
+of `x\{0\}', that is, `e', and replace the subtree it immediately
+dominates with the corresponding dependent field.
+\begin{quote}
 
-@@ [Example, p. 86 in notes]
+\Tree [ [.id$_0$
+          [.x\{0\} \textit{Ind} ]
+          [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
+        [.id$_1$
+          [.e run(x\{0\}:\textit{Ind}) ] ] ]
+
+\end{quote} 
+Next we go up one node from `x\{0\}' to `id$_0$' and look at its
+sister, `id$_1$'.  We then form an appropriate dependent field from
+its immediate subtree.
+\begin{quote}
+
+\Tree [ [.id$_0$
+          [.x\{0\} \textit{Ind} ]
+          [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
+        [.id$_1$
+          {$\langle\lambda v_0$:\textit{Ind} .  \smallrecord{\smalltfield{e}{run($v_0$)}},
+            $\langle$id$_0$.x$\rangle\rangle$} ] ]
+
+\end{quote}
+Finally, we remove the unique identifier `\{0\}'.
+\begin{quote}
+
+\Tree [ [.id$_0$
+          [.x \textit{Ind} ]
+          [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
+        [.id$_1$
+          {$\langle\lambda v_0$:\textit{Ind} .  \smallrecord{\smalltfield{e}{run($v_0$)}},
+            $\langle$id$_0$.x$\rangle\rangle$} ] ]
+
+\end{quote}
+This is now the tree variant of the official notation for the type.
+
+
 
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
