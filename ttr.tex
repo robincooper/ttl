@@ -2553,8 +2553,8 @@ In the unique identifier notation this would be
 \begin{quote}
 
 \record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
-                                \tfield{e}{dog(x\{0\}:\textit{Ind})}}}\\
-        \tfield{id$_1$}{\record{\tfield{e}{run(x\{0\}:\textit{Ind})}}}}
+                                \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
+        \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}}
 
 \end{quote}
 This in turn can be represented in tree-notation to make the
@@ -2563,9 +2563,9 @@ sisterhood relations clear.
 
 \Tree [ [.id$_0$
           [.x\{0\} \textit{Ind} ]
-          [.e dog(x\{0\}:\textit{Ind}) ] ]
+          [.e dog(\{0\}:\textit{Ind}) ] ]
         [.id$_1$
-          [.e run(x\{0\}:\textit{Ind}) ] ] ]
+          [.e run(\{0\}:\textit{Ind}) ] ] ]
 
 \end{quote}
 To convert this back to official notation, we first look at the sister
@@ -2577,7 +2577,7 @@ dominates with the corresponding dependent field.
           [.x\{0\} \textit{Ind} ]
           [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
         [.id$_1$
-          [.e run(x\{0\}:\textit{Ind}) ] ] ]
+          [.e run(\{0\}:\textit{Ind}) ] ] ]
 
 \end{quote} 
 Next we go up one node from `x\{0\}' to `id$_0$' and look at its
@@ -2606,8 +2606,32 @@ Finally, we remove the unique identifier `\{0\}'.
 \end{quote}
 This is now the tree variant of the official notation for the type.
 
+Suppose that instead we had wished to compute the flattening of this
+type.  We can apply the standard algorithm for records to the unique
+identifier notation, that is,
+\begin{quote}
+$\varphi$(\record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+                                \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
+        \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}})
+\end{quote}
+This is, again in unique identifier notation:
+\begin{quote}
+\record{\tfield{id$_0$.x\{0\}}{\textit{Ind}}\\
+        \tfield{id$_0$.e}{dog(\{0\}:\textit{Ind})}\\
+        \tfield{id$_1$.e}{run(\{0\}:\textit{Ind})}}
+\end{quote}
+Consider the relabelling:
+\begin{quote}
+id$_0$.x$\leadsto$x\\
+id$_0$.e$\leadsto$e$_1$\\
+id$_1$.e$\leadsto$e$_2$
+\end{quote}
+We assume that
 
 
+@@ [Consider the example where the unique identifier is not final in
+the path -- `see' from the beginning of this section.  Need to adjust
+$\varphi$ for types, or relabelling?]
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
