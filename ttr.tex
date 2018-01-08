@@ -2246,6 +2246,7 @@ which might be a way of representing the type which is the content of
                              $\langle$x$\rangle\rangle$}}}\\
         \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
 \end{quote}
+\label{pg:sam-saw-a-dog-run}
 Assuming that we have a way of making sure that we have a way of
 making sure that paths in dependent fields start from the root of the
 type as discussed above, we might think that the flattening of this type is:
@@ -2626,12 +2627,48 @@ id$_0$.x$\leadsto$x\\
 id$_0$.e$\leadsto$e$_1$\\
 id$_1$.e$\leadsto$e$_2$
 \end{quote}
-We assume that
+We assume that relabellings apply independently of whether labels are
+associated with a unique identifier or not.  Thus for the above type
+this relabelling will yield:
+\begin{quote}
+\record{\tfield{x\{0\}}{\textit{Ind}}\\
+        \tfield{e$_1$}{dog(\{0\}:\textit{Ind})}\\
+        \tfield{e$_2$}{run(\{0\}:\textit{Ind})}}
+\end{quote}
+which in official notation is
+\begin{quote}
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
+          $\langle$x$\rangle\rangle$}\\
+        \tfield{e$_2$}{$\langle\lambda v$:\textit{Ind} . run($v$),
+          $\langle$x$\rangle\rangle$}}
+\end{quote}
+In this example the unique identifier occurred at the end of a path,
+but this is not always the case.  Consider the example discussed on
+p.~\pageref{pg:sam-saw-a-dog-run}.  In unique identifier notation this
+is
+\begin{quote}
+\record{\tfield{s\{1\}}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+                                \tfield{c}{dog(\{0\}:\textit{Ind})}\\
+                                \tfield{e}{run(\{0\}:\textit{Ind})}}}\\
+        \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
+
+\end{quote}
+Applying the standard flattening algorithm to this will result in a
+type where the unique identifier `\{1\}' occurs three times:
+\begin{quote}
+\record{\tfield{s\{1\}.x\{0\}}{\textit{Ind}}\\
+        \tfield{s\{1\}.c}{dog(\{0\}:\textit{Ind})}\\
+        \tfield{s\{1\}.e}{run(\{0\}:\textit{Ind})}\\
+        \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
+\end{quote}
 
 
 @@ [Consider the example where the unique identifier is not final in
 the path -- `see' from the beginning of this section.  Need to adjust
-$\varphi$ for types, or relabelling?]
+$\varphi$ for types, or relabelling? Introduce path notation for types
+in place of flattening and replace paths directly not going through
+flattening.  Relabelling of paths must respect unique identifiers.]
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
