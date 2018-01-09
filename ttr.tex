@@ -1431,8 +1431,8 @@ defined by:
 
 \item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in L$, $\ell$ does not occur as a
   label in $R$ (i.e. there is no field $\langle\ell',T'\rangle$ in $R$
-  such that $\ell'=\ell$), then
-  $R\cup\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
+  such that $\ell'=\ell$) and $T\in\mathbf{Type}$, then
+  $R\cup\{\langle\ell,T\rangle\}\in\mathbf{RType}$.\label{cl:ndrectype-emb}
 
 \item $r:_{\mathbf{TYPE}_C}R\cup\{\langle\ell,T\rangle\}$ iff
   $r:_{\mathbf{TYPE}_C}R$, $\langle\ell,a\rangle\in r$ and $a:_{\mathbf{TYPE}_C}T$.
@@ -1548,19 +1548,19 @@ $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
 A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has dependent record types
   based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$,
-if it has records types based on $\langle L,
+if it has record types based on $\langle L,
 \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ and for each $n>0$
 \begin{enumerate} 
  
 \item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in
     $R$  and
-    ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
-    
+    % ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
+${\cal F}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.    
 
 
  
 \item $r :_{\mathbf{TYPE}_{\mathit{IC}_n}}R\cup\{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}$ iff $r :_{\mathbf{TYPE}_{\mathit{IC}_n}} R$, $\langle\ell, a\rangle$ is a field
-in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1,\ldots,r.\pi_m)$.  
+in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1),\ldots,(r.\pi_m)$.  
  
 \end{enumerate} 
 
@@ -2108,16 +2108,16 @@ when $T_1$ and $T_2$ are merged.
 % in $T$, with bg.$\pi$.
 % \end{quote}
 
-\section{Flattening and relabelling of record types}
-\label{app:flattening}
+\section{Relabelling of record types}
+\label{app:relabelling-rectypes}
 
 \subsection{Some considerations}
-\label{app:flattening-considerations}
+\label{app:relabelling-rectypes-considerations}
 
-We extend the notions of flattening and relabelling of records
-discussed in Appendix~\ref{app:rectypes} to types.\footnote{This was
+We extend the notion relabelling of records
+discussed in Appendix~\ref{app:rectypes} to record types.\footnote{This was
   not made explicit in \cite{Cooper2012}.}  For non-dependent record
-types flattening and relabelling are exactly parallel to that of
+types both flattening and relabelling can be regarded as exactly parallel to that of
 records since non-dependent record types are sets of ordered pairs of
 labels and types.  They are just like records except that the second
 members of the pairs are types.  However, in the case of dependent
@@ -2125,16 +2125,16 @@ record types, flattening and relabelling introduces some complications
 which need to be taken account of.  We shall start with an informal
 discussion of the complications.  
 
-\paragraph{Labels in dependent fields need to be adjusted in
-  flattening and unflattening.} First of all we need to
+\paragraph{Labels in dependent fields} First of all we need to
 note that labels not only occur as the first members of the ordered
 pairs that constitute the record type but also in the paths which
-occur in dependent fields.  For the discussion of flattening we need
-to make sure that we represent these paths in an appropriate way so
-that they are correct in the representation of the flattened type.
+occur in dependent fields.  This introduces complications if we
+attempt to define an operation of flattening for record types.
 Also in relabelling we need to make sure that the relabelling applies
 to the paths in the dependent fields as well as the labels of the
-record type.  Consider the record type which in abbreviatory notation
+record type.  
+
+Consider the record type which in abbreviatory notation
 we write as:
 \begin{quote}
 \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
@@ -2151,15 +2151,22 @@ type. Rather the flattened type should be, in abbreviatory notation:
 \record{\tfield{x.x}{\textit{Ind}}\\
         \tfield{x.e}{dog(x.x)}}
 \end{quote}
-We need also to guarantee that the unflattening of this type returns
-the original unflattened type.  We will, of course, work to achieve
-this, not with the abbreviatory notation but with the official
-notation, or rather with the set theoretic objects which the official
-notation represents.  That is, we need to convert: 
+This is a notational complication.  Recall that 'dog(x)' in the first
+type uses 'x' to represent the path 'x.x', that is, the path to the
+'x' in the immediate record containing 'dog(x)'.
+
+Let us consider how this would work in the official notation with full
+paths represented in dependent fields.  In order to define flattening
+and unflattening we would need to convert:
+% We need also to guarantee that the unflattening of this type returns
+% the original unflattened type.  We will, of course, work to achieve
+% this, not with the abbreviatory notation but with the official
+% notation, or rather with the set theoretic objects which the official
+% notation represents.  That is, we need to convert: 
 \begin{quote}
 \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
                            \tfield{e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$x$\rangle\rangle$}}}}
+                             .  dog($v$), $\langle$x.x$\rangle\rangle$}}}}
 \end{quote}
 to:
 \begin{quote}
@@ -2169,6 +2176,14 @@ to:
 \end{quote}
 and back again.
 
+% But now consider a slightly different (equivalent) type:
+% \begin{quote}
+% \record{\tfield{x}{$\langle\lambda v$:\textit{Ind}
+%     . \record{\tfield{x}{\textit{Ind}}\\
+%               \tfield{e}{dog($v$)}}, $\langle$x.x$\rangle\rangle$}}
+% \end{quote}
+% [No!  This is not a type according to the definition since x.x is not
+% a path in the type before you add the dependent field!]
 
 
 % or, in abbreviatory notation:
@@ -2205,7 +2220,9 @@ This is incorrect because the label `y' is not present in
 \record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
                              .  dog($v$), $\langle$y$\rangle\rangle$}}
 \end{quote}
-Rather the correct result should be:
+and this is not a type as require in Clause~\ref{cl:ndrectype-emb} of
+the definition of non-dependent record types on
+p.~\pageref{cl:ndrectype-emb}.  Rather the correct result should be:
 \begin{quote}
 \record{\tfield{y}{\textit{Ind}}\\
         \tfield{x}{$\langle\lambda v$:\textit{Ind}
@@ -2217,6 +2234,13 @@ In abbreviatory notation this is:
 \record{\tfield{y}{\textit{Ind}}\\
         \tfield{x}{\record{\tfield{e}{dog($\Uparrow$y)}}}}
 \end{quote}
+
+This, then, is a problem for defining relabelling of record types in
+terms of a notion of flattening and unflattening as we did for
+records.  This problem is not insurmountable given the techniques that
+we will develop below.  However, there is another problem which seems
+to strongly suggest that we should not use flattening in the same way
+that we did for records.
 
 
 % This is well-formed when we consider that the `y' in the dependent
