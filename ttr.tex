@@ -2260,20 +2260,19 @@ example:
         \tfield{e}{see(sam,s)}}
 \end{quote}
 which might be a way of representing the type which is the content of
-\textit{Sam saw a dog run}.  The official notation for this type is:
+\textit{Sam saw a dog run}.  The official notation for this type (with
+unabbreviated paths) is:
 \begin{quote}
 \record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
                            \tfield{c}{$\langle\lambda v$:\textit{Ind}
-                             . dog($v$), $\langle$x$\rangle\rangle$}\\
+                             . dog($v$), $\langle$s.x$\rangle\rangle$}\\
                            \tfield{e}{$\langle\lambda v$:\textit{Ind}
                              . run($v$),
-                             $\langle$x$\rangle\rangle$}}}\\
+                             $\langle$s.x$\rangle\rangle$}}}\\
         \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
 \end{quote}
 \label{pg:sam-saw-a-dog-run}
-Assuming that we have a way of making sure that we have a way of
-making sure that paths in dependent fields start from the root of the
-type as discussed above, we might think that the flattening of this type is:
+We might think that the flattening of this type is:
 \begin{quote}
 \record{\tfield{s.x}{\textit{Ind}}\\
         \tfield{s.c}{$\langle\lambda v$:\textit{Ind}
@@ -2284,21 +2283,32 @@ type as discussed above, we might think that the flattening of this type is:
         \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
 \end{quote} 
 But this is, of course, not correct since the path `s' in the
-`e'-field is not a path in the flattened type.  Instead we will make
-the flattened type depend on a record of the type required for the
-argument to `see' in the original unflattened type (and also on any
-objects on which that type depends):
-\begin{quote}
-$\lambda r$:\smallrecord{\smalltfield{s}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{c}{dog(x)}\\
-                         \smalltfield{e}{run(x)}}}} . 
-\record{\tfield{e}{see(sam, $r$.s)}}
-\end{quote}
-Call this $\mathcal{T}$.  This is, of course, not a type to which the flattening of a record
-belonging to the unflattened type can belong.  Instead we say if $r$
-is of the non-flattened type, then there is some $r'$ such that
-$\varphi(r):\mathcal{T}(r')$ and there is some flattening, $T_{\varphi}$, of the
-domain type of $\mathcal{T}$ such that $\varphi(r):T_{\varphi}$.
+`e'-field is not a path in the flattened type.  
+% This shows that we
+% cannot naively adapt the technique for flattening we used with records
+% to dependent record types.  Instead we will make
+% the flattened type depend on a record of the type required for the
+% argument to `see' in the original unflattened type (and also on any
+% objects on which that type depends):
+% \begin{quote}
+% $\lambda r$:\smallrecord{\smalltfield{s}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                          \smalltfield{c}{dog(x)}\\
+%                          \smalltfield{e}{run(x)}}}} . 
+% \record{\tfield{e}{see(sam, $r$.s)}}
+% \end{quote}
+% Call this $\mathcal{T}$.  This is, of course, not a type to which the 
+% flattening of a record
+% belonging to the unflattened type can belong. 
+Our strategy will be not
+to define relabelling in terms of flattening as we did for records,
+but to define relabelling of types in terms of direct replacement of
+paths in unflattened types.  In order to do this we will, however,
+find it convenient to use a ``flattened'' representation of the
+unflattened type which explicitly lists its paths. 
+% Instead we say if $r$
+% is of the non-flattened type, then there is some $r'$ such that
+% $\varphi(r):\mathcal{T}(r')$ and there is some flattening, $T_{\varphi}$, of the
+% domain type of $\mathcal{T}$ such that $\varphi(r):T_{\varphi}$.
 % We are now free to apply flattening or relabelling to the domain or
 % range of this function without creating the problem that the second
 % argument of `see' will not be defined.  Note that there may be several
@@ -2307,82 +2317,82 @@ domain type of $\mathcal{T}$ such that $\varphi(r):T_{\varphi}$.
 % dependencies of the types pointed at by those partial paths are.  Thus the
 % dependent type which is the flattening may take several arguments.
 
-\subsection{Basic definitions of flattening and
-  relabelling of record types}
-\label{app:flattening-def}
+% \subsection{Basic definitions of flattening and
+%   relabelling of record types}
+% \label{app:flattening-def}
 
-We start with a definition of what it means for a relabelling to be
-limited to a type.  This is given in terms of the notion of a
-relabelling being limited to a record (p.~\pageref{pg:limited}).
-\begin{quote}
-A relabelling, $\eta$, is \textit{limited to} a record type, $T$, just
-in case for any record, $r$, $r:T$ implies $\eta$ is limited to
-$\varphi(r)$.
-\end{quote}
-We can then define the notion of relabelling of record types as
-follows:
-\begin{quote}
-If $T_1$ and $T_2$ are record types and $\eta$ is a relabelling
-limited to $T_1$, then $T_2$ \textit{is an $\eta$-relabelling of}
-$T_1$ just in case for any record, $r$, such that $\eta$ is a proper
-relabelling (see p.~\pageref{pg:proper-relabelling}) of $r$, $r:T_1$
-implies $[r]_\eta:T_2$.
-\end{quote}
-Note that this definition does not require a definition of the
-flattening of types but relies of the notion of flattening of records
-which is necessary to define relabelling of records.  Thus if all we
-are interested in is the relabelling of types as in the notions of
-matching discussed in Chapter~\ref{ch:intensional}, then we do not
-have to address the problem of dependence involving partial paths
-discussed in Appendix~\ref{app:flattening-considerations}.
+% We start with a definition of what it means for a relabelling to be
+% limited to a type.  This is given in terms of the notion of a
+% relabelling being limited to a record (p.~\pageref{pg:limited}).
+% \begin{quote}
+% A relabelling, $\eta$, is \textit{limited to} a record type, $T$, just
+% in case for any record, $r$, $r:T$ implies $\eta$ is limited to
+% $\varphi(r)$.
+% \end{quote}
+% We can then define the notion of relabelling of record types as
+% follows:
+% \begin{quote}
+% If $T_1$ and $T_2$ are record types and $\eta$ is a relabelling
+% limited to $T_1$, then $T_2$ \textit{is an $\eta$-relabelling of}
+% $T_1$ just in case for any record, $r$, such that $\eta$ is a proper
+% relabelling (see p.~\pageref{pg:proper-relabelling}) of $r$, $r:T_1$
+% implies $[r]_\eta:T_2$.
+% \end{quote}
+% Note that this definition does not require a definition of the
+% flattening of types but relies of the notion of flattening of records
+% which is necessary to define relabelling of records.  Thus if all we
+% are interested in is the relabelling of types as in the notions of
+% matching discussed in Chapter~\ref{ch:intensional}, then we do not
+% have to address the problem of dependence involving partial paths
+% discussed in Appendix~\ref{app:flattening-considerations}.
 
-However, for the sake of completeness we give definitions of
-flattening and unflattening of record types.  There are two cases to
-consider: that where the flattening is a record type and that where
-the flattening is a dependent type which returns a record type when
-applied to an appropriate argument.  We first give the definitions for
-the case where the flattening is a record type.
-\begin{quote}
-If $T_1$ and $T_2$ are record types, 
+% However, for the sake of completeness we give definitions of
+% flattening and unflattening of record types.  There are two cases to
+% consider: that where the flattening is a record type and that where
+% the flattening is a dependent type which returns a record type when
+% applied to an appropriate argument.  We first give the definitions for
+% the case where the flattening is a record type.
+% \begin{quote}
+% If $T_1$ and $T_2$ are record types, 
 
-$T_2$ \textit{is a flattening of}
-$T_1$ just in case for any record, $r$, $r:T_1$ implies
-$\varphi(r):T_2$
+% $T_2$ \textit{is a flattening of}
+% $T_1$ just in case for any record, $r$, $r:T_1$ implies
+% $\varphi(r):T_2$
 
-$T_2$ \textit{is an unflattening of} $T_1$ just in case for any
-record, $r$, $r:T_1$ implies $\varphi^-(r):T_2$.
+% $T_2$ \textit{is an unflattening of} $T_1$ just in case for any
+% record, $r$, $r:T_1$ implies $\varphi^-(r):T_2$.
 
-\end{quote}
-For the cases where the flattening is a dependent type we have the
-following definitions:
-\begin{quote}
-If $T_1$, $T_2$ and ${T_2}_\varphi$ are record types such that ${T_2}_\varphi$ is a
-flattening of $T_2$ and
-$\mathcal{T}:(T_2\rightarrow\textit{RecType})$, 
+% \end{quote}
+% For the cases where the flattening is a dependent type we have the
+% following definitions:
+% \begin{quote}
+% If $T_1$, $T_2$ and ${T_2}_\varphi$ are record types such that ${T_2}_\varphi$ is a
+% flattening of $T_2$ and
+% $\mathcal{T}:(T_2\rightarrow\textit{RecType})$, 
 
-$\mathcal{T}$
-\textit{is a flattening of} $T_1$ just in case for any record, $r$,
-$r:T_1$ implies that for some record, $r'$, such that  $r':T_2$,
-$\varphi(r):(\mathcal{T}(r')\wedge {T_2}_\varphi)$
+% $\mathcal{T}$
+% \textit{is a flattening of} $T_1$ just in case for any record, $r$,
+% $r:T_1$ implies that for some record, $r'$, such that  $r':T_2$,
+% $\varphi(r):(\mathcal{T}(r')\wedge {T_2}_\varphi)$
 
-$T_1$ \textit{is an unflattening of} $\mathcal{T}$ just in case for
-any record, $r$, $r:({T_2}_\varphi\wedge\mathcal{T}(\varphi^-(r))$
-implies $\varphi^-(r):T_1$
-\end{quote}
+% $T_1$ \textit{is an unflattening of} $\mathcal{T}$ just in case for
+% any record, $r$, $r:({T_2}_\varphi\wedge\mathcal{T}(\varphi^-(r))$
+% implies $\varphi^-(r):T_1$
+% \end{quote}
 
-Note that if $T_1$ ($\mathcal{T}$) is a flattening of $T_2$ if and
-only if $T_2$ is an unflattening of $T_1$ ($\mathcal{T}$).
+% Note that if $T_1$ ($\mathcal{T}$) is a flattening of $T_2$ if and
+% only if $T_2$ is an unflattening of $T_1$ ($\mathcal{T}$).
 
 
 
-\subsection{Computing flattenings and relabellings of record types}
+\subsection{Relabellings of record types}
 
-The definitions in Section~\ref{app:flattening-def} enable us to tell
-whether one type is a flattening or relabelling of another but they do
-not give us an algorithm for constructing a flattening or relabelling
-of a particular type. Here we will consider how, for a given record
-type, $T$, to compute a flattening, $\varphi(T)$, an unflattening,
-$\varphi^-(T)$ and an $\eta$-relabelling, $[T]_\eta$.
+% The definitions in Section~\ref{app:flattening-def} enable us to tell
+% whether one type is a flattening or relabelling of another but they do
+% not give us an algorithm for constructing a flattening or relabelling
+% of a particular type.
+Here we will consider how, for a given record
+type, $T$, an $\eta$-relabelling of $T$, $[T]_\eta$.
 
 We start by defining the notion of paths for record types.  This can
 be defined in terms of the paths which are common to all witnesses for
@@ -2496,6 +2506,10 @@ identifier by the domain type of the function since the domain type of
 the function may be distinct from the type associated with the
 identifier in the field labelled by the identifier.
 
+It is important to note that we are manipulating the representations
+of types here, not the types themselves.  The unique identifier
+notation does not introduce additional types.
+
 We also need to show how to convert back from unique identifier
 notation for a type, $T^*$, to official notation.   We can do this by
 carrying out the following in order:
@@ -2552,7 +2566,8 @@ replace $\tau$ with $\langle\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
 \end{enumerate} 
    
 Consider as an example the type which in abbreviatory notation is
-written as:
+written (with abbreviatory representation of the path `id$_0$.x' in
+the `id$_0$.e'-field) as:
 \begin{quote}
 
 \record{\tfield{id$_0$}{\record{\tfield{x}{\textit{Ind}}\\
@@ -2631,20 +2646,24 @@ Finally, we remove the unique identifier `\{0\}'.
 \end{quote}
 This is now the tree variant of the official notation for the type.
 
-Suppose that instead we had wished to compute the flattening of this
-type.  We can apply the standard algorithm for records to the unique
-identifier notation, that is,
+The flattened variant of the unique identifier notation,
 \begin{quote}
-$\varphi$(\record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+\record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
                                 \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
-        \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}})
+        \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}}
 \end{quote}
-This is, again in unique identifier notation:
+is:
 \begin{quote}
 \record{\tfield{id$_0$.x\{0\}}{\textit{Ind}}\\
         \tfield{id$_0$.e}{dog(\{0\}:\textit{Ind})}\\
         \tfield{id$_1$.e}{run(\{0\}:\textit{Ind})}}
 \end{quote}
+where we have made the paths in the original type explicit.  Note,
+that this again is not introducing a new type.  It is merely a variant
+notation for the original unflattened type.
+
+@@
+
 Consider the relabelling:
 \begin{quote}
 id$_0$.x$\leadsto$x\\
