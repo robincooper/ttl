@@ -2662,9 +2662,7 @@ where we have made the paths in the original type explicit.  Note,
 that this again is not introducing a new type.  It is merely a variant
 notation for the original unflattened type.
 
-@@
-
-Consider the relabelling:
+Now consider the relabelling:
 \begin{quote}
 id$_0$.x$\leadsto$x\\
 id$_0$.e$\leadsto$e$_1$\\
@@ -2697,15 +2695,100 @@ is
         \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
 
 \end{quote}
-Applying the standard flattening algorithm to this will result in a
-type where the unique identifier `\{1\}' occurs three times:
+The flattened variant of the unique identifier notation for this type
+is below, where the unique identifier `\{1\}' occurs on three copies
+of the label `s':
 \begin{quote}
 \record{\tfield{s\{1\}.x\{0\}}{\textit{Ind}}\\
         \tfield{s\{1\}.c}{dog(\{0\}:\textit{Ind})}\\
         \tfield{s\{1\}.e}{run(\{0\}:\textit{Ind})}\\
         \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
 \end{quote}
+We require that any relabelling for a type must preserve partial paths
+terminated with a label associated with a unique identifier in the sense that
+while the partial path itself may be changed, it must be changed to the same
+partial path in each path where the unique identifier occurs.  Thus the
+following would be an admissible relabelling for this type:
+\begin{quote}
+s.x $\leadsto$ id$_0$.id$_1$.x \\
+s.c $\leadsto$ id$_0$.id$_1$.e \\
+s.e $\leadsto$ id$_0$.e \\
+e $\leadsto$ id$_2$.e
+\end{quote}
+We can decorate this relabelling with unique identifiers corresponding
+to the type:
+\begin{quote}
+s\{1\}.x\{0\} $\leadsto$ id$_0$\{1\}.id$_1$.x\{0\} \\
+s\{1\}.c $\leadsto$ id$_0$\{1\}.id$_1$.e \\
+s\{1\}.e $\leadsto$ id$_0$\{1\}.e \\
+e $\leadsto$ id$_2$.e
+\end{quote}
+How do we know where to place the identifier `\{1\}' on the right-hand
+side of the annotated relabelling?  It goes after the longest partial
+path which the three paths corresponding to left-hand side paths
+containing \{1\} have in common.  So, for example, if the relabelling
+had been:
+\begin{quote}
+s.x $\leadsto$ id$_0$.id$_1$.x \\
+s.c $\leadsto$ id$_0$.id$_1$.e$_1$ \\
+s.e $\leadsto$ id$_0$.id$_1$.e$_2$ \\
+e $\leadsto$ id$_2$.e
+\end{quote}
+the decorated version would be:
+\begin{quote}
+s\{1\}.x\{0\} $\leadsto$ id$_0$.id$_1$\{1\}.x\{0\} \\
+s\{1\}.c $\leadsto$ id$_0$.id$_1$\{1\}.e$_1$ \\
+s\{1\}.e $\leadsto$ id$_0$.id$_1$\{1\}.e$_2$ \\
+e $\leadsto$ id$_2$.e
+\end{quote}
 
+According to the first relabelling the relabelled type would be:
+\begin{quote}
+\record{\tfield{id$_0$\{1\}.id$_1$.x\{0\}}{\textit{Ind}}\\
+        \tfield{id$_0$\{1\}.id$_1$.e}{dog(\{0\}:\textit{Ind})}\\
+        \tfield{id$_0$\{1\}.e}{run(\{0\}:\textit{Ind})}\\
+        \tfield{id$_2$.e}{see(sam,\{1\}:\textit{Rec})}}
+\end{quote}
+In standard notation with unabbreviated paths this type is represented
+as
+\begin{quote}
+\record{\tfield{id$_0$}{\record{\tfield{id$_1$}{\record{\tfield{x}{\textit{Ind}}\\
+                                                        \tfield{e}{$\langle\lambda
+                                                          v$:\textit{Ind}
+                                                          . dog($v$),
+                                                          $\langle$id$_0$.id$_1$.x$\rangle\rangle$}}}\\
+                                \tfield{e}{$\langle\lambda
+                                  v$:\textit{Ind} . run($v$),
+                                  $\langle$id$_0$.id$_1$.x$\rangle\rangle$}}}\\
+        \tfield{id$_2$}{$\langle\lambda
+              v$:\textit{Rec} . \smallrecord{\smalltfield{e}{see(sam,$v$)}},
+              $\langle$id$_0\rangle\rangle$}}
+\end{quote}
+Using abbreviated paths, this is
+\begin{quote}
+\record{\tfield{id$_0$}{\record{\tfield{id$_1$}{\record{\tfield{x}{\textit{Ind}}\\
+                                                        \tfield{e}{$\langle\lambda
+                                                          v$:\textit{Ind}
+                                                          . dog($v$),
+                                                          $\langle$x$\rangle\rangle$}}}\\
+                                \tfield{e}{$\langle\lambda
+                                  v$:\textit{Ind} . run($v$),
+                                  $\langle$id$_1$.x$\rangle\rangle$}}}\\
+        \tfield{id$_2$}{$\langle\lambda
+              v$:\textit{Rec} . \smallrecord{\smalltfield{e}{see(sam,$v$)}},
+              $\langle$id$_0\rangle\rangle$}}
+\end{quote}
+Suppose we had tried to use the following relabelling instead.
+\begin{quote}
+s.x $\leadsto$ id$_0$.id$_1$.x \\
+s.c $\leadsto$ id$_0$.id$_1$.e \\
+s.e $\leadsto$ id$_1$.e \\
+e $\leadsto$ id$_2$.e
+\end{quote}
+This relabelling cannot be decorated according to the unique identifiers
+of the type because the three occurrences of `s' do not have a
+corresponding partial path on the right-hand side.  This relabelling
+is thus inadmissible for this type.
 
 @@ [Consider the example where the unique identifier is not final in
 the path -- `see' from the beginning of this section.  Need to adjust
