@@ -697,119 +697,130 @@ Suppose now that we add to
 Intuitively, this should enable a match since this does commit to an
 individual named Sam.  However, there is not a direct formal
 relationship between (\ref{ex:namedSam}) and \preveg{} corresponding
-to this intuition. We will use flattening and relabelling of record
-types in order to capture the relationship.  First recall that
-\preveg{} is an abbreviated form of \nexteg{} where we have expanded
-the paths of the labels which are used as arguments to predicates.  (We
-use $\ell^n$ for $\ell.\ell.\ldots.\ell$ where the label $\ell$ occurs $n$ times.) 
-\begin{ex} 
-\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
-                                                                             \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                                                           \smalltfield{e}{named(prev$^3$.bg.x, ``Dudamel'')}}}\\
-                                                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor(prev$^3$.bg.x)}}}}}
-                                                                   \\
-                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(prev$^2$.bg.x, ``Beethoven'')}}}\\
-                                              \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer(prev$^2$.bg.x)}}}}}
-                                   \\
-              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                            \smalltfield{e}{named(prev.bg.x, ``Uchida'')}}}\\
-              \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist(prev.bg.x)}}}}}\\
-     \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                   \smalltfield{e}{named(bg.x,
-                                     ``Sam'')}}}\\
-     \smalltfield{fg}{\smallrecord{\smalltfield{e}{singer(bg.x)}}}}
-\label{ex:nonflatsharedcomms} 
-\end{ex}
-The result of flattening \preveg{} will be a new type \nexteg{} where each path
-has been replaced by a single complex label consisting of the sequence
-of labels on the path (which we represent using the normal
-dot-notation for paths).
-\begin{ex} 
-\record{\tfield{prev$^4$}{\textit{Rec}} \\
-        \tfield{prev$^3$.bg.x}{\textit{Ind}} \\
-        \tfield{prev$^3$.bg.e}{named(prev$^3$.bg.x, ``Dudamel'')} \\
-        \tfield{prev$^3$.fg.e}{conductor(prev$^3$.bg.x)} \\
-        \tfield{prev$^2$.bg.x}{\textit{Ind}} \\
-        \tfield{prev$^2$.bg.e}{named(prev$^2$.bg.x, ``Beethoven'')} \\
-        \tfield{prev$^2$.fg.e}{composer(prev$^2$.bg.x)} \\
-        \tfield{prev.bg.x}{\textit{Ind}} \\
-        \tfield{prev.bg.e}{named(prev.bg.x, ``Uchida'')} \\
-        \tfield{prev.fg.e}{pianist(prev.bg.x)} \\
-        \tfield{bg.x}{\textit{Ind}} \\
-        \tfield{bg.e}{named(bg.x, ``Sam'')} \\
-        \tfield{fg.e}{singer(bg.x)}}
-\label{ex:flatsharedcomms}
-\end{ex} 
-While (\ref{ex:nonflatsharedcomms}) and \preveg{} are distinct record types which do
-not share any witnesses there is nevertheless a strong equivalence
-between them in that for any record which is of the type
-(\ref{ex:nonflatsharedcomms}) there is a multiset extensionally
-equivalent record (see Appendix~\ref{app:rectypes}) of type \preveg{} and \textit{vice
-  versa}.  There is a one-one mapping between the two types which
-preserves multiset extension.  Intuitively, this means that the two
-types represent the same basic commitments about the world, namely
-Dudamel is a conducor, Beethoven is a composer, Uchida is a pianist
-and Sam is a singer.  The difference between the two types involves
-the structure they impose on this world.  In the case of \preveg{} we
-have one big situation in which all of these facts hold and in
-(\ref{ex:nonflatsharedcomms}) we have a situation which is made up of
-several smaller situations for each of the individuals involved. Note,
-however, that because we have used the complex labels representing the
-paths we are able to recreate that structure from the flattened type
-in \preveg{}.
-Note also that we can still read off the relative salience of the
-various individuals and facts by checking the number of occurrences
-of `prev' in the label.  
+to this intuition. We will use relabelling of record
+types (see Appendix~\ref{app:relabelling-rectypes}) in order to
+capture the relationship.  
+% First recall that
+% \preveg{} is an abbreviated form of \nexteg{} where we have expanded
+% the paths of the labels which are used as arguments to predicates.  (We
+% use $\ell^n$ for $\ell.\ell.\ldots.\ell$ where the label $\ell$ occurs $n$ times.) 
+% \begin{ex} 
+% \smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}\\
+%                                                                              \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                                                            \smalltfield{e}{named(prev$^3$.bg.x, ``Dudamel'')}}}\\
+%                                                                               \smalltfield{fg}{\smallrecord{\smalltfield{e}{conductor(prev$^3$.bg.x)}}}}}
+%                                                                    \\
+%                                               \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                             \smalltfield{e}{named(prev$^2$.bg.x, ``Beethoven'')}}}\\
+%                                               \smalltfield{fg}{\smallrecord{\smalltfield{e}{composer(prev$^2$.bg.x)}}}}}
+%                                    \\
+%               \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                             \smalltfield{e}{named(prev.bg.x, ``Uchida'')}}}\\
+%               \smalltfield{fg}{\smallrecord{\smalltfield{e}{pianist(prev.bg.x)}}}}}\\
+%      \smalltfield{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                    \smalltfield{e}{named(bg.x,
+%                                      ``Sam'')}}}\\
+%      \smalltfield{fg}{\smallrecord{\smalltfield{e}{singer(bg.x)}}}}
+% \label{ex:nonflatsharedcomms} 
+% \end{ex}
+% The result of flattening \preveg{} will be a new type \nexteg{} where each path
+% has been replaced by a single complex label consisting of the sequence
+% of labels on the path (which we represent using the normal
+% dot-notation for paths).
+% \begin{ex} 
+% \record{\tfield{prev$^4$}{\textit{Rec}} \\
+%         \tfield{prev$^3$.bg.x}{\textit{Ind}} \\
+%         \tfield{prev$^3$.bg.e}{named(prev$^3$.bg.x, ``Dudamel'')} \\
+%         \tfield{prev$^3$.fg.e}{conductor(prev$^3$.bg.x)} \\
+%         \tfield{prev$^2$.bg.x}{\textit{Ind}} \\
+%         \tfield{prev$^2$.bg.e}{named(prev$^2$.bg.x, ``Beethoven'')} \\
+%         \tfield{prev$^2$.fg.e}{composer(prev$^2$.bg.x)} \\
+%         \tfield{prev.bg.x}{\textit{Ind}} \\
+%         \tfield{prev.bg.e}{named(prev.bg.x, ``Uchida'')} \\
+%         \tfield{prev.fg.e}{pianist(prev.bg.x)} \\
+%         \tfield{bg.x}{\textit{Ind}} \\
+%         \tfield{bg.e}{named(bg.x, ``Sam'')} \\
+%         \tfield{fg.e}{singer(bg.x)}}
+% \label{ex:flatsharedcomms}
+% \end{ex} 
+% While (\ref{ex:nonflatsharedcomms}) and \preveg{} are distinct record types which do
+% not share any witnesses there is nevertheless a strong equivalence
+% between them in that for any record which is of the type
+% (\ref{ex:nonflatsharedcomms}) there is a multiset extensionally
+% equivalent record (see Appendix~\ref{app:rectypes}) of type \preveg{} and \textit{vice
+%   versa}.  There is a one-one mapping between the two types which
+% preserves multiset extension.  Intuitively, this means that the two
+% types represent the same basic commitments about the world, namely
+% Dudamel is a conducor, Beethoven is a composer, Uchida is a pianist
+% and Sam is a singer.  The difference between the two types involves
+% the structure they impose on this world.  In the case of \preveg{} we
+% have one big situation in which all of these facts hold and in
+% (\ref{ex:nonflatsharedcomms}) we have a situation which is made up of
+% several smaller situations for each of the individuals involved. Note,
+% however, that because we have used the complex labels representing the
+% paths we are able to recreate that structure from the flattened type
+% in \preveg{}.
+% Note also that we can still read off the relative salience of the
+% various individuals and facts by checking the number of occurrences
+% of `prev' in the label.  
 
-In the type of the potential new information state that we are hoping
-to create (\ref{ex:nonflatsharedcomms}) would be embedded under the
-label `prev' showing that it is the type representing shared
-commitments in the previous information state. Thus the actual
-flattened type we want to relate the background of the parametric
-content to is \nexteg{}.
-\begin{ex} 
-\record{\tfield{prev$^5$}{\textit{Rec}} \\
-        \tfield{prev$^4$.bg.x}{\textit{Ind}} \\
-        \tfield{prev$^4$.bg.e}{named(prev$^3$.bg.x, ``Dudamel'')} \\
-        \tfield{prev$^4$.fg.e}{conductor(prev$^3$.bg.x)} \\
-        \tfield{prev$^3$.bg.x}{\textit{Ind}} \\
-        \tfield{prev$^3$.bg.e}{named(prev$^2$.bg.x, ``Beethoven'')} \\
-        \tfield{prev$^3$.fg.e}{composer(prev$^2$.bg.x)} \\
-        \tfield{prev$^2$.bg.x}{\textit{Ind}} \\
-        \tfield{prev$^2$.bg.e}{named(prev.bg.x, ``Uchida'')} \\
-        \tfield{prev$^2$.fg.e}{pianist(prev.bg.x)} \\
-        \tfield{prev.bg.x}{\textit{Ind}} \\
-        \tfield{prev.bg.e}{named(bg.x, ``Sam'')} \\
-        \tfield{prev.fg.e}{singer(bg.x)}}
-\label{ex:prevflatsharedcomms}
-\end{ex} 
+% In the type of the potential new information state that we are hoping
+% to create (\ref{ex:nonflatsharedcomms}) would be embedded under the
+% label `prev' showing that it is the type representing shared
+% commitments in the previous information state. Thus the actual
+% flattened type we want to relate the background of the parametric
+% content to is \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{prev$^5$}{\textit{Rec}} \\
+%         \tfield{prev$^4$.bg.x}{\textit{Ind}} \\
+%         \tfield{prev$^4$.bg.e}{named(prev$^3$.bg.x, ``Dudamel'')} \\
+%         \tfield{prev$^4$.fg.e}{conductor(prev$^3$.bg.x)} \\
+%         \tfield{prev$^3$.bg.x}{\textit{Ind}} \\
+%         \tfield{prev$^3$.bg.e}{named(prev$^2$.bg.x, ``Beethoven'')} \\
+%         \tfield{prev$^3$.fg.e}{composer(prev$^2$.bg.x)} \\
+%         \tfield{prev$^2$.bg.x}{\textit{Ind}} \\
+%         \tfield{prev$^2$.bg.e}{named(prev.bg.x, ``Uchida'')} \\
+%         \tfield{prev$^2$.fg.e}{pianist(prev.bg.x)} \\
+%         \tfield{prev.bg.x}{\textit{Ind}} \\
+%         \tfield{prev.bg.e}{named(bg.x, ``Sam'')} \\
+%         \tfield{prev.fg.e}{singer(bg.x)}}
+% \label{ex:prevflatsharedcomms}
+% \end{ex} 
 
-We can also flatten the type we are trying to match, that is
-(\ref{ex:namedSam}).  The result is \nexteg{}.
-\begin{ex} 
-\record{\tfield{f.x}{\textit{Ind}} \\
-        \tfield{f.e}{named(f.x, ``Sam'')} \\
-        \tfield{a}{\textit{Rec}}}
-\end{ex} 
+% We can also flatten the type we are trying to match, that is
+% (\ref{ex:namedSam}).  The result is \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{f.x}{\textit{Ind}} \\
+%         \tfield{f.e}{named(f.x, ``Sam'')} \\
+%         \tfield{a}{\textit{Rec}}}
+% \end{ex} 
 
-In order to match \preveg{} against (\ref{ex:prevflatsharedcomms}) we look
-for a relabelling, $\eta$, of \preveg{} that would make
-(\ref{ex:prevflatsharedcomms}) be a subtype of \preveg{}.  Such a
-relabelling is given in \nexteg{a} and the result of applying it to
-\preveg{} is given in \nexteg{b}.
+In order to match (\ref{ex:namedSam})  against \preveg{}  we look
+for a relabelling, $\eta$, of (\ref{ex:namedSam}) that would make
+\preveg{} be a subtype of (\ref{ex:namedSam}).  Such a
+relabelling is given in \nexteg{a} which we will write as \nexteg{b}.and the result of applying it to
+(\ref{ex:namedSam}) is given in \nexteg{c}.
 \begin{ex}
 \begin{subex}
 \item $\eta$ is a function with domain \{f.x,f.e,a\} such that
 \begin{quote}
-$\eta$(f.x) = prev.bg.x\\
-$\eta$(f.e) = prev.bg.e\\
-$\eta$(a) = prev$^5$
+$\eta$(f.x) = bg.x\\
+$\eta$(f.e) = bg.e\\
+$\eta$(a) = prev$^4$
 \end{quote}
+where prev$^4$ stands for prev.prev.prev.prev
+\item f.x $\leadsto$ bg.x\\
+f.e $\leadsto$ bg.e\\
+a $\leadsto$ prev$^4$
  
-\item \record{\tfield{prev.bg.x}{\textit{Ind}} \\
-        \tfield{prev.bg.e}{named(bg.x, ``Sam'')} \\
-        \tfield{prev$^5$}{\textit{Rec}}}
+\item 
+\record{\tfield{bg}{\record{\tfield{x}{\textit{Ind}}\\
+                            \tfield{e}{named(x, ``Sam'')}}}\\
+        \tfield{prev}{\record{\tfield{prev}{\record{\tfield{prev}{\record{\tfield{prev}{\textit{Rec}}}}}}}}}
+
+% \record{\tfield{prev.bg.x}{\textit{Ind}} \\
+%         \tfield{prev.bg.e}{named(bg.x, ``Sam'')} \\
+%         \tfield{prev$^5$}{\textit{Rec}}}
 \end{subex}
 \end{ex}
 This means, then, that any situation which is of the type required by
@@ -909,28 +920,33 @@ simultaneously ensures that Sam is the most salient individual in
 shared commitments in virtue of the new mention.
 
 
-We can achieve this update by using the tools of flattening and
-relabelling that we have just introduced.  Suppose that $T_{\mathrm{comm}}$ is the
+We can achieve this update by the following method.  Suppose that $T_{\mathrm{comm}}$ is the
 type representing shared commitments that we wish to update with a
 parametric content given in \nexteg{}.
 \begin{ex}
 \record{\field{bg}{$T_{\mathrm{bg}}$}\\
         \field{fg}{$f$}}
 \end{ex}
-where $f:(T_{\mathrm{bg}}\rightarrow\textit{RecType})$.  The
-first thing to do is embed  $T_{\mathrm{comm}}$ under the label `prev', obtaining
-\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}}.  Let
-$r_{\mathrm{prev}}$ be a record of this type.  We need to
-consider the flattened version of this type, that is,
-$\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}}). We
-need to find a relabelling, $\eta$, of the flattened version of
-$T_{\mathrm{bg}}$ such that
-$\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}})
-$\sqsubseteq$ $[\varphi(T_{\mathrm{bg}})]_\eta$, that is, the
-flattened version of
-\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}} is a subtype of
-result of relabelling the flattened version of $T_{\mathrm{bg}}$ with
-$\eta$.  Having found such an $\eta$ we use it to anchor
+where $f:(T_{\mathrm{bg}}\rightarrow\textit{RecType})$.  % The
+% first thing to do is embed  $T_{\mathrm{comm}}$ under the label `prev', obtaining
+% \smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}}.
+% Let
+% $r_{\mathrm{prev}}$ be a record of this type.  We need to
+% consider the flattened version of this type, that is,
+% $\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}}). 
+We
+need to find a relabelling, $\eta$, of 
+$T_{\mathrm{bg}}$ such that $T_{\mathrm{comm}}\sqsubseteq[T_{\mathrm{bg}}]_\eta$.
+% $\varphi$(\smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}})
+% $\sqsubseteq$ $[\varphi(T_{\mathrm{bg}})]_\eta$, that is, the
+% flattened version of
+% \smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}} is a subtype of
+% result of relabelling the flattened version of $T_{\mathrm{bg}}$ with
+% $\eta$.
+
+@@
+
+Having found such an $\eta$ we use it to anchor
 $T_{\mathrm{bg}}$ with $r_{\mathrm{prev}}$, that is
 $T_{\mathrm{bg}}\parallel_\eta r_{\mathrm{prev}}$. The operation
 $T \parallel_\eta r$ (defined explicitly in

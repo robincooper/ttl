@@ -1066,7 +1066,7 @@ Recall that a record, $r$, is a set of fields, $f$, where each $f$, is
 an ordered pair, $\langle\ell,v\rangle$ where $\ell$ is a (complex)
 label and $v$ is the value of the field which may itself be a record
 or some other object.  If $r$ is a record, then $\varphi(r)$,
-\textit{the flattening of} $r$, is
+\textit{the flattening of} $r$, is \label{pg:flattening}
 \begin{quote}
 $\displaystyle{\bigcup_{f\in r}}\mathrm{FlattenField}(f)$
 \end{quote}
@@ -1236,7 +1236,7 @@ important when we discuss paths in record types below.  [Is this still true?]
 %         \end{array}\right\}$
 % \end{quote}
 
-We now turn our attention to relabelling.   
+We now turn our attention to relabelling.\label{pg:relabelling}   
 An $L$\textit{-relabelling} is a one-one function whose domain and range
 are included in $L_+$. We will standardly represent a relabelling,
 $\eta$, whose domain is $\{\pi_1,\ldots,\pi_n\}$ and which is defined
@@ -2392,7 +2392,7 @@ unflattened type which explicitly lists its paths.
 % not give us an algorithm for constructing a flattening or relabelling
 % of a particular type.
 Here we will consider how, for a given record
-type, $T$, an $\eta$-relabelling of $T$, $[T]_\eta$.
+type, $T$, an $\eta$-relabelling of $T$, $[T]_\eta$ can be defined.
 
 We start by defining the notion of paths for record types.  This can
 be defined in terms of the paths which are common to all witnesses for
@@ -2441,7 +2441,7 @@ immediately dominates `e' in the type in virtue of the fact that the
 relation holds in all witnesses of the type, despite the fact the `e'
 is embedded in a function below `c' in the type.
 
-It will be convenient to define the computation of flattenings and
+It will be convenient to define the computation of 
 relabellings of types in terms of a notation which gives unique
 identifiers to the occurrences of labels and which eshews representing
 the functions in dependent fields explicitly, rather representing the
@@ -2660,7 +2660,31 @@ is:
 \end{quote}
 where we have made the paths in the original type explicit.  Note,
 that this again is not introducing a new type.  It is merely a variant
-notation for the original unflattened type.
+notation for the original unflattened type.  If we think of the
+notation itself as a record, that is, a set of ordered pairs, we can
+obtain the flattened representation of the type by applying the same
+procedure as we used for records.  Thus the unflattened representation
+corresponds to the set
+\begin{quote}
+\begin{tabbing}
+\{\=$\langle$id$_0$, \{\=$\langle$x\{0\}, \textit{Ind}$\rangle$,\\
+\>\>                    $\langle$e, dog(\{0\}:\textit{Ind})$\rangle$\}\\
+\>$\langle$id$_1$, \{$\langle$e, run(\{0\}:\textit{Ind})$\rangle$\}\}
+\end{tabbing}
+\end{quote}
+We can now apply the flattening algorithm defined on
+p.~\pageref{pg:flattening} to this set, yielding the set:
+\begin{quote}
+\begin{tabbing}
+\{\=$\langle$id$_0$.x\{0\}, \textit{Ind}$\rangle$\\
+\>  $\langle$id$_0$.e, dog(\{0\}:\textit{Ind})$\rangle$\\
+\>  $\langle$id$_1$.e, run(\{0\}:\textit{Ind})\}
+\end{tabbing}
+\end{quote}
+Thus we are not flattening the
+type, but we \emph{are} flattening the \emph{representation} of the type
+which can itself
+be conceived of as a record.
 
 Now consider the relabelling:
 \begin{quote}
@@ -2668,8 +2692,22 @@ id$_0$.x$\leadsto$x\\
 id$_0$.e$\leadsto$e$_1$\\
 id$_1$.e$\leadsto$e$_2$
 \end{quote}
-We assume that relabellings apply independently of whether labels are
-associated with a unique identifier or not.  Thus for the above type
+This relabelling can be decorated with the unique identifiers
+corresponding to the flattened representation of the type.  On the
+left hand side of the relabelling we copy whatever unique identifiers
+occur associated with the label in the type.  We then place a copy of
+the unique identifier occurring on the left hand side also on the
+right hand side.  Thus the decorated version of this relabelling
+corresponding to this type will be:
+\begin{quote}
+id$_0$.x\{0\}$\leadsto$x\{0\}\\
+id$_0$.e$\leadsto$e$_1$\\
+id$_1$.e$\leadsto$e$_2$
+\end{quote}
+Now, again considering the flattened representation of the type as a
+record, we can apply the relabelling to the representation in the
+manner characterized on pp.~\pageref{pg:relabelling}ff.
+Thus for the above type
 this relabelling will yield:
 \begin{quote}
 \record{\tfield{x\{0\}}{\textit{Ind}}\\
@@ -2788,13 +2826,25 @@ e $\leadsto$ id$_2$.e
 This relabelling cannot be decorated according to the unique identifiers
 of the type because the three occurrences of `s' do not have a
 corresponding partial path on the right-hand side.  This relabelling
-is thus inadmissible for this type.
+is thus inadmissible for this type.  We thus define admissibility of a
+relabelling for a type as follows:
+\begin{quote}
+A relabelling, $\eta$, is \textit{admissible} for a record type, $T$,
+just in case $\eta$ can be decorated according to the flattened unique
+identifier representation of $T$.
 
-@@ [Consider the example where the unique identifier is not final in
-the path -- `see' from the beginning of this section.  Need to adjust
-$\varphi$ for types, or relabelling? Introduce path notation for types
-in place of flattening and replace paths directly not going through
-flattening.  Relabelling of paths must respect unique identifiers.]
+\end{quote}
+
+We can now define the notion of relabelling for types using the
+notions of flattening and relabelling we used for records:
+\begin{quote}
+If $T$ is a record type with unique identifier representation, $r$, and $\eta$ is an admissible relabelling for $T$,
+then the \textit{result of relabelling $T$ with $\eta$}, $[T]_\eta$,
+is that $T'$ whose unique identifier representation is $[r]_\eta$.
+\end{quote}
+
+
+
 
 % If $T$ is a type, then $\varphi(T)$, \textit{the flattening of} $T$ is
 % \begin{enumerate} 
