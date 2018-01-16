@@ -943,19 +943,38 @@ $T_{\mathrm{bg}}$ such that $T_{\mathrm{comm}}\sqsubseteq[T_{\mathrm{bg}}]_\eta$
 % \smallrecord{\smalltfield{prev}{$T_{\mathrm{comm}}$}} is a subtype of
 % result of relabelling the flattened version of $T_{\mathrm{bg}}$ with
 % $\eta$.
-
-@@
-
-Having found such an $\eta$ we use it to anchor
-$T_{\mathrm{bg}}$ with $r_{\mathrm{prev}}$, that is
-$T_{\mathrm{bg}}\parallel_\eta r_{\mathrm{prev}}$. The operation
+Suppose that we have a record, $r_{\mathrm{comm}}$, of type
+$T_{\mathrm{comm}}$.  We can use this together with $\eta$ to anchor
+$T_{\mathrm{bg}}$.  The result of the anchoring is notated as 
+$T_{\mathrm{bg}}\parallel_\eta r_{\mathrm{comm}}$. The operation
 $T \parallel_\eta r$ (defined explicitly in
 Appendix~\ref{app:specrec}) replaces fields in $T$, \smallrecord{\smalltfield{$\ell$}{$T'$}}, such
 that $\ell$ is in the
 domain of the relabelling, $\eta$, and for which $\eta$ returns a
 path, $\pi$,
 in $r$ such that $r.\pi:T'$ with a manifest
-field \smallrecord{\smallmfield{$\ell$}{$r.\pi$}{$T'$}}. In the type of the updated shared
+field \smallrecord{\smallmfield{$\ell$}{$r.\pi$}{$T'$}}. For example,
+suppose that $T_{\mathrm{bg}}$ is \nexteg{a},
+$r_{\mathrm{comm}}:T_{\mathrm{comm}}$ and $\eta$ is \nexteg{b}. Then
+\mbox{$T_{\mathrm{bg}}\parallel_\eta r_{\mathrm{comm}}$} is \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{named(x, ``Sam'')}} 
+ 
+\item x $\leadsto$ bg.x\\
+      e $\leadsto$ bg.e
+
+\item \record{\mfield{x}{$r_{\mathrm{comm}}$.bg.x}{\textit{Ind}}\\
+              \mfield{e}{$r_{\mathrm{comm}}$.bg.e}{named(x, ``Sam'')}}
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
+In the type of the updated shared
 commitments the background will be the background of the parametric
 content anchored to the previous shared commitments and the foreground
 will be the result of applying the function which is the foreground of
@@ -1201,11 +1220,10 @@ $T_{\mathrm{bg}}\sqsubseteq$ \smallrecord{\smalltfield{x}{\textit{Ind}}}).
 In order to find a match between $f$.bg, that is, $T_{\mathrm{bg}}$ and $\iota_{\mathrm{curr}}$.ltm
 (that is, to ascertain that the presupposition associated with the
 parametric content is met by the long term memory of the current total
-information state) we need to find a relabelling, $\eta$, of the flattened
-version of $T_{\mathrm{bg}}$, $\varphi(T_{\mathrm{bg}})$, such that
+information state) we need to find a relabelling, $\eta$, of $T_{\mathrm{bg}}$ such that
 \nexteg{} holds.
 \begin{ex} 
-$\varphi$($\iota_{\mathrm{curr}}$.ltm) $\sqsubseteq$ $[\varphi(T_{\mathrm{bg}})]_\eta$ 
+$\iota_{\mathrm{curr}}$.ltm $\sqsubseteq$ $[T_{\mathrm{bg}}]_\eta$ 
 \end{ex} 
 Then we can derive \nexteg{} as a type of the updated total
 information state.
@@ -1226,8 +1244,7 @@ $T_{\mathrm{bg}}$ with manifest fields according to the matches we
 have in the `ltm'-field.  Thus, for example, if $T_{\mathrm{bg}}$ is
 (\ref{ex:namedSam}), repeated as \nexteg{a}, $r$ is a record
 representing long term memory of type (\ref{ex:ltm}), repeated as
-\nexteg{b} and $\eta$ is the relabelling with domain \{f.x,f.e,a\}
-with values as defined in \nexteg{c}, then
+\nexteg{b} and $\eta$ is the relabelling in \nexteg{c}, then
 $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
 \begin{ex} 
 \begin{subex} 
@@ -1255,9 +1272,9 @@ $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
                                                  ``Sam'')}}}\\
              \smalltfield{id$_8$}{\smallrecord{\smalltfield{e}{singer(id$_7$.x)}}}}
 
-\item  $\eta$(f.x) = id$_7$.x\\
-       $\eta$(f.e) = id$_7$.e\\
-       $\eta$(a) = id$_0$
+\item  f.x $\leadsto$ id$_7$.x\\
+       f.e $\leadsto$ id$_7$.e\\
+       a $\leadsto$ id$_0$
 
 \item \smallrecord{\smalltfield{f}{\smallrecord{\smallmfield{x}{$r$.id$_7$.x}{\textit{Ind}}\\
                                                \smallmfield{e}{$r$.id$_7$.e}{named(x,
@@ -1500,9 +1517,9 @@ $T_i$ $\sqsubseteq$ \smallrecord{\smalltfield{ltm}{\textit{RecType}}\\
 \end{quote}
 then \\
 \begin{quote}
-if there is some $\eta$ which is a relabelling of $\varphi$($f$.bg) such that 
+if there is some $\eta$ which is a relabelling of $f$.bg such that 
 \begin{quote}
-\mbox{$\varphi$($s_i$.gb.shared.commitments) $\sqsubseteq$ $[\varphi(f.\mathrm{bg})]_\eta$}
+\mbox{$s_i$.gb.shared.commitments $\sqsubseteq$ $[f.\mathrm{bg}]_\eta$}
 \end{quote}
 % and there is some $\eta'$ which is a labelling of $\mathcal{F}(f)$ such that $\eta'$ is an extension of
 % $\eta$,\\[.25\baselineskip]  
@@ -1510,8 +1527,8 @@ then $s_{i+1} :_A
 T_i$\fbox{\d{$\wedge$}}\textbf{AccGB}($\eta$)($s_i$)($f$) is
 licensed\\[\baselineskip]
 else if there is some $\eta$ which is a relabelling of
-$\varphi$($f$.bg) such that $\varphi$($s_i$.ltm)
-$\sqsubseteq$ $[\varphi(f.\mathrm{bg})]_\eta$\\[.25\baselineskip]
+$f$.bg such that $s_i$.ltm
+$\sqsubseteq$ $[f.\mathrm{bg}]_\eta$\\[.25\baselineskip]
 then $s_{i+1} :_A
 T_i$\fbox{\d{$\wedge$}}\textbf{AccLTM}($\eta$)($s_i$)($f$) is
 licensed\\[\baselineskip] 
