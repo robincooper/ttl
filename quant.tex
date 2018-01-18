@@ -8,7 +8,7 @@ ranging over individuals, first treating them in a similar way to free
 variables in logic and then showing how they can be bound by
 quantifiers.  The central idea is to use records as \textit{pronominal
   contexts} which correspond to partial assignments to variables in
-logical treatments.  Consider first a simple sentence with a deictic
+standard logical treatments.  Consider first a simple sentence with a deictic
 pronoun as in \nexteg{}.
 \begin{ex} 
 he left 
@@ -21,9 +21,9 @@ function from a context assigning a value to the pronoun to a
 type.\footnote{We will consider later how to combine types of context
   which assign values to pronouns with other context types which we
   have introduced with parametric contents.}  We will use the variable
-`$\mathfrak{s}$' to represent such contexts.  Thus a parametric content for
+`$\mathfrak{s}$' to represent such contexts.  Thus the foreground of a parametric content for
 \textit{he} could be that given in \nexteg{a}, for \textit{left}
-(ignoring tense) as \nexteg{b} and their combination, using a variant
+(ignoring tense) that given in \nexteg{b} and their combination, using a variant
 of S-combination which we will discuss as we progress, is represented
 in \nexteg{c}.
 \begin{ex} 
@@ -93,7 +93,7 @@ which can be referred to with masculine and feminine pronouns.
 
 Given the kind of interpretation rules we have so far we can obtain a
 reading for \nexteg{a} which corresponds to the kind of parametric
-content using pronominal contexts
+content foreground using pronominal contexts
 in \nexteg{b}, using the abbreviations `boy$'$' and `dog$'$' as
 introduced in Chapter~\ref{ch:commonnouns}.
 \begin{ex} 
@@ -173,9 +173,9 @@ with the same index which would replace the pronoun with the
 noun-phrase being quantified in.
 
 Neither of these options are open to us since our syntax is defined in
-terms of types of utterance situations and signs which related
+terms of types of utterance situations and signs which relate
 utterance situations to contents.  Our realistic strategy does not
-allow for the use of additional imaginary structures.  For this reason
+allow for the use of additional imaginary utterance structures.  For this reason
 we will adapt the kind of storage technique used in \cite{Cooper1983}.
 In the original version of storage we moved from assigning a
 single content to a syntactic structure to assigning a set of contents
@@ -290,7 +290,7 @@ The `cont'-field in a sign will now be required to be of the type in
               c.\mathrm{quants}=\emptyset}\textit{Cont}_{c.\mathrm{core}}}$}}
 \end{ex} 
 That is, the `unplugged'-field in the content will contain a set of
-unplugged interpretations (consisting of a quantifier store and a core
+unplugged interpretations (consisting of a quantifier store, possibly empty, and a core
 interpretation) and the `plugged'-field will contain one of the cores
 of those unplugged interpretations whose quantifier store is
 empty.
@@ -634,8 +634,8 @@ That is, max$_x$($R$) is the maximum $i$ such that `x$_i$' is a label
 in the `bg'-field of one of the records in $R$.  If there is no such label max$_x$($R$)
 returns -1. Thus in adding to a quantifier store, $R$, (as in the
 `quants'-fields in the examples above) we will always add a new
-quantifier indexed by max$_x$($R$)+1.  For brevity we will denote thie
-incr$_x$($R$). 
+quantifier indexed by max$_x$($R$)+1.  For brevity we will denote this by
+incr$_x$($R$), that is, the result of incrementing the maximal x in $R$. 
 
 It will also be useful to define an operation that adds a field
 \smallrecord{\field{$\ell$}{$v$}} to a record $r$ if there is no field
@@ -680,6 +680,7 @@ f_0)\ldots)\ominus f_n$ where $\{f_0,\ldots,f_n\}$ is $\{f\in T\mid f\
 \text{dependent on}\ \ell\}$ 
 \end{ex}   
 
+[Is this enough to cover paths which contain $\ell$?]
 
 We can now define storage as in
 \nexteg{}, where $\sigma$ is an arbitrary sign.
@@ -753,29 +754,42 @@ in the context is removed from the core interpretation.
 Finally, we show one way in which stored quantifiers can be
 ``percolated'' to higher constituents by showing in \nexteg{} how to
 construct an unplugged content from two constituent unplugged contents
-when the basic semantic composition involves function application.
+when the basic semantic composition involves function application.  To
+facilitate this we first define the `x'-incrementation of an object
+(such as a set or a function) with respect to a set of records $R$.
+
+\begin{ex} 
+The `x'\textit{-incrementation of an object $O$ with respect
+  to a set of records $R$}, $[O]_{\mathrm{incr}_x(R)}$, is the result of
+replacing each instance of x$_i$ in $O$, for any natural number $i$,
+with x$_{\mathrm{incr}_x(R)+i}$.  
+\end{ex} 
+Now application for unplugged contents (that is, objects of type
+\textit{UInterp}) can be characterized as in \nexteg{}.
+
 \begin{ex} 
 \textbf{Application}
 
-If $\alpha\in\sigma_1$.cont.unplugged and
-$\beta\in\sigma_2$.cont.unplugged and $\eta$ is a relabelling of
-$\beta$.quants such that $\eta$(x$_n$) =
-x$_{\mathrm{max}_x(\alpha.\mathrm{quants})+n+1}$, then \\
-\hspace*{2em} $\alpha @@\beta$ = 
-\record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_\eta$}\\
-        \field{core}{$\alpha$.core@[$\beta$.core]$_\eta$}}
+If $\alpha$ and $\beta$ are of type \textit{UInterp} and $\beta$.core
+is in the domain of $\alpha$.core, then the \textit{application of
+  $\alpha$ to $\beta$}, $\alpha @@\beta$, is
+\begin{quote}
+
+\record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}\\
+        \field{core}{$\alpha$.core@[$\beta$.core]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}}
+\end{quote}
 \end{ex} 
 \preveg{} says that the application of an unplugged content, $\alpha$,
-to another unplugged content, $\beta$, involves first relabelling the
+to another unplugged content, $\beta$, involves first changing the
 quantifier indices in $\beta$ so that they increment the quantifier
 indices in $\alpha$ in the way that is illustrated in the examples
 discussed above.  For example, if both $\alpha$ and $\beta$ contain
 the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
-`x$_0$' will be relabelled to `x$_1$' in $\beta$.  Now the result of
+`x$_0$' will be changed to `x$_1$' in $\beta$.  Now the result of
 application is an unplugged content whose `quants' are the union of
-$\alpha$'s `quants' and the relabelled `quants' of $\beta$.  The core
-is the result of applying $\alpha$'s core to $\beta$'s core under the
-same relabelling. 
+$\alpha$'s `quants' and the incremented `quants' of $\beta$.  The core
+is the result of applying $\alpha$'s core to $\beta$'s core using the
+same incrementation. 
   
 
 %[Grammar to be added.]
@@ -943,11 +957,14 @@ $\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$
 According to the definitions given in Chapter~\ref{ch:commonnouns},
 $\downP{P\restriction e}$ is the set of individuals in $e$ which have
 property $P$ and $Q|_{\mathcal{F}(P.\mathrm{fg})}$ is $Q$ with its
-domain restricted by $P$.  We spell this out for the type
+domain restricted by $P$ (example~(\ref{ex:function-restriction}), p.~\pageref{ex:function-restriction}).  We spell this out for the type
 corresponding to \textit{every dog runs} in \nexteg{}.  Here, as
 before, we only represent the foregrounds of the properties which are
 arguments to the predicate `every' in order to make the presentation clearer.    
 
+[@@ Where is $\downP{P\restriction e}$ defined?  Can we spell out what
+set the restricted property in the second argument corresponds to?
+(p. 12 of notes)]
 
 
 \section{Anaphora}
