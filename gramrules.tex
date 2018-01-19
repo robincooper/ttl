@@ -102,7 +102,7 @@ If $p$ is a predicate with arity $\langle T\rangle$ then $p'$
 represents the property
 
 \begin{quote}
-\record{\field{bg}{$T$}\\
+\record{\field{bg}{\smallrecord{\smalltfield{x}{$T$}}}\\
         \field{fg}{$\lambda r$:\smallrecord{\smalltfield{x}{$T$}}
 . \record{\tfield{e}{$p$($r$.x)}}}}
 \end{quote}
@@ -112,7 +112,7 @@ represents the property
 If $P$ is the property
 
 \begin{quote}
-\record{\field{bg}{$T_1$}\\
+\record{\field{bg}{\smallrecord{\smalltfield{x}{$T_1$}}}\\
         \field{fg}{$\lambda r$:\smallrecord{\smalltfield{x}{$T_1$}}
           . $T_2(r)$}}
 \end{quote}
@@ -120,7 +120,7 @@ If $P$ is the property
 then $P\!\restriction\!s$ represents
 
 \begin{quote}
-\record{\field{bg}{$T_1$}\\
+\record{\field{bg}{\smallrecord{\smalltfield{x}{$T_1$}}}\\
         \field{fg}{$\lambda r$:\smallrecord{\smalltfield{x}{$T_1$}}
           . $T_2(r)\!\drestr$\smallrecord{\field{e}{$s$}}}}
 \end{quote}

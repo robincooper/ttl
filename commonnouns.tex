@@ -977,12 +977,12 @@ property and \nexteg{b} is the new definition of the type,
 \begin{ex} 
 \begin{subex} 
  
-\item \record{\field{bg}{\textit{Ind}}\\
+\item \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}\\
               \field{fg}{$\lambda
-                r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{dog($r$.x)}}}} 
+                r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{dog($r$.x)}}}}} 
  
-\item \record{\tfield{bg}{\textit{Type}}\\
-              \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\rightarrow$\textit{RecType})}} 
+\item \record{\tfield{bg}{\smallrecord{\smalltfield{x}{\textit{Type}}}\\
+              \tfield{fg}(bg$\rightarrow$\textit{RecType})}} 
  
 \end{subex} 
 \label{ex:dog-Ppty}   
@@ -1223,7 +1223,7 @@ type (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
 a notion of property extension for our new definition of
 \textit{Ppty}.  This is done in \nexteg{}.
 \begin{ex} 
-$\downP{P}$ = $\{a\mid\exists r[r:$\smallrecord{\smalltfield{x}{$P$.bg}}
+$\downP{P}$ = $\{a\mid\exists r[r:P$.bg
 $\wedge\ r.\mathrm{x}=a\wedge\down{P.\mathrm{fg}(r)}\not=\emptyset]\}$  
 \end{ex} 
   
@@ -1347,7 +1347,7 @@ Our solution to this is to introduce resource situations
 and exploit the fact that properties can be restricted to a particular
 situation by introducing a restricted field in the foreground as in \nexteg{}.
 \begin{ex}
-\record{\field{bg}{\textit{Ind}}\\ 
+\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\ 
         \field{fg}{$\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}}} 
 \end{ex} 
@@ -1360,12 +1360,12 @@ abbreviations are represented in \nexteg{}.
 \begin{subex} 
  
 \item dog$'$ abbreviates 
-\record{\field{bg}{\textit{Ind}}\\
+\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
         \field{fg}{$\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smalltfield{e}{dog($r$.x)}}}} 
  
 \item dog$'$$\restriction$$s$ abbreviates 
-\record{\field{bg}{\textit{Ind}}\\
+\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
         \field{fg}{$\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}}} 
  
