@@ -1128,8 +1128,7 @@ Now we can use the notion of property restriction to characterize the
 witness condition for ptypes constructed with `exist', as in
 \nexteg{}.
 \begin{ex} 
-$e$:exist($P$,$Q$) iff $\downP{P\!\restriction\!
-  e}\cap\downP{Q\!\restriction\! e}\not=\emptyset$ 
+$e$:exist($P$,$Q$) iff $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$ 
 \label{ex:existwitcond}
 \end{ex} 
 This will have the consequence that any record of the type \nexteg{a}
@@ -1149,21 +1148,42 @@ will be of type \nexteg{b}.
 \label{ex:adogruns}
    
 \end{ex} 
-In other words, \preveg{a} is a subtype of \preveg{b}.  Consider an
-arbitrary record of type \preveg{a} as given in \nexteg{}.
+In other words, \preveg{a} is a subtype of \preveg{b}.  We abbreviate
+the two properties in \preveg{b} as `dog$'$' and `run$'$'
+respectively.  Consider an
+arbitrary record, $r$, of type \preveg{a} as given in \nexteg{}.
 \begin{ex} 
-\record{\field{x}{$a$}\\
+$r$ = \record{\field{x}{$a$}\\
         \field{c}{$s_1$}\\
-        \field{e}{$s_2$}}
+        \field{e}{$s_2$}\\
+        \ldots}
 
 \medskip
 
 where $s_1$ : dog($a$) and $s_2$ : run($a$)
 \end{ex} 
-The two relevant property extensions to be considered will both be the
-set $\{a\}$ and thus the conditions for \preveg{} being of type
-(\ref{ex:adogruns}b) will be fulfilled since the two property
-extensions have a non-empty overlap.   
+Given $r$ we know that $a$ must be a member of both
+$\downP{\text{dog}'}$ and $\downP{\text{run}'\restriction r}$ and that
+therefore $r$ must be of type (\ref{ex:adogruns}b).  Therefore
+(\ref{ex:adogruns}a)$\sqsubseteq$(\ref{ex:adogruns}b).  The argument does
+not go the other way,
+however: (\ref{ex:adogruns}b)$\not\sqsubseteq$(\ref{ex:adogruns}a).  Consider
+the situation $r$ in \nexteg{}.
+\begin{ex} 
+$r$ = \record{\field{e}{$s_1$}}
+
+\medskip
+
+where there is some situation $s\not=r$ such that $s$ : dog($a$) and $s_1$ : run($a$) 
+\end{ex} 
+In \preveg{}, $r$:(\ref{ex:adogruns}b) but $r$ is not of type
+(\ref{ex:adogruns}a), since $r$ does not ``contain the information'' that
+$a$ is a dog.  
+
+% The two relevant property extensions to be considered will both be the
+% set $\{a\}$ and thus the conditions for \preveg{} being of type
+% (\ref{ex:adogruns}b) will be fulfilled since the two property
+% extensions have a non-empty overlap.   
 
 
 % Another

@@ -953,6 +953,7 @@ quantifier theory.
 \begin{ex} 
 $e:q(P,Q)$ iff $q^*$ holds between $\downP{P}$ and
 $\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$
+\label{ex:witness-cond-GQ}
 \end{ex} 
 According to the definitions given in Chapter~\ref{ch:commonnouns},
 $\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$ is the set of
@@ -977,15 +978,20 @@ run$'$ = $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 \item \begin{tabbing}
 $s:T$ \=iff
 $\downP{\text{dog}'}\subseteq\downP{\text{run}'|_{\mathcal{F}(\text{dog}')}\restriction
-s}  $ \\
+s}  $ \hspace*{2em}(\ref{ex:witness-cond-GQ})\\
 \> iff  $\downP{\text{dog}'}\subseteq\downP{\text{run}'|_{\text{\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}}}\restriction
-s}  $ \\
-\> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
-     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ]\\
+s}  $ \hspace*{2em}(def. of fixed point types p.~\pageref{pg:fixedpointtype}f)\\
+\> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
+     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ] \hspace*{2em} (Ch.~\ref{ch:commonnouns},
+(\ref{ex:function-restriction}), p.~\pageref{ex:function-restriction})\\
 \> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
-     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ]\\
+     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ]
+     \hspace*{2em}\begin{minipage}{.3\textwidth}(def. of merge, Appendix~\ref{app:merge})\end{minipage}\\
 \> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
-     . \smallrecord{\smallrfield{e}{$s$}{run($r$.x)}} ]\\
+     . \smallrecord{\smallrfield{e}{$s$}{run($r$.x)}}
+     ]\hspace*{2em}\begin{minipage}{.3\textwidth}(def. of property restriction,
+     Appendix~\ref{app:gramrulesuniv}, p.~\pageref{pg:property-restriction})\end{minipage}\\
 \> iff \=$\{a\mid\exists r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   $\wedge
   r.\text{x}=a\wedge\down{\text{\smallrecord{\smalltfield{e}{dog($r$.x)}}}}\not=\emptyset\}$\\
