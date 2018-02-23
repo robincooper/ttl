@@ -1029,6 +1029,23 @@ interpreting unbound pronouns  the foreground of a content for
 \begin{ex} 
 $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{fail($\mathfrak{s}$.x$_0$)}} 
 \end{ex} 
+Call this \textbf{she$^\frown$failed}.  Then the foreground of the
+content for \textit{thinks she failed} is \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+  . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \record{\tfield{e}{think($r$.x, \textbf{she$^\frown$failed}($\mathfrak{s}$))}} 
+\end{ex} 
+Call this \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}. Here
+\textit{she} is still a free occurrence of a pronoun dependent on the
+context for resolution.  An alternative interpretation is \nexteg{},
+where the pronoun has become bound as the subject of the property.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{think($r$.x, \textbf{she$^\frown$failed}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$r$.x}}))}} 
+\end{ex} 
+We will call this a logophoric interpretation of the verb phrase, \textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}.   
   
 
 [donkey anaphora]
