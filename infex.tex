@@ -390,12 +390,12 @@ same.  We could represent the association by a function of the form
 \nexteg{}, corresponding to (\ref{ex:deptypefun}) in
 Chapter~\ref{ch:percint}.
 \begin{ex} 
-$\lambda s\!:\!T_{\mathit{SpEv}}\ .\ T_{\mathit{Cnt}}(s)$
+$\lambda s\!:\!T_{\mathit{SpEv}}\ .\ T_{\mathit{Cont}}(s)$
 \label{ex:signfun} 
 \end{ex} 
 This represents a mapping from a speech event $s$ of a given type
-$T_{\mathit{SpEv}}$ to a type $T_{\mathit{Cnt}}$ which is the content
-of the speech event.  The type $T_{\mathit{Cnt}}$ can depend on
+$T_{\mathit{SpEv}}$ to a type $T_{\mathit{Cont}}$ which is the content
+of the speech event.  The type $T_{\mathit{Cont}}$ can depend on
 $s$ (for example, the type of the described situation may require that
 the described situation be related
 to the utterance situation temporally or spatially). 
@@ -417,26 +417,26 @@ relationship between a function such as \preveg{} and a record type
 \nexteg{}.
 \begin{ex} 
 \record{\tfield{s-event}{$T_{\mathit{SpEv}}$ }\\
-        \mfield{cnt}{$T_{\mathit{Cnt}}$}{\textit{Cnt}}} 
+        \mfield{cont}{$T_{\mathit{Cont}}$}{\textit{Cont}}} 
 \end{ex} 
-\preveg{} is a type of signs.  Notice that the `cnt'-field in \preveg{} is a manifest field
+\preveg{} is a type of signs.  Notice that the `cont'-field in \preveg{} is a manifest field
 corresponding to the fact that the function in (\ref{ex:signfun})
-returns the type $T_{\mathit{Cnt}}$, not an object of type
-$T_{\mathit{Cnt}}$.  This means that the `cnt' field in \preveg{}
-requires that the type itself is in the `cnt' field in a record of the
-type, that is, in the sign.  The type \textit{Cnt} is
-the type of contents.  For the moment we will say that \textit{Cnt} is
+returns the type $T_{\mathit{Cont}}$, not an object of type
+$T_{\mathit{Cont}}$.  This means that the `cont' field in \preveg{}
+requires that the type itself is in the `cont' field in a record of the
+type, that is, in the sign.  The type \textit{Cont} is
+the type of contents.  For the moment we will say that \textit{Cont} is
 the type \textit{RecType}, that is, that contents are record types.
 This is because, for the moment, we will restrict our attention to
 declarative sentences.  When we come to look at constituents of
 sentences and speech acts other than assertions we will need to expand
-\textit{Cnt} to include other kinds of entities as well.  Restricting
+\textit{Cont} to include other kinds of entities as well.  Restricting
 our attention first to complete declarative sentences is similar to
 starting with propositional logic before moving on to more complex
 analysis.  The type \textit{Sign} of signs in general is given in \nexteg{}.
 \begin{ex} 
 \record{\tfield{s-event}{\textit{SEvent}} \\
-        \tfield{cnt}{\textit{Cnt}}}
+        \tfield{cont}{\textit{Cont}}}
 \label{eg:infex-sign-type} 
 \end{ex} 
 A record of this type, a sign, will pair a speech event with a
@@ -473,7 +473,7 @@ Section~\ref{sec:signs}.  For example, the user's first utterance
 could be regarded as corresponding to a sign of the type in \nexteg{}.
 \begin{ex} 
 \record{\smalltfield{s-event}{\record{\tfield{e}{``Dudamel is a conductor''}} } \\
-        \mfield{cnt}{\record{\tfield{e}{conductor(dudamel)} \\
+        \mfield{cont}{\record{\tfield{e}{conductor(dudamel)} \\
                              \tfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}{\textit{RecType}}} 
 \label{eg:diac}
 \end{ex} 
@@ -546,9 +546,9 @@ case $e$ is an event where $e_1$ is aligned with a final segment of
 $e_2$, that is in $e$ there is a split in dimension in the final
 segment as illustrated in (\ref{eg:diac-split}).  The notation
 `$\Uparrow$' in (\ref{eg:diac}) indicates that the path `x' is not to
-be found in the local record type which is required to be the value of `cnt'
+be found in the local record type which is required to be the value of `cont'
 but in the next higher record type with the fields `s-event' and
-`cnt'.  This notation is explained in Appendix~\ref{app:rectypes}.
+`cont'.  This notation is explained in Appendix~\ref{app:rectypes}.
 
 This sign type (\ref{eg:diac}) seems to give us what we need in order to explain how
 an utterance of \textit{Dudamel is a conductor} can convey the
@@ -912,14 +912,14 @@ of the content of the move to the type of the move.  We define it
 preliminarily as the join type in \nexteg{}.
 \begin{ex} 
 \record{\tfield{e}{\textit{Assertion}} \\
-        \tfield{cnt}{\textit{RecType}} \\
-        \tfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}$\vee$
+        \tfield{cont}{\textit{RecType}} \\
+        \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
 \record{\tfield{e}{\textit{Query}} \\
-        \tfield{cnt}{\textit{Question}} \\
-        \tfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}$\vee$
+        \tfield{cont}{\textit{Question}} \\
+        \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
 \record{\tfield{e}{\textit{Command}} \\
-        \tfield{cnt}{\textit{RecType}} \\
-        \tfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}$\vee$
+        \tfield{cont}{\textit{RecType}} \\
+        \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
 \record{\tfield{e}{\textit{Acknowledgement}}} 
 \end{ex} 
 Note that this allows for acknowledgements such as \textit{ok} not to
@@ -1095,8 +1095,8 @@ u$:\record{\tfield{move}{fst($r$.private.agenda)
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}  \\
+             \smallmfield{cont}{$u$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}  \\
 \hspace*{10em}$\mid$ rst($r$.private.agenda) \end{tabular}}{[\textit{MoveType}(\textit{SELF})]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}(\textit{SELF})} \\
@@ -1153,9 +1153,9 @@ to be of type:
 \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
                    \smallrecord{\smalltfield{e}{\textit{Assertion}
                      \d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}}                               \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]
 }{[\textit{RecType}]}}} \\
         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
@@ -1186,9 +1186,9 @@ judges this utterance event $u_1$ to be an event of type \nexteg{}.
 \begin{ex} 
  \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
           \tfield{chart}{\textit{Chart}} \\
           \tfield{e}{m-interp(chart,move)}}
 \end{ex} 
@@ -1229,8 +1229,8 @@ must be of the type \nexteg{}.
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]}{[\textit{RecType}]}}}
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
                                                                                 \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
@@ -1291,9 +1291,9 @@ is, \nexteg{}.
 \begin{ex} 
 \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]}{[\textit{Move}(SELF)]}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{Move}(SELF)]}}} \\
         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
 \fbox{\d{$\wedge$}}
@@ -1301,8 +1301,8 @@ is, \nexteg{}.
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]}{[\textit{RecType}]}}}
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
                                                                                 \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
@@ -1334,8 +1334,8 @@ the new information state which has been computed as a result of the update.
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]}{[\textit{RecType}]}}}
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
                                                                                 \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
@@ -1378,9 +1378,9 @@ r$:\record{\tfield{private}{\record{\tfield{agenda}{[\textit{RecType}]}}}}
 u$:\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}\smallrecord{\smalltfield{sp}{\textit{Ind}} \\
                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smalltfield{cnt}{\textit{RecType}}
+                                \smalltfield{cont}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
                             \\
                 \smalltfield{chart}{\textit{Chart}} \\
                 \smalltfield{e}{m-interp(chart,move)}}\hspace*{.5em}.
@@ -1388,9 +1388,9 @@ u$:\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertio
 \d{$\wedge$}\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
                            \smallmfield{au}{$u$.move.e.sp}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{$u$.move.cnt}{\textit{RecType}}
+                                \smallmfield{cont}{$u$.move.cont}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}} \\
 \hspace*{12em}$|\ r$.private.agenda\end{tabular}}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
@@ -1567,7 +1567,7 @@ u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
                                                                               \\
 \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
                         \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cnt}{\textit{RecType}}}}} 
+\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cont}{\textit{RecType}}}}} 
 \end{ex} 
 This function will
 \begin{enumerate} 
@@ -1614,7 +1614,7 @@ u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
                                                                               \\
 \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
                         \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cnt}{\textit{RecType}}}}} 
+\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cont}{\textit{RecType}}}}} 
 \end{ex}
 
 
@@ -1683,7 +1683,7 @@ can be defined as in \nexteg{}.
 If $\sigma$ is a type of speech event and $\kappa$ is a type (of
 situation) then \\
 sign($\sigma$,$\kappa$)= \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$\sigma$}} } \\
-        \mfield{cnt}{\smallrecord{\smalltfield{e}{$\kappa$} \\
+        \mfield{cont}{\smallrecord{\smalltfield{e}{$\kappa$} \\
                              \smalltfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}{\textit{RecType}}} 
 \end{ex} 
 Note that the operation `sign' introduces the interpretation of
@@ -1699,7 +1699,7 @@ content as defined in \nexteg{}.
 \begin{ex} 
 If $\sigma$ is a type of speech event then \\
 sign$_{\mathit{uc}}$($\sigma$)= \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$\sigma$}} } \\
-        \smalltfield{cnt}{\textit{RecType}}} 
+        \smalltfield{cont}{\textit{RecType}}} 
 \end{ex}
 Now we can characterize the sign types that an agent that can deal
 with the simple dialogues that we have been characterizing in this
@@ -1791,13 +1791,13 @@ relate signs to moves.  The definition is given in \nexteg{}.
 \item if $c$ : \textit{Chart} and $m$ : \textit{Move} and for some $\sigma$ and $\kappa$, $c$=sign($\sigma$,$\kappa$),
   then m-interp($c$,$m$) is non-empty iff $m$ : 
 \smallrecord{\smalltfield{e}{\textit{Assertion}} \\
-             \smallmfield{cnt}{$c$.cnt}{\textit{RecType}}} 
+             \smallmfield{cont}{$c$.cont}{\textit{RecType}}} 
  
 \item if $c$ : \textit{Chart} and $m$ : \textit{Move} and for some
   $\sigma$, $c$=sign$_{uc}$($\sigma$),  then m-interp($c$,$m$) is
   non-empty iff $m$ :
 \smallrecord{\smalltfield{e}{\textit{Acknowledgement}} \\
-             \smalltfield{cnt}{\textit{RecType}}}
+             \smalltfield{cont}{\textit{RecType}}}
  
 \end{subex} 
    
@@ -1846,21 +1846,21 @@ shown in \nexteg{}.
                    \smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{6em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]
 }{[\textit{RecType}]}}} \\
         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
@@ -1883,9 +1883,9 @@ repeated in Appendix~\ref{app:dialrules}.  The result of applying
      \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}} } 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
                             \\
              \smalltfield{chart}{\textit{Chart}} \\
              \smalltfield{e}{m-interp(chart,move)}} 
@@ -1897,9 +1897,9 @@ actually a dependent type as in \nexteg{}.
 $\lambda a$:\textit{Ind} . \smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}
 \smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
                             \\
              \smalltfield{chart}{\textit{Chart}} \\
              \smalltfield{e}{m-interp(chart,move)}} 
@@ -1934,9 +1934,9 @@ create something of type \nexteg{}, a subtype of
 \record{\tfield{move}{\record{\tfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \mfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \mfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \tfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
                             \\
              \tfield{chart}{\signtype{``Dudamel is a conductor''}} \\
              \tfield{e}{m-interp(chart,move)}} 
@@ -1959,29 +1959,29 @@ have hypothesized for $a_0$ and $u_1$ will be \nexteg{}.
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
           \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]}{[\textit{RecType}]}}} \\
 \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
             \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}\\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
 \smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
 \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}
  
@@ -1996,21 +1996,21 @@ We can now use \preveg{} to update the type we had for $a_0$, given in
                    \smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{6em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]
 }{[\textit{RecType}]}}} \\
         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
@@ -2020,29 +2020,29 @@ We can now use \preveg{} to update the type we had for $a_0$, given in
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
           \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]}{[\textit{RecType}]}}} \\
 \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
             \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}\\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
 \smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
 \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}
  
@@ -2052,29 +2052,29 @@ We can now use \preveg{} to update the type we had for $a_0$, given in
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
           \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]}{[\textit{RecType}]}}} \\
 \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
             \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}\\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
 \smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
 \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}} \\
 \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
@@ -2096,9 +2096,9 @@ $\lambda e$:\smallrecord{\smalltfield{e}{``Dudamel is a conductor''} \\
       \d{$\wedge$}
 \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                           \\
-                                                          \tfield{cnt}{\textit{Cnt}}
+                                                          \tfield{cont}{\textit{Cont}}
                                                           \\
-                                                          \tfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                                          \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
                                                       \\
                           \tfield{chart}{\signtype{``Dudamel is a conductor''}} \\
                           \tfield{e}{m-interp(chart,move)}} 
@@ -2111,18 +2111,18 @@ will be the type \nexteg{}.
             \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
 \end{tabular}}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
                                   \d{$\wedge$}
 \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
                                                                                 \smallmfield{chart}{$u_1$.chart}{
 \signtype{``Dudamel is a conductor''}}
                                                                               \\
@@ -2143,18 +2143,18 @@ obtaining \nexteg{a} identical with \nexteg{b}.
             \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
 \end{tabular}}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
                                   \d{$\wedge$}
 \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
                                                                                 \smallmfield{chart}{$u_1$.chart}{
 \signtype{``Dudamel is a conductor''}}
                                                                               \\
@@ -2166,18 +2166,18 @@ obtaining \nexteg{a} identical with \nexteg{b}.
               \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}]
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
 \end{tabular}}{[\textit{RecType}]}}}
   \\
                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
                                   \d{$\wedge$}
 \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
                                                                                 \smallmfield{chart}{$u_1$.chart}{
 \signtype{``Dudamel is a conductor''}}
                                                                               \\
@@ -2207,8 +2207,8 @@ content to be spoken by $B$ with $A$ as the audience.
       \\
                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{$u_1$.move.cnt}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
              \tfield{chart}{\textit{Chart}} \\
              \tfield{e}{m-interp(chart,move)}} 
  
@@ -2217,9 +2217,9 @@ content to be spoken by $B$ with $A$ as the audience.
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
              \smallmfield{au}{$u_1$.move.e.sp}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
                             \\
              \tfield{chart}{\textit{Chart}} \\
              \tfield{e}{m-interp(chart,move)}}
@@ -2238,8 +2238,8 @@ and \preveg{b} reduce to the type in
       \\
                                                                            \smallmfield{au}{$A$}{\textit{Ind}}}}
                                                                        \\
-             \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+             \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}} \\
+             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
              \tfield{chart}{\textit{Chart}} \\
              \tfield{e}{m-interp(chart,move)}} 
  
@@ -2268,23 +2268,23 @@ as a result of updating (\ref{ex:type-b1}b).
           \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}, \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
 ]}{[\textit{RecType}]}}} \\
 \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_2$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
             \d{$\wedge$}
 \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}\\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
 \smallmfield{chart}{$u_2$.chart}{\signtype{``Aha''}} \\
 \smallmfield{e}{$u_2$.e}{m-interp(chart,move)}
 }} \\
@@ -2302,9 +2302,9 @@ as a result of updating (\ref{ex:type-b1}b).
                                   \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
                                                                                 \smallmfield{chart}{$u_2$.chart}{
 \signtype{``Aha''}}
                                                                               \\
@@ -2333,9 +2333,9 @@ given in \nexteg{}.
             \d{$\wedge$}
 \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}}\\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
 \smallmfield{chart}{$u_6$.chart}{\signtype{``ok''}} \\
 \smallmfield{e}{$u_6$.e}{m-interp(chart,move)}
 }} \\
@@ -2357,9 +2357,9 @@ given in \nexteg{}.
                                   \d{$\wedge$}
 \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
                                 \\
-                                \smallmfield{cnt}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
                                 \\
-                                \smalltfield{c$_{\mathrm{cnt}}$}{content(e,cnt)}}} \\
+                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
                                                                                 \smallmfield{chart}{$u_6$.chart}{
 \signtype{``ok''}}
                                                                               \\

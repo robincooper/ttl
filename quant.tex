@@ -3,6 +3,7 @@
 \setcounter{equation}{0}
 
 \section{The interpretation of unbound pronouns}
+\label{sec:unbound}
 We will consider how to recreate a simple interpretation of pronouns
 ranging over individuals, first treating them in a similar way to free
 variables in logic and then showing how they can be bound by
@@ -923,7 +924,7 @@ introduced the notion of dynamic generalized quantifier and pointed
 out that one of the original motivations for them was what is known as
 donkey anaphora which we will discuss in Section~\ref{sec:anaph}.
 Here we will point out a connection between dynamic quantifiers and
-conservativity of quantifiers.  The informal way to state
+conservativity of quantifiers, noted in \cite{Chierchia1995}.  The informal way to state
 conservativity for quantifiers is as in \nexteg{a} and an example is
 given in \nexteg{b}.
 \begin{ex} 
@@ -998,25 +999,37 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}\d{$\wedge$}\smallrecord{\smalltfi
 \>\>$\subseteq\{a\mid\exists r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
   $\wedge
   r.\text{x}=a\wedge\down{\text{\smallrecord{\smallrfield{e}{$s$}{run($r$.x)}}}}\not=\emptyset\}$
+  \hspace*{2em}(def. of $\downarrow$, p.~\pageref{pg:property-extension-rev})
   \\
 \> iff
 $\{a\mid\down{\text{dog}(a)}\not=\emptyset\}\subseteq\{a\mid\down{\text{dog}(a)}\not=\emptyset\wedge\exists
-s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$\\
+s'[s'\underline{\varepsilon}s\wedge
+s':\text{run}(a)]\}$\\
+\>\`\begin{minipage}{.3\textwidth}(Arity of `dog', `run' and set
+extension of records, Appendix~\ref{app:rec}, \textit{cf.} p.~\pageref{pg:set-reduction-gq}ff)\end{minipage}\\ 
 \> iff $\{a\mid\exists s'[s':\text{dog}(a)]\}\subseteq\{a\mid\exists
 s'[s':\text{dog}(a)]\wedge\exists
-s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$ 
+s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$ \\
+\>\`\begin{minipage}{.3\textwidth}(def. of $\down{T}$, p.~\pageref{pg:type-extension})\end{minipage}
 \end{tabbing} 
 \end{subex} 
    
 \end{ex} 
   
 
-[@@ 
-(p. 12 of notes)]
-
 
 \section{Anaphora}
 \label{sec:anaph}
+
+\subsection{\textit{No girl thinks she failed}}
+
+Given the strategy we suggested in Section~\ref{sec:unbound} for
+interpreting unbound pronouns  the foreground of a content for
+\textit{she failed} would be \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{fail($\mathfrak{s}$.x$_0$)}} 
+\end{ex} 
+  
 
 [donkey anaphora]
 
