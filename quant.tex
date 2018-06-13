@@ -1034,7 +1034,9 @@ content for \textit{thinks she failed} is \nexteg{}.
 \begin{ex} 
 $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
   . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \record{\tfield{e}{think($r$.x, \textbf{she$^\frown$failed}($\mathfrak{s}$))}} 
+    . \record{\tfield{e}{think($r$.x,
+        \textbf{she$^\frown$failed}($\mathfrak{s}$))}}
+\label{ex:thinks-she-failed-x0} 
 \end{ex} 
 Call this \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}. Here
 \textit{she} is still a free occurrence of a pronoun dependent on the
@@ -1092,8 +1094,28 @@ Interpreting \textit{no girl} with storage yields \nexteg{}.
 \field{core}{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
   . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\smalltfield{x}{$\mathfrak{s}$.x$_1$}})$\urcorner$}} 
 \end{ex} 
-Then \textit{no girl thinks she failed} yields \nexteg{}.  
-    
+Then \textit{no girl thinks she failed} yields \nexteg{}.
+\begin{ex} 
+ \record{\field{quants}{\{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+      . $\lambda P$:\textit{Ppty} . \record{\tfield{e}{no(girl$'$,
+          $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_1$}}))}}$\urcorner$\}}\\
+\field{core}{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+      . \record{\tfield{e}{\textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\mathfrak{s}$.x$_1$}})}}$\urcorner$}}
+\end{ex} 
+\preveg{} uses the definition of
+\textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$} given in
+(\ref{ex:thinks-she-failed-x0}).  Let us call the value of the
+`core'-field in \preveg{}
+\textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}.  Then the result
+of applying retrieval to \preveg{} is \nexteg{}.
+\begin{ex} 
+\record{\field{quants}{\{\}}\\
+        \field{core}{$\ulcorner\lambda\mathfrak{s}$:\textit{Rec}
+          . \record{\tfield{e}{no(girl$'$, $\lambda
+              r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}} .  \textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_1$}{$r$.x$_1$}})})}$\urcorner$}}
+\end{ex} 
+     
+ @@[a boy walked. he whistled]   
   
 
 [donkey anaphora]
