@@ -1013,7 +1013,7 @@ s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$ \\
 \>\`\begin{minipage}{.3\textwidth}(def. of $\down{T}$, p.~\pageref{pg:type-extension})\end{minipage}
 \end{tabbing} 
 \end{subex} 
-   
+\label{ex:witnessconds-edr}   
 \end{ex} 
   
 
@@ -1124,9 +1124,9 @@ will be \nexteg{}.
 $\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{exist(man$'$, walk$'$)}} 
 \end{ex} 
 This does not give us a field which \textit{he} could pick up on to
-obtain the anaphoric reference.  However, we can show that the types
-in \nexteg{} are truth-conditionally equivalent, that is, \nexteg{a}
-will have a witness if and only if \nexteg{b} has a witness.
+obtain the anaphoric reference.  However, we can show that the type
+in \nexteg{a} truth-conditionally entails \nexteg{b}, that is, if \nexteg{a}
+has a witness then \nexteg{b} has a witness.
 \begin{ex} 
 \begin{subex} 
  
@@ -1137,10 +1137,38 @@ will have a witness if and only if \nexteg{b} has a witness.
               \tfield{e}{walk(x)}}
  
 \end{subex} 
+\label{ex:amw-drt}  
+\end{ex} 
+The argument for this goes as follows.  By an argument parallel to
+that in (\ref{ex:witnessconds-edr}c) we can show that \nexteg{a} and
+\nexteg{b} are equivalent.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $s$ : exist(man$'$, walk$'$) 
+ 
+\item $\{a\mid\exists s'[s':\text{man}(a)]\}\cap\{a\mid\exists
+  s'[s':\text{man}(a)]\wedge\exists s'[s'\underline{\varepsilon}s\wedge s':\text{walk}(a)]\}\not=\emptyset$ 
+ 
+\end{subex} 
    
 \end{ex} 
-@@    
-  
+This entails \nexteg{a} which, because of the arity of `man' and
+`walk' is equivalent to \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\exists a[\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$
+ 
+\item $\exists a[a:\textit{Ind}\wedge\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+If \preveg{b} is true, then it will be possible to construct a witness
+for (\ref{ex:amw-drt}b).    
+
+@@  
 
 [donkey anaphora]
 
