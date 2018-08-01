@@ -1024,6 +1024,76 @@ also the section on anaphora following this section.  The motivation
 for this is in part to get neater treatment of anaphora, and a more
 general treatment along the lines of Lücking and Ginzburg.]
 
+\subsection{A witness based account of generalized quantifiers}
+
+The classical view of quantifiers is based on the notion that noun
+phrases represent sets of sets or properties and the definition of a
+quantifier involves characterizing which set or sets or properties it
+represents.  This was the view presented, for example, in
+\cite{BarwiseCooper1981}.  Associated with this was the notion of
+\textit{witness set} defined by Barwise and Cooper as in \nexteg{}.
+\begin{ex} 
+A \textit{witness set} for a quantifier $D(A)$ living on $A$ is any
+subset $w$ of $A$ such that $w\in D(A)$. 
+\end{ex} 
+In \preveg{} $D$ was used as the function corresponding to a
+determiner such as \textit{some} or \textit{most} mapping a set $A$
+(corresponding, for example, to the set denoted by a common noun phrase such
+as  \textit{farmer} or \textit{farmer who owns a donkey}) to a set of
+sets.  The notion \textit{lives on} used by Barwise and Cooper
+corresponds to what was later in the literature referred to as
+\textit{conservativity}.  Their definition of the lives-on property,
+slightly simplified by removing reference to the model, is given in \nexteg{}.
+\begin{ex} 
+A quantifier $Q$ \textit{lives on} a set $A$ if $Q$ is a set of sets
+with the property that
+\begin{quote}
+$X\in Q \text{ iff } (X\cap A)\in Q$
+\end{quote}  
+\end{ex} 
+This means that the notion of witness set given by Barwise and Cooper
+is defined for conservative quantifiers.  Examples of witness sets
+that they give include: a witness set for the quantifier corresponding
+to a proper name \textit{John} as the singleton set containing the
+individual John;  a witness set corresponding to \textit{a woman} as
+any non-empty set of women; a witness set corresponding to
+\textit{most women} as a set of women which contains most women.
+
+The notion of witness set
+was introduced by Barwise and Cooper in a section called
+\textit{Processing Quantified Statements}.  It was introduced by them
+as an auxiliary notion which could be used in an account of how an
+agent might evaluate the truth of a quantified statement.  This
+suggests that it should play an important role in a theory of
+semantics like ours which is oriented towards explaining cognitive
+semantic processing, especially if it is a theory which attempts to do
+this in terms of judgements that objects (including situations) are
+witnesses of types.  It seems natural to make a link between the
+notion of witnesses for types and the notion of witnesses for
+quantifiers.  We will go further and suggest that the characterization
+of the meaning of determiners is based on witness sets, thus elevating
+the witness sets from an auxiliary notion derived from the meaning
+assigned to quantifiers to the central notion which characterizes the
+distinctions between the various quantifier meanings available, just
+as in type theory the notion of meaning is characterized in terms of
+the witness conditions for types.
+
+In the literature on generalized quantifiers \cite{Benthem1984}
+introduced the perspective that we should think of determiners as
+representing relations between sets rather than as mappings from sets
+to families of sets.  This is reflected in our characterization of
+quantifier relations as relations between properties (which can be
+used to generate the set of objects which have the property) and the
+use of ptypes constructed with quantifier relations and two properties
+as arguments.
+
+With each quantifier relation, $q$, and property, $P$, we will
+associate a type of witness sets $q^w(P)$.  For example, a set, $X$,
+is of type $\text{most}^w(P)$ if $X$ is a set of objects with property
+$P$ which contains most of the objects which have property $P$. 
+    
+
+
 \subsection{Relating properties, types and sets}
 
 \subsection{Types of witness sets for quantifiers}
