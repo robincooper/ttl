@@ -1090,11 +1090,77 @@ as arguments.
 With each quantifier relation, $q$, and property, $P$, we will
 associate a type of witness sets $q^w(P)$.  For example, a set, $X$,
 is of type $\text{most}^w(P)$ if $X$ is a set of objects with property
-$P$ which contains most of the objects which have property $P$. 
+$P$ which contains most of the objects which have property $P$.  We
+will say that a witness for the quantificational ptype `most($P$,
+$Q$)' is a pair (coded as a record and thus corresponding intuitively
+to a situation) consisting of the set, $X$, where  $X:q^w(P)$
+(i.e. $X$ is a witness set for $P$) and a function, $f$,  whose domain
+is $X$ and such that for any $a\in X$, $f(a)$ is a situation which
+shows that $a$ has property $Q$.  In general for distributive readings
+of monotone increasing
+quantifiers, $q$, we can say that a witness for $q(P, Q)$ provides a
+witness set $X$ of type $q^w(P)$ and a function which shows that every
+member of $X$ has the property $Q$. For distributive readings of
+monotone decreasing quantifiers we need a different kind of function
+together with the witness set.  Here we have to check that everything
+which has both property $P$ and property $Q$ is a member of the
+witness set.  Thus we need a function, $f$, whose domain is the set of
+objects having both $P$ and $Q$, such that if $a$ is in this set then
+$f(a)$ is a situation which shows that $a$ is a member of the witness
+set $X$.  These two kinds of functions correspond exactly to the
+evaluation procedures suggested in \cite{BarwiseCooper1981} quoted in
+\nexteg{}.
+\begin{ex} 
+\textit{To evaluate $X\in D(A)$ do the following:}
+\begin{enumerate} 
+ 
+\item Take some subset $w$ of $A$ which you know to be in $D(A)$ 
+ 
+\item 
+\begin{enumerate} 
+ 
+\item[(i)] For mon$\uparrow$ $D(A)$, check $w\subseteq X$. 
+ 
+\item[(ii)] For mon$\downarrow$ $D(A)$, check $(X\cap A)\subseteq w$
+ 
+ 
+\end{enumerate} 
+\item If there is such a $w$, the sentence is true.  Otherwise it is false.   
+ 
+\end{enumerate} 
+   
+\end{ex} 
+
+Using pairs of witness sets and functions as witnesses for
+quantificational ptypes is also closely related to
+the treatment of quantification in Martin-Löf type theory using
+$\Sigma$-types and dependent types.  (See, for example,  discussion in
+\citealp{Ranta1994}.)  A witness for the $\Sigma$-type \nexteg{a}
+would be an ordered pair as characterized in \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $(\Sigma x:A)B(x)$ 
+ 
+\item $\langle a,b\rangle$ where $a:A$ and $b:B(a)$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+In the following subsections we will develop the tools we need to make
+our analysis precise in terms of the TTR machinery we have developed
+so far to create a witness-based analysis of quantfiers.  We will also
+consider how we can move away from a set-based account of
+quantification to a type-based approach where we can estimate the
+probability of a quantificational ptype being witnessed on the basis
+of our previous experience.  
     
 
 
 \subsection{Relating properties, types and sets}
+
+@@
 
 \subsection{Types of witness sets for quantifiers}
 
