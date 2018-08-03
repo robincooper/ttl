@@ -1160,7 +1160,81 @@ of our previous experience.
 
 \subsection{Relating properties, types and sets}
 
-@@
+[????In this section we revise the definition of properties.  We
+probably need to go back and revise previous definitions for
+consistency.]
+
+We first define a type of record types whose labels include a certain
+set of labels.  Let $L$ be a set of labels, then \textit{RecType}$_L$
+is a type.  $T$ : \textit{RecType}$_L$ iff $T$ : \textit{RecType} and
+$L\subseteq\text{labels}(T)$.  [????Check whether `labels' defined for
+record types -- it is defined for records.]
+
+Now we can define \textit{Ppty} to be the type in \nexteg{}.
+\begin{ex} 
+\record{\tfield{bg}{\textit{RecType}$_{\{x\}}$}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} 
+\end{ex} 
+A witness for this type,  a property, would be something like
+\nexteg{}, ``the property of being a dog''.
+\begin{ex} 
+\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
+        \field{fg}{$\lambda
+          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}}} 
+\end{ex} 
+This is a cumbersome notation for a property so we abbreviate it as
+\nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda
+          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}$\urcorner$ 
+\end{ex}
+If $P$ is a property we will also use the notation $P(a)$ to represent $P.\text{fg}(a)$.
+ 
+\preveg{} is a property of individuals  and we will have a subtype of
+\textit{Ppty}, \textit{Ppty}(\textit{Ind}), to represent this more
+specific type of property. In general:  if $T$ is a type, then
+\textit{Ppty}($T$) is a type; $P$ : \textit{Ppty}($T$) iff
+$P$ : \textit{Ppty} and $P$.bg $\sqsubseteq$
+\smallrecord{\smalltfield{x}{$T$}}.
+
+A property, $P$, can be \textit{pure}, as in \preveg{}, that is,
+$P$.bg has exactly one field, the required `x'-field;  or they can be
+restricted by including additional fields in the background.  For
+example, in \nexteg{a} we have the pure property of being an
+individual that barks and in \nexteg{b} we have a restricted property
+of being an individual which is a dog that barks.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{bark($r$.x)}}$\urcorner$ 
+ 
+\item $\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                  \smalltfield{c}{dog(x)}}
+  . \record{\tfield{e}{bark($r$.x)}}$\urcorner$  
+ 
+\end{subex} 
+   
+\end{ex} 
+Note that \preveg{b} is still of type \textit{Ppty}(\textit{Ind})
+according to our definition above.
+
+
+This ability to restrict properties will be important for analyzing
+dynamic quantification where information from the first argument of
+the quantifier relation is passed to the second argument of the
+quantifier relation and this is what enables the treatment of donkey
+anaphora.  Thus \textit{every farmer who owns a donkey likes it} will
+be treated as the `every'-relation holding between the property of
+being a farmer and owning a donkey and the property of being a farmer
+who owns a donkey and likes it thus providing an antecedent for
+\textit{it} within the second property (see
+Section~\ref{sec:donkey-anaph}). However, it will also be important to
+be able to ``purify'' such restricted properties, that is, relate them
+systematically to a correspond property whose background contains just
+the one `x'-field.  This will allow us to avoid the proportion problem
+that can arise in the analysis of donkey anaphora. 
 
 \subsection{Types of witness sets for quantifiers}
 
@@ -1330,7 +1404,8 @@ type (\ref{ex:amw-drt}b) (assuming that the assertion was true).
 
 @@  
 
-[donkey anaphora]
+\subsection{every farmer who owns a donkey likes it}
+\label{sec:donkey-anaph}[donkey anaphora]
 
 \section{Structured contexts, binding principles and projection}
 \label{sec:struc-cntxt}
