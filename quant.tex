@@ -1195,7 +1195,8 @@ If $P$ is a property we will also use the notation $P(a)$ to represent $P.\text{
 specific type of property. In general:  if $T$ is a type, then
 \textit{Ppty}($T$) is a type; $P$ : \textit{Ppty}($T$) iff
 $P$ : \textit{Ppty} and $P$.bg $\sqsubseteq$
-\smallrecord{\smalltfield{x}{$T$}}.
+\smallrecord{\smalltfield{x}{$T$}}.  [Modify so that doesn't include
+the case where $T'\sqsubseteq T$ and the type of the property is \smallrecord{\smalltfield{x}{$T'$}}????]
 
 A property, $P$, can be \textit{pure}, as in \preveg{}, that is,
 $P$.bg has exactly one field, the required `x'-field;  or they can be
@@ -1234,7 +1235,57 @@ Section~\ref{sec:donkey-anaph}). However, it will also be important to
 be able to ``purify'' such restricted properties, that is, relate them
 systematically to a correspond property whose background contains just
 the one `x'-field.  This will allow us to avoid the proportion problem
-that can arise in the analysis of donkey anaphora. 
+that can arise in the analysis of donkey anaphora, that is in
+computing whether a
+sentence like \textit{most farmers who own a donkey like it} is true, we need
+to ensure that the majority of farmers who own a donkey are such that
+they like it and not that the majority of pairs of farmers and donkeys
+the farmer owns the donkey are such that the farmer likes the
+donkey. Thus we need a property of farmers, not of farmer-donkey
+pairs.  Suppose we have the restricted property \nexteg{a}.  We will
+define an operation on functions which will yield the pure property
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}}
+                             . \record{\tfield{e}{like($r$.x, $r$.y)}}
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$r$.x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}}}\\
+        \tfield{e}{\record{\tfield{e}{like($\Uparrow$$\mathfrak{c}$.x,
+              $\Uparrow$$\mathfrak{c}$.y)}}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+This purification operation changes the property in \preveg{a}, a
+property of farmers who own a donkey into the property \preveg{b}, a
+property of individuals.  The restriction in \preveg{a} has been
+lowered into the body of the property and labelled with
+`$\mathfrak{c}$', intuitively a local context in the type returned by
+the function.  We denote the purification operation by $\mathfrak{P}$
+and define it as in \nexteg{}.
+\begin{ex} 
+If $P$ : ($T\rightarrow$\textit{Type}) where $T\sqsubseteq$
+\smallrecord{\smalltfield{x}{$T'$}} (that is, $P$ :
+\textit{Ppty}($T'$))[???? Not restrictive enough: $T'$ might be a
+supertype of the type mentioned in the `x'-field of the property], then
+\begin{quote}
+$\mathfrak{P}(P)$ is $\lambda r$:\smallrecord{\smalltfield{x}{$T'$}}
+. \record{\tfield{$\mathfrak{c}$}{$T\parallel r$}\\
+          \tfield{e}{$P(\mathfrak{c})$}}
+\end{quote} 
+\end{ex} 
+(Recall that $T\parallel r$ is the result of specifying or anchoring
+$T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)   
 
 \subsection{Types of witness sets for quantifiers}
 
