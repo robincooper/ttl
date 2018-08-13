@@ -1194,9 +1194,11 @@ If $P$ is a property we will also use the notation $P(a)$ to represent $P.\text{
 \textit{Ppty}, \textit{Ppty}(\textit{Ind}), to represent this more
 specific type of property. In general:  if $T$ is a type, then
 \textit{Ppty}($T$) is a type; $P$ : \textit{Ppty}($T$) iff
-$P$ : \textit{Ppty} and $P$.bg $\sqsubseteq$
-\smallrecord{\smalltfield{x}{$T$}}.  [Modify so that doesn't include
-the case where $T'\sqsubseteq T$ and the type of the property is \smallrecord{\smalltfield{x}{$T'$}}????]
+$P$ : \textit{Ppty} and $P$.bg$^{\text{x}}$ is
+\smallrecord{\smalltfield{x}{$T$}}. (Here we use $P$.bg$^{\text{x}}$
+to represent the generalization of $P$.bg to its `x'-field as
+characterized in Appendix~\ref{sec:gen-rectypes}, that is the type
+whose only field is the `x'-field of $P$.bg.) 
 
 A property, $P$, can be \textit{pure}, as in \preveg{}, that is,
 $P$.bg has exactly one field, the required `x'-field;  or they can be
@@ -1233,7 +1235,7 @@ who owns a donkey and likes it thus providing an antecedent for
 \textit{it} within the second property (see
 Section~\ref{sec:donkey-anaph}). However, it will also be important to
 be able to ``purify'' such restricted properties, that is, relate them
-systematically to a correspond property whose background contains just
+systematically to a corresponding property whose background contains just
 the one `x'-field.  This will allow us to avoid the proportion problem
 that can arise in the analysis of donkey anaphora, that is in
 computing whether a
@@ -1248,23 +1250,23 @@ define an operation on functions which will yield the pure property
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                \smalltfield{c$_1$}{farmer(x)}\\
                                \smalltfield{y}{\textit{Ind}}\\
                                \smalltfield{c$_2$}{donkey(y)}\\
                                \smalltfield{e}{own(x, y)}}
-                             . \record{\tfield{e}{like($r$.x, $r$.y)}}
+                             . \record{\tfield{e}{like($r$.x, $r$.y)}}$\urcorner$
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$r$.x}{\textit{Ind}}\\
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$r$.x}{\textit{Ind}}\\
                                \smalltfield{c$_1$}{farmer(x)}\\
                                \smalltfield{y}{\textit{Ind}}\\
                                \smalltfield{c$_2$}{donkey(y)}\\
                                \smalltfield{e}{own(x, y)}}}\\
         \tfield{e}{\record{\tfield{e}{like($\Uparrow$$\mathfrak{c}$.x,
-              $\Uparrow$$\mathfrak{c}$.y)}}}} 
+              $\Uparrow$$\mathfrak{c}$.y)}}}}$\urcorner$ 
  
 \end{subex} 
-   
+\label{ex:pure-eg}   
 \end{ex} 
 This purification operation changes the property in \preveg{a}, a
 property of farmers who own a donkey into the property \preveg{b}, a
@@ -1274,18 +1276,38 @@ lowered into the body of the property and labelled with
 the function.  We denote the purification operation by $\mathfrak{P}$
 and define it as in \nexteg{}.
 \begin{ex} 
-If $P$ : ($T\rightarrow$\textit{Type}) where $T\sqsubseteq$
-\smallrecord{\smalltfield{x}{$T'$}} (that is, $P$ :
-\textit{Ppty}($T'$))[???? Not restrictive enough: $T'$ might be a
-supertype of the type mentioned in the `x'-field of the property], then
+If $P$ : \textit{Ppty}, then
 \begin{quote}
-$\mathfrak{P}(P)$ is $\lambda r$:\smallrecord{\smalltfield{x}{$T'$}}
-. \record{\tfield{$\mathfrak{c}$}{$T\parallel r$}\\
+$\mathfrak{P}(P)$ is $\lambda r$:$P$.bg$^{\text{x}}$
+. \record{\tfield{$\mathfrak{c}$}{$P.\text{bg}\parallel$ \smallrecord{\field{x}{$r$.x}}}\\
           \tfield{e}{$P(\mathfrak{c})$}}
 \end{quote} 
 \end{ex} 
 (Recall that $T\parallel r$ is the result of specifying or anchoring
-$T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)   
+$T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)
+
+As an example let us apply $\mathfrak{P}$ to (\ref{ex:pure-eg}a).  The
+result will be \nexteg{}
+\begin{ex} 
+$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}}$^x$ . 
+\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}} $\parallel$
+                             \smallrecord{\field{x}{$r$.x}}} \\  
+        \tfield{e}{$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}}
+                             . \record{\tfield{e}{like($r$.x, $r$.y)}}$\urcorner$($\mathfrak{c}$)}}$\urcorner$
+\end{ex} 
+     
 
 \subsection{Types of witness sets for quantifiers}
 
