@@ -1197,7 +1197,7 @@ specific type of property. In general:  if $T$ is a type, then
 $P$ : \textit{Ppty} and $P$.bg$^{\text{x}}$ is
 \smallrecord{\smalltfield{x}{$T$}}. (Here we use $P$.bg$^{\text{x}}$
 to represent the generalization of $P$.bg to its `x'-field as
-characterized in Appendix~\ref{sec:gen-rectypes}, that is the type
+characterized in Appendix~\ref{app:gen-rectypes}, that is the type
 whose only field is the `x'-field of $P$.bg.) 
 
 A property, $P$, can be \textit{pure}, as in \preveg{}, that is,
@@ -1278,10 +1278,17 @@ and define it as in \nexteg{}.
 \begin{ex} 
 If $P$ : \textit{Ppty}, then
 \begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
 $\mathfrak{P}(P)$ is $\lambda r$:$P$.bg$^{\text{x}}$
 . \record{\tfield{$\mathfrak{c}$}{$P.\text{bg}\parallel$ \smallrecord{\field{x}{$r$.x}}}\\
           \tfield{e}{$P(\mathfrak{c})$}}
-\end{quote} 
+\end{quote}
+\end{quote}
 \end{ex} 
 (Recall that $T\parallel r$ is the result of specifying or anchoring
 $T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)
@@ -1306,7 +1313,87 @@ $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                \smalltfield{c$_2$}{donkey(y)}\\
                                \smalltfield{e}{own(x, y)}}
                              . \record{\tfield{e}{like($r$.x, $r$.y)}}$\urcorner$($\mathfrak{c}$)}}$\urcorner$
+\label{ex:pure-eg1}
 \end{ex} 
+Following the definition of generalization of a type to a particular
+field in Appendix~\ref{app:gen-rectypes}, \nexteg{a} represents
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}}$^x$ 
+ 
+\item \smallrecord{\smalltfield{x}{\textit{Ind}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+According to the definition of the specification of a record type by a
+record given in Appendix~\ref{app:specrec}, \nexteg{a} represents
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}} $\parallel$
+                             \smallrecord{\field{x}{$r$.x}} 
+ 
+\item \smallrecord{\smallmfield{x}{$r$.x}{\textit{Ind}}\\
+                               \smalltfield{c$_1$}{farmer(x)}\\
+                               \smalltfield{y}{\textit{Ind}}\\
+                               \smalltfield{c$_2$}{donkey(y)}\\
+                               \smalltfield{e}{own(x, y)}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+To understand the reduction of the type in the `e'-field in (\ref{ex:pure-eg1}) we
+represent it first in the official notation for dependent fields as in
+\nexteg{a}.  This represents the same as \nexteg{b} (by
+$\beta$-conversion) and its abbreviatory notation in the context of
+(\ref{ex:pure-eg1}) is \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\langle\lambda v$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                      \smalltfield{c$_1$}{farmer(x)}\\
+                                      \smalltfield{y}{\textit{Ind}}\\
+                                      \smalltfield{c$_2$}{donkey(y)}\\
+                                      \smalltfield{e}{own(x,y)}}
+                                    . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                      \smalltfield{c$_1$}{farmer(x)}\\
+                                      \smalltfield{y}{\textit{Ind}}\\
+                                      \smalltfield{c$_2$}{donkey(y)}\\
+                                      \smalltfield{e}{own(x,y)}}
+                                    . \record{\tfield{e}{like($r$.x,$r$.y)}}$\urcorner$($v$), $\langle\mathfrak{c}\rangle\rangle$
+ 
+\item $\langle\lambda v$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                      \smalltfield{c$_1$}{farmer(x)}\\
+                                      \smalltfield{y}{\textit{Ind}}\\
+                                      \smalltfield{c$_2$}{donkey(y)}\\
+                                      \smalltfield{e}{own(x,y)}}
+                                    . 
+                                    \record{\tfield{e}{like($v$.x,$v$.y)}},
+                                      $\langle\mathfrak{c}\rangle\rangle$ 
+
+\item \record{\tfield{e}{like($\Uparrow\!\mathfrak{c}$.x,$\Uparrow\!\mathfrak{c}$.y)}}
+ 
+\end{subex} 
+   
+\end{ex} 
+Making these substitutions yields (\ref{ex:pure-eg}b).
+
+If $P$ is a pure property, we will use the notation $P\{a\}$ to
+represent the type $P$(\smallrecord{\field{x}{$a$}}).  If $P\{a\}$ is
+witnessed we say that $a$ has property $P$.  We can now define the
+type of objects which have $P$.    
      
 
 \subsection{Types of witness sets for quantifiers}
