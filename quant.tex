@@ -1393,7 +1393,55 @@ Making these substitutions yields (\ref{ex:pure-eg}b).
 If $P$ is a pure property, we will use the notation $P\{a\}$ to
 represent the type $P$(\smallrecord{\field{x}{$a$}}).  If $P\{a\}$ is
 witnessed we say that $a$ has property $P$.  We can now define the
-type of objects which have $P$.    
+type of objects which have $P$, which we will represent as
+$\mathfrak{T}(P)$. We introduce this type as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $P$ : \textit{Ppty}, then $\mathfrak{T}(P)$ : \textit{Type}. 
+ 
+\item $a:\mathfrak{T}(P)$ iff $\mathfrak{P}(P)\{a\}$ is witnessed. 
+ 
+\end{subex} 
+   
+\end{ex} 
+There is a different route to a type with the same witnesses as
+$\mathfrak{T}(P)$.  We have previously defined $\downP{P}$ as the
+set of objects which have the property $P$, as in
+Chapter~\ref{ch:commonnouns}, p.~\pageref{pg:property-extension-rev}.  For
+any set, $X$, we can define a type whose witnesses are exactly the
+members of $X$.  We will represent this type as $\mathfrak{T}(X)$ and
+introduce it as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T$ is a type and $X:\{T\}$, then $\mathfrak{T}(X)$ is a type 
+ 
+\item $a:\mathfrak{T}(X)$ iff $a\in X$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+Given this, it is straightforward to see that \nexteg{} holds.
+\begin{ex} 
+For any property, $P$, $a:\mathfrak{T}(P)$ iff
+$a:\mathfrak{T}(\downP{P})$ 
+\end{ex} 
+What distinguishes these two types is the method they suggest for
+determining whether something is a witness for the type.  In the case
+of $\mathfrak{T}(\downP{P})$ we have to first determine the complete
+set of objects which have the property and then determine whether the
+object in question is a member of the set.  In the case of
+$\mathfrak{T}(P)$ we only have to determine whether the object in
+question has the property $P$.  Computing the set of all objects which
+have a property may be viable when we are considering a property whose
+extension is a small finite set of objects (for example, if the
+property is that of being a dog in a particular small situation) but
+it does not seem feasible in the case of large finite sets or infinite
+sets.  We will return to this issue below when we consider the
+interpretation of generalized quantifiers which are classically
+treated by comparing sets and we will consider an alternative in terms
+of types and estimated probabilities.        
      
 
 \subsection{Types of witness sets for quantifiers}
