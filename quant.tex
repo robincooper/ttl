@@ -1094,7 +1094,7 @@ $P$ which contains most of the objects which have property $P$.  We
 will say that a witness for the quantificational ptype `most($P$,
 $Q$)' is a pair (coded as a record and thus corresponding intuitively
 to a situation) consisting of the set, $X$, where  $X:q^w(P)$
-(i.e. $X$ is a witness set for $P$) and a function, $f$,  whose domain
+(i.e. $X$ is a witness set for $q$ and $P$) and a function, $f$,  whose domain
 is $X$ and such that for any $a\in X$, $f(a)$ is a situation which
 shows that $a$ has property $Q$.  In general for distributive readings
 of monotone increasing
@@ -1186,21 +1186,35 @@ This is a cumbersome notation for a property so we abbreviate it as
 \nexteg{}.
 \begin{ex} 
 $\ulcorner\lambda
-          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}$\urcorner$ 
+          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{dog($r$.x)}}$\urcorner$ 
+\label{ex:ppty-dog}
 \end{ex}
 If $P$ is a property we will also use the notation $P(a)$ to represent $P.\text{fg}(a)$.
  
 \preveg{} is a property of individuals  and we will have a subtype of
 \textit{Ppty}, \textit{Ppty}(\textit{Ind}), to represent this more
-specific type of property. In general:  if $T$ is a type, then
-\textit{Ppty}($T$) is a type; $P$ : \textit{Ppty}($T$) iff
+specific type of property. In general we give the definition in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item if $T$ is a type, then
+\textit{Ppty}($T$) is a type 
+ 
+\item $P$ : \textit{Ppty}($T$) iff
 $P$ : \textit{Ppty} and $P$.bg$^{\text{x}}$ is
-\smallrecord{\smalltfield{x}{$T$}}. (Here we use $P$.bg$^{\text{x}}$
+\smallrecord{\smalltfield{x}{$T$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+Here we use $P$.bg$^{\text{x}}$
 to represent the generalization of $P$.bg to its `x'-field as
 characterized in Appendix~\ref{app:gen-rectypes}, that is the type
-whose only field is the `x'-field of $P$.bg.) 
+whose only field is the `x'-field of $P$.bg. 
 
-A property, $P$, can be \textit{pure}, as in \preveg{}, that is,
+A property, $P$, can be \textit{pure}, as in (\ref{ex:ppty-dog}), that is,
 $P$.bg has exactly one field, the required `x'-field;  or they can be
 restricted by including additional fields in the background.  For
 example, in \nexteg{a} we have the pure property of being an
@@ -1242,8 +1256,8 @@ computing whether a
 sentence like \textit{most farmers who own a donkey like it} is true, we need
 to ensure that the majority of farmers who own a donkey are such that
 they like it and not that the majority of pairs of farmers and donkeys
-the farmer owns the donkey are such that the farmer likes the
-donkey. Thus we need a property of farmers, not of farmer-donkey
+where the farmer owns the donkey are such that the farmer likes the
+donkey. Thus we need a property of individuals, not of farmer-donkey
 pairs.  Suppose we have the restricted property \nexteg{a}.  We will
 define an operation on functions which will yield the pure property
 \nexteg{b}.
@@ -1290,7 +1304,7 @@ $\mathfrak{P}(P)$ is $\lambda r$:$P$.bg$^{\text{x}}$
 \end{quote}
 \end{quote}
 \end{ex} 
-(Recall that $T\parallel r$ is the result of specifying or anchoring
+(Recall that $T\!\!\parallel\!\! r$ is the result of specifying or anchoring
 $T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)
 
 As an example let us apply $\mathfrak{P}$ to (\ref{ex:pure-eg}a).  The
@@ -1445,6 +1459,57 @@ of types and estimated probabilities.
      
 
 \subsection{Types of witness sets for quantifiers}
+In this section we will discuss the characterization of types of
+witness sets for various generalized quantifiers as a step on our way
+to characterizing a witnessed-based account of generalized
+quantifiers.  The witness sets we characterize will be very close to
+those of \cite{BarwiseCooper1981}, though not exactly the same in all
+cases.  In general for a quantifier relation, $q$, and property,
+$P$, a witness set, $X$, of type $q^w(P)$ must meet two conditions.  The
+first is that it must be a subset of the property extension of $P$.
+We now have two ways of expressing this as shown in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $X\subseteq\downP{P}$
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} makes explicit the connection to the original definition of
+witness sets by Barwise and Cooper.  \preveg{b} is an equivalent
+condition on $X$ which does not involve the computation of the
+complete property extension of $P$.
+
+The second condition which must be met by witnesses, $X$, of $q^w(P)$ is a
+cardinality condition on $X$.  This may be an absolute condition on
+the size of $X$ or it may involve a comparison of the size of $X$ with
+the size of the property extension of $P$, that is, $\downP{P}$.  Thus
+even though we have a way of avoiding the computation of the total
+property extension in the first condition on witness sets, we will not
+always be able to avoid it in the second condition.  It is for this
+reason that we will move to probability estimations in the next
+section.
+
+The witness condition for `exist$^{\text{w}}$($P$)' is given in
+\nexteg{}.
+\begin{ex} 
+$X:\text{exist}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|=1$ 
+ 
+\end{enumerate} 
+   
+\end{ex}
+Note that this differs from Barwise and Cooper in that it requires
+that the witness set contain exactly one object having property $P$
+rather than at least one such object. 
+  
 
 \subsection{Relating witness sets to probabilities}
 
