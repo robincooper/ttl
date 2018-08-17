@@ -1508,7 +1508,56 @@ $X:\text{exist}^{\text{w}}(P)$ iff
 \end{ex}
 Note that this differs from Barwise and Cooper in that it requires
 that the witness set contain exactly one object having property $P$
-rather than at least one such object. 
+rather than at least one such object.
+
+The witness condition for `every$^{\text{w}}$($P$)' is given in
+\nexteg{}.
+\begin{ex} 
+$X:\text{every}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|=|\downP{P}|$ 
+ 
+\end{enumerate}  
+\end{ex} 
+Note that \preveg{} requires $X$ to be identical with $\downP{P}$ and
+we could, of course, express the witness condition more succinctly as
+\nexteg{} if we are not concerned about demonstrating that the witness
+conditions for the types witness sets for all quantifiers follow the
+same pattern.
+\begin{ex} 
+$X:\text{every}^{\text{w}}(P)$ iff $X=\downP{P}$ 
+\end{ex} 
+Either way, we seem committed to computing the set $\downP{P}$ in
+order to compute a witness set of `every' and $P$ and this can
+therefore lead to problems if $\downP{P}$ is a large set.  A standard
+way of avoiding the computation of this set in the interpretation of
+universal quantification is to associate universal quantification with
+a function so that, using the notions we have built up,  a witness for `every($P$,$Q$)' would be a function
+from $\mathfrak{T}(P)$ to $\mathfrak{T}(Q)$ (see \citealp{Ranta1994},
+for discussion of how this is done in a standard Martin-Löf type
+theory).  This avoids computing the property extension of $P$ if we
+have the right view of functions as intensional objects or procedures,
+rather than the von Neumann notion of function as a set of ordered
+pairs as is standard in set theory.  We will make use of such
+functions when we come to treat the witness conditions for
+quantificational ptypes.  Such a treatment on its own does not yield a
+characterization of a witness set, however, and thus does not
+immediately yield a way of treating plural discourse anaphora with
+a universal quantifier as antecedent as in \nexteg{}.
+\begin{ex} 
+Every dog ran into the field.  They had seen the rabbits. 
+\end{ex} 
+For this reason we will pursue the witness set approach and attempt to
+solve the problem of large sets by introducing probability estimation.  
+
+The witness condition for `most$^{\text{w}}$' is given in \nexteg{}.
+Here we are assuming that there is a threshold,
+$\theta_{\text{most}}(P)$, which tells you what proportion of the
+property extension of $P$ has to be included in the witness set.  This
+is an oversimplification   
   
 
 \subsection{Relating witness sets to probabilities}
