@@ -1553,12 +1553,13 @@ Every dog ran into the field.  They had seen the rabbits.
 For this reason we will pursue the witness set approach and attempt to
 solve the problem of large sets by introducing probability estimation.  
 
-The witness condition for `most$^{\text{w}}$' is given in \nexteg{}.
-Here we are assuming that there is a threshold,
+
+In order to account for the witness condition for `most$^{\text{w}}$'
+we assume that there is a threshold,
 $\theta_{\text{most}}(P)$, which tells you what proportion of the
 property extension of $P$ has to be included in the witness set.  This
 is possibly an oversimplification in that the threshold may depend on
-more than the quantifier relation and and the first argument property
+more than the quantifier relation and the first argument property
 to the relation.  A common assumption in the generalized quantifier
 literature is that `most($P$,$Q$)' is true just in case at least one more than
 half of the $P$s are $Q$ (see, for example,
@@ -1569,12 +1570,31 @@ case for an example involving a larger set as in \nexteg{}.
 Most supporters in the stadium cheered when the goal was scored. 
 \end{ex} 
 \preveg{} does not appear to be true if only one more than half of the
-supporters in the stadium cheered.  Rather we would expect the number
+forty thousand supporters in the stadium cheered.  Rather we would expect the number
 of cheering supporters to be something in excess of 75\% or 85\%  of the
 supporters in the stadium.  The unclarity as to exactly which
 proportion is involved leads us to introduce a threshold which can
-vary with the context and the speaker.   
-  
+vary with the context and the speaker.  
+
+The witness condition for `most$^{\text{w}}$' is given in \nexteg{}. 
+\begin{ex} 
+$X:\text{most}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$ 
+ 
+\end{enumerate}  
+\end{ex}
+Clause~2 in \preveg{} requires us to count both the witness set, which
+may be quite large, like the number of supporters in a stadium, as
+well as the property extension of $P$.  We will address this by using
+probability estimations in the next section.
+
+The English determiner \textit{many}, has two readings: absolute and
+proportional.  We will treat this in terms of two quantifier relations
+`many$_a$' and `many$_p$'.   
 
 \subsection{Relating witness sets to probabilities}
 
