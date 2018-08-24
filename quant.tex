@@ -1508,7 +1508,39 @@ $X:\text{exist}^{\text{w}}(P)$ iff
 \end{ex}
 Note that this differs from Barwise and Cooper in that it requires
 that the witness set contain exactly one object having property $P$
-rather than at least one such object.
+rather than at least one such object.  The quantifier relation `exist'
+is used in interpreting the English determiner \textit{a} and also the
+singular determiner \textit{some}.  Plural \textit{some} corresponds
+to the quantifier relation `exist$_{\text{pl}}$'.  The witness condition for `exist$_{\text{pl}}^{\text{w}}$($P$)' is given in
+\nexteg{}.
+\begin{ex} 
+$X:\text{exist}_{\text{pl}}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|\geq 2$ 
+ 
+\end{enumerate} 
+   
+\end{ex}
+Correspondingly we can define the witness condition for `no$^{\text{w}}$($P$)' is given in
+\nexteg{}.
+\begin{ex} 
+$X:\text{no}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|=0$ 
+ 
+\end{enumerate} 
+   
+\end{ex}
+\preveg{} could, of course, be given more concisely as \nexteg{}.
+\begin{ex} 
+$X:\text{no}^{\text{w}}(P)$ iff $X=\emptyset$
+\end{ex}
 
 The witness condition for `every$^{\text{w}}$($P$)' is given in
 \nexteg{}.
@@ -1576,7 +1608,7 @@ supporters in the stadium.  The unclarity as to exactly which
 proportion is involved leads us to introduce a threshold which can
 vary with the context and the speaker.  
 
-The witness condition for `most$^{\text{w}}$' is given in \nexteg{}. 
+The witness condition for `most$^{\text{w}}$($P$)' is given in \nexteg{}. 
 \begin{ex} 
 $X:\text{most}^{\text{w}}(P)$ iff
 \begin{enumerate} 
@@ -1594,7 +1626,91 @@ probability estimations in the next section.
 
 The English determiner \textit{many}, has two readings: absolute and
 proportional.  We will treat this in terms of two quantifier relations
-`many$_a$' and `many$_p$'.   
+`many$_a$' and `many$_p$'.  For any property, $P$, we will assume that
+thresholds, $\theta_{\text{many}_a}(P)$ and $\theta_{\text{many}_p}(P)$ are
+provided.  These will indicate, respectively, the number of objects
+having property $P$ that will count as many and the proportion of the
+set of objects having $P$ that will count as many.  The witness
+condition for `many$_a^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{many}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|\geq\theta_{\text{many}_a}(P)$ 
+ 
+\end{enumerate} 
+ 
+\end{ex}
+The witness condition for `many$_p^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{many}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$ 
+ 
+\end{enumerate}  
+\end{ex} 
+The quantifier relations corresponding to \textit{few} are treated in
+an exactly similar fashion to those corresponding to \textit{many}
+except that the cardinality of the witness set or the proportion of
+the property extension included in the witness set is required to be
+less than or equal to the relevant threshold. The witness
+condition for `few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|\leq\theta_{\text{few}_a}(P)$ 
+ 
+\end{enumerate} 
+ 
+\end{ex}
+The witness condition for `few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$ 
+ 
+\end{enumerate}  
+\end{ex}
+The quantifier relations corresponding to \textit{a few} use the same
+thresholds as those corresponding to \textit{few} but in the case of
+\textit{a few} the size of the witness set and the proportion of the
+witness set to the property extension have to be greater than or equal
+to the threshold. The witness
+condition for `a\_few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{a\_few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|\geq\theta_{\text{few}_a}(P)$ 
+ 
+\end{enumerate} 
+ 
+\end{ex}
+The witness condition for `a\_few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{a\_few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$ 
+ 
+\end{enumerate}  
+\end{ex} 
+     
 
 \subsection{Relating witness sets to probabilities}
 
