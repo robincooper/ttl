@@ -1729,7 +1729,7 @@ witnessed and $0$ otherwise.
 Clearly, this of itself will not help if we wish to avoid counting the
 set of witnesses of $T_1$ or $T_2$. However, probabilities can be
 estimated on the basis of previous experience.  We will assume that an
-agent has available in memory a set of Austinian propositions,
+agent has available in memory a finite set of Austinian propositions,
 $\mathfrak{J}$, recording judgements previously made.  We will define
 a notion of having a type with respect to a set of Austinian
 propositions, $\mathfrak{J}$, using $a:_{\mathfrak{J}}T$ to represent
@@ -1742,7 +1742,7 @@ is defined in \nexteg{}.
                                          \field{type}{$T$}}
                                        $\in$ $\mathfrak{J}$ 
  
-\item $a:_{\mathfrak{J}}(T_1\wedge T_2)$ if $a:_{\mathfrak{J}}T_1$ and
+\item If $T=(T_1\wedge T_2)$, then $a:_{\mathfrak{J}}T$ if $a:_{\mathfrak{J}}T_1$ and
   $a:_{\mathfrak{J}}T_2$
 
 \item Otherwise $a\not:_{\mathfrak{J}}T$
@@ -1750,6 +1750,37 @@ is defined in \nexteg{}.
 \end{subex} 
    
 \end{ex} 
+We will use the notation $\down{T}_{\mathfrak{J}}$ to represent the
+extension of $T$ with respect to $\mathfrak{J}$, defined in \nexteg{}.
+\begin{ex} 
+$\down{T}_{\mathfrak{J}}=\{a\mid a:_{\mathfrak{J}}T\}$ 
+\end{ex} 
+We can now define the notion of \textit{estimate of} $p(T_1\|T_2)$
+\textit{based on} $\mathfrak{J}$, $p_{\mathfrak{J}}(T_1\|T_2)$, as in
+\nexteg{}.
+\begin{ex} 
+$p_{\mathfrak{J}}(T_1\|T_2)=\frac{|\down{T_1\wedge T_2}_{\mathfrak{J}}|}{|\down{T_2}_{\mathfrak{J}}|}$ 
+\end{ex} 
+A measure of reliability of the estimate could be related to the
+number of instances observed, that is, about which a judgement has
+been made, for example as in \nexteg{}.
+\begin{ex} 
+reliability($p_{\mathfrak{J}}(T_1\|T_2)$) = ln min($|\down{T_1}_{\mathfrak{J}}|,|\down{T_2}_{\mathfrak{J}}|$) 
+\end{ex} 
+This could still involve an agent in a serious amount of counting
+which might be unintuitive from a psychological point of view. From a
+computational point of view it would be straghtforward enough to keep
+track of how many objects of each type have already been judged and to
+increment these numbers when a new object of the type is encountered.
+However, we do not seem to be aware of how many objects of a given
+type we have encountered when the numbers get high.  For example, I
+know that I have seen a lot of dogs in my life but I have no idea how
+many.  It would also not explain how I could estimate the probability
+that any person is a stadium is wearing an IFK Göteborg scarf just by
+looking around the stadium but not exactly counting the number of
+people in the stadium and the number of those wearing the scarf.  This
+seems to point to some kind of Bayesian reasoning about probability as
+suggested in \cite{CooperDobnikLappinLarsson2014a} and ????.      
   
 
 
