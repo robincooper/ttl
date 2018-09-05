@@ -1551,17 +1551,17 @@ $X:\text{every}^{\text{w}}(P)$ iff
  
 \item $X:\{\mathfrak{T}(P)\}$ 
  
-\item $|X|=|\downP{P}|$ 
+\item $|X|=|\down{\mathfrak{T}(P)}|$ 
  
 \end{enumerate}  
 \end{ex} 
-Note that \preveg{} requires $X$ to be identical with $\downP{P}$ and
+Note that \preveg{} requires $X$ to be identical with $\down{\mathfrak{T}{P}}$ and
 we could, of course, express the witness condition more succinctly as
 \nexteg{} if we are not concerned about demonstrating that the witness
 conditions for the types witness sets for all quantifiers follow the
 same pattern.
 \begin{ex} 
-$X:\text{every}^{\text{w}}(P)$ iff $X=\downP{P}$ 
+$X:\text{every}^{\text{w}}(P)$ iff $X=\down{\mathfrak{T}(P)}$ 
 \end{ex} 
 Either way, we seem committed to computing the set $\downP{P}$ in
 order to compute a witness set of `every' and $P$ and this can
@@ -1866,6 +1866,62 @@ $X:\text{no}^{\text{w}}(P)$ iff
 Again the probabilistic and non-probabilistic conditions are
 equivalent and there is no point to computing the probability since
 all we have to do is check that the witness set is the empty set.
+
+The witness condition for `every$^{\text{w}}$($P$)' is given in
+\nexteg{}.
+\begin{ex} 
+$X:\text{every}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=1$ (corresponds to $|X|=|\down{\mathfrak{T}(P)}|$) 
+ 
+\end{enumerate}  
+\end{ex}
+Again the probabilistic and non-probabilistic conditions are
+equivalent given the frequentist interpretation of probability.
+However, here there is some point to the probability for semantic
+processing. Both the conditions as formulated require counting the set
+of objects which have the property, $P$, which can be intractable
+especially if the set is infinite or finite and reasonably large.
+However, the probability can be estimated on the basis of a finite
+number of observations.  The more relevant observations you have, the
+more reliable your estimate.  Consider the sentence in \nexteg{}.
+\begin{ex} 
+Every dog barks when it is time to go for a walk 
+\end{ex} 
+An utterance of \preveg{} is naturally interpreted to be quantifying
+over dogs in general, or at least those which are physically capable
+of barking.  I have no practical way of determining the truth or
+falsity of this
+sentence, though I can make an estimate on the basis my observations
+of dogs in pre-walk situations.  If all relevant observations of dogs
+involved the dog barking, then I can estimate that the sentence is
+true.  Of course, if I have only observed
+two or three dogs, my estimate is not very reliable even though it is
+consistent with my experience.  If on the other hand I have observed
+hundreds of situations where a dog is about to go for a walk, all of
+them with the dog barking, then it seems like a more reliable estimate,
+although my experience will not show conclusively that it will be
+true.  How do sentences like this get used in a dialogue.  Consider
+the (constructed) dialogue in \nexteg{}.
+\begin{ex} 
+\begin{tabular}[t]{lp{.8\textwidth}}
+\multicolumn{2}{p{.9\textwidth}}{\textit{[$A$ and $B$ are about to
+  take $A$'s  dog
+  for a walk.  The dog, realizing that a walk is in the offing, begins
+  to bark excitedly.]}}\\
+$A:$ & I must apologize for the racket.\\
+$B:$ & Not to worry. Every dog barks when it is time to go for a
+       walk. \textit{[$B$ is thinking of her past experience of dogs in
+       similar situations.]}\\
+$A:$ & Yes, that's right. \textit{[$A$ is thinking of
+       \emph{her} past experience of dogs in similar situations.]}
+\end{tabular}
+\end{ex} 
+$A$ and $B$ are agreeing on the basis of their own distinct
+observations.   
 
 \subsection{Witness conditions for quantificational ptypes}
 
