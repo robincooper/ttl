@@ -1973,6 +1973,80 @@ What the examples have in common is that the justification for the
 assertions of the same ``proposition'' is different facts based on
 personal experience.   Where they differ is in whether there is an
 objective fact or not.
+
+A similar discussion holds for \textit{most}. The witness condition for `most$^{\text{w}}$($P$)' is given in \nexteg{}. 
+\begin{ex} 
+$X:\text{most}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{most}}(P)$ (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$) 
+ 
+\end{enumerate}  
+\end{ex}
+As usual the frequentist interpretation of the conditional probability
+is equivalent to the corresponding non-probabilistic.  In order to see
+this note that
+\nexteg{} holds.
+\begin{ex} 
+$\frac{|\down{\mathfrak{T}(X)\wedge\mathfrak{T}(P)}|}{|\down{\mathfrak{T}(P)}|}=\frac{|X|}{|\downP{P}|}$
+\end{ex} 
+\preveg{} holds because of the equalities in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $|\down{\mathfrak{T}(X)}|=|X|$ since $\down{\mathfrak{T}(X)}=X$ 
+ 
+\item $\down{\mathfrak{T}(P)}=\downP{P}$
+
+\item
+  $|\down{\mathfrak{T}(X)\wedge\mathfrak{T}(P)}|=|\down{\mathfrak{T}(X)}|$
+    since $\down{\mathfrak{T}(X)}\subseteq\down{\mathfrak{T}(P)}$
+    (since $X:\{\mathfrak{T}(P)\}$)
+ 
+\end{subex} 
+   
+\end{ex} 
+Again, to make an evaluation when large sets are involved we may need to
+estimate the relevant probability on the basis of our own experience
+and the kind of dialogue which we illustrated for \textit{every} might
+occur.
+
+The witness
+condition for `many$_a^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{many}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item
+$p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{many}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
+  (corresponds to $|X|\geq\theta_{\text{many}_a}(P)$) 
+ 
+\end{enumerate} 
+\end{ex}
+Again the probabilistic condition on the frequentist interpretation is equivalent to the
+non-probabilistic one since both require that the cardinality of $X$ is
+greater than or equal to $\theta_{\text{many}_a}(P)$.
+
+The witness condition for `many$_p^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{many}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item
+  $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq\theta_{\text{many}_p}(P)$ (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$) 
+ 
+\end{enumerate}  
+\end{ex}     
+Again, the frequentist interpretation of the probabilisitic condition
+is equivalent to the non-probabilistic condition and with large sets
+we may need to estimate the probability rather than compute the
+cardinality of the witness set.
     
 
 \subsection{Witness conditions for quantificational ptypes}
