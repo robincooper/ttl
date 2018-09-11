@@ -1027,8 +1027,8 @@ general treatment along the lines of Lücking and Ginzburg.]
 \subsection{A witness based account of generalized quantifiers}
 
 The classical view of quantifiers is based on the notion that noun
-phrases represent sets of sets or properties and the definition of a
-quantifier involves characterizing which set or sets or properties it
+phrases represent sets of sets or set of properties and the definition of a
+quantifier involves characterizing which set of sets or properties it
 represents.  This was the view presented, for example, in
 \cite{BarwiseCooper1981}.  Associated with this was the notion of
 \textit{witness set} defined by Barwise and Cooper as in \nexteg{}.
@@ -1061,7 +1061,7 @@ any non-empty set of women; a witness set corresponding to
 
 The notion of witness set
 was introduced by Barwise and Cooper in a section called
-\textit{Processing Quantified Statements}.  It was introduced by them
+\textit{Processing Quantified Statements}.  It was introduced 
 as an auxiliary notion which could be used in an account of how an
 agent might evaluate the truth of a quantified statement.  This
 suggests that it should play an important role in a theory of
@@ -2047,6 +2047,66 @@ Again, the frequentist interpretation of the probabilisitic condition
 is equivalent to the non-probabilistic condition and with large sets
 we may need to estimate the probability rather than compute the
 cardinality of the witness set.
+
+The same holds for the quantifier relations corresponding to
+\textit{few} and \textit{a few}. The witness
+condition for `few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item
+  $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
+  (corresponds to $|X|\leq\theta_{\text{few}_a}(P)$) 
+ 
+\end{enumerate} 
+ 
+\end{ex}
+
+The witness condition for `few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\leq\theta_{\text{few}_p}(P)$
+  (corresponds to $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$) 
+ 
+\end{enumerate}  
+\end{ex}
+
+The witness
+condition for `a\_few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{a\_few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
+  (corresponds to $|X|\geq\theta_{\text{few}_a}(P)$) 
+ 
+\end{enumerate} 
+ 
+\end{ex}
+
+The witness condition for `a\_few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
+\begin{ex} 
+$X:\text{a\_few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq\theta_{\text{few}_p}(P)$
+  (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$) 
+ 
+\end{enumerate}  
+\end{ex}
+
+
     
 
 \subsection{Witness conditions for quantificational ptypes}
