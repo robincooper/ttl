@@ -2111,6 +2111,52 @@ $X:\text{a\_few}_p^{\text{w}}(P)$ iff
 
 \subsection{Witness conditions for quantificational ptypes}
 
+In general there are two witness conditions that can be associated
+with quantificational ptypes $q(P,Q)$ where $q$ is a quantifier
+relation and $P$ and $Q$ are properties.  These correspond to the two
+evaluation procedures suggested by \cite{BarwiseCooper1981} in
+connection with witness sets for monotone increasing and decreasing
+quantifiers respectively.  The two conditions are given in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $s:q(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$q^w(\mathfrak{T}(P))$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+ 
+\item $s:q(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$q^w(\mathfrak{T}(P))$}\\
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(\mathfrak{P}(Q))))\rightarrow$
+            \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} is the condition to be associated with monotone increasing
+quantifiers.  It says that $s$ is of the quantificational ptype just in
+case it provides an appropriate witness set (in a field labelled `X')
+and a function (in a field labelled `f') from objects, $a$, in that witness set to situations
+(modelled as records) which show that $a$ has the purified property
+derived from second argument of the quantificational ptype.
+\preveg{b} is the condition to be associated with monotone decreasing
+quantifiers.  It says that $s$ is of the quantificational ptype just
+in case it provides an appropriate witness set (in a field labelled
+`X') and a function from objects, $a$, which have both the property
+which is the first argument  and the purified property derived from
+the second argument to a situation (record) which shows that $a$ is a
+member of the witness set.
+
+For each quantifier relation, $q$, we have to say whether ptypes
+constructed with $q$ have the witness condition \preveg{a} or
+\preveg{b}.  Judging from the anaphoric possibilities associated with
+natural language quantified expressions the witness conditions used 
+are not these but simpler conditions using an equivalent type.  That
+is, if the relevant witness condition expressed in \preveg{} is $s:T$
+what actually gets used is $s:T'$ where $T$ is witnessed if and only
+if $T'$ is witnessed.  We shall discuss these cases as we go through
+the witness conditions associated with the individual quantifier relations.    
+
 \subsection{Some examples}
 
 
