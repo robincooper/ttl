@@ -2122,11 +2122,11 @@ quantifiers respectively.  The two conditions are given in
 \begin{subex} 
  
 \item $s:q(P,Q)$ iff $s$ :
-  \record{\tfield{X}{$q^w(\mathfrak{T}(P))$}\\
+  \record{\tfield{X}{$q^w(P)$}\\
           \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
  
 \item $s:q(P,Q)$ iff $s$ :
-  \record{\tfield{X}{$q^w(\mathfrak{T}(P))$}\\
+  \record{\tfield{X}{$q^w(P)$}\\
           \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(\mathfrak{P}(Q))))\rightarrow$
             \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}} 
  
@@ -2149,13 +2149,71 @@ member of the witness set.
 
 For each quantifier relation, $q$, we have to say whether ptypes
 constructed with $q$ have the witness condition \preveg{a} or
-\preveg{b}.  Judging from the anaphoric possibilities associated with
-natural language quantified expressions the witness conditions used 
-are not these but simpler conditions using an equivalent type.  That
+\preveg{b}.  We shall call these the \textit{general} witness
+conditions.  Judging from the anaphoric possibilities associated with
+natural language quantified expressions the witness conditions used
+for some quantifier relations
+are not the general witness conditions but simpler conditions (which
+we will call \textit{particular} witness conditions) using an equivalent type.  That
 is, if the relevant witness condition expressed in \preveg{} is $s:T$
 what actually gets used is $s:T'$ where $T$ is witnessed if and only
 if $T'$ is witnessed.  We shall discuss these cases as we go through
-the witness conditions associated with the individual quantifier relations.    
+the witness conditions associated with the individual quantifier
+relations. 
+
+The general witness condition for `exist($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+ $s:\text{exist}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{exist$^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+\end{ex} 
+This requires that a witness for `exist($P$,$Q$)' must be a record
+providing a pair of a singleton set whose member is an object which
+has property $P$ and a function whose domain is this set which returns
+for any $a$ a situation in which $a$ has (the purification of) the
+property $Q$.  Thus if we let `dog$'$' and `bark$'$' represent the
+properties indicated in \nexteg{a} and \nexteg{b} respectively then a
+witness for `exist(dog$'$,bark$'$)' will according to \preveg{} be of
+the type \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}$\urcorner$ 
+ 
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{bark($r$.x)}}$\urcorner$ 
+
+\item \record{\tfield{X}{exist$^w$(dog$'$)}\\
+              \tfield{f}{$((a:\mathfrak{T}(X))\rightarrow\text{bark}'\{a\})$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+It is trivial to show that \preveg{c} has a witness just in case
+\nexteg{} has a witness.
+\begin{ex} 
+\record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
+        \tfield{e}{bark$'$\{x\}}} 
+\end{ex} 
+The argument is essentially that there is a singleton set containing a
+dog all of whose members bark just in case there is a dog which barks.
+We might prefer to have the particular witness condition for
+`exist($P$,$Q$)' in \nexteg{}.
+\begin{ex} 
+$s:\text{exist}(P,Q)$ iff $s$ :
+  \record{\tfield{x}{$\mathfrak{T}(\mathfrak{P}(P))$}\\
+        \tfield{e}{$\mathfrak{P}(Q)$\{x\}}}
+\end{ex} 
+Apart from its intuitive simplicity and correspondence to the
+classical DRT treatment of indefinites as well as to the use of
+$\Sigma$-types to interpret indefinites in type theory the particular
+witness condition provides a component in the witness which can be
+picked up on by singular anaphora in examples like \nexteg{}.
+\begin{ex} 
+A dog is barking. It is right outside my window 
+\end{ex} 
+             
 
 \subsection{Some examples}
 
