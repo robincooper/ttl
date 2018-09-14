@@ -2127,7 +2127,7 @@ quantifiers respectively.  The two conditions are given in
  
 \item $s:q(P,Q)$ iff $s$ :
   \record{\tfield{X}{$q^w(P)$}\\
-          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(\mathfrak{P}(Q))))\rightarrow$
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
             \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}} 
  
 \end{subex} 
@@ -2202,17 +2202,39 @@ We might prefer to have the particular witness condition for
 `exist($P$,$Q$)' in \nexteg{}.
 \begin{ex} 
 $s:\text{exist}(P,Q)$ iff $s$ :
-  \record{\tfield{x}{$\mathfrak{T}(\mathfrak{P}(P))$}\\
+  \record{\tfield{x}{$\mathfrak{T}(P)$}\\
         \tfield{e}{$\mathfrak{P}(Q)$\{x\}}}
 \end{ex} 
 Apart from its intuitive simplicity and correspondence to the
 classical DRT treatment of indefinites as well as to the use of
 $\Sigma$-types to interpret indefinites in type theory the particular
-witness condition provides a component in the witness which can be
+witness condition provides a component in the witness (in the
+`x'-field) which can be
 picked up on by singular anaphora in examples like \nexteg{}.
 \begin{ex} 
 A dog is barking. It is right outside my window 
 \end{ex} 
+
+The general witness condition for `exist$_{\text{pl}}$($P$,$Q$)' is
+\nexteg{}.
+\begin{ex} 
+$s:\text{exist}_{\text{pl}}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{exist$_{\text{pl}}^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\end{ex} 
+This corresponds to a distributive reading of plural \textit{some}.
+It says intuitively that a situation, $s$, is of type
+`exist$_{\text{pl}}$($P$,$Q$) just in case $s$ provides a set of
+objects which have property $P$
+with at least two members and a function which shows that each member
+of 
+the set has property $Q$.  In this case the witness set provides us
+with a suitable antecedent for plural anaphora as in \nexteg{} and we
+do not need a particular witness condition.
+\begin{ex} 
+Some dogs are barking.  They are right outside my window. 
+\end{ex} 
+  
              
 
 \subsection{Some examples}
