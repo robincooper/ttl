@@ -2234,7 +2234,45 @@ do not need a particular witness condition.
 \begin{ex} 
 Some dogs are barking.  They are right outside my window. 
 \end{ex} 
+
+The general witness condition for `no($P$,$Q$)' is given in \nexteg{}.
+\begin{ex} 
+$s:\text{no}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{no}^w(P)$}\\
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+            \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}  
+\end{ex} 
+The only witness set allowed (that is,  the only set of type
+$\text{no}^w(P)$, no matter what $P$ is) is the empty set.  Suppose
+that we find some object, $a$, which has both properties $P$ and $Q$,
+then the function will return a situation (record) that shows that $a$
+is in the empty set.  There is, however, no such situation.  The only
+way that there can be a function of this type is if the set of objects
+which have both $P$ and $Q$ is also the empty set.  While this is
+technically correct and fits the general pattern for monotone
+decreasing quantifiers it does not seem to be an intuitive account of
+how we would check that `no($P$,$Q$)' is witnessed.  More intuitive is
+to check each object that has property $P$ and find that it does not
+have property $Q$.  This method is equivalent to the first and the
+relationship between the two corresponds to the equivalence between
+\nexteg{a} and \nexteg{b} in first order logic.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\neg\exists x[P(x)\wedge Q(x)]$ 
+ 
+\item $\forall x [P(x)\rightarrow\neg Q(x)]$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+We will define the particular witness condition for `no($P$,$Q$)' as
+\nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
   
+      
              
 
 \subsection{Some examples}
