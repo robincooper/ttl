@@ -2266,12 +2266,58 @@ relationship between the two corresponds to the equivalence between
 \end{subex} 
    
 \end{ex} 
+In order to do this we will use the notion of negation given  in
+\cite{CooperGinzburg2011,CooperGinzburg2012}.  [We should probably
+introduce negation somewhere else independently! ????] First we say that two
+types, $T_1$ and $T_2$ \textit{preclude each other}, $T_1\bot T_2$, just in case there is no
+possibility in which $\down{T_1}$ and $\down{T_2}$ overlap.  That is,
+nothing can be of both types.  We then introduce negated types as in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item if $T$ is a type, then $\neg T$ is a type 
+ 
+\item $a:\neg T$ iff from some type, $T'$, such that $T\bot T'$, $a:T'$ 
+ 
+\end{subex} 
+   
+\end{ex}   
 We will define the particular witness condition for `no($P$,$Q$)' as
 \nexteg{}.
 \begin{ex} 
- 
+$s:\text{no}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{every}^w(P)$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg Q\{x\})$}} 
 \end{ex} 
-  
+Some evidence that English uses the particular witness condition
+rather than the general one comes from the fact that we can have
+plural discourse anaphora related to a noun phrase with \textit{no} as
+its determiner, as in \nexteg{}.
+\begin{ex} 
+No dog barked.  They were all busy gnawing on a bone. 
+\end{ex} 
+Clearly, \textit{they} does not refer to the witness set of type
+`no$^w$(dog$'$)', which would have to be the empty set, but rather to
+a witness set of type `every$^w$(dog$'$)', the set of all dogs.  This
+is an instance of \textit{complement set anaphora}, first discussed by
+\cite{MoxeySanford1987,SanfordMoxey1993} and discussed in the
+semantics literature by [Nouwen, Kibble,...????].
+
+The general witness condition for `every($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+$s:\text{every}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{every}^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\end{ex} 
+In this case we do not need a particular witness condition.  \preveg{}
+correctly predicts the availability of plural discourse anaphora as in
+\nexteg{}.
+\begin{ex} 
+Every dog barked.  They had been disturbed by the intruder. 
+\end{ex} 
+       
       
              
 
