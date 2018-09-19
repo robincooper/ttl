@@ -2278,7 +2278,7 @@ nothing can be of both types.  We then introduce negated types as in
  
 \item if $T$ is a type, then $\neg T$ is a type 
  
-\item $a:\neg T$ iff from some type, $T'$, such that $T\bot T'$, $a:T'$ 
+\item $a:\neg T$ iff for some type, $T'$, such that $T\bot T'$, $a:T'$ 
  
 \end{subex} 
    
@@ -2317,8 +2317,86 @@ correctly predicts the availability of plural discourse anaphora as in
 \begin{ex} 
 Every dog barked.  They had been disturbed by the intruder. 
 \end{ex} 
-       
-      
+
+The same holds for \textit{most}.  The general witness condition for `most($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+$s:\text{most}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{most}^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\label{ex:mostPQ-witcond}
+\end{ex} 
+In this case we do not need a particular witness condition.  \preveg{}
+correctly predicts the availability of plural discourse anaphora as in
+\nexteg{}.
+\begin{ex} 
+Most dogs bark when somebody unknown comes into their territory.  They
+are disturbed by an intruder.
+\end{ex}       
+Note that the occurrence of \textit{they} here can be interpreted to refer not to all dogs
+or dogs in general but to the witness set of dogs containing most
+dogs. (This is what Moxey and Sanford call REFSET anaphora.) It can, however, also be interpreted to refer to dogs in
+general, that is, all dogs are disturbed by an intruder but not all of
+them bark when this happens.  This is referred to as MAXSET anaphora
+by Moxey and Sanford.  This could be taken as motivation for having a
+field which introduces the property `dog' in the sign corresponding to
+\textit{most dogs} in the manner suggested in
+Chapter~\ref{ch:gram}. Alternatively, it might be considered as
+motivation for an additional field corresponding to $P$ in the witness
+for `most($P$,$Q$)'.  We will leave this issue unresolved at this
+point. [????]  It seems clear, though, as has been pointed out in the
+literature (Nouwen [????]), that COMPSET anaphora is not possible with
+\textit{most}.  That is, \textit{they} in \nexteg{} cannot refer to
+dogs which do not bark when somebody unknown comes into their
+territory.
+\begin{ex} 
+\#Most dogs bark when somebody unknown comes into their territory.  They
+never feel threatened whatever happens. 
+\end{ex} 
+The lack of this reading is consistent with the witness condition in
+(\ref{ex:mostPQ-witcond}).
+
+Similar remarks can be made for \textit{many}.  The general witness condition for `many$_a$($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+$s:\text{many}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{many}_a^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\label{ex:mostPQ-witcond}
+\end{ex}   
+The general witness condition for `many$_p$($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+$s:\text{many}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{many}_p^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\label{ex:mostPQ-witcond}
+\end{ex}   
+For both absolute and proportional readings of \textit{many} REFSET
+and MAXSET anaphora are available but not COMPSET.  There is no
+motivation for a particular witness condition.
+
+The general witness condition for `few$_a$($P$,$Q$)' is given in
+\nexteg{}. 
+\begin{ex} 
+ $s:\text{few}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{few}_a^w(P)$}\\
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+            \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+\end{ex} 
+The general witness condition for `few$_p$($P$,$Q$)'  is exactly
+similar as given in \nexteg{}.
+\begin{ex} 
+ $s:\text{few}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{few}_p^w(P)$}\\
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+            \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+\end{ex}  
+As with \textit{no} we can formulate particular witness conditions
+using the dual of \textit{few}, that is, \textit{many} and type
+negation.  This corresponds to our intuition that few $P$ have
+property $Q$ is equivalent to saying that many $P$ do not have
+property $Q$.
              
 
 \subsection{Some examples}
