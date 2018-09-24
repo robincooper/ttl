@@ -2392,11 +2392,70 @@ similar as given in \nexteg{}.
           \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
             \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
 \end{ex}  
-As with \textit{no} we can formulate particular witness conditions
-using the dual of \textit{few}, that is, \textit{many} and type
-negation.  This corresponds to our intuition that few $P$ have
-property $Q$ is equivalent to saying that many $P$ do not have
-property $Q$.  This witness condition is given in \nexteg{}.
+% As with \textit{no} we can formulate particular witness conditions
+% using the dual of \textit{few}, that is, \textit{many} and type
+% negation.  This corresponds to our intuition that few $P$ have
+% property $Q$ is equivalent to saying that many $P$ do not have
+% property $Q$.  
+These witness conditions involve computing first the set of all
+objects that have both property $P$ and $Q$ and then checking that all
+the members of the set are in the witness set.  A more intuitive and
+less computationally expensive way of achieving an equivalent result
+is to find a sufficient number of objects that have property $P$ but
+which don't have property $Q$ (in our terms they have a property which
+precludes them having $Q$).  What counts as a sufficient  number of
+objects?  It has to be a number of objects with property $P$ such that
+only few objects having property $P$ remain, that is, it has to be a
+set with cardinality at least the cardinality of the set whose members
+have $P$ minus the threshold, $\theta_{\text{few}}$ in the case of an
+absolute quantifier.  In the case of a proportional quantifier the
+proportion of objects having $P$ but not $Q$ has to be greater than
+one minus the proportional threshold.  We treat this by introducing
+types of complement witness sets for \textit{few}.  The absolute case
+is given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If few$_a^w$($P$) is a type, then $\overline{\text{few}_a^w(P)}$ is a type 
+ 
+\item $X:\overline{\text{few}_a^w(P)}$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $|X|\geq|\down{\mathfrak{T}(P)}|-\theta_{\text{few}_a}$ 
+ 
+\end{enumerate} 
+   
+ 
+\end{subex} 
+   
+\end{ex}
+The proportional case is given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If few$_p^w$($P$) is a type, then $\overline{\text{few}_p^w(P)}$ is a type 
+ 
+\item $X:\overline{\text{few}_p^w(P)}$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item $\frac{|X|}{|\down{\mathfrak{T}(P)}|}\geq 1-\theta_{\text{few}_p}$ 
+ 
+\end{enumerate} 
+   
+ 
+\end{subex} 
+   
+\end{ex} 
+Clearly, computing whether a set is a witness for one of these new
+types can involve computing the cardinality of the set of objects
+which have property $P$ and for this reason is may be more tractable
+to estimate a probability.@@
+   
+This witness condition is given in \nexteg{}.
 \begin{ex} 
 $s:\text{few}(P,Q)$ iff $s$ :
   \record{\tfield{X}{$\text{many}^w(P)$}\\
