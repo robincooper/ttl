@@ -2423,7 +2423,7 @@ is given in \nexteg{}.
  
 \item $X:\{\mathfrak{T}(P)\}$ 
  
-\item $|X|\geq|\down{\mathfrak{T}(P)}|-\theta_{\text{few}_a}$ 
+\item $|X|\geq|\down{\mathfrak{T}(P)}|-\theta_{\text{few}_a}(P)$ 
  
 \end{enumerate} 
    
@@ -2442,7 +2442,7 @@ The proportional case is given in \nexteg{}.
  
 \item $X:\{\mathfrak{T}(P)\}$ 
  
-\item $\frac{|X|}{|\down{\mathfrak{T}(P)}|}\geq 1-\theta_{\text{few}_p}$ 
+\item $\frac{|X|}{|\down{\mathfrak{T}(P)}|}\geq 1-\theta_{\text{few}_p}(P)$ 
  
 \end{enumerate} 
    
@@ -2453,14 +2453,80 @@ The proportional case is given in \nexteg{}.
 Clearly, computing whether a set is a witness for one of these new
 types can involve computing the cardinality of the set of objects
 which have property $P$ and for this reason is may be more tractable
-to estimate a probability.@@
-   
-This witness condition is given in \nexteg{}.
+to estimate a probability.  The relevant probabilities here are
+similar to those associated with \textit{many}.  The witness condition
+for $\overline{\text{few}_a^w(P)}$ is given in \nexteg{}.
 \begin{ex} 
-$s:\text{few}(P,Q)$ iff $s$ :
-  \record{\tfield{X}{$\text{many}^w(P)$}\\
+$X:\overline{\text{few}_a^w(P)}$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item
+$p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
+   
+ 
+\end{enumerate} 
+\end{ex}
+The witness condition for $\overline{\text{few}_p^w(P)}$ is given in
+\nexteg{}.
+\begin{ex} 
+$X:\overline{\text{few}_p^w(P)}$ iff
+\begin{enumerate} 
+ 
+\item $X:\{\mathfrak{T}(P)\}$ 
+ 
+\item
+  $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq1-\theta_{\text{few}_p}(P)$  
+ 
+\end{enumerate}  
+\end{ex} 
+   
+Now we can give particular witness conditions for ptypes constructed with the
+quantifier predicates `few$_a$' and `few$_p$'.  The witness condition
+for `few$_a$($P$,$Q$)' is given in \nexteg{}.
+\begin{ex} 
+$s:\text{few}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\overline{\text{few}_a^w(P)}$}\\
           \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg Q\{x\})$}}  
 \end{ex} 
+The witness condition
+for `few$_p$($P$,$Q$)' is given in \nexteg{}.
+\begin{ex} 
+$s:\text{few}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\overline{\text{few}_p^w(P)}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg Q\{x\})$}}  
+\end{ex}
+
+Why do we use complement witness set types for \textit{few} in the
+particular witness conditions rather than witness sets related to
+\textit{many}?  We might naively have thought that \textit{few dogs
+  barked} was equivalent to \textit{many dogs did not bark}.  A
+standard analysis of \textit{few} in the literature is as \textit{not
+  many}, that is \textit{few dogs barked} is equivalent to \textit{not
+  many dogs barked} or \textit{it is not true that many dogs barked}.
+On the kind of analysis that we are proposing here neither of these
+will work. We illustrate this with an example.  Suppose that we have a
+dog hotel with twenty-five dogs in residence.  Suppose that what
+counts as many dogs in the context is ten and what counts as few is
+five.  This means that few dogs barked means that five or less dogs
+barked.  If this is true then it follows that many dogs did not bark
+(fifteen or more, and we only need ten to count as many) and it also
+follows that it is not the case that many dogs barked (since at most
+five did and for many dogs to bark we would need ten).  Thus
+\textit{few} seems to imply both \textit{many not} and \textit{not
+  many}.  However, the implications do not go back the other way.
+Suppose that many dogs did not bark.  This means that ten or more dogs
+did not bark.  If ten dogs did not bark then fifteen did bark.  Thus
+many dogs barked at the same time as many dogs did not bark.  It does
+not follow that few dogs barked.  Suppose that it is not the case that
+many dogs barked.  This means that less than ten dogs barked.  For
+example, nine dogs barked.  While nine is not many in this context
+neither is it few.  We might say \textit{quite a lot} or \textit{quite
+  a few}.  That is, our analysis allows for a gap between what counts
+as many and what counts as few and thus \textit{not many} is not
+equivalent to \textit{few}.
+ 
 Adopting the particular witness condition predicts the existence of
 COMPSET anaphora as in \nexteg{}.
 \begin{ex} 
@@ -2474,12 +2540,14 @@ from \cite{Evans1980}.
 Few congressmen admire Kennedy, and they are very junior. 
 \end{ex} 
 One way to handle this is to allow both the general and particular
-witness conditions as alternatives. 
+witness conditions as alternatives. Another solution to consider is
+letting the general witness condition be used for absolute
+\textit{few} and the particular witness condition for proportional
+\textit{few}.  This would perhaps be consistent with Kibble's
+(\citeyear{Kibble1997}) observation that complement anaphora seems to be
+associated with monotone decreasing proportional quantifiers.
 
-@@[Need to revise particular witness
-condition to take account of absolute and proportional.  This is not
-correct for either absolute or proportional.  Few dogs barked means Not many dogs barked, not Many dogs
-didn't bark.]      
+@@      
              
 
 \subsection{Some examples}
