@@ -2204,6 +2204,7 @@ We might prefer to have the particular witness condition for
 $s:\text{exist}(P,Q)$ iff $s$ :
   \record{\tfield{x}{$\mathfrak{T}(P)$}\\
         \tfield{e}{$\mathfrak{P}(Q)$\{x\}}}
+\label{ex:existPQ-part}
 \end{ex} 
 Apart from its intuitive simplicity and correspondence to the
 classical DRT treatment of indefinites as well as to the use of
@@ -2547,11 +2548,71 @@ letting the general witness condition be used for absolute
 (\citeyear{Kibble1997}) observation that complement anaphora seems to be
 associated with monotone decreasing proportional quantifiers.
 
-@@      
+The general witness condition for `a\_few$_a$($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+$s:\text{a\_few}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{a\_few}_a^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\end{ex} 
+The general witness condition for `a\_few$_p$($P$,$Q$)' is given in
+\nexteg{}.
+\begin{ex} 
+$s:\text{a\_few}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{a\_few}_p^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}} 
+\end{ex} 
+These will correctly predict the availability of REFSET anaphora as in
+\nexteg{}.
+\begin{ex} 
+A few dogs barked.  They had heard the intruder. 
+\end{ex} 
+If these are the only witness conditions then this will correctly
+predict the unavailability of COMPSET anaphora as shown by \nexteg{},
+where \textit{they} cannot refer to the dogs that did not bark.
+\begin{ex} 
+\#A few dogs barked.  They hadn't heard the intruder 
+\end{ex} 
+     
              
 
 \subsection{Some examples}
 
+In this section we show how these definitions could be
+used to express content for English utterances, ignoring for the
+moment the parametric properties using in Chapter~\ref{ch:commonnouns}
+and expressing the content of a quantified declarative sentence as a
+quantificational ptype rather than a record type containing a
+quantificational ptype as in Chapter~\ref{ch:gram} and subsequent chapters.
+
+\paragraph{\textit{A dog barks}}
+The content of the indefinite article, \textit{a(n)}, is given in
+\nexteg{}.
+\begin{ex} 
+$\lambda Q$:\textit{Ppty} . $\lambda P$:\textit{Ppty} . exist($Q$,$P|_{\mathcal{F}(Q)}$) 
+\end{ex} 
+The content of \textit{a dog} would then be as in \nexteg{}.
+\begin{ex} 
+$\lambda P$:\textit{Ppty}. exist(dog$'$,$P|_{\mathcal{F}(\text{dog}')}$) 
+\end{ex} 
+Finally, the content of \textit{a dog barks} would be as in \nexteg{}.
+\begin{ex} 
+exist(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+\end{ex} 
+Following the particular witness condition for `exist($P$,$Q$)' in
+(\ref{ex:existPQ-part}) we can infer \nexteg{}.
+\begin{ex} 
+$s$ : exist(dog$'$,bark$'|_{\mathcal{F}(dog')}$) iff
+\begin{quote}
+$s$ : \record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
+              \tfield{e}{$\mathfrak{P}$(bark$'|_{\mathcal{F}(\text{dog}')}$)\{x\}}}
+\end{quote} 
+\end{ex} 
+$\mathcal{F}$(dog$'$) is given in \nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+        
 
 
 \section{Anaphora}
