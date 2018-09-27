@@ -2606,12 +2606,66 @@ $s$ : exist(dog$'$,bark$'|_{\mathcal{F}(dog')}$) iff
 \begin{quote}
 $s$ : \record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
               \tfield{e}{$\mathfrak{P}$(bark$'|_{\mathcal{F}(\text{dog}')}$)\{x\}}}
-\end{quote} 
+\end{quote}
+\label{ex:adb-witcond} 
 \end{ex} 
 $\mathcal{F}$(dog$'$) is given in \nexteg{}.
 \begin{ex} 
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e}{dog(x)}} 
+\end{ex} 
+`bark$'|_{\mathcal{F}(\text{dog}')}$' is thus \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{dog(x)}} . \record{\tfield{e}{bark($r$.x)}} 
+\end{ex} 
+This means that `$\mathfrak{P}$(bark$'|_{\mathcal{F}(\text{dog}')}$)'
+is \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$r$.x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}} 
+\end{ex} 
+This means we can restate (\ref{ex:adb-witcond}) as \nexteg{}.
+\begin{ex} 
+$s$ : exist(dog$'$,bark$'|_{\mathcal{F}(dog')}$) iff
+\begin{quote}
+$s$ : \record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
+              \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}} }}
+\end{quote}
+\label{ex:adb-witcond-spelledout} 
+\end{ex} 
+Note that the record type on the right hand side of \preveg{} is
+truth-conditionally equivalent to the simpler record types in
+\nexteg{}, that is, for any pair of the types there is a witness for one of the types just in
+case there is a witness for the other type.
+\begin{ex}
+\begin{subex} 
+\item \record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
+        \tfield{e}{bark(x)}} 
+\item \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{c}{dog(x)}\\
+              \tfield{e}{bark(x)}}
+\end{subex}
+\end{ex} 
+The additional structure in (\ref{ex:adb-witcond-spelledout})
+unnecessary for this example but it will help us when we come to
+donkey anaphora.
+
+We have ignored the additional structure associated with quantifiers
+in Chapter~\ref{ch:gram} and the introduction of context dependence
+using parametric properties and contents as discussed in
+Chapter~\ref{ch:commonnouns} for the sake of readability but this
+additional structure can be added.  For example, the content of the indefinite
+article  could be \nexteg{}, following Chapter~\ref{ch:commonnouns}.
+\begin{ex} 
  
 \end{ex} 
+       
+  
         
 
 
