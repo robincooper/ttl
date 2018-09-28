@@ -2662,9 +2662,42 @@ Chapter~\ref{ch:commonnouns} for the sake of readability but this
 additional structure can be added.  For example, the content of the indefinite
 article  could be \nexteg{}, following Chapter~\ref{ch:commonnouns}.
 \begin{ex} 
- 
+$\lambda Q$:\textit{PPpty} . $\ulcorner\lambda
+r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+                \smalltfield{a}{$Q$.bg}} . $\lambda P$:\textit{Ppty}
+              . \record{\mfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+                        \mfield{scope}{$P|_{\mathfrak{F}(Q)}$}{\textit{Ppty}}\\
+                        \tfield{e}{exist(restr,scope)}}$\urcorner$
 \end{ex} 
-       
+[???? This might change after we have reconsidered the presentation of
+quantifiers in Ch. 5 in the light of this section.] Note that adding
+this additional structure would potentially make the restriction
+(corresponding to MAXSET) and the scope available for anaphora in
+addition to whatever set is supplied by the witness for
+`exist(restr,scope)'.  Thus potentially we could have all of the
+examples of anaphora in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item A dog barked.  They (dogs in general) do when they notice an
+  intruder.
+
+\item A dog barked.  They (the dogs which barked) made such a racket.
+
+\item A dog barked.  It (the dog which barked) heard an intruder. 
+ 
+\end{subex} 
+   
+\end{ex} 
+Of these, \preveg{b} seems very doubtful as a reasonable case of
+anaphora.  However, if we make the pronominal reference generic as
+might be appropriate if we are deriving the anaphoric interpretation
+from a property then the anaphora seems more plausible.
+\begin{ex} 
+A dog barked.  They (dogs in general which barked) frightened me when
+I was a child, but now I remained calm. 
+\end{ex} 
+          
   
         
 
