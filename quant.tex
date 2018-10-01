@@ -2289,7 +2289,8 @@ We will define the particular witness condition for `no($P$,$Q$)' as
 \begin{ex} 
 $s:\text{no}(P,Q)$ iff $s$ :
   \record{\tfield{X}{$\text{every}^w(P)$}\\
-          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg Q\{x\})$}} 
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}} 
+\label{ex:noPQ-part}
 \end{ex} 
 Some evidence that English uses the particular witness condition
 rather than the general one comes from the fact that we can have
@@ -2626,6 +2627,7 @@ $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} .
 \record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$r$.x}{\textit{Ind}}\\
                                         \tfield{e}{dog(x)}}}\\
         \tfield{e}{bark($\mathfrak{c}$.x)}} 
+\label{ex:Pdog_Fbark}
 \end{ex} 
 This means we can restate (\ref{ex:adb-witcond}) as \nexteg{}.
 \begin{ex} 
@@ -2697,7 +2699,42 @@ from a property then the anaphora seems more plausible.
 A dog barked.  They (dogs in general which barked) frightened me when
 I was a child, but now I remained calm. 
 \end{ex} 
-          
+
+\paragraph{\textit{No dog barks}} The simplified content for
+\textit{no dog barks} would be derived in an exactly similar way as
+that for \textit{a dog barks}.  We obtain \nexteg{}.
+\begin{ex} 
+no(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+\end{ex} 
+Following the particular witness condition in (\ref{ex:noPQ-part}), we
+can infer \nexteg{}.
+\begin{ex} 
+$s$ : no(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) iff
+\begin{quote}
+$s$ :
+  \record{\tfield{X}{$\text{every}^w(\text{dog}')$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg
+            \mathfrak{P}(\text{bark}'|_{\mathfrak{F}(\text{dog}')})\{x\})$}}
+\end{quote} 
+\end{ex}
+Given that $\mathfrak{P}(\text{bark}'|_{\mathfrak{F}(\text{dog}')})$
+is (\ref{ex:Pdog_Fbark}) we can restate \preveg{} as \nexteg{}.
+\begin{ex}
+$s$ : no(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) iff
+\begin{quote} 
+$s$ :
+  \record{\tfield{X}{$\text{every}^w(\text{dog}')$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg$
+           \record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}} $)$}} 
+\end{quote}
+\end{ex} 
+That no dog barks just in case every dog is such that it is not a dog
+that barks.  This can be made to take account of the additional
+structure used in Chapter~\ref{ch:commonnouns} in the same way that we
+did for \textit{a dog barks}.   
+             
   
         
 
