@@ -2490,14 +2490,16 @@ for `few$_a$($P$,$Q$)' is given in \nexteg{}.
 \begin{ex} 
 $s:\text{few}_a(P,Q)$ iff $s$ :
   \record{\tfield{X}{$\overline{\text{few}_a^w(P)}$}\\
-          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg Q\{x\})$}}  
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}} 
+\label{ex:fewaPQwitcond-part} 
 \end{ex} 
 The witness condition
 for `few$_p$($P$,$Q$)' is given in \nexteg{}.
 \begin{ex} 
 $s:\text{few}_p(P,Q)$ iff $s$ :
   \record{\tfield{X}{$\overline{\text{few}_p^w(P)}$}\\
-          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg Q\{x\})$}}  
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}} 
+\label{ex:fewpPQwitcond-part} 
 \end{ex}
 
 Why do we use complement witness set types for \textit{few} in the
@@ -2733,8 +2735,79 @@ $s$ :
 That no dog barks just in case every dog is such that it is not a dog
 that barks.  This can be made to take account of the additional
 structure used in Chapter~\ref{ch:commonnouns} in the same way that we
-did for \textit{a dog barks}.   
-             
+did for \textit{a dog barks}.
+
+\paragraph{few dogs bark}  The simplified content for an utterance of
+\textit{few dogs bark} is either \nexteg{a} or \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item few$_a$(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+ 
+\item few$_p$(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+ 
+\end{subex} 
+   
+\end{ex} 
+Following the particular witness conditions in
+(\ref{ex:fewaPQwitcond-part}) and \ref{ex:fewpPQwitcond-part}, we
+obtain \nexteg{a} and \nexteg{b} respectively.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  $s:\text{few}_a(\text{dog}',\text{bark}'|_{\mathcal{F}(\text{dog}')})$
+  iff 
+\begin{quote}
+$s$ :
+  \record{\tfield{X}{$\overline{\text{few}_a^w(\text{dog}')}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(\text{bark}'|_{\mathcal{F}(\text{dog}')})\{x\})$}} 
+\end{quote}
+ 
+\item
+  $s:\text{few}_p(\text{dog}',\text{bark}'|_{\mathcal{F}(\text{dog}')})$
+  iff 
+\begin{quote}
+$s$ :
+  \record{\tfield{X}{$\overline{\text{few}_p^w(\text{dog}')}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(\text{bark}'|_{\mathcal{F}(\text{dog}')})\{x\})$}} 
+\end{quote}
+ 
+\end{subex} 
+   
+\end{ex} 
+As with our treatment of \textit{no} these can be unpacked as
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  $s:\text{few}_a(\text{dog}',\text{bark}'|_{\mathcal{F}(\text{dog}')})$
+  iff 
+\begin{quote}
+$s$ :
+  \record{\tfield{X}{$\overline{\text{few}_a^w(\text{dog}')}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg$\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}}$)$}} 
+\end{quote}
+ 
+\item
+  $s:\text{few}_p(\text{dog}',\text{bark}'|_{\mathcal{F}(\text{dog}')})$
+  iff 
+\begin{quote}
+$s$ :
+  \record{\tfield{X}{$\overline{\text{few}_p^w(\text{dog}')}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg$\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}}$)$}} 
+\end{quote}
+ 
+\end{subex} 
+   
+\end{ex}     
+This, then yields a set up for COMPSET anaphora by providing the set
+in the `X'-field.             
   
         
 
@@ -2819,7 +2892,7 @@ Then \textit{no girl thinks she failed} yields \nexteg{}.
 \begin{ex} 
  \record{\field{quants}{\{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
       . $\lambda P$:\textit{Ppty} . \record{\tfield{e}{no(girl$'$,
-          $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_1$}}))}}$\urcorner$\}}\\
+          $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_1$}})$|_{\mathcal{F}(\text{girl}')}$)}}$\urcorner$\}}\\
 \field{core}{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
       . \record{\tfield{e}{\textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\mathfrak{s}$.x$_1$}})}}$\urcorner$}}
 \end{ex} 
@@ -2832,8 +2905,9 @@ of applying retrieval to \preveg{} is \nexteg{}.
 \begin{ex} 
 \record{\field{quants}{\{\}}\\
         \field{core}{$\ulcorner\lambda\mathfrak{s}$:\textit{Rec}
-          . \record{\tfield{e}{no(girl$'$, $\lambda
-              r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}} .  \textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_1$}{$r$.x$_1$}})})}$\urcorner$}}
+          . \smallrecord{\smalltfield{e}{no(girl$'$, $\lambda
+              r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}\\
+                              \smalltfield{e}{girl(x$_1$)}} .  \textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_1$}{$r$.x$_1$}})})}$\urcorner$}}
 \end{ex} 
      
 \subsection{\textit{A man walked. He whistled.} }
@@ -2844,56 +2918,56 @@ will be \nexteg{}.
 \begin{ex} 
 $\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{exist(man$'$, walk$'$)}} 
 \end{ex} 
-This does not give us a field which \textit{he} could pick up on to
-obtain the anaphoric reference.  However, we can show that the type
-in \nexteg{a} and \nexteg{b} are truth-conditionally equivalent, that is,  \nexteg{a}
-has a witness just in case \nexteg{b} has a witness.
-\begin{ex} 
-\begin{subex} 
+% This does not give us a field which \textit{he} could pick up on to
+% obtain the anaphoric reference.  However, we can show that the type
+% in \nexteg{a} and \nexteg{b} are truth-conditionally equivalent, that is,  \nexteg{a}
+% has a witness just in case \nexteg{b} has a witness.
+% \begin{ex} 
+% \begin{subex} 
  
-\item exist(man$'$, walk$'$) 
+% \item exist(man$'$, walk$'$) 
  
-\item \record{\tfield{x}{\textit{Ind}}\\
-              \tfield{c}{man(x)}\\
-              \tfield{e}{walk(x)}}
+% \item \record{\tfield{x}{\textit{Ind}}\\
+%               \tfield{c}{man(x)}\\
+%               \tfield{e}{walk(x)}}
  
-\end{subex} 
-\label{ex:amw-drt}  
-\end{ex} 
-The argument for this goes as follows.  By an argument parallel to
-that in (\ref{ex:witnessconds-edr}c) we can show that \nexteg{a} and
-\nexteg{b} are equivalent.
-\begin{ex} 
-\begin{subex} 
+% \end{subex} 
+% \label{ex:amw-drt}  
+% \end{ex} 
+% The argument for this goes as follows.  By an argument parallel to
+% that in (\ref{ex:witnessconds-edr}c) we can show that \nexteg{a} and
+% \nexteg{b} are equivalent.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $s$ : exist(man$'$, walk$'$) 
+% \item $s$ : exist(man$'$, walk$'$) 
  
-\item $\{a\mid\exists s'[s':\text{man}(a)]\}\cap\{a\mid\exists
-  s'[s':\text{man}(a)]\wedge\exists s'[s'\underline{\varepsilon}s\wedge s':\text{walk}(a)]\}\not=\emptyset$ 
+% \item $\{a\mid\exists s'[s':\text{man}(a)]\}\cap\{a\mid\exists
+%   s'[s':\text{man}(a)]\wedge\exists s'[s'\underline{\varepsilon}s\wedge s':\text{walk}(a)]\}\not=\emptyset$ 
  
-\end{subex} 
-\label{ex:amw-wit}   
-\end{ex} 
-This entails \nexteg{a} which, because of the arity of `man' and
-`walk', is equivalent to \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% \end{subex} 
+% \label{ex:amw-wit}   
+% \end{ex} 
+% This entails \nexteg{a} which, because of the arity of `man' and
+% `walk', is equivalent to \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\exists a[\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$
+% \item $\exists a[\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$
  
-\item $\exists a[a:\textit{Ind}\wedge\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$ 
+% \item $\exists a[a:\textit{Ind}\wedge\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$ 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-If \preveg{b} is true, then it will be possible to construct a witness
-for (\ref{ex:amw-drt}b).  On the other hand, if $s$ is of type
-(\ref{ex:amw-drt}b), then (\ref{ex:amw-wit}b) will be true so there
-will be a witness for (\ref{ex:amw-drt}a), for example, $s$ itself.
-Thus if it has been asserted that there is a situation of type
-(\ref{ex:amw-drt}a), it is safe to assume that there is a situation of
-type (\ref{ex:amw-drt}b) (assuming that the assertion was true).
-(\ref{ex:amw-drt}b) gives us a field which can be picked up by anaphora.  
+% \end{ex} 
+% If \preveg{b} is true, then it will be possible to construct a witness
+% for (\ref{ex:amw-drt}b).  On the other hand, if $s$ is of type
+% (\ref{ex:amw-drt}b), then (\ref{ex:amw-wit}b) will be true so there
+% will be a witness for (\ref{ex:amw-drt}a), for example, $s$ itself.
+% Thus if it has been asserted that there is a situation of type
+% (\ref{ex:amw-drt}a), it is safe to assume that there is a situation of
+% type (\ref{ex:amw-drt}b) (assuming that the assertion was true).
+% (\ref{ex:amw-drt}b) gives us a field which can be picked up by anaphora.  
 
 @@  
 
