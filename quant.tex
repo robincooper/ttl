@@ -2916,8 +2916,15 @@ Given our strategy for defining the content of quantified sentences in
 terms of generalized quantifiers the content of \textit{a man walked}
 will be \nexteg{}.
 \begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{exist(man$'$, walk$'$)}} 
+$\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{exist(man$'$, walk$'|_{\mathcal{F}(\text{dog}')}$)}} 
+\end{ex}
+We know from our treatment of the witness conditions associated with
+`exist' that \preveg{} is equivalent to \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+              \tfield{e}{$\mathfrak{P}$(walk$'|_{\mathcal{F}(\text{man}')}$)\{x\}}}}} 
 \end{ex} 
+   
 % This does not give us a field which \textit{he} could pick up on to
 % obtain the anaphoric reference.  However, we can show that the type
 % in \nexteg{a} and \nexteg{b} are truth-conditionally equivalent, that is,  \nexteg{a}
