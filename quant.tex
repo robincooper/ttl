@@ -2942,9 +2942,78 @@ pronoun) does not depend on the context and that the `x$_0$' in
 content of the first sentence.  The result we obtain is \nexteg{a}
 which, spelling out the function application in the `e'-field, is
 identical with \nexteg{b}.
+\begin{ex}
+\begin{subex} 
+ 
+\item $\lambda\mathfrak{s}$:\textit{Rec} . 
+\record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+                                                 \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
+         \tfield{e}{\textbf{he$^{\frown}$whistled}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\Uparrow$prev.e.x}})}}   
+ 
+\item $\lambda\mathfrak{s}$:\textit{Rec} . 
+\record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+                                                 \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
+         \tfield{e}{\record{\tfield{e}{whistle($\Uparrow$prev.e.x)}}}} 
+ 
+\end{subex} 
+   
+ 
+\end{ex} 
+
+Now we must consider how we would construct general rules that would
+combine the parametric content of the discourse so far with the
+parametric content of a new declarative sentence added to the
+discourse.  We will first consider the simple case where no anaphora
+occurs (for example, an interpretation of \textit{A man walked.  He
+  whistled} here \textit{he} is refers deictically and is not
+anaphorically related to \textit{a man}).  We will use
+$\mathcal{T}_{\text{curr}}$ to refer to the current parametric
+content of the discourse so far.  (We are making the simplifying
+assumption that the discourse consists of a string of declarative
+sentence utterances.) We will use $\mathcal{T}_{\text{new}}$ to refer
+to the paramtric content of the new (declarative) sentence with which
+we are updating the content of the discourse.  We will use
+$\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ to represent the
+result of updating $\mathcal{T}_{\text{curr}}$ with
+$\mathcal{T}_{\text{new}}$.  The non-anaphoric update is then defined
+as in \nexteg{}.
+\begin{ex} 
+If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$ and
+$\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, then
+$\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ is
+\begin{quote}
+$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})$
+. \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s})$}}
+\end{quote}
+\end{ex} 
+This method of combination is similar to the S-combinator in
+combinatory logic, in that it applies both parametric contents to a
+context, $\mathfrak{s}$.  It abstracts over $\mathfrak{s}$ and makes
+sure that it is of an appropriate type to be an argument to both
+parametric contents.  Rather than applying the first result of
+application to $\mathfrak{s}$ to the second it
+creates a record type involving both the contents.  In addition it
+increments the `x'-labels in the second content so that there will no
+be unintended label clash between the two.
+
+In the case of making a discourse anaphoric connection two additional things
+have to happen.  The pronoun content within $\mathcal{T}_{\text{new}}$
+has to be connected to some path in $\mathcal{T}_{\text{curr}}$ and
+the updated parametric content
+$\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ must be made not
+to depend on the context to determine the pronoun content.  We first
+give a definition which will allow one discourse anaphoric connection
+and we will then generalize this to a set of anaphoric connections.
+The definition given in \preveg{} will be a specific case of this
+general definition, where the set of anaphoric connections is empty.
+The case of a single anaphoric connection is given in \nexteg{}.
 \begin{ex} 
  
 \end{ex} 
+  
+
+  
   
 % This does not give us a field which \textit{he} could pick up on to
 % obtain the anaphoric reference.  However, we can show that the type
