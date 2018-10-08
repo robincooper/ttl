@@ -3009,10 +3009,49 @@ The definition given in \preveg{} will be a specific case of this
 general definition, where the set of anaphoric connections is empty.
 The case of a single anaphoric connection is given in \nexteg{}.
 \begin{ex} 
- 
+If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
+$\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, for any
+$s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))$ and
+$[\ell:v]\in[T_2]_{\text{incr}_x(T_1)}$, then
+$\mathcal{T}_{\text{curr}}+_{\pi,\ell}\mathcal{T}_{\text{new}}$ is
+\begin{quote}
+$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)}\ominus[\ell,v])$
+. \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus[\ell=\text{prev}.\pi])$}}
+\end{quote} 
 \end{ex} 
-  
+Here the dependence of $\mathcal{T}_{\text{new}}$ on $\ell$ is
+discharged locally by requiring that the $\ell$-field contains the
+same as the $\pi$-field from $\mathcal{T}_{\text{curr}}$.  The
+dependence on $\ell$ is thus removed from the domain of the function
+representing the parametric content for the whole discourse.
 
+Now let us consider how we can upgrade \preveg{} to allow for more
+than one pronoun resolution at a time as in an example like \textit{A
+  dog chased a cat.  She didn't catch him.} In order to facilitate
+this we introduce two new operators, $\ominus_{\text{set}}$ and
+$\oplus_{\text{set}}$, which perform $\ominus$ and $\oplus$
+respectively for each member of a set in their second arguments.  Thus
+$\ominus_{\text{set}}$ will substract a set of fields from a record
+type and $\oplus_{\text{set}}$ will add a set of fields to a record.
+We present the upgraded version of \preveg{} in \nexteg{}.
+\begin{ex} 
+If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
+$\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$ and\\
+\hspace*{2em}$\vec{\Pi}\subseteq\{\pi\mid$ for any
+$s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}\times
+[T_2]_{\text{incr}_x(T_1)}$,\\ then
+$\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ is
+\begin{quote}
+$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)}\ominus_{\text{set}}\vec{\Pi}_1$
+.\\ \hspace*{2em} \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\vec{\pi}_2=\text{prev}.\vec{\pi}_1]\mid\vec{\pi}\in\vec{\Pi}\}$}}
+\end{quote} 
+\end{ex} 
+
+This does not express any of the linguistic constraints concerning
+what anaphors can be related to what antecedents.  This will be
+addressed below.
   
   
 % This does not give us a field which \textit{he} could pick up on to
