@@ -683,6 +683,10 @@ f_0)\ldots)\ominus f_n$ where $\{f_0,\ldots,f_n\}$ is $\{f\in T\mid f\
 
 [Is this enough to cover paths which contain $\ell$?]
 
+We will also for convenience use the notation $T\ominus\ell$ to mean
+$T\ominus[\ell:v]$ if $\langle\ell,v\rangle\in T$ or $T$ if there is
+no field labelled $\ell$ in $T$.
+
 We can now define storage as in
 \nexteg{}, where $\sigma$ is an arbitrary sign.
 \begin{ex} 
@@ -2816,6 +2820,7 @@ in the `X'-field.
 \label{sec:anaph}
 
 \subsection{\textit{No girl thinks she failed}}
+\label{sec:direct-binding}
 
 Given the strategy we suggested in Section~\ref{sec:unbound} for
 interpreting unbound pronouns  the foreground of a content for
@@ -2911,7 +2916,7 @@ of applying retrieval to \preveg{} is \nexteg{}.
 \end{ex} 
      
 \subsection{\textit{A man walked. He whistled.} }
-
+\label{sec:discourse-anaph}
 Given our strategy for defining the content of quantified sentences in
 terms of generalized quantifiers the content of \textit{a man walked}
 will be \nexteg{}.
@@ -3043,9 +3048,9 @@ $s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}\times
 [T_2]_{\text{incr}_x(T_1)}$,\\ then
 $\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ is
 \begin{quote}
-$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)}\ominus_{\text{set}}\vec{\Pi}_1$
+$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})\ominus_{\text{set}}\vec{\Pi}_1$
 .\\ \hspace*{2em} \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
-          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\vec{\pi}_2=\text{prev}.\vec{\pi}_1]\mid\vec{\pi}\in\vec{\Pi}\}$}}
+          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\vec{\pi}_2=\text{prev}.\vec{\pi}_1]\mid\vec{\pi}\in\vec{\Pi}\})$}}
 \end{quote} 
 \end{ex} 
 
@@ -3109,6 +3114,41 @@ addressed in Section~\ref{sec:struc-cntxt}.
 
 \subsection{\textit{no dog which chases a cat catches it}}
 \label{sec:donkey-anaph}
+[Background on donkey anaphora????]
+Our treatment of donkey anaphora will employ a similar technique to
+that in \preveg{}.  This means that the anaphoric resolution of
+\textit{it} in \nexteg{a} will be more like the kind of discourse
+anaphora discussed in Section~\ref{sec:discourse-anaph} rather than
+direct binding of a pronoun by a quantifier as in
+Section~\ref{sec:direct-binding}.  Some evidence for this can be taken
+from \nexteg{b}, where it is difficult to relate the singular pronoun
+\textit{it} to \textit{every cat}, and \nexteg{c} where the plural
+pronoun \textit{them} can be related \textit{every cat}.  This follows
+the pattern of discourse anaphora illustrated in \nexteg{d} and
+\nexteg{e}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item no dog which chases a cat catches it 
+ 
+\item no dog which chases every cat catches it
+
+\item no dog which chases every cat catches them
+
+\item Every cat miaowed.  It wanted milk.
+
+\item Every cat miaowed.  They wanted milk. 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+The basic content related to \textit{no} is given in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+P$:\textit{Ppty} . no($Q$,$P|_{\mathcal{F}(Q)}$) 
+\end{ex} 
+    
 
 
 \section{Structured contexts, binding principles and projection}
