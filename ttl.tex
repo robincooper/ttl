@@ -16,8 +16,9 @@
 \usepackage{qtree}
 \usepackage{makeidx}
 \usepackage{covington}
-% \usepackage{tikz}
+\usepackage{tikz}
 % \usepackage{tikz-qtree}
+\usepackage{adjustbox}
 %\usepackage{arcs}
 %\usepackage{accents}
 
@@ -44,7 +45,31 @@
 
 \setsecnumdepth{subsubsection}
 
+%TikZ
 
+\usetikzlibrary{babel}
+\usetikzlibrary{automata}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{fit}
+
+
+% Giotto: "Lamentation of Christ" - 1305-10
+\definecolor{Lamentation1}{rgb}{.16,.09,.06} % Dark hair of man
+\definecolor{Lamentation2}{rgb}{.91,.91,.94} % White robe at lower left
+\definecolor{Lamentation3}{rgb}{.19,.22,.29} % Cloak of Christ
+\definecolor{Lamentation4}{rgb}{.94,.94,.91} % Skin of Christ
+\definecolor{Lamentation5}{rgb}{.55,.26,.22} % Mary Magdalene dress
+\definecolor{Lamentation6}{rgb}{.19,.26,.52} % Sky
+\definecolor{Lamentation7}{rgb}{.84,.74,.71} % Mary Magdalene sleeve
+
+\colorlet{ObjectCol}{Lamentation3}
+\colorlet{BTypeCol}{Lamentation6}
+\colorlet{FirstTypeCol}{Lamentation6}
+\colorlet{SecondTypeCol}{Lamentation6}
+\colorlet{BorderCol}{Lamentation1}
+\colorlet{ModalCol}{Lamentation7}
 
 \newenvironment{display}{\begin{center}}{\end{center}}
 
@@ -328,15 +353,15 @@
 I am grateful to many people for discussion which has led to
 significant changes in this material.  Among them are: Ellen
 Breitholtz, Liz Coppock, Simon Dobnik,
-Tim Fernando, Jonathan Ginzburg, Staffan Larsson, Bengt Nordström,
+Tim Fernando, Jonathan Ginzburg, Staffan Larsson, Andy Lücking, Bengt Nordström,
 Aarne Ranta, Kwong-Cheong Wong.  None of these people is responsible for what I have done
 with their ideas and suggestions.
 
 This research was supported in part by the following projects: Records, types
 and computational dialogue semantics, Vetenskapsrådet, 2002-4879,
-Library-based grammar engineering, Vetenskapsrådet, 2005-4211, and Semantic
+Library-based grammar engineering, Vetenskapsrådet, 2005-4211, Semantic
 analysis of interaction and coordination in dialogue (SAICD),
-Vetenskapsrådet, 2009-1569.  
+Vetenskapsrådet, 2009-1569, and Vetenskapsrådet project 2014-39 for the establishment of the Centre for Linguistic Theory and Studies in Probability (CLASP) at the University of Gothenburg.  
 
 \mainmatter
 

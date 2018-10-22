@@ -162,7 +162,155 @@ their own right, not, for example, as collections of objects.
 Diagrammatically we can represent this as in Figure~\ref{fig:basic}
 where object $a$ is of type $T_1$.
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{basic}
+%\includegraphics[width=\textwidth]{basic}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[
+  type/.style={circle, inner sep=0pt, minimum size=6pt, ball color=BTypeCol},
+  firsttype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=FirstTypeCol},
+  secondtype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=SecondTypeCol},
+  objects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ObjectCol},
+  modalobjects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ModalCol}
+  ]
+
+  % basic types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75
+    ]
+    \filldraw [fill=BTypeCol, draw=BorderCol, thick, fill opacity=0.5] (0,0) rectangle (8,2);
+
+    \foreach \x/\y in {0.5/1.3, 1.4/1.6, 1.8/1.3, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.4/0.9, 4.7/1, 5.5/0.3, 5.6/1.1, 5.5/1.7, 6.4/1.2, 6.7/1.6} {
+      \node [type] at (\x,\y) {};
+    }
+
+    \node [coordinate] (btypeleft) at (0,1) {};
+    \node [coordinate] (btyperight) at (8,1) {};
+
+    \node [type, label=above:$T_1$] (t1) at (1.3,0.6) {};
+    \node [type, label=above:$T_2$] (t2) at (3.1,0.5) {};
+  \end{scope}    
+
+
+  % objects:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-100
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (5,0) ellipse (6 and 1);
+
+    \foreach \a/\b in {5.5/0.7, 6.4/0.2, 6.7/0.6, 7/0, 7.5/0.35, 8/-0.3, 8.1/0.2, 8.7/0, 9/0.2, 10/0.1} {
+      \node [objects] at (\a,\b) {};
+    }
+    % for T1 from BType:
+    \node [modalobjects, label=above:$a$] (o1) at (0.3,-0.1) {}; 
+    \node [objects] (o2) at (1,0.35) {}; 
+    \node [objects] (o3) at (1.6,-0.2) {};
+    \node [ellipse, fit=(o1) (o2) (o3), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.3] (fitA) {};
+    \draw [BTypeCol, thick] (t1) -- (fitA.east);
+    \draw [BTypeCol, thick] (t1) -- (fitA.west);
+
+    % for T2 from BType:
+    \node [objects] (o4) at (2.6,-0.5) {};
+    \node [objects] (o5) at (3.1,-0.5) {};
+    \node [objects] (o6) at (3.3,-0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitB) {};
+    \draw [BTypeCol, thick] (t2) -- (fitB.east);
+    \draw [BTypeCol, thick] (t2) -- (fitB.west);
+
+    % % for T2 from Type1:
+    % \node [objects] (o7) at (4,0.4) {};
+    % \node [objects] (o8) at (4.4,0) {}; 
+    % \node [objects] (o9) at (4.7,0.1) {};
+    % \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9), yscale=0.6, xscale=0.9, draw=FirstTypeCol, thick, fill=FirstTypeCol, fill opacity=0.2] (fitC) {};
+
+    % % for T2 from Type2:
+    % \node [objects] (o10) at (5.5,-0.3) {};
+    % \node [objects] (o11) at (5.6,-0.1) {};
+    % \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9) (o10) (o11), yscale=0.7, xscale=0.8, draw=SecondTypeCol, thick, fill=SecondTypeCol, fill opacity=0.2] (fitD) {};
+  \end{scope}
+
+
+  % % modal types:
+  % \begin{scope}[
+  %   % every node/.append style={yslant=0,xslant=1.75},
+  %   %yslant=0,xslant=1.75,
+  %   yshift=-35, 
+  %   xshift=220
+  %   ]
+  %   \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (3.5,0) ellipse (4 and 0.75);
+
+  %   \foreach \a/\b in {0.3/-0.1, 1.5/-0.3, 3.9/0.2, 7/0} {
+  %     \node [objects] at (\a,\b) {};
+  %   }
+  %   \node [modalobjects, label=above:$a$] at (0.7,0) {};
+  %   \node [objects] (i1) at (5.7,-0.2) {};
+  %   \node [objects] (i2) at (6.1,0.3) {};
+  %   \node [objects] (i3) at (5,0) {};
+  %   \node [ellipse, fit=(i1) (i2) (i3), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] {};
+
+  %   \node [objects] (i4) at (1.6,0.1) {};
+  %   \node [objects] (i5) at (2,0.2) {};
+  %   \node [modalobjects, label=above:$b$] (i6) at (2.5,-0.3) {};
+  %   \node [objects] (i7) at (2.7,0.35) {};
+  %   \node [ellipse, fit=(i4) (i5) (i6) (i7), yscale=0.7, xscale=1.1, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] {};
+  % \end{scope}
+
+
+  % % Type1:
+  % \begin{scope}[
+  %   % every node/.append style={yslant=0,xslant=1.75},
+  %   yslant=0,xslant=1.75,
+  %   xshift=-100,
+  %   yshift=80
+  %   ]
+  %   \filldraw [fill=FirstTypeCol, draw=BorderCol, thick, fill opacity=0.3] (0,0) rectangle (8,2);
+  %   \node [coordinate] (firsttypeleft) at (0,1) {};
+  %   \node [coordinate] (firsttyperight) at (8,1) {};
+
+  %   \foreach \x/\y in {0.45/1.4, 1.4/1.6, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.7/1, 5.5/0.3, 5.6/1.1,  6.7/1.6} {
+  %     \node [firsttype] at (\x,\y) {};
+  %   }
+
+  %   \node [firsttype, label=above:$T_1$] (ft1) at (1.8,1.1) {};
+  %   \node [firsttype, label=above:$T_2$] (ft2) at (5.8,0.7) {};
+  %   \node [firsttype, label=above:$T_3$] (ft3) at (6.4,1.2) {};
+  %   \node [firsttype, label=above:{\textbf{Type$^1$}}] (ft) at (4,0.4) {};
+
+  %   \draw [FirstTypeCol, thick] (ft) -- (btypeleft);
+  %   \draw [FirstTypeCol, thick] (ft) -- (btyperight);
+    
+  %   \draw [FirstTypeCol, thick] (ft2) -- (fitC.east);
+  %   \draw [FirstTypeCol, thick] (ft2) -- (fitC.west);
+  % \end{scope}    
+
+
+  % % Type2:
+  % \begin{scope}[
+  %   % every node/.append style={yslant=0,xslant=1.75},
+  %   yslant=0,xslant=1.75,
+  %   xshift=-200,
+  %   yshift=160
+  %   ]
+  %   \filldraw [fill=SecondTypeCol, draw=BorderCol, thick, fill opacity=0.1] (0,0) rectangle (8,2);
+  %   \foreach \x/\y in {1.4/1.6, 1.9/0.5, 3.2/1.5, 4.7/1, 5.4/1.2, 5.8/0.3, 6/0.3,  6.2/1.6} {
+  %     \node [secondtype] at (\x,\y) {};
+  %   }
+
+  %   \node [secondtype, label=above:$T_1$] (st1) at (1.2,1) {};
+  %   \node [secondtype, label=above:$T_2$] (st2) at (4.8,0.7) {};
+  %   \node [secondtype, label=above:$T_3$] (st3) at (2.6,1.3) {};
+  %   \node [secondtype, label=above:{\textbf{Type$^2$}}] (st) at (3.4,0.5) {};
+
+  %   \draw [SecondTypeCol, thick] (st) -- (firsttypeleft);
+  %   \draw [SecondTypeCol, thick] (st) -- (firsttyperight);
+    
+  %   \draw [SecondTypeCol, thick] (st2) -- (fitD.east);
+  %   \draw [SecondTypeCol, thick] (st2) -- (fitD.west);
+  % \end{scope}    
+\end{tikzpicture}
+\end{adjustbox}
+
 \caption{System of basic types}
 \label{fig:basic}
 \end{figure}
@@ -732,7 +880,28 @@ So we might draw an informal diagram something like
 Figure~\ref{fig:fetch}.
 \begin{figure} 
 
-\includegraphics[width=6in]{fetch}
+%\includegraphics[width=6in]{fetch}
+
+\hspace*{-4em}\begin{tikzpicture}[
+  play/.style={rectangle, fill=Lamentation5, draw=Lamentation1, text=white, text depth=0.25ex, text height=1.5ex}
+  ]
+
+\node [play, pin=above:\textbf{Begin}] (p1) {pick\_up($a,c$)};
+\node [play, right=of p1] (p2) {attract\_attention($a,b$)};
+\node [play, right=of p2] (p3) {throw($a,c$)};
+\node [play, below=1.5 of p1] (p4) {run\_after($b,c$)};
+\node [play, right=of p4] (p5) {pick\_up($b,c$)};
+\node [play, right=of p5, pin=below:\textbf{End}] (p6) {return($b,c,a$)};
+
+\path [-{Stealth[]}, thick] 
+(p1) edge [bend left] (p2)
+(p2) edge [bend left] (p3)
+(p3) edge [out=240, in=60] (p4)
+(p4) edge [bend left] (p5)
+(p5) edge [bend left] (p6)
+(p6) edge [out=210, in=190, looseness=1.7] (p1);  
+\end{tikzpicture}
+
 
 \caption{play\_fetch($a$,$b$,$c$)}
 \label{fig:fetch}
@@ -750,7 +919,32 @@ finite state automata something like what we have represented in
 Figure~\ref{fig:fetch-fs}.
 \begin{figure} 
 
-\includegraphics[width=6in]{fetch-fs}
+%\includegraphics[width=6in]{fetch-fs}
+
+\begin{tikzpicture}[
+  node distance=3cm, 
+  on grid,
+  every state/.style={fill=Lamentation2},
+  ]
+
+\node [state, initial] (n0) {0};
+\node [state] (n1) [right=of n0] {1};
+\node [state] (n2) [right=of n1] {2};
+\node [state] (n3) [right=of n2] {3};
+\node [state] (n4) [below=of n3] {4};
+\node [state] (n5) [left=of n4] {5};
+\node [state, accepting] (n6) [left=of n5] {6};
+
+\path [-{Stealth[]}, thick] 
+(n0) edge [bend left] node [above] {pick\_up($a,c$)} (n1)
+(n1) edge [bend left] node [above] {attract\_attention($a,b$)} (n2)
+(n2) edge [bend left] node [above] {throw($a,c$)} (n3)
+(n3) edge [bend left] node [right] {run\_after($b,c$)} (n4)
+(n4) edge [bend left] node [below] {pick\_up($b,c$)} (n5)
+(n5) edge [bend left] node [below] {return($b,c,a$)} (n6)
+(n6) edge [bend left] node [left] {pick\_up($a,c$)} (n1);
+\end{tikzpicture}
+
 
 \caption{play\_fetch($a$,$b$,$c$) as a finite state machine}
 \label{fig:fetch-fs}
@@ -1650,7 +1844,161 @@ possibilities, one where the extensions of types $T_1$ and $T_2$
 overlap and another possibility where they do not.  
 
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{modal}
+%\includegraphics[width=\textwidth]{modal}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[
+  type/.style={circle, inner sep=0pt, minimum size=6pt, ball color=BTypeCol},
+  firsttype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=FirstTypeCol},
+  secondtype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=SecondTypeCol},
+  objects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ObjectCol},
+  modalobjects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ModalCol}
+  ]
+
+  % basic types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75
+    ]
+    \filldraw [fill=BTypeCol, draw=BorderCol, thick, fill opacity=0.5] (0,0) rectangle (8,2);
+
+    \foreach \x/\y in {0.5/1.3, 1.4/1.6, 1.8/1.3, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.4/0.9, 4.7/1, 5.5/0.3, 5.6/1.1, 5.5/1.7, 6.4/1.2, 6.7/1.6} {
+      \node [type] at (\x,\y) {};
+    }
+
+    \node [coordinate] (btypeleft) at (0,1) {};
+    \node [coordinate] (btyperight) at (8,1) {};
+
+    \node [type, label=above:$T_1$] (t1) at (1.3,0.6) {};
+    \node [type, label=above:$T_2$] (t2) at (4.5,0.5) {};
+  \end{scope}    
+
+
+  % objects:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-100
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (5,0) ellipse (6 and 1);
+
+    \foreach \a/\b in {5.5/0.7, 6.4/0.2, 6.7/0.6, 7/0, 7.5/0.35, 8/-0.3, 8.1/0.2, 8.7/0, 9/0.2, 10/0.1} {
+      \node [objects] at (\a,\b) {};
+    }
+    % for T1 from BType:
+    \node [modalobjects, label=above:$a$] (o1) at (0.3,-0.1) {}; 
+    \node [objects] (o2) at (1,0.35) {}; 
+    \node [objects] (o3) at (1.6,-0.2) {};
+    \node [ellipse, fit=(o1) (o2) (o3), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.3] (fitA) {};
+    \draw [BTypeCol, thick] (t1) -- (fitA.east);
+    \draw [BTypeCol, thick] (t1) -- (fitA.west);
+
+    % for T2 from BType:
+    \node [objects] (o4) at (2.6,-0.5) {};
+    \node [objects] (o5) at (3.1,-0.5) {};
+    \node [objects] (o6) at (3.3,-0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitB) {};
+    \draw [BTypeCol, thick] (t2) -- (fitB.east);
+    \draw [BTypeCol, thick] (t2) -- (fitB.west);
+
+    % % for T2 from Type1:
+    % \node [objects] (o7) at (4,0.4) {};
+    % \node [objects] (o8) at (4.4,0) {}; 
+    % \node [objects] (o9) at (4.7,0.1) {};
+    % \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9), yscale=0.6, xscale=0.9, draw=FirstTypeCol, thick, fill=FirstTypeCol, fill opacity=0.2] (fitC) {};
+
+    % % for T2 from Type2:
+    % \node [objects] (o10) at (5.5,-0.3) {};
+    % \node [objects] (o11) at (5.6,-0.1) {};
+    % \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9) (o10) (o11), yscale=0.7, xscale=0.8, draw=SecondTypeCol, thick, fill=SecondTypeCol, fill opacity=0.2] (fitD) {};
+  \end{scope}
+
+
+  % modal types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-35, 
+    xshift=220
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (3.5,0) ellipse (4 and 0.75);
+
+    \foreach \a/\b in {0.3/-0.1, 1.5/-0.3, 3.9/0.2, 7/0} {
+      \node [objects] at (\a,\b) {};
+    }
+    \node [modalobjects, label=above:$a$] at (0.7,0) {};
+    \node [objects] (i1) at (5.7,-0.2) {};
+    \node [objects] (i2) at (6.1,0.3) {};
+    \node [objects] (i3) at (5,0) {};
+    \node [ellipse, fit=(i1) (i2) (i3), yscale=0.7, draw=BTypeCol,
+    thick, fill=BTypeCol, fill opacity=0.2] (fitAA) {};
+    \draw [BTypeCol, thick] (t2) -- (fitAA.north);
+    \draw [BTypeCol, thick] (t2) -- (fitAA.south west);
+
+    \node [objects] (i4) at (1.6,0.1) {};
+    \node [objects] (i5) at (2,0.2) {};
+    \node [modalobjects, label=above:$b$] (i6) at (2.5,-0.3) {};
+    \node [objects] (i7) at (2.7,0.35) {};
+    \node [ellipse, fit=(i4) (i5) (i6) (i7), yscale=0.7, xscale=1.1,
+    draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitBB) {};
+    \draw [BTypeCol, thick] (t1) -- (fitBB.north);
+    \draw [BTypeCol, thick] (t1) -- (fitBB.south west);
+  \end{scope}
+
+
+  % % Type1:
+  % \begin{scope}[
+  %   % every node/.append style={yslant=0,xslant=1.75},
+  %   yslant=0,xslant=1.75,
+  %   xshift=-100,
+  %   yshift=80
+  %   ]
+  %   \filldraw [fill=FirstTypeCol, draw=BorderCol, thick, fill opacity=0.3] (0,0) rectangle (8,2);
+  %   \node [coordinate] (firsttypeleft) at (0,1) {};
+  %   \node [coordinate] (firsttyperight) at (8,1) {};
+
+  %   \foreach \x/\y in {0.45/1.4, 1.4/1.6, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.7/1, 5.5/0.3, 5.6/1.1,  6.7/1.6} {
+  %     \node [firsttype] at (\x,\y) {};
+  %   }
+
+  %   \node [firsttype, label=above:$T_1$] (ft1) at (1.8,1.1) {};
+  %   \node [firsttype, label=above:$T_2$] (ft2) at (5.8,0.7) {};
+  %   \node [firsttype, label=above:$T_3$] (ft3) at (6.4,1.2) {};
+  %   \node [firsttype, label=above:{\textbf{Type$^1$}}] (ft) at (4,0.4) {};
+
+  %   \draw [FirstTypeCol, thick] (ft) -- (btypeleft);
+  %   \draw [FirstTypeCol, thick] (ft) -- (btyperight);
+    
+  %   \draw [FirstTypeCol, thick] (ft2) -- (fitC.east);
+  %   \draw [FirstTypeCol, thick] (ft2) -- (fitC.west);
+  % \end{scope}    
+
+
+  % % Type2:
+  % \begin{scope}[
+  %   % every node/.append style={yslant=0,xslant=1.75},
+  %   yslant=0,xslant=1.75,
+  %   xshift=-200,
+  %   yshift=160
+  %   ]
+  %   \filldraw [fill=SecondTypeCol, draw=BorderCol, thick, fill opacity=0.1] (0,0) rectangle (8,2);
+  %   \foreach \x/\y in {1.4/1.6, 1.9/0.5, 3.2/1.5, 4.7/1, 5.4/1.2, 5.8/0.3, 6/0.3,  6.2/1.6} {
+  %     \node [secondtype] at (\x,\y) {};
+  %   }
+
+  %   \node [secondtype, label=above:$T_1$] (st1) at (1.2,1) {};
+  %   \node [secondtype, label=above:$T_2$] (st2) at (4.8,0.7) {};
+  %   \node [secondtype, label=above:$T_3$] (st3) at (2.6,1.3) {};
+  %   \node [secondtype, label=above:{\textbf{Type$^2$}}] (st) at (3.4,0.5) {};
+
+  %   \draw [SecondTypeCol, thick] (st) -- (firsttypeleft);
+  %   \draw [SecondTypeCol, thick] (st) -- (firsttyperight);
+    
+  %   \draw [SecondTypeCol, thick] (st2) -- (fitD.east);
+  %   \draw [SecondTypeCol, thick] (st2) -- (fitD.west);
+  % \end{scope}    
+\end{tikzpicture}
+\end{adjustbox}
+
 \caption{Modal system of basic types}
 \label{fig:modal}
 \end{figure}
@@ -1845,7 +2193,164 @@ Figure~\ref{fig:intensionalmodal} represents an intensional modal type
 system where we indicate just the initial
 three orders of an infinite hierarchy of type orders.
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{intensionalmodal}
+%\includegraphics[width=\textwidth]{intensionalmodal}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[
+  type/.style={circle, inner sep=0pt, minimum size=6pt, ball color=BTypeCol},
+  firsttype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=FirstTypeCol},
+  secondtype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=SecondTypeCol},
+  objects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ObjectCol},
+  modalobjects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ModalCol}
+  ]
+
+  % basic types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75
+    ]
+    \filldraw [fill=BTypeCol, draw=BorderCol, thick, fill opacity=0.5] (0,0) rectangle (8,2);
+
+    \foreach \x/\y in {0.5/1.3, 1.4/1.6, 1.8/1.3, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.4/0.9, 4.7/1, 5.5/0.3, 5.6/1.1, 5.5/1.7, 6.4/1.2, 6.7/1.6} {
+      \node [type] at (\x,\y) {};
+    }
+
+    \node [coordinate] (btypeleft) at (0,1) {};
+    \node [coordinate] (btyperight) at (8,1) {};
+
+    \node [type, label=above:$T_1$] (t1) at (1.3,0.6) {};
+    \node [type, label=above:$T_2$] (t2) at (4.5,0.5) {};
+  \end{scope}    
+
+
+  % objects:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-100
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (5,0) ellipse (6 and 1);
+
+    \foreach \a/\b in {5.5/0.7, 6.4/0.2, 6.7/0.6, 7/0, 7.5/0.35, 8/-0.3, 8.1/0.2, 8.7/0, 9/0.2, 10/0.1} {
+      \node [objects] at (\a,\b) {};
+    }
+    % for T1 from BType:
+    \node [objects] (o1) at (0.3,-0.1) {}; 
+    \node [objects] (o2) at (1,0.35) {}; 
+    \node [objects] (o3) at (1.6,-0.2) {};
+    \node [ellipse, fit=(o1) (o2) (o3), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.3] (fitA) {};
+    \draw [BTypeCol, thick] (t1) -- (fitA.east);
+    \draw [BTypeCol, thick] (t1) -- (fitA.west);
+
+    % for T2 from BType:
+    \node [objects] (o4) at (2.6,-0.5) {};
+    \node [objects] (o5) at (3.1,-0.5) {};
+    \node [objects] (o6) at (3.3,-0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6), yscale=0.7, xscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitB) {};
+    \draw [BTypeCol, thick] (t2) -- (fitB.east);
+    \draw [BTypeCol, thick] (t2) -- (fitB.west);
+
+    % for T2 from Type1:
+    \node [objects] (o7) at (4,0.4) {};
+    \node [objects] (o8) at (4.4,0) {}; 
+    \node [objects] (o9) at (4.7,0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9), yscale=0.9, xscale=0.8, draw=FirstTypeCol, thick, fill=FirstTypeCol, fill opacity=0.2] (fitC) {};
+
+    % for T2 from Type2:
+    \node [objects] (o10) at (5.5,-0.3) {};
+    \node [objects] (o11) at (5.6,-0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9) (o10) (o11), yscale=0.95, xscale=0.85, draw=SecondTypeCol, thick, fill=SecondTypeCol, fill opacity=0.2] (fitD) {};
+  \end{scope}
+
+
+  % modal types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-35, 
+    xshift=220
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (3.5,0) ellipse (4 and 0.75);
+
+    \foreach \a/\b in {0.3/-0.1, 1.5/-0.3, 3.9/0.2, 7/0} {
+      \node [objects] at (\a,\b) {};
+    }
+    \node [objects] at (0.7,0) {};
+    \node [objects] (i1) at (5.7,-0.2) {};
+    \node [objects] (i2) at (6.1,0.3) {};
+    \node [objects] (i3) at (5,0) {};
+    \node [ellipse, fit=(i1) (i2) (i3), yscale=0.7, draw=BTypeCol,
+    thick, fill=BTypeCol, fill opacity=0.2] (fitAA) {};
+\draw [BTypeCol, thick] (t2) -- (fitAA.north);
+    \draw [BTypeCol, thick] (t2) -- (fitAA.south west);
+
+    \node [objects] (i4) at (1.6,0.1) {};
+    \node [objects] (i5) at (2,0.2) {};
+    \node [objects] (i6) at (2.5,-0.3) {};
+    \node [objects] (i7) at (2.7,0.35) {};
+    \node [ellipse, fit=(i4) (i5) (i6) (i7), yscale=0.7, xscale=1.1,
+    draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitBB) {};
+    \draw [BTypeCol, thick] (t1) -- (fitBB.north);
+    \draw [BTypeCol, thick] (t1) -- (fitBB.south west);
+  \end{scope}
+
+
+  % Type1:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75,
+    xshift=-100,
+    yshift=80
+    ]
+    \filldraw [fill=FirstTypeCol, draw=BorderCol, thick, fill opacity=0.3] (0,0) rectangle (8,2);
+    \node [coordinate] (firsttypeleft) at (0,1) {};
+    \node [coordinate] (firsttyperight) at (8,1) {};
+
+    \foreach \x/\y in {0.45/1.4, 1.4/1.6, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.7/1, 5.5/0.3, 5.6/1.1,  6.7/1.6} {
+      \node [firsttype] at (\x,\y) {};
+    }
+
+    \node [firsttype, label=above:$T_1$] (ft1) at (1.8,1.1) {};
+    \node [firsttype, label=above:$T_2$] (ft2) at (5.8,0.7) {};
+    \node [firsttype, label=above:$T_3$] (ft3) at (6.4,1.2) {};
+    \node [firsttype, label=above:{\textbf{Type$^1$}}] (ft) at (4,0.4) {};
+
+    \draw [FirstTypeCol, thick] (ft) -- (btypeleft);
+    \draw [FirstTypeCol, thick] (ft) -- (btyperight);
+    
+    \draw [FirstTypeCol, thick] (ft2) -- (fitC.east);
+    \draw [FirstTypeCol, thick] (ft2) -- (fitC.west);
+  \end{scope}    
+
+
+  % Type2:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75,
+    xshift=-200,
+    yshift=160
+    ]
+    \filldraw [fill=SecondTypeCol, draw=BorderCol, thick, fill opacity=0.1] (0,0) rectangle (8,2);
+    \foreach \x/\y in {1.4/1.6, 1.9/0.5, 3.2/1.5, 4.7/1, 5.4/1.2, 5.8/0.3, 6/0.3,  6.2/1.6} {
+      \node [secondtype] at (\x,\y) {};
+    }
+
+    \node [secondtype, label=above:$T_1$] (st1) at (1.2,1) {};
+    \node [secondtype, label=above:$T_2$] (st2) at (4.8,0.7) {};
+    \node [secondtype, label=above:$T_3$] (st3) at (6.4,1.2) {};
+    \node [secondtype, label=above:{\textbf{Type$^1$}}] (st4) at
+    (3.4,0.5) {};
+    \node [secondtype, label=above:{\textbf{Type$^2$}}] (st) at
+    (4.0,1.7) {};
+
+    \draw [SecondTypeCol, thick] (st) -- (firsttypeleft);
+    \draw [SecondTypeCol, thick] (st) -- (firsttyperight);
+    
+    \draw [SecondTypeCol, thick] (st2) -- (fitD.east);
+    \draw [SecondTypeCol, thick] (st2) -- (fitD.west);
+  \end{scope}    
+\end{tikzpicture}
+\end{adjustbox}
+
 \caption{Intensional modal type system}
 \label{fig:intensionalmodal}
 \end{figure}
