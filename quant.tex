@@ -800,6 +800,7 @@ same incrementation.
 %[Grammar to be added.]
 
 \section{Long distance dependencies}
+\label{sec:long-distance}
 
 Let us consider how to derive the content of \textit{who Sam hugged}
 as a relative clause.  We use \textbf{hug}$_V$ to represent the
@@ -3148,7 +3149,16 @@ The basic content related to \textit{no} is given in \nexteg{}.
 $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
 P$:\textit{Ppty} . no($Q$,$P|_{\mathcal{F}(Q)}$) 
 \end{ex} 
-    
+As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
+relative pronoun \textit{which} has the content specified for
+\textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
+by not accounting for the gender distinction between the two.)  We
+repeat this in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
+  . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
+\end{ex} 
+      
 
 
 \section{Structured contexts, binding principles and projection}
