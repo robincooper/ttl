@@ -3158,6 +3158,44 @@ repeat this in \nexteg{}.
 $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
   . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
 \end{ex} 
+The basic content of an utterance of \textit{chase} is given in
+\nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{chase($r_1$.x, $r_2$.x)}} 
+\end{ex} 
+The indefinite article $a$ will have the content in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+P$:\textit{Ppty} . \record{\tfield{e}{exist($Q$, $P|_{\mathcal{F}(Q)}$)}} 
+\end{ex} 
+Thus the phrase \textit{a cat} will have the content in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+. \record{\tfield{e}{exist(cat$'$, $P|_{\mathcal{F}(\text{cat}')}$)}} 
+\end{ex} 
+We will refer to \preveg{} as \textbf{a$^\frown$cat}.  Given this the
+content of \textit{chase a cat} will be \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{chase($r_1$.x,
+    \textbf{a$^\frown$cat}($\mathfrak{s}$))}}
+\label{ex:chaseacat-noexport} 
+\end{ex} 
+Given that \textit{chase} is an extensional verb it will obey a
+constraint like (\ref{ex:mp-find}) on p.~\pageref{ex:mp-find}, as
+given in \nexteg{}.
+\begin{ex} 
+$e$ : chase($a$, $Q$) iff $e$ : $Q$($\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{chase$^{\dagger}$($a$,
+$r$.x)}}) 
+\end{ex} 
+This means that we can construe the content to be a function which
+returns an equivalent type to that returned in
+(\ref{ex:chaseacat-noexport}).  This new content is given in \nexteg{}.         
       
 
 
