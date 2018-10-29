@@ -3153,7 +3153,7 @@ As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
 relative pronoun \textit{which} has the content specified for
 \textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
 by not accounting for the gender distinction between the two.)  We
-repeat this in \nexteg{}.
+repeat this in \nexteg{} and will refer to it here as \textbf{which}.
 \begin{ex} 
 $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
   . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
@@ -3195,7 +3195,70 @@ $r$.x)}})
 \end{ex} 
 This means that we can construe the content to be a function which
 returns an equivalent type to that returned in
-(\ref{ex:chaseacat-noexport}).  This new content is given in \nexteg{}.         
+(\ref{ex:chaseacat-noexport}).  This new content is given in
+\nexteg{}.
+\begin{ex} 
+$\lambda s$:\textit{Rec} $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{\textbf{a$^\frown$cat}($\mathfrak{s}$)($\lambda
+      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+      . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+\end{ex} 
+\preveg{} is equivalent to \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{exist(cat$'$, $\lambda
+    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                    \smalltfield{e}{cat(x)}}
+                  . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+\end{ex} 
+In turn, \preveg{} is equivalent to \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+                               \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                                   \smalltfield{e}{cat(x)}}}\\
+                   \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x,
+                         $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}
+\label{ex:chase-a-cat} 
+\end{ex} 
+We represent \preveg{} as \textbf{chase$^\frown$a$^\frown$cat}.  From
+this we can form a ``sentence with a gap'' interpretation,
+\textbf{chase$^\frown$a$^\frown$cat$_S$}, in the manner described in
+Section~\ref{sec:long-distance}.  This is given in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}} . $\lambda
+P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh$_0$\}(\textbf{chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)) 
+\end{ex} 
+Unpacking \preveg{} we obtain \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+. \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+                               \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                                   \smalltfield{e}{cat(x)}}}\\
+                   \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\mathfrak{s}$.wh$_0$, $\Uparrow\!\mathfrak{c}$.x)}}}}}}}} 
+\end{ex} 
+Again following the analysis of long-distance dependencies developed
+in Section~\ref{sec:long-distance}, the content of \textit{which
+  chased a cat} is given in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} . \\
+\hspace*{1em} $\lambda
+r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \textbf{which}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}$)($\lambda
+r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{chase$^\frown$a$^\frown$cat$_S$}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$) 
+\end{ex} 
+Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
+\textit{which chased a cat} is identical with the content of
+\textit{chased a cat}.  For clarity we will represent this content
+also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
+Again following the proposal in Section~\ref{sec:long-distance} the
+content for \textit{dog which chases a cat} will be
+\nexteg{}. [Actually there is no proposal there for N Rel...]
+     
+               
       
 
 
