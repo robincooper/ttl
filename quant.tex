@@ -895,7 +895,10 @@ defining binding in the logical treatment.  This now gives us what we
 need to characterize the foreground of the content of the relative
 clause \textit{who Sam hugged}, which we will represent as
 \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged}, as in
-\nexteg{a} which is identical with \nexteg{b}.
+\nexteg{a} which is identical with \nexteg{b}.  \nexteg{b} is in turn
+equivalent to \nexteg{c} because of the constraint on the extensional
+predicate `hug' similar to that for `find' given in  (\ref{ex:mp-find})
+on p.~\pageref{ex:mp-find}. 
 \begin{ex} 
 \begin{subex} 
  
@@ -910,11 +913,27 @@ clause \textit{who Sam hugged}, which we will represent as
  
 \item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$r_1$.x}}))}} 
+  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty}
+      . $P$(\smallrecord{\field{x}{$r_1$.x}}))}}
+
+\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{e}{hug$^\dagger$(sam, $r_1$.x))}} 
  
 \end{subex} 
    
 \end{ex} 
+To form the content of a noun modified by a relative clause such as
+\textit{child who Sam hugged} we use a record type which requires of
+an individual that it has both the property of being a child and being
+hugged by Sam as given in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e$_1$}{child$'$\{$r$.x\}}\\
+          \tfield{e$_2$}{\textbf{who$^\frown$Sam$^\frown$hugged}($\mathfrak{s}$)\{$r$.x\}}}  
+\end{ex} 
+[Has the $P\{x\}$ notation already been introduced?]  
      
    
     
@@ -3256,7 +3275,14 @@ Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
 also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
 Again following the proposal in Section~\ref{sec:long-distance} the
 content for \textit{dog which chases a cat} will be
-\nexteg{}. [Actually there is no proposal there for N Rel...]
+\nexteg{}. 
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e$_1$}{dog$'$\{$r$.x\}}\\
+          \tfield{e$_2$}{\textbf{which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)\{$r$.x\}}} 
+\end{ex} 
+We call this \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.  
      
                
       
