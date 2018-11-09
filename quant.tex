@@ -3299,11 +3299,72 @@ is equivalent to \nexteg{b}.
                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}(P|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
  
 \end{subex} 
-   
+\label{ex:no-dog-which-chases-a-cat}   
 \end{ex} 
 Call this
 \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.
-This is to combine with the content of \textit{catches it}, given in \nexteg{}.   
+This is to combine with the content of \textit{catches it}, given in
+\nexteg{}. 
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
+\end{ex} 
+Using the S-combinator strategy to
+(\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
+\nexteg{b}, which represents a reading of the sentence where
+\textit{it} is not captured and refers to a particular object provided
+by the context.
+\begin{ex}
+\begin{subex} 
+ 
+\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+&&$\neg\mathfrak{P}(\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}}$|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+&&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+                                                               \smalltfield{e$_1$}{dog$'$\{x\}}\\
+                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                                                                                                                                                       \smalltfield{e}{cat(x)}}}\\
+                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+               \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{s}$.x$_0$)}}
+)}}}} 
+ 
+\end{subex} 
+   
+ 
+\end{ex} 
+In terms of the notation in \preveg{b}, it is simple enough to see
+what needs to be done in order to change it to a case of donkey
+anaphora.  The second argument to `catch$^\dagger$',
+`$\mathfrak{s}$.x$_0$', has to be changed so that it presents a path
+to the cat, that is, `$\mathfrak{c}$.e$_2$.e.x'.  Also the dependence
+of this parametric content on `x$_0$' has to be removed.  Thus the
+domain type for the $\lambda$-abstraction, currently
+`\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
+by `\textit{Rec}'.  The result would be \nexteg{}.
+\begin{ex} 
+ $\lambda\mathfrak{s}$:\textit{Rec} 
+  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+&&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+                                                               \smalltfield{e$_1$}{dog$'$\{x\}}\\
+                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                                                                                                                                                       \smalltfield{e}{cat(x)}}}\\
+                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+               \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+)}}}} 
+\end{ex} 
+Actually getting this to work out\ldots       
      
                
       
