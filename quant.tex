@@ -3364,7 +3364,54 @@ by `\textit{Rec}'.  The result would be \nexteg{}.
                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
 )}}}} 
 \end{ex} 
-Actually getting this to work out\ldots       
+In order to get this to work out in a compositional way we will use
+the kind of quantifier anatomy  that we introduced in
+Chapters~\ref{ch:gram} and~\ref{ch:commonnouns} except that we will
+use parametric properties instead of non-parametric properties.  Let
+us introduce some abbreviatory notation [should introduce from the
+beginning!].  Suppose that $q$ is a quantifier relation,
+$\mathcal{P}$ and $\mathcal{Q}$ are parametric properties and
+$\mathfrak{s}$ is a context of the kind we have been using in this
+chapter, then we use $\mathfrak{Q}(q,\mathcal{P},\mathcal{Q},\mathfrak{s})$ to represent
+\nexteg{}.
+\begin{ex} 
+\record{\mfield{restr}{$\mathcal{P}$}{\textit{PPpty}}\\
+        \mfield{scope}{$\mathcal{Q}$}{\textit{PPpty}}\\
+        \tfield{e}{$q$(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+\end{ex} 
+Instead of (\ref{ex:no-dog-which-chases-a-cat}) we will have
+\nexteg{a}, equivalent to \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda\mathfrak{s}$:\textit{Rec}
+  $\lambda\mathcal{P}$:\textit{PPpty}
+  . \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
+            \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
+            \tfield{e}{no(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+ 
+\item $\lambda\mathfrak{s}$:\textit{Rec}
+  $\lambda\mathcal{P}$:\textit{PPpty}
+  . \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
+            \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
+            \tfield{e}{\record{\tfield{X}{every$^w$($\Uparrow$restr($\mathfrak{s}$))}\\
+                               \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}$($\Uparrow$scope($\mathfrak{s}$)))\{x\}}}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+We will now use
+\textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}
+to refer to \preveg{b} rather than
+(\ref{ex:no-dog-which-chases-a-cat}b).  Note that we have not
+restricted the scope (that is the second argument of the quantifier
+relation) by the fixed point type of the restriction (that is the
+first argument of the quantifier relation).  Now that we have put the
+parametric properties used to form the arguments to the quantifier
+relation in their own fields (`restr' and `scope') we can have access
+to them at the point at which we combine the noun-phrase
+interpretation with that of another constituent and can at that point
+make modifications to the second argument.
      
                
       
