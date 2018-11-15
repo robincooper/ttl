@@ -2941,7 +2941,7 @@ Given our strategy for defining the content of quantified sentences in
 terms of generalized quantifiers the content of \textit{a man walked}
 will be \nexteg{}.
 \begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{exist(man$'$, walk$'|_{\mathcal{F}(\text{dog}')}$)}} 
+$\lambda\mathfrak{s}$:\textit{Rec} . \record{\tfield{e}{exist(man$'$, walk$'|_{\mathcal{F}(\text{man}')}$)}} 
 \end{ex}
 We know from our treatment of the witness conditions associated with
 `exist' that \preveg{} is equivalent to \nexteg{}.
@@ -3364,60 +3364,80 @@ by `\textit{Rec}'.  The result would be \nexteg{}.
                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
 )}}}} 
 \end{ex} 
-In order to get this to work out in a compositional way we will use
-the kind of quantifier anatomy  that we introduced in
-Chapters~\ref{ch:gram} and~\ref{ch:commonnouns} except that we will
-use parametric properties instead of non-parametric properties.  Let
-us introduce some abbreviatory notation [should introduce from the
-beginning!].  Suppose that $q$ is a quantifier relation,
-$\mathcal{P}$ and $\mathcal{Q}$ are parametric properties and
-$\mathfrak{s}$ is a context of the kind we have been using in this
-chapter, then we use $\mathfrak{Q}(q,\mathcal{P},\mathcal{Q},\mathfrak{s})$ to represent
-\nexteg{}.
+We will achieve this by introducing a notion of restriction on a
+parametric property in which we will allow anaphora to take place.
+Let us first consider a case without anaphora.  Suppose that
+$\mathcal{P}$ is a parametric property of type
+$(T_1\rightarrow(T_2\rightarrow \textit{Type}))$ and that $T$ is a
+type then we define the restriction of $\mathcal{P}$ by $T$,
+$\mathcal{P}|^p_T$, to be \nexteg{}.
 \begin{ex} 
-\record{\mfield{restr}{$\mathcal{P}$}{\textit{PPpty}}\\
-        \mfield{scope}{$\mathcal{Q}$}{\textit{PPpty}}\\
-        \tfield{e}{$q$(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+$\lambda\mathfrak{s}$:$T_1$ $\lambda r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s})(r)$ 
 \end{ex} 
-Instead of (\ref{ex:no-dog-which-chases-a-cat}) we will have
-\nexteg{a}, which is identical with \nexteg{b}.
+Now suppose that $[\ell,v]$ is a field in $T_1$ and $\pi$ is a path in
+$T_2$ and we want to make an anaphoric association between $\ell$ and
+$\pi$.  We define such a restriction,
+$\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
 \begin{ex} 
-\begin{subex} 
+$\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
+r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
+\end{ex}
+To enable the capture of several pronouns, 
+    
+% In order to get this to work out in a compositional way we will use
+% the kind of quantifier anatomy  that we introduced in
+% Chapters~\ref{ch:gram} and~\ref{ch:commonnouns} except that we will
+% use parametric properties instead of non-parametric properties.  Let
+% us introduce some abbreviatory notation [should introduce from the
+% beginning!].  Suppose that $q$ is a quantifier relation,
+% $\mathcal{P}$ and $\mathcal{Q}$ are parametric properties and
+% $\mathfrak{s}$ is a context of the kind we have been using in this
+% chapter, then we use $\mathfrak{Q}(q,\mathcal{P},\mathcal{Q},\mathfrak{s})$ to represent
+% \nexteg{}.
+% \begin{ex} 
+% \record{\mfield{restr}{$\mathcal{P}$}{\textit{PPpty}}\\
+%         \mfield{scope}{$\mathcal{Q}$}{\textit{PPpty}}\\
+%         \tfield{e}{$q$(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+% \end{ex} 
+% Instead of (\ref{ex:no-dog-which-chases-a-cat}) we will have
+% \nexteg{a}, which is identical with \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec}
-  $\lambda\mathcal{P}$:\textit{PPpty}
-  . $\mathfrak{Q}$(no, \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat},
-  $\mathcal{P}$, $\mathfrak{s}$)
+% \item $\lambda\mathfrak{s}$:\textit{Rec}
+%   $\lambda\mathcal{P}$:\textit{PPpty}
+%   . $\mathfrak{Q}$(no, \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat},
+%   $\mathcal{P}$, $\mathfrak{s}$)
 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec}
-  $\lambda\mathcal{P}$:\textit{PPpty}
-  . \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
-            \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
-            \tfield{e}{no(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
-% \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
+% \item $\lambda\mathfrak{s}$:\textit{Rec}
+%   $\lambda\mathcal{P}$:\textit{PPpty}
+%   . \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
 %             \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
-%             \tfield{e}{\record{\tfield{X}{every$^w$($\Uparrow$restr($\mathfrak{s}$))}\\
-%                                \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}$($\Uparrow$scope($\mathfrak{s}$)))\{x\}}}}}
+%             \tfield{e}{no(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+% % \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
+% %             \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
+% %             \tfield{e}{\record{\tfield{X}{every$^w$($\Uparrow$restr($\mathfrak{s}$))}\\
+% %                                \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}$($\Uparrow$scope($\mathfrak{s}$)))\{x\}}}}}
                          
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-We will now use
-\textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}
-to refer to \preveg{} rather than
-(\ref{ex:no-dog-which-chases-a-cat}).  Note that we have not
-restricted the scope (that is the second argument of the quantifier
-relation) by the fixed point type of the restriction (that is the
-first argument of the quantifier relation).  Now that we have put the
-parametric properties used to form the arguments to the quantifier
-relation in their own fields (`restr' and `scope') we can have access
-to them at the point at which we combine the noun-phrase
-interpretation with that of another constituent and can at that point
-make modifications to the second argument.  Since we have the
-arguments to the quantifier relation accessible via the labels `restr'
-and `scope' 
+% \end{ex} 
+% We will now use
+% \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}
+% to refer to \preveg{} rather than
+% (\ref{ex:no-dog-which-chases-a-cat}).  Note that we have not
+% restricted the scope (that is the second argument of the quantifier
+% relation) by the fixed point type of the restriction (that is the
+% first argument of the quantifier relation).  Now that we have put the
+% parametric properties used to form the arguments to the quantifier
+% relation in their own fields (`restr' and `scope') we can have access
+% to them at the point at which we combine the noun-phrase
+% interpretation with that of another constituent and can at that point
+% make modifications to the second argument.  Since we have the
+% arguments to the quantifier relation accessible via the labels `restr'
+% and `scope' 
 
      
                
