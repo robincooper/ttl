@@ -3059,20 +3059,28 @@ $\oplus_{\text{set}}$, which perform $\ominus$ and $\oplus$
 respectively for each member of a set in their second arguments.  Thus
 $\ominus_{\text{set}}$ will subtract a set of fields from a record
 type and $\oplus_{\text{set}}$ will add a set of fields to a record.
-We present the upgraded version of \preveg{} in \nexteg{}.
+We present the upgraded version of \preveg{} in \nexteg{} where if
+$\pi$ is an ordered pair we use $\pi_1$ and $\pi_2$ to represent the
+first and second members of $\pi$ respectively and if $f$ is a field
+then we use label($f$) to represent the label in the field, that is
+the first member of the ordered pair which is the field.
 \begin{ex} 
 If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
 $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$ and\\
-\hspace*{2em}$\vec{\Pi}\subseteq\{\pi\mid$ for any
-$s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}\times
-[T_2]_{\text{incr}_x(T_1)}$,\\ then
+\hspace*{2em}$\vec{\Pi}\subseteq[T_2]_{\text{incr}_x(T_1)}\times\{\pi\mid$ for any
+$s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}$ such
+that $\vec{\Pi}$ is the graph of a one-one function,\\ then
 $\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ is
 \begin{quote}
 $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})\ominus_{\text{set}}\vec{\Pi}_1$
 .\\ \hspace*{2em} \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
-          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\vec{\pi}_2=\text{prev}.\vec{\pi}_1]\mid\vec{\pi}\in\vec{\Pi}\})$}}
+          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=\text{prev}.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$}}
 \end{quote} 
 \end{ex} 
+If $\vec{\Pi}$ is
+$\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+then for convenience we represent
+$\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ as $\mathcal{T}_{\text{curr}}+_{\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}\mathcal{T}_{\text{new}}$.
 
 This does not express any of the linguistic constraints concerning
 what anaphors can be related to what antecedents.  This will be
@@ -3382,7 +3390,18 @@ $\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
 $\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
 r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
 \end{ex}
-To enable the capture of several pronouns, 
+To enable the capture of several pronouns, we let $\vec\Pi\subseteq
+T_1\times\text{paths}(T)$ such that $\vec\Pi$ is the graph of a one-one
+function (whose domain is included in the fields of $T_1$ and whose
+range is included in the paths of $T$).  We then define
+$\mathcal{P}|^p_{T,\vec{\Pi}}$ to be \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:$T_1\ominus_{\text{set}}\vec{\Pi}_1$ $\lambda
+r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=r.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$ 
+\end{ex} 
+If $\vec{\Pi}$ is
+$\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as $\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$.  
     
 % In order to get this to work out in a compositional way we will use
 % the kind of quantifier anatomy  that we introduced in
