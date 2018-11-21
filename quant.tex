@@ -3317,7 +3317,8 @@ This is to combine with the content of \textit{catches it}, given in
 $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
 $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
-\end{ex} 
+\end{ex}
+We will represent this as \textbf{catch$^\frown$it}. 
 Using the S-combinator strategy to
 (\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
 \nexteg{b}, which represents a reading of the sentence where
@@ -3370,7 +3371,8 @@ by `\textit{Rec}'.  The result would be \nexteg{}.
                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
-)}}}} 
+)}}}}
+\label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
 \end{ex} 
 We will achieve this by introducing a notion of restriction on a
 parametric property in which we will allow anaphora to take place.
@@ -3401,7 +3403,46 @@ r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{l
 \end{ex} 
 If $\vec{\Pi}$ is
 $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
-then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as $\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$.  
+then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as
+$\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$. Using
+this notation,  the content of \textit{no dog which chases a cat catches
+  it} where the pronoun is captured is \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec}
+  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+&&$\neg\mathfrak{P}$(\textbf{catch$^\frown$it}$|^p_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s})),\text{x}_0\leadsto\text{e}_2.\text{e}.\text{x}}(\mathfrak{s})$)\{x\})}}}} 
+\end{ex} 
+Unpacking \preveg{} yields
+(\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
+
+Notice that (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured})
+forces what is known in the literature as a \textit{strong} reading
+for the donkey anaphora.  That is, none of the dogs which chase a cat
+catch \textit{any} of the cats which they chase.  That monotone
+decreasing quantifiers force such strong readings was noted, for
+example, by [Chierchia???? Pelletier????].  Monotone increasing
+quantifiers, however, allow \textit{weak} readings.  Examples of
+donkey sentences mentioned in the literature that have naturally weak
+readings are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Every person who has a dime should put it in the parking
+  meter. (Pelletier ????) 
+ 
+\item Every man who has a daughter thinks she is the most beautiful
+  girl in the world \citep{Cooper1979} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} does not seem to suggest that anybody who has several dimes
+should put them all in the meter and \preveg{b} does not seem to
+commit a man who has two daughters to believe the contradictory
+proposition that they are both the one and only most beautiful girl in
+the world.  
+  
     
 % In order to get this to work out in a compositional way we will use
 % the kind of quantifier anatomy  that we introduced in
