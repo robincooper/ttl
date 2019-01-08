@@ -1327,6 +1327,7 @@ $\mathfrak{P}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
           \tfield{e}{$P(\mathfrak{c})$}}$\urcorner$
 \end{quote}
 \end{quote}
+\label{ex:purification}
 \end{ex} 
 (Recall that $T\!\!\parallel\!\! r$ is the result of specifying or anchoring
 $T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)
@@ -3467,8 +3468,106 @@ the meter, not all of their dimes.  What then do we say about the
 original donkey sentences like \textit{every farmer who owns a donkey
   likes it} which were analyzed by Geach and the classical analyses in
 DRT and type theory as having a strong reading in which every farmer
-who owns a donkey likes any donkey that he owns.   
-  
+who owns a donkey likes any donkey that he owns?  One option is to say
+that we only need the weak reading for such sentences as given in
+\nexteg{}.
+\begin{ex} 
+ $\lambda\mathfrak{s}$:\textit{Rec} 
+  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+&&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+                                                               \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                                                                                                                                                       \smalltfield{e}{donkey(x)}}}\\
+                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+               \smalltfield{e}{like$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+)}}}} 
+\label{ex:donkey-weak} 
+\end{ex} 
+That is,
+\textit{every farmer who owns a donkey likes it} requires that for
+every donkey owning farmer there is at least one donkey the farmer
+owns such that she likes it.  This allows for the farmers to like all
+their donkeys but does not require it.
+
+Another option is to recreate the original Geach reading by
+introducing a variant of the purification operation in
+(\ref{ex:purification}) which introduces a function on local contexts
+as in \nexteg{}. 
+\begin{ex} 
+If $P$ : \textit{Ppty}, then
+\begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
+$\mathfrak{P}(P)$ is $\ulcorner\lambda r_1$:$P$.bg$^{\text{x}}$
+. ($(r_2\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+\record{
+          \tfield{e}{$P(r_2)$}})$\urcorner$
+\end{quote}
+\end{quote}
+%\label{ex:purification-classic}
+\end{ex}
+Using \preveg{} instead of (\ref{ex:purification}) will have the
+consequence that the content of \textit{every farmer who owns a donkey
+  likes it} will be \nexteg{} rather than (\ref{ex:donkey-weak}).
+\begin{ex} 
+$\lambda\mathfrak{s}$:\textit{Rec} 
+  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+&&\hspace*{2em}(($r$:\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+                                                               \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                                                                                                                                                       \smalltfield{e}{donkey(x)}}}\\
+                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}})
+                                                                                       $\rightarrow$\\
+               &&\hspace*{5em}\smallrecord{\smalltfield{e}{like$^\dagger$($x$, $r$.e$_2$.e.x)}}
+))}}}}  
+\end{ex} 
+\preveg{} requires that the function labelled `f' maps any farmer who
+owns a donkey to a function which maps any situation in which that
+farmer owns a donkey to a situation in which the farmer likes the
+donkey.  Since for any donkey the farmer owns there will be a
+situation in which the farmer owns that donkey, this has the effect of
+universal quantification over the farmer's donkeys.  The difference
+between strong and weak readings is, however, cashed out in terms of
+whether we map farmers to functions from ``donkey owning'' situations
+to ``liking'' situations or to situations where there is ``donkey
+owning'' and ``liking''.
+
+It is not entirely obvious that strong readings are necessary since
+weak readings are consistent with the strong readings.  One might
+argue that the strong reading is necessary for interpreting sentences
+such as \nexteg{}.
+\begin{ex} 
+It is not true that every farmer who owns a donkey likes it 
+\end{ex} 
+If there is a reading of \preveg{} on which it is true even if every
+farmer likes at least one of her donkeys, but at least one farmer 
+does not like all of them, then we need to analyze this a strong reading. [????Check
+for discussion of this.]  
+
+The domain of the function introduced is farmers who own a donkey in
+our analysis of both the weak and the strong readings.  This is in
+contrast to the classical treatment of the strong reading
+\citep{Geach1962,KampReyle1993} which can be construed as 
+quantification over pairs of farmers and donkeys.  This works in the
+case of universal quantification. The sentence \textit{every farmer
+  who owns a donkey likes it} can be construed as ``every
+farmer-donkey pair such that the farmer owns the donkey is such that
+the farmer likes the donkey''.  However, for other generalized
+quantifiers, such as \textit{most} this represents an incorrect
+paraphrase.  Thus \textit{most farmers who own a donkey like it}
+cannot be construed as ``most farmer-donkey pairs such that the farmer
+owns the donkey are such that the farmer likes the donkey''.
+\cite{Chierchia1995} gives a good account of why this is so.   
     
 % In order to get this to work out in a compositional way we will use
 % the kind of quantifier anatomy  that we introduced in
