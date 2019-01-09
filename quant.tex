@@ -3567,7 +3567,15 @@ quantifiers, such as \textit{most} this represents an incorrect
 paraphrase.  Thus \textit{most farmers who own a donkey like it}
 cannot be construed as ``most farmer-donkey pairs such that the farmer
 owns the donkey are such that the farmer likes the donkey''.
-\cite{Chierchia1995} gives a good account of why this is so.   
+\cite{Chierchia1995} gives a good account of why this is so.  Suppose
+we have five farmers four of which have exactly one donkey and do not
+like it.  The fifth farmer has fifty donkeys and likes them all.
+Clearly in this case most farmer-donkey pairs are such that the farmer
+likes the donkey but it is not the case that most farmers who own a
+donkey like it.  This problem is known in the literature as the
+\textit{proportion problem}.  The treatment that we have proposed here
+does not suffer from it since the quantification is over farmers who
+own a donkey rather than farmer-donkey pairs. 
     
 % In order to get this to work out in a compositional way we will use
 % the kind of quantifier anatomy  that we introduced in
@@ -3629,8 +3637,48 @@ owns the donkey are such that the farmer likes the donkey''.
       
 
 
-\section{Structured contexts, binding principles and projection}
+\section{Structured contexts\ignore{, binding principles and projection}}
 \label{sec:struc-cntxt}
+
+The nature of the context that we have been using in this chapter is
+different from that of the contexts we used with parametric contents
+in previous chapters starting with Chapter~\ref{ch:propnames}.  The
+contexts in this chapter are records which constitute partial
+assignments of objects to labels `x$_0$', `x$_1$', \ldots whereas the
+contexts in the previous chapters are records of more general types.
+Thus an example of the kind of context type used in this chapter is
+\nexteg{a} whereas an example of the kind of context types used
+previously is \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{x$_0$}{\textit{Ind}}\\
+              \tfield{x$_1$}{\textit{Ind}}} 
+ 
+\item \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{named(x, ``Sam'')}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+Contexts of types like \preveg{a} correspond to partial assignments to
+variables in logic where the labels `x$_0$', `x$_1$', \ldots
+correspond to a countably infinite set of variables in a logic.
+Context types like those in \preveg{b} correspond to presuppositions
+\citep{BeaverGeurts2014} or content not \textit{under discussion}
+\citep{Ginzburg2012}  or \textit{at issue} \citep{Potts2005}. We
+reserve the labels `x$_0$', `x$_1$' for contexts giving assignments to
+pronouns which can be involved in binding of the kind described in
+this chapter.  In principle we could combine both kinds of contexts
+by, for example, merging the two types in \preveg{} as given in
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{x$_0$}{\textit{Ind}}\\
+        \tfield{x$_1$}{\textit{Ind}}\\
+        \tfield{e}{named(x, ``Sam'')}} 
+\end{ex} 
+However,  
 
 \section{Compositional semantics and incremental processing}
 
