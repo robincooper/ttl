@@ -3678,7 +3678,41 @@ by, for example, merging the two types in \preveg{} as given in
         \tfield{x$_1$}{\textit{Ind}}\\
         \tfield{e}{named(x, ``Sam'')}} 
 \end{ex} 
-However,  
+However, it seems that it is a good idea to keep different kinds of
+context separate as they may be treated differently by compositional
+semantics, for example, in terms of their projection properties which
+regulates to what extent contexts required by lower constituents are
+also required by higher constituents, as discussed, for example, by
+\cite{Potts2005}.  We could try to do this by having several layers of
+lambda abstraction for each of the different kinds of contexts.  That
+is, parametric contents taking into account several different kinds of
+contexts may have the kind of form represented in \nexteg{}.
+\begin{ex} 
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+              \smalltfield{x$_1$}{\textit{Ind}}} $\lambda c$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+              \smalltfield{e}{named(x, ``Sam'')}} \ldots\ \  . $\varphi(\mathfrak{s},c,\ldots)$
+\end{ex} 
+where the `\ldots' represent further lambda abstractions for any other
+kinds of contexts that might need to be distinguished and $\varphi$ is
+some content which may depend on all of these contexts.  One
+difficulty with this kind of proposal is that it is difficult to
+motivate what order the lambda abstractions should come in and it
+could become impossible to decide if we want to allow the different
+kinds of contexts to depend on each other.  In addition, it could
+become unnecessarily complicated to write down the compositional
+interpretation rules.  For this we will keep to having a single lambda
+abstraction for a context with several components which can be
+addressed separately when it comes to characterizing projection
+properties.  Thus instead of \preveg{} we will have parametric
+contents which look like \nexteg{}.
+\begin{ex} 
+$\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+              \smalltfield{x$_1$}{\textit{Ind}}}}\\
+                \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+              \smalltfield{e}{named(x, ``Sam'')}}}\\
+\ldots} . $\varphi(c)$ 
+\end{ex} 
+   
 
 \section{Compositional semantics and incremental processing}
 
