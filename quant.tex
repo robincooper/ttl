@@ -3712,6 +3712,25 @@ $\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{
               \smalltfield{e}{named(x, ``Sam'')}}}\\
 \ldots} . $\varphi(c)$ 
 \end{ex} 
+
+[Perhaps we should have introduced structured contexts already in
+Ch. \ref{ch:propnames} on proper names, together with pronouns like
+\textit{him}, \textit{himself} and simple ``binding'' principles.  Use
+`x$_i$' to distinguish proper noun occurrences like we do for pronouns rather
+than `f' and `a' as currently??]
+
+\subsection{\textit{Sam likes him/himself}}
+
+The parametric content for \textit{him} is given in \nexteg{}.
+
+\begin{ex} 
+$\lambda
+c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
+\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+\end{ex} 
+  
    
 
 \section{Compositional semantics and incremental processing}
