@@ -3769,7 +3769,18 @@ $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . like($r$.x,
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+The idea is that context parameters represented by `$\mathfrak{s}$'
+are open for binding unless object supplying that parameter are
+required to be of type `$c$.local'.  Reflexive parameters are, however,
+required to be of type `$c$.refl' and these must be bound within the VP.
+Note that since the reflexive is bound by `$r$.x' in \preveg{b} it is
+not represented in `$c$.refl' in the context for the VP.  Thus
+\textit{himself} on its own requires an individual to be supplied by
+the context to give it a referent.  However, for the content of
+\textit{likes himself} no such individual is required from the context
+since the property which is the content of the VP is that of ``being
+an $x$ such that $x$ likes $x$''.  [Better way to talk about this?]
   
   
    
