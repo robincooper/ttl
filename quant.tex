@@ -3755,16 +3755,16 @@ the parametric content in \nexteg{b}.
 c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
                 \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
 \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . like($r$.x,
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}) 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
+$\lambda P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}} 
  
 \item $\lambda
 c$:\smallrecord{\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
   \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . like($r$.x,
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
   \textbf{himself}(\smallrecord{\field{$\mathfrak{s}$}{\smallrecord{\field{x$_0$}{$r$.x}}}\\
                                 \field{local}{$\mathfrak{T}$($\emptyset$)}\\
-                                \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))
+                                \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))}}
  
  
 \end{subex} 
@@ -3780,7 +3780,41 @@ not represented in `$c$.refl' in the context for the VP.  Thus
 the context to give it a referent.  However, for the content of
 \textit{likes himself} no such individual is required from the context
 since the property which is the content of the VP is that of ``being
-an $x$ such that $x$ likes $x$''.  [Better way to talk about this?]
+an $x$ such that $x$ likes $x$''.  [Better way to talk about this?].
+
+[Possible revision of treatment of proper names:]
+The content of an utterance of \textit{Sam} is given in \nexteg{}.
+\begin{ex} 
+$\lambda
+c$:\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                                           \smalltfield{e}{named(x,
+                                                                                             ``Sam'')}}}}}}
+                                                                                 . $\lambda
+                                                                                 P$:\textit{Ppty}
+                                                                                 . $P$($c$.$\mathfrak{c}$.id$_0$) 
+\end{ex} 
+The content of \textit{Sam likes him} is given in \nexteg{a} and
+\textit{Sam likes himself} in \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda
+  c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+                  \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x,
+                                                                              ``Sam'')}}}}}}
+                                                                  . 
+\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
+    P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
+ 
+\item  
+ 
+\end{subex} 
+   
+\end{ex} 
+    
   
   
    
