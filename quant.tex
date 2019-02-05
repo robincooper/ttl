@@ -1,4 +1,4 @@
-\chapter{Quantification, anaphora and underspecification}
+\chapter{Witness-based quantification and type-based underspecification}
 \label{ch:quant}
 \setcounter{equation}{0}
 
@@ -3809,13 +3809,25 @@ The content of \textit{Sam likes him} is given in \nexteg{a} and
 \record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
     P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
  
-\item  
+\item $\lambda
+  c$:\smallrecord{
+\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                                                                            \smalltfield{e}{named(x,
+                                                                              ``Sam'')}}}}}}
+                                                                  . \\
+\hspace*{3em}                                                                   
+\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
+    P$:\textit{Ppty} . 
+$P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}} 
  
 \end{subex} 
    
 \end{ex} 
     
-  
+[This material should possibly be moved to Ch.~\ref{ch:propnames} so we have
+structured contexts from the beginning.]  
   
    
 
