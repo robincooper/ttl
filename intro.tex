@@ -30,6 +30,7 @@ advantages to looking at some old puzzles from this perspective.
 
 In Chapter~\ref{ch:percint} we introduce a notion of perception of an
 object or event as making a judgement that the object is of a type.
+In symbols, we write $a:T$ to indicate that object $a$ is of type $T$.
 We shall talk interchangeably of an object being of a type or being a
 witness for a type.  Our claim
 is that we can only perceive something as being of a type, even if
@@ -49,6 +50,37 @@ Perry in the nineteen eighties.  One of the themes of this book is a
 working out of parts of the old situation theory using ideas taken from
 Martin-Löf's type theory.
 
+A central notion in TTR is that of \textit{record}.  The term
+``record'' is used in computer science for what is often called an
+attribute-value matrix (AVM) or feature structure in linguistics.  A
+record is a collection of fields consisting of a label (attribute or
+feature in the standard linguistic way of talking) and an object of
+some kind (which itself can be a record).  An schematic example of a
+record is given in \nexteg{}, where the $\ell_i$ are labels and the
+$o_i$ are objects.
+\begin{ex} 
+\record{\field{$\ell_0$}{\record{\field{$\ell_1$}{$o_0$}\\
+                                 \field{$\ell_2$}{$o_1$}}}\\
+        \field{$\ell_3$}{$o_2$}}
+\label{ex:sch-rec} 
+\end{ex} 
+Records are witnesses for record types which are also collections of
+fields. Rather than objects, the fields in a record type contain types.
+In the schematic example in \nexteg{} the $T_i$ are types.
+\begin{ex} 
+\record{\tfield{$\ell_0$}{\record{\tfield{$\ell_1$}{$T_0$}\\
+                                 \tfield{$\ell_2$}{$T_1$}}}\\
+        \tfield{$\ell_3$}{$T_2$}} 
+\end{ex} 
+The record (\ref{ex:sch-rec}) will be of the type \preveg{} just in
+case $o_0:T_0$, $o_1:T_1$ and $o_2:T_2$. Martin-Löf's orginal type
+theory did not have records or record types though there have been
+many suggestions in the literature on how to add them.  We have
+borrowed freely from some of these ideas in TTR although the way we
+have developed the notions differs essentially from previous
+proposals.  We will use records and record types to model situations
+and situation types.   
+
 In Chapter~\ref{ch:infex} we apply the theory of types from
 Chapter~\ref{ch:percint} to basic notions of information update in
 dialogue.  Here we build on seminal work on dialogue analysis by
@@ -57,7 +89,11 @@ Staffan Larsson
 leading to the information state update approach to dialogue systems.
 We have adapted these ideas in a way that allows us to persue the
 questions of grammar and semantics that we take up in the remainder of
-the book.  
+the book.  A central notion here is that of the dialogue gameboard
+which we construe as a type of information state representing the
+current state of play in the dialogue from the perspective of a
+dialogue participant including what has been committed to as being
+true in the dialogue so far and what questions are currently under discussion. 
 
 In Chapter~\ref{ch:gram} we show how syntax and semantics can be
 embedded in the theory of action characterized in
@@ -108,7 +144,37 @@ beliefs or making a plan to achieve a goal.  The types become cognitive
 activity.  In Part~II we will look at a number of examples of this.
 
 
-In Chapter~\ref{ch:propnames}  
+In Chapter~\ref{ch:propnames} we examine reference by uses of proper names and
+occurrences of pronouns which are not bound by quantifiers.  In order
+to account for this we need a notion of \textit{parametric content},
+which is to say that the content of an utterance depends on a context
+belonging to a certain type.  For example, an utterance of the proper
+name \textit{Sam} requires a context in which there is an individual
+named ``Sam''.  But where in her resources should a dialogue
+participant look for such a context?  One obvious place is the
+conversational gameboard that we introduced in
+Chapter~\ref{ch:infex}.  Another place is the visual scene, or more
+generally the ambient situation which the agent can perceive by
+different sense modalities.  This we also represent as a resource
+using a type -- that is, the type for which the ambient situation
+would be a witness if the agent's perception is correct.  Yet another
+place to look is the agent's long term memory (which we will equate
+with the agent's beliefs, although one may ultimately wish to make a
+distinction).  This resource is also modelled as a type representing
+how the world would be if the agent's memory or beliefs are correct.
+The fact that we are reasoning about to what extent the context type
+associated with the utterance matches the types modelling the agent's
+relevant resources enables us to talk about cases where there are
+names of non-existent objects (that is, the agent's resource types do
+not exactly match the world) or where a single object in the world
+corresponds to two objects in the resources or \textit{vice versa} (another way in which
+there can be a mismatch between reality and an agent's resources).
+
+In Chapter~\ref{ch:commonnouns} we look at frames associated with
+common nouns.  The idea of frames goes back to early work on frame
+semantics by Fillmore and also psychological work on frames by
+Barsalou.  We will construe frames as situations (modelled as records
+in TTR).  A common noun like \textit{dog}
 
 
 
