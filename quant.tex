@@ -2,938 +2,8 @@
 \label{ch:quant}
 \setcounter{equation}{0}
 
-\section{The interpretation of unbound pronouns}
-\label{sec:unbound}
-We will consider how to recreate a simple interpretation of pronouns
-ranging over individuals, first treating them in a similar way to free
-variables in logic and then showing how they can be bound by
-quantifiers.  The central idea is to use records as \textit{pronominal
-  contexts} which correspond to partial assignments to variables in
-standard logical treatments.  Consider first a simple sentence with a deictic
-pronoun as in \nexteg{}.
-\begin{ex} 
-he left 
-\end{ex} 
-In our initial pass we will ignore matters
-of gender to make things simpler.  The content of \preveg{} is a type
-which depends on a context (a situation) which provides a value of the
-pronoun \textit{he}. Thus it will have a parametric content which is a
-function from a context assigning a value to the pronoun to a
-type.\footnote{We will consider later how to combine types of context
-  which assign values to pronouns with other context types which we
-  have introduced with parametric contents.}  We will use the variable
-`$\mathfrak{s}$' to represent such contexts.  Thus the foreground of a parametric content for
-\textit{he} could be that given in \nexteg{a}, for \textit{left}
-(ignoring tense) that given in \nexteg{b} and their combination, using a variant
-of S-combination which we will discuss as we progress, is represented
-in \nexteg{c}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_0$}})
- 
-\item $\lambda\mathfrak{s}$:\textit{Rec} . 
-        $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
-              \record{\tfield{e}{leave($r$.x)}}
-
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-  . 
-         \record{\tfield{e}{leave($\mathfrak{s}$.x$_0$)}}
- 
-\end{subex} 
-   
-\end{ex}
-We follow Montague's strategy in allowing the content of \textit{he}
-to be \nexteg{} for any natural number $i$.
-\begin{ex}
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
-        $\lambda P$:\textit{Ppty}
-        . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_i$}})
-\label{ex:pronoun-cont}
-\end{ex} 
-Thus considering the boy and the dog, a
-content for \nexteg{a} will be \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item he hugged it 
- 
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-                                   \smalltfield{x$_1$}{\textit{Ind}}}
-                                 . 
-\record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
- 
-\end{subex} 
-   
-\end{ex} 
-An advantage of using record types to characterize pronominal contexts
-rather than variable assignments is that we can add further
-information represented by the pronoun such as gender.   Thus a simple
-treatment of gender for \preveg{} might be given by making the content
-be \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-                             \smalltfield{c$_0$}{male(x$_0$)}\\
-                             \smalltfield{x$_1$}{\textit{Ind}}\\
-                             \smalltfield{c$_1$}{neuter(x$_1$)}}
-                                 . 
-\record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
-\end{ex} 
-As we will see below, there are some complications with this simple
-idea when it comes to the interpretation of pronouns which are bound
-by quantifiers.  Even for deictic pronouns there are problems
-determining which predicates should be used in a semantic treatment of
-gender.  Even for a language like English which apparently has
-semantic gender (as opposed to grammatical gender like German or
-French), neuter can be used for objects which do not have gender (like
-tables) and for animals other than humans which do have gender and
-which can be referred to with masculine and feminine pronouns.
-
-\section{Quantifier scope and underspecification}
-
-Given the kind of interpretation rules we have so far we can obtain a
-reading for \nexteg{a} which corresponds to the kind of parametric
-content foreground using pronominal contexts
-in \nexteg{b}, using the abbreviations `boy$'$' and `dog$'$' as
-introduced in Chapter~\ref{ch:commonnouns}, example (\ref{ex:dogprime}).
-\begin{ex} 
-\begin{subex} 
- 
-\item a boy hugged every dog 
- 
-\item $\lambda \mathfrak{s}$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
-\smallrecord{\smalltfield{e}{every(dog$'$, 
-$\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} . 
-\smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
- 
-\end{subex} 
-   
-\end{ex} 
-This, of course, represents the reading where there is a boy such that
-he hugs every dog.  Notice that here we have vacuous abstraction over
-pronominal contexts and the constraint on them is that they are a record of
-some kind without requiring any particular fields.    
-
-In order to obtain the reading where \textit{every dog} has wide
-scope, we follow Montague and pretty much everybody else in basing our
-treatment of quantifier scope on the treatment of free pronouns,
-though without the contribution of any gender information.  Let us
-imagine just for a moment that such a pronoun existed in English and
-is written as \textit{it$^*$} with the kind of pronoun interpretations
-given in (\ref{ex:pronoun-cont}).  Then the content for \nexteg{a} could be
-\nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item a boy hugged it$^*$
- 
-\item $\lambda \mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{hug($r$.x, $\mathfrak{s}$.x$_0$)}})}} 
- 
-\end{subex} 
-   
-\end{ex}
-Let us further imagine, contrary to fact, that English represented the fact
-that a noun phrase has wide scope over a sentence by placing it at the
-beginning of a sentence as in \nexteg{a} and giving it an
-interpretation where the interpretation of \textit{it$^*$} gets bound
-as in \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item every dog, a boy hugged it$^*$ 
- 
-\item $\lambda\mathfrak{s}$:\textit{Rec} . 
-\smallrecord{\smalltfield{e}{every(dog$'$,
-$\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-    r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x$_0$)}})}})}} 
- 
-\end{subex} 
-\label{ex:edabhi}   
-\end{ex} 
-The imaginary English expression \preveg{a} corresponds quite closely
-to the kind of representation for wide scope readings that are used in
-various theories of logical form.  A major difference is that in
-logical form there is an index corresponding to the label `x$_0$' that
-we use in the interpretation which shows that \textit{every dog} binds
-\textit{it$^*$}.  This might be represented something like in
-\nexteg{}.
-\begin{ex} 
-every dog$_{x_0}$, a boy hugged it$^*_{x_0}$ 
-\end{ex} 
-The imaginary sentence (\ref{ex:edabhi}a) also corresponds closely to
-Montague's (\citeyear{Montague1973}) treatment of scope phenomena.
-Montague would also index the pronoun and use a quantification rule
-with the same index which would replace the pronoun with the
-noun-phrase being quantified in.
-
-Neither of these options are open to us since our syntax is defined in
-terms of types of utterance situations and signs which relate
-utterance situations to contents.  Our realistic strategy does not
-allow for the use of additional imaginary utterance structures.  For this reason
-we will adapt the kind of storage technique used in \cite{Cooper1983}.
-In the original version of storage we moved from assigning a
-single content to a syntactic structure to assigning a set of contents
-in order to allow for the ambiguous interpretation of a single
-syntactic structure.  In our sign-based approach using types the
-corresponding move is not such a major change and the result yields a
-theory involving underspecified content rather than a set of contents.
-
-To see this consider the type \textit{Sign} introduced in
-Chapter~\ref{ch:gram}.  Any object of type \textit{Sign} will be of
-the type in \nexteg{}.
-\begin{ex} 
-\record{\tfield{s-event}{\textit{SEvent}} \\
-         \tfield{syn}{\textit{Syn}} \\
-        \tfield{cont}{\textit{Cont}}}  
-\end{ex} 
-The type in \preveg{} is completely underspecified.  Any sign will be
-of this type.  We could specify it with respect to content by making
-the `cont'-field be a manifest field as in \nexteg{b}, where $c$ is as
-given in \nexteg{a}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $c$ = \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-        . \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
-            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-              . \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
- 
-\item  \record{\tfield{s-event}{\textit{SEvent}} \\
-         \tfield{syn}{\textit{Syn}} \\
-        \mfield{cont}{$c$}{\textit{Cont}}}  
- 
-\end{subex} 
-   
-\end{ex} 
-Now recall that the manifest field
-\smallrecord{\smallmfield{cont}{$c$}{\textit{Cont}}} is just a
-convenient way of writing
-\smallrecord{\smalltfield{cont}{\textit{Cont}$_c$}} where
-\textit{Cont}$_c$ is a singleton type whose only witness is $c$.  It
-is in this sense that the content has been specified to be $c$.
-Suppose now that we do not have enough information to fully specify
-the content, that is, tie it down to be one particular content, but we
-know that it has to be one of either $c$ or $c'$ (as characterized in
-\nexteg{a}).  This could be represented by using a join type of two
-singleton types, \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, as in
-\nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $c'$ =  \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
-      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-        . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-              . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x)}})}})}}
- 
-\item  \record{\tfield{s-event}{\textit{SEvent}} \\
-         \tfield{syn}{\textit{Syn}} \\
-        \tfield{cont}{\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$}}  
- 
-\end{subex} 
-   
-\end{ex} 
-\preveg{} is the type of signs whose contents are either $c$ or $c'$.
-This is, then, a single type, which corresponds to an ``underspecified
-content''.  Of course, the set of witnesses of the join type,
-$\{c,c'\}$, corresponds to the set of contents that could be generated
-by a storage algorithm.  Our strategy, then, is to devise a way of
-computing such types on the basis of compositional interpretation.     
-Notice that saying that the content is of type
-\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, that is, that it is
-either $c$ or $c'$ is distinct from saying that the content is the
-disjunction of $c$ and $c'$, that is, if $c$ and $c'$ are types, the
-type $c\vee c'$.  The witnesses for $c\vee c'$ will be situations $s$
-such that either $s:c$ or $s:c'$ whereas the witness for
-\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ will be the contents $c$
-and $c'$.  This will make an important different in compositional
-interpretation.  For example, if a sentence $S$ has a content of type     
-\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ we would want to say that
-the sentence \textit{Sam believes $S$} has a content of type
-\textit{Cont}$_{believe(sam,c)}$$\vee$\textit{Cont}$_{believe(sam,c')}$
-rather than that it has the content `believe(sam,$c\vee c'$)'.
-
-In order to make the relationship between sets of contents and join
-types smoother we will use generalized join types
-(Appendix~\ref{app:jointypes}).  Suppose we have computed a set of
-possible contents, $\{c_1,\ldots,c_n\}$, for a phrase, then the type
-of the content for that phrase is
-$\bigvee\{\textit{Cont}_{c_1},\ldots,\textit{Cont}_{c_n}\}$.  If
-$\mathbb{C}$ represents the set of contents we have computed, we can
-use the more convenient notation
-$\displaystyle{\bigvee_{c\in\mathbb{C}}}\textit{Cont}_c$ to mean
-$\bigvee\{\textit{Cont}_c\mid c\in\mathbb{C}\}$.
-
-We will take content now to be divided into two fields labelled
-`unplugged' and `plugged'.  This terminology goes back to
-\cite{Bos1996}.  The `unplugged'-field contains a set of unplugged
-interpretations consisting of a set of parametric quantifiers
-(possibly empty) and a core interpretation consisting of a parametric
-content.  Thus we define a type \textit{UInterp} of unplugged
-interpretations as in \nexteg{}.
-\begin{ex} 
-\textit{UInterp} = \record{\tfield{quants}{\{\textit{PQuant}\}}\\
-                           \tfield{core}{\textit{PCont}}}
-\end{ex} 
-The `cont'-field in a sign will now be required to be of the type in
-\nexteg{}.
-\begin{ex} 
-\record{\tfield{unplugged}{\{\textit{UInterp}\}}\\
-        \tfield{plugged}{$\displaystyle{\bigvee_{c\in\mathrm{unplugged},\
-              c.\mathrm{quants}=\emptyset}\textit{Cont}_{c.\mathrm{core}}}$}}
-\end{ex} 
-That is, the `unplugged'-field in the content will contain a set of
-unplugged interpretations (consisting of a quantifier store, possibly empty, and a core
-interpretation) and the `plugged'-field will contain one of the cores
-of those unplugged interpretations whose quantifier store is
-empty.
-
-Let us consider what this will look like for the example \textit{every
-  boy wants a dog} using \textit{every}$'$, \textit{boy}$'$ etc. as
-abbreviations for non-parametric contents for these words.  We show
-the `cont'-field of the sign type associated with constituents of this
-sentence.
-\begin{ex} 
-\begin{subex} 
- 
-\item a dog 
- 
-\item
-  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
-                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                        . \textit{a}$'$(\textit{dog}$'$)}}}}, \\
-   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                        . $\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
-                                                            \\
-          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                        . \textit{a}$'$(\textit{dog}$'$)}}}}$}}
- 
-\end{subex} 
-   
-\end{ex} 
-\begin{ex} 
-\begin{subex} 
- 
-\item want a dog 
- 
-\item
-  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
-                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                        . \textit{want}$'$(\textit{a}$'$(\textit{dog}$'$))}}}}, \\
-   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                        . \textit{want}$'$($\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$)}}}}\}} {\{\textit{UInterp}\}}
-                                                            \\
-          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                        . \textit{want}(\textit{a}$'$(\textit{dog}$'$))}}}}$}}
- 
-\end{subex} 
-   
-\end{ex} 
-
-\begin{ex} 
-\begin{subex} 
- 
-\item every boy 
- 
-\item
-  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
-                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                        . \textit{every}$'$(\textit{boy}$'$)}}}}, \\
-   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                        . $\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
-                                                            \\
-          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                        . \textit{every}$'$(\textit{boy}$'$)}}}}$}}
- 
-\end{subex} 
-   
-\end{ex} 
-    
-\begin{ex} 
-\begin{subex} 
- 
-\item every boy wants a dog 
- 
-\item
-% \newsavebox{\test}
-% \sbox\test{\begin{tabular}{l}a,\\b\end{tabular}}
-% \usebox{\test}
-
-% \newsavebox{\unplugged}
-% \sbox\unplugged{$\left\{ \text{\begin{tabular}{l}\usebox{\unpluggeda},\\
-%                                     \usebox{\unpluggedb},\\
-%                                     \usebox{\unpluggedc},\\
-%                                     \usebox{\unpluggedd},\\
-%                                     \usebox{\unpluggede},\\
-%                                     \usebox{\unpluggedf},\\
-%                                     \usebox{\unpluggedg}
-%                   \end{tabular}}\right\}$}
-
-\newsavebox{\plugged}
-\sbox\plugged{$\displaystyle{\bigvee_{c\in\mathbb{C}_{\mathrm{plugged}}}\textit{Cont}_c}$}
-                              
-
-\smallrecord{\smallmfield{unplugged}{$\mathbb{C}_{\mathrm{unplugged}}$}{\{\textit{UInterp}\}}\\
-             \smalltfield{plugged}{\usebox{\plugged}}}
-
- 
-\end{subex} 
-   
-\end{ex} 
-where $\mathbb{C}_{\mathrm{unplugged}}$ is the set whose members are
-listed in \nexteg{} and $\mathbb{C}_{\mathrm{plugged}}$ is the set
-whose members are listed in (\ref{ex:plugged}).
-\newsavebox{\unpluggeda}
-\sbox\unpluggeda{\smallrecord{\field{quants}{$\emptyset$}\\
-                                                       \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                                                 \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
-                                                                         . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}}}}
-
-\newsavebox{\unpluggedb}
-\sbox\unpluggedb{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                           \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                        . \\
-                                                                                   \hspace*{1em}$\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        . \\
-                                                                                   \hspace*{2em}$P(\mathfrak{s}.\textrm{x}_0)$(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))\end{tabular}}}}}}
-
-\newsavebox{\unpluggedc}
-\sbox\unpluggedc{\smallrecord{\field{quants}{\{\begin{tabular}{l}\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                            . \textit{every}$'$(\textit{boy}$'$)}}, \\
-                                                                        \smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\end{tabular}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-                                                                                              \smalltfield{x$_1$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}} \\
-                                                                                                                \smalltfield{x$_1$}{\textit{Ind}}}
-                                                                        . \\
-                                                                                                       \hspace*{1em}$\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        . \\
-                                                                                   \hspace*{2em}$P(\mathfrak{s}.\textrm{x}_0)$(\textit{want}$'$($\lambda
-                                                                                   P$:\textit{Ppty}
-                                                                                   .
-                                                                                   $P(\mathfrak{s}.\textrm{x}_1)$))\end{tabular}}}}}}
-
-\newsavebox{\unpluggedd}
-\sbox\unpluggedd{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                        . \\
-                                                                                   \hspace*{1em}\textit{every}$'$(\textit{boy}$'$) \\ 
-\hspace*{2em}($\lambda
-   r$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \\
-   \hspace*{3em}$\lambda P$:\textit{Ppty} .  $P$($r$.x$_0$)\\
-                                                                                   \hspace*{4em}(\textit{want}$'$\\ \hspace*{5em}($\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        .
-                                                                                
-$P(\mathfrak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
-
-\newsavebox{\unpluggede}
-\sbox\unpluggede{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
-                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
-                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
-                                                \\
-                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                        . \\
-                                                                                   \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)\\
-                                                                                   \hspace*{2em}($\lambda
-                                                                        r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                          . \\
-                                                                                   \hspace*{3em}$\lambda
-                                                                          P$:\textit{Ppty}
-                                                                          . \\
-                                                                                   \hspace*{4em}$P$($r$.x$_1$)\\
-                                                                                   \hspace*{5em}(\textit{want}$'$($\lambda
-                                                                        P$:\textit{Ppty}
-                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$))})\end{tabular}}}}}
-
-\newsavebox{\unpluggedf}
-\sbox\unpluggedf{\smallrecord{\field{quants}{\{\}}\\
-                              \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                        \field{fg}{\begin{tabular}{l}
-                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
-                                                                     \\
-                                                                    \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
-                                                                      \\
-                                                                    \hspace*{2em}($\lambda
-                                                                     r_1$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                     . \\
-                                                                    \hspace*{3em}\textit{every}$'$(\textit{boy}$'$)\\
-                                                                    \hspace*{4em}($\lambda
-                                                                     r_2$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                     . \\
-                                                                    \hspace*{5em}$\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_0$)\\
-                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}}}}
-
-\newsavebox{\unpluggedg}
-\sbox\unpluggedg{\smallrecord{\field{quants}{\{\}}\\
-                              \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
-                                                        \field{fg}{\begin{tabular}{l}
-                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
-                                                                     \\
-                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
-                                                                      \\
-                                                                    \hspace*{2em}($\lambda
-                                                                     r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                     . \\
-                                                                    \hspace*{3em}\textit{a}$'$(\textit{dog}$'$)\\
-                                                                    \hspace*{4em}($\lambda
-                                                                     r_2$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                     . \\
-                                                                    \hspace*{5em}$\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_0$)\\
-                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}}}}
 
 
-
-\begin{ex} 
-\begin{subex} 
- 
-\item \usebox{\unpluggeda} 
- 
-\item \usebox{\unpluggedb}
-
-\item \usebox{\unpluggedc}
-
-\item \usebox{\unpluggedd}
-
-\item \usebox{\unpluggede}
-
-\item \usebox{\unpluggedf}
-
-\item \usebox{\unpluggedg} 
- 
-\end{subex} 
-   
-\end{ex} 
-
-\begin{ex} 
-\begin{subex} 
- 
-\item \smallrecord{\field{bg}{\textit{Rec}}\\
-                   \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec} . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}
-                               
-\item  \smallrecord{\field{bg}{\textit{Rec}}\\
-                    \field{fg}{\begin{tabular}{l}
-                                    $\lambda\mathfrak{s}$:\textit{Rec}
-                                                                     \\
-                                      \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
-                                                                      \\
-                                      \hspace*{2em}($\lambda
-                                                           r_1$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                     . \\
-                                      \hspace*{3em}\textit{every}$'$(\textit{boy}$'$)\\
-                                      \hspace*{4em}($\lambda
-                                                          r_2$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                     . \\
-                                      \hspace*{5em}$\lambda
-                                                        P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_0$)\\
-                                       \hspace*{6em}\textit{wants}$'$($\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}
- 
-\item  \smallrecord{\field{bg}{\textit{Rec}}\\
-                                                        \field{fg}{\begin{tabular}{l}
-                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
-                                                                     \\
-                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
-                                                                      \\
-                                                                    \hspace*{2em}($\lambda
-                                                                     r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-                                                                     . \\
-                                                                    \hspace*{3em}\textit{a}$'$(\textit{dog}$'$)\\
-                                                                    \hspace*{4em}($\lambda
-                                                                     r_2$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
-                                                                     . \\
-                                                                    \hspace*{5em}$\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_0$)\\
-                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
-                                                                     P$:\textit{Ppty}
-                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}
- 
-\end{subex} 
-\label{ex:plugged}   
-\end{ex} 
-  
-We now take a look at what is needed in order achieve the analysis we
-have discussed above.  We will express storage and retrieval as
-constraints on linguistically allowable sign types.  As a preliminary
-we will define a bookkeeping function, max$_x$, which enables us to determine
-the maximum $i$ such that `x$_i$' is used as a label in a set of
-records, $R$.  This will enable us to store quantifiers using labels
-`x$_0$', `x$_1$' and so on in order as in the examples discussed
-above. `max$_x$' is defined as in \nexteg{} where $R$ is an arbitrary
-set of records.
-\begin{ex} 
-max$_x$($R$) = 
-\begin{quote}
-max($\{i\mid\exists r\in R\ \exists v\ \langle \mathrm{x}_i,v\rangle\in r.\mathrm{bg}\}$), if
-defined
-
-otherwise: -1 
-\end{quote}
-\end{ex}
-That is, max$_x$($R$) is the maximum $i$ such that `x$_i$' is a label
-in the `bg'-field of one of the records in $R$.  If there is no such label max$_x$($R$)
-returns -1. Thus in adding to a quantifier store, $R$, (as in the
-`quants'-fields in the examples above) we will always add a new
-quantifier indexed by max$_x$($R$)+1.  For brevity we will denote this by
-incr$_x$($R$), that is, the result of incrementing the maximal x in $R$. 
-
-It will also be useful to define an operation that adds a field
-\smallrecord{\field{$\ell$}{$v$}} to a record $r$ if there is no field
-with the label $\ell$ or replaces the $\ell$-field in $r$ with
-\smallrecord{\field{$\ell$}{$v$}}.  We will represent the new record
-thus derived as $r\oplus$\smallrecord{\field{$\ell$}{$v$}}.  This
-is defined in \nexteg{}.
-\begin{ex} 
-$r\oplus$\smallrecord{\field{$\ell$}{$v$}} is \\
-\hspace*{1em}$r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$ such
-that $\langle\ell,v'\rangle\in\mathfrak{s}$\\
-\hspace*{1em}$(r-\{\langle\ell,r.l\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
-\end{ex} 
-Similarly we define $T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}}
-for record types, $T$, in
-\nexteg{}.
-\begin{ex} 
-$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
-\hspace*{1em}$T-\{\langle\ell,v\rangle\}$ 
-\end{ex} 
-Note that this version of subtraction for record types will only
-result in a well-formed record type if there are not fields in $T$
-which depend on $\ell$.  In order to rectify this we need to make
-$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} remove in addition
-all fields which depend on $\ell$.  A field, $f$, is dependent on $\ell$
-just in case it is of the form
-$\langle\ell',\langle\mathcal{F},\pi\rangle\rangle$ where $\pi$ is a
-sequence of paths containing $\ell$. Therefore we can refine the
-definition in \preveg{} as that in \nexteg{}.
-\begin{ex} 
-$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
-\hspace*{1em}$T-(\{\langle\ell,v\rangle\}\cup\{f\in T\mid f\
-\text{dependent on}\ \ell\})$ 
-\end{ex} 
-This is technically not enough, since there may still be fields left
-which are dependent on the dependent fields we have removed.
-Therefore we need to make the definition recursive as in \nexteg{}.
-\begin{ex} 
-$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
-\hspace*{1em}$(\ldots(T-\{\langle\ell,v\rangle\}\ominus
-f_0)\ldots)\ominus f_n$ where $\{f_0,\ldots,f_n\}$ is $\{f\in T\mid f\
-\text{dependent on}\ \ell\}$ 
-\end{ex}   
-
-[Is this enough to cover paths which contain $\ell$?]
-
-We will also for convenience use the notation $T\ominus\ell$ to mean
-$T\ominus[\ell:v]$ if $\langle\ell,v\rangle\in T$ or $T$ if there is
-no field labelled $\ell$ in $T$.
-
-We can now define storage as in
-\nexteg{}, where $\sigma$ is an arbitrary sign.
-\begin{ex} 
-\textbf{Storage}
-
-If $\alpha\in\sigma$.cont.unplugged, $\alpha$.core : \textit{PQuant}
-and \\ $\alpha$.core.fg $\not=$
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-  . $\lambda P$:\textit{Ppty} . $P$($\mathfrak{s}$.x$_i$) for any $i$, \\then
-
-\hspace*{1em}\record{\field{quants}{$\alpha$.quants $\cup$ \{
-                              \record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
-        \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
-          . $\alpha$.core.fg($\mathfrak{s}$)}}\}}\\
-\field{core}{\record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
-                     \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
-                       . $\lambda P$:\textit{Ppty}
-                       . $P$($\mathfrak{s}$.x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$)}}}}
-
-\hspace*{4em}$\in$ $\sigma$.cont.unplugged
-                                 
-\end{ex} 
-If $\sigma$ is a sign, $\sigma$.cont.unplugged is a set of unplugged interpretations.
-\preveg{} says that if any
-of those is a noun-phrase interpretation, that is, its core is of type
-\textit{PQuant}, and is not the result of applying storage, that is,
-the foreground of its core is not an interpretation depending on a
-context, $\mathfrak{s}$, as introduced by storage, then
-$\sigma$.cont.unplugged also contains an unplugged interpretation
-where the core has been stored. 
-
-We now characterize retrieval (in a version corresponding to
-quantification with scope over sentences, as opposed to verb phrases
-or common nouns) in \nexteg{}, where again $\sigma$ is an arbitrary
-sign.
-\begin{ex} 
-\textbf{Retrieval (S)} 
-
-If $\alpha\in\sigma$.cont.unplugged, for some $i$,
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-. $Q$ $\in$ $\alpha$.quants and $\alpha$.core : ($T$ $\rightarrow$
-\textit{Type}), where $T$ $\sqsubseteq$
-\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, then \\
-
-\hspace*{1em}\record{\field{quants}{$\alpha$.quants $-$
-    $\{\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-    . $Q\}$} \\
-        \field{core}{$\lambda\mathfrak{s}$:$T-$\{\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}\}
-          . $Q$($\lambda
-          r$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-          . $\alpha$.core($\mathfrak{s}\oplus$\smallrecord{\field{x$_i$}{$r$.x$_i$}}))}}
-
-\hspace*{4em}$\in$ $\sigma$.cont.unplugged
-\end{ex} 
-\preveg{} says that if any of the unplugged interpretations in a sign
-contains a quantifier indexed by $i$, that is, it is a parametric
-quantifier whose domain type is
-\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, and the core of this
-unplugged interpretation is a function from contexts to a type, that
-is, it corresponds to a (declarative) sentence interpretation, where
-the context is required to provide a value for `x$_i$', that is, the
-domain type is a subtype of
-\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}},\footnote{Note that
-  this requirement will prevent the kind of vacuous binding that
-  Keller storage \citep{Keller1988} avoided.} then the quantifier is
-removed from the store and given scope over the sentence
-interpretation in the core binding `x$_i$'.  The dependence on `x$_i$'
-in the context is removed from the core interpretation. 
-
-Finally, we show one way in which stored quantifiers can be
-``percolated'' to higher constituents by showing in \nexteg{} how to
-construct an unplugged content from two constituent unplugged contents
-when the basic semantic composition involves function application.  To
-facilitate this we first define the `x'-incrementation of an object
-(such as a set or a function) with respect to a set of records $R$.
-
-\begin{ex} 
-The `x'\textit{-incrementation of an object $O$ with respect
-  to a set of records $R$}, $[O]_{\mathrm{incr}_x(R)}$, is the result of
-replacing each instance of x$_i$ in $O$, for any natural number $i$,
-with x$_{\mathrm{incr}_x(R)+i}$.  
-\end{ex} 
-Now application for unplugged contents (that is, objects of type
-\textit{UInterp}) can be characterized as in \nexteg{}.
-
-\begin{ex} 
-\textbf{Application}
-
-If $\alpha$ and $\beta$ are of type \textit{UInterp} and $\beta$.core
-is in the domain of $\alpha$.core, then the \textit{application of
-  $\alpha$ to $\beta$}, $\alpha @@\beta$, is
-\begin{quote}
-
-\record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}\\
-        \field{core}{$\alpha$.core@[$\beta$.core]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}}
-\end{quote}
-\end{ex} 
-\preveg{} says that the application of an unplugged content, $\alpha$,
-to another unplugged content, $\beta$, involves first changing the
-quantifier indices in $\beta$ so that they increment the quantifier
-indices in $\alpha$ in the way that is illustrated in the examples
-discussed above.  For example, if both $\alpha$ and $\beta$ contain
-the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
-`x$_0$' will be changed to `x$_1$' in $\beta$.  Now the result of
-application is an unplugged content whose `quants' are the union of
-$\alpha$'s `quants' and the incremented `quants' of $\beta$.  The core
-is the result of applying $\alpha$'s core to $\beta$'s core using the
-same incrementation. 
-  
-
-%[Grammar to be added.]
-
-\section{Long distance dependencies}
-\label{sec:long-distance}
-
-Let us consider how to derive the content of \textit{who Sam hugged}
-as a relative clause.  We use \textbf{hug}$_V$ to represent the
-foreground of the content of \textit{hug} as a transitive verb,
-characterized as in \nexteg{}.
-\begin{ex} 
-\textbf{hug}$_V$ = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} . $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}} 
-\end{ex} 
-Our theory of syntax in terms of event types means that what have been
-called ``gaps'' or ``traces'' in other theories of syntax would
-somehow have to correspond to non-events in which nothing happens and
-do not have any temporal extent.  This strongly suggests that they do
-not exist.  Instead we will take a strategy similar to that pursued,
-for example, in combinatory categorial grammar (see, for example,
-\citealp{Steedman2012}) where \textit{hug} can also be interpreted as
-a verb phrase whose content is ``looking for'' a \textit{wh}-phrase
-content.  We will represent the foreground of this content as
-\textbf{hug}$_{\mathit{VP}}$ and characterize it in terms of
-\textbf{hug}$_V$ as in \nexteg{a} which is identical with \nexteg{b}.
-\begin{ex} 
-\begin{subex}
-\item \textbf{hug}$_{\mathit{VP}}$ = $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-. \textbf{hug}$_V$($\mathfrak{s}$)($\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}})) 
-
-\item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . $\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug($r_1$.x, $\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
-\end{subex}
-\end{ex}
-
-Let us now consider the content of \textit{Sam hugged}.  In order to
-avoid the additional complexity of combining different kinds of
-context which we will undertake in Section~\ref{sec:struc-cntxt} we
-will go back to the treatment of proper names in Chapter~\ref{ch:gram}
-rather than the treatment in Chapter~\ref{ch:propnames} where proper
-names introduce a constraint on the context. Thus we will consider the
-foreground of the parametric content of \textit{Sam}, which we will
-represent as \textbf{Sam}, to be \nexteg{}
-where `sam' is a particular individual named Sam.
-\begin{ex} 
-\textbf{Sam} = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{sam}}) 
-\end{ex}
-The foreground of the content of \textit{Sam hugged}, which we will
-represent as \textbf{Sam$^\frown$hugged}, is \nexteg{a} which is
-identical with \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item \textbf{Sam$^\frown$hugged} =
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . \textbf{Sam}($\mathfrak{s}$)(\textbf{hug}$_{\mathit{VP}}$($\mathfrak{s}$)) 
- 
-\item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
- 
-\end{subex} 
-   
-\end{ex}
-The foreground of the content of \textit{who}, which we will represent
-as \textbf{who}, is given in \nexteg{}.
-\begin{ex} 
-\textbf{who} =
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
-. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh}}) 
-\end{ex} 
-In order to be able to characterize the kind of binding involved in
-combining \textit{who} with \textit{Sam hugged} we will define an
-operation, $\oplus$, which adds a field to a record or, if the label
-of the field being added
-is already present in the record, will replace that field with the new
-field.  This operation is characterized in \nexteg{}.
-\begin{ex} 
-If $r$ is a record, $\ell$ is a label and $v$ is some TTR object, then
-\\
-\hspace*{1em} $r\oplus[\ell=v]$ is \\
-\hspace*{2em} $r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$
-such that $\langle\ell,v'\rangle\in r$\\
-\hspace*{2em}
-$(r-\{\langle\ell,r.\ell\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
-\end{ex} 
-We are using records here to do the work of partial variable
-assignments in logic and the $\oplus$-operation carries out the kind
-of modification which is performed on variable assignments when
-defining binding in the logical treatment.  This now gives us what we
-need to characterize the foreground of the content of the relative
-clause \textit{who Sam hugged}, which we will represent as
-\textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged}, as in
-\nexteg{a} which is identical with \nexteg{b}.  \nexteg{b} is in turn
-equivalent to \nexteg{c} because of the constraint on the extensional
-predicate `hug' similar to that for `find' given in  (\ref{ex:mp-find})
-on p.~\pageref{ex:mp-find}. 
-\begin{ex} 
-\begin{subex} 
- 
-\item \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged} = \\
-  \hspace*{1em}$\lambda\mathfrak{s}$:\textit{Rec} . \\
-\hspace*{2em}$\lambda
-  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \\
-\hspace*{3em}\textbf{who}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}]$)
-($\lambda
-  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$)) 
- 
-\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty}
-      . $P$(\smallrecord{\field{x}{$r_1$.x}}))}}
-
-\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug$^\dagger$(sam, $r_1$.x))}} 
- 
-\end{subex} 
-   
-\end{ex} 
-To form the content of a noun modified by a relative clause such as
-\textit{child who Sam hugged} we use a record type which requires of
-an individual that it has both the property of being a child and being
-hugged by Sam as given in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e$_1$}{child$'$\{$r$.x\}}\\
-          \tfield{e$_2$}{\textbf{who$^\frown$Sam$^\frown$hugged}($\mathfrak{s}$)\{$r$.x\}}}  
-\end{ex} 
-[Has the $P\{x\}$ notation already been introduced?]  
      
    
     
@@ -3637,198 +2707,716 @@ own a donkey rather than farmer-donkey pairs.
       
 
 
-\section{Structured contexts\ignore{, binding principles and projection}}
-\label{sec:struc-cntxt}
+  
+\section{Quantifier scope and underspecification}\todo{Moved from
+  beginning of chapter.  Needs rewriting.}
 
-The nature of the context that we have been using in this chapter is
-different from that of the contexts we used with parametric contents
-in previous chapters starting with Chapter~\ref{ch:propnames}.  The
-contexts in this chapter are records which constitute partial
-assignments of objects to labels `x$_0$', `x$_1$', \ldots whereas the
-contexts in the previous chapters are records of more general types.
-Thus an example of the kind of context type used in this chapter is
-\nexteg{a} whereas an example of the kind of context types used
-previously is \nexteg{b}.
+Given the kind of interpretation rules we have so far we can obtain a
+reading for \nexteg{a} which corresponds to the kind of parametric
+content foreground using pronominal contexts
+in \nexteg{b}, using the abbreviations `boy$'$' and `dog$'$' as
+introduced in Chapter~\ref{ch:commonnouns}, example (\ref{ex:dogprime}).
 \begin{ex} 
 \begin{subex} 
  
-\item \record{\tfield{x$_0$}{\textit{Ind}}\\
-              \tfield{x$_1$}{\textit{Ind}}} 
+\item a boy hugged every dog 
  
-\item \record{\tfield{x}{\textit{Ind}}\\
-              \tfield{e}{named(x, ``Sam'')}} 
+\item $\lambda \mathfrak{s}$:\textit{Rec} . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{every(dog$'$, 
+$\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
  
 \end{subex} 
    
 \end{ex} 
-Contexts of types like \preveg{a} correspond to partial assignments to
-variables in logic where the labels `x$_0$', `x$_1$', \ldots
-correspond to a countably infinite set of variables in a logic.
-Context types like those in \preveg{b} correspond to presuppositions
-\citep{BeaverGeurts2014} or content not \textit{under discussion}
-\citep{Ginzburg2012}  or \textit{at issue} \citep{Potts2005}. We
-reserve the labels `x$_0$', `x$_1$' for contexts giving assignments to
-pronouns which can be involved in binding of the kind described in
-this chapter.  In principle we could combine both kinds of contexts
-by, for example, merging the two types in \preveg{} as given in
-\nexteg{}.
-\begin{ex} 
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{x$_0$}{\textit{Ind}}\\
-        \tfield{x$_1$}{\textit{Ind}}\\
-        \tfield{e}{named(x, ``Sam'')}} 
-\end{ex} 
-However, it seems that it is a good idea to keep different kinds of
-context separate as they may be treated differently by compositional
-semantics, for example, in terms of their projection properties which
-regulates to what extent contexts required by lower constituents are
-also required by higher constituents, as discussed, for example, by
-\cite{Potts2005}.  We could try to do this by having several layers of
-lambda abstraction for each of the different kinds of contexts.  That
-is, parametric contents taking into account several different kinds of
-contexts may have the kind of form represented in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-              \smalltfield{x$_1$}{\textit{Ind}}} $\lambda c$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-              \smalltfield{e}{named(x, ``Sam'')}} \ldots\ \  . $\varphi(\mathfrak{s},c,\ldots)$
-\end{ex} 
-where the `\ldots' represent further lambda abstractions for any other
-kinds of contexts that might need to be distinguished and $\varphi$ is
-some content which may depend on all of these contexts.  One
-difficulty with this kind of proposal is that it is difficult to
-motivate what order the lambda abstractions should come in and it
-could become impossible to decide if we want to allow the different
-kinds of contexts to depend on each other.  In addition, it could
-become unnecessarily complicated to write down the compositional
-interpretation rules.  For this we will keep to having a single lambda
-abstraction for a context with several components which can be
-addressed separately when it comes to characterizing projection
-properties.  Thus instead of \preveg{} we will have parametric
-contents which look like \nexteg{}.
-\begin{ex} 
-$\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-              \smalltfield{x$_1$}{\textit{Ind}}}}\\
-                \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-              \smalltfield{e}{named(x, ``Sam'')}}}\\
-\ldots} . $\varphi(c)$ 
-\end{ex} 
+This, of course, represents the reading where there is a boy such that
+he hugs every dog.  Notice that here we have vacuous abstraction over
+pronominal contexts and the constraint on them is that they are a record of
+some kind without requiring any particular fields.    
 
-[Perhaps we should have introduced structured contexts already in
-Ch. \ref{ch:propnames} on proper names, together with pronouns like
-\textit{him}, \textit{himself} and simple ``binding'' principles.  Use
-`x$_i$' to distinguish proper noun occurrences like we do for pronouns rather
-than `f' and `a' as currently??]
-
-\subsection{\textit{Sam likes him/himself}}
-
-The parametric content for \textit{him} is given in \nexteg{}.
-
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
-\end{ex} 
-
-The parametric content of the reflexive pronoun \textit{himself} is
-the same as \preveg{} except that the values associated with the
-labels `local' and `refl' are switched, as shown in \nexteg{}.
-
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}}
- . 
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
-\end{ex} 
-We will refer to \preveg{} as \textbf{himself}.  The idea is that the `local'-field in the context must be passed up to
-the VP unchanged, whereas the `refl'-field must be emptied
-(discharged) at the VP-level.  Thus \textit{likes him} has the
-parametric content in \nexteg{a} whereas \textit{likes himself} has
-the parametric content in \nexteg{b}.
+In order to obtain the reading where \textit{every dog} has wide
+scope, we follow Montague and pretty much everybody else in basing our
+treatment of quantifier scope on the treatment of free pronouns,
+though without the contribution of any gender information.  Let us
+imagine just for a moment that such a pronoun existed in English and
+is written as \textit{it$^*$} with the kind of pronoun interpretations
+given in (\ref{ex:pronoun-cont}).  Then the content for \nexteg{a} could be
+\nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
-$\lambda P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}} 
+\item a boy hugged it$^*$
  
-\item $\lambda
-c$:\smallrecord{\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-  \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
-  \textbf{himself}(\smallrecord{\field{$\mathfrak{s}$}{\smallrecord{\field{x$_0$}{$r$.x}}}\\
-                                \field{local}{$\mathfrak{T}$($\emptyset$)}\\
-                                \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))}}
- 
+\item $\lambda \mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{hug($r$.x, $\mathfrak{s}$.x$_0$)}})}} 
  
 \end{subex} 
    
 \end{ex}
-The idea is that context parameters represented by `$\mathfrak{s}$'
-are open for binding unless object supplying that parameter are
-required to be of type `$c$.local'.  Reflexive parameters are, however,
-required to be of type `$c$.refl' and these must be bound within the VP.
-Note that since the reflexive is bound by `$r$.x' in \preveg{b} it is
-not represented in `$c$.refl' in the context for the VP.  Thus
-\textit{himself} on its own requires an individual to be supplied by
-the context to give it a referent.  However, for the content of
-\textit{likes himself} no such individual is required from the context
-since the property which is the content of the VP is that of ``being
-an $x$ such that $x$ likes $x$''.  [Better way to talk about this?].
-
-[Possible revision of treatment of proper names:]
-The content of an utterance of \textit{Sam} is given in \nexteg{}.
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                                           \smalltfield{e}{named(x,
-                                                                                             ``Sam'')}}}}}}
-                                                                                 . $\lambda
-                                                                                 P$:\textit{Ppty}
-                                                                                 . $P$($c$.$\mathfrak{c}$.id$_0$) 
-\end{ex} 
-The content of \textit{Sam likes him} is given in \nexteg{a} and
-\textit{Sam likes himself} in \nexteg{b}.
+Let us further imagine, contrary to fact, that English represented the fact
+that a noun phrase has wide scope over a sentence by placing it at the
+beginning of a sentence as in \nexteg{a} and giving it an
+interpretation where the interpretation of \textit{it$^*$} gets bound
+as in \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda
-  c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                  \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(x,
-                                                                              ``Sam'')}}}}}}
-                                                                  . 
-\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
-    P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
+\item every dog, a boy hugged it$^*$ 
  
-\item $\lambda
-  c$:\smallrecord{
-\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(x,
-                                                                              ``Sam'')}}}}}}
-                                                                  . \\
-\hspace*{3em}                                                                   
-\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
-    P$:\textit{Ppty} . 
-$P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}} 
+\item $\lambda\mathfrak{s}$:\textit{Rec} . 
+\smallrecord{\smalltfield{e}{every(dog$'$,
+$\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+    r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x$_0$)}})}})}} 
+ 
+\end{subex} 
+\label{ex:edabhi}   
+\end{ex} 
+The imaginary English expression \preveg{a} corresponds quite closely
+to the kind of representation for wide scope readings that are used in
+various theories of logical form.  A major difference is that in
+logical form there is an index corresponding to the label `x$_0$' that
+we use in the interpretation which shows that \textit{every dog} binds
+\textit{it$^*$}.  This might be represented something like in
+\nexteg{}.
+\begin{ex} 
+every dog$_{x_0}$, a boy hugged it$^*_{x_0}$ 
+\end{ex} 
+The imaginary sentence (\ref{ex:edabhi}a) also corresponds closely to
+Montague's (\citeyear{Montague1973}) treatment of scope phenomena.
+Montague would also index the pronoun and use a quantification rule
+with the same index which would replace the pronoun with the
+noun-phrase being quantified in.
+
+Neither of these options are open to us since our syntax is defined in
+terms of types of utterance situations and signs which relate
+utterance situations to contents.  Our realistic strategy does not
+allow for the use of additional imaginary utterance structures.  For this reason
+we will adapt the kind of storage technique used in \cite{Cooper1983}.
+In the original version of storage we moved from assigning a
+single content to a syntactic structure to assigning a set of contents
+in order to allow for the ambiguous interpretation of a single
+syntactic structure.  In our sign-based approach using types the
+corresponding move is not such a major change and the result yields a
+theory involving underspecified content rather than a set of contents.
+
+To see this consider the type \textit{Sign} introduced in
+Chapter~\ref{ch:gram}.  Any object of type \textit{Sign} will be of
+the type in \nexteg{}.
+\begin{ex} 
+\record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}}}  
+\end{ex} 
+The type in \preveg{} is completely underspecified.  Any sign will be
+of this type.  We could specify it with respect to content by making
+the `cont'-field be a manifest field as in \nexteg{b}, where $c$ is as
+given in \nexteg{a}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $c$ = \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+        . \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
+            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+              . \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
+ 
+\item  \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \mfield{cont}{$c$}{\textit{Cont}}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+Now recall that the manifest field
+\smallrecord{\smallmfield{cont}{$c$}{\textit{Cont}}} is just a
+convenient way of writing
+\smallrecord{\smalltfield{cont}{\textit{Cont}$_c$}} where
+\textit{Cont}$_c$ is a singleton type whose only witness is $c$.  It
+is in this sense that the content has been specified to be $c$.
+Suppose now that we do not have enough information to fully specify
+the content, that is, tie it down to be one particular content, but we
+know that it has to be one of either $c$ or $c'$ (as characterized in
+\nexteg{a}).  This could be represented by using a join type of two
+singleton types, \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, as in
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $c'$ =  \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
+      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+        . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+              . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x)}})}})}}
+ 
+\item  \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{} is the type of signs whose contents are either $c$ or $c'$.
+This is, then, a single type, which corresponds to an ``underspecified
+content''.  Of course, the set of witnesses of the join type,
+$\{c,c'\}$, corresponds to the set of contents that could be generated
+by a storage algorithm.  Our strategy, then, is to devise a way of
+computing such types on the basis of compositional interpretation.     
+Notice that saying that the content is of type
+\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, that is, that it is
+either $c$ or $c'$ is distinct from saying that the content is the
+disjunction of $c$ and $c'$, that is, if $c$ and $c'$ are types, the
+type $c\vee c'$.  The witnesses for $c\vee c'$ will be situations $s$
+such that either $s:c$ or $s:c'$ whereas the witness for
+\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ will be the contents $c$
+and $c'$.  This will make an important different in compositional
+interpretation.  For example, if a sentence $S$ has a content of type     
+\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ we would want to say that
+the sentence \textit{Sam believes $S$} has a content of type
+\textit{Cont}$_{believe(sam,c)}$$\vee$\textit{Cont}$_{believe(sam,c')}$
+rather than that it has the content `believe(sam,$c\vee c'$)'.
+
+In order to make the relationship between sets of contents and join
+types smoother we will use generalized join types
+(Appendix~\ref{app:jointypes}).  Suppose we have computed a set of
+possible contents, $\{c_1,\ldots,c_n\}$, for a phrase, then the type
+of the content for that phrase is
+$\bigvee\{\textit{Cont}_{c_1},\ldots,\textit{Cont}_{c_n}\}$.  If
+$\mathbb{C}$ represents the set of contents we have computed, we can
+use the more convenient notation
+$\displaystyle{\bigvee_{c\in\mathbb{C}}}\textit{Cont}_c$ to mean
+$\bigvee\{\textit{Cont}_c\mid c\in\mathbb{C}\}$.
+
+We will take content now to be divided into two fields labelled
+`unplugged' and `plugged'.  This terminology goes back to
+\cite{Bos1996}.  The `unplugged'-field contains a set of unplugged
+interpretations consisting of a set of parametric quantifiers
+(possibly empty) and a core interpretation consisting of a parametric
+content.  Thus we define a type \textit{UInterp} of unplugged
+interpretations as in \nexteg{}.
+\begin{ex} 
+\textit{UInterp} = \record{\tfield{quants}{\{\textit{PQuant}\}}\\
+                           \tfield{core}{\textit{PCont}}}
+\end{ex} 
+The `cont'-field in a sign will now be required to be of the type in
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{unplugged}{\{\textit{UInterp}\}}\\
+        \tfield{plugged}{$\displaystyle{\bigvee_{c\in\mathrm{unplugged},\
+              c.\mathrm{quants}=\emptyset}\textit{Cont}_{c.\mathrm{core}}}$}}
+\end{ex} 
+That is, the `unplugged'-field in the content will contain a set of
+unplugged interpretations (consisting of a quantifier store, possibly empty, and a core
+interpretation) and the `plugged'-field will contain one of the cores
+of those unplugged interpretations whose quantifier store is
+empty.
+
+Let us consider what this will look like for the example \textit{every
+  boy wants a dog} using \textit{every}$'$, \textit{boy}$'$ etc. as
+abbreviations for non-parametric contents for these words.  We show
+the `cont'-field of the sign type associated with constituents of this
+sentence.
+\begin{ex} 
+\begin{subex} 
+ 
+\item a dog 
+ 
+\item
+  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
+                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                        . \textit{a}$'$(\textit{dog}$'$)}}}}, \\
+   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . $\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
+                                                            \\
+          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                        . \textit{a}$'$(\textit{dog}$'$)}}}}$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+\begin{ex} 
+\begin{subex} 
+ 
+\item want a dog 
+ 
+\item
+  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
+                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                        . \textit{want}$'$(\textit{a}$'$(\textit{dog}$'$))}}}}, \\
+   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . \textit{want}$'$($\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$)}}}}\}} {\{\textit{UInterp}\}}
+                                                            \\
+          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                        . \textit{want}(\textit{a}$'$(\textit{dog}$'$))}}}}$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item every boy 
+ 
+\item
+  \smallrecord{\smallmfield{unplugged}{\{\smallrecord{\field{quants}{$\emptyset$}\\
+                                            \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                        . \textit{every}$'$(\textit{boy}$'$)}}}}, \\
+   \hspace*{5em}                            \smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . $\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$}}}}\}} {\{\textit{UInterp}\}}
+                                                            \\
+          \smalltfield{plugged}{\textit{Cont}$_{\text{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                      \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                        . \textit{every}$'$(\textit{boy}$'$)}}}}$}}
  
 \end{subex} 
    
 \end{ex} 
     
-[This material should possibly be moved to Ch.~\ref{ch:propnames} so we have
-structured contexts from the beginning.]  
+\begin{ex} 
+\begin{subex} 
+ 
+\item every boy wants a dog 
+ 
+\item
+% \newsavebox{\test}
+% \sbox\test{\begin{tabular}{l}a,\\b\end{tabular}}
+% \usebox{\test}
+
+% \newsavebox{\unplugged}
+% \sbox\unplugged{$\left\{ \text{\begin{tabular}{l}\usebox{\unpluggeda},\\
+%                                     \usebox{\unpluggedb},\\
+%                                     \usebox{\unpluggedc},\\
+%                                     \usebox{\unpluggedd},\\
+%                                     \usebox{\unpluggede},\\
+%                                     \usebox{\unpluggedf},\\
+%                                     \usebox{\unpluggedg}
+%                   \end{tabular}}\right\}$}
+
+\newsavebox{\plugged}
+\sbox\plugged{$\displaystyle{\bigvee_{c\in\mathbb{C}_{\mathrm{plugged}}}\textit{Cont}_c}$}
+                              
+
+\smallrecord{\smallmfield{unplugged}{$\mathbb{C}_{\mathrm{unplugged}}$}{\{\textit{UInterp}\}}\\
+             \smalltfield{plugged}{\usebox{\plugged}}}
+
+ 
+\end{subex} 
+   
+\end{ex} 
+where $\mathbb{C}_{\mathrm{unplugged}}$ is the set whose members are
+listed in \nexteg{} and $\mathbb{C}_{\mathrm{plugged}}$ is the set
+whose members are listed in (\ref{ex:plugged}).
+\newsavebox{\unpluggeda}
+\sbox\unpluggeda{\smallrecord{\field{quants}{$\emptyset$}\\
+                                                       \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                                                 \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec}
+                                                                         . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}}}}
+
+\newsavebox{\unpluggedb}
+\sbox\unpluggedb{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                           \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                   \hspace*{1em}$\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . \\
+                                                                                   \hspace*{2em}$P(\mathfrak{s}.\textrm{x}_0)$(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))\end{tabular}}}}}}
+
+\newsavebox{\unpluggedc}
+\sbox\unpluggedc{\smallrecord{\field{quants}{\{\begin{tabular}{l}\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}, \\
+                                                                        \smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\end{tabular}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+                                                                                              \smalltfield{x$_1$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}} \\
+                                                                                                                \smalltfield{x$_1$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                                       \hspace*{1em}$\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . \\
+                                                                                   \hspace*{2em}$P(\mathfrak{s}.\textrm{x}_0)$(\textit{want}$'$($\lambda
+                                                                                   P$:\textit{Ppty}
+                                                                                   .
+                                                                                   $P(\mathfrak{s}.\textrm{x}_1)$))\end{tabular}}}}}}
+
+\newsavebox{\unpluggedd}
+\sbox\unpluggedd{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                            . \textit{a}$'$(\textit{dog}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                   \hspace*{1em}\textit{every}$'$(\textit{boy}$'$) \\ 
+\hspace*{2em}($\lambda
+   r$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \\
+   \hspace*{3em}$\lambda P$:\textit{Ppty} .  $P$($r$.x$_0$)\\
+                                                                                   \hspace*{4em}(\textit{want}$'$\\ \hspace*{5em}($\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        .
+                                                                                
+$P(\mathfrak{s}.\textrm{x}_1)$)))\end{tabular}}}}}}
+
+\newsavebox{\unpluggede}
+\sbox\unpluggede{\smallrecord{\field{quants}{\{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}} \\
+                                                                          \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                            . \textit{every}$'$(\textit{boy}$'$)}}\}} \\
+                                            \field{core}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}
+                                                \\
+                                                                      \field{fg}{\begin{tabular}{l}$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                        . \\
+                                                                                   \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)\\
+                                                                                   \hspace*{2em}($\lambda
+                                                                        r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                          . \\
+                                                                                   \hspace*{3em}$\lambda
+                                                                          P$:\textit{Ppty}
+                                                                          . \\
+                                                                                   \hspace*{4em}$P$($r$.x$_1$)\\
+                                                                                   \hspace*{5em}(\textit{want}$'$($\lambda
+                                                                        P$:\textit{Ppty}
+                                                                        . $P(\mathfrak{s}.\textrm{x}_0)$))})\end{tabular}}}}}
+
+\newsavebox{\unpluggedf}
+\sbox\unpluggedf{\smallrecord{\field{quants}{\{\}}\\
+                              \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                        \field{fg}{\begin{tabular}{l}
+                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
+                                                                     \\
+                                                                    \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
+                                                                      \\
+                                                                    \hspace*{2em}($\lambda
+                                                                     r_1$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{3em}\textit{every}$'$(\textit{boy}$'$)\\
+                                                                    \hspace*{4em}($\lambda
+                                                                     r_2$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{5em}$\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}}}}
+
+\newsavebox{\unpluggedg}
+\sbox\unpluggedg{\smallrecord{\field{quants}{\{\}}\\
+                              \field{core}{\smallrecord{\field{bg}{\textit{Rec}}\\
+                                                        \field{fg}{\begin{tabular}{l}
+                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
+                                                                     \\
+                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
+                                                                      \\
+                                                                    \hspace*{2em}($\lambda
+                                                                     r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{3em}\textit{a}$'$(\textit{dog}$'$)\\
+                                                                    \hspace*{4em}($\lambda
+                                                                     r_2$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{5em}$\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}}}}
+
+
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item \usebox{\unpluggeda} 
+ 
+\item \usebox{\unpluggedb}
+
+\item \usebox{\unpluggedc}
+
+\item \usebox{\unpluggedd}
+
+\item \usebox{\unpluggede}
+
+\item \usebox{\unpluggedf}
+
+\item \usebox{\unpluggedg} 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item \smallrecord{\field{bg}{\textit{Rec}}\\
+                   \field{fg}{$\lambda\mathfrak{s}$:\textit{Rec} . \textit{every}$'$(\textit{boy}$'$)(\textit{want}$'$(\textit{a}$'$(\textit{dog}$'$)))}}
+                               
+\item  \smallrecord{\field{bg}{\textit{Rec}}\\
+                    \field{fg}{\begin{tabular}{l}
+                                    $\lambda\mathfrak{s}$:\textit{Rec}
+                                                                     \\
+                                      \hspace*{1em}\textit{a}$'$(\textit{dog}$'$)
+                                                                      \\
+                                      \hspace*{2em}($\lambda
+                                                           r_1$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                      \hspace*{3em}\textit{every}$'$(\textit{boy}$'$)\\
+                                      \hspace*{4em}($\lambda
+                                                          r_2$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                      \hspace*{5em}$\lambda
+                                                        P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                       \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}
+ 
+\item  \smallrecord{\field{bg}{\textit{Rec}}\\
+                                                        \field{fg}{\begin{tabular}{l}
+                                                                    $\lambda\mathfrak{s}$:\textit{Rec}
+                                                                     \\
+                                                                    \hspace*{1em}\textit{every}$'$(\textit{boy}$'$)
+                                                                      \\
+                                                                    \hspace*{2em}($\lambda
+                                                                     r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{3em}\textit{a}$'$(\textit{dog}$'$)\\
+                                                                    \hspace*{4em}($\lambda
+                                                                     r_2$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+                                                                     . \\
+                                                                    \hspace*{5em}$\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_0$)\\
+                                                                    \hspace*{6em}\textit{wants}$'$($\lambda
+                                                                     P$:\textit{Ppty}
+                                                                     . $P$($r_1$.x$_1$))))\end{tabular}}}
+ 
+\end{subex} 
+\label{ex:plugged}   
+\end{ex} 
   
+We now take a look at what is needed in order achieve the analysis we
+have discussed above.  We will express storage and retrieval as
+constraints on linguistically allowable sign types.  As a preliminary
+we will define a bookkeeping function, max$_x$, which enables us to determine
+the maximum $i$ such that `x$_i$' is used as a label in a set of
+records, $R$.  This will enable us to store quantifiers using labels
+`x$_0$', `x$_1$' and so on in order as in the examples discussed
+above. `max$_x$' is defined as in \nexteg{} where $R$ is an arbitrary
+set of records.
+\begin{ex} 
+max$_x$($R$) = 
+\begin{quote}
+max($\{i\mid\exists r\in R\ \exists v\ \langle \mathrm{x}_i,v\rangle\in r.\mathrm{bg}\}$), if
+defined
+
+otherwise: -1 
+\end{quote}
+\end{ex}
+That is, max$_x$($R$) is the maximum $i$ such that `x$_i$' is a label
+in the `bg'-field of one of the records in $R$.  If there is no such label max$_x$($R$)
+returns -1. Thus in adding to a quantifier store, $R$, (as in the
+`quants'-fields in the examples above) we will always add a new
+quantifier indexed by max$_x$($R$)+1.  For brevity we will denote this by
+incr$_x$($R$), that is, the result of incrementing the maximal x in $R$. 
+
+It will also be useful to define an operation that adds a field
+\smallrecord{\field{$\ell$}{$v$}} to a record $r$ if there is no field
+with the label $\ell$ or replaces the $\ell$-field in $r$ with
+\smallrecord{\field{$\ell$}{$v$}}.  We will represent the new record
+thus derived as $r\oplus$\smallrecord{\field{$\ell$}{$v$}}.  This
+is defined in \nexteg{}.
+\begin{ex} 
+$r\oplus$\smallrecord{\field{$\ell$}{$v$}} is \\
+\hspace*{1em}$r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$ such
+that $\langle\ell,v'\rangle\in\mathfrak{s}$\\
+\hspace*{1em}$(r-\{\langle\ell,r.l\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
+\end{ex} 
+Similarly we define $T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}}
+for record types, $T$, in
+\nexteg{}.
+\begin{ex} 
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
+\hspace*{1em}$T-\{\langle\ell,v\rangle\}$ 
+\end{ex} 
+Note that this version of subtraction for record types will only
+result in a well-formed record type if there are not fields in $T$
+which depend on $\ell$.  In order to rectify this we need to make
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} remove in addition
+all fields which depend on $\ell$.  A field, $f$, is dependent on $\ell$
+just in case it is of the form
+$\langle\ell',\langle\mathcal{F},\pi\rangle\rangle$ where $\pi$ is a
+sequence of paths containing $\ell$. Therefore we can refine the
+definition in \preveg{} as that in \nexteg{}.
+\begin{ex} 
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
+\hspace*{1em}$T-(\{\langle\ell,v\rangle\}\cup\{f\in T\mid f\
+\text{dependent on}\ \ell\})$ 
+\end{ex} 
+This is technically not enough, since there may still be fields left
+which are dependent on the dependent fields we have removed.
+Therefore we need to make the definition recursive as in \nexteg{}.
+\begin{ex} 
+$T\ominus$\smallrecord{\smalltfield{$\ell$}{$v$}} is \\ 
+\hspace*{1em}$(\ldots(T-\{\langle\ell,v\rangle\}\ominus
+f_0)\ldots)\ominus f_n$ where $\{f_0,\ldots,f_n\}$ is $\{f\in T\mid f\
+\text{dependent on}\ \ell\}$ 
+\end{ex}   
+
+[Is this enough to cover paths which contain $\ell$?]
+
+We will also for convenience use the notation $T\ominus\ell$ to mean
+$T\ominus[\ell:v]$ if $\langle\ell,v\rangle\in T$ or $T$ if there is
+no field labelled $\ell$ in $T$.
+
+We can now define storage as in
+\nexteg{}, where $\sigma$ is an arbitrary sign.
+\begin{ex} 
+\textbf{Storage}
+
+If $\alpha\in\sigma$.cont.unplugged, $\alpha$.core : \textit{PQuant}
+and \\ $\alpha$.core.fg $\not=$
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+  . $\lambda P$:\textit{Ppty} . $P$($\mathfrak{s}$.x$_i$) for any $i$, \\then
+
+\hspace*{1em}\record{\field{quants}{$\alpha$.quants $\cup$ \{
+                              \record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
+        \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
+          . $\alpha$.core.fg($\mathfrak{s}$)}}\}}\\
+\field{core}{\record{\field{bg}{\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}}\\
+                     \field{fg}{$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$}{\textit{Ind}}}
+                       . $\lambda P$:\textit{Ppty}
+                       . $P$($\mathfrak{s}$.x$_{\mathrm{incr}_x(\alpha.\mathrm{quants})}$)}}}}
+
+\hspace*{4em}$\in$ $\sigma$.cont.unplugged
+                                 
+\end{ex} 
+If $\sigma$ is a sign, $\sigma$.cont.unplugged is a set of unplugged interpretations.
+\preveg{} says that if any
+of those is a noun-phrase interpretation, that is, its core is of type
+\textit{PQuant}, and is not the result of applying storage, that is,
+the foreground of its core is not an interpretation depending on a
+context, $\mathfrak{s}$, as introduced by storage, then
+$\sigma$.cont.unplugged also contains an unplugged interpretation
+where the core has been stored. 
+
+We now characterize retrieval (in a version corresponding to
+quantification with scope over sentences, as opposed to verb phrases
+or common nouns) in \nexteg{}, where again $\sigma$ is an arbitrary
+sign.
+\begin{ex} 
+\textbf{Retrieval (S)} 
+
+If $\alpha\in\sigma$.cont.unplugged, for some $i$,
+$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+. $Q$ $\in$ $\alpha$.quants and $\alpha$.core : ($T$ $\rightarrow$
+\textit{Type}), where $T$ $\sqsubseteq$
+\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, then \\
+
+\hspace*{1em}\record{\field{quants}{$\alpha$.quants $-$
+    $\{\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+    . $Q\}$} \\
+        \field{core}{$\lambda\mathfrak{s}$:$T-$\{\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}\}
+          . $Q$($\lambda
+          r$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+          . $\alpha$.core($\mathfrak{s}\oplus$\smallrecord{\field{x$_i$}{$r$.x$_i$}}))}}
+
+\hspace*{4em}$\in$ $\sigma$.cont.unplugged
+\end{ex} 
+\preveg{} says that if any of the unplugged interpretations in a sign
+contains a quantifier indexed by $i$, that is, it is a parametric
+quantifier whose domain type is
+\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, and the core of this
+unplugged interpretation is a function from contexts to a type, that
+is, it corresponds to a (declarative) sentence interpretation, where
+the context is required to provide a value for `x$_i$', that is, the
+domain type is a subtype of
+\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}},\footnote{Note that
+  this requirement will prevent the kind of vacuous binding that
+  Keller storage \citep{Keller1988} avoided.} then the quantifier is
+removed from the store and given scope over the sentence
+interpretation in the core binding `x$_i$'.  The dependence on `x$_i$'
+in the context is removed from the core interpretation. 
+
+Finally, we show one way in which stored quantifiers can be
+``percolated'' to higher constituents by showing in \nexteg{} how to
+construct an unplugged content from two constituent unplugged contents
+when the basic semantic composition involves function application.  To
+facilitate this we first define the `x'-incrementation of an object
+(such as a set or a function) with respect to a set of records $R$.
+
+\begin{ex} 
+The `x'\textit{-incrementation of an object $O$ with respect
+  to a set of records $R$}, $[O]_{\mathrm{incr}_x(R)}$, is the result of
+replacing each instance of x$_i$ in $O$, for any natural number $i$,
+with x$_{\mathrm{incr}_x(R)+i}$.  
+\end{ex} 
+Now application for unplugged contents (that is, objects of type
+\textit{UInterp}) can be characterized as in \nexteg{}.
+
+\begin{ex} 
+\textbf{Application}
+
+If $\alpha$ and $\beta$ are of type \textit{UInterp} and $\beta$.core
+is in the domain of $\alpha$.core, then the \textit{application of
+  $\alpha$ to $\beta$}, $\alpha @@\beta$, is
+\begin{quote}
+
+\record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}\\
+        \field{core}{$\alpha$.core@[$\beta$.core]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}}
+\end{quote}
+\end{ex} 
+\preveg{} says that the application of an unplugged content, $\alpha$,
+to another unplugged content, $\beta$, involves first changing the
+quantifier indices in $\beta$ so that they increment the quantifier
+indices in $\alpha$ in the way that is illustrated in the examples
+discussed above.  For example, if both $\alpha$ and $\beta$ contain
+the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
+`x$_0$' will be changed to `x$_1$' in $\beta$.  Now the result of
+application is an unplugged content whose `quants' are the union of
+$\alpha$'s `quants' and the incremented `quants' of $\beta$.  The core
+is the result of applying $\alpha$'s core to $\beta$'s core using the
+same incrementation. 
+  
+
+%[Grammar to be added.]
    
 
 \section{Compositional semantics and incremental processing}
