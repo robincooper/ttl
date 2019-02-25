@@ -5,7 +5,7 @@
 As we interact with the world and with each other we need to classify objects
 and events, that is, we need to make judgements about what types of
 objects and events we are confronted with.  This is an important part
-of what is involved in planning what future actions we should carry
+of what is involved in planning the future actions we should carry
 out and how we should coordinate with other agents in carrying out
 collaborative actions.  This is true of action in general, including
 linguistic action.  The aim of this book is to characterize a
@@ -15,8 +15,9 @@ these types.  We will argue that a theory of language based on
 action allows us to take a perspective on linguistic content which is
 centered on interaction in dialogue and that this is importantly different to
 the traditional view of natural languages as being essentially similar
-to formal languages.  At the same time we will argue that the
-tremendous technical advances made by the formal language view can be
+to formal languages such as logics developed by philosophers or mathematicians.  At the same time we will argue that the
+tremendous technical advances made by the formal language view of
+semantics can be
 incorporated into the action-based view and that this can lead to
 important improvements both of intuitive understanding and empirical
 coverage.
@@ -46,7 +47,7 @@ considerations.  We also introduce some basic notions of a theory of
 action based on these types which will be developed further as the
 book progresses.  The overall approach presented here owes much to the
 theory of situations and situation semantics presented by Barwise and
-Perry in the nineteen eighties.  One of the themes of this book is a
+Perry in the 1980's.  One of the themes of this book is a
 working out of parts of the old situation theory using ideas taken from
 Martin-Löf's type theory.
 
@@ -73,7 +74,7 @@ In the schematic example in \nexteg{} the $T_i$ are types.
         \tfield{$\ell_3$}{$T_2$}} 
 \end{ex} 
 The record (\ref{ex:sch-rec}) will be of the type \preveg{} just in
-case $o_0:T_0$, $o_1:T_1$ and $o_2:T_2$. Martin-Löf's orginal type
+case the objects are of the types with the same labelling, that is, $o_0:T_0$, $o_1:T_1$ and $o_2:T_2$. Martin-Löf's orginal type
 theory did not have records or record types though there have been
 many suggestions in the literature on how to add them.  We have
 borrowed freely from some of these ideas in TTR although the way we
@@ -87,12 +88,12 @@ dialogue.  Here we build on seminal work on dialogue analysis by
 Jonathan Ginzburg and also related computational implementation by
 Staffan Larsson
 leading to the information state update approach to dialogue systems.
-We have adapted these ideas in a way that allows us to persue the
+We have adapted these ideas in a way that allows us to pursue the
 questions of grammar and semantics that we take up in the remainder of
 the book.  A central notion here is that of the dialogue gameboard
 which we construe as a type of information state representing the
 current state of play in the dialogue from the perspective of a
-dialogue participant including what has been committed to as being
+dialogue participant.  It includes the dialogue participant's view of what has been committed to as being
 true in the dialogue so far and what questions are currently under discussion. 
 
 In Chapter~\ref{ch:gram} we show how syntax and semantics can be
@@ -105,10 +106,10 @@ meaning introduced in Barwise and Perry's situation semantics which
 focusses on the relation between utterance situations and described
 situations.  This was perhaps the first attempt to generalize the
 Speech Act Theory developed by Austin and Searle to the concerns of
-compositional interpretation of syntactic structure.  We think that
+compositional interpretation of syntactic structure.  \ignore{We think that
 placing the old situation semantics project within the theory of types
 that we present makes it more convincing and also gives it greater
-mathematical precision and detail.  A more recent theory to which the
+mathematical precision and detail.}  A more recent theory to which the
 ideas in this chapter are related is that of Dynamic Syntax (DS).
 While the particular formulations in our approach look rather
 different from those in DS the two theories have common aims relating
@@ -126,7 +127,7 @@ intensional in that the identity of a type is not established in terms
 of the set of objects which are of that type.  That is, types are not
 \textit{extensional} in the way that sets are in a standard set
 theory.  The axiom of extensionality in standard set theory requires
-there cannot be two sets which have the same members.  In contrast, there can be different types which have exactly the same set
+that there cannot be two sets which have the same members.  In contrast, there can be different types which have exactly the same set
 of witnesses.  The second notion has to do with the facts that the
 types themselves are treated as objects that can enter into relations
 and be used to construct new types.  We will call this \textit{first
@@ -139,7 +140,8 @@ perceive objects and events in terms of types and act on these
 perceptions but that we can also
 reason about and act on the types themselves, for example, in ascribing them to
 other agents as
-beliefs or making a plan to achieve a goal.  The types become cognitive
+beliefs or making a plan to achieve a goal by creating an event of a
+certain type.  The types become cognitive
 \textit{resources} which we can exploit in our communicative
 activity.  In Part~II we will look at a number of examples of this.
 
@@ -153,7 +155,9 @@ name \textit{Sam} requires a context in which there is an individual
 named ``Sam''.  But where in her resources should a dialogue
 participant look for such a context?  One obvious place is the
 conversational gameboard that we introduced in
-Chapter~\ref{ch:infex}.  Another place is the visual scene, or more
+Chapter~\ref{ch:infex}.  That is, the dialogue participant should
+determine whether there has been reference to somebody of that name
+already in the current dialogue according to her gameboard.  Another place is the visual scene, or more
 generally the ambient situation which the agent can perceive by
 different sense modalities.  This we also represent as a resource
 using a type -- that is, the type for which the ambient situation
@@ -176,10 +180,9 @@ semantics by Fillmore and also psychological work on frames by
 Barsalou.  We will construe frames as situations (modelled as records
 in TTR).  We will argue that frame types are an additional kind of
 resource which is exploited in natural language semantics.  
-
 A common noun like \textit{dog}, in addition to being
 associated with the property of being a dog, can also be associated
-with a type of situation (a frame) which is common for dogs, for
+with a type of situation (a frame type) which is common for dogs, for
 example, where the dog has a name, an age and various other attributes
 we commonly attribute to dogs.  We will argue that such a frame can
 play an important role in interpreting utterances such as \textit{the
@@ -196,16 +199,18 @@ example originally discussed by Manfred Krifka: \textit{four thousand
   ships passed through the lock} which can either mean that four
 thousand distinct ships passed through the lock or that there were
 four thousand ship-passing-through-the-lock events some of which may
-have involved the same ship. 
+have involved the same ship. We argue that in order to interpret such
+examples you need to have as a resource an appropriate frame type
+associated with the noun \textit{ship}.
 
 In Chapter~\ref{ch:intensional} we explore phenomena in natural
-language which are standardly referred to as modality and
-intensionality. We argue that types as we conceive them are better
+language which are standardly referred to as \textit{modality} and
+\textit{intensionality}. We argue that types as we conceive them are better
 placed to deal with these phenomena than possible worlds that are used
 in standard formal semantics.  In standard formal semantics
 propositions are regarded as sets of possible worlds.  For example,
 the proposition corresponding to \textit{a boy hugged a dog} is the
-set of possible worlds in which a boy hugged a dog is true.  What we
+set of all logically possible worlds in which a boy hugged a dog is true.  What we
 substitute for this is the type of situations in which a boy hugged a
 dog.  At an intuitive level these notions are quite similar.  They
 both represent mathematical objects which allow for many different
@@ -240,8 +245,8 @@ individual to believe a type it has to be the case that the type
 matches (in a way we make precise) the type which models the beliefs
 (or long term memory) of the individual, that is the same resource
 that was needed in Chapter~\ref{ch:propnames} to get the dialogical
-analysis of proper names to work out.  Thus resources modelled as
-types play an important role in our account of intensionality as well.
+analysis of proper names to work out.  \ignore{Thus resources modelled as
+types play an important role in our account of intensionality as well.}
 
 In Chapter~\ref{ch:quant} we look at generalized quantifiers from the
 perspective of dialogic interaction.  Traditionally generalized
@@ -254,14 +259,13 @@ characterization of witness sets the primary notion in defining
 quantifiers.  This makes it more straightforward to account for the
 anaphoric possibilities relating to quantified expressions in
 dialogue.
-
 We often use quantified statements in dialogue when we have inadequate
 information to determine their truth.  This is particularly true of
 determiners like \textit{every} and \textit{most} when talking about
 large sets.  We suggest that this phenomenon can be analyzed by
 estimating a probability based on the evidence presented in our
-cognitive resources (long-term memory or beliefs).
-
+cognitive resources (long-term memory or beliefs as discussed in
+Chapters~\ref{ch:propnames} and \ref{ch:intensional}).
 Finally, we give an account of how TTR types can be used to talk of
 content which is underspecified for quantifier scope.  The idea is to
 compute content types which have the various available contents which
@@ -289,6 +293,11 @@ which have different emphasis at different points in the text:
   and mental states
 
 \item types as a way of doing underspecification
+
+\item avoiding an intermediate ``semantic'' language such as logical
+  form or discourse representation language but rather giving a direct
+  interpretation of linguistic events in terms of semantic a semantic
+  universe containing structured objects
  
 \end{itemize} 
 Behind all this is a desire to find a theory of types which can be
@@ -303,9 +312,13 @@ These are questions that I have asked myself at various points while
 writing this book.  It worries me (and it will probably worry you)
 despite the fact that I know the answer:  it is important to have a
 single approach to language in which all these issues can be addressed
-simultaneously.  Addressing the issues one at a time is not as
+simultaneously.  Taking the issues one at a time is not as
 convincing or ultimately as interesting as showing how these different
-aspects of language interact in a complex system.  
+aspects of language interact in a complex system, giving us a view
+of linguistic interpretation which both embraces an action oriented
+approach and preserves the insights we have gained from formal
+semantics as well as addressing some of the puzzles that it failed to
+solve adequately.  
 
 %%% Local Variables:
 %%% mode: latex
