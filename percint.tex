@@ -90,7 +90,7 @@ different perspective.  In this respect our types are similar to
 notions developed in situation theory and situation semantics
 \citep{BarwisePerry1983,Barwise1989}.
 
-@@Gibson's notion of attunement is adopted by Barwise and Perry.  The
+Gibson's notion of attunement is adopted by Barwise and Perry.  The
 idea is that certain organisms are attuned to certain invariants while
 others are not.  Suppose that Kim perceives a cherry tree with flowers
 and that a bee alights on one of the flowers.  One assumes that the bee's
@@ -113,7 +113,7 @@ types) which are available to us through our cognitive apparatus.
 \section{Modelling type systems in terms of mathematical objects}
 
 In order to make our theory precise we are going to create
-models of the systems we propose as mathematical objects.  This
+mathematical models of the systems we propose.  This
 represents one  of the two main strategies that have been employed in
 logic to create rigorous theories.  The other approach is to create a
 formal language to describe the objects in the theory and define
@@ -127,7 +127,7 @@ with two different logical traditions: the \textit{model theoretic}
 and \textit{proof theoretic} traditions.  
 
 The philosophical foundation of type theory (as presented, for
-example, by \cite{Martin-Loef1984}) is normally seen as related to
+example, by \citealp{Martin-Loef1984}) is normally seen as related to
 intuitionism and constructive mathematics.  It is, at bottom,  a proof-theoretic
 discipline rather than a model-theoretic one (despite the fact that model
 theories have been provided for some type theories).  However, it seems that
@@ -136,7 +136,7 @@ of natural language can be adopted into the classical set theoretic
 framework familiar to linguists from the classical model-theoretic canon of formal
 semantics starting from \cite{Montague1974}.    
 
-Your theory is not very interesting if it does not
+A theory is not very interesting if it does not
 make \textit{predictions}, that is, by making certain assumptions you
 can infer some conclusions.  This gives you one way to test your
 theory:  see what you can conclude from premises that you know or
@@ -153,12 +153,13 @@ From the informal discussion of type theory that we have seen so far
 it is clear that it should involve two kinds of entity:  the types and
 the objects which are of those types.  (Here we use the word
 ``entity'' not in the sense that Montague did, that is, basic
-individuals, but as an informal notion which can include both objects
+individuals, but as an informal notion which includes both objects
 and types.) This means that we should
 characterize a type theory with two domains:
 one domain for the objects of the types and another domain for the types to which
 these objects belong.  Thus we see types as theoretical entities in
-their own right, not, for example, as collections of objects.
+their own right, not, for example, as collections of the objects which
+are witnesses for the types.
 Diagrammatically we can represent this as in Figure~\ref{fig:basic}
 where object $a$ is of type $T_1$.
 \begin{figure}[h]
@@ -317,11 +318,11 @@ where object $a$ is of type $T_1$.
 
 A system of basic types consists of a set of types which are \textit{basic} in
 the sense that they are not analyzed as
-\textit{complex} objects composed of other objects in the theory.
+\textit{complex} entities composed of other entities in the theory.
 Each of these types is associated with a set of objects, that is, the
-objects which are of the type, that is the \textit{witnesses} for the type.  Thus if $T$ is a type and $A$ is the
-set of objects associated with $T$, then $a$ is of type $T$ (in
-symbols, $a:T$) just in case $a\in A$.  We require that any object $a$
+objects which are of the type, the \textit{witnesses} for the type.  Thus if $T$ is a type and $A(T)$ is the
+set of witnesses for $T$, then $a$ is of type $T$ (in
+symbols, $a:T$) just in case $a\in A(T)$.  We require that any object $a$
 which is a witness for a basic type is not itself one of the types in
 the system.  A type may be \textit{empty} in the sense that it is
 associated with the empty set, that is, there is nothing of that
@@ -384,7 +385,34 @@ $a:_{\mathbf{TYPE_B}}T$.  However,  we will continue
 to write $a:T$ in our informal discussion when there is no danger of
 confusion. 
 
-The definition of a system of basic types is made precise in Appendix~\ref{sec:basic}.   
+The definition of a system of basic types is made precise in
+\nexteg{}, which is repeated in
+Appendix~\ref{sec:basic}.  
+
+\begin{ex}
+A {\it system of basic types\/} is a pair:
+\begin{quote}
+{\bf TYPE$_B$} = $\langle${\bf Type}, $A$$\rangle$
+\end{quote}
+where:
+\begin{enumerate} 
+ 
+\item \textbf{Type} is a non-empty set 
+ 
+\item $A$ is a function whose domain is \textbf{Type}
+
+\item for any $T\in\textbf{Type}$, $A(T)$ is a set disjoint from
+  \textbf{Type}
+
+\item for any $T\in\textbf{Type}$, $a:_{\mathbf{TYPE_B}}T$ iff $a\in A(T)$
+ 
+\end{enumerate}
+
+\label{ex:def-basic-types}
+\end{ex} 
+
+Some readers may prefer a slightly less formal characterization which
+uses the kind of format normally employed in proof theory.@@
 
 What counts as an object may vary from agent to agent
 (particularly if agents are of different species).  Different agents
