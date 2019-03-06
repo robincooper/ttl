@@ -412,7 +412,26 @@ where:
 \end{ex} 
 
 Some readers may prefer a slightly less formal characterization which
-uses the kind of format normally employed in proof theory.@@
+uses the kind of format normally employed in proof theory.  Instead of
+regarding contexts, $\Gamma$, as sequences of judgements we will
+regard them as structures like those in \preveg{}.  We will write
+$\Gamma\vdash T\in\textbf{Type}$ ``$T\in\textbf{Type}$ follows from
+$\Gamma$'' to represent that \textbf{Type} is the set of types in
+$\Gamma$  as
+specified in \preveg{} and that the type $T$ is a member of this set.
+We can then write a rule as in \nexteg{}.
+\begin{ex} 
+For $\Gamma$ a system of basic types:
+
+\begin{prooftree}
+\hypo{\Gamma\vdash T\in \textbf{Type}} \hypo{\Gamma\vdash a\in A(T)}
+\infer2{\Gamma\vdash a:T}
+\end{prooftree} 
+\end{ex} 
+We take this to be an inductive definition of the set of consequences.
+That is, we are characterizing the smallest set of judgements
+$\Gamma\vdash a:T$ which obey the premises.  In this way the inference
+rule \preveg{} has the force of a biconditional.@@   
 
 What counts as an object may vary from agent to agent
 (particularly if agents are of different species).  Different agents

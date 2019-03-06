@@ -22,6 +22,12 @@
 %\usepackage{arcs}
 %\usepackage{accents}
 \usepackage{todonotes}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{ebproof}
+\ebproofnewrulestyle{enth}{
+rule code = {\hbox{\tikz
+\draw[decorate,decoration={snake,amplitude=.1ex}]
+(0,0) -- (\hsize,0);}}}
 
 %\counterwithout{section}{chapter}
 
