@@ -134,7 +134,11 @@ theories have been provided for some type theories).  However, it seems that
 many of the ideas in type theory that are important for the analysis
 of natural language can be adopted into the classical set theoretic
 framework familiar to linguists from the classical model-theoretic canon of formal
-semantics starting from \cite{Montague1974}.    
+semantics starting from \cite{Montague1974}.  We
+assume a standard underlying set theory such as ZF
+(Zermelo-Fraenkel) with urelements (as formulated for example in \citealp{Suppes1960}).  This is what we take to be the
+common or garden working set theory which is familiar from the core
+literature on formal semantics deriving from Montague's original work.   
 
 A theory is not very interesting if it does not
 make \textit{predictions}, that is, by making certain assumptions you
@@ -412,13 +416,19 @@ where:
 \end{ex} 
 
 Some readers may prefer a slightly less formal characterization which
-uses the kind of format normally employed in proof theory.  Instead of
-regarding contexts, $\Gamma$, as sequences of judgements we will
-regard them as structures like those in \preveg{}.  We will write
+uses the kind of format normally employed in proof theory.  This may
+provide a more easily readable overview of the definitions while
+suppressing some of the details which are not necessary for intuitive
+understanding.  We will use $\Gamma$, normally used for contexts in
+prove theory, that is sequences of judgements to refer to type systems
+like those characterized in \preveg{}.  Thus in \nexteg{} $\Gamma$
+corresponds to \textbf{TYPE}$_B$.  We will write
 $\Gamma\vdash T\in\textbf{Type}$ ``$T\in\textbf{Type}$ follows from
 $\Gamma$'' to represent that \textbf{Type} is the set of types in
 $\Gamma$  as
 specified in \preveg{} and that the type $T$ is a member of this set.
+We will similarly write $\Gamma\vdash a\in A(T)$ to indicate that
+object $a$ is in the set assigned to $T$ by the function $A$ given by $\Gamma$.
 We can then write a rule as in \nexteg{}.
 \begin{ex} 
 For $\Gamma$ a system of basic types:
@@ -431,7 +441,8 @@ For $\Gamma$ a system of basic types:
 We take this to be an inductive definition of the set of consequences.
 That is, we are characterizing the smallest set of judgements
 $\Gamma\vdash a:T$ which obey the premises.  In this way the inference
-rule \preveg{} has the force of a biconditional.@@   
+rule \preveg{} has the force of a biconditional corresponding to
+clause~4 in (\ref{ex:def-basic-types}).   
 
 What counts as an object may vary from agent to agent
 (particularly if agents are of different species).  Different agents
@@ -478,7 +489,7 @@ other -- what \cite{Davidson1967} called events and \cite{BarwisePerry1983} call
 introduce types which are constructed from predicates (like `hug') and
 objects which are arguments to this predicate like $a$ and $b$.  We
 will represent such a constructed type as hug($a$,$b$) and we will
-sometimes call it a \textit{ptype} to indicate that it is a type whose
+call it a \textit{ptype} to indicate that it is a type whose
 main constructor is a predicate.  What would an
 object belonging to such a type be?  According to the type-theoretic
 approach introduced by Martin-Löf it should be an object which
@@ -494,8 +505,8 @@ kind of situation type.  Thus one view would be that
 ptypes are playing a similar role in type theory to the role that
 infons play in situation theory.
 
-What kind of entity are predicates?  The notion is made precise in
-Appendix~\ref{app:predicates}.  The important thing about predicates
+What kind of entity are predicates?  \ignore{The notion is made precise in
+Appendix~\ref{app:predicates}.}  One important fact about predicates
 is that they come along with an \textit{arity}.  The arity of a
 predicate tells you what kind of arguments the predicate takes and
 what order they come in. For us the arity of a predicate will be a
@@ -507,7 +518,55 @@ that if you combine a predicate with arguments of the appropriate
 types in the appropriate order indicated by the arity then you will
 have a type.  Thus if $a$ : \textit{Ind} and $b$ : \textit{Ind} then
 hug($a$,$b$) will be a type, intuitively the type of situation where
-$a$ hugs $b$.
+$a$ hugs $b$.  
+
+We will introduce a function \textit{Arity} which is
+defined on predicates and which assigns an arity to any predicate.
+This function is introduced in a \textit{predicate signature} which in
+addition tells you what predicates there are and what we can use to
+characterize their arguments (a set of types in the way we will use
+this. We define a predicate signature by the definition in \nexteg{}
+(repeated in Appendix~\ref{app:predicates}).
+\begin{ex} 
+A \textit{predicate signature} 
+is a triple
+\begin{quote}
+$\langle$\textbf{Pred}, \textbf{ArgIndices}, \textit{Arity}$\rangle$
+\end{quote}
+where:
+\begin{enumerate} 
+ 
+\item \textbf{Pred} is a set (of predicates)
+
+\item \textbf{ArgIndices} is a set (of indices for predicate
+  arguments, normally types)
+ 
+\item \textit{Arity} is a function with domain \textbf{Pred} and range
+  included in the set of finite sequences of members of \textbf{ArgIndices}. 
+ 
+\end{enumerate}
+\label{ex:pred-sig} 
+\end{ex}
+A simple example of a predicate signature would be given by \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textbf{Pred} = \{boy, dog, hug\} 
+ 
+\item \textbf{ArgIndices} = \{\textit{Ind}\}
+
+\item \textit{Arity} is defined by:
+\begin{quote}
+\textit{Arity}(boy) = $\langle\textit{Ind}\rangle$\\
+\textit{Arity}(dog) = $\langle\textit{Ind}\rangle$\\
+\textit{Arity}(hug) = $\langle\textit{Ind}, \textit{Ind}\rangle$\\
+\end{quote} 
+ 
+\end{subex} 
+   
+\end{ex} 
+@@   
+  
 
 It may be desirable to allow some predicates to combine with more than
 one assortment of argument types.  Thus, for example, one might wish
