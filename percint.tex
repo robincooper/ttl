@@ -559,13 +559,13 @@ A simple example of a predicate signature would be given by \nexteg{}.
 \begin{quote}
 \textit{Arity}(boy) = $\langle\textit{Ind}\rangle$\\
 \textit{Arity}(dog) = $\langle\textit{Ind}\rangle$\\
-\textit{Arity}(hug) = $\langle\textit{Ind}, \textit{Ind}\rangle$\\
+\textit{Arity}(hug) = $\langle\textit{Ind}, \textit{Ind}\rangle$
 \end{quote} 
  
 \end{subex} 
    
 \end{ex} 
-@@   
+   
   
 
 It may be desirable to allow some predicates to combine with more than
@@ -591,15 +591,60 @@ example pairs and not allow this kind of predicate polymorphism in the
 type theory. We do not take a stand on this issue but merely note that
 both possibilities are available.  If predicates are to be considered
 polymorphic then the arity of a predicate can be considered to be a
-set of sequences of types.
+set of sequences of types.  In \nexteg{} we give a definition of
+a polymorphic predicate signature (repeated in Appendix~\ref{app:predicates}).
+\begin{ex} 
+A \textit{polymorphic predicate signature} 
+is a triple 
+\begin{quote}
+$\langle$\textbf{Pred}, \textbf{ArgIndices}, \textit{Arity}$\rangle$
+\end{quote}
+where:
+\begin{enumerate} 
+ 
+\item \textbf{Pred} is a set (of predicates)
 
-Predicates can be considered as functions from sequences of objects
+\item \textbf{ArgIndices} is a set (of indices for predicate
+  arguments, normally types)
+ 
+\item \textit{Arity} is a function with domain \textbf{Pred} and range
+  included in the powerset of the set of finite sequences of members
+  of \textbf{ArgIndices}. 
+ 
+\end{enumerate}
+\label{ex:poly-pred-sig} 
+\end{ex} 
+A simple example of a polymorphic predicate signature is given in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textbf{Pred} = \{boy, dog, hug, walk\} 
+ 
+\item \textbf{ArgIndices} = \{\textit{Ind}\}
+
+\item \textit{Arity} is defined by:
+\begin{quote}
+\textit{Arity}(boy) = $\{\langle\textit{Ind}\rangle\}$\\
+\textit{Arity}(dog) = $\{\langle\textit{Ind}\rangle\}$\\
+\textit{Arity}(hug) = $\{\langle\textit{Ind}, \textit{Ind}\rangle\}$\\
+\textit{Arity}(walk) = $\{\langle\textit{Ind}\rangle, \langle\textit{Ind}, \textit{Ind}\rangle\}$
+\end{quote} 
+ 
+\end{subex} 
+   
+\end{ex}   
+
+An alternative to our characterization of predicates is to consider them as functions from sequences of objects
 matching their arity to types.  As such they would be a
 \textit{dependent type}, that is, an entity which returns a type when
 provided with an appropriate object or sequence of objects.  However,
-we have not made this explicit in Appendix~\ref{app:predicates}.
+we have not done this because we want all those entities we call
+dependent types to be representable as $\lambda$-expressions.  We can,
+however, think of them as \textit{type constructors} as will be made
+clear in our discussion of systems of complex types below.
 
-A system of complex types (made precise in Appendix~\ref{app:comptypes})
+A \textit{system of complex types} \ignore{(made precise in Appendix~\ref{app:comptypes})}
 adds to a system of basic types a collection of types constructed from
 a set of predicates with their arities, that is, it adds all the types
 which you can construct from the predicates by combining them with
@@ -615,7 +660,122 @@ important here.  There may be many individuals $x$ and $y$ for which
 hug($x$,$y$) is empty but still we would want to say that the types
 resulting from the combination of  `hug'
 with the various different individuals corresponds to
-different types of situations.  There are thus two important functions
+different types of situations.  The formal characterization of a
+system of complex types is given in \nexteg{} (repeated in
+Appendix~\ref{app:comptypes}).
+\begin{ex} 
+A {\it system of complex types\/} is a quadruple:
+\begin{quote}
+{\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$
+\end{quote}
+where:  
+\begin{enumerate} 
+ 
+\item $\langle$\textbf{BType}, $A$$\rangle$ is a system of basic types 
+ 
+\item \textbf{BType}$\subseteq$\textbf{Type}
+
+\item for any $T\in\textbf{Type}$, if $a:_{\langle\mathbf{BType},
+    A\rangle}T$ then $a:_{\mathbf{TYPE_C}}T$
+
+\item \label{cl:predtypes}$\langle${\bf Pred}, \textbf{ArgIndices},
+  {\it Arity\/}$\rangle$ is a (polymorphic) predicate
+  signature
+
+\item\hspace*{-1ex}\ignore{\footnote{This clause has been modified since
+    \cite{Cooper2012} where it was a conditional rather than a biconditional.}} %\sloppy  
+  $P(a_1,\ldots a_n)\in\textbf{PType}$ iff $P\in\textbf{Pred}$, $T_1\in \mathbf{Type},\ldots,T_n\in
+  \mathbf{Type}$, \textit{Arity}($P$)=$\langle
+  T_1,\ldots,T_n\rangle$  ($\langle
+  T_1,\ldots,T_n\rangle$$\in$\textit{Arity}($P$)) and $a_1:_{\mathbf{TYPE_C}}T_1,\ldots,a_n:_{\mathbf{TYPE_C}}T_n$
+
+% If $P\in\textbf{Pred}$, $T_1\in \mathbf{Type},\ldots,T_n\in
+%   \mathbf{Type}$, \textit{Arity}($P$)=$\langle
+%   T_1,\ldots,T_n\rangle$  ($\langle
+%   T_1,\ldots,T_n\rangle$$\in$\textit{Arity}($P$)) and $a_1:_{\mathbf{TYPE_C}}T_1,\ldots,a_n:_{\mathbf{TYPE_C}}T_n$ then
+%   $P(a_1,\ldots a_n)\in\textbf{PType}$
+
+
+
+\item \textbf{PType}$\subseteq$\textbf{Type}
+
+\item for any $T\in\textbf{PType}$, $F(T)$ is a set disjoint from \textbf{Type}
+
+\item for any $T\in\textbf{PType}$, $a:_{\mathbf{TYPE_C}}T$ iff $a\in F(T)$
+ 
+\end{enumerate} 
+\label{ex:comp-types}
+\end{ex} 
+\preveg{} perhaps looks a little forbidding for something that says
+that if you have a predicate $r$ whose arity is $\langle
+T_1,\ldots,T_n\rangle$ and you have objects $a_1:T_1,\ldots,a_n:T_n$
+then $r(a_1,\ldots,a_n)$ is a ptype and any ptype is also a type.
+\preveg{} also gives us a function $F$ which maps ptypes to a set of
+witnesses and it also makes clear that a system of complex types adds
+to a system of basic types.  The set of types of the new system
+consists of the basic types and the ptypes.  Perhaps the informal
+proof theoretic notation in \nexteg{} is a little less forbidding.
+\begin{ex}
+For $\Gamma$ a system of complex types: 
+\begin{subex} 
+ 
+\item  \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{BType}} \hypo{\Gamma\vdash a\in A(T)}
+\infer2{\Gamma\vdash a:T}
+\end{prooftree}
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in \textbf{BType}} \infer1{\Gamma\vdash
+  T\in\textbf{Type}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash r\in\textbf{Pred}} \hypo{\Gamma\vdash \langle
+  T_1,\ldots,T_n\rangle=\textit{Arity}(r)} \hypo{\Gamma\vdash
+  a_1:T_1,\ldots,\Gamma\vdash a_n:T_n} \infer3{\Gamma\vdash
+  r(a_1,\ldots,a_n)\in\textbf{PType}}
+\end{prooftree}
+
+\medskip
+
+or alternatively if we are considering our predicates to be
+polymorphic:
+
+\medskip
+
+\begin{prooftree}
+\hypo{\Gamma\vdash r\in\textbf{Pred}} \hypo{\Gamma\vdash \langle
+  T_1,\ldots,T_n\rangle\in\textit{Arity}(r)} \hypo{\Gamma\vdash
+  a_1:T_1,\ldots,\Gamma\vdash a_n:T_n} \infer3{\Gamma\vdash
+  r(a_1,\ldots,a_n)\in\textbf{PType}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{PType}} \infer1{\Gamma\vdash
+  T\in\textbf{Type}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{PType}} \hypo{\Gamma\vdash s\in F(T)}
+\infer2{\Gamma\vdash s:T}
+\end{prooftree} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} is the rule that we had for basic type systems except that
+we have identified the relevant set of types as \textbf{BType} (the
+basic types).  \preveg{b} tells us that \textbf{BType} is a subset of
+\textbf{Type}. \preveg{c} tells us how to form ptypes from a predicate
+and an appropriate sequence of objects. \preveg{d} tells us that
+ptypes are types.  \preveg{e} tells us that the witnesses of ptypes
+are determined by the function $F$.
+
+@@ [Where to put the set theoretic coding of ptypes?]  
+  
+
+There are thus two important functions
 in a system of complex types:  one, which we call $A$, which comes from
 the system of basic types embedded in the system and assigns
 extensions to basic types and the other, which we call $F$, which
