@@ -485,7 +485,12 @@ other entities in the theory.  As we have just seen,
 cognitive agents, in addition to being able to assign types to
 individual objects like trees, also perceive the world in terms of states and
 events where objects have properties and stand in relations to each
-other -- what \cite{Davidson1967} called events and \cite{BarwisePerry1983} called situations.  We
+other -- what \cite{Davidson1967} called events and
+\cite{BarwisePerry1983} called situations.  
+
+\subsection{Types constructed from predicates (ptypes)}
+\label{sec:ptypes}
+We
 introduce types which are constructed from predicates (like `hug') and
 objects which are arguments to this predicate like $a$ and $b$.  We
 will represent such a constructed type as hug($a$,$b$) and we will
@@ -708,9 +713,14 @@ where:
 \label{ex:comp-types}
 \end{ex} 
 \preveg{} perhaps looks a little forbidding for something that says
-that if you have a predicate $r$ whose arity is $\langle
+that if you have a predicate $P$ whose arity is $\langle
 T_1,\ldots,T_n\rangle$ and you have objects $a_1:T_1,\ldots,a_n:T_n$
-then $r(a_1,\ldots,a_n)$ is a ptype and any ptype is also a type.
+then $P(a_1,\ldots,a_n)$ is a ptype and any ptype is also a type.  In
+this definition we have not made explicit exactly what set theoretic
+object we are representing with $P(a_1,\ldots,a_n)$.  We will take
+this up below (in Section~\ref{sec:labelled-sets}) since it is part of
+a general strategy we employ for representing objects in our type
+theory as sets.  
 \preveg{} also gives us a function $F$ which maps ptypes to a set of
 witnesses and it also makes clear that a system of complex types adds
 to a system of basic types.  The set of types of the new system
@@ -731,10 +741,10 @@ For $\Gamma$ a system of complex types:
 \end{prooftree}
 
 \item \begin{prooftree}
-\hypo{\Gamma\vdash r\in\textbf{Pred}} \hypo{\Gamma\vdash \langle
-  T_1,\ldots,T_n\rangle=\textit{Arity}(r)} \hypo{\Gamma\vdash
+\hypo{\Gamma\vdash P\in\textbf{Pred}} \hypo{\Gamma\vdash \langle
+  T_1,\ldots,T_n\rangle=\textit{Arity}(P)} \hypo{\Gamma\vdash
   a_1:T_1,\ldots,\Gamma\vdash a_n:T_n} \infer3{\Gamma\vdash
-  r(a_1,\ldots,a_n)\in\textbf{PType}}
+  P(a_1,\ldots,a_n)\in\textbf{PType}}
 \end{prooftree}
 
 \medskip
@@ -745,10 +755,10 @@ polymorphic:
 \medskip
 
 \begin{prooftree}
-\hypo{\Gamma\vdash r\in\textbf{Pred}} \hypo{\Gamma\vdash \langle
-  T_1,\ldots,T_n\rangle\in\textit{Arity}(r)} \hypo{\Gamma\vdash
+\hypo{\Gamma\vdash P\in\textbf{Pred}} \hypo{\Gamma\vdash \langle
+  T_1,\ldots,T_n\rangle\in\textit{Arity}(P)} \hypo{\Gamma\vdash
   a_1:T_1,\ldots,\Gamma\vdash a_n:T_n} \infer3{\Gamma\vdash
-  r(a_1,\ldots,a_n)\in\textbf{PType}}
+  P(a_1,\ldots,a_n)\in\textbf{PType}}
 \end{prooftree}
 
 \item \begin{prooftree}
@@ -771,8 +781,6 @@ basic types).  \preveg{b} tells us that \textbf{BType} is a subset of
 and an appropriate sequence of objects. \preveg{d} tells us that
 ptypes are types.  \preveg{e} tells us that the witnesses of ptypes
 are determined by the function $F$.
-
-@@ [Where to put the set theoretic coding of ptypes?]  
   
 
 There are thus two important functions
@@ -792,7 +800,7 @@ various subsets, corresponding to \textit{sorts}. For
 us, $A$ characterizes assignments to basic types and thus provides
 something like a sorted domain in first order model theory.  In first
 order logic $F$ gives us what we need to know to determine the truth
-of expressions like hug($a$,$b$) in first order logic.  Thus $F$ will
+of expressions like `hug($a$,$b$)' in first order logic.  Thus $F$ will
 assign to the predicate `hug' a set of ordered pairs telling us who
 hugs whom.  Our $F$ also give us the information we need in order to
 tell who stands in a predicate relation.  However, it does this, not
@@ -804,8 +812,64 @@ $\langle x,y\rangle$ for which the $F$ in a complex system of types
 assigns a non-empty set.  For this reason we call the pair $\langle
 A,F\rangle$ a \textit{model} within the type system, even though it is not
 technically a model in the sense of model theory for logic.  The
-correspondence will become important below, however.
+correspondence becomes important below, when we talk about modal type systems.
 
+\subsection{Representing complex entities as labelled sets}
+\label{sec:labelled-sets}
+When we characterized ptypes in Section~\ref{sec:ptypes}, we did not
+make explicit exactly which set-theoretic entity we were representing
+by the notation for a ptype `$P(a_1,\ldots,a_n)$'.  In general complex
+entities in our theory will be a particular kind of set.
+
+We introduce a notion \textit{labelled sets} to model our complex entities. We
+will assume that our set theory comes equipped with a set of
+\textit{urelements} (entities which are not sets but which can be
+members of sets).  We will assume that among the urelements is a countably infinite
+set which is designated as the set of labels.  A \textit{labelled set} is a set
+of ordered pairs whose first member is a label and whose second
+element is either an urelement which is not a label or a set (possibly a labelled
+set), such that no more than one ordered pair can contain any
+particular label as its first member.  This means that a labelled set
+is the traditional set theoretic construction of an extensional
+function from a set of labels onto some set.  Suppose that we have a
+set \nexteg{a}
+and that $\ell_0,\ell_1,\ell_2,\ell_3$ are labels.  Then examples of
+labelled sets which are \textit{labellings} of \nexteg{a} would be \nexteg{b
+  and c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\{a,b,c,d\}$ 
+ 
+\item
+  $\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$
+
+\item $\{\langle\ell_0,\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle\}\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+There are various ways in which labelled sets could be represented
+graphically.  One way to represent the examples in \preveg{b and c}
+would be as in \nexteg{}.@@
+\begin{ex} 
+\begin{subex} 
+ 
+\item  
+ 
+\item  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+  
+Labelled sets where we identify particular distinguished labels will
+always give us enough structure to model the structured objects that
+we need and define operations on them as required by the type theory.
+
+
+\subsection{Record types}
 Kim sees this situation where $a$ (the boy) hugs $b$ (the dog) and
 perceives it to be of type hug($a$,$b$).  However, there are
 intuitively other types which she could assign to this situation other

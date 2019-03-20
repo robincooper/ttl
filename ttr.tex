@@ -4,56 +4,27 @@
 Unless otherwise stated this is the version of TTR presented in 
 \cite{Cooper2012}.
 
-\section{Underlying set theory}
-\label{app:sets}
+% \section{Underlying set theory}
+% \label{app:sets}
 % In previous statements of this system such as \cite{Cooper2012} we
 % tacitly assumed a standard underlying set theory such as ZF
 % (Zermelo-Fraenkel) with urelements (as formulated for example in \citealp{Suppes1960}).  This is what we take to be the
 % common or garden working set theory which is familiar from the core
 % literature on formal semantics deriving from Montague's original work
 % \citep{Montague1974}.  
-When we introduced complex
-objects and types
-other than records and record types we were not explicit about exactly which
-structured set-theoretic object they represented.  The reason for this
-was that, except in the case of records and record types, it did not
-seem important exactly how you code structured objects in the set
-theory and a detailed exposition would seem to provide another level
-of complication over and above an already complicated story.  
+% When we introduced complex
+% objects and types
+% other than records and record types we were not explicit about exactly which
+% structured set-theoretic object they represented.  The reason for this
+% was that, except in the case of records and record types, it did not
+% seem important exactly how you code structured objects in the set
+% theory and a detailed exposition would seem to provide another level
+% of complication over and above an already complicated story.  
 
-In this
-version we will take advantage of the freedom provided by an appendix
-and spell out a set theoretic coding for all of our structured
-objects.  We will use \textit{labelled sets} to model our structured
-objects which is what we use for records and record types as well.  We
-will assume that our set theory comes equipped with a set of
-\textit{urelements} (objects which are not sets but which can be
-members of sets) which is partitioned into two countable subsets or
-\textit{urelements proper} (intuitively ``real atomic objects'') and
-\textit{labels} (intuitively ``objects that are used to label real
-objects, either atomic or sets'').  A \textit{labelled set} is a set
-of ordered pairs whose first member is a label and whose second
-element is either an urelement proper or a set (possibly a labelled
-set), such that no more than one ordered pair can contain any
-particular label as its first member.  This means that a labelled set
-is the traditional set theoretic construction of an extensional
-function from a set of labels onto some set.  Suppose that we have a
-set
-
-$\{a,b,c,d\}$
-
-and that $\ell_0,\ell_1,\ell_2,\ell_3$ are labels.  Then examples of
-labelled sets would be
-
-$\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$
-
-and
-
-$\{\langle\ell_0,\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle\}\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$
-
-Labelled sets where we identify particular distinguished labels will
-always give us enough structure to model the structured objects that
-we need and define operations on them as required by the type theory.
+% In this
+% version we will take advantage of the freedom provided by an appendix
+% and spell out a set theoretic coding for all of our structured
+% objects.
 
 
 \section{Basic types}
