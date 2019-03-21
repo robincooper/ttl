@@ -812,7 +812,33 @@ $\langle x,y\rangle$ for which the $F$ in a complex system of types
 assigns a non-empty set.  For this reason we call the pair $\langle
 A,F\rangle$ a \textit{model} within the type system, even though it is not
 technically a model in the sense of model theory for logic.  The
-correspondence becomes important below, when we talk about modal type systems.
+correspondence becomes important below, when we talk about modal type
+systems.
+
+What are the entities which are witnesses for ptypes?  The intuition is
+that, for example, \nexteg{} means that $e$ is an event or situation where the individual $a$ is
+running.
+\begin{ex}
+$e$ : run($a$)
+\end{ex}
+There are two competing intuitions about what $e$ could be.
+One is that it is a ``part of the world'', a non-set (urelement).  That is, from
+the perspective of set theory and the theory of types it is an unstructured
+atom.  The other intuition we have is that it is a structured entity which
+contains $a$ as a component and in which a running activity is going
+on which involves smaller events such as picking feet up off the
+ground, spending certain time in each step cycle with neither foot
+touching the ground and so on.  We want to allow for both of these
+intuitions.  That is, a witness for a ptype can be a non-set
+corresponding to our notion of an event of a certain type.  Or it can
+be the kind of labelled set which we call a record (see
+Section~\ref{sec:rectypes}).  That is, $e$ is not only a witness for
+the type `run($a$)' but also for a record type which
+characterizes in more detail the structure of the event.  We will
+argue that both intuitions are important and that
+observers of the world shift between views where certain
+ptypes are regarded as types of non-sets and views where those
+ptypes are types of records.
 
 \subsection{Representing complex entities as labelled sets}
 \label{sec:labelled-sets}
@@ -851,13 +877,17 @@ labelled sets which are \textit{labellings} of \nexteg{a} would be \nexteg{b
 \end{ex} 
 There are various ways in which labelled sets could be represented
 graphically.  One way to represent the examples in \preveg{b and c}
-would be as in \nexteg{}.@@
+would be as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item  
+\item \mbox{\Tree [.$\ell_0$ \{$a$, ]\hspace*{1em} \Tree [.$\ell_1$ $b,$ ]\hspace*{1em} \Tree
+  [.$\ell_2$ $c,$ ]\hspace*{1em} \Tree [.$\ell_3$ $d$\} ]}
  
-\item  
+\item \mbox{\Tree [.$\ell_0$ [.$\ell_0$ \{$a$, ] [.$\ell_1$ $b$, ] ]}  \raisebox{-2.054em}{\hspace*{1em}\Tree
+  [.$\ell_2$ $c,$ ]\hspace*{1em} \Tree [.$\ell_3$ $d$\} ]}
+
+
  
 \end{subex} 
    
@@ -865,13 +895,24 @@ would be as in \nexteg{}.@@
   
   
 Labelled sets where we identify particular distinguished labels will
-always give us enough structure to model the structured objects that
-we need and define operations on them as required by the type theory.
+always give us enough structure to model the structured entities that
+we need and define operations on them as required by our theory of types.
+
+The entity 
+represented by $P(a_1,\ldots a_n)$ is the
+labelled set in \nexteg{} where `pred', `arg$_i$' are reserved labels
+(that is, not used except as
+required here).
+\begin{ex}
+$\{\langle\mathrm{pred},P\rangle,\langle\mathrm{arg}_1,a_1\rangle,\ldots,\langle\mathrm{arg}_n,a_n\rangle\}$
+\end{ex}
+
 
 
 \subsection{Record types}
-Kim sees this situation where $a$ (the boy) hugs $b$ (the dog) and
-perceives it to be of type hug($a$,$b$).  However, there are
+\label{sec:rectypes}
+Kim sees a situation where $a$ (the boy) hugs $b$ (the dog) and
+perceives it to be of type `hug($a$,$b$)'.  However, there are
 intuitively other types which she could assign to this situation other
 than the type of situation where $a$ hugs $b$ which is represented
 here.  For example, a more general type, which would be useful in
@@ -881,7 +922,7 @@ individual hugs another individual''.  Another type of situation she
 might use is that of ``situation where a boy hugs a dog''.  This is a
 more specific type than ``situation where one
 individual hugs another individual'' but still does not tie us down to
-the specific individuals $a$ and $b$ as hug($a$,$b$) does.
+the specific individuals $a$ and $b$ as the type `hug($a$,$b$)' does.
 
 There are at least two different ways in type theory to approach
 these more general types.  One is to use \textit{$\Sigma$-types} \label{pg:sigmatypes} such
@@ -895,9 +936,12 @@ as \nexteg{}.
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+
+@@
+ 
 In general $\Sigma
-x$:$T_1.T_2(x))$ will have as witnesses any ordered pair the first
+x$:$T_1.T_2(x)$ will have as witnesses any ordered pair the first
 member of which is a witness for $T_1$ and the second member of which
 is a witness for $T_2(x)$.  Thus this type will be non-empty
 (``true'') just in case there is something $a$ of type $T_1$ such that
