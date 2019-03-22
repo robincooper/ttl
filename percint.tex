@@ -937,15 +937,16 @@ as \nexteg{}.
 \end{subex} 
    
 \end{ex}
-
-@@
- 
+We will use the notation $T\dep{x_1,\ldots,x_n}$ to represent that the
+type $T$ depends on $x_1,\ldots,x_n$.  For example, the types
+`hug($x$,$y$)' represented within the expressions in \preveg{} depend
+on $x$ and $y$.
 In general $\Sigma
-x$:$T_1.T_2(x)$ will have as witnesses any ordered pair the first
+x$:$T_1.T_2\dep{x}$ will have as witnesses any ordered pair the first
 member of which is a witness for $T_1$ and the second member of which
-is a witness for $T_2(x)$.  Thus this type will be non-empty
+is a witness for $T_2\dep{x}$.  Thus this type will be non-empty
 (``true'') just in case there is something $a$ of type $T_1$ such that
-there is something of type $T_2(a)$.  This means that $\Sigma$-types
+there is something of type $T_2\dep{a}$.  This means that $\Sigma$-types
 correspond to existential quantification.  A witness for \preveg{a} would be $\langle a,
 \langle b, s\rangle\rangle$ where $a$:\textit{Ind}, $b$:\textit{Ind}
 and $s$:hug($a$,$b$).  If there is such a witness then some individual
@@ -957,51 +958,67 @@ among others.
 Another approach to these more general types is to use \textit{record
   types} such as \nexteg{}.
 \begin{ex}
-\label{eg:rectype} 
 \begin{subex} 
  
 \item \record{\tfield{x}{\textit{Ind}} \\
               \tfield{y}{\textit{Ind}} \\
-              \tfield{c}{hug(x,y)}}
+              \tfield{e}{hug(x,y)}}
  
 \item \record{\tfield{x}{\textit{Boy}} \\
               \tfield{y}{\textit{Dog}} \\
-              \tfield{c}{hug(x,y)}} 
+              \tfield{e}{hug(x,y)}} 
+ 
+\end{subex} 
+\label{ex:rectype} 
+\end{ex} 
+\ignore{We make the notion of record type precise in
+Appendix~\ref{app:rectypes}.}  In TTR, record types are labelled
+sets.  A first approximation to the labelled sets represented in
+\preveg{} is given in \nexteg{}.  (In a short while we will introduce
+a complication in connection with the dependency represented by `hug(x,y)'.)
+\begin{ex} 
+\begin{subex} 
+ 
+\item \{$\langle$x, \textit{Ind}$\rangle$, $\langle$y,
+  \textit{Ind}$\rangle$, $\langle$e, hug(x, y)$\rangle$\} 
+ 
+\item \{$\langle$x, \textit{Boy}$\rangle$, $\langle$y,
+  \textit{Dog}$\rangle$, $\langle$e, hug(x, y)$\rangle$\} 
  
 \end{subex} 
    
 \end{ex} 
-We make the notion of record type precise in
-Appendix~\ref{app:rectypes}.  Record types consist of sets of fields
-such as \smallrecord{\smalltfield{x}{\textit{Ind}}} and
-\smallrecord{\smalltfield{c}{hug(x,y)}}.  Fields themselves are pairs
-consisting of a \textit{label} such as `x' or `c' in the first
-position (before the `:' in our notation) and a type in the second
-position. You cannot have more than one field with the same label in a
-record type.  The witnesses of record types are \textit{records}.  These
-are also sets of fields, but in this case the fields consist of a
-label and an object belonging to a type.  A record, $r$, belongs to a record
+`x', `y' and `e' are particular labels.  In record types, the ordered
+pairs whose first member is a label are called \textit{fields}.  Thus
+record types are sets of fields.  We will give a precise
+characterization of which labelled sets are record types later. 
+
+The witnesses of record types are \textit{records}.  These
+are also labelled sets, consisting of ordered pairs which we will call
+fields of the record.  However, in this case the fields consist of a
+label and an object belonging to a type, rather than a type, as in the
+fields of record types.  A record, $r$, is a witness for a record
 type, $T$, just in case $r$ contains fields with the same labels as
 those in $T$  and the objects in the fields in $r$ are of the type
 with the corresponding label in $T$.  The record may contain
 additional fields with labels not mentioned in the record type with
 the restriction there can only be one field within the record with a
 particular label.  Thus both \nexteg{a} and \nexteg{b} are records of
-type \preveg{a}.
+type (\ref{ex:rectype}a).
 \begin{ex} 
 \begin{subex} 
  
 \item \begin{tabular}{lp{.6\textwidth}}\record{\field{x}{$a$} \\
               \field{y}{$b$} \\
-              \field{c}{$s$} } &  where $a$:\textit{Ind},
+              \field{e}{$s$} } &  where $a$:\textit{Ind},
             $b$:\textit{Ind} and $s$:hug($a$,$b$) \end{tabular}
  
-\item \begin{tabular}{lp{.6\textwidth}}\record{\field{x}{$d$} \\
-              \field{y}{$e$} \\
-              \field{c}{$s'$} \\
-              \field{z}{$f$} \\
-              \field{w}{$g$}} &  where $d$:\textit{Ind},
-            $e$:\textit{Ind}, $s'$:hug($d$,$e$) and $f$ and $g$ are
+\item \begin{tabular}{lp{.6\textwidth}}\record{\field{x}{$c$} \\
+              \field{y}{$d$} \\
+              \field{e}{$s'$} \\
+              \field{z}{$a'$} \\
+              \field{w}{$a''$}} &  where $c$:\textit{Ind},
+            $d$:\textit{Ind}, $s'$:hug($c$,$d$) and $a'$ and $a''$ are
             objects of some type \end{tabular}
  
 \end{subex} 
@@ -1011,16 +1028,16 @@ Note that in our notation for records we have `=' between the two
 elements of the field whereas in record types we have `:'.  Note also
 that when we have types constructed from predicates in our record
 types and the arguments are represented as labels as in
-(\ref{eg:rectype}a) this means that the type is \textit{dependent} on
+(\ref{ex:rectype}a) this means that the type is \textit{dependent} on
 what objects you choose for those labels in the object of the record
-type.  Thus in \preveg{a} the type of the object labelled `c' is
-hug($a$,$b$) whereas in \preveg{b} the type is hug($d$,$e$).
+type.  Thus in \preveg{a} the type of the object labelled `e' is
+hug($a$,$b$) whereas in \preveg{b} the type is hug($c$,$d$).
 Actually, the notation we are using here for the dependent types is a
-convenient simplification of what is needed as we explain in
-Appendix~\ref{app:rectypes}. 
+convenient simplification of what is needed as we will explain later\ignore{in
+Appendix~\ref{app:rectypes}}.
 
 Record types and $\Sigma$-types are very similar in an important
-respect.  The type (\ref{eg:rectype}a) will be non-empty (``true'')
+respect.  The type (\ref{ex:rectype}a) will be witnessed (``true'')
 just in case there are individuals $x$ and $y$ such that $x$ hugs
 $y$.  Thus both record types and $\Sigma$-types can be used to model
 existential quantification.  In fact record types and $\Sigma$-types
@@ -1063,11 +1080,12 @@ regarding record types (and records) as \textit{sets} of fields,
 \end{ex} 
 
 \paragraph{labels} Record types (and their witnesses) include labelled
-fields which can be used to access ``components'' of what is being
-modelled.  This is useful, for example, when we want to analyze
+fields which can be used to access \textit{components} of what is being
+modelled.  Components of a record are defined as objects which occur
+in a record.  (A precise definition will be given later.)  This is useful, for example, when we want to analyze
 anaphoric phenomena in language where pronouns and other words refer
 back to parts of previous meanings in the discourse.  They can also be
-exploited in other cases where we want to refer to ``components'' of
+exploited in other cases where we want to refer to components of
 utterances or their meanings as in clarification questions.
 
 \paragraph{discourse representation}  The labels in record types can
@@ -1087,60 +1105,67 @@ correspond to attributes in feature structures.
 
 \paragraph{frames}  Record types can also be used to model something
 very like the kinds of frames discussed in frame semantics
-\citep{Fillmore1982,Fillmore1985,RuppenhoferEllsworthPetruckJohnsonScheffczyk2006}.
-Here the labels in record types correspond to roles (frame elements).
+\citep{Fillmore1982,Fillmore1985,RuppenhoferEllsworthPetruckJohnsonScheffczyk2006}
+or in the psychological literature \citep{Barsalou1992a,Barsalou1999}.
+The labels in record types correspond to roles (frame elements).
 
 For discussion of some of the various uses to which record types can
 be put see \cite{Cooper2005a}.  We will take up all of the uses named
 here as we progress.
 
-Another way of approaching these more general types in type theory is
-to use \textit{contexts}.  In \nexteg{} we take \textit{True} to be
-the type of non-empty types.
+Another way of approaching more general types such as ``situation
+where a boy hugs a dog'' is
+to use \textit{contexts} as used in type theory.  \ignore{In \nexteg{} we take
+$T \textit{true}$ to represent a judgement that $T$ is witnessed.}  If
+we wish to express that an inference from ``$x$ hugs $y$'' to ``$x$
+touches $y$'' we might consider doing it as in \nexteg{}
 \begin{ex} 
-\begin{subex} 
- 
-\item $x$ : \textit{Ind}, $y$ : \textit{Ind} $\vdash$ hug($x$,$y$) : \textit{True}
- 
-\item $x$ : \textit{Boy}, $y$ : \textit{Dog} $\vdash$ hug($x$,$y$) : \textit{True}
- 
-\end{subex} 
+$x$ : \textit{Ind}, $y$ : \textit{Ind}, $e$ : hug($x$,$y$) $\vdash$
+$e$ : touch($x$,$y$) 
    
 \end{ex} 
-\preveg{a,b} mean in a context where $x$ and $y$ are
-individuals or a boy and a dog respectively the type hug($x$,$y$) is
-non-empty.  This notation is normally taken to mean universal
-quantification over the parameters or variables in the context (i.e. sequence of
-parametric type judgements) to the left of `$\vdash$'.  Thus they
-would mean that for any two individuals or pair of a boy and a dog,
-the first hugs the second.  However, we can also devise ways for
-thinking of existential quantification over the variables of the
-context, e.g. for some boy, $x$, and some dog, $y$, the type
-hug($x$,$y$) is non-empty.  We can also think of the contexts as being
-objects belonging to types in our type theory.  Records and record
-types give us a way of doing this.  Thus, for example,
-(\ref{eg:rectype}a) models the type of context which might be
-represented as the sequence of parametric type judgements given in
-\nexteg{}.
-\begin{ex} 
-$x$ : \textit{Ind}, $y$ : \textit{Ind}, $c$ : hug($x$,$y$) 
-\end{ex} 
+\preveg{} means in a context where $x$ and $y$ are
+individuals and $e$ is a witness for the type `hug($x$,$y$)' then $e$ is
+also a witness for the type `touch($x$,$y$)'.  
+% This notation is normally taken to mean universal
+% quantification over the parameters or variables in the context (i.e. sequence of
+% parametric type judgements) to the left of `$\vdash$'.  Thus they
+% would mean that for any two individuals or pair of a boy and a dog,
+% the first hugs the second.  However, we can also devise ways for
+% thinking of existential quantification over the variables of the
+% context, e.g. for some boy, $x$, and some dog, $y$, the type
+% hug($x$,$y$) is non-empty. 
+Contexts (as represented to the left of the turnstile (`$\vdash$') in \preveg{}) are
+standardly thought of as sequences of judgements.  They are not
+standardly thought of
+being
+objects which are witnesses for types in the type theory.  However, as
+we develop our semantic theory in this book, we will want to think of
+contexts as objects belonging to a certain type and to give semantic
+analyses in terms of types of context.  Records and record
+types will enable us to do this.  Thus, for example,
+(\ref{ex:rectype}a) models the type of context represented to the left
+of the turnstile in \preveg{}.
+% \begin{ex} 
+% $x$ : \textit{Ind}, $y$ : \textit{Ind}, $c$ : hug($x$,$y$) 
+% \end{ex} 
 As in the comparison with $\Sigma$-types there is a difference in that
 the judgements in a standard type theory context are ordered whereas
 the fields in a record type are unordered.  This means that
-technically \nexteg{} is a distinct context from \preveg{} even though
+technically \nexteg{} is a distinct context from that in \preveg{} even though
 there is an obvious equivalence between them.  
 \begin{ex} 
-$y$ : \textit{Ind}, $x$ : \textit{Ind}, $c$ : hug($x$,$y$) 
+$y$ : \textit{Ind}, $x$ : \textit{Ind}, $e$ : hug($x$,$y$) 
 \end{ex} 
 They correspond to the
-same record type, however. Since we will use record types to model
-type theoretic contexts and records to model instantiations of
-contexts we will not introduce a separate notion of context.
+same record type, however. % Since we will use record types to model
+% type theoretic contexts and records to model instantiations of
+% contexts we will not introduce a separate notion of context.
 
 Thus we use record types to replace both the $\Sigma$-types and
 contexts that one often finds in standard versions of type theory.
-  
+ 
+@@ 
 
 The introduction of predicates  and ptypes raises
 some new questions.  We said above that the arity of `hug' is
