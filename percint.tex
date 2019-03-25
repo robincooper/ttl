@@ -840,6 +840,98 @@ observers of the world shift between views where certain
 ptypes are regarded as types of non-sets and views where those
 ptypes are types of records.
 
+The introduction of predicates  and ptypes raises
+the question of how one-place predicates relate to basic types.  For
+example, what is the relationship between a type \textit{Dog} whose
+witnesses are dogs and a predicate `dog' whose arity is
+$\langle\textit{Ind}\rangle$.  One way to relate the two is given in
+\nexteg{}.
+\begin{ex} 
+$a:\textit{Dog}$ iff $\exists e\ e:\text{dog}(a)$ 
+\end{ex} 
+\preveg{} says that something is of type \textit{Dog} just in case
+there is a situation which shows it to fall under the predicate
+`dog'. In this book we will relate common nouns to predicates rather
+than basic types, in part because common nouns can sometimes have
+more than one argument and in part because we want to limit the number
+of basic types we use.  If we need a type we can derive it from the
+predicate using something like \preveg{}.
+
+% We said above that the arity of `hug' is
+% $\langle$\textit{Ind},\textit{Ind}$\rangle$.  However, when we look at
+% (\ref{eg:rectype}b) where the types labelled with `x' and `y' are
+% \textit{Boy} and \textit{Dog} we see that there is nothing explicit here that
+% requires that the two arguments of `hug' are of type \textit{Ind}.
+% One obvious way to achieve this would be to require that \textit{Boy}
+% and \textit{Dog} are subtypes of \textit{Ind}, that is, that any
+% object of type \textit{Boy} is also of type \textit{Ind} and similarly
+% for \textit{Dog}.  However, now that we have introduced predicates
+% there is nothing to stop us having two predicates `boy' and `dog' with
+% arity $\langle$\textit{Ind}$\rangle$.  Thus we could have the record
+% type \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_{\mathrm{boy}}$}{boy(x)} \\
+%         \tfield{y}{\textit{Ind}} \\
+%         \tfield{c$_{\mathrm{dog}}$}{dog(y)} \\
+%               \tfield{c$_{\mathrm{hug}}$}{hug(x,y)}} 
+% \end{ex} 
+% How do we choose between a type like \preveg{} where common nouns like
+% \textit{boy} and \textit{dog}
+% correspond to one-place predicates and a type like
+% (\ref{eg:rectype}{b}) where common nouns correspond to basic types?
+% One advantage is that \preveg{} explicitly represents that the arity
+% of `hug' is fulfilled.  Another advantage is that many, and on some
+% analyses possibly all,
+% nouns in natural languages will in more detailed treatments correspond
+% to predicates of more than one argument.  Consider, for example, the
+% fact that boys grow into men.  The same individual can be a boy at one
+% time and a man at a later time.  One way of treating this is to say
+% that  `boy' is a predicate of
+% two arguments with arity
+% $\langle$\textit{Ind},\textit{Time}$\rangle$.  In fact if we are going
+% to deal with tense and aspect in natural language in this way we will probably
+% want to add time arguments to most if not all of our predicates and
+% thus allow ourselves record types like \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{e-time}{\textit{Time}} \\
+% \tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_{\mathrm{boy}}$}{boy(x,e-time)} \\
+%         \tfield{y}{\textit{Ind}} \\
+%         \tfield{c$_{\mathrm{dog}}$}{dog(y,e-time)} \\
+%               \tfield{c$_{\mathrm{hug}}$}{hug(x,y,e-time)}} 
+% \end{ex} 
+% where `e-time' stands for ``event time''.  Here we have required that
+% the times in all the predicate fields be the event time but this is
+% not always the case.  Consider \nexteg{}.
+% \begin{ex} 
+% The minister smoked pot in his youth 
+% \end{ex} 
+% Here the time of the pot-smoking event most likely precedes 
+% the time of the pot-smoking individual being a minister. We will thus
+% use our basic types for basic ontological categories like \textit{individual}
+% and \textit{time} and use predicates for words that occur in natural
+% language.  Predicates can be $n$-ary whereas our types will always be
+% unary.  Note that a ptype like hug($a$,$b$,$t$) is constructed from a
+% ternary predicate `hug' but the type itself is a unary type of
+% situations.  Thus we might have the judgement $s$ : hug($a$,$b$,$t$).
+
+% Below we will propose an alternative to this treatment of
+% time as an argument.  There is, however, another reason for allowing predicates
+% corresponding to nouns to have more than one argument.  This is the existence of relational nouns such as \textit{friend}
+% or \textit{daughter}.  (See \citealp{ParteeBorschev2012} for recent
+% discussion.)
+
+% In this book we will reserve basic types for two kinds of types:  (i)
+% those which correspond to intuitively fundamental ontological categories
+% such as individual and (ii) those types which require a recursive
+% definition to characterize the set of their witnesses.  The latter is
+% for a technical reason:  defining recursive types as, for instance,
+% record types could lead to the types themselves being a
+% non-well-founded set of ordered pairs which contain themselves.  We
+% will discuss this more (????) when recursive types become relevant.
+
+
 \subsection{Representing complex entities as labelled sets}
 \label{sec:labelled-sets}
 When we characterized ptypes in Section~\ref{sec:ptypes}, we did not
@@ -851,7 +943,8 @@ We introduce a notion \textit{labelled sets} to model our complex entities. We
 will assume that our set theory comes equipped with a set of
 \textit{urelements} (entities which are not sets but which can be
 members of sets).  We will assume that among the urelements is a countably infinite
-set which is designated as the set of labels.  A \textit{labelled set} is a set
+set which is designated as the set of labels.  A \textit{labelled set}
+(see also Appendix~\ref{app:sets}) is a set
 of ordered pairs whose first member is a label and whose second
 element is either an urelement which is not a label or a set (possibly a labelled
 set), such that no more than one ordered pair can contain any
@@ -1167,80 +1260,6 @@ contexts that one often finds in standard versions of type theory.
  
 @@ 
 
-The introduction of predicates  and ptypes raises
-some new questions.  We said above that the arity of `hug' is
-$\langle$\textit{Ind},\textit{Ind}$\rangle$.  However, when we look at
-(\ref{eg:rectype}b) where the types labelled with `x' and `y' are
-\textit{Boy} and \textit{Dog} we see that there is nothing explicit here that
-requires that the two arguments of `hug' are of type \textit{Ind}.
-One obvious way to achieve this would be to require that \textit{Boy}
-and \textit{Dog} are subtypes of \textit{Ind}, that is, that any
-object of type \textit{Boy} is also of type \textit{Ind} and similarly
-for \textit{Dog}.  However, now that we have introduced predicates
-there is nothing to stop us having two predicates `boy' and `dog' with
-arity $\langle$\textit{Ind}$\rangle$.  Thus we could have the record
-type \nexteg{}.
-\begin{ex} 
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_{\mathrm{boy}}$}{boy(x)} \\
-        \tfield{y}{\textit{Ind}} \\
-        \tfield{c$_{\mathrm{dog}}$}{dog(y)} \\
-              \tfield{c$_{\mathrm{hug}}$}{hug(x,y)}} 
-\end{ex} 
-How do we choose between a type like \preveg{} where common nouns like
-\textit{boy} and \textit{dog}
-correspond to one-place predicates and a type like
-(\ref{eg:rectype}{b}) where common nouns correspond to basic types?
-One advantage is that \preveg{} explicitly represents that the arity
-of `hug' is fulfilled.  Another advantage is that many, and on some
-analyses possibly all,
-nouns in natural languages will in more detailed treatments correspond
-to predicates of more than one argument.  Consider, for example, the
-fact that boys grow into men.  The same individual can be a boy at one
-time and a man at a later time.  One way of treating this is to say
-that  `boy' is a predicate of
-two arguments with arity
-$\langle$\textit{Ind},\textit{Time}$\rangle$.  In fact if we are going
-to deal with tense and aspect in natural language in this way we will probably
-want to add time arguments to most if not all of our predicates and
-thus allow ourselves record types like \nexteg{}.
-\begin{ex} 
-\record{\tfield{e-time}{\textit{Time}} \\
-\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_{\mathrm{boy}}$}{boy(x,e-time)} \\
-        \tfield{y}{\textit{Ind}} \\
-        \tfield{c$_{\mathrm{dog}}$}{dog(y,e-time)} \\
-              \tfield{c$_{\mathrm{hug}}$}{hug(x,y,e-time)}} 
-\end{ex} 
-where `e-time' stands for ``event time''.  Here we have required that
-the times in all the predicate fields be the event time but this is
-not always the case.  Consider \nexteg{}.
-\begin{ex} 
-The minister smoked pot in his youth 
-\end{ex} 
-Here the time of the pot-smoking event most likely precedes 
-the time of the pot-smoking individual being a minister. We will thus
-use our basic types for basic ontological categories like \textit{individual}
-and \textit{time} and use predicates for words that occur in natural
-language.  Predicates can be $n$-ary whereas our types will always be
-unary.  Note that a ptype like hug($a$,$b$,$t$) is constructed from a
-ternary predicate `hug' but the type itself is a unary type of
-situations.  Thus we might have the judgement $s$ : hug($a$,$b$,$t$).
-
-Below we will propose an alternative to this treatment of
-time as an argument.  There is, however, another reason for allowing predicates
-corresponding to nouns to have more than one argument.  This is the existence of relational nouns such as \textit{friend}
-or \textit{daughter}.  (See \citealp{ParteeBorschev2012} for recent
-discussion.)
-
-In this book we will reserve basic types for two kinds of types:  (i)
-those which correspond to intuitively fundamental ontological categories
-such as individual and (ii) those types which require a recursive
-definition to characterize the set of their witnesses.  The latter is
-for a technical reason:  defining recursive types as, for instance,
-record types could lead to the types themselves being a
-non-well-founded set of ordered pairs which contain themselves.  We
-will discuss this more (????) when recursive types become relevant.
 
 % These types play a role in the ``propositions as types'' dictum which
 % comes from type theory.  If hug($a$,$b$) is the type of events where
