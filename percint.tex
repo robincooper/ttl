@@ -968,6 +968,11 @@ labelled sets which are \textit{labellings} of \nexteg{a} would be \nexteg{b
 \end{subex} 
    
 \end{ex} 
+We will refer to the first members of the pairs which constitute a
+labelled set as \textit{labels} use in the labelled set and we will refer to
+the second members of the ordered pairs as the \textit{labelled
+  elements} of the labelled set.
+
 There are various ways in which labelled sets could be represented
 graphically.  One way to represent the examples in \preveg{b and c}
 would be as in \nexteg{}.
@@ -1257,6 +1262,45 @@ same record type, however. % Since we will use record types to model
 
 Thus we use record types to replace both the $\Sigma$-types and
 contexts that one often finds in standard versions of type theory.
+
+\subsubsection{Definitions of records and record types}
+A record according to a set of labels $\mathcal{L}$ and a type
+system $\mathbb{T}$   is a
+finite labelled set 
+whose labels are included in $\mathcal{L}$ and whose labelled elements
+are witnesses of some type according to $\mathbb{T}$.
+Records are characterized by the definition in \nexteg{}.
+\begin{ex} 
+$r$ is a \textit{record according to a set of labels $\mathcal{L}$ and a type
+system $\mathbb{T}$} (Appendix~\ref{app:rec}) iff $r$ is a finite labelled set
+(Appendix~\ref{app:sets}) whose labels are included in $\mathcal{L}$
+and for any labelled element, $v$, in $r$, there is some type $T$ such
+that $v:_{\mathbb{T}}T$.
+\label{ex:records} 
+\end{ex} 
+If $r$ is a record and $\langle\ell,v\rangle$
+is in $r$, we call $\langle\ell,v\rangle$ a \textit{field} of $r$,
+$\ell$ a {\it label\/} in $r$ and $v$ a {\it value\/} in $r$ (the
+\textit{value of $\ell$ in $r$}).
+We use $r.\ell$ to denote $v$.  \ignore{$r.\ell$ is called a \textit{path}
+in $r$.}
+
+We use a tabular format to
+represent records.  A record as given in \nexteg{a} 
+ is displayed as \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ 
+ 
+\item \record{\field{$\ell_1$}{$v_1$} \\
+        &\vdots& \\
+        \field{$\ell_n$}{$v_n$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+
  
 @@ 
 

@@ -24,7 +24,10 @@ element is either an urelement which is not a label or a set (possibly a labelle
 set), such that no more than one ordered pair can contain any
 particular label as its first member.  This means that a labelled set
 is the traditional set theoretic construction of an extensional
-function from a set of labels onto some set.
+function from a set of labels onto some set.  We refer to the first members of the pairs which constitute a
+labelled set as \textit{labels} use in the labelled set and we will refer to
+the second members of the ordered pairs as the \textit{labelled
+  elements} of the labelled set.
 % When we introduced complex
 % objects and types
 % other than records and record types we were not explicit about exactly which
@@ -891,18 +894,38 @@ start by characterizing them.
 \subsection{Records}
 \label{app:rec}
 
-A {\it record\/} is a finite set of ordered pairs (called {\it fields\/})
-which is the graph of a function.  If $r$ is a record and $\langle\ell,v\rangle$
-is a field in $r$ we call $\ell$ a {\it label\/} and $v$ a {\it value\/} in $r$
-and we use $r.\ell$ to denote $v$.  $r.\ell$ is called a \textit{path}
-in $r$.  This means that a record is a labelled set as introduced in Appendix~\ref{app:sets}.
+% A \textit{record according to a set of labels $\mathcal{L}$ and a type
+% system $\mathbb{T}$} (Chapter~\ref{ch:percint}, p.~\pageref{ex:records})  is a
+% finite labelled set (Appendix~\ref{app:sets})
+% whose labels are included in $\mathcal{L}$ and whose labelled elements
+% are witnesses of some type according to $\mathbb{T}$.
 
-We will use a tabular format to
+$r$ is a \textit{record according to a set of labels $\mathcal{L}$ and a type
+system $\mathbb{T}$} (Chapter~\ref{ch:percint},
+p.~\pageref{ex:records}) iff $r$ is a finite labelled set
+(Appendix~\ref{app:sets}) whose labels are included in $\mathcal{L}$
+and for any labelled element, $v$, in $r$, there is some type $T$ such
+that $v:_{\mathbb{T}}T$.
+
+% We call the ordered pairs which constitute a labelled set which is a record \textit{fields}.
+% The labels of the labelled set we will refer to as \textit{labels} of
+% the record and the labelled elements of the labelled set we refer to
+% as \textit{values} in the record 
+
+\ignore{A {\it record\/} is a finite set of ordered pairs (called {\it fields\/})
+which is the graph of a function.}  If $r$ is a record and $\langle\ell,v\rangle$
+is in $r$, we call $\langle\ell,v\rangle$ a \textit{field} of $r$,
+$\ell$ a {\it label\/} in $r$ and $v$ a {\it value\/} in $r$ (the
+\textit{value of $\ell$ in $r$}).
+We use $r.\ell$ to denote $v$.  \ignore{$r.\ell$ is called a \textit{path}
+in $r$.}  \ignore{This means that a record is a labelled set as introduced in Appendix~\ref{app:sets}.}
+
+We use a tabular format to
 represent records.  A record 
 $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ is displayed as
 \begin{display}
 \record{\field{$\ell_1$}{$v_1$} \\
-        \ldots \\
+        &\vdots& \\
         \field{$\ell_n$}{$v_n$}}
 \end{display}
 
