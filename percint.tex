@@ -1035,6 +1035,14 @@ as \nexteg{}.
 \end{subex} 
    
 \end{ex}
+% \preveg{b} uses the types \textit{Boy} and \textit{Dog} but we could
+% also use ptypes constructed from the predicates `boy' and `dog' as
+% discussed in Section~\ref{sec:ptypes} as in \nexteg{}.
+% \begin{ex} 
+% $\Sigma x$:\textit{Ind}.$\Sigma s_1$:boy($x$).$\Sigma
+% y$:\textit{Ind}.$\Sigma s_2$:dog($y$).hug($x$,$y$) 
+% \end{ex} 
+  
 We will use the notation $T\dep{x_1,\ldots,x_n}$ to represent that the
 type $T$ depends on $x_1,\ldots,x_n$.  For example, the types
 `hug($x$,$y$)' represented within the expressions in \preveg{} depend
@@ -1054,7 +1062,10 @@ exploited for the semantics of natural language by \cite{Ranta1994}
 among others.
 
 Another approach to these more general types is to use \textit{record
-  types} such as \nexteg{}.
+  types} such as \nexteg{a,b} or, as we will prefer given our decision
+in Section~\ref{sec:ptypes}
+to use ptypes constructed from predicates rather than types
+corresponding to common nouns, \nexteg{c}.
 \begin{ex}
 \begin{subex} 
  
@@ -1065,6 +1076,12 @@ Another approach to these more general types is to use \textit{record
 \item \record{\tfield{x}{\textit{Boy}} \\
               \tfield{y}{\textit{Dog}} \\
               \tfield{e}{hug(x,y)}} 
+
+\item \record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{boy(x)} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{dog(y)} \\
+              \tfield{e}{hug(x,y)}}
  
 \end{subex} 
 \label{ex:rectype} 
@@ -1072,8 +1089,9 @@ Another approach to these more general types is to use \textit{record
 \ignore{We make the notion of record type precise in
 Appendix~\ref{app:rectypes}.}  In TTR, record types are labelled
 sets.  A first approximation to the labelled sets represented in
-\preveg{} is given in \nexteg{}.  (In a short while we will introduce
-a complication in connection with the dependency represented by `hug(x,y)'.)
+\preveg{} is given in \nexteg{}.  (In Section~\ref{sec:depfields} we will introduce
+a complication in connection with the dependency represented by
+`hug(x,y)', `boy(x)' and `dog(y)'.)
 \begin{ex} 
 \begin{subex} 
  
@@ -1082,11 +1100,15 @@ a complication in connection with the dependency represented by `hug(x,y)'.)
  
 \item \{$\langle$x, \textit{Boy}$\rangle$, $\langle$y,
   \textit{Dog}$\rangle$, $\langle$e, hug(x, y)$\rangle$\} 
+
+\item \{$\langle$x, \textit{Ind}$\rangle$, $\langle$c$_1$,
+  boy(x)$\rangle$, $\langle$y,
+  \textit{Ind}$\rangle$, $\langle$c$_2$, dog(y)$\rangle$, $\langle$e, hug(x, y)$\rangle$\} 
  
 \end{subex} 
    
 \end{ex} 
-`x', `y' and `e' are particular labels.  In record types, the ordered
+`x', `y', `c$_1$', `c$_2$' and `e' are particular labels.  In record types, the ordered
 pairs whose first member is a label are called \textit{fields}.  Thus
 record types are sets of fields.  We will give a precise
 characterization of which labelled sets are record types later. 
@@ -1222,7 +1244,7 @@ $x$ : \textit{Ind}, $y$ : \textit{Ind}, $e$ : hug($x$,$y$) $\vdash$
 $e$ : touch($x$,$y$) 
    
 \end{ex} 
-\preveg{} means in a context where $x$ and $y$ are
+\preveg{} means that in a context where $x$ and $y$ are
 individuals and $e$ is a witness for the type `hug($x$,$y$)' then $e$ is
 also a witness for the type `touch($x$,$y$)'.  
 % This notation is normally taken to mean universal
@@ -1262,6 +1284,60 @@ same record type, however. % Since we will use record types to model
 
 Thus we use record types to replace both the $\Sigma$-types and
 contexts that one often finds in standard versions of type theory.
+
+\subsubsection{Dependent fields in record types}
+\label{sec:depfields}
+Consider again the record type (\ref{ex:rectype}c) repeated as
+\nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{boy(x)} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{dog(y)} \\
+              \tfield{e}{hug(x,y)}} 
+\label{ex:bhd-ty}
+\end{ex} 
+Strictly speaking the notations `boy(x)', `dog(y)' and `hug(x,y)' do
+not represent ptypes as we have defined them since `x' and `y' are
+labels, not objects of type \textit{Ind} as required by the arities of
+the predicates.  What we mean by this notation is that the labels are
+to be replaced by whatever is in the field with that label in the
+record that we are checking against the type.  Thus, for example, if
+we are checking whether the record in \nexteg{a} is of the type
+\preveg{} we need to check that the judgements listed in \nexteg{b}
+are correct.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\field{x}{$a$}\\
+              \field{c$_1$}{$s_1$}\\
+              \field{y}{$b$}\\
+              \field{c$_2$}{$s_2$}\\
+              \field{e}{$s_3$}}
+ 
+\item $a$ : \textit{Ind}\\
+      $s_1$ : boy($a$)\\
+      $b$ : \textit{Ind}\\
+      $s_2$ : dog($b$)\\
+      $s_3$ : hug($a$,$b$)
+ 
+\end{subex} 
+   
+\end{ex} 
+The notation `boy(x)' in (\ref{ex:bhd-ty}) thus actually encodes two
+pieces of information: firstly that we have what is known as a
+\textit{dependent type}, a function which takes a certain type of
+object and returns a type, and secondly that we give an address in the
+record where we should look for the object in the record that we are
+checking.  We will represent functions using $\lambda$-expressions
+from a variant of the $\lambda$-calculus.  The relevant functions for
+(\ref{ex:bhd-ty}) are given in \nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+  
+
+@@    
 
 \subsubsection{Definitions of records and record types}
 A record according to a set of labels $\mathcal{L}$ and a type
