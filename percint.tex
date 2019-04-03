@@ -1327,19 +1327,74 @@ are correct.
 The notation `boy(x)' in (\ref{ex:bhd-ty}) thus actually encodes two
 pieces of information: firstly that we have what is known as a
 \textit{dependent type}, a function which takes a certain type of
-object and returns a type, and secondly that we give an address in the
-record where we should look for the object in the record that we are
+object and returns a type, and secondly that we give an address where we should look for the object in the record that we are
 checking.  We will represent functions using $\lambda$-expressions
 from a variant of the $\lambda$-calculus.  The relevant functions for
 (\ref{ex:bhd-ty}) are given in \nexteg{}.
-\begin{ex} 
+\begin{ex}
+\begin{subex} 
+ 
+\item $\lambda v$:\textit{Ind} . boy($v$) 
+ 
+\item $\lambda v$:\textit{Ind} . dog($v$)
+
+\item $\lambda v_1$:\textit{Ind} . $\lambda v_2$:\textit{Ind} . hug($v_1$,$v_2$) 
+ 
+\end{subex} 
+   
  
 \end{ex} 
-  
+We shall normally use $v$, $v_1$, $v_2$, \ldots for the variables in
+our functions.  In general if $\xi$ is a variable and
+$\varphi\dep{\xi}$ represents an object containing the value of $\xi$, then we
+use the notation $\lambda\xi$:$T$ . $\varphi\dep{\xi}$ to
+represent the total function $f$ whose domain is the set of witnesses
+of the type $T$ and for any $a:T$, $f(a)=\varphi\dep{a}$.  We shall
+say something more precise about functions in Section~\ref{sec:funs}.
 
-@@    
+The second piece of information we need to provide is where to find
+the object(s) which will serve as the arguments to these functions.
+This will be a sequence of \textit{paths} in the record, providing a
+path for each argument to the function.  A path is a string of labels
+separated by `.'.  We will make this notion precise in
+Section~\ref{sec:recs-rectypes}.  In the case of our current example
+we only need paths consisting of one label.
+
+We will represent the dependent field as containing an ordered pair
+consisting of the dependent type and the sequence of paths.  Thus
+(\ref{ex:bhd-ty}) is more explicitly represented as \nexteg{}.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind}
+                . boy($v$), $\langle$x$\rangle\rangle$} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{$\langle\lambda v$:\textit{Ind}
+                . dog($v$), $\langle$y$\rangle\rangle$} \\
+              \tfield{e}{$\langle\lambda v_1$:\textit{Ind} . $\lambda
+                v_2$:\textit{Ind} . hug($v_1$,$v_2$), $\langle$x,y$\rangle\rangle$}}  
+\end{ex} 
+This will
+be our ``official'' notation although we will continue to use the
+notation as in (\ref{ex:bhd-ty}) for the sake of readability when it
+is not important to make this explicit.
+
+The nature of dependent fields in record types as we have explained it
+here means that before we can give an explicit account of record types,
+we must first introduce type systems which contain
+functions and ensure that those functions can return types in order to
+give us the dependent types that we need.  This we will do in
+Sections~\ref{sec:funs} and \ref{sec:type-Type}.
+
+@@ 
+
+\subsubsection{Functions and function types}
+\label{sec:funs} 
+
+\subsubsection{The type \textit{Type}}
+\label{sec:type-Type}  
 
 \subsubsection{Definitions of records and record types}
+\label{sec:recs-rectypes}
 A record according to a set of labels $\mathcal{L}$ and a type
 system $\mathbb{T}$   is a
 finite labelled set 
