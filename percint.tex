@@ -1449,15 +1449,41 @@ For $\Gamma$, a system of complex types with function types:
 \item \begin{prooftree}
 \hypo{[\Gamma\vdash a:T_1]}
 \ellipsis{}{\Gamma\vdash f(a):T_2}
-\infer1{\Gamma\vdash f:(T_1\rightarrow T_2)}
+\hypo{[\Gamma\vdash f(a):T_2]}
+\ellipsis{}{\Gamma\vdash a:T_1}
+\infer2{\Gamma\vdash f:(T_1\rightarrow T_2)}
 \end{prooftree} 
 
-\item 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash f:(T_1\rightarrow T_2)}
+\hypo{\Gamma\vdash a:T_1}
+\infer2{\Gamma\vdash f(a):T_2}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash f:(T_1\rightarrow T_2)}
+\hypo{\Gamma\vdash f(a):T_2}
+\infer2{\Gamma\vdash a:T_1}
+\end{prooftree}
  
 \end{subex} 
   
 \end{ex} 
-  
+\preveg{a} tells us that for any two types, $T_1$ and $T_2$, we can
+form the function type $(T_1\rightarrow T_2)$.  \preveg{b} tells us
+that if we can prove that $f(a):T_2$ from the assumption that $a:T_1$
+and we can also prove from the assumption $f(a):T_2$ that $a:T_1$,
+then $f:(T_1\rightarrow T_2)$.  The first premise requires that the
+function is defined on all witnesses for $T_1$ and the second premise
+requires that anything on which the function is defined is a witness
+for $T_1$.  Jointly they require that the domain of the function (the
+set of objects on which it is defined) is the set of witnesses for
+$T_1$.  \preveg{c} tells us that if we have a function of type
+$(T_1\rightarrow T_2)$ and an object of type $T_1$ then the result of
+applying the function to that object will be of type $T_2$.
+Conversely, \preveg{d} tells us that if we have a function of type
+$(T_1\rightarrow T_2)$ and the result of applying it to some object is
+of type $T_2$, then that object must be of type $T_1$.  
 
    
 
