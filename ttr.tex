@@ -281,27 +281,29 @@ non-polymorphic function types).
 
 
 
-This choice of modelling functions as sets of ordered pairs means that
-$f:_{\mathbf{TYPE_C}}(T_1\rightarrow T_2)$ iff $f\subseteq \{a\mid
-  a:_{\mathbf{TYPE_C}}T_1\} \times \{a\mid a:_{\mathbf{TYPE_C}}T_2\}$
-  such that if $b \in \{a\mid
-  a:_{\mathbf{TYPE_C}}T_1\}$ then there is exactly one $c$, such that
-  $\langle b,c\rangle\in f$.  We shall say that in this case the
-  result of applying the function $f$ to $b$, in symbols, $f(b)$, is
-  $c$.
+
 
 We introduce a notation for functions which is borrowed from the
-$\lambda$-calculus as used by \cite{Montague1973}.  Let $O[v]$ be the
-notation for some object of our type theory which uses the variable
-$v$ and let $T$ be a type.  Then the function
+$\lambda$-calculus:
 
-$\lambda v:T\ .\ O[v]$ 
+$\lambda v\!:\!T\ .\ \varphi$ (Chapter~\ref{ch:percint},
+p.~\pageref{ex:fun-notation}) is that function $f$ such that for any
+$a:T$, $f(a)$ (the result of applying $f$ to $a$) is represented by
+$\varphi[v\leftarrow a]$ (the result of replacing any free occurrence
+of $v$ in $\varphi$ with $a$).
 
-is to be the function
+%  as used by \cite{Montague1973}.  Let $O[v]$ be the
+% notation for some object of our type theory which uses the variable
+% $v$ and let $T$ be a type.  Then the function
 
-$\{\langle v,O[v]\rangle\mid v:T\}$
+% $\lambda v:T\ .\ O[v]$ 
 
-(Here we suppress the subscript $\mathbf{TYPE_C}$ on the `:'.)  For
+% is to be the function
+
+% $\{\langle v,O[v]\rangle\mid v:T\}$
+
+% (Here we suppress the subscript $\mathbf{TYPE_C}$ on the `:'.)
+For
 example, the function
 
 $\lambda v$:\textit{Ind} . run($v$)
