@@ -770,13 +770,14 @@ definition will also hold for those types in that system.
 
 % \bigskip
 
-An {\it intensional system of complex types\/} is a family of
+An {\it intensional system of complex types\/}
+(Chapter~\ref{ch:percint}, p.~\pageref{ex:int-type-sys}) is a family of
 quadruples indexed by the natural numbers:
-\begin{display}
+\begin{quote}
 {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$
-\end{display}
+\end{quote}
 where (using $\mathbf{TYPE}_{\mathit{IC}_n}$ to refer to the quadruple
 indexed by $n$):
 \begin{enumerate} 
@@ -789,8 +790,8 @@ system of complex types
 \item for each $n$, $\mathbf{Type}^n\subseteq\mathbf{Type}^{n+1}$ and
   $\mathbf{PType}^n\subseteq\mathbf{PType}^{n+1}$
 
-\item for each $n$, if $T\in\mathbf{PType}^n$ and $p\in F^n(T)$ then
-  $p\in F^{n+1}(T)$
+\item for each $n$, if $T\in\mathbf{PType}^n$ then $F^n(T)\subseteq F^{n+1}(T)$%and $p\in F^n(T)$ then
+  %$p\in F^{n+1}(T)$
 
 \item for each $n>0$, $\mathit{Type}^n\in\mathbf{Type}^n$
 

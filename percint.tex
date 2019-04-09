@@ -497,8 +497,8 @@ will represent such a constructed type as hug($a$,$b$) and we will
 call it a \textit{ptype} to indicate that it is a type whose
 main constructor is a predicate.  What would an
 object belonging to such a type be?  According to the type-theoretic
-approach introduced by Martin-LÃ¶f it should be an object which
-constitutes a proof that $a$ is hugging $b$.  For Martin-LÃ¶f, who was
+approach introduced by Martin-Löf it should be an object which
+constitutes a proof that $a$ is hugging $b$.  For Martin-Löf, who was
 considering mathematical predicates, such proof objects might be numbers
 with certain properties, ordered pairs and so on.  \cite{Ranta1994}
 points out that for non-mathematical predicates the objects could be
@@ -1529,10 +1529,145 @@ of any free occurrence of the variable $v$ by $a$).
 \end{subex} 
    
 \end{ex} 
-       
+
+In this section we have introduced functions from objects of one type
+to objects of another type.  However, it does not yet give us the
+functions we need in the dependent fields of our record types since
+these are functions which take objects of a type and return a
+\textit{type}, that is, they are \textit{dependent types}.       
 
 \subsubsection{The type \textit{Type}}
-\label{sec:type-Type}  
+\label{sec:type-Type}
+Up until now we have said that the witnesses of any type do not
+overlap with the set of types.  We are now going to relax this
+requirement in a restricted way by introducing a special type called \textit{Type}
+whose witnesses are any type, that is, members of the set
+\textbf{Type}.  We will call type systems that have types of types in
+this way \textit{intensional} since this will be a key feature of our
+treatment of natural language intensional constructions in
+Chapter~\ref{ch:intensional}.\footnote{In Martin-Löf type theory,
+  types of types are called \textit{universes}.  This is, however,
+  potentially a confusing terminology for a theory relating to the
+  kind of model theory which has been used in linguistics where
+  ``universe'' has a different meaning.}  Since \textit{Type} is itself a type it will also be a
+member of the set \textbf{Type} and this will mean that it has itself
+as a witness, that is, \textit{Type} : \textit{Type}.  For everyday
+working purposes we will assume that this is the system we have and
+ignore the fact that this is bringing us into danger of introducing
+Russell's paradox.  In the remainder of this subsection we will show
+how the paradox can be avoided by using a technique called
+stratification.  We will in future assume that our type systems are
+stratified in this way without mentioning it explicitly for the most
+part.  If you are not interested in the details of this you can skip
+the rest of this subsection and come back to it if you feel the need.
+
+% An intensional type system is one in which the types themselves become
+% objects of a type. We introduce a distinguished type \textit{Type} to
+% which all the members of the set \textbf{Type} belong.  Things are a
+% little more complicated than this, though, since we want \textit{Type}
+% itself to be a type and therefore it should belong to the set
+% \textbf{Type}.  This would mean that \textit{Type} belongs to itself,
+% i.e. \textit{Type}:\textit{Type}.  
+Allowing types to belong to
+themselves puts us in danger of creating a situation in which
+Russell's paradox arises.  If some members of \textbf{Type} belong to
+themselves then we should be able to talk of the set of types which do
+not belong to themselves,
+$\{T\in\mathbf{Type}\mid T\not\ : T\}$.  Suppose that some model
+assigns this set to $T'$.  Then the question arises whether $T'$
+belongs to itself and we can show that if $T':T'$ then $T'\not\ :T'$
+and if $T'\not\ :T'$ then $T':T'$.  
+In order to avoid this problem we
+will \textit{stratify} (or \textit{ramify}) our type system by introducing types of
+different \textit{orders}.   A type system of order 0 will be a
+system of complex types in the way we have defined it.  The
+set of types, \textbf{Type}$^1$ of a type
+system of order 1 based on this system will contain in addition to
+everything in the original type system a type, \textit{Type}$^1$, to
+which all the types of order 0, members of the set \textbf{Type}$^0$, belong.  In general for all the natural
+numbers $n$, \textit{Type}$^{n+1}$ will be a type to which all the
+types in \textbf{Type}$^n$ belong.
+
+We characterize an intensional system of complex types in \nexteg{}
+(repeated in Appendix~\ref{app:int}).
+\begin{ex}
+An {\it intensional system of complex types\/} is a family of
+quadruples indexed by the natural numbers:
+\begin{display}
+{\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$
+\end{display}
+where (using $\mathbf{TYPE}_{\mathit{IC}_n}$ to refer to the quadruple
+indexed by $n$):
+\begin{enumerate} 
+ 
+\item for each $n$,$\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle$ is a 
+system of complex types  
+ 
+\item for each $n$, $\mathbf{Type}^n\subseteq\mathbf{Type}^{n+1}$ and
+  $\mathbf{PType}^n\subseteq\mathbf{PType}^{n+1}$
+
+\item for each $n$, if $T\in\mathbf{PType}^n$ then $F^n(T)\subseteq F^{n+1}(T)$
+
+\item for each $n>0$, $\mathit{Type}^n\in\mathbf{Type}^n$
+
+\item for each $n>0$,
+  $T:_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathit{Type}^n$ iff $T\in\mathbf{Type}^{n-1}$
+ 
+\end{enumerate}
+\label{ex:int-type-sys}
+\end{ex}
+
+Here, but not in \cite{Cooper2012}, we make explicit that
+\textit{Type} is a distinguished urelement and that \textit{Type}$^n$
+represents the labelled set
+$\{\langle\mathrm{ord},n\rangle,\langle\mathrm{typ},\mathit{Type}\rangle\}$
+where `ord' and `typ' are reserved labels (``order'', ``type'').
+
+In our informal proof theoretic notation we can characterize
+intensional systems of complex types as in \nexteg{}.
+\begin{ex} 
+For $\{\Gamma^n\}_{n\in\mathit{Nat}}$ an intensional system of complex
+types
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T\in\textbf{Type}^n}
+\infer1{\Gamma^{n+1}\vdash T\in\textbf{Type}^{n+1}}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T\in\textbf{PType}^n}
+\infer1{\Gamma^{n+1}\vdash T\in\textbf{PType}^{n+1}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash a:T}
+\infer1{\Gamma^{n+1}\vdash a:T}
+\end{prooftree}
+
+\item \begin{prooftree}
+\infer0[$n>0$]{\Gamma^n\vdash\textit{Type}^n\in\textbf{Type}^n}
+\end{prooftree} 
+
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T\in\textbf{Type}^n}
+\infer1{\Gamma^{n+1}\vdash T:\textit{Type}^{n+1}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T:\textit{Type}^n}
+\infer1[$n>0$]{\Gamma^{n-1}\vdash T\in\textbf{Type}^{n-1}}
+\end{prooftree} 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
 
 \subsubsection{Definitions of records and record types}
 \label{sec:recs-rectypes}
