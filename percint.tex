@@ -1666,6 +1666,24 @@ types
 \end{subex} 
    
 \end{ex} 
+
+For the most part in the remainder of this book we will suppress the
+$n$-superscripts.  This means that we will characterize a function
+such as \nexteg{a} as being of the type \nexteg{b} whereas in fact it
+is a witness for all the types characterized in \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda v$:\textit{Ind} . dog($v$) 
+ 
+\item (\textit{Ind}$\rightarrow$\textit{Type})
+
+\item \{(\textit{Ind}$\rightarrow$\textit{Type}$^n$) $\mid$ $n>0$\} 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
   
 
 
@@ -1684,7 +1702,37 @@ system $\mathbb{T}$} (Appendix~\ref{app:rec}) iff $r$ is a finite labelled set
 and for any labelled element, $v$, in $r$, there is some type $T$ such
 that $v:_{\mathbb{T}}T$.
 \label{ex:records} 
+\end{ex}
+In giving our informal proof theoretic characterization of the set of
+records we will use \nexteg{} to mean
+that $r$ is a record according to type system $\Gamma$ and set of
+labels $\mathcal{L}$.
+\begin{ex} 
+$\Gamma,\mathcal{L}\vdash r \text{ record}$ 
+\end{ex}     
+We give the characterization inductively in
+\nexteg{}.
+\begin{ex}
+For $\Gamma$ a type system and $\mathcal{L}$ a set of labels 
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\infer0{\Gamma,\mathcal{L}\vdash\emptyset\text{ record}}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash a:T}
+\hypo{\ell\in\mathcal{L}}
+\hypo{\Gamma,\mathcal{L}-\{\ell\}\vdash r \text{ record}}
+\infer3{\Gamma,\mathcal{L}\vdash r\cup\{\langle\ell,a\rangle\}\text{
+    record}}
+\end{prooftree} 
+ 
+\end{subex} 
+   
 \end{ex} 
+  
+ 
 If $r$ is a record and $\langle\ell,v\rangle$
 is in $r$, we call $\langle\ell,v\rangle$ a \textit{field} of $r$,
 $\ell$ a {\it label\/} in $r$ and $v$ a {\it value\/} in $r$ (the
@@ -1708,6 +1756,145 @@ represent records.  A record as given in \nexteg{a}
    
 \end{ex} 
 
+We now move to characterizing record types.  Record types are, with
+two exceptions of distinguished non-complex record types, labelled sets.  We first characterize
+type systems which have non-dependent record types (that is, record
+types which do not have dependent fields).  Non-dependent record types
+are labelled sets whose labelled elements are types.  We characterize a type
+system with complex types and non-dependent record types in \nexteg{}
+(repeated in Appendix~\ref{app:rectypes}).
+\begin{ex} 
+A system of complex types \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  (non-dependent) record
+  types based on $\langle \mathcal{L}, \mathbf{RType}\rangle$}, where $\mathcal{L}$ is a countably infinite set (of labels)
+and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType} is
+defined by:
+\begin{enumerate} 
+ 
+\item $\mathit{Rec}\in\mathbf{RType}$
+
+\item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a well-typed record with
+  respect to \textbf{TYPE$_C$} and $L$.
+
+\item $\mathit{ERec}\in\mathbf{RType}$
+
+\item $r:_{\mathbf{TYPE}_C}\mathit{ERec}$ iff $r=\emptyset$
+
+\item if $\ell\in L$ and $T\in\mathbf{Type}$, then
+  $\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
+
+\item $r:_{\mathbf{TYPE}_C}\{\langle\ell,T\rangle\}$ iff
+  $r:_{\mathbf{TYPE}_C}\mathit{Rec}$, $\langle\ell,a\rangle\in r$ and
+  $a:_{\mathbf{TYPE}_C}T$.
+
+\item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in L$, $\ell$ does not occur as a
+  label in $R$ (i.e. there is no field $\langle\ell',T'\rangle$ in $R$
+  such that $\ell'=\ell$) and $T\in\mathbf{Type}$, then
+  $R\cup\{\langle\ell,T\rangle\}\in\mathbf{RType}$.\label{cl:ndrectype-emb}
+
+\item $r:_{\mathbf{TYPE}_C}R\cup\{\langle\ell,T\rangle\}$ iff
+  $r:_{\mathbf{TYPE}_C}R$, $\langle\ell,a\rangle\in r$ and $a:_{\mathbf{TYPE}_C}T$.
+ 
+\end{enumerate} 
+\label{ex:ndrectypes}
+\end{ex} 
+In this definition we introduced two distinguished non-complex types:
+\textit{Rec}, the type of all records (clauses 1 and 2), and
+\textit{ERec}, the type of the empty record (clauses 3 and 4). In
+clauses 5 and 6 we introduce records with a single field, $\langle\ell,T\rangle$, the type of
+records which contain a field with label $\ell$ and an
+object of type $T$.  Clauses 7 and 8 are recursion clauses that add a
+single field, $\langle\ell,T\rangle$, to any record type with at least one field (that is,
+those record types which are labelled sets).  A record will be a
+witness for the new type if it is of the old type and it contains a
+field with the label $\ell$ and an object of type $T$.
+
+In terms of our informal proof theoretic notation this can be
+expressed as \nexteg{}.
+\begin{ex}
+For $\Gamma$ a system of complex types which has record types based on
+$\langle\mathcal{L},\text{RType}\rangle$, $\mathcal{L}$ a countably
+infinite set of labels: 
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\infer0{\Gamma,\mathcal{L}\vdash\textit{Rec}\in\text{RType}}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash r\text{ record}}
+\infer1{\Gamma,\mathcal{L}\vdash r:\textit{Rec}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash r:\textit{Rec}}
+\infer1{\Gamma,\mathcal{L}\vdash r\text{ record}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\infer0{\Gamma,\mathcal{L}\vdash\textit{ERec}\in\text{RType}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{Type}}
+\infer1{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash a:T}
+\infer1{\Gamma,\mathcal{L}\vdash a:T}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash T\in\text{RType}}
+\infer1{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\infer0{\Gamma,\mathcal{L}\vdash\emptyset:\textit{ERec}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash r:\textit{ERec}}
+\infer1{\Gamma,\mathcal{L}\vdash r=\emptyset:\textit{ERec}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
+\hypo{\ell\in\mathcal{L}}
+\infer2{\Gamma,\mathcal{L}\vdash\{\langle\ell,T\rangle\}\in\text{RType}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash r:\textit{Rec}}
+\hypo{\Gamma,\mathcal{L}\vdash a:T}
+\hypo{\langle\ell,a\rangle\in r} 
+\infer3{\Gamma,\mathcal{L}\vdash r:\{\langle\ell,T\rangle\}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
+\hypo{\ell\in\mathcal{L}}
+\hypo{\Gamma,\mathcal{L}-\{\ell\}\vdash
+  R\in\text{RType}-\{\textit{Rec},\textit{ERec}\}}
+\infer3{\Gamma,\mathcal{L}\vdash
+  R\cup\{\langle\ell,T\rangle\}\in\text{RType}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash a:T}
+\hypo{\Gamma,\mathcal{L}-\{\ell\}\vdash R\in\text{RType}}
+\hypo{\Gamma,\mathcal{L}\vdash r:R}
+\hypo{\langle\ell,a\rangle\in r}
+\infer4{\Gamma,\mathcal{L}\vdash r:R\cup\{\langle\ell,T\rangle\}}
+\end{prooftree}
+ 
+\end{subex} 
+   
+\end{ex} 
+  
  
 @@ 
 
