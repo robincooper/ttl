@@ -1838,6 +1838,15 @@ infinite set of labels:
 \end{prooftree}
 
 \item \begin{prooftree}
+\infer0{\Gamma,\mathcal{L}\vdash\emptyset:\textit{ERec}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma,\mathcal{L}\vdash r:\textit{ERec}}
+\infer1{\Gamma,\mathcal{L}\vdash r=\emptyset:\textit{ERec}}
+\end{prooftree}
+
+\item \begin{prooftree}
 \hypo{\Gamma\vdash T\in\textbf{Type}}
 \infer1{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
 \end{prooftree}
@@ -1850,15 +1859,6 @@ infinite set of labels:
 \item \begin{prooftree}
 \hypo{\Gamma,\mathcal{L}\vdash T\in\text{RType}}
 \infer1{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
-\end{prooftree}
-
-\item \begin{prooftree}
-\infer0{\Gamma,\mathcal{L}\vdash\emptyset:\textit{ERec}}
-\end{prooftree}
-
-\item \begin{prooftree}
-\hypo{\Gamma,\mathcal{L}\vdash r:\textit{ERec}}
-\infer1{\Gamma,\mathcal{L}\vdash r=\emptyset:\textit{ERec}}
 \end{prooftree}
 
 \item \begin{prooftree}
@@ -1894,7 +1894,29 @@ infinite set of labels:
 \end{subex} 
    
 \end{ex} 
-  
+\preveg{a} tells us that \textit{Rec} is a distinguished record type.
+\preveg{b and c} tell us that $r$:\textit{Rec} just in case $r$ is a
+record.  \preveg{d} introduces \textit{ERec} as a distinguished record
+type and \preveg{e and f} tells us that the empty set is the only
+witness for \textit{ERec}.  \preveg{g and h} tell us respectively that
+anything which is a type according to the system is also a type
+according to the system and the set of labels and similarly that
+anything which is a witness for a type according to the system will be
+a witness for that type according to the system and the set of labels.
+\preveg{i} requires that any record type is also a type according to
+the system.  \preveg{j} introduces record types with one
+field.$\langle\ell,T\rangle$ and
+\preveg{k} tells us that a record containing a field with label $\ell$
+and an object of type  $T$ will be a witness
+for such a record type. \preveg{l and m} are inductive rule which,
+respectively, tell us that you can add a new field,
+$\langle\ell,T\rangle$, to a record type, $R$,
+provided $\ell$ is not already a label of $R$ and that a record, $r$, is of
+the new type just in case $r:R$ and it contains a field
+$\langle\ell,a\rangle$ such that $a:T$.
+
+\todo[inline]{$\mathcal{L}-\ell$ doesn't allow for there to be embedded
+  $\ell$'s}
  
 @@ 
 
