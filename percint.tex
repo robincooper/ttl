@@ -971,7 +971,14 @@ labelled sets which are \textit{labellings} of \nexteg{a} would be \nexteg{b
 We will refer to the first members of the pairs which constitute a
 labelled set as \textit{labels} use in the labelled set and we will refer to
 the second members of the ordered pairs as the \textit{labelled
-  elements} of the labelled set.
+  elements} of the labelled set.  If $X$ is a labelled set, we will
+use $\mathrm{labels}(X)$ to represent the set of labels of $X$, that is,
+the left projection of $X$ which means the set of objects which are
+first members of the set of ordered pairs which are members of $X$.
+Note that this means that if $X$ is the labelled set \preveg{c}, then
+$\mathrm{labels}(X)$ is $\{\ell_0,\ell_2,\ell_3\}$, that is, the set of
+those labels which occur at the topmost level of $X$, not including the set of
+labels that occur within a labelled set contained in $X$, which in this case would in addition include the label $\ell_1$.
 
 There are various ways in which labelled sets could be represented
 graphically.  One way to represent the examples in \preveg{b and c}
