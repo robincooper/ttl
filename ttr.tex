@@ -1497,7 +1497,8 @@ stratification).
 An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
-A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has record types
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ (Chapter~\ref{ch:percint},
+p.~\pageref{ex:int-ndrectype-sys}) \textit{has (non-dependent) record types
   based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ if
 for each $n$,  $\langle${\bf Type}$^n$, {\bf BType},
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
@@ -1508,7 +1509,7 @@ L,\mathbf{RType}^n\rangle$ and
  
 \item for each $n$, \textbf{RType}$^n$ $\subseteq$ \textbf{RType}$^{n+1}$ 
  
-\item for each $n>0$, \textit{RecType}$^n$ $\in$ \textbf{RType}$^n$
+\item for each $n>0$, \textit{RecType}$^n$ $\in$ \textbf{Type}$^n$
 
 \item for each $n>0$,
   $T:_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathit{RecType}^n$ iff $T\in\mathbf{RType}^{n-1}$

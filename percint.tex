@@ -1729,8 +1729,8 @@ For $\Gamma$ a type system and $\mathcal{L}$ a set of labels
  
 \item \begin{prooftree}
 \hypo{\Gamma\vdash a:T}
-\hypo{\ell\in\mathcal{L}}
-\hypo{\Gamma,\mathcal{L}-\{\ell\}\vdash r \text{ record}}
+\hypo{\Gamma,\mathcal{L}\vdash r \text{ record}}
+\hypo{\ell\in\mathcal{L}-\mathrm{labels}(r)}
 \infer3{\Gamma,\mathcal{L}\vdash r\cup\{\langle\ell,a\rangle\}\text{
     record}}
 \end{prooftree} 
@@ -1883,48 +1883,131 @@ infinite set of labels:
 
 \item \begin{prooftree}
 \hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
-\hypo{\ell\in\mathcal{L}}
-\hypo{\Gamma,\mathcal{L}-\{\ell\}\vdash
+\hypo{\Gamma,\mathcal{L}\vdash
   R\in\text{RType}-\{\textit{Rec},\textit{ERec}\}}
+\hypo{\ell\in\mathcal{L}-\mathrm{labels}(R)}
 \infer3{\Gamma,\mathcal{L}\vdash
   R\cup\{\langle\ell,T\rangle\}\in\text{RType}}
 \end{prooftree}
 
 \item \begin{prooftree}
 \hypo{\Gamma,\mathcal{L}\vdash a:T}
-\hypo{\Gamma,\mathcal{L}-\{\ell\}\vdash R\in\text{RType}}
+\hypo{\Gamma,\mathcal{L}\vdash R\in\text{RType}}
 \hypo{\Gamma,\mathcal{L}\vdash r:R}
+\hypo{\ell\in\mathcal{L}-\mathrm{labels}(R)}
 \hypo{\langle\ell,a\rangle\in r}
-\infer4{\Gamma,\mathcal{L}\vdash r:R\cup\{\langle\ell,T\rangle\}}
+\infer5{\Gamma,\mathcal{L}\vdash r:R\cup\{\langle\ell,T\rangle\}}
 \end{prooftree}
  
 \end{subex} 
    
 \end{ex} 
-\preveg{a} tells us that \textit{Rec} is a distinguished record type.
+\preveg{a} tells us that \textit{Rec} is a distinguished record type
+(corresponding to (\ref{ex:ndrectypes}), clause 1).
 \preveg{b and c} tell us that $r$:\textit{Rec} just in case $r$ is a
-record.  \preveg{d} introduces \textit{ERec} as a distinguished record
-type and \preveg{e and f} tells us that the empty set is the only
-witness for \textit{ERec}.  \preveg{g and h} tell us respectively that
+record (corresponding to (\ref{ex:ndrectypes}), clause 2).  \preveg{d} introduces \textit{ERec} as a distinguished record
+type (corresponding to (\ref{ex:ndrectypes}), clause 3) and \preveg{e and f} tells us that the empty set is the only
+witness for \textit{ERec} (corresponding to (\ref{ex:ndrectypes}),
+clause 4).  \preveg{g and h} tell us respectively that
 anything which is a type according to the system is also a type
 according to the system and the set of labels and similarly that
 anything which is a witness for a type according to the system will be
 a witness for that type according to the system and the set of labels.
 \preveg{i} requires that any record type is also a type according to
-the system.  \preveg{j} introduces record types with one
-field.$\langle\ell,T\rangle$ and
+the system (corresponding to the requirement \textbf{RType}$\subseteq$\textbf{Type}).  \preveg{j} introduces record types with one
+field.$\langle\ell,T\rangle$ (corresponding to (\ref{ex:ndrectypes}),
+clause 5) and
 \preveg{k} tells us that a record containing a field with label $\ell$
 and an object of type  $T$ will be a witness
-for such a record type. \preveg{l and m} are inductive rule which,
+for such a record type (corresponding to (\ref{ex:ndrectypes}), clause
+6). \preveg{l and m} are inductive rules which,
 respectively, tell us that you can add a new field,
 $\langle\ell,T\rangle$, to a record type, $R$,
-provided $\ell$ is not already a label of $R$ and that a record, $r$, is of
+provided $\ell$ is not already a label of $R$ (corresponding to
+(\ref{ex:ndrectypes}), clause 7) and that a record, $r$, is of
 the new type just in case $r:R$ and it contains a field
-$\langle\ell,a\rangle$ such that $a:T$.
+$\langle\ell,a\rangle$ such that $a:T$ (corresponding to
+(\ref{ex:ndrectypes}), clause 8).
 
-\todo[inline]{$\mathcal{L}-\ell$ doesn't allow for there to be embedded
-  $\ell$'s}
+We can add dependent record types to systems which have non-dependent
+record types.  In order to do this we need dependent types, that is,
+functions which return types and for this we need the type
+\textit{Type} as introduced in intensional systems of complex types
+characterized in (\ref{ex:int-type-sys}).  We characterize an
+intensional system of types with (non-dependent) record types in
+\nexteg{}, repeated in Appendix~\ref{app:rectypes}.
+\begin{ex} 
+An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has (non-dependent) record types
+  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ if
+for each $n$,  $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle$ has record types based on $\langle
+L,\mathbf{RType}^n\rangle$ and
+\begin{enumerate} 
  
+\item for each $n$, \textbf{RType}$^n$ $\subseteq$ \textbf{RType}$^{n+1}$ 
+ 
+\item for each $n>0$, \textit{RecType}$^n$ $\in$ \textbf{Type}$^n$
+
+\item for each $n>0$,
+  $T:_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathit{RecType}^n$ iff $T\in\mathbf{RType}^{n-1}$
+ 
+\end{enumerate}  
+\label{ex:int-ndrectype-sys}
+\end{ex} 
+The definition in \preveg{} requires that an intensional system with
+record types is a family of systems with record types, indexed by the
+natural numbers such that any record type in a system indexed by a
+natural number $n$ will also be a record type in the system indexed by
+$n+1$.  It also introduces as distinguished type \textit{RecType}$^n$
+for each level $n$ above 0 whose witnesses are the record types of the
+level $n-1$.  In our informal proof-theoretic notation this can be
+expressed in as in \nexteg{}.
+\begin{ex} 
+For $\{\Gamma^n\}_{n\in\textit{Nat}}$ an intensional system of complex
+types with (non-dependent) record types
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T\in\textbf{RType}^n}
+\infer1{\Gamma^{n+1}\vdash T\in\textbf{RType}^{n+1}}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\infer0[$n>0$]{\Gamma^n\vdash\textit{RecType}^n\in\textbf{Type}^n}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T\in\textbf{RType}^n}
+\infer1{\Gamma^{n+1}\vdash T:\textit{RecType}^{n+1}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T:\textit{RecType}^n}
+\infer1[$n>0$]{\Gamma^{n-1}\vdash T\in\textbf{RType}^{n-1}}
+\end{prooftree}
+
+ 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} requires that any record type on one level will be a record
+type on the next higher level (corresponding to
+(\ref{ex:int-ndrectype-sys}), clause 1).  \preveg{b} introduces the
+distinguished type \textit{RecType} on all levels above 0 (corresponding to
+(\ref{ex:int-ndrectype-sys}), clause 2).  \preveg{c and d} requires
+that the witnesses of \textit{RecType} are exactly the record types
+which are in the system one level down (corresponding to
+(\ref{ex:int-ndrectype-sys}), clause 3).
+
+Now we can introduce dependent record types.   
+
+
 @@ 
 
 
