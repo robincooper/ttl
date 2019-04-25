@@ -966,7 +966,7 @@ labelled sets which are \textit{labellings} of \nexteg{a} would be \nexteg{b
 \item $\{\langle\ell_0,\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle\}\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$ 
  
 \end{subex} 
-   
+\label{ex:labelled-sets}   
 \end{ex} 
 We will refer to the first members of the pairs which constitute a
 labelled set as \textit{labels} use in the labelled set and we will refer to
@@ -978,10 +978,34 @@ first members of the set of ordered pairs which are members of $X$.
 Note that this means that if $X$ is the labelled set \preveg{c}, then
 $\mathrm{labels}(X)$ is $\{\ell_0,\ell_2,\ell_3\}$, that is, the set of
 those labels which occur at the topmost level of $X$, not including the set of
-labels that occur within a labelled set contained in $X$, which in this case would in addition include the label $\ell_1$.
+labels that occur within a labelled set contained in $X$, which in
+this case would in addition include the label $\ell_1$.  If $X$ is a
+labelled set and $\ell\in\mathrm{labels}(X)$ we will use $X.\ell$ to
+represent the entity labelled by $\ell$.  Thus if $X$ is \preveg{b},
+$X.\ell_0$ is $a$.  We can also define the set of \textit{paths} in
+labelled sets given by the definition in \nexteg{}.
+\begin{ex} 
+If $X$ is a labelled set, then
+\begin{enumerate} 
+ 
+\item if $\ell\in\mathrm{labels}(X)$, then $\ell\in\mathrm{paths}(X)$ 
+ 
+\item if $\ell\in\mathrm{labels}(X)$, $X.\ell$ is a labelled set and
+  $\pi\in\mathrm{paths}(X.\ell)$, then $\ell.\pi\in\mathrm{paths}(X)$
+\end{enumerate}  
+\end{ex} 
+By this definition the set of paths in (\ref{ex:labelled-sets}c) is
+\nexteg{}.
+\begin{ex} 
+$\{\ell_0,\ell_2,\ell_3,\ell_0.\ell_0,\ell_0.\ell_1\}$ 
+\end{ex} 
+Note also that by these definitions, if $X$ is
+(\ref{ex:labelled-sets}c), then $X.\ell_0.\ell_0$ is $a$, that is, we
+can use the dot notation to take us down to a value on any path in the
+labelled set.   
 
 There are various ways in which labelled sets could be represented
-graphically.  One way to represent the examples in \preveg{b and c}
+graphically.  One way to represent the examples in (\ref{ex:labelled-sets}b and c)
 would be as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
@@ -1776,27 +1800,26 @@ $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
   (non-dependent) record
   types based on $\langle \mathcal{L}, \mathbf{RType}\rangle$}, where $\mathcal{L}$ is a countably infinite set (of labels)
-and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType} is
-defined by:
+and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType} if
 \begin{enumerate} 
  
 \item $\mathit{Rec}\in\mathbf{RType}$
 
-\item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a well-typed record with
-  respect to \textbf{TYPE$_C$} and $L$.
+\item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a record according
+  to $\mathcal{L}$ and\textbf{TYPE$_C$}.
 
 \item $\mathit{ERec}\in\mathbf{RType}$
 
 \item $r:_{\mathbf{TYPE}_C}\mathit{ERec}$ iff $r=\emptyset$
 
-\item if $\ell\in L$ and $T\in\mathbf{Type}$, then
+\item if $\ell\in\mathcal{L}$ and $T\in\mathbf{Type}$, then
   $\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
 
 \item $r:_{\mathbf{TYPE}_C}\{\langle\ell,T\rangle\}$ iff
   $r:_{\mathbf{TYPE}_C}\mathit{Rec}$, $\langle\ell,a\rangle\in r$ and
   $a:_{\mathbf{TYPE}_C}T$.
 
-\item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in L$, $\ell$ does not occur as a
+\item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in\mathcal{L}$, $\ell$ does not occur as a
   label in $R$ (i.e. there is no field $\langle\ell',T'\rangle$ in $R$
   such that $\ell'=\ell$) and $T\in\mathbf{Type}$, then
   $R\cup\{\langle\ell,T\rangle\}\in\mathbf{RType}$.\label{cl:ndrectype-emb}
@@ -1941,7 +1964,7 @@ An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\lang
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
 A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has (non-dependent) record types
-  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ if
+  based on} $\langle\mathcal{L}, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ if
 for each $n$,  $\langle${\bf Type}$^n$, {\bf BType},
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
@@ -2005,7 +2028,36 @@ that the witnesses of \textit{RecType} are exactly the record types
 which are in the system one level down (corresponding to
 (\ref{ex:int-ndrectype-sys}), clause 3).
 
-Now we can introduce dependent record types.   
+Now we can introduce dependent record types by adding them to
+intensional type systems with record types.  The 
+characterization of type systems with dependent record types is given
+in \nexteg{} (repeated in Appendix~\ref{app:rectypes}).
+\begin{ex} 
+An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has dependent record types
+  based on} $\langle\mathcal{L}, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$,
+if it has record types based on $\langle\mathcal{L},
+\mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ and for each $n>0$
+\begin{enumerate} 
+ 
+\item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in
+    $R$  and
+    % ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
+${\cal F}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.    
+
+
+ 
+\item $r :_{\mathbf{TYPE}_{\mathit{IC}_n}}R\cup\{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}$ iff $r :_{\mathbf{TYPE}_{\mathit{IC}_n}} R$, $\langle\ell, a\rangle$ is a field
+in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1),\ldots,(r.\pi_m)$.  
+ 
+\end{enumerate}
+\label{ex:int-drectype-sys} 
+ 
+\end{ex} 
+     
+\todo{Need to clean up L and paths in definition}
 
 
 @@ 

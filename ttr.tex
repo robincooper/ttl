@@ -29,7 +29,23 @@ labelled set as \textit{labels} use in the labelled set and we will refer to
 the second members of the ordered pairs as the \textit{labelled
   elements} of the labelled set.  If $X$ is a labelled set we use
 $\mathrm{labels}(X)$ to represent the set $\{\ell\mid\exists 
-x\ \langle\ell,x\rangle\in X\}$, the left projection of $X$.
+x\ \langle\ell,x\rangle\in X\}$, the left projection of $X$.  If
+$\ell\in\mathrm{labels}(X)$ and $\langle\ell,v\rangle\in X$ then we
+use $X.\ell$ to represent $v$.  We characterize the set of
+\textit{paths} in a labelled set, $\mathrm{paths}(X)$ by the following
+inductive definition:
+\begin{quote}
+If $X$ is a labelled set, then
+\begin{enumerate} 
+ 
+\item if $\ell\in\mathrm{labels}(X)$, then $\ell\in\mathrm{paths}(X)$ 
+ 
+\item if $\ell\in\mathrm{labels}(X)$, $X.\ell$ is a labelled set and
+  $\pi\in\mathrm{paths}(X.\ell)$, then $\ell.\pi\in\mathrm{paths}(X)$ 
+ 
+\end{enumerate} 
+\end{quote}
+  
 % When we introduced complex
 % objects and types
 % other than records and record types we were not explicit about exactly which
@@ -1391,28 +1407,28 @@ $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
   (non-dependent) record
   types based on $\langle \mathcal{L}, \mathbf{RType}\rangle$},
-(Chapter~\ref{ch:percint}, p.~\pageref{ex:ndrectypes}) where $\mathcal{L}$ is a countably infinite set (of labels)
-and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType} is
-defined by:
+ where $\mathcal{L}$ is a countably infinite set (of labels)
+and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType}
+(Chapter~\ref{ch:percint}, p.~\pageref{ex:ndrectypes}) if
 \begin{enumerate} 
  
 \item $\mathit{Rec}\in\mathbf{RType}$
 
-\item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a well-typed record with
-  respect to \textbf{TYPE$_C$} and $L$.
+\item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a record according
+  to $\mathcal{L}$ and\textbf{TYPE$_C$}.
 
 \item $\mathit{ERec}\in\mathbf{RType}$
 
 \item $r:_{\mathbf{TYPE}_C}\mathit{ERec}$ iff $r=\emptyset$
 
-\item if $\ell\in L$ and $T\in\mathbf{Type}$, then
+\item if $\ell\in\mathcal{L}$ and $T\in\mathbf{Type}$, then
   $\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
 
 \item $r:_{\mathbf{TYPE}_C}\{\langle\ell,T\rangle\}$ iff
   $r:_{\mathbf{TYPE}_C}\mathit{Rec}$, $\langle\ell,a\rangle\in r$ and
   $a:_{\mathbf{TYPE}_C}T$.
 
-\item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in L$, $\ell$ does not occur as a
+\item if $R\in\mathbf{RType}-\{\mathit{Rec},\mathit{ERec}\}$, $\ell\in\mathcal{L}$, $\ell$ does not occur as a
   label in $R$ (i.e. there is no field $\langle\ell',T'\rangle$ in $R$
   such that $\ell'=\ell$) and $T\in\mathbf{Type}$, then
   $R\cup\{\langle\ell,T\rangle\}\in\mathbf{RType}$.\label{cl:ndrectype-emb}
@@ -1497,14 +1513,13 @@ stratification).
 An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
-A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ (Chapter~\ref{ch:percint},
-p.~\pageref{ex:int-ndrectype-sys}) \textit{has (non-dependent) record types
-  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ if
+A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$  \textit{has (non-dependent) record types
+  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ (Chapter~\ref{ch:percint},
+p.~\pageref{ex:int-ndrectype-sys}) if
 for each $n$,  $\langle${\bf Type}$^n$, {\bf BType},
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
-A,F^n\rangle$$\rangle$ has record types based on $\langle
-L,\mathbf{RType}^n\rangle$ and
+A,F^n\rangle$$\rangle$ has record types based on $\langle\mathcal{L},\mathbf{RType}^n\rangle$ and
 \begin{enumerate} 
  
 \item for each $n$, \textbf{RType}$^n$ $\subseteq$ \textbf{RType}$^{n+1}$ 
@@ -1532,12 +1547,12 @@ $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
 A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has dependent record types
   based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$,
+(Chapter~\ref{ch:percint}, p.~\pageref{ex:int-drectype-sys})
 if it has record types based on $\langle L,
 \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ and for each $n>0$
 \begin{enumerate} 
  
-\item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in
-    $R$  and
+\item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in $R$  and
     % ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
 ${\cal F}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.    
 
