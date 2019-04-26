@@ -2042,22 +2042,63 @@ if it has record types based on $\langle\mathcal{L},
 \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ and for each $n>0$
 \begin{enumerate} 
  
-\item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in
-    $R$  and
+\item if $R\in\textbf{RType}^n$, $\ell\in\mathcal{L}-\mathrm{labels}(R)$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $\pi_1,\ldots,\pi_m\in\mathrm{paths}(R)$ and
     % ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
-${\cal F}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.    
+${\cal T}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal T}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.    
 
 
  
-\item $r :_{\mathbf{TYPE}_{\mathit{IC}_n}}R\cup\{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}$ iff $r :_{\mathbf{TYPE}_{\mathit{IC}_n}} R$, $\langle\ell, a\rangle$ is a field
-in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1),\ldots,(r.\pi_m)$.  
+\item $r :_{\mathbf{TYPE}_{\mathit{IC}_n}}R\cup\{\langle\ell, \langle{\cal T}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}$ iff $r :_{\mathbf{TYPE}_{\mathit{IC}_n}} R$, $\langle\ell, a\rangle$ is a field
+in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal T}(r.\pi_1)\ldots(r.\pi_m)$.  
  
 \end{enumerate}
 \label{ex:int-drectype-sys} 
  
 \end{ex} 
-     
-\todo{Need to clean up L and paths in definition}
+\preveg{}, clause~1 says that for any record type $R$ we can create a new record
+type by adding a field
+$\langle\ell,\langle\mathcal{T},\langle\pi_1,...,\pi_m\rangle\rangle\rangle$,
+where $\ell$ is not a topmost label in $R$, $\mathcal{T}$ is an
+$m$-place function which returns a type and $\pi_1,...,\pi_m$ are
+paths in $R$.  Clause~2 says that a record $r$ is of the new type just
+in case it is of type $R$, $\langle\ell,a\rangle$ is a field in $r$,
+$r.\pi_1,\ldots, r.\pi_m$ are appropriate arguments to $\mathcal{T}$ and
+$a$ is of the type resulting from the application of $\mathcal{T}$ to
+$r.\pi_1,\ldots, r.\pi_m$. In terms of our informal proof theoretic
+notation we can express this as \nexteg{}.
+\begin{ex} 
+For $\{\Gamma^n\}_{n\in\textit{Nat}}$ an intensional system of complex
+types with dependent record types based on
+$\langle\mathcal{L},\textbf{RType}^n\rangle_{n\in\textit{Nat}}$
+\begin{subex} 
+ 
+\item \mbox{} 
+
+\hspace*{-3em}\begin{tiny}\begin{prooftree}[separation=0.5em]
+\hypo{\Gamma^n\vdash R\in\textbf{RType}^n}
+\hypo{\ell\in\mathcal{L}-\mathrm{labels}(R)}
+\hypo{\Gamma^n\vdash T_1,\ldots,T_m\in\textbf{Type}^n}
+\hypo{\pi_1,...,\pi_m\in\mathrm{paths}(R)}
+\hypo{\Gamma^n\vdash\mathcal{T}:(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\textit{Type}^n)\ldots)}
+\infer5{\Gamma^n\vdash
+R\cup\{\langle,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\textbf{RType}^n} 
+\end{prooftree}
+\end{tiny}
+ 
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash r:R}
+\hypo{\langle\ell,a\rangle\in r}
+\hypo{\Gamma^n\vdash r.\pi_1:T_1,\ldots,r.\pi_m:T_m}
+\hypo{\Gamma^n\vdash a:\mathcal{T}(r.\pi_1)\ldots(r.\pi_m)}
+\infer4{\Gamma^n\vdash
+r:R\cup\{\langle\ell,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}} 
+\end{prooftree}
+ 
+\end{subex} 
+   
+\end{ex} 
+    
+
 
 
 @@ 

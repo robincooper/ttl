@@ -1546,20 +1546,22 @@ An {\it intensional system of complex types\/} {\bf TYPE$_\mathit{IC}$} = $\lang
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle
 A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$ \textit{has dependent record types
-  based on} $\langle L, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$,
+  based on} $\langle\mathcal{L}, \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$,
 (Chapter~\ref{ch:percint}, p.~\pageref{ex:int-drectype-sys})
-if it has record types based on $\langle L,
+if it has record types based on $\langle\mathcal{L},
 \mathbf{RType}^n\rangle_{n\in\mathit{Nat}}$ and for each $n>0$
 \begin{enumerate} 
  
-\item if $R$ is a member of {\bf RType}$^n$, $\ell\in L$  not occurring as a label in $R$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $R.\pi_1,\ldots,R.\pi_m$ are paths in $R$  and
+\item if $R\in\textbf{RType}^n$, $\ell\in\mathcal{L}-\mathrm{labels}(R)$, $T_1,\ldots,T_m\in\mathbf{Type}^n$, $\pi_1,\ldots,\pi_m\in\mathrm{paths}(R)$ and
     % ${\cal F}$ is a function of type $((a_1:T_1)\rightarrow\ldots\rightarrow((a_m:T_m)\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
-${\cal F}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.    
+${\cal F}$ is a function of type $(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\mathit{Type}^n)\ldots)$, then $R \cup \{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\mathbf{RType}^n$.
+
+   
 
 
  
 \item $r :_{\mathbf{TYPE}_{\mathit{IC}_n}}R\cup\{\langle\ell, \langle{\cal F}, \langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}$ iff $r :_{\mathbf{TYPE}_{\mathit{IC}_n}} R$, $\langle\ell, a\rangle$ is a field
-in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1),\ldots,(r.\pi_m)$.  
+in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_m$ and  $a :_{\mathbf{TYPE}_{\mathit{IC}_n}} {\cal F}(r.\pi_1)\ldots(r.\pi_m)$.  
  
 \end{enumerate} 
 
