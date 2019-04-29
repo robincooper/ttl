@@ -2072,24 +2072,29 @@ types with dependent record types based on
 $\langle\mathcal{L},\textbf{RType}^n\rangle_{n\in\textit{Nat}}$
 \begin{subex} 
  
-\item \mbox{} 
-
-\hspace*{-3em}\begin{tiny}\begin{prooftree}[separation=0.5em]
-\hypo{\Gamma^n\vdash R\in\textbf{RType}^n}
-\hypo{\ell\in\mathcal{L}-\mathrm{labels}(R)}
-\hypo{\Gamma^n\vdash T_1,\ldots,T_m\in\textbf{Type}^n}
-\hypo{\pi_1,...,\pi_m\in\mathrm{paths}(R)}
-\hypo{\Gamma^n\vdash\mathcal{T}:(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\textit{Type}^n)\ldots)}
-\infer5{\Gamma^n\vdash
-R\cup\{\langle,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\textbf{RType}^n} 
-\end{prooftree}
-\end{tiny}
- 
 \item \begin{prooftree}
+\hypo{\text{\begin{tabular}{ccc}
+$\Gamma^n\vdash R\in\textbf{RType}^n$&$\Gamma^n\vdash
+                                     T_1,\ldots,T_m\in\textbf{Type}^n$&$\ell\in\mathcal{L}-\mathrm{labels}(R)$\\\multicolumn{2}{c}{$\Gamma^n\vdash\mathcal{T}:(T_1\rightarrow\ldots\rightarrow(T_m\rightarrow\textit{Type}^n)\ldots)$}
+&$\pi_1,...,\pi_m\in\mathrm{paths}(R)$
+\end{tabular}}}
+\infer1{\Gamma^n\vdash
+R\cup\{\langle\ell,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}\in\textbf{RType}^n}
+\end{prooftree}
+
+\item \begin{prooftree}
+% \hypo{\text{\begin{tabular}{ccc}
+% $\Gamma^n\vdash r:R$&$\langle\ell,a\rangle\in
+%                       r$&$\ell\in\mathcal{L}-\mathrm{labels}(R)$\\
+% \multicolumn{2}{c}{$\Gamma^n\vdash
+%               r.\pi_1:T_1,\ldots,r.\pi_m:T_m$}&$\Gamma^n\vdash
+%                                                 a:\mathcal{T}(r.\pi_1)\ldots(r.\pi_m)$
+% \end{tabular}}}
 \hypo{\Gamma^n\vdash r:R}
 \hypo{\langle\ell,a\rangle\in r}
-\hypo{\Gamma^n\vdash r.\pi_1:T_1,\ldots,r.\pi_m:T_m}
-\hypo{\Gamma^n\vdash a:\mathcal{T}(r.\pi_1)\ldots(r.\pi_m)}
+\hypo{\ell\in\mathcal{L}-\mathrm{labels}(R)}
+% \hypo{\Gamma^n\vdash r.\pi_1:T_1,\ldots,r.\pi_m:T_m}
+ \hypo{\Gamma^n\vdash a:\mathcal{T}(r.\pi_1)\ldots(r.\pi_m)}
 \infer4{\Gamma^n\vdash
 r:R\cup\{\langle\ell,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle\}} 
 \end{prooftree}
@@ -2097,9 +2102,23 @@ r:R\cup\{\langle\ell,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\
 \end{subex} 
    
 \end{ex} 
-    
-
-
+\preveg{a} corresponds to (\ref{ex:int-drectype-sys}), clause~1.  It
+says that for any record type $R$ not containing $\ell$ among its
+labels, any sequencec of a subset of $R$'s paths, $\pi_1,\ldots,\pi_m$, and a
+dependent type $\mathcal{T}$ with $m$ arguments, we can obtain a new
+record type by adding the field,
+$\langle\ell,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle$
+to $R$.  \preveg{b} corresponds to (\ref{ex:int-drectype-sys}),
+clause~2.  It says that if a record, $r$, is of type $R$ and contains
+a field $\langle\ell,a\rangle$, where $\ell$ is not a label in $R$ and
+$a$ is of the type obtained by applying the dependent type
+$\mathcal{T}$ to $r.\pi_1,\ldots,r.\pi_m$, then $r$ is of the record
+type resulting from adding the field $\langle\ell,\langle\mathcal{T},\langle\pi_1,\ldots,\pi_m\rangle\rangle\rangle$
+to $R$. As usual, the force of the biconditional in
+(\ref{ex:int-drectype-sys}b) is provided by the fact that \preveg{b}
+is part of an inductive definition and it is the only rule which
+specifies under which conditions a record is a witness for the record
+type with the additional dependent field.
 
 @@ 
 
