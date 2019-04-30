@@ -2,6 +2,954 @@
 \label{ch:infex}
 \setcounter{equation}{0}
 
+\section{The string theory of events}\todo{Moved from Ch. 1.  Needs integrating}
+\label{sec:ev-strings}
+
+Kim stands and watches the boy and the dog for a while.  They start to
+play fetch.\footnote{\url{http://en.wikipedia.org/wiki/Fetch_(game)},
+  accessed 10th Oct 2011.}  This is a moderately complex game in that
+it consists of a number of components which are carried out in a
+certain order.  The boy picks up a stick, attracts the attention of
+the dog (possibly shouting ``Fetch!''), and throws the stick.  The dog
+runs after the stick, picks it up in his mouth and brings it back to
+the boy.  This sequence can be repeated arbitrarily many times.  One
+thing that becomes clear from this is that events do not happen in a
+single moment but rather they are stretched out over intervals of
+time, characterized by the sub-events that constitute them.  So if we were to have a type of event (that is, a kind of situation)
+play\_fetch($a$,$b$,$c$) where $a$ is a human, $b$ is a dog and
+$c$ is a stick% , then $t$ should not be a moment of time but a time
+% \textit{interval} starting with the time of the beginning of the event
+% and ending with the time of the end of the event.  But 
+we can %could also
+say something about the series of subevents that we have identified.
+So we might draw an informal diagram something like
+Figure~\ref{fig:fetch}.
+\begin{figure} 
+
+%\includegraphics[width=6in]{fetch}
+
+\hspace*{-4em}\begin{tikzpicture}[
+  play/.style={rectangle, fill=Lamentation5, draw=Lamentation1, text=white, text depth=0.25ex, text height=1.5ex}
+  ]
+
+\node [play, pin=above:\textbf{Begin}] (p1) {pick\_up($a,c$)};
+\node [play, right=of p1] (p2) {attract\_attention($a,b$)};
+\node [play, right=of p2] (p3) {throw($a,c$)};
+\node [play, below=1.5 of p1] (p4) {run\_after($b,c$)};
+\node [play, right=of p4] (p5) {pick\_up($b,c$)};
+\node [play, right=of p5, pin=below:\textbf{End}] (p6) {return($b,c,a$)};
+
+\path [-{Stealth[]}, thick] 
+(p1) edge [bend left] (p2)
+(p2) edge [bend left] (p3)
+(p3) edge [out=240, in=60] (p4)
+(p4) edge [bend left] (p5)
+(p5) edge [bend left] (p6)
+(p6) edge [out=210, in=190, looseness=1.7] (p1);  
+\end{tikzpicture}
+
+
+\caption{play\_fetch($a$,$b$,$c$)}
+\label{fig:fetch}
+\end{figure}
+
+
+
+
+   
+
+In an important series of papers including
+\cite{Fernando2004,Fernando2006,Fernando2008,Fernando2009,Fernando2011}, Fernando introduces a finite state
+approach to event analysis where events are analyzed in terms of
+finite state automata something like what we have represented in
+Figure~\ref{fig:fetch-fs}.
+\begin{figure} 
+
+%\includegraphics[width=6in]{fetch-fs}
+
+\begin{tikzpicture}[
+  node distance=3cm, 
+  on grid,
+  every state/.style={fill=Lamentation2},
+  ]
+
+\node [state, initial] (n0) {0};
+\node [state] (n1) [right=of n0] {1};
+\node [state] (n2) [right=of n1] {2};
+\node [state] (n3) [right=of n2] {3};
+\node [state] (n4) [below=of n3] {4};
+\node [state] (n5) [left=of n4] {5};
+\node [state, accepting] (n6) [left=of n5] {6};
+
+\path [-{Stealth[]}, thick] 
+(n0) edge [bend left] node [above] {pick\_up($a,c$)} (n1)
+(n1) edge [bend left] node [above] {attract\_attention($a,b$)} (n2)
+(n2) edge [bend left] node [above] {throw($a,c$)} (n3)
+(n3) edge [bend left] node [right] {run\_after($b,c$)} (n4)
+(n4) edge [bend left] node [below] {pick\_up($b,c$)} (n5)
+(n5) edge [bend left] node [below] {return($b,c,a$)} (n6)
+(n6) edge [bend left] node [left] {pick\_up($a,c$)} (n1);
+\end{tikzpicture}
+
+
+\caption{play\_fetch($a$,$b$,$c$) as a finite state machine}
+\label{fig:fetch-fs}
+\end{figure}  
+Such an automaton will recognize a string of
+sub-events.  The idea is that our perception of complex events can be seen as strings of
+punctual observations similar to the kind of sampling we are
+familiar with from audio technology and digitization processing in
+speech recognition.  Thus events can be analyzed as strings of smaller
+events.  What we mean by a string is made precise in
+Appendix~\ref{sec:regular}. Any object of any type can be part of a
+string.  Any two objects (including strings themselves), $s_1$ and $s_2$, can be
+\textit{concatenated} to form a string ${s_1}^{\frown}s_2$.  An
+important property of concatenation is \textit{associativity}, that is
+if we concatenate $s_1$ with $s_2$ and then concatenate the result
+with $s_3$ we get the same string that we would obtain by
+concatenating $s_2$ with $s_3$ and then concatenating $s_1$ with the
+result.  In symbols: $({s_1}^{\frown}s_2)^{\frown}s_3 =
+{s_1}^{\frown}({s_2}^{\frown}s_3)$.  For this reason we normally write
+${s_1}^{\frown}{s_2}^{\frown}s_3$ (without the parentheses) or simply
+$s_1s_2s_3$ if it is clear from the context that we mean this to be
+string concatenation.  Following Fernando we will use these strings to
+give us our notion of temporal order. 
+
+Although we will present strings in this way, we will model them as
+records \label{pg:stringsasrecords} with distinguished labels related to the natural numbers, 
+t$_0$, t$_1$, \ldots (`t' for ``time'').  The field labelled t$_n$
+will correspond to the $n$th place in the string.  Thus a string of
+objects $a_1a_2a_3$
+will be the record in \nexteg{}.
+\begin{ex} 
+\record{\field{t$_0$}{$a_1$} \\
+        \field{t$_1$}{$a_2$} \\
+        \field{t$_2$}{$a_3$}} 
+\end{ex} 
+The concatenation of \preveg{} with the string $a_4$, that is, \nexteg{a}, will
+be \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\field{t$_0$}{$a_4$}} 
+ 
+\item  \record{\field{t$_0$}{$a_1$} \\
+        \field{t$_1$}{$a_2$} \\
+        \field{t$_2$}{$a_3$} \\
+        \field{t$_3$}{$a_4$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+We will continue to
+represent strings for convenience in the traditional way but modelling
+strings as records will become important when following paths in
+records down to elements in strings.  We will use $s[n]$ to represent
+the $n$th element in a string $s$ (where the first element in the
+string is $s[0]$).  But in terms of the record notation
+this is just a convenient abbreviation for $s$.t$_n$.    
+
+Now let us build further on the
+types that we have introduced so far to include string types. For any
+two types, $T_1$ and $T_2$, we can form the type ${T_1}^{\frown}T_2$.
+This is the type of strings $a^{\frown}b$ where $a:T_1$ and $b:T_2$.
+The concatenation operation on types (just like that on objects) is
+associative so we do not use parentheses when more than one type is
+involved, e.g. ${T_1}^{\frown}{T_2}^{\frown}T_3$.
+
+Let us return to Kim watching the boy, $a$, playing fetch with the
+dog, $b$, using the stick, $c$. % over a time interval $t$
+She
+perceives the event as being of type play\_fetch($a$,$b$,$c$).
+But what does it mean to be an event of this type?  Given our
+concatenation types we can build a type which corresponds to most of
+what we have sketched in Figure~\ref{fig:fetch}, namely \nexteg{}.
+% (again ignoring time for the sake of simplification).
+\begin{ex} 
+pick\_up($a$,$c$)$^{\frown}$attract\_attention($a$,$b$)$^{\frown}$throw($a$,$c$)$^{\frown}$run\_after($b$,$c$)$^{\frown}$pick\_up($b$,$c$)$^{\frown}$return($b$,$c$,$a$) 
+\end{ex} 
+\preveg{} is a type corresponding to everything we have represented in
+Figure~\ref{fig:fetch} except for the arrow which loops back from the
+end state to the start state.    In order to get the loop into the event
+type we will use a kind of type which introduces a Kleene-+.  In
+standard notations for strings $s^+$ stands for a string consisting of
+one or more occurrences of $s$.\footnote{This notation was introduced
+  by the mathematician Stephen Kleene.}  We will adopt this into types
+by saying that for any type $T$ there is also a type $T^+$ which is
+the type of strings of objects of type $T$ containing one or more
+members.  (See Appendix~\ref{sec:regular} for a more precise
+definition.)  The type \nexteg{} will, then,
+give us a type corresponding to the complete Figure~\ref{fig:fetch}
+since it will be the type consisting of strings of one or more events
+of the type \preveg{}.
+\begin{ex} 
+(pick\_up($a$,$c$)$^{\frown}$attract\_attention($a$,$b$)$^{\frown}$throw($a$,$c$)$^{\frown}$run\_after($b$,$c$)$^{\frown}$pick\_up($b$,$c$)$^{\frown}$
+\\ return($b$,$c$,$a$))$^+$ 
+\end{ex}
+
+
+% In \preveg{} we simplified the string type by excluding time.  Now we
+% will consider what is needed to put time back in.  Each of the
+% subevents represented there is associated with a time interval, a
+% different time interval for each subevent.  The type for time
+% intervals, which we will abbreviate as \textit{TimeInt} is \nexteg{}\label{pg:TimeInt}.
+% \begin{ex} 
+% \record{\tfield{start}{\textit{Time}} \\
+%         \tfield{end}{\textit{Time}} \\
+%         \tfield{c$_<$}{start$<$end}}
+% \end{ex} 
+% where \textit{Time} is the type of time points and $<$ is the relation
+% ``earlier than'' defined on the witnesses of this type.\footnote{We
+%   use the infix notation $t_1<t_2$ rather than the official notation
+%   $<(t_1,t_2)$.}  In order to get time intervals associated with each
+% subevent we will treat the subevent types as record types rather than
+% ptypes.  Thus as a first step towards characterizing the right type we
+% have \nexteg{}.
+% \begin{ex} 
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($a$,$c$,e-time)}}$^{\frown}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
+%              \\
+%                   \smalltfield{c$_{\mathrm{attract\_attention}}$}{attract\_attention($a$,$b$,e-time)}}$^{\frown}$
+
+% \medskip
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{throw}}$}{throw($a$,$c$,e-time)}}$^{\frown}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{run\_after}}$}{run\_after($b$,$c$,e-time)}}$^{\frown}$
+
+% \medskip
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($b$,$c$,e-time)}}$^{\frown}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{return}}$}{return($b$,$c$,$a$,e-time) }}
+% \end{ex}
+
+% This will get us a time interval for each subevent but it does not
+% require any relationship between the time intervals of the different
+% subevents whereas, of course, each subevent should occur at a later
+% time than the previous one.  In order to achieve this we will
+% introduce a more restricted notion of type concatenation especially
+% for record types which have a field
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}}} as in \nexteg{}.
+% \begin{ex}
+% \begin{enumerate} 
+% \item If $T_1$ and $T_2$ are subtypes of
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}}}$^+$ then
+% $T_1^{\frown_<}T_2$ is a type. 
+
+% \item $a:T_1^{\frown_<}T_2$ iff $a=a_1^{\frown}a_2$, $a_1:T_1$, $a_2:T_2$ and
+%   last($a_1$).e-time.end$<$first($a_2$).e-time.start
+% \end{enumerate}
+% \end{ex} 
+% Here first($s$) and last($s$) pick out the first and last elements
+% respectively of the string $s$.  We need to make a similar adjustment
+% to the Kleene-+ type constructor.
+% \begin{ex} 
+% \begin{enumerate} 
+ 
+% \item If $T$ is a subtype of
+%   \smallrecord{\smalltfield{e-time}{\textit{TimeInt}}} then $T^{+_<}$
+%   is a type
+ 
+% \item $a:T^{+_<}$ iff $a=x_1^\frown\!\ldots^\frown\!x_n$, $n>0$ and
+%   for $i$, $j$, $1\leq
+% i<j\leq n$, $x_i:T$, $x_j:T$ and $x_i^{\frown}x_j:T^{\frown_<}T$ 
+ 
+% \end{enumerate} 
+   
+% \end{ex} 
+
+% [The details of temporal concatenation above should be included in the
+% appendix.]
+
+We will complicate \preveg{} slightly by substituting record types for
+the ptypes as in \nexteg{}.  We do this because we
+will want to allow for things happening simultaneously and record
+types will give us a straightforward way of allowing this.
+\begin{ex} 
+(\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}$^{\frown}$\smallrecord{\smalltfield{e}{throw($a$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}$^{\frown}$\\
+\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}})$^+$ 
+\label{eg:fetch-type}
+\end{ex}
+The label `e' (``event'') occurs in each of the elements of the string
+type.  In this case we will say that `e' labels a \textit{dimension}
+of events of this type.  The `e'-dimension can be thought of as the
+dimension which characterizes what is happening at each stage of the
+event.  If you want to think geometrically, you can think of the
+event-string as being located in a space of event types (that is, the ptypes).
+
+% So now we can represent the event type for playing fetch as \nexteg{}.
+% \begin{ex} 
+% (\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($a$,$c$,e-time)}}$^{\frown_<}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
+%              \\
+%                   \smalltfield{c$_{\mathrm{attract\_attention}}$}{attract\_attention($a$,$b$,e-time)}}$^{\frown_<}$
+
+% \medskip
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{throw}}$}{throw($a$,$c$,e-time)}}$^{\frown_<}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{run\_after}}$}{run\_after($b$,$c$,e-time)}}$^{\frown_<}$
+
+% \medskip
+% \smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($b$,$c$,e-time)}}$^{\frown_<}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%              \smalltfield{c$_{\mathrm{return}}$}{return($b$,$c$,$a$,e-time) }})$^{+_<}$
+% \end{ex}
+
+What happens when Kim perceives an event as being of this type?  She
+makes a series of observations of events, assigning them to types in
+the string type.  Note that the ptypes in each of the types can be
+further broken down in a similar way.  This gives us a whole hierarchy
+of perceived events which at some point have to bottom out in basic
+perceptions which are not further analyzed.  In order to recognize an
+event as being of this type Kim does not need to perceive a string of
+events corresponding to each of the types in the string types.  She
+may, for example, observe the boy waving the stick to attract the
+dog's attention, get distracted by a bird flying overhead for a while,
+and then return to the fetch event at the point where the dog is
+running back to the boy with the stick.  This still enables her to
+perceive the event as an event of fetch playing because she has seen
+such events before and learned that such events are of the string type in \preveg{}.  It suffices for her to observe enough of the elements in
+the string to distinguish the event from other event types she may
+have available in her knowledge resources.  Suppose, for example, that
+she has just two event string types available that begin with the picking
+up of a stick by a human in the company of a dog.  One is \preveg{}.
+The other is one that leads to the human beating the dog with the
+stick.  If she only observes the picking up of the stick she cannot be
+sure whether what she is observing is a game of fetch or a beating.
+However, as soon as she observes something in the event string which
+belongs only to the fetch type of string she can reasonably conclude
+that she is observing an event of the fetch type.  She may, of course,
+be wrong.  She may be observing an event of a type which she does not
+yet have available in her resource of event types, in which case she
+will need to learn about the new event type and add it to her
+resources.  However, given the resources at her disposal she can make
+a prediction about the nature of the rest of the event.  One could
+model her prediction making ability in terms of a function which maps
+a situation (modelled as a record) to a type of predicted situation,
+for example \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{human}}$}{human(x)}
+                         \\
+                         \smalltfield{y}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
+                         \smalltfield{z}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
+                         \\
+                         \smalltfield{e}{\smallrecord{
+             \smalltfield{e}{pick\_up(x,z)}}$^{\frown}$\smallrecord{
+                  \smalltfield{e}{attract\_attention(x,y)}}}} .
+            \\*[.75\baselineskip]
+\hspace*{4em}\smallrecord{\smalltfield{e}{play\_fetch($r$.x,$r$.y,$r$.z)}
+\\
+\smalltfield{c$_{\mathrm{init}}$}{init($r$.e,e)}}
+\label{ex:ev-predict-fun}
+\end{ex} 
+% \begin{ex} 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}} \\
+%                          \smalltfield{c$_{\mathrm{human}}$}{human(x)}
+%                          \\
+%                          \smalltfield{y}{\textit{Ind}} \\
+%                          \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
+%                          \smalltfield{z}{\textit{Ind}} \\
+%                          \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
+%                          \\
+%                          \smalltfield{e-time}{\textit{TimeInt}} \\
+%                          \smalltfield{e}{\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
+%                              \\
+% \smalltfield{c$_{\leq}$}{$\Uparrow$e-time.start$\leq$e-time.start} \\
+%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($\Uparrow$x,$\Uparrow$z,e-time)}}$^{\frown_<}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
+%              \\
+% \smalltfield{c$_{\leq}$}{e-time.start$\leq\Uparrow$e-time.start} \\
+%                   \smalltfield{c$_{\mathrm{attract\_attention}}$}{attract\_attention($\Uparrow$x,$\Uparrow$y,e-time)}}}}
+%             \\*[.75\baselineskip]
+% \hspace*{4em}(\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%                            \smalltfield{c$_{\leq}$}{$r$.e-time.start$\leq$e-time.start} \\
+%                            \smalltfield{e}{play\_fetch($r$.x,$r$.y,$r$.z,e-time)}})
+% \label{ex:ev-predict-fun}
+% \end{ex}
+
+Here the predicate `init' has arity
+$\langle$\textit{String}, \textit{String}$\rangle$.  The type init($s_1$,$s_2$) is
+non-empty just in case $s_1$ is an initial substring of $s_2$.  We
+achieve this by defining
+\begin{quote}
+If $s_1$ is a string of length $n$ and $s_2$ is a string of any
+length, then $s$ : init($s_1$,$s_2$) iff the length of $s_2$ is
+greater than or equal to $n$ and for each $i$, $0\leq i<n$,
+$s_1[i]=s_2[i]$ and $s=s_2$.
+\end{quote}
+That is, if the initial substring condition holds then the second
+argument to the predicate (and nothing else) is of the ptype.
+
+% Here a `$\Uparrow$' prefixed to a path-name consisting of labels such
+% as `e-time.start' or `x' means that the path-name is to start in the
+% next higher record type in which the current record type is embedded.
+% This notation is an abbreviation for something much less readable (but
+% more precise) which is given in Appendix~\ref{app:rectypes}. [????
+% This notation needs to be added to the appendix.]
+
+The kind of function of which \preveg{} is an instance is a function
+of the general form \nexteg{}.
+\begin{ex} 
+$\lambda a\!:\!T_1\ .\ T_2(a)$
+\label{ex:deptypefun} 
+\end{ex} 
+where we use the notation $T_2(a)$ to represent the fact that $T_2$
+depends on $a$. The nature of this dependence in
+(\ref{ex:ev-predict-fun}) is seen in the occurrences of $r$ in the body
+of the function, for example, `play\_fetch($r$.x,$r$.y,$r$.z)'.
+Such a function maps an object of some type (represented by $T_1$) to
+a type (represented by $T_2(a)$).  The type that results from an
+application of this function will depend on what object it is applied
+to -- that is, we have the possibility of obtaining different types
+from different objects. In type theory such a function is often called
+a \textit{dependent type}.  These functions will play an important
+role in much of what is to come later in this book.  They will show up
+many times in what appear at first blush to be totally unrelated
+phenomena.  We want to suggest, however, that all of the phenomena we
+will describe using such functions have their origin in our basic
+cognitive ability to make predictions on the basis of partial
+observation of objects and events.
+
+What happens when Kim does not observe enough of the event to be able
+to predict with any certainty that the complete event will be a game
+of fetch?  One theory would be that she can only make categorical
+judgements, and that she has to wait until she has seen enough so that
+there is only one type that matches in the collection of situation
+types in her resources.  Another theory would be
+one where she predicts a disjunction of the available matching types when there is
+more than one that matches.  One might refine this theory so that she
+can choose one of the available types but assign it a probability
+based on the number of matching types.  If $n$ is the number of
+matching types the probability of any one of them might be
+$\frac{1}{n}$.  This assumes that each of the types is equally likely
+to be realized.  It would be natural to assume, however, that the
+probability which Kim assigns to any one of the matching types would
+be dependent on her previous experience.  Suppose, for example, that
+she has seen 100 events of a boy picking up a stick in the company of
+a dog, 99 of those events led to a game of fetch and only one led to
+the boy beating the dog.  One might then assume that when she now sees
+the boy pick up the stick she would assign a 99\% probability to the
+type of fetch events and only 1\% probability to the boy beating the
+dog.  That is, the probability she assigns to an event of a boy
+picking up a stick leading to a game of fetch is the result of
+dividing the number of instances of a game of fetch she has already
+observed by the sum of the number of instances she has observed of any types whose
+initial segment involves the picking up of a stick.  In more general
+terms we can compute the probability which an agent $A$ assigns on the
+basis of a string, $\omega$, of previous observations to a
+predicted type $T_{\mathit{pr}}$ given an observed type $T_{\mathit{obs}}$, $P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}})$, in the case where
+$T_{\mathit{pr}}$ is a member of the set of alternatives which can be
+predicted from $T_{\mathit{obs}}$ according to $A$'s resources based on $\omega$,
+$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, by the following formula:
+\[P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}}) =
+\frac{\mid\{T_{\mathit{pr}}\}^{A,\omega}\mid}{\sum\limits_{T_{\mathit{alt}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}\mid\{T_{\mathit{alt}}\}^{A,\omega}\mid}\]
+where $\{T\}^{A,\omega}$ is the set of objects of type $T$ observed by $A$
+in $\omega$.  If $T_{\mathit{pr}}$ is not a member of
+$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, that is not one of the
+alternatives, we say that $P_{A,\omega}(T_{\mathit{pr}}\mid
+T_{\mathit{obs}}) = 0$.
+
+While this is still a rather naive and simple view of how
+probabilities might be assigned it is not without interest, as shown
+by the following points:  
+\paragraph{Probability distributions} It will always provide a probability distribution over sets
+of alternatives, that is,
+\[\sum\limits_{T_{\mathit{pr}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}P_{A,\omega}(T_{\mathit{pr}}\mid
+T_{\mathit{obs}}) = 1\]
+\paragraph{Alternatives} We have assumed a notion of alternatives based on types of completed
+events for which the observed event is an initial segment but other
+notions of alternativeness could be considered and perhaps even
+combined.  
+\paragraph{Relativity of probability assignments} The notion of
+probability is both agent and resource relative.  It represents the
+probability which an agent will assign to a type when observing a
+given situation after a previous string of observations.  Two agents may assign different
+probabilities depending on the resources they have available.
+\paragraph{Learning} Relevant observations will update the probability
+distributions an agent will assign to a given set of alternatives
+since the probability is computed on the basis of previous
+observations of the alternative types.
+
+Kim is not alone in being able to draw conclusions based on partial
+observations of an event.  The dog can do it too.  As soon as the boy
+has raised the stick and attracted the dog's attention the dog is
+excitedly snapping at the stick and starting to run in the direction
+in which the boy seems to be about to throw.  The dog also seems to be
+attuned to string types of events just as Kim is and also able to make
+predictions on the basis of partial observations.  The types to which
+a dog is attuned will not be the same as those to which humans can be
+attuned and this can certainly lead to miscommunication between humans
+and dogs.  For example, there may be many reasons why I would go to
+the place where outdoor clothes are hanging and where the dog's lead
+is kept.  Many times it will be because I am planning to take the dog
+out for a walk, but not as often as the dog appears to think, judging
+from the excitement he shows any time I go near the lead.  It is
+difficult to explain to the dog that I am just looking for a receipt
+that I think I might have left in my coat pocket.  But the basic
+mechanism of being able to assemble types of events
+into string types of more complex events and make predictions on the
+basis of these types seems to be common to both humans and dogs and a
+good number of other animals too.  Perhaps simple organisms do not
+have this ability and can only react to events that have already
+happened, but not to predicted outcomes.
+
+This basic inferential ability is thus not parasitic on the ability to
+communicate using a human language.  It is, however, an ability which
+appears to be exploited to a great extent in our use of language as we
+will see in later chapters.  In the remaining sections of this chapter
+we will look at some aspects of the type theory which seem more likely
+to
+correspond to cognitive abilities which only humans have.
+
+
+% When talking about the intuition behind this
+% analysis Fernando sometimes refers to strings of frames in a movie
+% (e.g. in \cite{Fernando2008}).  But in many cases what he is calling
+% a movie frame 
+% can also be seen as a frame in something like the sense of frame semantics as well.
+
+\section{Doing things with types}\todo{Moved from Ch. 1.  Needs integrating}
+\label{sec:typeacts}
+
+The boy and the dog have to coordinate and interact in order to create an
+event of the game of fetch.  This involves doing more with types than
+just making judgements.  For example, when the dog observes the
+situation in which the boy raises the stick, it may not be clear
+to the dog whether this is part of a fetch-game situation or a
+stick-beating situation.  The dog may be in a situation of
+entertaining these two types as possibilities prior to making the
+judgement that the situation is of the fetch type.  We will call this
+act a query as opposed to a judgement.  Once the dog has made the
+judgement that what it has observed so far is an initial segment of a
+fetch type situation it has to make its own contribution in order to
+realize the fetch type, that is, it has to run after the stick and
+bring it back.  This involves the creation of a situation of a certain
+type.  Thus creation acts are another kind of act related to types.
+Creating objects of a given type often has a \textit{de se}
+\citep[see, for example,][]{Perry1979,Lewis1979a,Ninan2010,Schlenker2011} aspect.  The dog
+has to know that it itself must run after the stick in order to make
+this a situation in which it and the boy are playing fetch.  There is
+something akin to what Perry calls an essential indexical here,
+though, of course, the dog does not have indexical linguistic
+expressions. It is nevertheless part of the basic competence that an
+agent needs in order to be able to coordinate its action with the rest
+of the world that it has a primitive sense of self which is distinct
+from being able to identify an object which has the same properties as
+itself.  We will follow Lewis in modelling \textit{de se} in terms of
+functional abstraction over the ``self''.  In our terms this will mean
+that \textit{de se} type acts involve dependent types.
+
+In standard type theory we have judgements such as $o:T$ ``$o$ is of type $T$'' 
+and 
+$T$ \textit{true} ``there is something of type $T$''.    We want to
+enhance this notion of judgement by including a reference to the agent
+$A$ which makes the judgement, giving judgements such as
+$o:_AT$ ``agent $A$ judges that $o$ is of type $T$''
+and 
+$:_AT$ ``agent $A$ judges that there is some object of type $T$''. We will call
+the first of these a \textit{specific} judgement and the second a
+\textit{non-specific} judgement.  Such
+judgements are one of the three kinds of acts represented in \nexteg{}
+that we want to include
+in our type act theory.
+\begin{ex} 
+\textit{Type Acts}
+\begin{description}
+\item[judgements] \mbox{}
+
+\begin{description}
+\item[\textit{specific}] $o:_A T$ ``agent $A$ judges object $o$ to be of type
+  $T$''
+
+\item[\textit{non-specific}] $:_A T$ ``agent $A$ judges that there is some
+  object of type $T$''
+\end{description}
+
+\item[queries] \mbox{}
+\begin{description}
+\item[\textit{specific}] $o:_A T?$ ``agent $A$ wonders whether object $o$ is of type
+  $T$''
+
+\item[\textit{non-specific}] $:_A T?$ ``agent $A$ wonders whether there is some object of type
+$T$''
+\end{description}
+\item[creations] \mbox{}
+\begin{description}
+\item[\textit{non-specific}] $:_A T!$ ``agent $A$ creates something of type
+  $T$''
+\end{description}
+\end{description}
+
+\end{ex} 
+Note that creations only come in the non-specific variant.  You cannot
+create an object which already exists.  
+
+Creations are also limited in
+that there are certain types which a given agent is not able to
+realize as the main actor.  Consider for example the event type involved in the fetch
+game of the dog running after the stick.  The human cannot be the main
+creator of such
+an event since it is the dog who is the actor.  The most the human can
+do is wait until the dog has carried out the action
+and we will count this as a creation type act.  This will become
+important when we discuss coordination in the fetch-game below.  It is
+actually important that the human makes this passive contribution to
+the creation of the event of the dog running after the stick and does
+not, for example, get the game confused by immediately throwing
+another stick before the dog has had a chance to retrieve the first
+stick.  There are other cases of event types which require a less
+passive contribution from an agent other than the main actor.
+Consider the type of event where the dog returns the stick to the
+human.  The dog is clearly the main actor here but the human has also
+a role to play in making the event realized.  For example, if the
+human turns her back on the dog and ignores what is happening or runs
+away the event type will not be realized despite the dog's best
+efforts.  Other event types, such as lifting a piano, involve more
+equal collaboration between two or more agents, where it is not
+intuitively clear that any one of the agents is the main actor.  So
+when we say ``agent $A$ creates something of type $T$'' perhaps it
+would be more accurate to phrase this as ``agent $A$ contributes to
+the creation of something of type $T$'' where $A$'s contribution might
+be as little as  not realizing any of the other types involved in the game until
+$T$ has been realized.   
+   
+\textit{De se} type acts involve functions which have the agent in its
+domain and return a type, that is, they are dependent types which,
+given the agent, will yield a type.  We will say that agents are of
+type \textit{Ind} and that the relevant dependent types, 
+$\mathcal{T}$, are functions of type
+  (\textit{Ind}$\rightarrow$\textit{Type}).  
+We characterize \textit{de se} type acts in a way parallel to
+\preveg{}, as given in \nexteg{}.
+\begin{ex}
+\textit{De Se Type Acts} 
+\begin{description}
+\item[\textit{judgements}] \mbox{}
+\begin{description}
+\item[\textit{specific}]  $o:_A \mathcal{T}(A)$ ``agent $A$ judges object $o$ to be of type
+  $\mathcal{T}(A)$''
+\item[\textit{non-specific}] $:_A \mathcal{T}(A)$ ``agent $A$ judges
+  that there is some object of type $\mathcal{T}(A)$''
+\end{description}
+
+\item[\textit{queries}] \mbox{}
+\begin{description}
+\item[\textit{specific}] $o:_A \mathcal{T}(A)?$ ``agent $A$ wonders whether object $o$ is of type
+  $\mathcal{T}(A)$''
+\item[\textit{non-specific}] $:_A \mathcal{T}(A)?$ ``agent $A$ wonders whether there is some object of type
+$\mathcal{T}(A)$''
+\end{description}
+
+\item[\textit{creations}] \mbox{}
+\begin{description}
+\item[\textit{non-specific}] $:_A \mathcal{T}(A)!$ ``agent $A$ creates
+  something of type $\mathcal{T}(A)$''
+\end{description}
+\end{description} 
+\end{ex} 
+
+From the point of view of the type theory \textit{de se} type acts
+seem more complex than non-\textit{de se} type acts since they involve
+a dependent rather than a non-dependent type and a functional
+application of that dependent type to the agent.  However, from a
+cognitive perspective one might expect \textit{de se} type acts to be
+more basic.  Agents which perform type acts using types directly
+related to themselves are behaving egocentrically and one could regard
+it as a more advanced level of abstraction to consider types which are
+independent of the agent.  This seems a puzzling way in which our
+notions of type seem in conflict with out intuitions about cognition.   
+
+While these type acts are prelinguistic (we need them to account for
+the dog's behaviour in the game of fetch) we will try to argue later
+that they are the basis on which the notion of speech act
+\citep{Austin1962,Searle1969} is built.  Our notion of using types in
+query acts seems intuitively related to work on inquisitive semantics
+\citep{GroenendijkRoelofsen2012} where some propositions (in
+particular disjunctions) are regarded as inquisitive.  However, this
+will still allow us to make a distinction between questions and
+assertions in natural language as argued for by \cite{Ginzburg2012}.
+
+Let us now apply these notions to the kind of interaction that has to
+take place between the human and the dog in a game of fetch.  First
+consider in more detail what is actually involved in playing a game of
+fetch, that is creating an event of type (\ref{eg:fetch-type}).  Each
+agent has to keep track in some way of where they are in the game and
+in particular what needs to happen next.  We analyze this by saying
+that each agent has an information state which we will model as a
+record.  We need to keep track of the progression of types of
+information state for an agent during the course of the game.  We will
+refer to the types of information states as gameboards.\footnote{Our
+  notions of \textit{information state} and \textit{gameboard} are
+  taken from \cite{Larsson2002} and \cite{Ginzburg2012} respectively
+  as well as a great deal of related literature on the gameboard or
+  information state approach to dialogue analysis originating from
+  \cite{Ginzburg1994}.  We have adapted the notions somewhat to our own
+  purposes and will take this up in more detail in
+  Chapter~\ref{ch:infex}.}  The idea is that as part of the event
+occurs then the agent's gameboard is updated so that an event of the
+next type in the string is expected.  For now, we will consider
+gameboards which only place one requirement on information states,
+namely that there is an agenda which indicates the type of the next
+move in the game.  Thus if the agent is playing fetch and observes an
+event of the type where the human throws the stick, then, according to
+(\ref{eg:fetch-type}), the next move in the game will be an event of
+the type where the dog runs after the stick.  If the actor in the next
+move is the agent herself then the agent will need to create an event
+of the type of the next move if the game is to progress.  If the actor in the next move is the
+other player in the game, then the agent will need to observe an event
+and judge it to be of the appropriate type in order for the game to
+progress.  The type of information states, \textit{InfoState}, will be
+\nexteg{a}.  (In Chapter~\ref{ch:infex}, when we apply these ideas to dialogue, we
+will see more complex information states.)  The type of the initial
+information state, \textit{InitInfoState}, will be one where the agenda is required to be the
+empty list.
+\begin{ex}
+\begin{subex} 
+\item \record{\tfield{agenda}{[\textit{RecType}]}}
+\item \record{\mfield{agenda}{[]}{[\textit{RecType}]}} 
+\end{subex}
+\end{ex} 
+We can now see the rules of the game corresponding to the type
+(\ref{eg:fetch-type}) as a set of update functions which indicate for
+an information state of a given type what type the next information
+state may belong to if an event of a certain type occurs.  These
+update functions correspond to the transitions in a finite state
+machine.  This is
+given in \nexteg{}.
+\begin{ex} 
+\{ \begin{tabular}[t]{l}
+$\lambda
+  r$:\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}} . \\
+\hspace*{1em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{[\textit{RecType}]}},
+\\ 
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($a$,$c$)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($a$,$c$)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{throw($a$,$c$)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}
+\\
+% $\lambda
+% r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}}
+% \\
+% \hspace*{1em}$\lambda
+% e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
+% \hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{[pick\_up($a$,$c$)]}}]}{[\textit{RecType}]}}
+ \end{tabular} \\
+\hspace*{\textwidth} \} 
+\label{eg:fetch-update-funs} 
+ 
+   
+\end{ex} 
+
+Since we are treating an empty agenda as the condition for the input
+to the initial state in the corresponding automaton and also the
+output of the final state we automatically get the loop effect from
+the final state to the initial state.  In order to prevent the loop we
+would have to distinguish the type corresponding to the initial and
+final states. Note that the functions in \preveg{} are of the
+type \nexteg{}.
+\begin{ex}
+(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$(\textit{Rec}$\rightarrow$\textit{RecType}))
+\end{ex}
+That is, they map an information state containing an agenda (modelled
+as a record containing an agenda field) and an
+event (modelled as a record) to a record type.   This is true of all
+except for the function corresponding to the initial state which is of
+type \nexteg{}.
+\begin{ex}
+(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$\textit{RecType})
+\end{ex}
+That is, it maps an information state directly to a record type and does not
+require an event.  We can think of this set as the set of rules which
+define the game.  It is of the type \nexteg{}.
+\begin{ex}
+\{((\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$(\textit{Rec}$\rightarrow$\textit{RecType}))$\vee$(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$\textit{RecType}))\}
+\end{ex}
+Let us call the type in \preveg{} \textit{GameRules}.  Sets of game
+rules of this type define the rules for specific participants as in
+(\ref{eg:fetch-update-funs}).  In order to characterize the game in
+general we need to abstract out the roles of the individual
+participants in the game.  This we will do by defining a function from
+a record containing individuals appropriate to play the roles in the
+game thus revising (\ref{eg:fetch-update-funs}) to \nexteg{}.
+
+\begin{ex}
+$\lambda r^*$:\record{\tfield{h}{\textit{Ind}} \\
+                          \tfield{c$_{\mathrm{human}}$}{human(h)} \\
+                          \tfield{d}{\textit{Ind}} \\
+                          \tfield{c$_{\mathrm{dog}}$}{dog(d)} \\
+                          \tfield{s}{\textit{Ind}} \\
+                          \tfield{c$_{\mathrm{stick}}$}{stick(s)}}
+                        . \\ 
+\hspace*{1em}\{ \begin{tabular}[t]{l}
+$\lambda
+  r$:\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}} . \\
+\hspace*{1em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($r^*$.h,$r^*$.s)}}]}{[\textit{RecType}]}},
+\\ 
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($r^*$.h,$r^*$.s)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{pick\_up($r^*$.h,$r^*$.s)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($r^*$.h,$r^*$.d)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($r^*$.h,$r^*$.d)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{attract\_attention($r^*$.h,$r^*$.d)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($r^*$.h,$r^*$.s)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($r^*$.h,$r^*$.s)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{throw($r^*$.h,$r^*$.s)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($r^*$.d,$r^*$.s)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($r^*$.d,$r^*$.s)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{run\_after($r^*$.d,$r^*$.s)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($r^*$.d,$r^*$.s)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($r^*$.d,$r^*$.s)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{pick\_up($r^*$.d,$r^*$.s)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($r^*$.d,$r^*$.s,$r^*$.h)}}]}{[\textit{RecType}]}},
+\\
+$\lambda
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($r^*$.d,$r^*$.s,$r^*$.h)}}]}{[\textit{RecType}]}}
+\\
+\hspace*{1em}$\lambda
+e$:\smallrecord{\smalltfield{e}{return($r^*$.d,$r^*$.s,$r^*$.h)}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}
+\\
+% $\lambda
+% r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}}
+% \\
+% \hspace*{1em}$\lambda
+% e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
+% \hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{[pick\_up($a$,$c$)]}}]}{[\textit{RecType}]}}
+ \end{tabular} \\
+\hspace*{\textwidth} \} 
+\end{ex}
+\preveg{} is of type (\textit{Rec}$\rightarrow$\textit{GameRules})
+which we will call \textit{Game}. 
+  
+Specifying the rules of the game in terms of update functions in this way will not actually getting
+anything to happen, though.  For that we need type acts of the kind we
+discussed. We link the update functions to type acts by means of
+\textit{licensing conditions on type acts}.  A basic licensing
+condition is that an agent can create (or contribute to the creation
+of) a witness for the first type that occurs on the agenda in its
+information state.  Such a licensing condition is expressed in
+\nexteg{}.
+\begin{ex} 
+If $A$ is an agent, $s_i$ is $A$'s current information state, \\ $s_i
+:_A$ \record{\mfield{agenda}{$T\!\mid\!
+    R\ $}{[\textit{RecType}]}}, then $:_A T!$ is licensed. 
+\end{ex}
+(Here we use the notation $T\!\mid\!R$ to represent a list whose first
+member is $T$ and whose rest is $R$.  For example, if the list is
+$[T_1,T_2,T_3]$ then $T$ would correspond to $T_1$ and $R$ would
+correspond to $[T_2,T_3]$. See Appendix~\ref{app:listtypes}.) 
+
+Update functions of the kind we have discussed are handled by the
+licensing conditions in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
+function, $A$ is an agent, $s_i$ is $A$'s current information state,
+$s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), then an event $e:_A
+T_2$ (and $e:T_2$) licenses $s_{i+1}:_A f(s_i)(e)$. 
+ 
+\item If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
+function, $A$ is an agent, $s_i$ is $A$'s current information state,
+$s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), $s_{i+1}:_A
+f(s_i)$ is licensed. 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} is for the case where the update function requires an event in
+order to be triggered and \preveg{b} is for the case where no event is
+required. There are two variants of licensing conditions which can be
+considered.  One variant is where the licensing conditions rely only
+on the agent's judgement of information states and events occurring.
+The other variant is where in addition we require that the information
+states and events actually are of the types which the agent judges
+them to be of.  (These conditions are represented in parentheses in
+\preveg{}.)  In practical terms an agent has to rely on its own
+judgement, of course, and there is one sense in which any resulting
+action is licensed even if the agent's judgement was mistaken.  There
+is another stricter sense of license which requires the agent's
+judgement to be correct.  In the real world, though, the only way we
+have of judging a judgement to be correct is to look at judgements by
+other agents.
+
+Licensing conditions will regulate the coordination of
+successfully realized games like fetch.  They enable the agents to
+coordinate their activity when they both have access to the same
+objects of type \textit{Game} and are both willing to play.  The use
+of the word ``license'' is important, however.  The agents have free
+will and may choose not to do what is licensed and also may perform
+acts that are not licensed.  We cannot build a theory that will
+predict exactly what will happen but we can have a theory which tells
+us what kinds of actions belong to a game.  It is up to the agents to
+decide whether they will play the game or not.  At the same time,
+however, we might regard whatever is licensed at a given point in the
+game as an obligation.  That is, if there is a general obligation to
+continue a game once you have embarked on it, then whatever type is
+placed on an agent's agenda as the result of a previous event in the
+game can be seen as an obligation on the agent to play its part in the
+creation of an event of that type.
+
+
+
+
+
 \section{Speech events}
 \label{sec:spev}
 
