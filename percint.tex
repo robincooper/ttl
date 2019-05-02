@@ -2,6 +2,37 @@
 \label{ch:percint}
 \pagestyle{headings}
 
+\section{Introduction}
+
+When we perceive objects and events we classify them as belonging to
+some type.  In this chapter we will explain this idea and introduce a
+mathematical theory of some of the types we use.  Perception and the
+use of natural language for communication are closely linked.  Types,
+particularly types of events, are a good model for what are often
+called ``propositions'', true if there is something of the type and
+false if there is nothing of the type.  It seems that the origin
+of linguistic meaning seems closely related to perception.  If you are
+talking to a two year old child, you tend to point at physical objects
+or observable events and utter the corresponding word or phrase.  You
+do not talk about abstract concepts like `university', `democracy',
+`thought' or `feeling'.  These come later.  We will argue in this
+book, that humans have built on the basic perceptual apparatus in
+terms of types in a way that allows them to reason about the types
+themselves and that it is this ability which allows us to talk about
+intensional notions like `belief' and `knowledge'.
+
+In this chapter we will talk first about the notion of perception as
+type assignment (Section~\ref{sec:perc}).  We will then lay the basis
+for our mathematical modelling of types
+(Section~\ref{sec:modelling}).  We introduce a notion of situation
+type  (Section~\ref{sec:sittypes}) which will be important for the idea
+that types are used to model propositions (discussed in
+Section~\ref{sec:props-as-types}).  Included in the kinds of types we
+use as situation types
+are types constructed from predicates and their arguments
+(\textit{ptypes}) and types which are collections of labelled fields
+(\textit{record types}).
+
 
 \section{Perception as type assignment}
 \label{sec:perc}
@@ -18,7 +49,7 @@ a certain object, $a$, as a tree involves the ascription of a type
 \textit{Tree} to $a$.  In terms of the kind of type theory discussed by
 \cite{Martin-Loef1984,NordstromPeterssonSmith1990}, we might say that
 Kim has made the \textit{judgement} that $a$ is of type \textit{Tree}
-(in symbols $a$ : \textit{Tree}).
+(in symbols, $a$ : \textit{Tree}).
 
 % Central to type theory is the notion of judgements that an object $a$
 % is of a type $T$ (in symbols $a:T$).  We see this as being
@@ -111,6 +142,7 @@ types) which are available to us through our cognitive apparatus.
   
 
 \section{Modelling type systems in terms of mathematical objects}
+\label{sec:modelling}
 
 In order to make our theory precise we are going to create
 mathematical models of the systems we propose.  This
@@ -163,7 +195,7 @@ characterize a type theory with two domains:
 one domain for the objects of the types and another domain for the types to which
 these objects belong.  Thus we see types as theoretical entities in
 their own right, not, for example, as collections of the objects which
-are witnesses for the types.
+are object of the types.
 Diagrammatically we can represent this as in Figure~\ref{fig:basic}
 where object $a$ is of type $T_1$.
 \begin{figure}[h]
@@ -380,7 +412,7 @@ world you look at.
 Finally, notice that there may be different systems of basic types,
 possibly with different types and different objects.  One way of
 exploiting this would be to associate different systems with different
-organisms as discussed in Section~\ref{sec:perc}.  (Below we will see
+organisms as discussed in Section~\ref{sec:perc}.  (Later in this book we will see
 different uses of this for the analysis of types which model the
 cognitive system of a single
 agent.) Thus properly we should say that an object $a$ is of type $T$
@@ -389,6 +421,7 @@ $a:_{\mathbf{TYPE_B}}T$.  However,  we will continue
 to write $a:T$ in our informal discussion when there is no danger of
 confusion. 
 
+\begin{shaded}
 The definition of a system of basic types is made precise in
 \nexteg{}, which is repeated in
 Appendix~\ref{sec:basic}.  
@@ -420,7 +453,7 @@ uses the kind of format normally employed in proof theory.  This may
 provide a more easily readable overview of the definitions while
 suppressing some of the details which are not necessary for intuitive
 understanding.  We will use $\Gamma$, normally used for contexts in
-prove theory, that is sequences of judgements to refer to type systems
+proof theory, that is sequences of judgements to refer to type systems
 like those characterized in \preveg{}.  Thus in \nexteg{} $\Gamma$
 corresponds to \textbf{TYPE}$_B$.  We will write
 $\Gamma\vdash T\in\textbf{Type}$ ``$T\in\textbf{Type}$ follows from
@@ -443,6 +476,7 @@ That is, we are characterizing the smallest set of judgements
 $\Gamma\vdash a:T$ which obey the premises.  In this way the inference
 rule \preveg{} has the force of a biconditional corresponding to
 clause~4 in (\ref{ex:def-basic-types}).   
+\end{shaded}
 
 What counts as an object may vary from agent to agent
 (particularly if agents are of different species).  Different agents
@@ -525,6 +559,7 @@ have a type.  Thus if $a$ : \textit{Ind} and $b$ : \textit{Ind} then
 hug($a$,$b$) will be a type, intuitively the type of situation where
 $a$ hugs $b$.  
 
+\begin{shaded}
 We will introduce a function \textit{Arity} which is
 defined on predicates and which assigns an arity to any predicate.
 This function is introduced in a \textit{predicate signature} which in
@@ -719,7 +754,7 @@ then $P(a_1,\ldots,a_n)$ is a ptype and any ptype is also a type.  In
 this definition we have not made explicit exactly what set theoretic
 object we are representing with $P(a_1,\ldots,a_n)$.  We will take
 this up below (in Section~\ref{sec:labelled-sets}) since it is part of
-a general strategy we employ for representing objects in our type
+a general strategy we employ for representing entities in our type
 theory as sets.  
 \preveg{} also gives us a function $F$ which maps ptypes to a set of
 witnesses and it also makes clear that a system of complex types adds
@@ -812,8 +847,9 @@ $\langle x,y\rangle$ for which the $F$ in a complex system of types
 assigns a non-empty set.  For this reason we call the pair $\langle
 A,F\rangle$ a \textit{model} within the type system, even though it is not
 technically a model in the sense of model theory for logic.  The
-correspondence becomes important below, when we talk about modal type
+correspondence becomes important later in the book, when we talk about modal type
 systems.
+\end{shaded}
 
 What are the entities which are witnesses for ptypes?  The intuition is
 that, for example, \nexteg{} means that $e$ is an event or situation where the individual $a$ is
@@ -931,7 +967,7 @@ predicate using something like \preveg{}.
 % non-well-founded set of ordered pairs which contain themselves.  We
 % will discuss this more (????) when recursive types become relevant.
 
-
+\begin{shaded}
 \subsection{Representing complex entities as labelled sets}
 \label{sec:labelled-sets}
 When we characterized ptypes in Section~\ref{sec:ptypes}, we did not
@@ -1035,7 +1071,7 @@ required here).
 \begin{ex}
 $\{\langle\mathrm{pred},P\rangle,\langle\mathrm{arg}_1,a_1\rangle,\ldots,\langle\mathrm{arg}_n,a_n\rangle\}$
 \end{ex}
-
+\end{shaded}
 
 
 \subsection{Record types}
@@ -1443,6 +1479,7 @@ classical set-theoretic way.  Ultimately, we suspect that a more
 computational and intensional notion of function should be
 substituted.
 
+\begin{shaded}
 In \nexteg{} we characterize a system of complex types with function
 types (repeated in Appendix~\ref{app:funtypes}).
 \begin{ex} 
@@ -1525,6 +1562,7 @@ applying the function to that object will be of type $T_2$.
 Conversely, \preveg{d} tells us that if we have a function of type
 $(T_1\rightarrow T_2)$ and the result of applying it to some object is
 of type $T_2$, then that object must be of type $T_1$.  
+\end{shaded}
 
 We introduce a notation for functions based on the $\lambda$-calculus.
 The notation is characterized in \nexteg{} where $v$ is a variable in
@@ -1536,6 +1574,8 @@ $\varphi[v\leftarrow a]$ (the result of replacing any free occurrence
 of $v$ in $\varphi$ with $a$).
 \label{ex:fun-notation}
 \end{ex} 
+
+\begin{shaded}
 In our informal proof theoretic representation this can be expressed
 by \nexteg{} (where again $[v\leftarrow a]$ represents the replacement
 of any free occurrence of the variable $v$ by $a$).
@@ -1565,7 +1605,8 @@ In this section we have introduced functions from objects of one type
 to objects of another type.  However, it does not yet give us the
 functions we need in the dependent fields of our record types since
 these are functions which take objects of a type and return a
-\textit{type}, that is, they are \textit{dependent types}.       
+\textit{type}, that is, they are \textit{dependent types}.
+\end{shaded}       
 
 \subsubsection{The type \textit{Type}}
 \label{sec:type-Type}
@@ -1620,6 +1661,7 @@ which all the types of order 0, members of the set \textbf{Type}$^0$, belong.  I
 numbers $n$, \textit{Type}$^{n+1}$ will be a type to which all the
 types in \textbf{Type}$^n$ belong.
 
+\begin{shaded}
 We characterize an intensional system of complex types in \nexteg{}
 (repeated in Appendix~\ref{app:int}).
 \begin{ex}
@@ -1715,10 +1757,10 @@ is a witness for all the types characterized in \nexteg{c}.
 \end{subex} 
    
 \end{ex} 
-  
+\end{shaded}  
   
 
-
+\begin{shaded}
 \subsubsection{Definitions of records and record types}
 \label{sec:recs-rectypes}
 A record according to a set of labels $\mathcal{L}$ and a type
@@ -2134,11 +2176,12 @@ type with the additional dependent field.
 % Section~\ref{sec:complex}.  We also introduce there a number of other
 % kinds of complex types such as meets (conjunction), joins
 % (disjunction) and function types.
-
+\end{shaded}
  
 
 
 \section{Intensionality: propositions as types}
+\label{sec:props-as-types}
 
 Kim continues to think about the boy and the dog as she walks along.
 It was fun to see them playing together.  They seemed so happy.  The
