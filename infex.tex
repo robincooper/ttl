@@ -1,23 +1,33 @@
-\chapter{Information states and information exchange}
+\chapter[From event perception and action to information states and
+information exchange][Information states and information
+exchange]{From event perception and action to information states and information exchange}
 \label{ch:infex}
 \setcounter{equation}{0}
 
-\section{The string theory of events}\todo{Moved from Ch. 1.  Needs integrating}
+\section{Introduction}
+In Chapter~\ref{ch:percint} we talked about two kinds of situation
+types: ptypes and record types.  This presents a static view of
+situations which are events, that is, those situations in which a
+change takes place.  In Section~\ref{sec:ev-strings} we will introduce
+string types which enable us to treat events as strings of smaller events.
+
+\section{The string theory of events}\todo{Moved from Ch. 1.  In the
+  process of integrating.}
 \label{sec:ev-strings}
 
 Kim stands and watches the boy and the dog for a while.  They start to
 play fetch.\footnote{\url{http://en.wikipedia.org/wiki/Fetch_(game)},
   accessed 10th Oct 2011.}  This is a moderately complex game in that
 it consists of a number of components which are carried out in a
-certain order.  The boy picks up a stick, attracts the attention of
+certain order.  The boy picks up a stick attracts the attention of
 the dog (possibly shouting ``Fetch!''), and throws the stick.  The dog
 runs after the stick, picks it up in his mouth and brings it back to
 the boy.  This sequence can be repeated arbitrarily many times.  One
 thing that becomes clear from this is that events do not happen in a
 single moment but rather they are stretched out over intervals of
-time, characterized by the sub-events that constitute them.  So if we were to have a type of event (that is, a kind of situation)
+time, characterized by the sub-events that constitute them.  So if we were to have a type of event (that is, a type of situation)
 play\_fetch($a$,$b$,$c$) where $a$ is a human, $b$ is a dog and
-$c$ is a stick% , then $t$ should not be a moment of time but a time
+$c$ is a stick % , then $t$ should not be a moment of time but a time
 % \textit{interval} starting with the time of the beginning of the event
 % and ending with the time of the end of the event.  But 
 we can %could also
@@ -59,7 +69,7 @@ Figure~\ref{fig:fetch}.
    
 
 In an important series of papers including
-\cite{Fernando2004,Fernando2006,Fernando2008,Fernando2009,Fernando2011}, Fernando introduces a finite state
+\cite{Fernando2004,Fernando2006,Fernando2008,Fernando2009,Fernando2011,Fernando2015}, Fernando introduces a finite state
 approach to event analysis where events are analyzed in terms of
 finite state automata something like what we have represented in
 Figure~\ref{fig:fetch-fs}.
@@ -100,20 +110,24 @@ sub-events.  The idea is that our perception of complex events can be seen as st
 punctual observations similar to the kind of sampling we are
 familiar with from audio technology and digitization processing in
 speech recognition.  Thus events can be analyzed as strings of smaller
-events.  What we mean by a string is made precise in
-Appendix~\ref{sec:regular}. Any object of any type can be part of a
+events.  % What we mean by a string is made precise in
+% Appendix~\ref{sec:regular}.
+Any object of any type can be part of a
 string.  Any two objects (including strings themselves), $s_1$ and $s_2$, can be
-\textit{concatenated} to form a string ${s_1}^{\frown}s_2$.  An
+\textit{concatenated} to form a string $s_1s_2$.  An
 important property of concatenation is \textit{associativity}, that is
 if we concatenate $s_1$ with $s_2$ and then concatenate the result
 with $s_3$ we get the same string that we would obtain by
 concatenating $s_2$ with $s_3$ and then concatenating $s_1$ with the
-result.  In symbols: $({s_1}^{\frown}s_2)^{\frown}s_3 =
-{s_1}^{\frown}({s_2}^{\frown}s_3)$.  For this reason we normally write
-${s_1}^{\frown}{s_2}^{\frown}s_3$ (without the parentheses) or simply
-$s_1s_2s_3$ if it is clear from the context that we mean this to be
-string concatenation.  Following Fernando we will use these strings to
-give us our notion of temporal order. 
+result.  In symbols: $(s_1s_2)s_3 =
+s_1(s_2s_3)$.  For this reason we normally write
+$s_1s_2s_3$ (without the parentheses).  Following Fernando we will use these strings to
+give us our notion of temporal order.
+
+\begin{shaded}
+We can give a formal characterization of strings as in \nexteg{}
+(repeated in Appendix~\ref{sec:regular}).
+\end{shaded} \todo{Not necessary since we will use records to model strings}@@
 
 Although we will present strings in this way, we will model them as
 records \label{pg:stringsasrecords} with distinguished labels related to the natural numbers, 
@@ -3365,3 +3379,8 @@ given in \nexteg{}.
 %\section{Semantics}
 
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End:
