@@ -3136,72 +3136,87 @@ $[\ell,T']$ is a non-dependent field in $T$), then \textit{the
 \label{sec:regular}
 \label{app:strings}
 
-A \textit{string algebra over a set of objects} $O$ is a pair $\langle S,
-^{\frown}\rangle$ where:
-\begin{enumerate} 
+% A \textit{string algebra over a set of objects} $O$ is a pair $\langle S,
+% ^{\frown}\rangle$ where:
+% \begin{enumerate} 
  
-\item $S$ is the closure of $O\cup\{\varepsilon\}$ ($\varepsilon$ is the empty string) under the binary operation `$^{\frown}$' (``concatenation'') 
+% \item $S$ is the closure of $O\cup\{\varepsilon\}$ ($\varepsilon$ is the empty string) under the binary operation `$^{\frown}$' (``concatenation'') 
  
-\item for any $s$ in $S$, $\varepsilon^{\frown}s = s^{\frown}\varepsilon = s$
+% \item for any $s$ in $S$, $\varepsilon^{\frown}s = s^{\frown}\varepsilon = s$
 
-\item for any $s_1,s_2,s_3$ in $S$,
-  $(s_1^{\frown}s_2)^{\frown}s_3=s_1^{\frown}(s_2^{\frown}s_3)$.  For
-  this reason we normally write $s_1^{\frown}s_2^{\frown}s_3$ or more
-  simply $s_1s_2s_3$.
+% \item for any $s_1,s_2,s_3$ in $S$,
+%   $(s_1^{\frown}s_2)^{\frown}s_3=s_1^{\frown}(s_2^{\frown}s_3)$.  For
+%   this reason we normally write $s_1^{\frown}s_2^{\frown}s_3$ or more
+%   simply $s_1s_2s_3$.
  
-\end{enumerate}
+% \end{enumerate}
 
-The objects in $S$ are called strings.  Strings have length.  $\varepsilon$ has
-length 0.  If $s$ is a string in $S$
-with length $n$ and $a$ is an object in $O$ then $s^{\frown}a$ has
-length $n+1$.  We use $s[n]$ to represent the $n$th element of string
-$s$.
+% The objects in $S$ are called strings.  Strings have length.  $\varepsilon$ has
+% length 0.  If $s$ is a string in $S$
+% with length $n$ and $a$ is an object in $O$ then $s^{\frown}a$ has
+% length $n+1$.  We use $s[n]$ to represent the $n$th element of string
+% $s$.
 
-In TTR strings are records\footnote{This is new since \cite{Cooper2012}.} with fields labelled by a distinguished
-ordered countably infinite set of labels (corresponding to the natural
-numbers):  t$_0$,t$_1$,\ldots.  $\varepsilon$ is the empty record,
-that is the empty set.  This has length 0.  (Recall that records are sets of ordered
-pairs.)  A string with one element $a$ (of some type) is the
-record \smallrecord{\field{t$_0$}{$a$}}. If $s$ is a string whose
-highest label in the order is t$_n$ ($n\geq 0$) and $a$ is an object of
-some type then $s^{\frown}a$ is $s\cup\{\langle t_{n+1},a\rangle\}$.  If
-$s$ is a string whose highest label in the order is t$_n$ then the
-length of $s$ is $n+1$.  $s[n]$ is defined to be $s$.t$_n$.
-Concatenation (`$^{\frown}$') can be extended to include concatenation
-of strings of arbitrary length.  If $s$ is a string and $s_n$ is a
-string of length $n$, then $s^{\frown}s_n$ is
-$s^{\frown}s_n[0]^{\frown}\ldots^{\frown}s_n[n-1]$. 
+% In TTR strings are records\footnote{This is new since \cite{Cooper2012}.} with fields labelled by a distinguished
+% ordered countably infinite set of labels (corresponding to the natural
+% numbers):  t$_0$,t$_1$,\ldots.  The empty string is the empty record,
+% that is the empty set.  This has length 0.  (Recall that records are sets of ordered
+% pairs.)  A string with one element $a$ (of some type) is the
+% record \smallrecord{\field{t$_0$}{$a$}}. If $s$ is a string whose
+% highest label in the order is t$_n$ ($n\geq 0$) and $a$ is an object of
+% some type then $s^{\frown}a$ is $s\cup\{\langle t_{n+1},a\rangle\}$.  If
+% $s$ is a string whose highest label in the order is t$_n$ then the
+% length of $s$ is $n+1$.  $s[n]$ is defined to be $s$.t$_n$.
+% Concatenation (`$^{\frown}$') can be extended to include concatenation
+% of strings of arbitrary length.  If $s$ is a string and $s_n$ is a
+% string of length $n$, then $s^{\frown}s_n$ is
+% $s^{\frown}s_n[0]^{\frown}\ldots^{\frown}s_n[n-1]$. 
 
-If $s$ is a string of length $n$ of records such that for each $i$,
-$0\leq i<n$, $s[i].\pi$ is a defined path, 
-$\displaystyle\mathop{\mathrm{concat}}_{0\leq i<n}(s[i].\pi)$ denotes
-$s[0].\pi^{\frown}\ldots^{\frown}s[n-1].\pi$.  We use
-concat$_i$($s[i].\pi$) to represent $\displaystyle\mathop{\mathrm{concat}}_{0\leq i<\mathrm{length}(s)}(s[i].\pi)$.
+
 
 A system of complex types  \textbf{TYPE}$_S$ = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with record types
-based on $\langle L, \mathbf{RType}\rangle$ \textit{has string types}
+based on $\langle\mathcal{L}, \mathbf{RType}\rangle$ \textit{has strings}
 if
 \begin{enumerate} 
  
-\item for each natural number $i$, t$_i\in L$
+\item for each natural number $i$, t$_i\in\mathcal{L}$
  
 \item \textit{String} $\in$ \textbf{BType}
 
-\item $\emptyset\in$ \textit{String}
+\item $\emptyset:_{\mathbf{TYPE}_S}$ \textit{String}
 
 \item if $T \in$ \textbf{Type} and $a:_{\mathbf{TYPE}_S}T$ then
-  \smallrecord{\field{t$_0$}{a}} : \textit{String}
+  $\{\langle\text{t}_0,a\rangle\} : \textit{String}$
 
-\item if $s$ :$_{\mathbf{TYPE}_S}$ \textit{String}, t$_n$ is a label in $s$ such that
-  there is no $i>n$ where t$_i$ is a label in $s$, $T \in$ \textbf{Type}
+\item if $s$ :$_{\mathbf{TYPE}_S}$ \textit{String}, t$_n\in\mathrm{labels}(s)$ such that
+  there is no $i>n$ where t$_i\in\mathrm{labels}(s)$, $T \in$ \textbf{Type}
   and $a:_{\mathbf{TYPE}_S}T$ then $s\cup\{\langle \mathrm{t}_{n+1},a\rangle\}$ :$_{\mathbf{TYPE}_S}$
   \textit{String}
 
 \item Nothing is of type \textit{String} except as required above.
  
-\end{enumerate} 
+\end{enumerate}
+
+If $s$ is a string according to some type system with strings we write
+$\mathrm{length}(s)$ for $|s|$ (that is the cardinality of the set of
+ordered pairs constituting the record modelling the string).  If $s_1$
+is a string such that $\text{t}_n\in\mathrm{labels}(s)$ and there is
+no $i>n$ such that $\text{t}_i\in\mathrm{labels}(s)$ and $s_2$ is a
+string, then the concatenation $s_1s_2$ is $s_1\cup s_2'$ where $s_2'$
+is the result of replacing each label $t_i$ in $s_2$ with $t_{i+n+1}$.
+
+If $s$ is a string according to some type system and $\text{t}_n\in\mathrm{labels}(s)$, we use $s[n]$ to
+represent $s.\text{t}_n$.
+
+@@
+
+\todo{Not sure where this should go.}If $s$ is a string of length $n$ of records such that for each $i$,
+$0\leq i<n$, $s[i].\pi$ is a defined path, 
+$\displaystyle\mathop{\mathrm{concat}}_{0\leq i<n}(s[i].\pi)$ denotes
+$s[0].\pi^{\frown}\ldots^{\frown}s[n-1].\pi$.  We use
+concat$_i$($s[i].\pi$) to represent $\displaystyle\mathop{\mathrm{concat}}_{0\leq i<\mathrm{length}(s)}(s[i].\pi)$. 
   
  
 We can define types whose elements are strings.  Such types correspond

@@ -124,15 +124,10 @@ s_1(s_2s_3)$.  For this reason we normally write
 $s_1s_2s_3$ (without the parentheses).  Following Fernando we will use these strings to
 give us our notion of temporal order.
 
-\begin{shaded}
-We can give a formal characterization of strings as in \nexteg{}
-(repeated in Appendix~\ref{sec:regular}).
-\end{shaded} \todo{Not necessary since we will use records to model strings}@@
-
 Although we will present strings in this way, we will model them as
 records \label{pg:stringsasrecords} with distinguished labels related to the natural numbers, 
 t$_0$, t$_1$, \ldots (`t' for ``time'').  The field labelled t$_n$
-will correspond to the $n$th place in the string.  Thus a string of
+will correspond to the $n+1$th place in the string.  Thus a string of
 objects $a_1a_2a_3$
 will be the record in \nexteg{}.
 \begin{ex} 
