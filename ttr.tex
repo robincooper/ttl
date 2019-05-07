@@ -3202,10 +3202,9 @@ if
 If $s$ is a string according to some type system with strings we write
 $\mathrm{length}(s)$ for $|s|$ (that is the cardinality of the set of
 ordered pairs constituting the record modelling the string).  If $s_1$
-is a string such that $\text{t}_n\in\mathrm{labels}(s)$ and there is
-no $i>n$ such that $\text{t}_i\in\mathrm{labels}(s)$ and $s_2$ is a
-string, then the concatenation $s_1s_2$ is $s_1\cup s_2'$ where $s_2'$
-is the result of replacing each label $t_i$ in $s_2$ with $t_{i+n+1}$.
+and $s_2$ are
+strings, then the concatenation $s_1s_2$ is $s_1\cup s_2'$ where $s_2'$
+is the result of replacing each label $t_i$ in $s_2$ with $t_{i+\mathrm{length}(s_1)}$.
 
 If $s$ is a string according to some type system and $\text{t}_n\in\mathrm{labels}(s)$, we use $s[n]$ to
 represent $s.\text{t}_n$.
