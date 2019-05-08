@@ -3174,10 +3174,11 @@ $[\ell,T']$ is a non-dependent field in $T$), then \textit{the
 
 
 
-A system of complex types  \textbf{TYPE}$_S$ = $\langle${\bf Type}, {\bf BType},
+A system of complex types  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with record types
-based on $\langle\mathcal{L}, \mathbf{RType}\rangle$ \textit{has strings}
+based on $\langle\mathcal{L}, \mathbf{RType}\rangle$ \textit{has
+  strings} (Chapter~\ref{ch:infex}, p.~\pageref{ex:string-sys})
 if
 \begin{enumerate} 
  
@@ -3185,14 +3186,14 @@ if
  
 \item \textit{String} $\in$ \textbf{BType}
 
-\item $\emptyset:_{\mathbf{TYPE}_S}$ \textit{String}
+\item $\emptyset:_{\mathbf{TYPE}_C}$ \textit{String}
 
-\item if $T \in$ \textbf{Type} and $a:_{\mathbf{TYPE}_S}T$ then
+\item if $T \in$ \textbf{Type} and $a:_{\mathbf{TYPE}_C}T$ then
   $\{\langle\text{t}_0,a\rangle\} : \textit{String}$
 
-\item if $s$ :$_{\mathbf{TYPE}_S}$ \textit{String}, t$_n\in\mathrm{labels}(s)$ such that
+\item if $s$ :$_{\mathbf{TYPE}_C}$ \textit{String}, t$_n\in\mathrm{labels}(s)$ such that
   there is no $i>n$ where t$_i\in\mathrm{labels}(s)$, $T \in$ \textbf{Type}
-  and $a:_{\mathbf{TYPE}_S}T$ then $s\cup\{\langle \mathrm{t}_{n+1},a\rangle\}$ :$_{\mathbf{TYPE}_S}$
+  and $a:_{\mathbf{TYPE}_C}T$ then $s\cup\{\langle \mathrm{t}_{n+1},a\rangle\}$ :$_{\mathbf{TYPE}_C}$
   \textit{String}
 
 \item Nothing is of type \textit{String} except as required above.
@@ -3204,10 +3205,26 @@ $\mathrm{length}(s)$ for $|s|$ (that is the cardinality of the set of
 ordered pairs constituting the record modelling the string).  If $s_1$
 and $s_2$ are
 strings, then the concatenation $s_1s_2$ is $s_1\cup s_2'$ where $s_2'$
-is the result of replacing each label $t_i$ in $s_2$ with $t_{i+\mathrm{length}(s_1)}$.
+is the result of replacing each label $t_i$ in $\mathrm{labels}(s_2)$ with $t_{i+\mathrm{length}(s_1)}$.
 
 If $s$ is a string according to some type system and $\text{t}_n\in\mathrm{labels}(s)$, we use $s[n]$ to
-represent $s.\text{t}_n$.
+represent $s.\text{t}_n$.  We use $\varepsilon$ to represent the empty
+string (which is identical with the empty set).
+
+A system of complex types  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with strings has
+\textit{length determining string types} if
+\begin{enumerate} 
+ 
+\item for any $T\in\textbf{Type}$ and $n$ a natural number, the string
+  types $T^{=n}$,
+  $T^{\leq n}$, $T^{\geq n}\in\textbf{Type}$ 
+ 
+\item  
+ 
+\end{enumerate} 
+  
 
 @@
 

@@ -149,13 +149,97 @@ be \nexteg{b}.
  
 \end{subex} 
    
+\end{ex}
+
+\begin{shaded}
+Strings can be introduced into a type system with record types by the
+definition in \nexteg{} (repeated in Appendix~\ref{app:strings})
+\begin{ex} 
+A system of complex types  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with record types
+based on $\langle\mathcal{L}, \mathbf{RType}\rangle$ \textit{has strings}
+if
+\begin{enumerate} 
+ 
+\item for each natural number $i$, t$_i\in\mathcal{L}$
+ 
+\item \textit{String} $\in$ \textbf{BType}
+
+\item $\emptyset:_{\mathbf{TYPE}_C}$ \textit{String}
+
+\item if $T \in$ \textbf{Type} and $a:_{\mathbf{TYPE}_C}T$ then
+  $\{\langle\text{t}_0,a\rangle\} : \textit{String}$
+
+\item if $s$ :$_{\mathbf{TYPE}_C}$ \textit{String}, t$_n\in\mathrm{labels}(s)$ such that
+  there is no $i>n$ where t$_i\in\mathrm{labels}(s)$, $T \in$ \textbf{Type}
+  and $a:_{\mathbf{TYPE}_C}T$ then $s\cup\{\langle \mathrm{t}_{n+1},a\rangle\}$ :$_{\mathbf{TYPE}_C}$
+  \textit{String}
+
+\item Nothing is of type \textit{String} except as required above.
+ 
+\end{enumerate}
+\label{ex:string-sys} 
 \end{ex} 
+\preveg{}, clause~1 ensures that the labels $t_i$ are among the labels
+available for forming record types.  Clause~2 introduces a basic type
+\textit{String}.  Clause~3 says the empty set (also known as the empty
+record and empty string) is a string. Clause~4 says that if you have
+an object, $a$, of some type then you can form a unit string
+containing $a$.  That is the record
+\smallrecord{\field{t$_0$}{$a$}}. Note that we always start with the
+label `t$_0$'. Clause~5 says that we can always create a new string
+from a string $s$ by adding an additional object to the end of it,
+using a label `t$_{n+1}$' where $n$ is the highest number such that
+$\text{t}_n\in\mathrm{labels}(s)$.  Clause~6 is an exclusion clause.
+Clauses~3--6 constitute an inductive definition of the set of
+witnesses of the type \textit{String}.
+
+In our informal proof theoretic notation this can be characterized by
+giving an inductive definition as in \nexteg{}.
+\begin{ex} 
+For $\Gamma$ a system of complex types with record types based on
+$\langle\mathcal{L},\mathbf{RType}\rangle$ and strings
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\infer0[$i\in\textit{Nat}$]{\text{t}_i\in\mathcal{L}} 
+\end{prooftree} 
+
+\item \begin{prooftree}
+\infer0{\Gamma\vdash\textit{String}\in\textbf{BType}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\infer0{\Gamma\vdash\emptyset:\textit{String}}
+\end{prooftree}
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash a:T}
+\infer1{\Gamma\vdash\{\langle\text{t}_0,a\rangle\}:\textit{String}}
+\end{prooftree} 
+
+\item \begin{prooftree}
+\hypo{\Gamma\vdash s:\textit{String}}
+\hypo{\Gamma\vdash a:T}
+\hypo{\{\text{t}_0,\ldots,\text{t}_n\}=\mathrm{labels}(s)}
+\infer3[$n\geq 0$]{\Gamma\vdash
+  s\cup\{\langle\text{t}_{n+1},a\rangle\}:\textit{String}}
+\end{prooftree}
+ 
+\end{subex} 
+   
+\end{ex} 
+    
+\end{shaded} 
 We will continue to
 represent strings for convenience in the traditional way but modelling
 strings as records will become important when following paths in
-records down to elements in strings.  We will use $s[n]$ to represent
+records down to elements in strings and any operations we define on
+records will automatically generalize to strings.  We will use
+$\varepsilon$ to represent the empty string (that is, the empty set). We will use $s[n]$ to represent
 the $n$th element in a string $s$ (where the first element in the
-string is $s[0]$).  But in terms of the record notation
+string is $s[0]$).  In terms of the record notation
 this is just a convenient abbreviation for $s$.t$_n$.    
 
 Now let us build further on the
