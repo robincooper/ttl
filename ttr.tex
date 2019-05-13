@@ -3214,16 +3214,29 @@ string (which is identical with the empty set).
 A system of complex types  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with strings has
-\textit{length determining string types} if
+\textit{length determining string types} (Chapter~\ref{ch:infex}, p.~\pageref{ex:ldstringtypes}) if
 \begin{enumerate} 
  
 \item for any $T\in\textbf{Type}$ and $n$ a natural number, the string
   types $T^{=n}$,
   $T^{\leq n}$, $T^{\geq n}\in\textbf{Type}$ 
  
-\item  
+\item $s:_{\mathbf{TYPE}_C}T^{=n}\ (T^{\leq n}, T^{\geq n})$ iff
+  $s:_{\mathbf{TYPE}_C}\textit{String}$, for all $i$, $0\leq
+  i<\mathrm{length}(s)$, $s[i]:_{\mathbf{TYPE_C}}T$ and $\mathrm{length}(s) =
+  (\leq,\geq)\ n$ 
  
-\end{enumerate} 
+\end{enumerate}
+
+When there is not source of confusion we write $T^n$ for $T^{=n}$. We
+also write $T^*$ for $T^{\geq0}$ (Kleene star) and $T^+$ for
+$T^{\geq1}$ (Kleene plus).
+
+As with other complex types we model $T^{\xi n}$ (where $\xi$ is
+`$=$', `$\leq$' or `$\geq$') as a labelled set:
+\begin{quote}
+$\{\langle\mathrm{str}_0,\{\langle\mathrm{comp},\xi\rangle,\langle\mathrm{num},n\rangle,\langle\mathrm{type},T\rangle\}\rangle\}$
+\end{quote} 
   
 
 @@

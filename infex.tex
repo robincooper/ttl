@@ -240,12 +240,45 @@ records will automatically generalize to strings.  We will use
 $\varepsilon$ to represent the empty string (that is, the empty set). We will use $s[n]$ to represent
 the $n$th element in a string $s$ (where the first element in the
 string is $s[0]$).  In terms of the record notation
-this is just a convenient abbreviation for $s$.t$_n$.    
+this is just a convenient abbreviation for $s$.t$_n$.
 
-Now let us build further on the
-types that we have introduced so far to include string types. For any
+We will use $T^{=n}$, or, when there is no risk of confusion, simply
+$T^n$, as the type of strings of length $n$ all of whose elements are
+of type $T$. We will use $T^{\geq n}$ for the type of strings of
+objects of type $T$ which have length greater than or equal to $n$.
+In particular we will use $T^*$ (the Kleene star) for $T^{\geq0}$ and
+$T^+$ (the Kleene plus) for $T^{\geq1}$.
+
+\begin{shaded}
+We can make this precise with the definition in \nexteg{} (repeated in
+Appendix~\ref{app:strings})
+\begin{ex} 
+A system of complex types  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with strings has
+\textit{length determining string types} if
+\begin{enumerate} 
+ 
+\item for any $T\in\textbf{Type}$ and $n$ a natural number, the string
+  types $T^{=n}$,
+  $T^{\leq n}$, $T^{\geq n}\in\textbf{Type}$ 
+ 
+\item $s:_{\mathbf{TYPE}_C}T^{=n}\ (T^{\leq n}, T^{\geq n})$ iff
+  $s:_{\mathbf{TYPE}_C}\textit{String}$, for all $i$, $0\leq
+  i<\mathrm{length}(s)$, $s[i]:_{\mathbf{TYPE_C}}T$ and $\mathrm{length}(s) =
+  (\leq,\geq)\ n$ 
+ 
+\end{enumerate}
+\label{ex:ldstringtypes} 
+\end{ex} 
+
+
+  
+\end{shaded}    
+
+Next we introduce concatenation types.  For any
 two types, $T_1$ and $T_2$, we can form the type ${T_1}^{\frown}T_2$.
-This is the type of strings $a^{\frown}b$ where $a:T_1$ and $b:T_2$.
+This is the type of strings $ab$ where $a:T_1$ and $b:T_2$.
 The concatenation operation on types (just like that on objects) is
 associative so we do not use parentheses when more than one type is
 involved, e.g. ${T_1}^{\frown}{T_2}^{\frown}T_3$.
