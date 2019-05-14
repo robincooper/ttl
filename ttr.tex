@@ -3237,9 +3237,48 @@ As with other complex types we model $T^{\xi n}$ (where $\xi$ is
 \begin{quote}
 $\{\langle\mathrm{str}_0,\{\langle\mathrm{comp},\xi\rangle,\langle\mathrm{num},n\rangle,\langle\mathrm{type},T\rangle\}\rangle\}$
 \end{quote} 
-  
 
-@@
+A system of complex types  \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with strings and
+length determining string types has \textit{concatenation types}
+(Chapter~\ref{ch:infex}, p.~\pageref{ex:concatenation-types}) if
+\begin{enumerate} 
+ 
+\item if $T_1$, $T_2\in\textbf{Type}$ then the string type $T_1^\frown T_2\in\textbf{Type}$ 
+ 
+\item $s:_{\mathbf{TYPE}_C}T_1^\frown T_2$ iff there are $s_1$ and
+  $s_2$ such that
+\begin{enumerate} 
+ 
+\item $s_1s_2=s$ 
+ 
+\item $s_1:_{\mathbf{TYPE}_C}T_1$ if $T_1$ is a string type, otherwise
+  $s_1:_{\mathbf{TYPE}_C}{T_1}^{=1}$
+
+\item $s_2:_{\mathbf{TYPE}_C}T_2$ if $T_2$ is a string type, otherwise
+  $s_2:_{\mathbf{TYPE}_C}{T_2}^{=1}$  
+ 
+\end{enumerate} 
+   
+ 
+\end{enumerate} 
+
+The labelled set represented by ${T_1}^\frown T_2$ can be characterized as
+follows:
+\begin{quote}
+Let $T_1'$ be ${T_1}^{=1}$ if $T_1$ is not a string type and $T_1$
+otherwise and similarly let $T_2'$ be ${T_2}^{=1}$ if $T_2$ is not a
+string type and $T_2$ otherwise.  Then $T_1^\frown T_2$ represents the
+labelled set \mbox{$T_1'\cup T_2''$} where $T_2''$ is the result of replacing
+any label `str$_i$' in $\mathrm{labels}(T_2')$ with `str$_{i+n+1}$',
+where `str$_n$' is in $\mathrm{labels}(T_1')$ and there is no $j$ such
+that `str$_j$' is in $\mathrm{labels}(T_1')$ and $j>n$.
+\end{quote}  
+This definition has as a consequence that `$^\frown$' is associative:
+$(T_1^\frown T_2)^\frown T_3=T_1^\frown(T_2^\frown T_3)$.  
+
+
 
 \todo{Not sure where this should go.}If $s$ is a string of length $n$ of records such that for each $i$,
 $0\leq i<n$, $s[i].\pi$ is a defined path, 
@@ -3248,68 +3287,68 @@ $s[0].\pi^{\frown}\ldots^{\frown}s[n-1].\pi$.  We use
 concat$_i$($s[i].\pi$) to represent $\displaystyle\mathop{\mathrm{concat}}_{0\leq i<\mathrm{length}(s)}(s[i].\pi)$. 
   
  
-We can define types whose elements are strings.  Such types correspond
-to regular expressions and we will call them \textit{regular types}.
-Here we will define just two kinds of such types:  concatenation types
-and Kleene-+ types.
+% We can define types whose elements are strings.  Such types correspond
+% to regular expressions and we will call them \textit{regular types}.
+% Here we will define just two kinds of such types:  concatenation types
+% and Kleene-+ types.
 
-A system of complex types with string types \textbf{TYPE}$_S$ = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
-  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
-  concatenation types} if 
-\begin{enumerate} 
+% A system of complex types with string types \textbf{TYPE}$_S$ = $\langle${\bf Type}, {\bf BType},
+% $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+%   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+%   concatenation types} if 
+% \begin{enumerate} 
  
-\item 
-\begin{enumerate}
-\item for any $T_1$, $T_2$ $\in$ {\bf Type},  $({T_1}^\frown\!T_2)$
-  $\in$ {\bf Type}
+% \item 
+% \begin{enumerate}
+% \item for any $T_1$, $T_2$ $\in$ {\bf Type},  $({T_1}^\frown\!T_2)$
+%   $\in$ {\bf Type}
 
-\item for any $T_1$, $T_2$, $T_3$ $\in$ \textbf{Type},
-  $({T_1}^{\frown}T_2)^{\frown}T_3 =
-  {T_1}^{\frown}({T_2}^{\frown}T_3)$\footnote{This has been added to
-    the definition in \cite{Cooper2012} to make associativity explicit.}
-\end{enumerate}
+% \item for any $T_1$, $T_2$, $T_3$ $\in$ \textbf{Type},
+%   $({T_1}^{\frown}T_2)^{\frown}T_3 =
+%   {T_1}^{\frown}({T_2}^{\frown}T_3)$\footnote{This has been added to
+%     the definition in \cite{Cooper2012} to make associativity explicit.}
+% \end{enumerate}
  
-\item $a :_{\mathbf{TYPE}_S} {T_1}^\frown\!T_2$ iff $a=x^\frown\!y$, $x:_{\mathbf{TYPE}_S}T_1$ and $y:_{\mathbf{TYPE}_S}T_2$ 
+% \item $a :_{\mathbf{TYPE}_S} {T_1}^\frown\!T_2$ iff $a=x^\frown\!y$, $x:_{\mathbf{TYPE}_S}T_1$ and $y:_{\mathbf{TYPE}_S}T_2$ 
  
-\end{enumerate} 
-\textbf{TYPE}$_S$ \textit{has Kleene-+ types} if
-\begin{enumerate} 
+% \end{enumerate} 
+% \textbf{TYPE}$_S$ \textit{has Kleene-+ types} if
+% \begin{enumerate} 
  
-\item 
-for any $T$ $\in$ {\bf Type},  $T^+$ $\in$ {\bf Type} 
+% \item 
+% for any $T$ $\in$ {\bf Type},  $T^+$ $\in$ {\bf Type} 
  
-\item $a:_{\mathbf{TYPE}_S}T^+$ iff $a=x_1^\frown\!\ldots^\frown\!x_n$, $n>0$ and for $i$, $1\leq
-i\leq n$, $x_i:_{\mathbf{TYPE}_S}T$ 
+% \item $a:_{\mathbf{TYPE}_S}T^+$ iff $a=x_1^\frown\!\ldots^\frown\!x_n$, $n>0$ and for $i$, $1\leq
+% i\leq n$, $x_i:_{\mathbf{TYPE}_S}T$ 
  
-\end{enumerate} 
+% \end{enumerate} 
 
-\textbf{TYPE}$_S$ \textit{has Kleene-* types} if
-\begin{enumerate} 
+% \textbf{TYPE}$_S$ \textit{has Kleene-* types} if
+% \begin{enumerate} 
  
-\item 
-for any $T$ $\in$ {\bf Type},  $T^*$ $\in$ {\bf Type} 
+% \item 
+% for any $T$ $\in$ {\bf Type},  $T^*$ $\in$ {\bf Type} 
  
-\item $a:_{\mathbf{TYPE}_S}T^*$ iff
-  $a=x_1^\frown\!\ldots^\frown\!x_n$, $n\geq 0$ and for $i$, $1\leq
-i\leq n$, $x_i:_{\mathbf{TYPE}_S}T$ 
+% \item $a:_{\mathbf{TYPE}_S}T^*$ iff
+%   $a=x_1^\frown\!\ldots^\frown\!x_n$, $n\geq 0$ and for $i$, $1\leq
+% i\leq n$, $x_i:_{\mathbf{TYPE}_S}T$ 
  
-\end{enumerate} 
+% \end{enumerate} 
 
-Note that this definition distinguishes and object $a$ and the unit
-string consisting of $a$, that is, \smallrecord{\field{$t_0$}{$a$}}.
-We will use $\overset{\frown}{a}$ to represent this.
+% Note that this definition distinguishes and object $a$ and the unit
+% string consisting of $a$, that is, \smallrecord{\field{$t_0$}{$a$}}.
+% We will use $\overset{\frown}{a}$ to represent this.
 
    
-Strings are used standardly in formal language theory where strings of
-symbols or strings of words are normally considered.  Following
-important insights by Tim Fernando
-\cite{Fernando2004,Fernando2006,Fernando2008,Fernando2009} we shall be
-concerned rather with strings of events.   We use informal notations
-like ` ``sam'' ' and ` ``ran'' '  to represent phonological types of
-speech events (utterances of \textit{Sam} and \textit{ran}).  Thus `
-``sam''$^{\frown}$``ran'' ' is the type of speech events which are
-concatenations of an utterance of \textit{Sam} and an utterance of \textit{ran}.
+% Strings are used standardly in formal language theory where strings of
+% symbols or strings of words are normally considered.  Following
+% important insights by Tim Fernando
+% \cite{Fernando2004,Fernando2006,Fernando2008,Fernando2009} we shall be
+% concerned rather with strings of events.   We use informal notations
+% like ` ``sam'' ' and ` ``ran'' '  to represent phonological types of
+% speech events (utterances of \textit{Sam} and \textit{ran}).  Thus `
+% ``sam''$^{\frown}$``ran'' ' is the type of speech events which are
+% concatenations of an utterance of \textit{Sam} and an utterance of \textit{ran}.
 
 \subsection*{Predicates which relate strings}
 
