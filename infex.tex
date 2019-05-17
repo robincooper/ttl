@@ -404,10 +404,9 @@ To \preveg{} we can add \nexteg{} to express the associativity of
 `$^\frown$'.
 \begin{ex} 
 \begin{prooftree}
-\hypo{\Gamma\vdash T_1\in\textbf{Type}}
-\hypo{\Gamma\vdash T_2\in\textbf{Type}}
-\hypo{\Gamma\vdash T_3\in\textbf{Type}}
-\infer3{\Gamma\vdash(T_1^\frown T_2)^\frown T_3 =
+\hypo{\Gamma\vdash (T_1^\frown T_2)^\frown T_3\in\textbf{Type}}
+\hypo{\Gamma\vdash T_1^\frown(T_2^\frown T_3)\in\textbf{Type}}
+\infer2{\Gamma\vdash(T_1^\frown T_2)^\frown T_3 =
   T_1^\frown(T_2^\frown T_3)\in\textbf{Type}}
 \end{prooftree}
 \end{ex} 
@@ -415,8 +414,6 @@ To \preveg{} we can add \nexteg{} to express the associativity of
   
 
 \end{shaded}
-
-@@
 
 Let us return to Kim watching the boy, $a$, playing fetch with the
 dog, $b$, using the stick, $c$. % over a time interval $t$
@@ -427,25 +424,28 @@ concatenation types we can build a type which corresponds to most of
 what we have sketched in Figure~\ref{fig:fetch}, namely \nexteg{}.
 % (again ignoring time for the sake of simplification).
 \begin{ex} 
-pick\_up($a$,$c$)$^{\frown}$attract\_attention($a$,$b$)$^{\frown}$throw($a$,$c$)$^{\frown}$run\_after($b$,$c$)$^{\frown}$pick\_up($b$,$c$)$^{\frown}$return($b$,$c$,$a$) 
+pick\_up($a$,$c$)$^{\frown}$attract\_attention($a$,$b$)$^{\frown}$throw($a$,$c$)$^{\frown}$run\_after($b$,$c$)$^{\frown}$pick\_up($b$,$c$)$^{\frown}$\\
+\hspace*{2em}return($b$,$c$,$a$) 
 \end{ex} 
 \preveg{} is a type corresponding to everything we have represented in
 Figure~\ref{fig:fetch} except for the arrow which loops back from the
 end state to the start state.    In order to get the loop into the event
-type we will use a kind of type which introduces a Kleene-+.  In
-standard notations for strings $s^+$ stands for a string consisting of
-one or more occurrences of $s$.\footnote{This notation was introduced
-  by the mathematician Stephen Kleene.}  We will adopt this into types
-by saying that for any type $T$ there is also a type $T^+$ which is
-the type of strings of objects of type $T$ containing one or more
-members.  (See Appendix~\ref{sec:regular} for a more precise
-definition.)  The type \nexteg{} will, then,
+type we will use a Kleene-+ type.  % In
+% standard notations for strings $s^+$ stands for a string consisting of
+% one or more occurrences of $s$.\footnote{This notation was introduced
+%   by the mathematician Stephen Kleene.}
+% We will adopt this into types
+% by saying that for any type $T$ there is also a type $T^+$ which is
+% the type of strings of objects of type $T$ containing one or more
+% members.  (See Appendix~\ref{sec:regular} for a more precise
+% definition.)
+The type \nexteg{} will, then,
 give us a type corresponding to the complete Figure~\ref{fig:fetch}
 since it will be the type consisting of strings of one or more events
 of the type \preveg{}.
 \begin{ex} 
 (pick\_up($a$,$c$)$^{\frown}$attract\_attention($a$,$b$)$^{\frown}$throw($a$,$c$)$^{\frown}$run\_after($b$,$c$)$^{\frown}$pick\_up($b$,$c$)$^{\frown}$
-\\ return($b$,$c$,$a$))$^+$ 
+\\ \hspace*{2em}return($b$,$c$,$a$))$^+$ 
 \end{ex}
 
 
@@ -527,15 +527,15 @@ will want to allow for things happening simultaneously and record
 types will give us a straightforward way of allowing this.
 \begin{ex} 
 (\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}$^{\frown}$\smallrecord{\smalltfield{e}{throw($a$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}$^{\frown}$\\
-\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}})$^+$ 
+\hspace*{2em}\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}$^{\frown}$\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}})$^+$ 
 \label{eg:fetch-type}
 \end{ex}
 The label `e' (``event'') occurs in each of the elements of the string
 type.  In this case we will say that `e' labels a \textit{dimension}
 of events of this type.  The `e'-dimension can be thought of as the
 dimension which characterizes what is happening at each stage of the
-event.  If you want to think geometrically, you can think of the
-event-string as being located in a space of event types (that is, the ptypes).
+event.  % If you want to think geometrically, you can think of the
+% event-string as being located in a space of event types (that is, the ptypes).
 
 % So now we can represent the event type for playing fetch as \nexteg{}.
 % \begin{ex} 
@@ -555,223 +555,11 @@ event-string as being located in a space of event types (that is, the ptypes).
 %              \smalltfield{c$_{\mathrm{return}}$}{return($b$,$c$,$a$,e-time) }})$^{+_<}$
 % \end{ex}
 
-What happens when Kim perceives an event as being of this type?  She
-makes a series of observations of events, assigning them to types in
-the string type.  Note that the ptypes in each of the types can be
-further broken down in a similar way.  This gives us a whole hierarchy
-of perceived events which at some point have to bottom out in basic
-perceptions which are not further analyzed.  In order to recognize an
-event as being of this type Kim does not need to perceive a string of
-events corresponding to each of the types in the string types.  She
-may, for example, observe the boy waving the stick to attract the
-dog's attention, get distracted by a bird flying overhead for a while,
-and then return to the fetch event at the point where the dog is
-running back to the boy with the stick.  This still enables her to
-perceive the event as an event of fetch playing because she has seen
-such events before and learned that such events are of the string type in \preveg{}.  It suffices for her to observe enough of the elements in
-the string to distinguish the event from other event types she may
-have available in her knowledge resources.  Suppose, for example, that
-she has just two event string types available that begin with the picking
-up of a stick by a human in the company of a dog.  One is \preveg{}.
-The other is one that leads to the human beating the dog with the
-stick.  If she only observes the picking up of the stick she cannot be
-sure whether what she is observing is a game of fetch or a beating.
-However, as soon as she observes something in the event string which
-belongs only to the fetch type of string she can reasonably conclude
-that she is observing an event of the fetch type.  She may, of course,
-be wrong.  She may be observing an event of a type which she does not
-yet have available in her resource of event types, in which case she
-will need to learn about the new event type and add it to her
-resources.  However, given the resources at her disposal she can make
-a prediction about the nature of the rest of the event.  One could
-model her prediction making ability in terms of a function which maps
-a situation (modelled as a record) to a type of predicted situation,
-for example \nexteg{}.
-\begin{ex} 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}} \\
-                         \smalltfield{c$_{\mathrm{human}}$}{human(x)}
-                         \\
-                         \smalltfield{y}{\textit{Ind}} \\
-                         \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
-                         \smalltfield{z}{\textit{Ind}} \\
-                         \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
-                         \\
-                         \smalltfield{e}{\smallrecord{
-             \smalltfield{e}{pick\_up(x,z)}}$^{\frown}$\smallrecord{
-                  \smalltfield{e}{attract\_attention(x,y)}}}} .
-            \\*[.75\baselineskip]
-\hspace*{4em}\smallrecord{\smalltfield{e}{play\_fetch($r$.x,$r$.y,$r$.z)}
-\\
-\smalltfield{c$_{\mathrm{init}}$}{init($r$.e,e)}}
-\label{ex:ev-predict-fun}
-\end{ex} 
-% \begin{ex} 
-% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}} \\
-%                          \smalltfield{c$_{\mathrm{human}}$}{human(x)}
-%                          \\
-%                          \smalltfield{y}{\textit{Ind}} \\
-%                          \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
-%                          \smalltfield{z}{\textit{Ind}} \\
-%                          \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
-%                          \\
-%                          \smalltfield{e-time}{\textit{TimeInt}} \\
-%                          \smalltfield{e}{\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
-%                              \\
-% \smalltfield{c$_{\leq}$}{$\Uparrow$e-time.start$\leq$e-time.start} \\
-%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($\Uparrow$x,$\Uparrow$z,e-time)}}$^{\frown_<}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
-%              \\
-% \smalltfield{c$_{\leq}$}{e-time.start$\leq\Uparrow$e-time.start} \\
-%                   \smalltfield{c$_{\mathrm{attract\_attention}}$}{attract\_attention($\Uparrow$x,$\Uparrow$y,e-time)}}}}
-%             \\*[.75\baselineskip]
-% \hspace*{4em}(\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
-%                            \smalltfield{c$_{\leq}$}{$r$.e-time.start$\leq$e-time.start} \\
-%                            \smalltfield{e}{play\_fetch($r$.x,$r$.y,$r$.z,e-time)}})
-% \label{ex:ev-predict-fun}
-% \end{ex}
 
-Here the predicate `init' has arity
-$\langle$\textit{String}, \textit{String}$\rangle$.  The type init($s_1$,$s_2$) is
-non-empty just in case $s_1$ is an initial substring of $s_2$.  We
-achieve this by defining
-\begin{quote}
-If $s_1$ is a string of length $n$ and $s_2$ is a string of any
-length, then $s$ : init($s_1$,$s_2$) iff the length of $s_2$ is
-greater than or equal to $n$ and for each $i$, $0\leq i<n$,
-$s_1[i]=s_2[i]$ and $s=s_2$.
-\end{quote}
-That is, if the initial substring condition holds then the second
-argument to the predicate (and nothing else) is of the ptype.
-
-% Here a `$\Uparrow$' prefixed to a path-name consisting of labels such
-% as `e-time.start' or `x' means that the path-name is to start in the
-% next higher record type in which the current record type is embedded.
-% This notation is an abbreviation for something much less readable (but
-% more precise) which is given in Appendix~\ref{app:rectypes}. [????
-% This notation needs to be added to the appendix.]
-
-The kind of function of which \preveg{} is an instance is a function
-of the general form \nexteg{}.
-\begin{ex} 
-$\lambda a\!:\!T_1\ .\ T_2(a)$
-\label{ex:deptypefun} 
-\end{ex} 
-where we use the notation $T_2(a)$ to represent the fact that $T_2$
-depends on $a$. The nature of this dependence in
-(\ref{ex:ev-predict-fun}) is seen in the occurrences of $r$ in the body
-of the function, for example, `play\_fetch($r$.x,$r$.y,$r$.z)'.
-Such a function maps an object of some type (represented by $T_1$) to
-a type (represented by $T_2(a)$).  The type that results from an
-application of this function will depend on what object it is applied
-to -- that is, we have the possibility of obtaining different types
-from different objects. In type theory such a function is often called
-a \textit{dependent type}.  These functions will play an important
-role in much of what is to come later in this book.  They will show up
-many times in what appear at first blush to be totally unrelated
-phenomena.  We want to suggest, however, that all of the phenomena we
-will describe using such functions have their origin in our basic
-cognitive ability to make predictions on the basis of partial
-observation of objects and events.
-
-What happens when Kim does not observe enough of the event to be able
-to predict with any certainty that the complete event will be a game
-of fetch?  One theory would be that she can only make categorical
-judgements, and that she has to wait until she has seen enough so that
-there is only one type that matches in the collection of situation
-types in her resources.  Another theory would be
-one where she predicts a disjunction of the available matching types when there is
-more than one that matches.  One might refine this theory so that she
-can choose one of the available types but assign it a probability
-based on the number of matching types.  If $n$ is the number of
-matching types the probability of any one of them might be
-$\frac{1}{n}$.  This assumes that each of the types is equally likely
-to be realized.  It would be natural to assume, however, that the
-probability which Kim assigns to any one of the matching types would
-be dependent on her previous experience.  Suppose, for example, that
-she has seen 100 events of a boy picking up a stick in the company of
-a dog, 99 of those events led to a game of fetch and only one led to
-the boy beating the dog.  One might then assume that when she now sees
-the boy pick up the stick she would assign a 99\% probability to the
-type of fetch events and only 1\% probability to the boy beating the
-dog.  That is, the probability she assigns to an event of a boy
-picking up a stick leading to a game of fetch is the result of
-dividing the number of instances of a game of fetch she has already
-observed by the sum of the number of instances she has observed of any types whose
-initial segment involves the picking up of a stick.  In more general
-terms we can compute the probability which an agent $A$ assigns on the
-basis of a string, $\omega$, of previous observations to a
-predicted type $T_{\mathit{pr}}$ given an observed type $T_{\mathit{obs}}$, $P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}})$, in the case where
-$T_{\mathit{pr}}$ is a member of the set of alternatives which can be
-predicted from $T_{\mathit{obs}}$ according to $A$'s resources based on $\omega$,
-$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, by the following formula:
-\[P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}}) =
-\frac{\mid\{T_{\mathit{pr}}\}^{A,\omega}\mid}{\sum\limits_{T_{\mathit{alt}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}\mid\{T_{\mathit{alt}}\}^{A,\omega}\mid}\]
-where $\{T\}^{A,\omega}$ is the set of objects of type $T$ observed by $A$
-in $\omega$.  If $T_{\mathit{pr}}$ is not a member of
-$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, that is not one of the
-alternatives, we say that $P_{A,\omega}(T_{\mathit{pr}}\mid
-T_{\mathit{obs}}) = 0$.
-
-While this is still a rather naive and simple view of how
-probabilities might be assigned it is not without interest, as shown
-by the following points:  
-\paragraph{Probability distributions} It will always provide a probability distribution over sets
-of alternatives, that is,
-\[\sum\limits_{T_{\mathit{pr}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}P_{A,\omega}(T_{\mathit{pr}}\mid
-T_{\mathit{obs}}) = 1\]
-\paragraph{Alternatives} We have assumed a notion of alternatives based on types of completed
-events for which the observed event is an initial segment but other
-notions of alternativeness could be considered and perhaps even
-combined.  
-\paragraph{Relativity of probability assignments} The notion of
-probability is both agent and resource relative.  It represents the
-probability which an agent will assign to a type when observing a
-given situation after a previous string of observations.  Two agents may assign different
-probabilities depending on the resources they have available.
-\paragraph{Learning} Relevant observations will update the probability
-distributions an agent will assign to a given set of alternatives
-since the probability is computed on the basis of previous
-observations of the alternative types.
-
-Kim is not alone in being able to draw conclusions based on partial
-observations of an event.  The dog can do it too.  As soon as the boy
-has raised the stick and attracted the dog's attention the dog is
-excitedly snapping at the stick and starting to run in the direction
-in which the boy seems to be about to throw.  The dog also seems to be
-attuned to string types of events just as Kim is and also able to make
-predictions on the basis of partial observations.  The types to which
-a dog is attuned will not be the same as those to which humans can be
-attuned and this can certainly lead to miscommunication between humans
-and dogs.  For example, there may be many reasons why I would go to
-the place where outdoor clothes are hanging and where the dog's lead
-is kept.  Many times it will be because I am planning to take the dog
-out for a walk, but not as often as the dog appears to think, judging
-from the excitement he shows any time I go near the lead.  It is
-difficult to explain to the dog that I am just looking for a receipt
-that I think I might have left in my coat pocket.  But the basic
-mechanism of being able to assemble types of events
-into string types of more complex events and make predictions on the
-basis of these types seems to be common to both humans and dogs and a
-good number of other animals too.  Perhaps simple organisms do not
-have this ability and can only react to events that have already
-happened, but not to predicted outcomes.
-
-This basic inferential ability is thus not parasitic on the ability to
-communicate using a human language.  It is, however, an ability which
-appears to be exploited to a great extent in our use of language as we
-will see in later chapters.  In the remaining sections of this chapter
-we will look at some aspects of the type theory which seem more likely
-to
-correspond to cognitive abilities which only humans have.
-
-
-% When talking about the intuition behind this
-% analysis Fernando sometimes refers to strings of frames in a movie
-% (e.g. in \cite{Fernando2008}).  But in many cases what he is calling
-% a movie frame 
-% can also be seen as a frame in something like the sense of frame semantics as well.
-
-\section{Doing things with types}\todo{Moved from Ch. 1.  Needs integrating}
+\section{Doing things with types}
 \label{sec:typeacts}
+
+\subsection{Type acts}
 
 The boy and the dog have to coordinate and interact in order to create an
 event of the game of fetch.  This involves doing more with types than
@@ -865,7 +653,7 @@ Consider the type of event where the dog returns the stick to the
 human.  The dog is clearly the main actor here but the human has also
 a role to play in making the event realized.  For example, if the
 human turns her back on the dog and ignores what is happening or runs
-away the event type will not be realized despite the dog's best
+away, the event type will not be realized despite the dog's best
 efforts.  Other event types, such as lifting a piano, involve more
 equal collaboration between two or more agents, where it is not
 intuitively clear that any one of the agents is the main actor.  So
@@ -922,14 +710,315 @@ independent of the agent.  This seems a puzzling way in which our
 notions of type seem in conflict with out intuitions about cognition.   
 
 While these type acts are prelinguistic (we need them to account for
-the dog's behaviour in the game of fetch) we will try to argue later
+the dog's behaviour in the game of fetch), it seems
 that they are the basis on which the notion of speech act
-\citep{Austin1962,Searle1969} is built.  Our notion of using types in
-query acts seems intuitively related to work on inquisitive semantics
-\citep{GroenendijkRoelofsen2012} where some propositions (in
-particular disjunctions) are regarded as inquisitive.  However, this
-will still allow us to make a distinction between questions and
-assertions in natural language as argued for by \cite{Ginzburg2012}.
+\citep[and much subsequent literature]{Austin1962,Searle1969} is built.  % Our notion of using types in
+% query acts seems intuitively related to work on inquisitive semantics
+% \citep{GroenendijkRoelofsen2012} where some propositions (in
+% particular disjunctions) are regarded as inquisitive.  However, this
+% will still allow us to make a distinction between questions and
+% assertions in natural language as argued for by \cite{Ginzburg2012}.
+
+\subsection{Making inferences about events}
+What happens
+when Kim perceives an event as being of the type (\ref{eg:fetch-type})?  She
+makes a series of observations of events, assigning them to types in
+the string type.  Note that the ptypes in each of the types can be
+further broken down in a similar way.  This gives us a whole hierarchy
+of perceived events which at some point have to bottom out in basic
+perceptions which are not further analyzed.  In order to recognize an
+event as being of this type Kim does not need to perceive a string of
+events corresponding to each of the types in the string types.  She
+may, for example, observe the boy waving the stick to attract the
+dog's attention, get distracted by a bird flying overhead for a while,
+and then return to the fetch event at the point where the dog is
+running back to the boy with the stick.  This still enables her to
+perceive the event as an event of fetch playing because she has seen
+such events before and learned that such events are of the string type in (\ref{eg:fetch-type}).  It suffices for her to observe enough of the elements in
+the string to distinguish the event from other event types she may
+have available in her knowledge resources.  Suppose, for example, that
+she has just two event string types available that begin with the picking
+up of a stick by a human in the company of a dog.  One is (\ref{eg:fetch-type}).
+The other is one that leads to the human beating the dog with the
+stick.  If she only observes the picking up of the stick she cannot be
+sure whether what she is observing is a game of fetch or a beating.
+However, as soon as she observes something in the event string which
+belongs only to the fetch type she can reasonably conclude
+that she is observing an event of the fetch type.  She may, of course,
+be wrong.  She may be observing an event of a type which she does not
+yet have available in her resource of event types, in which case she
+will need to learn about the new event type and add it to her
+resources.  However, given the resources at her disposal she can make
+a prediction about the nature of the rest of the event.  One could
+model her prediction making ability in terms of a function which maps
+a situation (modelled as a record) to a type of predicted situation,
+for example \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{human}}$}{human(x)}
+                         \\
+                         \smalltfield{y}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
+                         \smalltfield{z}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
+                         \\
+                         \smalltfield{e}{\smallrecord{
+             \smalltfield{e}{pick\_up(x,z)}}$^{\frown}$\smallrecord{
+                  \smalltfield{e}{attract\_attention(x,y)}}}} .
+            \\*[.75\baselineskip]
+\hspace*{4em}\smallrecord{\smalltfield{e}{play\_fetch($r$.x,$r$.y,$r$.z)}
+\\
+\smalltfield{c$_{\mathrm{init}}$}{init($r$.e,e)}}
+\label{ex:ev-predict-fun}
+\end{ex} 
+% \begin{ex} 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}} \\
+%                          \smalltfield{c$_{\mathrm{human}}$}{human(x)}
+%                          \\
+%                          \smalltfield{y}{\textit{Ind}} \\
+%                          \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
+%                          \smalltfield{z}{\textit{Ind}} \\
+%                          \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
+%                          \\
+%                          \smalltfield{e-time}{\textit{TimeInt}} \\
+%                          \smalltfield{e}{\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
+%                              \\
+% \smalltfield{c$_{\leq}$}{$\Uparrow$e-time.start$\leq$e-time.start} \\
+%              \smalltfield{c$_{\mathrm{pick\_up}}$}{pick\_up($\Uparrow$x,$\Uparrow$z,e-time)}}$^{\frown_<}$\smallrecord{\smalltfield{e-time}{\textit{TimeInt}}
+%              \\
+% \smalltfield{c$_{\leq}$}{e-time.start$\leq\Uparrow$e-time.start} \\
+%                   \smalltfield{c$_{\mathrm{attract\_attention}}$}{attract\_attention($\Uparrow$x,$\Uparrow$y,e-time)}}}}
+%             \\*[.75\baselineskip]
+% \hspace*{4em}(\smallrecord{\smalltfield{e-time}{\textit{TimeInt}} \\
+%                            \smalltfield{c$_{\leq}$}{$r$.e-time.start$\leq$e-time.start} \\
+%                            \smalltfield{e}{play\_fetch($r$.x,$r$.y,$r$.z,e-time)}})
+% \label{ex:ev-predict-fun}
+% \end{ex}
+
+Here the predicate `init' has arity
+$\langle$\textit{String}, \textit{String}$\rangle$.  The type init($s_1$,$s_2$) is
+non-empty just in case $s_1$ is an initial substring of $s_2$.  
+
+\begin{shaded}
+We
+achieve this by the definition in \nexteg{}, repeated in Appendix~\ref{app:strings}.
+\begin{ex}
+If $s_1$ is a string of length $n$ and $s_2$ is a string of any
+length, then $s$ : init($s_1$,$s_2$) iff the length of $s_2$ is
+greater than or equal to $n$ and for each $i$, $0\leq i<n$,
+$s_1[i]=s_2[i]$ and $s=s_2$.
+\end{ex}
+That is, if the initial substring condition holds then the second
+argument to the predicate (and nothing else) is of the ptype.
+\end{shaded}
+
+% Here a `$\Uparrow$' prefixed to a path-name consisting of labels such
+% as `e-time.start' or `x' means that the path-name is to start in the
+% next higher record type in which the current record type is embedded.
+% This notation is an abbreviation for something much less readable (but
+% more precise) which is given in Appendix~\ref{app:rectypes}. [????
+% This notation needs to be added to the appendix.]
+
+The kind of function of which (\ref{ex:ev-predict-fun} is an instance is a function
+of the general form \nexteg{}.
+\begin{ex} 
+$\lambda a\!:\!T_1\ .\ T_2\dep{a}$
+\label{ex:deptypefun} 
+\end{ex} 
+
+
+Recall that the notation $T_2\dep{a}$ represents that $T_2$
+depends on $a$. The nature of this dependence in
+(\ref{ex:ev-predict-fun}) is seen in the occurrences of $r$ in the body
+of the function, for example, \nexteg{}.
+\begin{ex}
+play\_fetch($r$.x,$r$.y,$r$.z)
+\end{ex}
+A function of the form (\ref{ex:deptypefun}) maps an object of some type (represented by $T_1$) to
+a type (represented by $T_2\dep{a}$).  The type that results from an
+application of this function will depend on what object it is applied
+to -- that is, we have the possibility of obtaining different types
+from different objects. This function is then a dependent type as
+discussed, for example, on p.~\pageref{pg:deptype},  These functions will play an important
+role in much of what is to come later in this book.  They will show up
+many times in what appear at first blush to be totally unrelated
+phenomena.  We want to suggest, however, that all of the phenomena we
+will describe using such functions have their origin in our basic
+cognitive ability to make predictions on the basis of partial
+observation of objects and events.
+
+
+Functions which are dependent types return types but they do not, of
+themselves, tell us what to do with the type if we have obtained it by
+applying the function to an argument.  Suppose $\mathcal{T}$ is the
+function (\ref{ex:ev-predict-fun}) and that $T$ is the domain type of
+$\mathcal{T}$, that is, \nexteg{}.
+\begin{ex} 
+\smallrecord{\smalltfield{x}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{human}}$}{human(x)}
+                         \\
+                         \smalltfield{y}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{dog}}$}{dog(y)} \\
+                         \smalltfield{z}{\textit{Ind}} \\
+                         \smalltfield{c$_{\mathrm{stick}}$}{stick(z)}
+                         \\
+                         \smalltfield{e}{\smallrecord{
+             \smalltfield{e}{pick\_up(x,z)}}$^{\frown}$\smallrecord{
+                  \smalltfield{e}{attract\_attention(x,y)}}}} 
+\end{ex} 
+Then we may have the action rule given in \nexteg{}.
+\begin{ex} 
+\begin{prooftree}
+\hypo{s:_A T}
+\infer[enth]1{:_A\mathcal{T}(s)}
+\end{prooftree} 
+\end{ex} 
+\preveg{} represents that if an agent, $A$, judges a situation, $s$, to
+be of type $T$ then $A$ is licensed to judge that there is some
+situation of type $\mathcal{T}(s)$.  We use a wavy line in this
+inference rule to indicate that it does not represent a conclusion
+that follows from a premise in a logical sense, but rather that the
+act above the line licenses the act below the line.  That is, on the
+basis of what is above the line it is reasonable to perform what is
+below the line, though without a guarantee that it is correct or even
+thatthe action will be performed.  Given
+that you observe a human pick up a stick and attract a dog's
+attention, it is reasonable to conclude that there will be an event of
+playing fetch, but there is no guarantee that there actually will be
+such an event.  We have talked in terms of what is above the line
+licensing what is below the line.  Another term that can be used is
+\textit{afford} which goes back to Gibson's (\citeyear{Gibson1979})
+notion of affordance.  Thus we can talk of the action above the line
+as affording the action below the line. 
+
+Sometimes dependent type functions like $\mathcal{T}$ can be
+associated with more than one action rule.  Agents may get to choose
+which they apply or perhaps there will be aspects of the context which
+will determine which of the action rules is appropriate.  Thus in
+addition to \preveg{} we might also have the action rules in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \begin{prooftree}
+\hypo{s:_A T}
+\infer[enth]1{s:_A\mathcal{T}(s)}
+\end{prooftree}
+ 
+\item \begin{prooftree}
+\hypo{s:_A T}
+\infer[enth]1{:_A\mathcal{T}(s)!}
+\end{prooftree} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} says that if $A$ judges $s$ to be of type $T$ then $A$ is
+licensed to judge that $s$ is also of type $\mathcal{T}(s)$.
+\preveg{b} says that if $A$ judges $s$ to be of type $T$ then $A$ is
+licensed to create something of type $\mathcal{T}(s)$.   
+  
+@@
+
+What happens when Kim does not observe enough of the event to be able
+to predict with any certainty that the complete event will be a game
+of fetch?  One theory would be that she can only make categorical
+judgements, and that she has to wait until she has seen enough so that
+there is only one type that matches in the collection of situation
+types in her resources.  Another theory would be
+one where she predicts a disjunction of the available matching types when there is
+more than one that matches.  One might refine this theory so that she
+can choose one of the available types but assign it a probability
+based on the number of matching types.  If $n$ is the number of
+matching types the probability of any one of them might be
+$\frac{1}{n}$.  This assumes that each of the types is equally likely
+to be realized.  It would be natural to assume, however, that the
+probability which Kim assigns to any one of the matching types would
+be dependent on her previous experience.  Suppose, for example, that
+she has seen 100 events of a boy picking up a stick in the company of
+a dog, 99 of those events led to a game of fetch and only one led to
+the boy beating the dog.  One might then assume that when she now sees
+the boy pick up the stick she would assign a 99\% probability to the
+type of fetch events and only 1\% probability to the boy beating the
+dog.  That is, the probability she assigns to an event of a boy
+picking up a stick leading to a game of fetch is the result of
+dividing the number of instances of a game of fetch she has already
+observed by the sum of the number of instances she has observed of any types whose
+initial segment involves the picking up of a stick.  In more general
+terms we can compute the probability which an agent $A$ assigns on the
+basis of a string, $\omega$, of previous observations to a
+predicted type $T_{\mathit{pr}}$ given an observed type $T_{\mathit{obs}}$, $P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}})$, in the case where
+$T_{\mathit{pr}}$ is a member of the set of alternatives which can be
+predicted from $T_{\mathit{obs}}$ according to $A$'s resources based on $\omega$,
+$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, by the following formula:
+\[P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}}) =
+\frac{\mid\{T_{\mathit{pr}}\}^{A,\omega}\mid}{\sum\limits_{T_{\mathit{alt}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}\mid\{T_{\mathit{alt}}\}^{A,\omega}\mid}\]
+where $\{T\}^{A,\omega}$ is the set of objects of type $T$ observed by $A$
+in $\omega$.  If $T_{\mathit{pr}}$ is not a member of
+$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, that is not one of the
+alternatives, we say that $P_{A,\omega}(T_{\mathit{pr}}\mid
+T_{\mathit{obs}}) = 0$.
+
+While this is still a rather naive and simple view of how
+probabilities might be assigned it is not without interest, as shown
+by the following points:  
+\paragraph{Probability distributions} It will always provide a probability distribution over sets
+of alternatives, that is,
+\[\sum\limits_{T_{\mathit{pr}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}P_{A,\omega}(T_{\mathit{pr}}\mid
+T_{\mathit{obs}}) = 1\]
+\paragraph{Alternatives} We have assumed a notion of alternatives based on types of completed
+events for which the observed event is an initial segment but other
+notions of alternativeness could be considered and perhaps even
+combined.  
+\paragraph{Relativity of probability assignments} The notion of
+probability is both agent and resource relative.  It represents the
+probability which an agent will assign to a type when observing a
+given situation after a previous string of observations.  Two agents may assign different
+probabilities depending on the resources they have available.
+\paragraph{Learning} Relevant observations will update the probability
+distributions an agent will assign to a given set of alternatives
+since the probability is computed on the basis of previous
+observations of the alternative types.
+
+Kim is not alone in being able to draw conclusions based on partial
+observations of an event.  The dog can do it too.  As soon as the boy
+has raised the stick and attracted the dog's attention the dog is
+excitedly snapping at the stick and starting to run in the direction
+in which the boy seems to be about to throw.  The dog also seems to be
+attuned to string types of events just as Kim is and also able to make
+predictions on the basis of partial observations.  The types to which
+a dog is attuned will not be the same as those to which humans can be
+attuned and this can certainly lead to miscommunication between humans
+and dogs.  For example, there may be many reasons why I would go to
+the place where outdoor clothes are hanging and where the dog's lead
+is kept.  Many times it will be because I am planning to take the dog
+out for a walk, but not as often as the dog appears to think, judging
+from the excitement he shows any time I go near the lead.  It is
+difficult to explain to the dog that I am just looking for a receipt
+that I think I might have left in my coat pocket.  But the basic
+mechanism of being able to assemble types of events
+into string types of more complex events and make predictions on the
+basis of these types seems to be common to both humans and dogs and a
+good number of other animals too.  Perhaps simple organisms do not
+have this ability and can only react to events that have already
+happened, but not to predicted outcomes.
+
+This basic inferential ability is thus not parasitic on the ability to
+communicate using a human language.  It is, however, an ability which
+appears to be exploited to a great extent in our use of language as we
+will see in later chapters.  In the remaining sections of this chapter
+we will look at some aspects of the type theory which seem more likely
+to
+correspond to cognitive abilities which only humans have.\todo{End of
+  material from previous section}
+
+
+% When talking about the intuition behind this
+% analysis Fernando sometimes refers to strings of frames in a movie
+% (e.g. in \cite{Fernando2008}).  But in many cases what he is calling
+% a movie frame 
+% can also be seen as a frame in something like the sense of frame semantics as well.
+
 
 Let us now apply these notions to the kind of interaction that has to
 take place between the human and the dog in a game of fetch.  First
