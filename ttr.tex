@@ -352,22 +352,50 @@ when we discuss record types.
 List types were not included in \cite{Cooper2012}.
 
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list types} if
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list
+  types} (Chapter~\ref{ch:infex}, p.~\pageref{ex:listtypes}) if
 \begin{enumerate} 
  
-\item for any $T \in \textbf{Type}$, $[T] \in \textbf{Type}$ 
+\item for any $T \in \textbf{Type}$, $\mathrm{list}(T) \in \textbf{Type}$ 
  
 \item for any $T \in \textbf{Type}$, 
 \begin{enumerate} 
  
-\item $a\mid L:_{\mathbf{TYPE_C}}[T]$ iff
-  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}[T]$ 
+\item $a\!\mid\! L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
  
-\item $[\ ]:_{\mathbf{TYPE_C}}[T]$ 
+\item $[\ ]:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
  
 \end{enumerate}
 
 \end{enumerate}
+
+In \cite{Cooper2012}
+we did not specify an encoding of lists in terms of sets.  Here we
+will use an encoding with labelled sets using the reserved labels
+`fst' and `rst' for the first member of the list and the remainder
+(``rest'') of
+the list respectively.  We let the empty list, [], be the empty set,
+$\emptyset$.\footnote{If it is important to distinguish the empty list
+  from the empty set we could use an additional reserved label,
+  e.g. `lst',  and
+  have the empty list be the labelled set $\{\langle
+  \mathrm{lst},\emptyset\rangle\}$.}  If $L$ is a list then $a\!\mid\! L$
+is to be the labelled set $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
+
+
+% We use $a\!\mid\! L$ to represent the record
+% \begin{quote}
+% \record{\field{fst}{$a$}\\
+%         \field{rst}{$L$}}
+% \end{quote}
+% where `fst' (``first'') and `rst' (``rest'') are reserved labels used
+% only in lists.
+
+
+% We use $[\ ]$ to represent the empty list which is identical with the
+% empty set, $\emptyset$.  
 
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
@@ -398,20 +426,6 @@ represents $\{\langle\mathrm{lst},T\rangle\}$ and
 ${_{\mathit{ne}}[T]}$ represents $\{\langle\mathrm{nelst},T\rangle\}$
 where `lst' and `nelst' are reserved labels. 
 
-Lists are a common data structure used in computer science but they
-are not normally defined in basic set theory, although it is
-straightforward to define them in terms of sets.  In \cite{Cooper2012}
-we did not specify an encoding of lists in terms of sets.  Here we
-will use an encoding with labelled sets using the reserved labels
-`fst' and `rst' for the first member of the list and the remainder
-(``rest'') of
-the list respectively.  We let the empty list, [], be the empty set,
-$\emptyset$.\footnote{If it is important to distinguish the empty list
-  from the empty set we could use an additional reserved label,
-  e.g. `lst',  and
-  have the empty list be the labelled set $\{\langle
-  \mathrm{lst},\emptyset\rangle\}$.}  If $L$ is a list then $a\mid L$
-is to be the labelled set $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
 
 \section{Set types}
 \label{app:settypes}

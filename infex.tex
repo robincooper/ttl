@@ -881,7 +881,7 @@ that follows from a premise in a logical sense, but rather that the
 act above the line licenses the act below the line.  That is, on the
 basis of what is above the line it is reasonable to perform what is
 below the line, though without a guarantee that it is correct or even
-thatthe action will be performed.  Given
+that the action will be performed.  Given
 that you observe a human pick up a stick and attract a dog's
 attention, it is reasonable to conclude that there will be an event of
 playing fetch, but there is no guarantee that there actually will be
@@ -917,8 +917,6 @@ addition to \preveg{} we might also have the action rules in
 licensed to judge that $s$ is also of type $\mathcal{T}(s)$.
 \preveg{b} says that if $A$ judges $s$ to be of type $T$ then $A$ is
 licensed to create something of type $\mathcal{T}(s)$.   
-  
-@@
 
 What happens when Kim does not observe enough of the event to be able
 to predict with any certainty that the complete event will be a game
@@ -938,34 +936,53 @@ be dependent on her previous experience.  Suppose, for example, that
 she has seen 100 events of a boy picking up a stick in the company of
 a dog, 99 of those events led to a game of fetch and only one led to
 the boy beating the dog.  One might then assume that when she now sees
-the boy pick up the stick she would assign a 99\% probability to the
-type of fetch events and only 1\% probability to the boy beating the
+the boy pick up the stick she would assign a .99 probability (on a
+scale of 0 to 1) to the
+type of fetch events and only .01 probability to the boy beating the
 dog.  That is, the probability she assigns to an event of a boy
 picking up a stick leading to a game of fetch is the result of
 dividing the number of instances of a game of fetch she has already
 observed by the sum of the number of instances she has observed of any types whose
 initial segment involves the picking up of a stick.  In more general
 terms we can compute the probability which an agent $A$ assigns on the
-basis of a string, $\omega$, of previous observations to a
-predicted type $T_{\mathit{pr}}$ given an observed type $T_{\mathit{obs}}$, $P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}})$, in the case where
+basis of a string, $s$, of previous observations to a
+predicted type $T_{\mathit{pr}}$ given an observed type $T_{\mathit{obs}}$, $p_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}})$, in the case where
 $T_{\mathit{pr}}$ is a member of the set of alternatives which can be
-predicted from $T_{\mathit{obs}}$ according to $A$'s resources based on $\omega$,
-$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, by the following formula:
-\[P_{A,\omega}(T_{\mathit{pr}}\mid T_{\mathit{obs}}) =
-\frac{\mid\{T_{\mathit{pr}}\}^{A,\omega}\mid}{\sum\limits_{T_{\mathit{alt}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}\mid\{T_{\mathit{alt}}\}^{A,\omega}\mid}\]
-where $\{T\}^{A,\omega}$ is the set of objects of type $T$ observed by $A$
-in $\omega$.  If $T_{\mathit{pr}}$ is not a member of
-$\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})$, that is not one of the
-alternatives, we say that $P_{A,\omega}(T_{\mathit{pr}}\mid
-T_{\mathit{obs}}) = 0$.
+predicted from $T_{\mathit{obs}}$ according to $A$'s resources based on $p$,
+$\mathrm{alt}_{A,s}(T_{\mathit{obs}})$, by the formula in
+\nexteg{}.
+\begin{ex}
+$p_{A,s}(T_{\mathit{pr}}\mid T_{\mathit{obs}}) =
+\frac{\mid\{T_{\mathit{pr}}\}^{A,s}\mid}{\sum\limits_{T_{\mathit{alt}}\in\mathrm{alt}_{A,s}(T_{\mathit{obs}})}\mid\{T_{\mathit{alt}}\}^{A,s}\mid}$
+\end{ex}
+where $\{T\}^{A,s}$ is the set of objects of type $T$ observed by $A$
+in $s$.  If $T_{\mathit{pr}}$ is not a member of
+$\mathrm{alt}_{A,s}(T_{\mathit{obs}})$, that is not one of the
+alternatives, we say that $p_{A,s}(T_{\mathit{pr}}\mid
+T_{\mathit{obs}}) = 0$.  
+
+Where does the set of alternatives come from?  We assume that an agent
+has a set of functions similar to (\ref{ex:ev-predict-fun}) available
+as cognitive resources, that is, a set of resources that associates
+objects of given types with another type, that is collections of
+dependent types.  We could think of these
+resources as topoi in the sense of Breitholtz\todo{reference to
+  book}.  Among this collection of functions may be several which
+share the same domain type, that is, for some particular type $T$ they
+are witnesses of the function type $(T\rightarrow\textit{Type})$.
+Suppose that $F$ is a set of such resources sharing the type $T$ as a
+domain type.  Then the set of alternatives for an object $r$ of type
+$T$ with respect to $F$ is $\{T'\mid T'=f(r)\text{ for some } f\in F\}$. 
 
 While this is still a rather naive and simple view of how
 probabilities might be assigned it is not without interest, as shown
 by the following points:  
 \paragraph{Probability distributions} It will always provide a probability distribution over sets
-of alternatives, that is,
-\[\sum\limits_{T_{\mathit{pr}}\in\mathrm{alt}_{A,\omega}(T_{\mathit{obs}})}P_{A,\omega}(T_{\mathit{pr}}\mid
-T_{\mathit{obs}}) = 1\]
+of alternatives, that is \nexteg{}.
+\begin{ex}
+$\sum\limits_{T_{\mathit{pr}}\in\mathrm{alt}_{A,s}(T_{\mathit{obs}})}p_{A,s}(T_{\mathit{pr}}\mid
+T_{\mathit{obs}}) = 1$
+\end{ex}
 \paragraph{Alternatives} We have assumed a notion of alternatives based on types of completed
 events for which the observed event is an initial segment but other
 notions of alternativeness could be considered and perhaps even
@@ -1006,11 +1023,7 @@ happened, but not to predicted outcomes.
 This basic inferential ability is thus not parasitic on the ability to
 communicate using a human language.  It is, however, an ability which
 appears to be exploited to a great extent in our use of language as we
-will see in later chapters.  In the remaining sections of this chapter
-we will look at some aspects of the type theory which seem more likely
-to
-correspond to cognitive abilities which only humans have.\todo{End of
-  material from previous section}
+will see in later chapters.  
 
 
 % When talking about the intuition behind this
@@ -1019,6 +1032,7 @@ correspond to cognitive abilities which only humans have.\todo{End of
 % a movie frame 
 % can also be seen as a frame in something like the sense of frame semantics as well.
 
+\subsection{Coordination and games}
 
 Let us now apply these notions to the kind of interaction that has to
 take place between the human and the dog in a game of fetch.  First
@@ -1035,9 +1049,8 @@ refer to the types of information states as gameboards.\footnote{Our
   as well as a great deal of related literature on the gameboard or
   information state approach to dialogue analysis originating from
   \cite{Ginzburg1994}.  We have adapted the notions somewhat to our own
-  purposes and will take this up in more detail in
-  Chapter~\ref{ch:infex}.}  The idea is that as part of the event
-occurs then the agent's gameboard is updated so that an event of the
+  purposes.}  The idea is that as part of the event
+occurs, the agent's gameboard is updated so that an event of the
 next type in the string is expected.  For now, we will consider
 gameboards which only place one requirement on information states,
 namely that there is an agenda which indicates the type of the next
@@ -1050,16 +1063,65 @@ of the type of the next move if the game is to progress.  If the actor in the ne
 other player in the game, then the agent will need to observe an event
 and judge it to be of the appropriate type in order for the game to
 progress.  The type of information states, \textit{InfoState}, will be
-\nexteg{a}.  (In Chapter~\ref{ch:infex}, when we apply these ideas to dialogue, we
-will see more complex information states.)  The type of the initial
+\nexteg{a}.    The type of the initial
 information state, \textit{InitInfoState}, will be one where the agenda is required to be the
-empty list.
+empty list.  We use $\mathrm{list}(T)$ to represent the type of lists
+of objects of type $T$ and [ ] to represent the empty list.
 \begin{ex}
 \begin{subex} 
-\item \record{\tfield{agenda}{[\textit{RecType}]}}
-\item \record{\mfield{agenda}{[]}{[\textit{RecType}]}} 
+\item \record{\tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}
+\item \record{\mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}} 
 \end{subex}
+\end{ex}
+
+\begin{shaded}
+We can introduce lists and list types into our type systems by the
+definition in \nexteg{}, repeated in Appendix~\ref{app:listtypes}.
+\begin{ex} 
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list
+  types}  if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $\mathrm{list}(T) \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+\begin{enumerate} 
+ 
+\item $a\!\mid\! L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
+ 
+\item $[\ ]:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
+ 
+\end{enumerate}
+
+\end{enumerate}
+\label{ex:listtypes} 
 \end{ex} 
+Lists are a common data structure used in computer science but they
+are not normally defined in basic set theory, although it is
+straightforward to define them in terms of labelled sets.  We
+will use an encoding with labelled sets using the reserved labels
+`fst' and `rst' for the first member of the list and the remainder
+(``rest'') of
+the list respectively.  We let the empty list, [], be the empty set,
+$\emptyset$.  If $L$ is a list then $a\!\mid\! L$
+is to be the labelled set
+$\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
+
+In our informal proof theoretic notation we can characterize type
+systems with lists as in \nexteg{}.
+
+@@
+
+\begin{ex} 
+ 
+\end{ex} 
+    
+\end{shaded} 
+
+
 We can now see the rules of the game corresponding to the type
 (\ref{eg:fetch-type}) as a set of update functions which indicate for
 an information state of a given type what type the next information
