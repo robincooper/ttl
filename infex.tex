@@ -966,8 +966,7 @@ has a set of functions similar to (\ref{ex:ev-predict-fun}) available
 as cognitive resources, that is, a set of resources that associates
 objects of given types with another type, that is collections of
 dependent types.  We could think of these
-resources as topoi in the sense of Breitholtz\todo{reference to
-  book}.  Among this collection of functions may be several which
+resources as topoi in the sense of \cite{Breitholtzfthca}.  Among this collection of functions may be several which
 share the same domain type, that is, for some particular type $T$ they
 are witnesses of the function type $(T\rightarrow\textit{Type})$.
 Suppose that $F$ is a set of such resources sharing the type $T$ as a
@@ -1065,13 +1064,17 @@ and judge it to be of the appropriate type in order for the game to
 progress.  The type of information states, \textit{InfoState}, will be
 \nexteg{a}.    The type of the initial
 information state, \textit{InitInfoState}, will be one where the agenda is required to be the
-empty list.  We use $\mathrm{list}(T)$ to represent the type of lists
-of objects of type $T$ and [ ] to represent the empty list.
+empty list.  % We use $\mathrm{list}(T)$ to represent the type of lists
+% of objects of type $T$ and [ ] to represent the empty list.  We use
+% $\mathrm{fst}(L)$ to represent the first member of the list and
+% $\mathrm{rst}(L)$ to represent the rest of the list, that is, the list
+% of all the members of list except the first.
 \begin{ex}
 \begin{subex} 
 \item \record{\tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}
 \item \record{\mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}} 
 \end{subex}
+\label{ex:InfoState-InitInfoState}
 \end{ex}
 
 \begin{shaded}
@@ -1089,10 +1092,10 @@ $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
 \item for any $T \in \textbf{Type}$, 
 \begin{enumerate} 
  
+\item $[\ ]:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
+
 \item $a\!\mid\! L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ iff
   $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
- 
-\item $[\ ]:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
  
 \end{enumerate}
 
@@ -1108,16 +1111,40 @@ will use an encoding with labelled sets using the reserved labels
 the list respectively.  We let the empty list, [], be the empty set,
 $\emptyset$.  If $L$ is a list then $a\!\mid\! L$
 is to be the labelled set
-$\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
+$\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.  If
+$L$ is a list we often use $\mathrm{fst}(L)$ and $\mathrm{rst}(L)$ to
+represent $L$.fst and $L$.rst respectively.
 
 In our informal proof theoretic notation we can characterize type
 systems with lists as in \nexteg{}.
 
-@@
-
-\begin{ex} 
+\begin{ex}
+For $\Gamma$ a system of complex types with list types
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{Type}}
+\infer1{\Gamma\vdash\mathrm{list}(T)\in\textbf{Type}}
+\end{prooftree}
+ 
+\item \begin{prooftree}
+\infer0{\Gamma\vdash[\ ]:\mathrm{list}(T)}
+\end{prooftree}
+\hspace*{2em}
+\begin{prooftree}
+\hypo{\Gamma\vdash a:T}
+\hypo{\Gamma\vdash L:\mathrm{list}(T)}
+\infer2{\Gamma\vdash a\!\mid\!L:\mathrm{list}(T)}
+\end{prooftree} 
+ 
+\end{subex} 
+   
  
 \end{ex} 
+\preveg{a} introduces list types and corresponds to clause~1 of
+(\ref{ex:listtypes}).  \preveg{b} gives an inductive definitions of
+the set of witnesses for an arbitrary list type and corresponds to
+clause~2 of (\ref{ex:listtypes}).
     
 \end{shaded} 
 
@@ -1132,50 +1159,50 @@ given in \nexteg{}.
 \begin{ex} 
 \{ \begin{tabular}[t]{l}
 $\lambda
-  r$:\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}} . \\
-\hspace*{1em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{[\textit{RecType}]}},
+  r$:\smallrecord{\smallmfield{agenda}{[]}{$\mathrm{list}(\textit{RecType})$}} . \\
+\hspace*{1em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}},
 \\ 
 $\lambda
-r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{[\textit{RecType}]}}
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 \hspace*{1em}$\lambda
 e$:\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}]}{[\textit{RecType}]}},
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}]}{$\mathrm{list}(\textit{RecType})$}},
 \\
 $\lambda
-r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}]}{[\textit{RecType}]}}
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}}]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 \hspace*{1em}$\lambda
 e$:\smallrecord{\smalltfield{e}{attract\_attention($a$,$b$)}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($a$,$c$)}}]}{[\textit{RecType}]}},
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($a$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}},
 \\
 $\lambda
-r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($a$,$c$)}}]}{[\textit{RecType}]}}
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{throw($a$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 \hspace*{1em}$\lambda
 e$:\smallrecord{\smalltfield{e}{throw($a$,$c$)}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}]}{[\textit{RecType}]}},
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}},
 \\
 $\lambda
-r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}]}{[\textit{RecType}]}}
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 \hspace*{1em}$\lambda
 e$:\smallrecord{\smalltfield{e}{run\_after($b$,$c$)}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}]}{[\textit{RecType}]}},
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}},
 \\
 $\lambda
-r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}]}{[\textit{RecType}]}}
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 \hspace*{1em}$\lambda
 e$:\smallrecord{\smalltfield{e}{pick\_up($b$,$c$)}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}},
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{$\mathrm{list}(\textit{RecType})$}},
 \\
 $\lambda
-r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}}
+r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 \hspace*{1em}$\lambda
 e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}
+\hspace*{2em}\smallrecord{\smallmfield{agenda}{[]}{$\mathrm{list}(\textit{RecType})$}}
 \\
 % $\lambda
 % r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}}]}{[\textit{RecType}]}}
@@ -1184,7 +1211,7 @@ e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
 % e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
 % \hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{[pick\_up($a$,$c$)]}}]}{[\textit{RecType}]}}
  \end{tabular} \\
-\hspace*{\textwidth} \} 
+\hspace*{.65\textwidth} \} 
 \label{eg:fetch-update-funs} 
  
    
@@ -1195,11 +1222,34 @@ to the initial state in the corresponding automaton and also the
 output of the final state we automatically get the loop effect from
 the final state to the initial state.  In order to prevent the loop we
 would have to distinguish the type corresponding to the initial and
-final states. Note that the functions in \preveg{} are of the
+final states. 
+
+Note that the functions in \preveg{}, with the exception of the
+function listed first, are of the
 type \nexteg{}.
 \begin{ex}
-(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$(\textit{Rec}$\rightarrow$\textit{RecType}))
+(($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))
 \end{ex}
+\preveg{} is a dependent function type.  A function of this type maps
+something, $r$, of type \textit{InfoState} as characterized in
+(\ref{ex:InfoState-InitInfoState}a), to a function from records of the
+first type on the list in the `agenda'-field in $r$ to a record type.
+For any list, $L$, we use $\mathrm{fst}(L)$ to represent the first
+member of $L$.  Dependent functions are slightly more complex than the
+function types we have seen previously in that they introduce a
+variable (in this case, $r$) on which type of the object they return
+can depend.  Schematically, we can represent the difference between
+non-dependent function types and dependent function types as the
+difference between $(T_1\rightarrow T_2)$ and $(a:T_1)\rightarrow
+T_2\dep{a}$.
+\begin{shaded}
+We can introduce dependent function types into our type systems as in
+\nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+  
+\end{shaded}
 That is, they map an information state containing an agenda (modelled
 as a record containing an agenda field) and an
 event (modelled as a record) to a record type.   This is true of all
