@@ -492,24 +492,26 @@ label.
 Singleton types were not included in the formal definition in \cite{Cooper2012}.
 
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has singleton types} if
-\begin{enumerate} 
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  singleton types} (Chapter~\ref{ch:percint}, p.~\pageref{ex:singleton-types}) if
+% \begin{enumerate} 
  
-\item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, $T_a \in \textbf{Type}$ 
+% \item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, $T_a \in \textbf{Type}$ 
  
-\item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, 
-$b:_{\mathbf{TYPE_C}}T_a$ iff  $a=b$
+% \item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, 
+% $b:_{\mathbf{TYPE_C}}T_a$ iff  $a=b$
    
  
-\end{enumerate}
+% \end{enumerate}
 
-These clauses are those presented in \cite{Cooper2012}. A more general
-version of these clauses seems useful for the uses we wish to make of
-singleton types, for example, the restriction of properties discussed
-in Appendix~\ref{app:gramrulesuniv}.  The more general version allows
-singleton types to be created using an object of any type but will
-guarantee that the type is empty if the object is not of the type
-being restricted: 
+% These clauses are those presented in \cite{Cooper2012}. A more general
+% version of these clauses seems useful for the uses we wish to make of
+% singleton types, for example, the restriction of properties discussed
+% in Appendix~\ref{app:gramrulesuniv}.  The more general version allows
+% singleton types to be created using an object of any type but will
+% guarantee that the type is empty if the object is not of the type
+% being restricted: 
 \begin{enumerate} 
  
 \item for any $T,T' \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T'$, $T_a \in \textbf{Type}$ 
@@ -519,12 +521,12 @@ $b:_{\mathbf{TYPE_C}}T_a$ iff  $b:_{\mathbf{TYPE_C}}T$ and $a=b$
    
  
 \end{enumerate}
-As we now allow singleton types that are empty (because the object
-used to restrict them is not of the required type) it may seem that
-the name ``singleton type'' is a misnomer.  The cases of empty types
-are those where we have failed to define a singleton type.
+% As we now allow singleton types that are empty (because the object
+% used to restrict them is not of the required type) it may seem that
+% the name ``singleton type'' is a misnomer.  The cases of empty types
+% are those where we have failed to define a singleton type.
 
-Note that these definitions allow the formation of singleton types
+Note that this definition allows the formation of singleton types
 from singleton types.  We sometimes refer to these as
 \textit{multiple} singleton types and notate them as $T_{a,b,\ldots}$
 rather than the typographically unfortunate ${{T_a}_b}_{\ldots}$.
@@ -532,7 +534,7 @@ Following the definition above an object $c$ will be of type $T_{a,b}$
 just in case $c:T$ and $a=b=c$.
 
 We let $T_a$ represent the labelled set
-$\{\langle\mathrm{singleton},T,a\rangle\}$ where `singleton' is a reserved
+$\{\langle\mathrm{singleton},\langle T,a\rangle\rangle\}$ where `singleton' is a reserved
 label.
  
 \section{Join types}
@@ -844,18 +846,19 @@ where `ord' and `typ' are reserved labels (``order'', ``type'').
 $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$
 \end{display} 
-\textit{has dependent function types} if
+\textit{has dependent function types} (Chapter~\ref{ch:infex},
+p.~\pageref{ex:dep-fun-types}) if
 \begin{enumerate} 
  
 \item for any $n>0$, $T \in \mathbf{Type}^n$ and
-  $\mathcal{F}:_{\mathbf{TYPE}_{\mathit{IC}_n}}(T\rightarrow\mathit{Type^n})$,
-  $((a:T)\rightarrow \mathcal{F}(a)) \in \mathbf{Type}^n$ 
+  $\mathcal{T}:_{\mathbf{TYPE}_{\mathit{IC}_n}}(T\rightarrow\mathit{Type^n})$,
+  $((a:T)\rightarrow \mathcal{T}(a)) \in \mathbf{Type}^n$ 
  
 \item for each $n>0$,
-$f:_{\mathbf{TYPE}_{\mathit{IC}_n}}((a:T)\rightarrow \mathcal{F}(a))$
+$f:_{\mathbf{TYPE}_{\mathit{IC}_n}}((a:T)\rightarrow \mathcal{T}(a))$
 iff $f$ is a function whose domain is $\{a\mid
 a:_{\mathbf{TYPE}_{\mathit{IC}_n}}T\}$ and such that for any $a$ in the
-domain of $f$, $f(a):_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathcal{F}(a)$.
+domain of $f$, $f(a):_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathcal{T}(a)$.
    
  
 \end{enumerate} 

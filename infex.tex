@@ -1076,6 +1076,26 @@ empty list.  % We use $\mathrm{list}(T)$ to represent the type of lists
 \end{subex}
 \label{ex:InfoState-InitInfoState}
 \end{ex}
+The type \textit{RecType} is the type of record types, that is, the
+witnesses for this type will be record types.  Just like the type
+\textit{Type}, \textit{RecType} should have a superscript as in
+\textit{RecType}$^n$, representing
+the order with which it is associated in the stratification of the
+type system.  This was made precise in Chapter~\ref{ch:percint},
+p.~\pageref{ex:int-ndrectype-sys}ff.  As with \textit{Type},
+we ignore the stratification order superscript except where it becomes
+important to mention it. For any type, $T$, $\mathrm{list}(T)$ is also
+a type, the type whose witnesses are lists all of whose members are of
+type $T$.  Suppose that $a,b,c$ are of type $T$, then the list
+$[a,b,c]$ is of type $\mathrm{list}(T)$.  In \preveg{b}, $[\ ]$
+represents the empty list.  The field in this type is an example of a
+manifest field \citep{CoquandPollackTakeyama2004}.  We use the
+notation \smallrecord{\smallmfield{$\ell$}{$a$}{$T$}} to represent
+\smallrecord{\smalltfield{$\ell$}{$T_a$}} where $T_a$ is a type such
+that $b:T_a$ just in case $b:T$ and $b=a$, that is it either has no
+witnesses because $a$ is not of type $T$ or it has exactly one
+witness, $a$, of type $T$.  We call $T_a$ a \textit{singleton type}.  We
+introduce list types and singleton types in detail below.
 
 \begin{shaded}
 We can introduce lists and list types into our type systems by the
@@ -1145,6 +1165,48 @@ For $\Gamma$ a system of complex types with list types
 (\ref{ex:listtypes}).  \preveg{b} gives an inductive definitions of
 the set of witnesses for an arbitrary list type and corresponds to
 clause~2 of (\ref{ex:listtypes}).
+
+We introduce singleton types by the definition in \nexteg{}, repeated
+in Appendix~\ref{app:singletontypes}.
+\begin{ex} 
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  singleton types} if
+\begin{enumerate} 
+ 
+\item for any $T,T' \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T'$, $T_a \in \textbf{Type}$ 
+ 
+\item for any $T,T' \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T'$, 
+$b:_{\mathbf{TYPE_C}}T_a$ iff  $b:_{\mathbf{TYPE_C}}T$ and $a=b$
+   
+ 
+\end{enumerate}
+\label{ex:singleton-types} 
+\end{ex}
+
+In our informal proof theoretic notation we can characterize type
+systems with singleton types as in \nexteg{}.
+\begin{ex} 
+For $\Gamma$ a system of complex types with singleton types
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{Type}} 
+\hypo{\Gamma\vdash a:T'}
+\infer2{\Gamma\vdash T_a\in\textbf{Type}}
+\end{prooftree}
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash a=b:T}
+\infer1{\Gamma\vdash b:T_a}
+\end{prooftree} 
+ 
+\end{subex} 
+   
+\end{ex} 
+   
+  
     
 \end{shaded} 
 
@@ -1224,13 +1286,20 @@ the final state to the initial state.  In order to prevent the loop we
 would have to distinguish the type corresponding to the initial and
 final states. 
 
-Note that the functions in \preveg{}, with the exception of the
-function listed first, are of the
-type \nexteg{}.
+The first function listed in \preveg{} is of the type \nexteg{a}.  It
+maps an initial information state, that is, with an empty agenda, to a
+record type where the type of event where the human, $a$, picks up the
+stick $c$ is on the agenda.  The remaining functions are of type
+\nexteg{b}. They map an information state where some type is on the
+agenda and an event of that type to a new type of information state
+where the next type to be realized in the game is on the agenda.
 \begin{ex}
-(($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))
+\begin{subex}
+\item (\textit{InitInfoState}$\rightarrow$\textit{RecType})
+\item (($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))
+\end{subex}
 \end{ex}
-\preveg{} is a dependent function type.  A function of this type maps
+\preveg{b} is a dependent function type.  A function of this type maps
 something, $r$, of type \textit{InfoState} as characterized in
 (\ref{ex:InfoState-InitInfoState}a), to a function from records of the
 first type on the list in the `agenda'-field in $r$ to a record type.
@@ -1244,12 +1313,36 @@ difference between $(T_1\rightarrow T_2)$ and $(a:T_1)\rightarrow
 T_2\dep{a}$.
 \begin{shaded}
 We can introduce dependent function types into our type systems as in
-\nexteg{}.
+\nexteg{}, repeated in Appendix~\ref{app:int}.
 \begin{ex} 
+An intensional system of complex types \textbf{TYPE}$_\mathit{IC}$,
+\begin{display}
+{\bf TYPE$_\mathit{IC}$} = $\langle${\bf Type}$^n$, {\bf BType},
+$\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F^n\rangle$$\rangle_{n\in\mathit{Nat}}$
+\end{display} 
+\textit{has dependent function types} if
+\begin{enumerate} 
  
+\item for any $n>0$, $T \in \mathbf{Type}^n$ and
+  $\mathcal{T}:_{\mathbf{TYPE}_{\mathit{IC}_n}}(T\rightarrow\mathit{Type^n})$,
+  $((a:T)\rightarrow \mathcal{T}(a)) \in \mathbf{Type}^n$ 
+ 
+\item for each $n>0$,
+$f:_{\mathbf{TYPE}_{\mathit{IC}_n}}((a:T)\rightarrow \mathcal{T}(a))$
+iff $f$ is a function whose domain is $\{a\mid
+a:_{\mathbf{TYPE}_{\mathit{IC}_n}}T\}$ and such that for any $a$ in the
+domain of $f$, $f(a):_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathcal{T}(a)$.
+   
+ 
+\end{enumerate} 
+\label{ex:dep-fun-types} 
 \end{ex} 
   
 \end{shaded}
+
+@@
+
 That is, they map an information state containing an agenda (modelled
 as a record containing an agenda field) and an
 event (modelled as a record) to a record type.   This is true of all
