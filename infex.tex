@@ -11,8 +11,7 @@ situations which are events, that is, those situations in which a
 change takes place.  In Section~\ref{sec:ev-strings} we will introduce
 string types which enable us to treat events as strings of smaller events.
 
-\section{The string theory of events}\todo{Moved from Ch. 1.  In the
-  process of integrating.}
+\section{The string theory of events}
 \label{sec:ev-strings}
 
 Kim stands and watches the boy and the dog for a while.  They start to
@@ -1334,11 +1333,53 @@ iff $f$ is a function whose domain is $\{a\mid
 a:_{\mathbf{TYPE}_{\mathit{IC}_n}}T\}$ and such that for any $a$ in the
 domain of $f$, $f(a):_{\mathbf{TYPE}_{\mathit{IC}_n}}\mathcal{T}(a)$.
    
- 
+
+   
 \end{enumerate} 
 \label{ex:dep-fun-types} 
-\end{ex} 
-  
+\end{ex}
+
+We can express this in our formal proof theoretic notation as
+\nexteg{}.
+\begin{ex} 
+For $\{\Gamma^n\}_{n\in\textit{Nat}}$ an intensional system with
+complex types and dependent function types
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma^n\vdash T\in\textbf{Type}^n}
+\hypo{\Gamma^n\vdash\mathcal{T}:(T\rightarrow\textit{Type}^n)}
+\infer2{\Gamma^n\vdash((a:T)\rightarrow\mathcal{T}(a))\in\textbf{Type}^n}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\hypo{[\Gamma^n\vdash a:T]}
+\ellipsis{}{\Gamma^n\vdash f(a):\mathcal{T}(a)}
+\infer1{\Gamma^n\vdash f:((a:T)\rightarrow\mathcal{T}(a))}
+\end{prooftree}
+\hspace*{2em}
+\begin{prooftree}
+\hypo{\Gamma^n\vdash f:((a:T)\rightarrow\mathcal{T}(a))}
+\hypo{\Gamma^n\vdash f(a):\mathcal{T}(a)}
+\infer2{\Gamma^n\vdash a:T}
+\end{prooftree} 
+ 
+\end{subex} 
+   
+\end{ex}  
+\preveg{a} introduces dependent function types.  \preveg{b}
+characterizes what it means for a function to be a witness for a
+dependent function type.  The first rule says that if, assuming $a:T$,
+we can conclude that $f(a):\mathcal{T}(a)$, then $f$ is of the
+dependent function type $((a:T)\rightarrow\mathcal{T}(a))$.  The
+second rule says that if a function $f$ is of this type and $f$
+applied to some object $a$ is of type $\mathcal{T}(a)$ then $a:T$.  We
+have included this second rule in order to require that the domain
+type of $f$ is $T$.  The first rule requires that $f$ will be
+defined on anything of type $T$ and the second requires that anything
+the function is defined on is of type $T$, that is, a function $f$ of
+type $((a:T)\rightarrow\mathcal{T}(a))$ is defined on all and only
+witnesses of $T$.  
 \end{shaded}
 
 @@
