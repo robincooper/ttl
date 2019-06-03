@@ -1297,6 +1297,7 @@ where the next type to be realized in the game is on the agenda.
 \item (\textit{InitInfoState}$\rightarrow$\textit{RecType})
 \item (($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))
 \end{subex}
+\label{ex:gamerules-types}
 \end{ex}
 \preveg{b} is a dependent function type.  A function of this type maps
 something, $r$, of type \textit{InfoState} as characterized in
@@ -1382,19 +1383,52 @@ type $((a:T)\rightarrow\mathcal{T}(a))$ is defined on all and only
 witnesses of $T$.  
 \end{shaded}
 
-@@
 
-That is, they map an information state containing an agenda (modelled
-as a record containing an agenda field) and an
-event (modelled as a record) to a record type.   This is true of all
-except for the function corresponding to the initial state which is of
-type \nexteg{}.
-\begin{ex}
-(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$\textit{RecType})
+
+We can think of the set (\ref{eg:fetch-update-funs} of update
+functions as the set of rules which
+define the game.  The rules in this game are either of type
+(\ref{ex:gamerules-types}a) or (\ref{ex:gamerules-types}b).  That is,
+they are all of the \textit{join type} in \nexteg{}.
+\begin{ex} 
+((\textit{InitInfoState}$\rightarrow$\textit{RecType})$\vee$(($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType})) 
+\end{ex} 
+In general we can say that for any two types, $T_1$ and $T_2$, there
+is another type $(T_1\vee T_2)$ and that $a:(T_1\vee T_2)$ just in case
+either $a:T_1$ or $a:T_2$.  Join types can also be called union or
+disjunctive types.
+
+@@  
+
+\begin{shaded}
+We can introduce join types formally as in
+\nexteg{}, repeated in Appendix~\ref{app:jointypes}.
+\begin{ex} 
+ 
 \end{ex}
-That is, it maps an information state directly to a record type and does not
-require an event.  We can think of this set as the set of rules which
-define the game.  It is of the type \nexteg{}.
+In our informal proof theoretic notation this can be expressed as
+\nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+For many purposes it may be an unwanted consequence that the types
+$T_1\vee T_2$ and $T_2\vee T_1$ are distinct types, albeit with the
+same set of witnesses.  For cases where this is not desired we
+introduce \textit{generalized join types} as in \nexteg{}, repeated in
+Appendix~\ref{app:jointypes}.
+\begin{ex} 
+ 
+\end{ex} 
+In our informal proof theoretic notation, this is expressed as
+\nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+We can then, if desired, use the notation $(T_1\vee T_2\vee\ldots\vee T_n)$ to
+express $\bigvee\{T_1,T_2,\ldots,T_n\}$.       
+\end{shaded}  
+
+It is of the type \nexteg{}.
 \begin{ex}
 \{((\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$(\textit{Rec}$\rightarrow$\textit{RecType}))$\vee$(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$\textit{RecType}))\}
 \end{ex}
