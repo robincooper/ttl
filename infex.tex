@@ -1404,14 +1404,75 @@ disjunctive types.
 We can introduce join types formally as in
 \nexteg{}, repeated in Appendix~\ref{app:jointypes}.
 \begin{ex} 
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has join
+  types} if 
+
+\begin{enumerate} 
  
+\item for any $T_1,T_2 \in \mathbf{Type}$, $(T_1\vee T_2) \in \mathbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $a:_{\mathbf{TYPE_C}}(T_1\vee T_2)$ iff
+  $a:_{\mathbf{TYPE_C}}T_1$ or $a:_{\mathbf{TYPE_C}}T_2$ 
+ 
+\end{enumerate} 
+\label{ex:jointypes}
 \end{ex}
 In our informal proof theoretic notation this can be expressed as
 \nexteg{}.
 \begin{ex} 
+For $\Gamma$ a system of complex types with join types:
+\begin{subex} 
  
-\end{ex} 
-For many purposes it may be an unwanted consequence that the types
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T_1\in\textbf{Type}}
+\hypo{\Gamma\vdash T_2\in\textbf{Type}}
+\infer2{\Gamma\vdash (T_1\vee T_2)\in\textbf{Type}}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash a:T_1}
+\hypo{\Gamma\vdash T_2\in\textbf{Type}}
+\infer2{\Gamma\vdash a:(T_1\vee T_2)}
+\end{prooftree}
+\hspace*{2em}
+\begin{prooftree}
+\hypo{\Gamma\vdash T_1\in\textbf{Type}}
+\hypo{\Gamma\vdash a:T_2}
+\infer2{\Gamma\vdash a:(T_1\vee T_2)}
+\end{prooftree}
+\hspace*{2em}
+\begin{prooftree}
+\hypo{\Gamma\vdash a:(T_1\vee T_2)}
+\hypo{[\Gamma\vdash x:T_1]}
+\ellipsis{}{\Gamma\vdash x:T}
+\hypo{[\Gamma\vdash x:T_2]}
+\ellipsis{}{\Gamma\vdash x:T}
+\infer3{\Gamma\vdash a:T}
+\end{prooftree} 
+ 
+\end{subex} 
+  
+\end{ex}
+\preveg{a} tells us that for any two types in the system there is a
+join type which can be constructed from them.  The first two rules in \preveg{b}
+tell us it is sufficient for an object to be a witness of one of the
+two types in order to be a witness for the join type.  The third rule
+tells us that if something, $a$, is a witness for a join type and there is
+some type, $T$, such that we can show that witnesses for either of the two
+types used to construct the join type are also witnesses for $T$, then
+$a$ is a witness for $T$.
+
+ 
+We specify that $(T_1\vee T_2)$
+represents the labelled set \nexteg{}
+\begin{ex}
+$\{\langle\mathrm{disj}_1,T_1\rangle,\langle\mathrm{disj_2},T_2\rangle\}$
+\end{ex}
+where `disj$_1$' and `disj$_2$' are reserved labels
+(``disjunct''). For many purposes it may be an unwanted consequence of
+this characterization of join types that the types
 $T_1\vee T_2$ and $T_2\vee T_1$ are distinct types, albeit with the
 same set of witnesses.  For cases where this is not desired we
 introduce \textit{generalized join types} as in \nexteg{}, repeated in
