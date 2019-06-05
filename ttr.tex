@@ -17,15 +17,24 @@ In this version we
 will assume that our set theory comes equipped with a set of
 \textit{urelements} (entities which are not sets but which can be
 members of sets).  We will assume that among the urelements is a countably infinite
-set which is designated as the set of labels.  A \textit{labelled set}
+set which is designated as the set of \textit{labels}. In addition we assume
+that among the urelements there is a finite or countably infinite set,
+disjoint from the set of labels, designated as the set of
+\textit{flavours}.  An \textit{(unflavoured) labelled set}
 (Chapter~\ref{ch:percint}, p.~\pageref{sec:labelled-sets}) is a set
 of ordered pairs whose first member is a label and whose second
 element is either an urelement which is not a label or a set (possibly a labelled
 set), such that no more than one ordered pair can contain any
 particular label as its first member.  This means that a labelled set
 is the traditional set theoretic construction of an extensional
-function from a set of labels onto some set.  We refer to the first members of the pairs which constitute a
-labelled set as \textit{labels} use in the labelled set and we will refer to
+function from a set of labels onto some set. A \textit{flavoured
+labelled set} is an unflavoured labelled set, $X$, with the addition of
+some flavour, $\mathfrak{f}$, that is, $X\cup\{\mathfrak{f}\}$. We use
+flavours when we need to distinguish objects which correspond to the
+same set of ordered pairs.
+
+We refer to the first members of the pairs in a
+labelled set (flavoured or unfalvoured) as \textit{labels} used in the labelled set and we will refer to
 the second members of the ordered pairs as the \textit{labelled
   elements} of the labelled set.  If $X$ is a labelled set we use
 $\mathrm{labels}(X)$ to represent the set $\{\ell\mid\exists 
@@ -909,9 +918,7 @@ $\langle$\textbf{PType}$^n$, {\bf Pred}, \textbf{ArgIndices}, {\it
 
 
 
-In this section \todo{How do we distinguish between
-  records which contain types and the corresponding record type,
-  e.g. [x=$T$] and [x:$T$]?} we will define what it means for a system of complex
+In this section we will define what it means for a system of complex
 types to have record types.  The objects of record types, that is,
 records, are themselves structured mathematical objects of a
 particular kind and we will
@@ -1421,7 +1428,14 @@ changed back by $\eta^-$ and our claim will hold true.
 % \textbf{TYPE} with set of types \textbf{Type} and a set of labels $L$
 % iff for each field $\langle\ell,a\rangle\in r$, $\ell\in L$ and
 % either $a:_\mathbf{TYPE}T$ for some $T\in\mathbf{Type}$ or $a$ is
-% itself a record which is well-typed with respect to \textbf{TYPE} and $L$.
+% itself a record which is well-typed with respect to \textbf{TYPE}
+% and $L$.
+
+We will model record types as flavoured labelled sets (see
+Appendix~\ref{app:sets}) using a distinguished flavour `RT', the
+``record type flavour''.  This is to distinguish record types from
+records, which may in certain cases correspond to the same set of
+ordered pairs.
 
 A system of complex types \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
@@ -1436,16 +1450,16 @@ and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType}
 \item $\mathit{Rec}\in\mathbf{RType}$
 
 \item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a record according
-  to $\mathcal{L}$ and\textbf{TYPE$_C$}.
+  to $\mathcal{L}$ and \textbf{TYPE$_C$}.
 
 \item $\mathit{ERec}\in\mathbf{RType}$
 
 \item $r:_{\mathbf{TYPE}_C}\mathit{ERec}$ iff $r=\emptyset$
 
 \item if $\ell\in\mathcal{L}$ and $T\in\mathbf{Type}$, then
-  $\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
+  $\{\text{RT},\langle\ell,T\rangle\}\in\mathbf{RType}$.
 
-\item $r:_{\mathbf{TYPE}_C}\{\langle\ell,T\rangle\}$ iff
+\item $r:_{\mathbf{TYPE}_C}\{\text{RT},\langle\ell,T\rangle\}$ iff
   $r:_{\mathbf{TYPE}_C}\mathit{Rec}$, $\langle\ell,a\rangle\in r$ and
   $a:_{\mathbf{TYPE}_C}T$.
 
@@ -1459,8 +1473,8 @@ and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType}
  
 \end{enumerate}
 
-We say that $T$ is a \textit{proper} record type if it is a non-empty
-set of fields.\footnote{This terminology was not introduced in \cite{Cooper2012}.}\label{pg:proprectype} 
+% We say that $T$ is a \textit{proper} record type if it is a non-empty
+% set of fields.\footnote{This terminology was not introduced in \cite{Cooper2012}.}\label{pg:proprectype} 
 
 This gives us non-dependent record types in a system of complex types.
 We can extend this to intensional systems of complex types (with
@@ -1589,13 +1603,15 @@ in $r$,  $r.\pi_1:_{\mathbf{TYPE}_{\mathit{IC}_n}}T_1,\ldots,r.\pi_m:_{\mathbf{T
 
 
 
-We represent a record type $\{\langle\ell_1,T_1\rangle,\ldots,\langle\ell_n,T_n\rangle\}$
+We represent a record type $\{\text{RT},\langle\ell_1,T_1\rangle,\ldots,\langle\ell_n,T_n\rangle\}$
 graphically as
-\begin{display}
+\begin{quote}
 \record{\tfield{$\ell_1$}{$T_1$} \\
         \ldots \\
         \tfield{$\ell_n$}{$T_n$}}
-\end{display}
+\end{quote}
+
+
 In the case of a manifest field, that is, one containing a singleton
 type, as in $\langle\ell,T_a\rangle$, we display this
 \begin{display}

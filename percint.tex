@@ -1004,8 +1004,30 @@ labelled sets which are \textit{labellings} of \nexteg{a} would be \nexteg{b
 \end{subex} 
 \label{ex:labelled-sets}   
 \end{ex} 
-We will refer to the first members of the pairs which constitute a
-labelled set as \textit{labels} use in the labelled set and we will refer to
+
+We will also sometimes have need of adding flavours to our labelled
+sets when we need to model distinct objects which correspond to the
+same set of ordered pairs.  We will assume that there is a finite or
+countably infinite set of flavours among the urelements and that this
+set is disjoint from the set of labels.  A flavoured labelled set
+contains a single flavour, $\mathfrak{f}$, in addition to the ordered
+pairs.  Thus the labelled sets in \nexteg{} are examples of labelled
+sets with flavour $\mathfrak{f}$.
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\{\mathfrak{f},\langle\ell_0,a\rangle,\langle\ell_1,b\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$ 
+ 
+\item $\{\mathfrak{f},\langle\ell_0,\{\langle\ell_0,a\rangle,\langle\ell_1,b\rangle\}\rangle,\langle\ell_2,c\rangle,\langle\ell_3,d\rangle\}$  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
+We will refer to the first members of the pairs in a
+labelled set as \textit{labels} used in the labelled set and we will refer to
 the second members of the ordered pairs as the \textit{labelled
   elements} of the labelled set.  If $X$ is a labelled set, we will
 use $\mathrm{labels}(X)$ to represent the set of labels of $X$, that is,
@@ -1831,7 +1853,9 @@ represent records.  A record as given in \nexteg{a}
 \end{ex} 
 
 We now move to characterizing record types.  Record types are, with
-two exceptions of distinguished non-complex record types, labelled sets.  We first characterize
+two exceptions of distinguished non-complex record types, flavoured
+labelled sets using a flavour which we represent as `RT', the
+record-type flavour.  We first characterize
 type systems which have non-dependent record types (that is, record
 types which do not have dependent fields).  Non-dependent record types
 are labelled sets whose labelled elements are types.  We characterize a type
@@ -1849,16 +1873,16 @@ and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType} if
 \item $\mathit{Rec}\in\mathbf{RType}$
 
 \item $r:_{\mathbf{TYPE}_C}\mathit{Rec}$ iff $r$ is a record according
-  to $\mathcal{L}$ and\textbf{TYPE$_C$}.
+  to $\mathcal{L}$ and \textbf{TYPE$_C$}.
 
 \item $\mathit{ERec}\in\mathbf{RType}$
 
 \item $r:_{\mathbf{TYPE}_C}\mathit{ERec}$ iff $r=\emptyset$
 
 \item if $\ell\in\mathcal{L}$ and $T\in\mathbf{Type}$, then
-  $\{\langle\ell,T\rangle\}\in\mathbf{RType}$.
+  $\{\text{RT},\langle\ell,T\rangle\}\in\mathbf{RType}$.
 
-\item $r:_{\mathbf{TYPE}_C}\{\langle\ell,T\rangle\}$ iff
+\item $r:_{\mathbf{TYPE}_C}\{\text{RT},\langle\ell,T\rangle\}$ iff
   $r:_{\mathbf{TYPE}_C}\mathit{Rec}$, $\langle\ell,a\rangle\in r$ and
   $a:_{\mathbf{TYPE}_C}T$.
 
@@ -1937,14 +1961,14 @@ infinite set of labels:
 \item \begin{prooftree}
 \hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
 \hypo{\ell\in\mathcal{L}}
-\infer2{\Gamma,\mathcal{L}\vdash\{\langle\ell,T\rangle\}\in\text{RType}}
+\infer2{\Gamma,\mathcal{L}\vdash\{\text{RT},\langle\ell,T\rangle\}\in\text{RType}}
 \end{prooftree}
 
 \item \begin{prooftree}
 \hypo{\Gamma,\mathcal{L}\vdash r:\textit{Rec}}
 \hypo{\Gamma,\mathcal{L}\vdash a:T}
 \hypo{\langle\ell,a\rangle\in r} 
-\infer3{\Gamma,\mathcal{L}\vdash r:\{\langle\ell,T\rangle\}}
+\infer3{\Gamma,\mathcal{L}\vdash r:\{\text{RT},\langle\ell,T\rangle\}}
 \end{prooftree}
 
 \item \begin{prooftree}
@@ -2162,6 +2186,35 @@ to $R$. As usual, the force of the biconditional in
 is part of an inductive definition and it is the only rule which
 specifies under which conditions a record is a witness for the record
 type with the additional dependent field. 
+
+Note that both records and record types may contain types in their
+fields.  Minimal examples are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\field{$\ell$}{$T$}} 
+ 
+\item \record{\tfield{$\ell$}{$T$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The record and the type in \preveg{} are distinct objects which
+nevertheless seem to correspond to the same set of ordered pairs.  We
+distinguish them by modelling the record as an unflavoured labelled
+set and the record type as a flavoured labelled set as given in
+\nexteg{a and b} respectively.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\{\langle\ell,T\rangle\}$ 
+ 
+\item $\{\text{RT},\langle\ell,T\rangle\}$   
+ 
+\end{subex} 
+   
+\end{ex} 
+    
 
 
 % These types play a role in the ``propositions as types'' dictum which
