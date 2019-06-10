@@ -574,21 +574,21 @@ We add generalized join types which were not present in
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
   generalized join
-  types} if 
+  types} (Chapter~\ref{ch:infex}, p.~\pageref{ex:genjointypes}) if 
 
 \begin{enumerate} 
  
-\item for any finite set of types, $\mathbb{T}$, such that $\mathbb{T}
-  \subseteq\mathbf{Type}$, $\bigvee\mathbb{T} \in \mathbf{Type}$ 
+\item for any finite set of types, $\mathscr{T}$, such that $\mathscr{T}
+  \subseteq\mathbf{Type}$, $\bigvee\mathscr{T} \in \mathbf{Type}$ 
  
-\item for any finite $\mathbb{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigvee\mathbb{T}$ iff
-  $a:_{\mathbf{TYPE_C}}T$ for some $T\in\mathbb{T}$
+\item for any finite $\mathscr{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigvee\mathscr{T}$ iff
+  $a:_{\mathbf{TYPE_C}}T$ for some $T\in\mathscr{T}$
  
 \end{enumerate}
 
-We specify that $\bigvee\mathbb{T}$
+We specify that $\bigvee\mathscr{T}$
 represents the labelled set
-$\{\langle\mathrm{disj},\mathbb{T}\rangle\}$
+$\{\langle\mathrm{disj},\mathscr{T}\rangle\}$
 where `disj' is a reserved label (``disjunction'').
 
 \section{Meet types}
