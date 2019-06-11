@@ -1531,15 +1531,91 @@ We can then, if desired, use the notation $(T_1\vee T_2\vee\ldots\vee T_n)$ to
 express $\bigvee\{T_1,T_2,\ldots,T_n\}$.       
 \end{shaded}  
 
-@@
 
-It is of the type \nexteg{}.
+
+The set in (\ref{eg:fetch-update-funs}) is thus a set all of whose
+members are witness of type \textit{GameRule}, that is the set is of
+type $\mathrm{set}(\textit{GameRule})$.  For any type, $T$, there is a
+type $\mathrm{set}(T)$ whose witnesses are sets each of whose members
+are of type $T$. 
+
+\begin{shaded}
+We can introduce set types formally as in \nexteg{}, repeated in
+Appendix~\ref{app:settypes}.
 \begin{ex}
-\{((\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$(\textit{Rec}$\rightarrow$\textit{RecType}))$\vee$(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$\textit{RecType}))\}
-\end{ex}
-Let us call the type in \preveg{} \textit{GameRules}.  Sets of game
-rules of this type define the rules for specific participants as in
-(\ref{eg:fetch-update-funs}).  In order to characterize the game in
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has set types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $\mathrm{set}(T) \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+$X:_{\mathbf{TYPE_C}}\mathrm{set}(T)$ iff  $X$ is a set and 
+  for all $a\in X$, $a:_{\mathbf{TYPE_C}}T$
+   
+ 
+\end{enumerate} 
+ 
+\label{ex:settypes}
+\end{ex} 
+In our informal proof theoretic notations, this is expressed as
+\nexteg{}. 
+\begin{ex} 
+For $\Gamma$ a system of complex types with set types:
+\begin{subex} 
+ 
+\item \begin{prooftree}
+\hypo{\Gamma\vdash T\in\textbf{Type}}
+\infer1{\Gamma\vdash\mathrm{set}(T)\in\textbf{Type}}
+\end{prooftree} 
+ 
+\item \begin{prooftree}
+\hypo{X\ \textrm{set}}
+\hypo{[x\in X]}
+\ellipsis{}{\Gamma\vdash x:T}
+\infer2{X:\mathrm{set}(T)}
+\end{prooftree}
+\hspace*{2em}
+\begin{prooftree}
+\hypo{\Gamma\vdash X:\mathrm{set}(T)}
+\hypo{a\in X}
+\infer2{\Gamma\vdash a:T}
+\end{prooftree} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} tells us that for any type, $T$, there is another type
+$\mathrm{set}(T)$.  In \preveg{b} we use `$X$ set' to represent that
+$X$ is a set, in the sense of set theory.  The first rule in
+\preveg{b} tells that if we have a set, $X$, and a way of showing that any
+member of $X$ is of type $T$, then $X$ is of type $\mathrm{set}(T)$.
+The second rule tells us conversely that if we have a set of type
+$\mathrm{set}(T)$ then any member of $X$ is of type $T$.  The
+inference rules in \preveg{b} are presumably not rules that would be
+available in a constructive type theory in that they rely on the set
+theoretic notion of set (including infinite and non-denumerable sets)
+and it may not be decidable whether all the members of an arbitrary
+set are of type $T$ or not.  One strategy that can be used,  if we are
+concerned about this, is to limit the notion of set to those which are
+recursive.  For many of the applications we have in mind, finite sets
+are adequate.  For example, we would want probably want to limit games
+to having a finite set of rules.   
+
+\end{shaded}
+ 
+
+% It is of the type \nexteg{}.
+% \begin{ex}
+% \{((\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$(\textit{Rec}$\rightarrow$\textit{RecType}))$\vee$(\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}$\rightarrow$\textit{RecType}))\}
+% \end{ex}
+
+
+
+The set of game
+rules in
+(\ref{eg:fetch-update-funs}) gives the rules for specific
+participants, $a$, $b$ and $c$.  In order to characterize the game in
 general we need to abstract out the roles of the individual
 participants in the game.  This we will do by defining a function from
 a record containing individuals appropriate to play the roles in the
@@ -1607,11 +1683,13 @@ e$:\smallrecord{\smalltfield{e}{return($r^*$.d,$r^*$.s,$r^*$.h)}} . \\
 % e$:\smallrecord{\smalltfield{e}{return($b$,$c$,$a$)}} . \\
 % \hspace*{2em}\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{[pick\_up($a$,$c$)]}}]}{[\textit{RecType}]}}
  \end{tabular} \\
-\hspace*{\textwidth} \} 
+\hspace*{.7\textwidth} \} 
 \end{ex}
-\preveg{} is of type (\textit{Rec}$\rightarrow$\textit{GameRules})
+\preveg{} is of type (\textit{Rec}$\rightarrow$$\mathrm{set}(\textit{GameRule})$)
 which we will call \textit{Game}. 
   
+@@
+
 Specifying the rules of the game in terms of update functions in this way will not actually getting
 anything to happen, though.  For that we need type acts of the kind we
 discussed. We link the update functions to type acts by means of
