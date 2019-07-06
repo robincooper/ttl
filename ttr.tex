@@ -409,30 +409,33 @@ is to be the labelled set $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
-  non-empty list types} if
+  non-empty list types} (Chapter~\ref{ch:infex},
+p.~\pageref{ex:nelisttypes}) if
 \begin{enumerate} 
  
-\item for any $T \in \textbf{Type}$, $_{\mathit{ne}}[T] \in \textbf{Type}$ 
+\item for any $T \in \textbf{Type}$, $\mathrm{nelist}(T) \in \textbf{Type}$ 
  
 \item for any $T \in \textbf{Type}$, 
 \begin{enumerate} 
+
+\item $[a]:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff $a:T$
  
-\item $a\mid L:_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ iff
-  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ 
+\item $a\mid L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ 
  
-\item $[a]:_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ iff $a:T$
+
  
 \end{enumerate}
 
 \end{enumerate}
 
-If $a\mid L :_{\mathbf{TYPE_C}} {_{\mathit{ne}}[T]}$ for some system of
+If $a\mid L :_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ for some system of
 complex types {\bf TYPE$_C$} and type $T$, then we use fst($a\mid L$)
 to refer to $a$ and rst($a\mid L$) to refer to $L$.
 
-In contrast to \cite{Cooper2012} we here make it explcit that $[T]$
+In contrast to \cite{Cooper2012} we here make it explcit that $\mathrm{list}(T)$
 represents $\{\langle\mathrm{lst},T\rangle\}$ and
-${_{\mathit{ne}}[T]}$ represents $\{\langle\mathrm{nelst},T\rangle\}$
+$\mathrm{nelist}(T)$ represents $\{\langle\mathrm{nelst},T\rangle\}$
 where `lst' and `nelst' are reserved labels. 
 
 

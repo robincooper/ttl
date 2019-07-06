@@ -1285,23 +1285,35 @@ the final state to the initial state.  In order to prevent the loop we
 would have to distinguish the type corresponding to the initial and
 final states. 
 
-The first function listed in \preveg{} is of the type \nexteg{a}.  It
+The first function listed in \preveg{} is of the type \nexteg{}.
+\begin{ex} 
+(\textit{InitInfoState}$\rightarrow$\textit{RecType}) 
+\end{ex}   
+It
 maps an initial information state, that is, with an empty agenda, to a
 record type where the type of event where the human, $a$, picks up the
-stick $c$ is on the agenda.  The remaining functions are of type
-\nexteg{b}. They map an information state where some type is on the
+stick $c$ is on the agenda.
+
+The remaining functions all map information states of some type to a
+function.  For example, the first of these functions is of the type in
+\nexteg{}.
+\begin{ex} 
+(($r$:\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType})) 
+\end{ex} 
+They map an information state where some type is on the
 agenda and an event of that type to a new type of information state
 where the next type to be realized in the game is on the agenda.
-\begin{ex}
-\begin{subex}
-\item (\textit{InitInfoState}$\rightarrow$\textit{RecType})
-\item (($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))
-\end{subex}
-\label{ex:gamerules-types}
-\end{ex}
-\preveg{b} is a dependent function type.  A function of this type maps
-something, $r$, of type \textit{InfoState} as characterized in
-(\ref{ex:InfoState-InitInfoState}a), to a function from records of the
+% \begin{ex}
+% \begin{subex}
+% \item (\textit{InitInfoState}$\rightarrow$\textit{RecType})
+% \item
+%   (($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))\todo{This
+%     type is wrong}
+% \end{subex}
+% \label{ex:gamerules-types}
+% \end{ex}
+\preveg{} is a dependent function type.  A function of this type maps
+something, $r$, of type  \smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{pick\_up($a$,$c$)}}]}{$\mathrm{list}(\textit{RecType})$}}, to a function from records of the
 first type on the list in the `agenda'-field in $r$ to a record type.
 For any list, $L$, we use $\mathrm{fst}(L)$ to represent the first
 member of $L$.  Dependent functions are slightly more complex than the
@@ -1385,9 +1397,99 @@ witnesses of $T$.
 
 
 
-We can think of the set (\ref{eg:fetch-update-funs} of update
+We can think of the set (\ref{eg:fetch-update-funs}) of update
 functions as the set of rules which
-define the game.  The rules in this game are either of type
+define the game.  With the types we have so far these rules will not
+have a type in common.  All the rules, except for the first one listed
+will be defined on some type of information state with a
+non-empty agenda.  If $T$ is a type we will use $\mathrm{nelist}(T)$
+to represent the type of non-empty lists of objects of type $T$.
+\begin{shaded}
+We introduce the type of non-empty lists formally as in
+\nexteg{}, repeated in Appendix~\ref{app:listtypes}.
+\begin{ex}
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  non-empty list types} if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $\mathrm{nelist}(T) \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+\begin{enumerate} 
+
+\item $[a]:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff $a:T$
+ 
+\item $a\mid L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ 
+ 
+
+ 
+\end{enumerate}
+
+\end{enumerate}
+ 
+  
+
+\label{ex:nelisttypes}
+\end{ex}
+
+In our informal proof theoretic notation this can be expressed as
+\nexteg{}.
+\begin{ex} 
+  For $\Gamma$ a system of complex types with non-empty list types:
+\begin{subex} 
+ 
+\item \begin{prooftree}
+    \hypo{\Gamma\vdash T\in\textbf{Type}}
+    \infer1{\Gamma\vdash \mathrm{nelist}(T)\in\textbf{Type}}
+    \end{prooftree}
+ 
+  \item \begin{prooftree}
+      \hypo{\Gamma\vdash a:T}
+      \infer1{\Gamma\vdash [a]:\mathrm{nelist}(T)}
+    \end{prooftree}
+    \hspace*{2em}
+    \begin{prooftree}
+      \hypo{\Gamma\vdash a:T}
+      \hypo{\Gamma\vdash L:\mathrm{nelist}(T)}
+      \infer2{\Gamma\vdash a\mid L:\mathrm{nelist}(T)}
+    \end{prooftree}
+    
+ 
+\end{subex} 
+  
+\end{ex}
+  
+\end{shaded}
+
+We might think that all the functions listed in
+(\ref{eg:fetch-update-funs}) are of the type \nexteg{}.
+\begin{ex} 
+(($r$:\smallrecord{\smalltfield{agenda}{$\mathrm{nelist}(\textit{RecType})$}}))$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType})) 
+\end{ex}
+This would, however, be incorrect since functions of the type
+\preveg{} would have to be defined on all information states with a
+non-empty agenda.  However,  the functions in
+(\ref{eg:fetch-update-funs}) are only defined on some of the
+information states with a non-empty agenda, since they require a
+particular type to be on the agenda.  That is they are
+ \textit{partial} functions on information states with
+non-empty agenda. We shall use $(T_1\rightharpoonup T_2)$ to represent
+the type of partial functions from objects of type $T_1$ to objects of
+type $T_2$.  Functions of this type are not arbitrary partial
+functions but those which are of some total function type
+$(T\rightarrow T_2)$ such that any object of type $T$ is also of type
+$T_1$.  That is, we only consider partial functions which are total
+functions on the objects of some type.
+
+\begin{shaded}
+We can characterize this formally by \nexteg{}, repeated in Appendix~\ref{app:funtypes}.
+\end{shaded}
+
+  
+@@ The rules in this game are either of type
 (\ref{ex:gamerules-types}a) or (\ref{ex:gamerules-types}b).  That is,
 they are all of the \textit{join type} in \nexteg{}, which we will
 call \textit{GameRule}.
