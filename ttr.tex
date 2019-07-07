@@ -278,8 +278,37 @@ where `dmn' (``domain'') and `rng' (``range'') are reserved labels.
 We also introduce a limited kind of polymorphism is function types
 which we did not have in \cite{Cooper2012}.
 
-
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with function types
+\textit{has
+  partial function types} (Chapter~\ref{ch:infex},
+p.~\pageref{ex:partialfuntypes}) if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$,
+  $(T_1\rightharpoonup T_2) \in \textbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$,
+  $f:_{\mathbf{TYPE_C}}(T_1\rightharpoonup T_2)$ iff there is some type $T'$ such that
+  $f:(T'\rightarrow T_2)$ and for any $a$, if $a:T'$ then $a:T_1$
+   
+ 
+\end{enumerate}
+
+We
+specify the type $(T_1\rightharpoonup T_2)$   to be the labelled set
+
+$\{\langle\mathrm{partdmn},T_1\rangle,\langle\mathrm{rng},T_2\rangle\}$
+
+where `partdmn' (``polymorphic domain'') and `rng' (``range'') are
+reserved labels (`rng' being the same reserved label that was used for
+non-polymorphic function types).
+
+
+
+
+A\todo{Do we want both these definitions?} system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
   polymorphic function types} if

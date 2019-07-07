@@ -1287,7 +1287,8 @@ final states.
 
 The first function listed in \preveg{} is of the type \nexteg{}.
 \begin{ex} 
-(\textit{InitInfoState}$\rightarrow$\textit{RecType}) 
+  (\textit{InitInfoState}$\rightarrow$\textit{RecType})
+  \label{ex:initrule}
 \end{ex}   
 It
 maps an initial information state, that is, with an empty agenda, to a
@@ -1485,16 +1486,88 @@ $T_1$.  That is, we only consider partial functions which are total
 functions on the objects of some type.
 
 \begin{shaded}
-We can characterize this formally by \nexteg{}, repeated in Appendix~\ref{app:funtypes}.
-\end{shaded}
-
+We can characterize this formally by \nexteg{}, repeated in
+Appendix~\ref{app:funtypes}.
+\begin{ex}
+  A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with function types
+\textit{has
+  partial function types} if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$,
+  $(T_1\rightharpoonup T_2) \in \textbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \textbf{Type}$,
+  $f:_{\mathbf{TYPE_C}}(T_1\rightharpoonup T_2)$ iff there is some type $T'$ such that
+  $f:(T'\rightarrow T_2)$ and for any $a$, if $a:T'$ then $a:T_1$
+   
+ 
+\end{enumerate}
   
-@@ The rules in this game are either of type
-(\ref{ex:gamerules-types}a) or (\ref{ex:gamerules-types}b).  That is,
+
+  \label{ex:partialfuntypes}
+\end{ex}
+This can be expressed in our informal proof theoretic notation as
+\nexteg{}. 
+\begin{ex} 
+  For $\Gamma$ a system of complex types with partial function types:
+  \begin{subex} 
+ 
+  \item \begin{prooftree}
+      \hypo{\Gamma\vdash T_1\in\textbf{Type}}
+      \hypo{\Gamma\vdash T_2\in\textbf{Type}}
+      \infer2{\Gamma\vdash(T_1\rightharpoonup T_2)\in\textbf{Type}}
+      \end{prooftree}
+ 
+  \item \begin{prooftree}
+      \hypo{\Gamma\vdash f:(T\rightarrow T_2)}
+      \hypo{[\Gamma\vdash x:T]}
+      \ellipsis{}{\Gamma\vdash x:T_1}
+      \infer2{\Gamma\vdash f:(T_1\rightharpoonup T_2)}
+    \end{prooftree}
+
+    \medskip
+    
+    \hspace*{2em}
+    \begin{prooftree}
+      \hypo{\Gamma\vdash f:(T_1\rightharpoonup T_2)}
+      \hypo{a\in\mathrm{dom}(f)}
+      \infer2{\Gamma\vdash a:T_1}
+    \end{prooftree}
+    \hspace*{2em}
+    \begin{prooftree}
+      \hypo{\Gamma\vdash f:(T_1\rightharpoonup T_2)}
+      \hypo{a\in\mathrm{dom}(f)}
+      \infer2{\Gamma\vdash f(a):T_2}
+     \end{prooftree}   
+ 
+\end{subex}
+  
+\end{ex}
+
+Essentially these definitions characterize a type $(T_1\rightharpoonup
+T_2)$ as a limited kind of \textit{polymorphic} function type.  That
+is, a function will be of this type just in case it is a witness for
+one of many types $(T\rightarrow T_2)$ where any witness for type $T$
+is also a witness for type $T_1$.
+  
+  
+\end{shaded}
+  
+The rules in the game (\ref{eg:fetch-update-funs}) are either of type
+(\ref{ex:initrule}) or \nexteg{}.
+\begin{ex} 
+(($r$:\smallrecord{\smalltfield{agenda}{$\mathrm{nelist}(\textit{RecType})$}}))$\rightharpoonup$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))  
+\end{ex} 
+  
+
+That is,
 they are all of the \textit{join type} in \nexteg{}, which we will
 call \textit{GameRule}.
 \begin{ex} 
-((\textit{InitInfoState}$\rightarrow$\textit{RecType})$\vee$(($r$:\textit{InfoState})$\rightarrow$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType})) 
+((\textit{InitInfoState}$\rightarrow$\textit{RecType})$\vee$(($r$:\smallrecord{\smalltfield{agenda}{$\mathrm{nelist}(\textit{RecType})$}}))$\rightharpoonup$($\mathrm{fst}(r.\text{agenda})$$\rightarrow$\textit{RecType}))) 
 \end{ex} 
 In general we can say that for any two types, $T_1$ and $T_2$, there
 is another type $(T_1\vee T_2)$ and that $a:(T_1\vee T_2)$ just in case
@@ -1787,62 +1860,92 @@ e$:\smallrecord{\smalltfield{e}{return($r^*$.d,$r^*$.s,$r^*$.h)}} . \\
  \end{tabular} \\
 \hspace*{.7\textwidth} \} 
 \end{ex}
-\preveg{} is of type (\textit{Rec}$\rightarrow$$\mathrm{set}(\textit{GameRule})$)
+\preveg{} is of type $(\textit{Rec}\rightharpoonup\mathrm{set}(\textit{GameRule}))$
 which we will call \textit{Game}. 
   
-@@
+
 
 Specifying the rules of the game in terms of update functions in this way will not actually getting
 anything to happen, though.  For that we need type acts of the kind we
 discussed. We link the update functions to type acts by means of
-\textit{licensing conditions on type acts}.  A basic licensing
+\textit{licensing conditions on type acts} which we can also refer to
+as action rules as discussed in Section~\ref{sec:typeacts}.  A basic licensing
 condition is that an agent can create (or contribute to the creation
 of) a witness for the first type that occurs on the agenda in its
 information state.  Such a licensing condition is expressed in
-\nexteg{}.
+\nexteg{} where we use $s_{i,A}$ to represent the current information
+state of the agent $A$.
 \begin{ex} 
-If $A$ is an agent, $s_i$ is $A$'s current information state, \\ $s_i
-:_A$ \record{\mfield{agenda}{$T\!\mid\!
-    R\ $}{[\textit{RecType}]}}, then $:_A T!$ is licensed. 
+% If $A$ is an agent, $s_i$ is $A$'s current information state, \\ $s_i
+% :_A$ \record{\mfield{agenda}{$T\!\mid\!
+%     R\ $}{[\textit{RecType}]}}, then $:_A T!$ is licensed.
+\begin{prooftree}
+\hypo{s_{i,A}:_A\text{\record{\tfield{agenda}{$\mathrm{nelist}(\textit{RecType})$}}}}
+\infer[enth]1{:_A \mathrm{fst}(s_{i,A}.\text{agenda})!}
+\end{prooftree} 
 \end{ex}
-(Here we use the notation $T\!\mid\!R$ to represent a list whose first
-member is $T$ and whose rest is $R$.  For example, if the list is
-$[T_1,T_2,T_3]$ then $T$ would correspond to $T_1$ and $R$ would
-correspond to $[T_2,T_3]$. See Appendix~\ref{app:listtypes}.) 
+% (Here we use the notation $T\!\mid\!R$ to represent a list whose first
+% member is $T$ and whose rest is $R$.  For example, if the list is
+% $[T_1,T_2,T_3]$ then $T$ would correspond to $T_1$ and $R$ would
+% correspond to $[T_2,T_3]$. See Appendix~\ref{app:listtypes}.) 
 
-Update functions of the kind we have discussed are handled by the
-licensing conditions in \nexteg{}.
+Update functions (or game rules) of the kind we have discussed are handled by the
+licensing conditions in \nexteg{}, where we use $f$ to represent an
+update function available to the agent, $A$, and $e$ an event currently
+observed by the agent.  As before $s_{i,A}$ refers to $A$'s current
+information state and $s_{i+1,A}$ is used to refer to $A$'s updated
+information state.
 \begin{ex} 
 \begin{subex} 
  
-\item If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
-function, $A$ is an agent, $s_i$ is $A$'s current information state,
-$s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), then an event $e:_A
-T_2$ (and $e:T_2$) licenses $s_{i+1}:_A f(s_i)(e)$. 
+\item % If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
+% function, $A$ is an agent, $s_i$ is $A$'s current information state,
+% $s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), then an event $e:_A
+% T_2$ (and $e:T_2$) licenses $s_{i+1}:_A f(s_i)(e)$.
+
+\begin{prooftree}
+  \hypo{f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))}
+  \hypo{s_{i,A}:_A T_1}
+  \hypo{e:_A T_2}
+  \infer[enth]3{s_{i+1,A}:_A f(s_{i,A})(e)}
+\end{prooftree}
+
  
-\item If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
-function, $A$ is an agent, $s_i$ is $A$'s current information state,
-$s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), $s_{i+1}:_A
-f(s_i)$ is licensed. 
+\item % If $f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))$ is an update
+% function, $A$ is an agent, $s_i$ is $A$'s current information state,
+% $s_i:_A T_i$, $T_i\sqsubseteq T_1$ (and $s_i:T_1$), $s_{i+1}:_A
+% f(s_i)$ is licensed.
+
+\begin{prooftree}
+  \hypo{f:(T\rightarrow\textit{Type})}
+  \hypo{s_{i,A}:_A T}
+  \infer[enth]2{s_{i+1,A}:_A f(s_{i,A})}
+\end{prooftree}
+
  
 \end{subex} 
    
 \end{ex} 
 \preveg{a} is for the case where the update function requires an event in
-order to be triggered and \preveg{b} is for the case where no event is
-required. There are two variants of licensing conditions which can be
-considered.  One variant is where the licensing conditions rely only
-on the agent's judgement of information states and events occurring.
-The other variant is where in addition we require that the information
-states and events actually are of the types which the agent judges
-them to be of.  (These conditions are represented in parentheses in
-\preveg{}.)  In practical terms an agent has to rely on its own
-judgement, of course, and there is one sense in which any resulting
-action is licensed even if the agent's judgement was mistaken.  There
-is another stricter sense of license which requires the agent's
-judgement to be correct.  In the real world, though, the only way we
-have of judging a judgement to be correct is to look at judgements by
-other agents.
+order to be triggered and is thereby licensed (or ``afforded'') to
+judge their updated information state as being of the type resulting
+from applying the update function to their current information state
+and the observed event. \preveg{b} is for the case where no event is
+required. We can think of updates to the information state licensed by
+this as \textit{tacit} updates, that is, updates that do not require
+an external event such as a speech event or move in a game.  % There are two variants of licensing conditions which can be
+% considered.  One variant is where the licensing conditions rely only
+% on the agent's judgement of information states and events occurring.
+% The other variant is where in addition we require that the information
+% states and events actually are of the types which the agent judges
+% them to be of.  (These conditions are represented in parentheses in
+% \preveg{}.)  In practical terms an agent has to rely on its own
+% judgement, of course, and there is one sense in which any resulting
+% action is licensed even if the agent's judgement was mistaken.  There
+% is another stricter sense of license which requires the agent's
+% judgement to be correct.  In the real world, though, the only way we
+% have of judging a judgement to be correct is to look at judgements by
+% other agents.
 
 Licensing conditions will regulate the coordination of
 successfully realized games like fetch.  They enable the agents to
@@ -1913,7 +2016,7 @@ regarded as strings of smaller events.  Consider the dialogue excerpt
 \nexteg{} from the British National Corpus which is the beginning of a
 consultation between a patient (John) and a doctor (Anon 1).
 
-\begin{figure}
+%\begin{figure}
 \begin{ex} 
 \begin{tabular}[t]{ll}
 John:	&	Hello doctor. \\
@@ -1939,10 +2042,10 @@ Anon 1:	&	[I can see]$_2$
 
 \label{ex:dryskin}
 \end{ex} 
-\end{figure}
+%\end{figure}
 
 We might assign the whole dialogue of which this is a part to a genre
-type for patient doctor consultation.\footnote{For a recent discussion
+type for patient doctor consultation.\footnote{For a discussion
   of genre in the kind of framework that we are describing see
   \cite{Ginzburg2010,Ginzburg2012}.}  The genre type could be
 seen as an event type which, like the type for the game of fetch
@@ -1999,7 +2102,7 @@ phonological and phonetic theory).  For example, the pronunciation of
 the phoneme /k/ in ``kit'' is distinct from its pronunciation in
 ``cat'' due to the influence of the following vowel. Suppose that the
 dimensions of phoneme utterance events are given by place, manner,
-rounding, voicing and nasal.  Then we might represent the type of an
+rounding, voicing and nasality.  Then we might represent the type of an
 utterance of /k/ as
 \begin{ex} 
 \record{\tfield{place}{\textit{Velar}}\\
@@ -2220,7 +2323,8 @@ the doctor's utterance of \textit{Hello} in (\ref{ex:dryskin}) does
 not tell us anything about a described situation external to the
 current conversation, although it does give us information about where
 we are in the conversation (the beginning) and indicate that the
-doctor is paying attention.  We shall say that the former utterance
+doctor is paying attention.  We shall say that the former utterance is
+associated
 with a type of described situation and call this the \textit{content}
 of the utterance.  A situation type is an appropriate content for a
 declarative sentence used to make an assertion.\footnote{We will
@@ -2393,6 +2497,9 @@ can give the more detail type in \nexteg{}.
 \tfield{e$_2$}{conductor(dudamel)}}}}
 \label{eg:diac-split} 
 \end{ex} 
+
+@@
+
 This explicitly requires that Dudamel is a conductor during the
 utterance of each individual word.  Both the types (\ref{eg:diac-whole}--\ref{eg:diac-split}) are
 facilitated by the fact that `conductor(dudamel)' is a
