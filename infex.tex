@@ -2498,8 +2498,6 @@ can give the more detail type in \nexteg{}.
 \label{eg:diac-split} 
 \end{ex} 
 
-@@
-
 This explicitly requires that Dudamel is a conductor during the
 utterance of each individual word.  Both the types (\ref{eg:diac-whole}--\ref{eg:diac-split}) are
 facilitated by the fact that `conductor(dudamel)' is a
@@ -2509,16 +2507,131 @@ conductor(dudamel) we can regard it as a string of events of type
 to aspectual types other than state below.  The predicate
 `final\_align' in (\ref{eg:diac}) requires alignment of the speech
 event and the described event in the way we have exemplified in
-(\ref{eg:diac-whole}) and (\ref{eg:diac-split}).  The definition of
-what counts as a witness for final\_align($e_1$,$e_2$) given in
-Appendix~\ref{sec:regular} requires that $e$ is of this type just in
+(\ref{eg:diac-whole}) and (\ref{eg:diac-split}).
+
+\begin{shaded}
+
+If $s$ is a string, we use the notation $s[i]$ to represent the object
+which is in the $i$th position of $s$, that is, in the records that we
+use to code strings, $s.t_i$.  $s[0]$ represents the first element in
+$s$.  The definition of
+what counts as a witness for final\_align($e_1$,$e_2$), given in
+\nexteg{} and repeated in
+Appendix~\ref{app:stringrels}, requires that $e$ is of this type just in
 case $e$ is an event where $e_1$ is aligned with a final segment of
 $e_2$, that is in $e$ there is a split in dimension in the final
-segment as illustrated in (\ref{eg:diac-split}).  The notation
+segment as illustrated in (\ref{eg:diac-split}).
+\begin{ex} 
+If $s_1$:\textit{Rec}$^+$ is a string of length $n$ and $s_2$:\textit{Rec}$^+$ is a string of 
+length $m$, then $s$ : final\_align($s_1$,$s_2$) iff 
+\begin{enumerate} 
+ 
+\item $m$ is
+greater than or equal to $n$ 
+ 
+\item  $s$ is a string of length $m$
+
+\item for each
+$i$, $0\leq i<n$, 
+
+\begin{enumerate} 
+ 
+\item  $s[(m-n)+i]$ :
+\smallrecord{\smalltfield{e$_1$}{\textit{Rec}} \\
+             \smalltfield{e$_2$}{\textit{Rec}}} 
+\item  $s[(m-n)+i]$.e$_1$ =
+$s_1[i]$
+
+\item $s[(m-n)+i]$.e$_2$ = $s_2[(m-n)+i]$
+ 
+\end{enumerate} 
+
+\item  otherwise for each
+$i$, $0\leq i<m$, $s[i]=s_2[i]$ 
+ 
+\end{enumerate} 
+ 
+\end{ex}
+Suppose that $s_1$ and $s_2$ are the two strings in \nexteg{} of
+lengths 4 and 5 respectively.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $s_1[0] s_1[1] s_1[2] s_1[3]$ 
+ 
+\item $s_2[0] s_2[1] s_2[2] s_2[3] s_2[4]$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+Then $s$ will be the string in \nexteg{}.
+\begin{ex} 
+  $s_2[0]$\record{\field{e$_1$}{$s_1[0]$}\\
+                  \field{e$_2$}{$s_2[1]$}}\record{\field{e$_1$}{$s_1[1]$}\\
+                                                  \field{e$_2$}{$s_2[2]$}}\record{\field{e$_1$}{$s_1[2]$}\\
+                                \field{e$_2$}{$s_2[3]$}}\record{\field{e$_1$}{$s_1[3]$}\\
+                                \field{e$_2$}{$s_2[4]$}}     
+\end{ex} 
+In terms of our informal proof theoretic notation we might write
+\nexteg{}.
+\begin{ex} 
+  For $\Gamma$ with string types
+  \begin{subex} 
+ 
+  \item \begin{prooftree}
+      \hypo{\begin{array}{c}\Gamma\vdash s_1:\textit{Rec}^n\\
+      \Gamma\vdash s_2:\textit{Rec}^m\\
+      \Gamma\vdash s:\textit{Rec}^m\end{array}}
+      \hypo{m\geq n}
+      \hypo{[0\leq i<n]}
+      \ellipsis{}{\Gamma\vdash
+        s[(m-n)+i]=\text{\record{\field{e$_1$}{$s_1[i]$}\\
+            \field{e$_2$}{$s_2[(m-n)+i]$}}}}
+      \infer3{\Gamma\vdash s:\text{final\_align}(s_1,s_2)}
+      \end{prooftree}
+ 
+    \item \begin{prooftree}
+      \hypo{\begin{array}{c}\Gamma\vdash s_1:\textit{Rec}^n\\
+      \Gamma\vdash s_2:\textit{Rec}^m\\
+      \Gamma\vdash s:\textit{Rec}^m\end{array}}
+      \hypo{\begin{array}{c}m\geq n\\
+      0\leq i<n\end{array}}
+      \hypo{\Gamma\vdash s:\text{final\_align}(s_1,s_2)}
+      \infer3{\Gamma\vdash s[(m-n)+i]=\text{\record{\field{e$_1$}{$s_1[i]$}\\
+            \field{e$_2$}{$s_2[(m-n)+i]$}}}}
+      \end{prooftree}
+ 
+\end{subex} 
+  
+\end{ex} 
+  
+  
+
+\end{shaded}
+
+The notation
 `$\Uparrow$' in (\ref{eg:diac}) indicates that the path `x' is not to
 be found in the local record type which is required to be the value of `cont'
 but in the next higher record type with the fields `s-event' and
-`cont'.  This notation is explained in Appendix~\ref{app:rectypes}.
+`cont'.  This notation is explained in
+Appendix~\ref{app:rectypes}.
+
+\begin{shaded}
+(\ref{eg:diac}) is a more friendly
+notation for \nexteg{}.
+\begin{ex}
+ \hspace*{-1em}\scalebox{0.9}{
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel is a conductor''}} } \\
+  \smalltfield{cont}{$\langle\lambda v_1$:``Dudamel is a conductor'' . \textit{RecType}{\textsubscript{\smallrecord{\smalltfield{e}{conductor(dudamel)} \\
+                             \smalltfield{c$_{\mathrm{tns}}$}{$\langle\lambda
+                               v_2$:conductor(dudamel)
+                               . final\_align($v_1$, $v_2$),
+                               $\langle$e$\rangle\rangle$}}}},
+                       $\langle$s-event.e$\rangle\rangle$}}
+                   }
+\end{ex} 
+
+\end{shaded}
 
 This sign type (\ref{eg:diac}) seems to give us what we need in order to explain how
 an utterance of \textit{Dudamel is a conductor} can convey the
