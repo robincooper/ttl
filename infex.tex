@@ -414,6 +414,61 @@ To \preveg{} we can add \nexteg{} to express the associativity of
 
 \end{shaded}
 
+While strings as we have defined them are useful for modelling events
+in terms of strings of subevents, it is not the case that all strings
+of events
+can be considered as occurring events.  Consider a case where we have
+to events as characterized in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $e_1:T_1$ 
+ 
+\item $e_2:T_2$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+The type theory as we have defined it will yield both
+juedgements in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $e_1e_2:T_1^{\frown}T_2$ 
+ 
+\item $e_2e_1:T_2^{\frown}T_1$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+However, if we are using event strings to model temporal ordering it
+cannot be the case that both $e_1e_2$ and $e_2e_1$ both model
+occurring events even though they are both strings of events.  That
+is, if $e_1$ temporally precedes $e_2$ then $e_2$ cannot temporally
+precede $e_1$  and \textit{vice versa}.  This has to do with the fact
+that a particular event can only happen once.  It is, of course,
+possible to have different events of the same types occurring in the
+reverse order as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $e_1e_2:T_1^{\frown}T_2$ 
+ 
+\item $e_3e_4:T_2^{\frown}T_1$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+One way to distinguish those strings which correspond to occurring
+events from those which do not is to introduce a type \textit{Occur}
+such that if $e_1e_2:\textit{Occur}$ then $e_2e_1\not:\textit{Occur}$.
+Below we will use records to model the simultaneous occurrence of
+events.  We can do this by allowing records to be witnesses for
+\textit{Occur} and requiring that if $r:\textit{Occur}$ and
+$\ell_1,\ell_2\in\mathrm{labels}(r)$ then
+$r.\ell_1r.\ell_2\not:\textit{Occur}$.  We will not develop this idea
+further here but assume it in the background.  
+
 Let us return to Kim watching the boy, $a$, playing fetch with the
 dog, $b$, using the stick, $c$. % over a time interval $t$
 She
@@ -2632,6 +2687,8 @@ notation for \nexteg{}.
 \end{ex} 
 
 \end{shaded}
+
+@@
 
 This sign type (\ref{eg:diac}) seems to give us what we need in order to explain how
 an utterance of \textit{Dudamel is a conductor} can convey the
