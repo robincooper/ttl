@@ -2109,7 +2109,7 @@ be broken down into a string of subevent types such as greeting
 (realized here by the exchange \textit{Hello doctor./Hello}),
 establishing the patient's symptoms (realized here by the remainder of
 \preveg{}), making a diagnosis, prescribing treatment and so on.
-Events belonging to these subtypes can be further broken down into
+These subevents can be further broken down into
 strings of turns which further can be broken down into strings of
 utterances of phrases.  In turn phrase utterances are constituted by
 strings of word utterances which in
@@ -2688,16 +2688,33 @@ notation for \nexteg{}.
 
 \end{shaded}
 
-@@
 
-This sign type (\ref{eg:diac}) seems to give us what we need in order to explain how
+
+The sign type (\ref{eg:diac})/\preveg{} seems to give us what we need in order to explain how
 an utterance of \textit{Dudamel is a conductor} can convey the
 information that Dudamel is a conductor.  If both dialogue
 participants have this sign type among their resources then the User
 knows that in order to convey this content she has to make an
 utterance which witnesses the appropriate speech event type.  The
 System knows that on observing a speech event of this type the
-corresponding content should be recorded.
+corresponding content should be recorded.  Simple action rules
+relating to signs are given in \nexteg{}.
+
+@@\todo{Should we have already introduced subtyping?}
+
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item \begin{prooftree}
+%     \hypo{\sigma:_A\textit{Sign}}
+%     \hypo{
+ 
+% \item  
+ 
+% \end{subex} 
+%    
+% \end{ex} 
+%   
 
 Things are not as straightforward, however, for the acknowledgements
 \textit{Aha} and \textit{OK} expressed by the system.  It is not
