@@ -2726,7 +2726,55 @@ knows that in order to convey this content she has to make an
 utterance which witnesses the appropriate speech event type.  The
 System knows that on observing a speech event of this type the
 corresponding content should be recorded.  Simple action rules
-relating to signs are given in \nexteg{}.
+relating to the sign type  (\ref{eg:diac})/\preveg{} are given in
+\nexteg{} to illustrate the kind of reasoning we are thinking of.
+These rules assume that the agent $A$ has access to the type
+(\ref{eg:diac})/\preveg{} as a resource, either stored in memory or
+available through computation using other accessible resources.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  \begin{prooftree}
+    \hypo{u:_A\text{``Dudamel is a conductor''}}
+    \infer[enth]1{:_A\text{
+        \smallrecord{
+          \smalltfield{s-event}{
+            \smallrecord{\smallmfield{e}{$u$}{``Dudamel is a conductor''}}}\\
+          \smallmfield{cont}{
+            \smallrecord{
+              \smalltfield{e}{conductor(dudamel)}\\
+              \smalltfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}
+          {\textit{RecType}}
+        }}}
+    \end{prooftree}
+ 
+  \item
+    \begin{prooftree}
+      \hypo{s_{i,A}:_A\text{
+          \smallrecord{\smalltfield{agenda}{
+              \smallrecord{
+                \smallmfield{fst}{
+                  \smallrecord{
+                    \smalltfield{s-event}{
+                      \smallrecord{
+                        \smalltfield{e}{\textit{Phon}}}}\\
+                    \smallmfield{cont}{
+                      \smallrecord{
+                        \smalltfield{e}{conductor(dudamel)}\\
+                        \smalltfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}{\textit{RecType}}}}{\textit{RecType}}\\
+                \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+      \infer[enth]1{s_{i+1,A}:_A\text{
+          \smallrecord{\smalltfield{agenda}{\smallrecord{\smallmfield{fst}{\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel is a conductor''}} } \\
+        \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)} \\
+            \smalltfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}{\textit{RecType}}}}{\textit{RecType}}\\
+    \smallmfield{rst}{$s_{i,A}$.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+\end{prooftree}
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} tells us that   
 
 @@\todo{Should we have already introduced subtyping?}
 
