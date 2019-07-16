@@ -384,88 +384,6 @@ notion of function application.  We will introduce that complication
 when we discuss record types.
 
 
-\section{List types}
-\label{app:listtypes}
-
-List types were not included in \cite{Cooper2012}.
-
-A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
-  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list
-  types} (Chapter~\ref{ch:infex}, p.~\pageref{ex:listtypes}) if
-\begin{enumerate} 
- 
-\item for any $T \in \textbf{Type}$, $\mathrm{list}(T) \in \textbf{Type}$ 
- 
-\item for any $T \in \textbf{Type}$, 
-\begin{enumerate} 
- 
-\item $[\ ]:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
-
-\item $a\!\mid\! L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ iff
-  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
- 
-\end{enumerate}
-
-\end{enumerate}
-
-In \cite{Cooper2012}
-we did not specify an encoding of lists in terms of sets.  Here we
-will use an encoding with labelled sets using the reserved labels
-`fst' and `rst' for the first member of the list and the remainder
-(``rest'') of
-the list respectively.  We let the empty list, [], be the empty set,
-$\emptyset$.\footnote{If it is important to distinguish the empty list
-  from the empty set we could use an additional reserved label,
-  e.g. `lst',  and
-  have the empty list be the labelled set $\{\langle
-  \mathrm{lst},\emptyset\rangle\}$.}  If $L$ is a list then $a\!\mid\! L$
-is to be the labelled set $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
-
-
-% We use $a\!\mid\! L$ to represent the record
-% \begin{quote}
-% \record{\field{fst}{$a$}\\
-%         \field{rst}{$L$}}
-% \end{quote}
-% where `fst' (``first'') and `rst' (``rest'') are reserved labels used
-% only in lists.
-
-
-% We use $[\ ]$ to represent the empty list which is identical with the
-% empty set, $\emptyset$.  
-
-A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
-  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
-  non-empty list types} (Chapter~\ref{ch:infex},
-p.~\pageref{ex:nelisttypes}) if
-\begin{enumerate} 
- 
-\item for any $T \in \textbf{Type}$, $\mathrm{nelist}(T) \in \textbf{Type}$ 
- 
-\item for any $T \in \textbf{Type}$, 
-\begin{enumerate} 
-
-\item $[a]:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff $a:T$
- 
-\item $a\mid L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff
-  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ 
- 
-
- 
-\end{enumerate}
-
-\end{enumerate}
-
-If $a\mid L :_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ for some system of
-complex types {\bf TYPE$_C$} and type $T$, then we use fst($a\mid L$)
-to refer to $a$ and rst($a\mid L$) to refer to $L$.
-
-In contrast to \cite{Cooper2012} we here make it explcit that $\mathrm{list}(T)$
-represents $\{\langle\mathrm{lst},T\rangle\}$ and
-$\mathrm{nelist}(T)$ represents $\{\langle\mathrm{nelst},T\rangle\}$
-where `lst' and `nelst' are reserved labels. 
 
 
 \section{Set types}
@@ -3202,6 +3120,108 @@ $[\ell,T']$ is a non-dependent field in $T$), then \textit{the
 \record{\tfield{$\ell$}{$T'$}}
 \end{quote}
 \end{quote}
+
+\section{List types}
+\label{app:listtypes}
+
+List types were not included in \cite{Cooper2012}.
+
+A system of complex types with record types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list
+  types} (Chapter~\ref{ch:infex}, p.~\pageref{ex:listtypes}) if
+\begin{enumerate} 
+ 
+\item for any $T \in \textbf{Type}$, $\mathrm{list}(T) \in \textbf{Type}$ 
+ 
+\item for any $T \in \textbf{Type}$, 
+\begin{enumerate} 
+ 
+\item $[\ ]:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
+
+\item $a\!\mid\! L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ iff
+  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}}\mathrm{list}(T)$ 
+ 
+\end{enumerate}
+
+\end{enumerate}
+
+In \cite{Cooper2012}
+we did not specify an encoding of lists in terms of sets.  Here we
+will use records with the reserved labels
+`fst' and `rst' for the first member of the list and the remainder
+(``rest'') of
+the list respectively.  We let the empty list, [], be the empty set,
+$\emptyset$.\footnote{If it is important to distinguish the empty list
+  from the empty set we could use an additional reserved label,
+  e.g. `lst',  and
+  have the empty list be the labelled set $\{\langle
+  \mathrm{lst},\emptyset\rangle\}$.}  If $L$ is a list then $a\!\mid\! L$
+is to be the record
+\begin{quote}
+\record{\field{fst}{$a$}\\
+          \field{rst}{$L$}}
+\end{quote}
+
+% labelled set $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
+
+
+% We use $a\!\mid\! L$ to represent the record
+% \begin{quote}
+% \record{\field{fst}{$a$}\\
+%         \field{rst}{$L$}}
+% \end{quote}
+% where `fst' (``first'') and `rst' (``rest'') are reserved labels used
+% only in lists.
+
+
+% We use $[\ ]$ to represent the empty list which is identical with the
+% empty set, $\emptyset$.  
+
+% A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+% $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+%   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+%   non-empty list types} (Chapter~\ref{ch:infex},
+% p.~\pageref{ex:nelisttypes}) if
+% \begin{enumerate} 
+ 
+% \item for any $T \in \textbf{Type}$, $\mathrm{nelist}(T) \in \textbf{Type}$ 
+ 
+% \item for any $T \in \textbf{Type}$, 
+% \begin{enumerate} 
+
+% \item $[a]:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff $a:T$
+ 
+% \item $a\mid L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff
+%   $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ 
+ 
+
+ 
+% \end{enumerate}
+
+% \end{enumerate}
+We sometimes use $\mathrm{nelist}(T)$ as an abbreviation for the type
+of non-empty lists:
+\begin{quote}
+  \record{
+    \tfield{fst}{$T$}\\
+    \tfield{rst}{$\mathrm{list}(T)$}
+  }
+\end{quote}
+
+If
+$L$ is a list we often use $\mathrm{fst}(L)$ and $\mathrm{rst}(L)$ to
+represent $L$.fst and $L$.rst respectively.
+% If $a\mid L :_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ for some system of
+% complex types {\bf TYPE$_C$} and type $T$, then we use fst($a\mid L$)
+% to refer to $a$ and rst($a\mid L$) to refer to $L$.
+
+In contrast to \cite{Cooper2012} we here make it explcit that $\mathrm{list}(T)$
+represents $\{\langle\mathrm{lst},T\rangle\}$ % and
+% $\mathrm{nelist}(T)$ represents $\{\langle\mathrm{nelst},T\rangle\}$
+where `lst' % and `nelst' are
+is a reserved label. 
+
 
 \section{Strings and regular types}
 \label{sec:regular}

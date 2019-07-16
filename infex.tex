@@ -1141,21 +1141,35 @@ we ignore the stratification order superscript except where it becomes
 important to mention it. For any type, $T$, $\mathrm{list}(T)$ is also
 a type, the type whose witnesses are lists all of whose members are of
 type $T$.  Suppose that $a,b,c$ are of type $T$, then the list
-$[a,b,c]$ is of type $\mathrm{list}(T)$.  In \preveg{b}, $[\ ]$
-represents the empty list.  The field in this type is an example of a
+$[a,b,c]$ is of type $\mathrm{list}(T)$.  We use $[\ ]$, as in \preveg{b} to represent
+the empty list, identical with the empty set, $\emptyset$.
+The field in this type is an example of a
 manifest field \citep{CoquandPollackTakeyama2004}.  We use the
 notation \smallrecord{\smallmfield{$\ell$}{$a$}{$T$}} to represent
 \smallrecord{\smalltfield{$\ell$}{$T_a$}} where $T_a$ is a type such
 that $b:T_a$ just in case $b:T$ and $b=a$, that is it either has no
 witnesses because $a$ is not of type $T$ or it has exactly one
-witness, $a$, of type $T$.  We call $T_a$ a \textit{singleton type}.  We
+witness, $a$, of type $T$.  We call $T_a$ a \textit{singleton type}.  
+
+$[a,b,c]$ is a convenient
+standard notation for the list consisting of $a$, $b$ and $c$ in that
+order but, as with strings, we will actually model lists as records
+with a first and rest structure as in \nexteg{} and we will use the
+standard notation as a convenient abbreviation.
+\begin{ex} 
+  \record{\field{fst}{$a$}\\
+    \field{rst}{\record{\field{fst}{$b$}\\
+        \field{rst}{\record{\field{fst}{$c$}\\
+                           \field{rst}{[ ]}}}}}}
+\end{ex} 
+We
 introduce list types and singleton types in detail below.
 
 \begin{shaded}
 We can introduce lists and list types into our type systems by the
 definition in \nexteg{}, repeated in Appendix~\ref{app:listtypes}.
 \begin{ex} 
-A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+A system of complex types with record types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has list
   types}  if
@@ -1178,14 +1192,20 @@ $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
 \end{ex} 
 Lists are a common data structure used in computer science but they
 are not normally defined in basic set theory, although it is
-straightforward to define them in terms of labelled sets.  We
-will use an encoding with labelled sets using the reserved labels
+straightforward to define them in terms of records.  We
+will use the reserved labels
 `fst' and `rst' for the first member of the list and the remainder
 (``rest'') of
 the list respectively.  We let the empty list, [], be the empty set,
 $\emptyset$.  If $L$ is a list then $a\!\mid\! L$
-is to be the labelled set
-$\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.  If
+is to be the record in \nexteg{}.% labelled set
+% $\{\langle\mathrm{fst},a\rangle,\langle\mathrm{rst},L\rangle\}$.
+\begin{ex} 
+  \record{\field{fst}{$a$}\\
+          \field{rst}{$L$}}
+\end{ex} 
+  
+If
 $L$ is a list we often use $\mathrm{fst}(L)$ and $\mathrm{rst}(L)$ to
 represent $L$.fst and $L$.rst respectively.
 
@@ -1459,66 +1479,74 @@ define the game.  With the types we have so far these rules will not
 have a type in common.  All the rules, except for the first one listed
 will be defined on some type of information state with a
 non-empty agenda.  If $T$ is a type we will use $\mathrm{nelist}(T)$
-to represent the type of non-empty lists of objects of type $T$.
-\begin{shaded}
-We introduce the type of non-empty lists formally as in
-\nexteg{}, repeated in Appendix~\ref{app:listtypes}.
-\begin{ex}
-A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
-  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
-  non-empty list types} if
-\begin{enumerate} 
+to represent the type of non-empty lists of objects of type $T$ given
+in \nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{fst}{$T$}\\
+    \tfield{rst}{$\mathrm{list}(T)$}
+    }
+\end{ex} 
+  
+% \begin{shaded}
+% We introduce the type of non-empty lists formally as in
+% \nexteg{}, repeated in Appendix~\ref{app:listtypes}.
+% \begin{ex}
+% A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+% $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+%   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+%   non-empty list types} if
+% \begin{enumerate} 
  
-\item for any $T \in \textbf{Type}$, $\mathrm{nelist}(T) \in \textbf{Type}$ 
+% \item for any $T \in \textbf{Type}$, $\mathrm{nelist}(T) \in \textbf{Type}$ 
  
-\item for any $T \in \textbf{Type}$, 
-\begin{enumerate} 
+% \item for any $T \in \textbf{Type}$, 
+% \begin{enumerate} 
 
-\item $[a]:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff $a:T$
+% \item $[a]:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff $a:T$
  
-\item $a\mid L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff
-  $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ 
+% \item $a\mid L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ iff
+%   $a:_{\mathbf{TYPE_C}}T$ and $L:_{\mathbf{TYPE_C}} \mathrm{nelist}(T)$ 
  
 
  
-\end{enumerate}
+% \end{enumerate}
 
-\end{enumerate}
+% \end{enumerate}
  
   
 
-\label{ex:nelisttypes}
-\end{ex}
+% \label{ex:nelisttypes}
+% \end{ex}
 
-In our informal proof theoretic notation this can be expressed as
-\nexteg{}.
-\begin{ex} 
-  For $\Gamma$ a system of complex types with non-empty list types:
-\begin{subex} 
+% In our informal proof theoretic notation this can be expressed as
+% \nexteg{}.
+% \begin{ex} 
+%   For $\Gamma$ a system of complex types with non-empty list types:
+% \begin{subex} 
  
-\item \begin{prooftree}
-    \hypo{\Gamma\vdash T\in\textbf{Type}}
-    \infer1{\Gamma\vdash \mathrm{nelist}(T)\in\textbf{Type}}
-    \end{prooftree}
+% \item \begin{prooftree}
+%     \hypo{\Gamma\vdash T\in\textbf{Type}}
+%     \infer1{\Gamma\vdash \mathrm{nelist}(T)\in\textbf{Type}}
+%     \end{prooftree}
  
-  \item \begin{prooftree}
-      \hypo{\Gamma\vdash a:T}
-      \infer1{\Gamma\vdash [a]:\mathrm{nelist}(T)}
-    \end{prooftree}
-    \hspace*{2em}
-    \begin{prooftree}
-      \hypo{\Gamma\vdash a:T}
-      \hypo{\Gamma\vdash L:\mathrm{nelist}(T)}
-      \infer2{\Gamma\vdash a\mid L:\mathrm{nelist}(T)}
-    \end{prooftree}
+%   \item \begin{prooftree}
+%       \hypo{\Gamma\vdash a:T}
+%       \infer1{\Gamma\vdash [a]:\mathrm{nelist}(T)}
+%     \end{prooftree}
+%     \hspace*{2em}
+%     \begin{prooftree}
+%       \hypo{\Gamma\vdash a:T}
+%       \hypo{\Gamma\vdash L:\mathrm{nelist}(T)}
+%       \infer2{\Gamma\vdash a\mid L:\mathrm{nelist}(T)}
+%     \end{prooftree}
     
  
-\end{subex} 
+% \end{subex} 
   
-\end{ex}
+% \end{ex}
   
-\end{shaded}
+% \end{shaded}
 
 We might think that all the functions listed in
 (\ref{eg:fetch-update-funs}) are of the type \nexteg{}.
