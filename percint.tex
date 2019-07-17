@@ -1374,6 +1374,45 @@ same record type, however. % Since we will use record types to model
 Thus we use record types to replace both the $\Sigma$-types and
 contexts that one often finds in standard versions of type theory.
 
+\subsubsection{Subtyping in record types}
+Another important property of record types is that they introduce a
+restrictive notion of subtyping.  Intuitively $T_1$ is a subtype of
+$T_2$ (in symbols $T_1\sqsubseteq T_2$) just in case for any $a$, $a:T_1$ implies $a:T_2$, \textit{no
+  matter what is assigned to the basic types and ptypes}.  Consider
+the types in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{boy(x)} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{dog(y)}
+             }  
+ 
+\item \record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{boy(x)} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{dog(y)} \\
+              \tfield{e}{hug(x,y)}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} is intuitively the type of situation in which there is a
+boy and a dog.  \preveg{b} is the type of situation in which there is
+a boy and a dog and the boy hugs the dog.  Clearly any situation of
+type \preveg{b} must be of type \preveg{a}.  This holds independently
+of what boys and dogs there are and what kind of hugging is going on.
+We can tell that \preveg{b} is a subtype of \preveg{a} simply by the
+fact that the set of fields of \preveg{a} is a subset of the set of
+fields of \preveg{b}. We will notice other ways in which you can
+recognize that one record type is a subtype of another as we progress.
+
+\begin{shaded}
+Subtyping on this view is a \textit{modal} notion.@@
+\end{shaded}
+
+
 \subsubsection{Dependent fields in record types}
 \label{sec:depfields}
 Consider again the record type (\ref{ex:rectype}c) repeated as
