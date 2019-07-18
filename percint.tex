@@ -1409,7 +1409,54 @@ fields of \preveg{b}. We will notice other ways in which you can
 recognize that one record type is a subtype of another as we progress.
 
 \begin{shaded}
-Subtyping on this view is a \textit{modal} notion.@@
+Subtyping on this view is a \textit{modal} notion.  This means that we
+do not just consider one type system but a collection of type systems
+which assign different objects to the basic types and ptypes.  We call
+such a collection a \textit{modal type system}.  This
+corresponds intuitively to a set of possibilities under
+consideration.  A type, $T_1$, is a subtype of another type, $T_2$,
+with respect to a modal type system just in case for each of the
+systems in the modal type system any witness for $T_1$ is also a
+witness for $T_2$.  We characterize a modal system of complex
+types as a collection of systems of complex types in \nexteg{}, repeated in Appendix~\ref{app:modal}.  We use $M$
+as a variable over pairs $\langle A,F\rangle$ where $A$ is an
+assignment of witnesses to the basic types of a system of complex
+types and $F$ is an
+assignment to the ptypes of that system.
+\begin{ex} 
+A \textit{modal system of complex types based on $\mathcal{M}$} is a
+family of quadruples:
+\begin{quote}
+{\bf TYPE$_{\mathit{MC}}$} = $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle_{M\in\mathcal{M}}$
+\end{quote}
+where for each $M\in \mathcal{M}$, $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle$ is
+a system of complex types.
+
+\label{ex:modalsys-complex}
+\end{ex}
+We call the individual systems of complex types in such a system the
+\textit{possibilities} of the system.  The set of basic types and the
+predicates and their arities are held constant across the different
+possibilities whereas the set of ptypes (and therefore the set of types
+in general) will vary since different assignments to the basic types
+will generate different arguments to the predicates and thus different
+ptypes.  We can then define the notion of subtype with respect to a
+modal system of complex types as in \nexteg{}.
+\begin{ex} 
+$T_1$ \textit{is a subtype$_i$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
+  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$ 
+\end{ex} 
+We can recast this in our informal proof theoretic notation as
+\nexteg{}.
+\begin{ex} 
+$\Gamma\in\mathbf{\Gamma}$ 
+\end{ex} 
+  
+  
 \end{shaded}
 
 
