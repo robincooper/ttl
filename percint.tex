@@ -1374,92 +1374,6 @@ same record type, however. % Since we will use record types to model
 Thus we use record types to replace both the $\Sigma$-types and
 contexts that one often finds in standard versions of type theory.
 
-\subsubsection{Subtyping in record types}
-Another important property of record types is that they introduce a
-restrictive notion of subtyping.  Intuitively $T_1$ is a subtype of
-$T_2$ (in symbols $T_1\sqsubseteq T_2$) just in case for any $a$, $a:T_1$ implies $a:T_2$, \textit{no
-  matter what is assigned to the basic types and ptypes}.  Consider
-the types in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
- 
-\item \record{\tfield{x}{\textit{Ind}} \\
-              \tfield{c$_1$}{boy(x)} \\
-              \tfield{y}{\textit{Ind}} \\
-              \tfield{c$_2$}{dog(y)}
-             }  
- 
-\item \record{\tfield{x}{\textit{Ind}} \\
-              \tfield{c$_1$}{boy(x)} \\
-              \tfield{y}{\textit{Ind}} \\
-              \tfield{c$_2$}{dog(y)} \\
-              \tfield{e}{hug(x,y)}}  
- 
-\end{subex} 
-   
-\end{ex} 
-\preveg{a} is intuitively the type of situation in which there is a
-boy and a dog.  \preveg{b} is the type of situation in which there is
-a boy and a dog and the boy hugs the dog.  Clearly any situation of
-type \preveg{b} must be of type \preveg{a}.  This holds independently
-of what boys and dogs there are and what kind of hugging is going on.
-We can tell that \preveg{b} is a subtype of \preveg{a} simply by the
-fact that the set of fields of \preveg{a} is a subset of the set of
-fields of \preveg{b}. We will notice other ways in which you can
-recognize that one record type is a subtype of another as we progress.
-
-\begin{shaded}
-Subtyping on this view is a \textit{modal} notion.  This means that we
-do not just consider one type system but a collection of type systems
-which assign different objects to the basic types and ptypes.  We call
-such a collection a \textit{modal type system}.  This
-corresponds intuitively to a set of possibilities under
-consideration.  A type, $T_1$, is a subtype of another type, $T_2$,
-with respect to a modal type system just in case for each of the
-systems in the modal type system any witness for $T_1$ is also a
-witness for $T_2$.  We characterize a modal system of complex
-types as a collection of systems of complex types in \nexteg{}, repeated in Appendix~\ref{app:modal}.  We use $M$
-as a variable over pairs $\langle A,F\rangle$ where $A$ is an
-assignment of witnesses to the basic types of a system of complex
-types and $F$ is an
-assignment to the ptypes of that system.
-\begin{ex} 
-A \textit{modal system of complex types based on $\mathcal{M}$} is a
-family of quadruples:
-\begin{quote}
-{\bf TYPE$_{\mathit{MC}}$} = $\langle${\bf Type}$_M$, {\bf BType},
-$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle_{M\in\mathcal{M}}$
-\end{quote}
-where for each $M\in \mathcal{M}$, $\langle${\bf Type}$_M$, {\bf BType},
-$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle$ is
-a system of complex types.
-
-\label{ex:modalsys-complex}
-\end{ex}
-We call the individual systems of complex types in such a system the
-\textit{possibilities} of the system.  The set of basic types and the
-predicates and their arities are held constant across the different
-possibilities whereas the set of ptypes (and therefore the set of types
-in general) will vary since different assignments to the basic types
-will generate different arguments to the predicates and thus different
-ptypes.  We can then define the notion of subtype with respect to a
-modal system of complex types as in \nexteg{}.
-\begin{ex} 
-$T_1$ \textit{is a subtype$_i$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
-  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
-  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
-  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$ 
-\end{ex} 
-We can recast this in our informal proof theoretic notation as
-\nexteg{}.
-\begin{ex} 
-$\Gamma\in\mathbf{\Gamma}$ 
-\end{ex} 
-  
-  
-\end{shaded}
-
-
 \subsubsection{Dependent fields in record types}
 \label{sec:depfields}
 Consider again the record type (\ref{ex:rectype}c) repeated as
@@ -2316,6 +2230,138 @@ set and the record type as a flavoured labelled set as given in
 % kinds of complex types such as meets (conjunction), joins
 % (disjunction) and function types.
 \end{shaded}
+
+\subsubsection{Subtyping in record types}
+An important property of record types is that they introduce a
+restrictive notion of subtyping.  Intuitively $T_1$ is a subtype of
+$T_2$ (in symbols $T_1\sqsubseteq T_2$) just in case for any $a$, $a:T_1$ implies $a:T_2$, \textit{no
+  matter what is assigned to the basic types and ptypes}.  Consider
+the types in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{boy(x)} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{dog(y)}
+             }  
+ 
+\item \record{\tfield{x}{\textit{Ind}} \\
+              \tfield{c$_1$}{boy(x)} \\
+              \tfield{y}{\textit{Ind}} \\
+              \tfield{c$_2$}{dog(y)} \\
+              \tfield{e}{hug(x,y)}}  
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} is intuitively the type of situation in which there is a
+boy and a dog.  \preveg{b} is the type of situation in which there is
+a boy and a dog and the boy hugs the dog.  Clearly any situation of
+type \preveg{b} must be of type \preveg{a}.  This holds independently
+of what boys and dogs there are and what kind of hugging is going on.
+We can tell that \preveg{b} is a subtype of \preveg{a} simply by the
+fact that the set of fields of \preveg{a} is a subset of the set of
+fields of \preveg{b}. We will notice other ways in which you can
+recognize that one record type is a subtype of another as we progress.
+
+\begin{shaded}
+Subtyping on this view is a \textit{modal} notion.  This means that we
+do not just consider one type system but a collection of type systems
+which assign different objects to the basic types and ptypes.  We call
+such a collection a \textit{modal type system}.  This
+corresponds intuitively to a set of possibilities under
+consideration.  A type, $T_1$, is a subtype of another type, $T_2$,
+with respect to a modal type system just in case for each of the
+systems in the modal type system any witness for $T_1$ is also a
+witness for $T_2$.  We characterize a modal system of complex
+types as a collection of systems of complex types in \nexteg{}, repeated in Appendix~\ref{app:modal}.  We use $M$
+as a variable over pairs $\langle A,F\rangle$ where $A$ is an
+assignment of witnesses to the basic types of a system of complex
+types and $F$ is an
+assignment to the ptypes of that system.
+\begin{ex} 
+A \textit{modal system of complex types based on $\mathcal{M}$} is a
+family of quadruples:
+\begin{quote}
+{\bf TYPE$_{\mathit{MC}}$} = $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle_{M\in\mathcal{M}}$
+\end{quote}
+where for each $M\in \mathcal{M}$, $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle, M\rangle$ is
+a system of complex types.
+
+\label{ex:modalsys-complex}
+\end{ex}
+We call the individual systems of complex types in such a system the
+\textit{possibilities} of the system.  The set of basic types and the
+predicates and their arities are held constant across the different
+possibilities whereas the set of ptypes (and therefore the set of types
+in general) will vary since different assignments to the basic types
+will generate different arguments to the predicates and thus different
+ptypes.  We can then define the notion of subtype with respect to a
+modal system of complex types as in \nexteg{}.
+\begin{ex} 
+$T_1$ \textit{is a subtype$_i$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
+  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$ 
+\end{ex} 
+We can recast this in our informal proof theoretic notation as
+\nexteg{}.
+\begin{ex} 
+  For $\mathcal{G}$ a modal system of complex types
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{[\Gamma\in\mathcal{G},\ \Gamma\vdash x:T_1,\ \Gamma\vdash
+        T_2\in\textbf{Type}]}
+      \ellipsis{}{\Gamma\vdash x:T_2}
+      \infer1{\mathcal{G}\vdash T_1\sqsubseteq T_2}
+    \end{prooftree}
+    
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\mathcal{G}\vdash T_1\sqsubseteq T_2}
+      \hypo{\Gamma\in\mathcal{G}}
+      \hypo{\Gamma\vdash a:T_1}
+      \hypo{\Gamma\vdash T_2\in\textbf{Type}}
+      \infer4{\Gamma\vdash a:T_2}
+    \end{prooftree}
+    
+ 
+\end{subex}   
+\end{ex} 
+A disadvantage of \preveg{a} is that it does not tell us exactly what
+types would count as being in the subtype relation on the basis of the
+nature of the types.  In the case of record types we can often
+recognize the subtype relation on the basis of the structure of the
+types. For example, a record type $T_1$ is a subtype of a record type
+$T_2$ if $T_2\subseteq T_1$. (Recall that record types are sets of
+fields.)  This means that we can have the informal inference rule in
+\nexteg{}.
+\begin{ex} 
+  For $\mathcal{G}$, a modal system of complex types
+  \begin{quote}
+    \begin{prooftree}
+      \hypo{\Gamma,\Delta\in\mathcal{G}}
+      \hypo{\Gamma\vdash T_1\in\textbf{RType}}
+      \hypo{\Delta\vdash T_2\in\textbf{RType}}
+      \hypo{T_2\subseteq T_1}
+      \infer4{\mathcal{G}\vdash T_1\sqsubseteq T_2}
+    \end{prooftree}
+  \end{quote}
+  
+    
+\end{ex} 
+We will introduce more such specific inference rules later.  
+  
+\end{shaded}
+
+
+
  
 
 
