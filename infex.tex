@@ -2875,88 +2875,94 @@ boxes as records as in \nexteg{}.
   
 
 What kinds of objects should \textit{AGENDA}, \textit{L-UTT} and
-\textit{COMM} be?  They will be defined with respect to the agent who
-owns the information state which, for convenience, we will refer to as
-\textit{SELF}.  We will see as we proceed with the discussion below
-that \textit{SELF} is related to the notion of \textit{de se} type act discussed in Section~\ref{sec:typeacts}.
+\textit{COMM} be?  % They will be defined with respect to the agent who
+% owns the information state which, for convenience, we will refer to as
+% \textit{SELF}.  We will see as we proceed with the discussion below
+% that \textit{SELF} is related to the notion of \textit{de se} type act discussed in Section~\ref{sec:typeacts}.
 
-We will say that \textit{AGENDA} is a list of dialogue move types,
-that is,  the types of dialogue moves that \textit{SELF} plans to
+We will say that \textit{AGENDA} is a list of sign \ignore{dialogue move} types,
+that is,  the types of sign \ignore{dialogue moves} that the agent \ignore{\textit{SELF}} plans to
 realize by means of a creation type act.  Recall from
 Chapter~\ref{ch:percint} that this does not necessarily mean that
-\textit{SELF} is the main actor in the event realizing the move type.
+the agent \ignore{\textit{SELF}} is the main actor in the event
+realizing the sign \ignore{move} type.
 It can for example be a type of move to be carried out by an
-interlocutor which \textit{SELF} should wait for.  This will give us a
+interlocutor which the agent \ignore{\textit{SELF}} should wait for.  This will give us a
 mechanism for handling basic turn-taking in dialogue.  (See
 \citealp{SacksSchegloffJefferson1974} for the classic work on
-turn-taking.) We will define a dependent type \textit{Move} such that for any agent
-$A$, \textit{Move}($A$) is the type of dialogue moves in which $A$ is involved.
+turn-taking.) % We will define a dependent type \textit{Move} such that for any agent
+% $A$, \textit{Move}($A$) is the type of dialogue moves in which $A$ is involved.
 For now we will say that there are two ways in which an agent can be
 involved in a dialogue act:  as speaker (or performer) or as hearer
 (part of the audience to whom the dialogue act is
 addressed).\footnote{A third way of being involved in a dialogue act
-  which we will not take account of here is as an overhearer.}  Performing a dialogue move is a \textit{de se} type act of creation as
-discussed in Chapter~\ref{sec:typeacts}.  Being the hearer or audience
-of a move type involves a \textit{de se} type act of judgement as
-discussed there.
-\textit{AGENDA}  should thus be a list of move types depending on
-\textit{SELF} (that
-is, subtypes of \textit{Move}(\textit{SELF})).  We introduce a
-dependent type,
-\textit{MoveType}, such that for any $a$:\textit{Ind},
-$T$:\textit{MoveType}($a$) iff $T\sqsubseteq\textit{Move}(a)$.
-\textit{AGENDA} is thus a list of move types and will
-have type [\textit{MoveType}(\textit{SELF})].   For any type $T$, $[T]$ is the type of
-lists all of whose members are of type $T$ (see
-Appendix~\ref{app:listtypes}).  We will come back to the details of
-\textit{Move} below.
+  which we will not take account of here is as an overhearer.}  % Performing a dialogue move is a \textit{de se} type act of creation as
+% discussed in Chapter~\ref{sec:typeacts}.  Being the hearer or audience
+% of a move type involves a \textit{de se} type act of judgement as
+% discussed there.
+% \textit{AGENDA}  should thus be a list of move types depending on
+% \textit{SELF} (that
+% is, subtypes of \textit{Move}(\textit{SELF})).  We introduce a
+% dependent type,
+% \textit{MoveType}, such that for any $a$:\textit{Ind},
+% $T$:\textit{MoveType}($a$) iff $T\sqsubseteq\textit{Move}(a)$.
+% \textit{AGENDA} is thus a list of move types and will
+% have type [\textit{MoveType}(\textit{SELF})].   For any type $T$, $[T]$ is the type of
+% lists all of whose members are of type $T$ (see
+% Appendix~\ref{app:listtypes}).  We will come back to the details of
+% \textit{Move} below.
+% \todo{Move vs Sign?}
 
-@@
+\textit{L-UTT} should tell us what the latest utterance in the
+dialogue was.  This will be the witness of a sign type.  % move (or moves\footnote{See
+%   \cite{Larsson2002} for a proposal where dialogue contributions
+%   involve several moves. For now we will make the simplifying
+%   assumption that utterances are associated with a single move.}) has just been carried out.
+% But we will need more information than this.  We will need information about
+% what (the agent \textit{SELF} thinks) was actually said.  For this we will use a
+% chart, i.e. a set of edges between vertices representing hypotheses
+% about parts of the utterance, that is, sign types associated with
+% parts of the utterance.  The move should be predictable from the chart
+% by a process of move-interpretation for which we will use the
+% predicate `m-interp'.  Thus \textit{L-UTT} should itself be of
+% the type \nexteg{}.
 
-\textit{L-UTT} should tell us what move (or moves\footnote{See
-  \cite{Larsson2002} for a proposal where dialogue contributions
-  involve several moves. For now we will make the simplifying
-  assumption that utterances are associated with a single move.}) has just been carried out.
-But we will need more information than this.  We will need information about
-what (the agent \textit{SELF} thinks) was actually said.  For this we will use a
-chart, i.e. a set of edges between vertices representing hypotheses
-about parts of the utterance, that is, sign types associated with
-parts of the utterance.  The move should be predictable from the chart
-by a process of move-interpretation for which we will use the
-predicate `m-interp'.  Thus \textit{L-UTT} should itself be of
-the type \nexteg{}.
-
-\begin{ex} 
-\record{\tfield{move}{\textit{Move}(\textit{SELF})} \\
-        \tfield{chart}{\textit{Chart}} \\
-        \tfield{e}{m-interp(chart,move)}} 
-\end{ex} 
+% \begin{ex} 
+% \record{\tfield{move}{\textit{Move}(\textit{SELF})} \\
+%         \tfield{chart}{\textit{Chart}} \\
+%         \tfield{e}{m-interp(chart,move)}} 
+% \end{ex} 
   
 
-The type \textit{Chart}
-we will say more about in Chapter~\ref{ch:gram}.
+% The type \textit{Chart}
+% we will say more about in Chapter~\ref{ch:gram}.
 
 The commitments field has normally been considered as a set of
 facts or propositions \citep{Ginzburg2012,Larsson2002}.  Here we will
-treat them as a single record type, i.e. a member of the type
+treat them as a single record type, i.e. a witness of the type
 \textit{RecType}.  Using a single type will make it more
-straightforward to deal with issues like consistency and anaphora [????].
+straightforward to deal with issues like consistency and anaphora as
+we will see in later chapters.
 
 Thus information states can belong to the type \nexteg{}.
 
 \begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{MoveType}(\textit{SELF})]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}(\textit{SELF})} \\
-                                                                  \smalltfield{chart}{\textit{Chart}}
-                                                                \\
-                                                                  \smalltfield{e}{m-interp(chart,move)}}}\\
-                               \smalltfield{commitments}{\textit{RecType}}}}} 
+  \record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+        \tfield{commitments}{\textit{RecType}}}}} 
 \label{ex:InfoStatePrelim}
-\end{ex} 
-(Here, by convention the labels `chart' and `move' in
-\smallrecord{\smalltfield{e}{m-interp(chart,move)}} refer to the path down to the minimal record in
-which the e-field occurs, that is `shared.latest-utterance.chart' and
-`shared.latest-utterance.move' respectively.)
+\end{ex}
+Here \textit{Sign}$^*$ @@
+
+% (Here, by convention the labels `chart' and `move' in
+% \smallrecord{\smalltfield{e}{m-interp(chart,move)}} refer to the path down to the minimal record in
+% which the e-field occurs, that is `shared.latest-utterance.chart' and
+% `shared.latest-utterance.move' respectively.)
 
 \preveg{} is, however, not quite general enough.  It requires that
 there always will be a latest utterance.  At the beginning of a
