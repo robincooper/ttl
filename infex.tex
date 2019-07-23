@@ -123,7 +123,12 @@ s_1(s_2s_3)$.  For this reason we normally write
 $s_1s_2s_3$ (without the parentheses).  Following Fernando we will use these strings to
 give us our notion of temporal order.
 
-Although we will present strings in this way, we will model them as
+If $a_1,a_2,\ldots,a_n$ are objects we will normally represent the
+string of these objects as $a_1a_2\ldots a_n$.  Where confusion might
+arise from this notation we use $\mathrm{str}(a_1a_2\ldots a_n)$.
+This latter notation will be particularly useful when distinguishing a
+single object, $a$, from a unit string containing this object
+$\mathrm{str}(a)$.  Although we will present strings in this way, we will model them as
 records \label{pg:stringsasrecords} with distinguished labels related to the natural numbers, 
 t$_0$, t$_1$, \ldots (`t' for ``time'').  The field labelled t$_n$
 will correspond to the $n+1$th place in the string.  Thus a string of
@@ -241,7 +246,7 @@ the $n$th element in a string $s$ (where the first element in the
 string is $s[0]$).  In terms of the record notation
 this is just a convenient abbreviation for $s$.t$_n$.
 
-We will use $T^{=n}$, or, when there is no risk of confusion, simply
+\label{pg:stringtype-notation}We will use $T^{=n}$, or, when there is no risk of confusion, simply
 $T^n$, as the type of strings of length $n$ all of whose elements are
 of type $T$. We will use $T^{\geq n}$ for the type of strings of
 objects of type $T$ which have length greater than or equal to $n$.
@@ -2957,35 +2962,42 @@ Thus information states can belong to the type \nexteg{}.
         \tfield{commitments}{\textit{RecType}}}}} 
 \label{ex:InfoStatePrelim}
 \end{ex}
-Here \textit{Sign}$^*$ @@
+Here \textit{Sign}$^*$ is the type of strings of signs of length 0 or
+more using the string type notation introduced on
+p.~\pageref{pg:stringtype-notation}.  At the beginning of a dialogue
+there will be no latest utterance and we will represent this by having
+the empty string of signs in `latest-utterance'-field.  By using
+\textit{Sign}$^*$ we allow for the possibility that the previous
+utterance can be represented by a string of several signs although in
+the examples we will discuss here we will only have strings of length 1.
 
 % (Here, by convention the labels `chart' and `move' in
 % \smallrecord{\smalltfield{e}{m-interp(chart,move)}} refer to the path down to the minimal record in
 % which the e-field occurs, that is `shared.latest-utterance.chart' and
 % `shared.latest-utterance.move' respectively.)
 
-\preveg{} is, however, not quite general enough.  It requires that
-there always will be a latest utterance.  At the beginning of a
-dialogue this will not be the case and we need a way of representing
-that there is no previous utterance.  We will use a type whose only
-witness is the empty record for this.  Records, it will be recalled,
-are sets of ordered pairs (see
-Appendix~\ref{app:rectypes}).  This will include the empty set,
-$\emptyset$ which could also be notated as `[\ ]' if we are thinking
-of the empty set as the empty record.  However, this latter notation
-is confusing since it could also be used to represent the empty record
-type, that is the type that does not place any constraints on which
-records it has as witnesses, that is, the type of all records which we
-represent as \textit{Rec} in order to avoid confusion.  The type of
-the empty record could be constructed as the singleton type
-\textit{Rec}$_\emptyset$ (or if you are using the bracket notation for
-the empty record, \textit{Rec}$_{[\ ]}$).  In order to avoid
-notational confusion we will use \textit{ERec} to represent the type
-whose only witness is the empty record, that is, the empty set.  Thus
-\nexteg{} will hold.
-\begin{ex} 
-$a$ : \textit{ERec} iff $a=\emptyset$ 
-\end{ex} 
+% \preveg{} is, however, not quite general enough.  It requires that
+% there always will be a latest utterance.  At the beginning of a
+% dialogue this will not be the case and we need a way of representing
+% that there is no previous utterance.  We will use a type whose only
+% witness is the empty record for this.  Records, it will be recalled,
+% are sets of ordered pairs (see
+% Appendix~\ref{app:rectypes}).  This will include the empty set,
+% $\emptyset$ which could also be notated as `[\ ]' if we are thinking
+% of the empty set as the empty record.  However, this latter notation
+% is confusing since it could also be used to represent the empty record
+% type, that is the type that does not place any constraints on which
+% records it has as witnesses, that is, the type of all records which we
+% represent as \textit{Rec} in order to avoid confusion.  The type of
+% the empty record could be constructed as the singleton type
+% \textit{Rec}$_\emptyset$ (or if you are using the bracket notation for
+% the empty record, \textit{Rec}$_{[\ ]}$).  In order to avoid
+% notational confusion we will use \textit{ERec} to represent the type
+% whose only witness is the empty record, that is, the empty set.  Thus
+% \nexteg{} will hold.
+% \begin{ex} 
+% $a$ : \textit{ERec} iff $a=\emptyset$ 
+% \end{ex} 
 At the beginning of a
 dialogue there will not be any shared commitments either.  Therefore, it
 will be natural to use \textit{Rec} for the
@@ -2997,47 +3009,74 @@ to a situation of any particular type.  Thus it corresponds to ``there
 is a situation'' or ``the world is not empty''.  It plays a similar
 role in our theory to the set of all possible worlds in a system based
 on possible worlds.  It represents a state where no constraints have
-been placed on the nature of the world.   The 
-adjustment we need to make to (\ref{ex:InfoStatePrelim}) in order to include dialogue
-initial information states is to the shared.latest-utterance field as
-in \nexteg{}.  The `commitments'-field does not need to be adjusted as
-the type \textit{Rec} is one of the witnesses of \textit{RecType} (see Appendix~\ref{app:rectypes}).
+been placed on the nature of the world.   % The 
+% adjustment we need to make to (\ref{ex:InfoStatePrelim}) in order to include dialogue
+% initial information states is to the shared.latest-utterance field as
+% in \nexteg{}.
+% The `commitments'-field does not need to be adjusted as
+The type \textit{Rec} is one of the witnesses of \textit{RecType} (see
+Appendix~\ref{app:rectypes}).  The type of an initial information
+state based on \preveg{} is \nexteg{}.
 \begin{ex}
-\smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{MoveType}(\textit{SELF})]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}(\textit{SELF})} \\
-                                                                  \smalltfield{chart}{\textit{Chart}}
-                                                                \\
-                                                                  \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
-                               \smalltfield{commitments}{\textit{RecType}}}}}
-\label{ex:gameboard}
+ \record{
+    \tfield{private}{
+      \record{
+        \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
+        \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}   
+% \smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{MoveType}(\textit{SELF})]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}(\textit{SELF})} \\
+%                                                                   \smalltfield{chart}{\textit{Chart}}
+%                                                                 \\
+%                                                                   \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
+%                                \smalltfield{commitments}{\textit{RecType}}}}}
+% \label{ex:gameboard}
 \end{ex}
-\preveg{} uses a join type (Appendix~\ref{app:jointypes}).  For any two
-types $T_1$ and $T_2$ you can form the join (or disjunction) $T_1\vee
-T_2$.  $a:T_1\vee T_2$ just in case either $a:T_1$ or $a:T_2$.
+% \preveg{} uses a join type (Appendix~\ref{app:jointypes}).  For any two
+% types $T_1$ and $T_2$ you can form the join (or disjunction) $T_1\vee
+% T_2$.  $a:T_1\vee T_2$ just in case either $a:T_1$ or $a:T_2$.
 
-\label{pg:SELF}We will use notation including `\textit{SELF}' as in \preveg{} to
-represent types which are derived from dependent types by applying
-them to the argument represented by \textit{SELF}.  This notational
-convention will save us a good deal of complication in presentation
-and it is always possible to recover the dependent type from which the
-type is derived by creating a function which maps an individual to the
-appropriate type.  Thus in the case of \preveg{} the dependent type
-would be \nexteg{}.
-\begin{ex}
-$\lambda a$:\textit{Ind} . \smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{MoveType}($a$)]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}($a$)} \\
-                                                                  \smalltfield{chart}{\textit{Chart}}
-                                                                \\
-                                                                  \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
-                               \smalltfield{commitments}{\textit{RecType}}}}}
-\end{ex} 
-[???? This needs revising in order to include moves by agents other
-than \textit{SELF}!]
+% \label{pg:SELF}We will use notation including `\textit{SELF}' as in \preveg{} to
+% represent types which are derived from dependent types by applying
+% them to the argument represented by \textit{SELF}.  This notational
+% convention will save us a good deal of complication in presentation
+% and it is always possible to recover the dependent type from which the
+% type is derived by creating a function which maps an individual to the
+% appropriate type.  Thus in the case of \preveg{} the dependent type
+% would be \nexteg{}.
+% \begin{ex}
+% $\lambda a$:\textit{Ind} . \smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{MoveType}($a$)]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}($a$)} \\
+%                                                                   \smalltfield{chart}{\textit{Chart}}
+%                                                                 \\
+%                                                                   \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
+%                                \smalltfield{commitments}{\textit{RecType}}}}}
+% \end{ex} 
+% [???? This needs revising in order to include moves by agents other
+% than \textit{SELF}!]
 
-Dialogue moves are a type of
-event in which an actor (normally speaker) is related to an intended
-audience, an illocutionary force (such as `assert') and a content
-(that is, for our present purposes, a record type such as \smallrecord{\smalltfield{e}{conductor(Dudamel)}}).
+Some signs (but not all) will be associated with an \textit{illocutionary
+force}, a term which originally comes from \cite{Austin1962}.  The four illocutionary forces we will consider here are:
+assertion, query, command and acknowledgement.  Signs which have an
+illocutionary force can be thought of as \textit{dialogue moves} or in
+Austin's original terminology \textit{illocutionary acts}.
+Those signs which are not associated with an illocutionary force are
+normally constituents of something which does have illocutionary
+force.  Thus, for example, if somebody says \textit{The dog barked}
+the whole utterance can be thought of as an assertion.  However, the
+utterance of \textit{the dog} which is part of this utterance does not
+have illocutionary force.  This is not to say that some other
+utterance of \textit{the dog} could not have illocutionary force.  For
+example, in response to the question \textit{What made all the mess?},
+an utterance of \textit{the dog} might be regarded as an assertion
+that the dog made all the mess.
+
+% Dialogue moves are a type of
+% event in which an actor (normally speaker) is related to an intended
+% audience, an illocutionary force (such as `assert') and a content
+% (that is, for our present purposes, a record type such as \smallrecord{\smalltfield{e}{conductor(Dudamel)}}).
 
 % , e.g. assert(User, System,
 % conductor(Dudamel)).  We shall need to refine our view of what the
@@ -3051,82 +3090,112 @@ audience, an illocutionary force (such as `assert') and a content
 % components of move types so that we can partially specify them.
 % Therefore we will use the record type
 
-We will take dialogue moves to be a pairing of speech acts and content.
-The type of speech acts (\textit{SpeechAct}) will be taken to be a
-subtype of the type of speech events (\textit{SEvent}) as defined in
-(\ref{ex:SEventLocSpAu}) on p.~\pageref{ex:SEventLocSpAu}.  In
-particular this will mean that there is a field in a speech act for
-the speaker (labelled by `sp') and another for the audience (labelled
-by `au').  More
-specifically we will take the type \textit{Move}($a$) to be an abbreviation for
-\nexteg{}. 
-\begin{ex} 
-% \record{\tfield{actor}{\textit{Ind}} \\
-%         \tfield{audience}{\{\textit{Ind}\}} \\
-%         \tfield{orientation}{eq(\textit{SELF},actor)$\vee$member(\textit{SELF},audience)}
-%         \\
-%         \tfield{i-force}{\textit{IForce}} \\
-%         \tfield{content}{\textit{RecType}} \\
-%         \tfield{e}{move(actor, audience, i-force, content)}}
-\smallrecord{\smalltfield{e}{\textit{SpeechAct}}} $\wedge$ (
-\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}}}
-$\vee$
-\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{$a$}{\textit{Ind}}}}}
-)
-$\wedge$ \textit{MoveContent} 
-\label{ex:Move-a}
-\end{ex}
-The type in \preveg{} is a
-meet type (Appendix~\ref{app:meettypes}).\footnote{Strictly speaking, this type should be
-  written with parentheses since we are assuming a binary meet
-  operation:
-  (\smallrecord{\smalltfield{e}{\textit{SpeechAct}}} $\wedge$ ((
-\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}}}
-$\vee$
-\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{$a$}{\textit{Ind}}}}}
-)
-$\wedge$ \textit{MoveContent})) 
-  but we will often omit parentheses for clarity.} If $T_1$ and $T_2$ are
-types, then an object $a$ is of type  $T_1\wedge T_2$ just in case
-$a:T_1$ and $a:T_2$.  
+% We will take dialogue moves to be a pairing of speech acts and content.
+% The type of speech acts (\textit{SpeechAct}) will be taken to be a
+% subtype of the type of speech events (\textit{SEvent}) as defined in
+% (\ref{ex:SEventLocSpAu}) on p.~\pageref{ex:SEventLocSpAu}.  In
+% particular this will mean that there is a field in a speech act for
+% the speaker (labelled by `sp') and another for the audience (labelled
+% by `au').  More
+% specifically we will take the type \textit{Move}($a$) to be an abbreviation for
+% \nexteg{}. 
+% \begin{ex} 
+% % \record{\tfield{actor}{\textit{Ind}} \\
+% %         \tfield{audience}{\{\textit{Ind}\}} \\
+% %         \tfield{orientation}{eq(\textit{SELF},actor)$\vee$member(\textit{SELF},audience)}
+% %         \\
+% %         \tfield{i-force}{\textit{IForce}} \\
+% %         \tfield{content}{\textit{RecType}} \\
+% %         \tfield{e}{move(actor, audience, i-force, content)}}
+% \smallrecord{\smalltfield{e}{\textit{SpeechAct}}} $\wedge$ (
+% \smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}}}
+% $\vee$
+% \smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{$a$}{\textit{Ind}}}}}
+% )
+% $\wedge$ \textit{MoveContent} 
+% \label{ex:Move-a}
+% \end{ex}
+% The type in \preveg{} is a
+% meet type (Appendix~\ref{app:meettypes}).\footnote{Strictly speaking, this type should be
+%   written with parentheses since we are assuming a binary meet
+%   operation:
+%   (\smallrecord{\smalltfield{e}{\textit{SpeechAct}}} $\wedge$ ((
+% \smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}}}
+% $\vee$
+% \smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{$a$}{\textit{Ind}}}}}
+% )
+% $\wedge$ \textit{MoveContent})) 
+%   but we will often omit parentheses for clarity.} If $T_1$ and $T_2$ are
+% types, then an object $a$ is of type  $T_1\wedge T_2$ just in case
+% $a:T_1$ and $a:T_2$.  
 
-Note that \preveg{} requires $a$ to be either the speaker or the
-audience of the speech act and does not rule out the possibility that
-$a$ is both speaker and audience (i.e. $a$ is talking to herself).
+% Note that \preveg{} requires $a$ to be either the speaker or the
+% audience of the speech act and does not rule out the possibility that
+% $a$ is both speaker and audience (i.e. $a$ is talking to herself).
 
-We
-will not attempt a complete inventory of speech act types here.
-Preliminarily, we could define \textit{SpeechAct} to be
-\begin{quote}
-\textit{Assertion}$\vee$\textit{Query}$\vee$\textit{Command}$\vee$\textit{Acknowledgement},
-\end{quote}
-that
-is, a join type (Appendix~\ref{app:jointypes}) of all the available
-speech act types.\footnote{Strictly speaking, this type should be
-  written with parentheses since we are assuming a binary join
-  operation:
-  (\textit{Assertion}$\vee$(\textit{Query}$\vee$(\textit{Command}$\vee$\textit{Acknowledgement})))
-  but we will often omit parentheses for clarity.}  Something will be of
-this type just in case it is of at least one of the types of the
-join.  Each of the speech act types are subtypes of \textit{SEvent}
-and can be defined as in \nexteg{}.
-\begin{ex} 
+% We
+% will not attempt a complete inventory of speech act types here.
+% Preliminarily, we could define \textit{SpeechAct} to be
+% \begin{quote}
+% \textit{Assertion}$\vee$\textit{Query}$\vee$\textit{Command}$\vee$\textit{Acknowledgement},
+% \end{quote}
+% that
+% is, a join type (Appendix~\ref{app:jointypes}) of all the available
+% speech act types.\footnote{Strictly speaking, this type should be
+%   written with parentheses since we are assuming a binary join
+%   operation:
+%   (\textit{Assertion}$\vee$(\textit{Query}$\vee$(\textit{Command}$\vee$\textit{Acknowledgement})))
+%   but we will often omit parentheses for clarity.}  Something will be of
+% this type just in case it is of at least one of the types of the
+% join.
+% Each of the speech act types are subtypes of \textit{SEvent}
+% and can be defined as in \nexteg{}.
+We introduce four subtypes of \textit{Sign}:
+\textit{Assertion}, \textit{Query}, \textit{Command} and
+\textit{Acknowledgement}.  These are characterized in \nexteg{}. 
+\begin{ex}
 \begin{tabular}[t]{lcl}
-\textit{Assertion} & -- & \textit{SEvent} \d{$\wedge$} 
-\smallrecord{\smalltfield{e}{\textit{Phon}} \\
-             \smalltfield{c$_{\mathrm{illoc}}$}{assertion(e)}} \\
-\textit{Query} & -- & \textit{SEvent} \d{$\wedge$} 
-\smallrecord{\smalltfield{e}{\textit{Phon}} \\
-             \smalltfield{c$_{\mathrm{illoc}}$}{query(e)}} \\
-\textit{Command} & -- & \textit{SEvent} \d{$\wedge$} 
-\smallrecord{\smalltfield{e}{\textit{Phon}} \\
-             \smalltfield{c$_{\mathrm{illoc}}$}{command(e)}} \\
-\textit{Acknowledgement} & -- & \textit{SEvent} \d{$\wedge$} 
-\smallrecord{\smalltfield{e}{\textit{Phon}} \\
-             \smalltfield{c$_{\mathrm{illoc}}$}{acknowledgement(e)}} 
+\textit{Assertion} & -- & % \textit{SEvent} \d{$\wedge$} 
+% \smallrecord{\smalltfield{e}{\textit{Phon}} \\
+%              \smalltfield{c$_{\mathrm{illoc}}$}{assertion(e)}}
+  \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{RecType}}\\
+  \tfield{illoc}{assert(s-event, cont)}
+  }
+  \\
+\textit{Query} & -- & % \textit{SEvent} \d{$\wedge$} 
+% \smallrecord{\smalltfield{e}{\textit{Phon}} \\
+% \smalltfield{c$_{\mathrm{illoc}}$}{query(e)}}
+  \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{Question}}\\
+  \tfield{illoc}{query(s-event, cont)}
+  }
+  \\
+\textit{Command} & -- & % \textit{SEvent} \d{$\wedge$} 
+% \smallrecord{\smalltfield{e}{\textit{Phon}} \\
+% \smalltfield{c$_{\mathrm{illoc}}$}{command(e)}}
+  \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{RecType}}\\
+  \tfield{illoc}{command(s-event, cont)}
+  }
+  \\
+\textit{Acknowledgement} & -- & % \textit{SEvent} \d{$\wedge$} 
+% \smallrecord{\smalltfield{e}{\textit{Phon}} \\
+% \smalltfield{c$_{\mathrm{illoc}}$}{acknowledgement(e)}}
+  \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{RecType}}\\
+  \tfield{illoc}{acknowledge(s-event, cont)}
+  }
+  
 
 \end{tabular} 
-\end{ex} 
+\end{ex}
+@@
+
 Here the subscript `illoc' stands for ``illocutionary'' indicating
 that the condition provides information about the illocutionary force
 of the speech act. The symbol \d{$\wedge$} represents the merge operation defined in
