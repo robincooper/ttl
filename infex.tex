@@ -2495,7 +2495,20 @@ analysis.  The type \textit{Sign} of signs in general is given in \nexteg{}.
 \label{eg:infex-sign-type} 
 \end{ex} 
 A record of this type, a sign, will pair a speech event with a
-content.  We will refine our definition of \textit{Sign} as we progress.  
+content.  We will refine our definition of \textit{Sign} as we
+progress. We will often have occasion to use subtypes of \textit{Sign}
+to characterize the signs used in our analyses.  We will call these
+\textit{sign types} and introduce the type \textit{SignType} whose
+witnesses we characterize in \nexteg{}.
+\begin{ex} 
+$T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ 
+\end{ex} 
+Sign types are a particular kind of record type so we will also have
+\nexteg{}.
+\begin{ex} 
+$\textit{SignType}\sqsubseteq\textit{RecType}$ 
+\end{ex} 
+  
 
 \section{Information exchange in dialogue}
 
@@ -3194,64 +3207,77 @@ We introduce four subtypes of \textit{Sign}:
 
 \end{tabular} 
 \end{ex}
-@@
+Note that the type of the content varies with the illocutionary
+force.  We use the type \textit{Question} for queries and
+\textit{RecType} for the others.  We will say more about
+\textit{Question} in later chapters.  It is quite likely that the
+content type for commands should be something other than
+\textit{RecType}, for example, the type \textit{Ppty} (``property'')
+that we will develop in later chapters, but we do not have more to say
+about commands in this work.  In a more complete treatment of
+illocutionary force the nature of the speech event could also be made
+to vary with illocutionary force.  For example, we could require
+question syntax for queries, although that would not take account of
+the fact that declarative sentence syntax can also be used to ask
+questions.  It is not our aim here to give a detailed analysis of such
+phenomena but to provide a general framework in which they could be analyzed.
 
-Here the subscript `illoc' stands for ``illocutionary'' indicating
-that the condition provides information about the illocutionary force
-of the speech act. The symbol \d{$\wedge$} represents the merge operation defined in
-Appendix~\ref{app:merge}.  In \preveg{} the relevant merges will be
-the unions of the sets of fields represented by \textit{SEvent} and
-the type consisting of the `e' and `illoc' fields.  This is
-illustrated in \nexteg{} for \textit{Assertion}. \nexteg{a} (where
-\textit{SEvent} is spelled out) is
-identical with \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% Here the subscript `illoc' stands for ``illocutionary'' indicating
+% that the condition provides information about the illocutionary force
+% of the speech act. The symbol \d{$\wedge$} represents the merge operation defined in
+% Appendix~\ref{app:merge}.  In \preveg{} the relevant merges will be
+% the unions of the sets of fields represented by \textit{SEvent} and
+% the type consisting of the `e' and `illoc' fields.  This is
+% illustrated in \nexteg{} for \textit{Assertion}. \nexteg{a} (where
+% \textit{SEvent} is spelled out) is
+% identical with \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \record{\tfield{e-loc}{\textit{Loc}} \\
-        \tfield{sp}{\textit{Ind}} \\
-        \tfield{au}{\textit{Ind}} \\
-        \tfield{e}{\textit{Phon}} \\
-        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
-        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
-        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} \d{$\wedge$} 
-\smallrecord{\smalltfield{e}{\textit{Phon}} \\
-             \smalltfield{c$_{\mathrm{illoc}}$}{assertion(e)}}
+% \item \record{\tfield{e-loc}{\textit{Loc}} \\
+%         \tfield{sp}{\textit{Ind}} \\
+%         \tfield{au}{\textit{Ind}} \\
+%         \tfield{e}{\textit{Phon}} \\
+%         \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+%         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+%         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} \d{$\wedge$} 
+% \smallrecord{\smalltfield{e}{\textit{Phon}} \\
+%              \smalltfield{c$_{\mathrm{illoc}}$}{assertion(e)}}
  
-\item \record{\tfield{e-loc}{\textit{Loc}} \\
-        \tfield{sp}{\textit{Ind}} \\
-        \tfield{au}{\textit{Ind}} \\
-        \tfield{e}{\textit{Phon}} \\
-        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
-        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
-        \tfield{c$_{\mathrm{au}}$}{audience(e,au)} \\
-        \tfield{c$_{\mathrm{illoc}}$}{assertion(e)}}
+% \item \record{\tfield{e-loc}{\textit{Loc}} \\
+%         \tfield{sp}{\textit{Ind}} \\
+%         \tfield{au}{\textit{Ind}} \\
+%         \tfield{e}{\textit{Phon}} \\
+%         \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+%         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+%         \tfield{c$_{\mathrm{au}}$}{audience(e,au)} \\
+%         \tfield{c$_{\mathrm{illoc}}$}{assertion(e)}}
 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
   
 
-Finally, the type \textit{MoveContent} in (\ref{ex:Move-a}) relates the type
-of the content of the move to the type of the move.  We define it
-preliminarily as the join type in \nexteg{}.
-\begin{ex} 
-\record{\tfield{e}{\textit{Assertion}} \\
-        \tfield{cont}{\textit{RecType}} \\
-        \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
-\record{\tfield{e}{\textit{Query}} \\
-        \tfield{cont}{\textit{Question}} \\
-        \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
-\record{\tfield{e}{\textit{Command}} \\
-        \tfield{cont}{\textit{RecType}} \\
-        \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
-\record{\tfield{e}{\textit{Acknowledgement}}} 
-\end{ex} 
-Note that this allows for acknowledgements such as \textit{ok} not to
-have any content (although it does not prevent them from having content).  We will return later to discussion of whether this
-is a reasonable claim for acknolwedgements, while noting that this would  be one way of
-dealing with ``phatic'' communication such as greetings like \textit{Hello}.
+% Finally, the type \textit{MoveContent} in (\ref{ex:Move-a}) relates the type
+% of the content of the move to the type of the move.  We define it
+% preliminarily as the join type in \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{e}{\textit{Assertion}} \\
+%         \tfield{cont}{\textit{RecType}} \\
+%         \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
+% \record{\tfield{e}{\textit{Query}} \\
+%         \tfield{cont}{\textit{Question}} \\
+%         \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
+% \record{\tfield{e}{\textit{Command}} \\
+%         \tfield{cont}{\textit{RecType}} \\
+%         \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}$\vee$
+% \record{\tfield{e}{\textit{Acknowledgement}}} 
+% \end{ex} 
+% Note that this allows for acknowledgements such as \textit{ok} not to
+% have any content (although it does not prevent them from having content).  We will return later to discussion of whether this
+% is a reasonable claim for acknolwedgements, while noting that this would  be one way of
+% dealing with ``phatic'' communication such as greetings like \textit{Hello}.
 
 % We place a condition on `self' that it be the ``ego'', that is, that
 % it involves a situation which is of the type ego(self).  The idea is
@@ -3267,139 +3293,150 @@ dealing with ``phatic'' communication such as greetings like \textit{Hello}.
 % \textit{de se} phenomena see \cite{Ninan2010,Hanks2012}.
   
 
-We will be able to read partial information about
-a dialogue move from certain aspects of a speech-event.  For example,
-an utterance of \textit{ok}
-may tell us that the dialogue move is of type \nexteg{}.
+% We will be able to read partial information about
+% a dialogue move from certain aspects of a speech-event.  For example,
+% an utterance of \textit{ok}
+% may tell us that the dialogue move is of type \nexteg{}.
 
+% \begin{ex} 
+% % \record{\tfield{actor}{\textit{Ind}} \\
+% %         \tfield{audience}{\{\textit{Ind}\}} \\
+% %         \tfield{orientation}{member(\textit{SELF},audience)} \\
+% %         \mfield{i-force}{acknowledge}{\textit{IForce}} \\
+% %         \tfield{content}{\textit{RecType}} \\
+% %         \tfield{e}{move(actor, audience, i-force, content)}} 
+% \record{\tfield{e}{\textit{Acknowledgement}} \\
+%         \mfield{sp}{\textit{SELF}}{\textit{Ind}}}
+% \end{ex} 
+In order to find the content of an utterance of \textit{ok}, we look
+to the content of the previous utterance.  Thus an utterance of
+\textit{ok} following an utterance of \textit{Dudamel is a conductor}
+will have the same content as the assertion,  namely \nexteg{}.
 \begin{ex} 
-% \record{\tfield{actor}{\textit{Ind}} \\
-%         \tfield{audience}{\{\textit{Ind}\}} \\
-%         \tfield{orientation}{member(\textit{SELF},audience)} \\
-%         \mfield{i-force}{acknowledge}{\textit{IForce}} \\
-%         \tfield{content}{\textit{RecType}} \\
-%         \tfield{e}{move(actor, audience, i-force, content)}} 
-\record{\tfield{e}{\textit{Acknowledgement}} \\
-        \mfield{sp}{\textit{SELF}}{\textit{Ind}}}
+\record{\tfield{e}{conductor(dudamel)}} 
 \end{ex} 
-If an utterance of \textit{ok} is to have content after all, we will have to look to the previous utterance to find
-it.  An
-utterance of \textit{Dudamel is a conductor} may give us information
-about the type of speech act (\textit{Assertion}) and the content
-(\smallrecord{\smalltfield{e}{conductor(Dudamel)}}).  Note, however,
-that we only get such a fully specified content if we have a unique
-individual `Dudamel' whom we associate with utterances of the name
-\textit{Dudamel}.  If the resources we have available do not give us
-such an individual associated with \textit{Dudamel} then we only get
-the information that somebody named Dudamel is a conductor, that is,
-we may only get partial information about the content the speaker
-intended to communicate.  Consider the example \textit{Strauss is a
-  composer}.  There are at least two famous composers named Strauss
-(and also some more not so famous ones).  If our available resources
-give us two people associated with the name \textit{Strauss} we will
-not know which of them is being referred to.  Representing contents as record types will 
-enable us to handle this content underspecification. However, in order
-to do this we will need to abandon our current simplifying
-``propositional logic'' assumption
-that sentences come as unanalyzed wholes associated with their
-contents.  This we will do in Chapter~\ref{ch:gram}.
+Assigning \preveg{} as the content of \textit{Dudamel is a conductor}
+involves the naive assumption that a proper name uniquely identifies a
+particular individual.  We will develop a more sophisticated approach
+to proper names in Chapters~\ref{ch:gram} and \ref{ch:propnames}.  
+% An
+% utterance of \textit{Dudamel is a conductor} may give us information
+% about the type of speech act (\textit{Assertion}) and the content
+% (\smallrecord{\smalltfield{e}{conductor(Dudamel)}}).  Note, however,
+% that we only get such a fully specified content if we have a unique
+% individual `Dudamel' whom we associate with utterances of the name
+% \textit{Dudamel}.  If the resources we have available do not give us
+% such an individual associated with \textit{Dudamel} then we only get
+% the information that somebody named Dudamel is a conductor, that is,
+% we may only get partial information about the content the speaker
+% intended to communicate.  Consider the example \textit{Strauss is a
+%   composer}.  There are at least two famous composers named Strauss
+% (and also some more not so famous ones).  If our available resources
+% give us two people associated with the name \textit{Strauss} we will
+% not know which of them is being referred to.  Representing contents as record types will 
+% enable us to handle this content underspecification. However, in order
+% to do this we will need to abandon our current simplifying
+% ``propositional logic'' assumption
+% that sentences come as unanalyzed wholes associated with their
+% contents.  This we will do in Chapter~\ref{ch:gram}.
 % We will talk
 % about the exact nature of the record type when we talk about semantics below.
 
 
-Not surprisingly, when we are dealing with an agenda as in (\ref{ex:gameboard}), a
-plan for future action, we have got ourselves into a situation
-where we need types rather than the objects.  The things that are on
-the agenda list are not actual events, but rather \textit{types} of
-events planned for the future.  Normally the types occurring on the
-agenda will be subtypes of \textit{Move}(\textit{SELF}), though we may wish to
-include types of events like looking something up in a database,
-i.e. non-speech events.
+% Not surprisingly, when we are dealing with an agenda as in (\ref{ex:gameboard}), a
+% plan for future action, we have got ourselves into a situation
+% where we need types rather than the objects.  The things that are on
+% the agenda list are not actual events, but rather \textit{types} of
+% events planned for the future.  Normally the types occurring on the
+% agenda will be subtypes of \textit{Move}(\textit{SELF}), though we may wish to
+% include types of events like looking something up in a database,
+% i.e. non-speech events.
 
-For the most part types on the agenda will not be completely specified
-types.  That is they will not be types all of whose fields are
-manifest (restricted to particular objects of those types).
-Frequently it will be the case that we specify the content of the move
-but leave open the phonology, that is, the type will specify the
-content of what is to be said but not actually what is to be said or
-even perhaps which language it should.  We want, for example, to be able to
-say that a speaker is carrying out the same type of move independently of which
-language they are speaking.  Thus, if the user says to the system ``Dudamel is a conductor''
-or (in Swedish) ``Dudamel är dirigent'' she will in both cases have carried out a
-move involving the assertion of the content \smallrecord{\smalltfield{e}{conductor(Dudamel)}}.  This abstraction will
-be important, for example, if we want to change language in the middle
-of a dialogue, as people sometimes do.\footnote{This phenomenon is
-  known as code-switching \citep{BullockToribio2009}.}  At the same time it is the
-normal case to continue a dialogue in the same language and thus we
-need to note which language was used in the previous utterance,
-i.e. keep track of what was actually said.  This information will be
-in the chart which is part of the latest move.  In the chart there
-will be
-more information about what was actually said which will be important when it comes to dealing
-with parts of the utterance for things like clarification and
-anaphora.  But this again requires us to abandon our current
-simplifying ``propositional logic'' assumption.
+% For the most part types on the agenda will not be completely specified
+% types.  That is they will not be types all of whose fields are
+% manifest (restricted to particular objects of those types).
+% Frequently it will be the case that we specify the content of the move
+% but leave open the phonology, that is, the type will specify the
+% content of what is to be said but not actually what is to be said or
+% even perhaps which language it should.  We want, for example, to be able to
+% say that a speaker is carrying out the same type of move independently of which
+% language they are speaking.  Thus, if the user says to the system ``Dudamel is a conductor''
+% or (in Swedish) ``Dudamel är dirigent'' she will in both cases have carried out a
+% move involving the assertion of the content \smallrecord{\smalltfield{e}{conductor(Dudamel)}}.  This abstraction will
+% be important, for example, if we want to change language in the middle
+% of a dialogue, as people sometimes do.\footnote{This phenomenon is
+%   known as code-switching \citep{BullockToribio2009}.}  At the same time it is the
+% normal case to continue a dialogue in the same language and thus we
+% need to note which language was used in the previous utterance,
+% i.e. keep track of what was actually said.  This information will be
+% in the chart which is part of the latest move.  In the chart there
+% will be
+% more information about what was actually said which will be important when it comes to dealing
+% with parts of the utterance for things like clarification and
+% anaphora.  But this again requires us to abandon our current
+% simplifying ``propositional logic'' assumption.
     
 
-We will assume that agents do not have complete
-information about the information state, that is, they reason in terms
-of \textit{types} of information state (that is, gameboards).
-The basic intuition behind our reasoning about information state
-updates can be expressed as in \nexteg{}.
+% We will assume that agents do not have complete
+% information about the information state, that is, they reason in terms
+% of \textit{types} of information state (that is, gameboards).
+% The basic intuition behind our reasoning about information state
+% updates can be expressed as in \nexteg{}.
 
-\begin{ex} 
-If $r_i$ : $T_i$, then $r_{i+1}$ : $T_{i+1}(r_i)$ 
-\end{ex} 
+% \begin{ex} 
+% If $r_i$ : $T_i$, then $r_{i+1}$ : $T_{i+1}(r_i)$ 
+% \end{ex} 
   
 
-That is, given that we believe that the current information state is
-of type $T_i$ (recall that we can come to this belief without having
-any belief about which specific information state is involved), then
-we can conclude that the next information state is of type $T_{i+1}$
-which can depend on the current information state.  According to this,
-we can have a hypothesis about the type of the next information state
-even though we may not know exactly what the current information state
-is.  Exactly which type the next information state belongs to depends,
-though, on the exact nature of the current information state.  Thus
-the dependency in our types provides us with an additional means for
-representing underspecification.
+% That is, given that we believe that the current information state is
+% of type $T_i$ (recall that we can come to this belief without having
+% any belief about which specific information state is involved), then
+% we can conclude that the next information state is of type $T_{i+1}$
+% which can depend on the current information state.  According to this,
+% we can have a hypothesis about the type of the next information state
+% even though we may not know exactly what the current information state
+% is.  Exactly which type the next information state belongs to depends,
+% though, on the exact nature of the current information state.  Thus
+% the dependency in our types provides us with an additional means for
+% representing underspecification.
 
-This basic rule of inference corresponds to a function from records to
-record types, a function of type ($T_i$ $\rightarrow$ {\it
-  RecType\/}), that is, one kind of update function we were using in Chapter~\ref{ch:percint}.  Such a function is of
-the form \nexteg{}. 
+% This basic rule of inference corresponds to a function from records to
+% record types, a function of type ($T_i$ $\rightarrow$ {\it
+%   RecType\/}), that is, one kind of update function we were using in Chapter~\ref{ch:percint}.  Such a function is of
+% the form \nexteg{}. 
 
-\begin{ex} 
-$\lambda r\!:\!T_i\ .\ T_{i+1}(r)$ 
-\end{ex} 
+% \begin{ex} 
+% $\lambda r\!:\!T_i\ .\ T_{i+1}(r)$ 
+% \end{ex} 
   
 
-Things are a litte more complicated than this, however, because this
-only represents the change from one information state to another,
-whereas in fact this change is triggered by a speech
-event which bears an appropriate relation to the current information
-state represented by $r$.  Thus we are actually interested in
-functions from the current information state to a function from events
-to the new information state, as in \nexteg{}.
+% Things are a litte more complicated than this, however, because this
+% only represents the change from one information state to another,
+% whereas in fact this change is triggered by a speech
+% event which bears an appropriate relation to the current information
+% state represented by $r$.  Thus we are actually interested in
+% functions from the current information state to a function from events
+% to the new information state, as in \nexteg{}.
 
-\begin{ex}
-$\lambda r\!:\!T_i\ .\ \lambda e\!:\!T_e(r)\ .\ T_{i+1}(r,e)$
-\label{eg:updateFun}
-\end{ex}
+% \begin{ex}
+% $\lambda r\!:\!T_i\ .\ \lambda e\!:\!T_e(r)\ .\ T_{i+1}(r,e)$
+% \label{eg:updateFun}
+% \end{ex}
 
-This is the other kind of update function we were using in Chapter~\ref{ch:percint}.\footnote{This is
-  one of a number of ways of characterizing update in this kind of
-  framework.  One might for instance think of the type of the speech event as
-  being part of the current information state.  Also instead of using
-  an update function one can use a record type with a
-  `preconditions'-field and an `effect'-field.  Both
-  \cite{Ginzburg2012} and \cite{Larsson2002} have this kind of approach.}  Let us consider
-the update function which the user could use in order to update her
+% This is the other kind of update function we were using in Chapter~\ref{ch:percint}.\footnote{This is
+%   one of a number of ways of characterizing update in this kind of
+%   framework.  One might for instance think of the type of the speech event as
+%   being part of the current information state.  Also instead of using
+%   an update function one can use a record type with a
+%   `preconditions'-field and an `effect'-field.  Both
+%   \cite{Ginzburg2012} and \cite{Larsson2002} have this kind of approach.}
+Let us consider
+the update function and update rule which the user could use in order to update her
 information state after her own utterance of \textit{Dudamel is
   a conductor}.  This is modelled on the kind of integration rules
-discussed in \cite{Larsson2002}.
+discussed in \cite{Larsson2002}. 
 
-
+@@
 
 \begin{ex} \mbox{}
 
