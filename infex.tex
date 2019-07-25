@@ -2962,7 +2962,8 @@ treat them as a single record type, i.e. a witness of the type
 straightforward to deal with issues like consistency and anaphora as
 we will see in later chapters.
 
-Thus information states can belong to the type \nexteg{}.
+Thus information states can belong to the type \nexteg{}, our current
+version of the type \textit{InfoState}.
 
 \begin{ex} 
   \record{
@@ -3029,7 +3030,8 @@ been placed on the nature of the world.   % The
 % The `commitments'-field does not need to be adjusted as
 The type \textit{Rec} is one of the witnesses of \textit{RecType} (see
 Appendix~\ref{app:rectypes}).  The type of an initial information
-state based on \preveg{} is \nexteg{}.
+state based on \preveg{} is \nexteg{}, that is, our current version of
+the type \textit{InitInfoState}.
 \begin{ex}
  \record{
     \tfield{private}{
@@ -3220,7 +3222,30 @@ to vary with illocutionary force.  For example, we could require
 question syntax for queries, although that would not take account of
 the fact that declarative sentence syntax can also be used to ask
 questions.  It is not our aim here to give a detailed analysis of such
-phenomena but to provide a general framework in which they could be analyzed.
+phenomena but to provide a general framework in which they could be
+analyzed.
+
+We will also introduce types \textit{AssertionType},
+\textit{QueryType}, \textit{CommandType} and
+\textit{AcknowledgementType} which are characterized in a similar way
+to \textit{SignType} as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $T:\textit{AssertionType}$ iff $T\sqsubseteq \textit{Assertion}$ 
+ 
+\item $T:\textit{QueryType}$ iff $T\sqsubseteq \textit{Query}$
+
+  
+\item $T:\textit{CommandType}$ iff $T\sqsubseteq \textit{Command}$
+
+  
+\item $T:\textit{AcknowledgementType}$ iff $T\sqsubseteq \textit{Acknowledgement}$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
 
 % Here the subscript `illoc' stands for ``illocutionary'' indicating
 % that the condition provides information about the illocutionary force
@@ -3434,7 +3459,70 @@ Let us consider
 the update function and update rule which the user could use in order to update her
 information state after her own utterance of \textit{Dudamel is
   a conductor}.  This is modelled on the kind of integration rules
-discussed in \cite{Larsson2002}. 
+discussed in \cite{Larsson2002}.  The update function we wish to
+characterize will be defined on information states which have some
+assertion type as the first element on the agenda, that is the type in
+\nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{
+          \record{
+            \tfield{fst}{\textit{AssertionType}}\\
+            \tfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}} \\
+    \tfield{shared}{
+      \record{
+        \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+        \tfield{commitments}{\textit{RecType}}}}}  
+\end{ex} 
+Rather than writing out such types in our update functions we can
+think of the objects in the domain of our update
+function as meeting the requirement that they belong to two types as
+in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textit{InfoState} 
+ 
+\item
+  \record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{
+          \record{
+            \tfield{fst}{\textit{AssertionType}}}}}}}
+ 
+\end{subex} 
+   
+\end{ex} 
+A statement of the update function in terms of the abbreviation
+\textit{InfoState} will not only save space but also be helpful as we
+further develop our notion of what type \textit{InfoState} represents.
+If we are just adding extra fields to the type \textit{InfoState},
+that is we develop our theory monotonically just by adding more
+detail, then we do not have to go back and revise the formulation of
+the update functions based on earlier versions of the theory.
+
+However, we still need to give a characterization of a single type
+which will serve as the domain type of the update function.  One way
+to do this is to use TTR's \textit{meet types} such as \nexteg{}.
+\begin{ex} 
+  (\textit{InfoState} $\wedge$
+  \record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{
+          \record{
+            \tfield{fst}{\textit{AssertionType}}}}}}}) 
+\end{ex} 
+In general $a:(T_1\wedge T_2)$ just in case $a:T_1$ and $a:T_2$.
+
+\begin{shaded}
+We can introduce meet (also known as intersection or conjunctive
+types) into a type system
+\end{shaded}
+
 
 @@
 

@@ -1586,6 +1586,9 @@ $(T_1\rightarrow T_2)$ and the result of applying it to some object is
 of type $T_2$, then that object must be of type $T_1$.  
 \end{shaded}
 
+If a function, $f$, is of type $(T_1\rightarrow T_2)$ we say that the
+\textit{domain type} of $f$, $\mathrm{domtype}(f)$, is $T_1$.
+
 We introduce a notation for functions based on the $\lambda$-calculus.
 The notation is characterized in \nexteg{} where $v$ is a variable in
 our notation.
@@ -1595,7 +1598,10 @@ $a:T$, $f(a)$ (the result of applying $f$ to $a$) is represented by
 $\varphi[v\leftarrow a]$ (the result of replacing any free occurrence
 of $v$ in $\varphi$ with $a$).
 \label{ex:fun-notation}
-\end{ex} 
+\end{ex}
+Note that $\mathrm{domtype}(\lambda v\!:\!T\ .\
+\varphi)$ is $T$.
+
 
 \begin{shaded}
 In our informal proof theoretic representation this can be expressed
