@@ -3520,8 +3520,167 @@ In general $a:(T_1\wedge T_2)$ just in case $a:T_1$ and $a:T_2$.
 
 \begin{shaded}
 We can introduce meet (also known as intersection or conjunctive
-types) into a type system
+types) into a type system as in \nexteg{}, repeated in
+Appendix~\ref{app:meettypes}.
+\begin{ex} 
+A system of complex types \textbf{TYPE}$_C$ = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has meet types} if
+\begin{enumerate} 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $(T_1\wedge T_2) \in \mathbf{Type}$ 
+ 
+\item for any $T_1,T_2 \in \mathbf{Type}$, $a:_{\mathbf{TYPE_C}}(T_1\wedge T_2)$ iff
+  $a:_{\mathbf{TYPE_C}}T_1$ and $a:_{\mathbf{TYPE_C}}T_2$ 
+
+\end{enumerate}
+\label{ex:meettypes}
+\end{ex} 
+In our informal proof theoretic notation this can be represented as
+\nexteg{}.
+\begin{ex} 
+  For $\Gamma$ a system of complex types
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash T_1\in\textbf{Type}}
+      \hypo{\Gamma\vdash T_2\in\textbf{Type}}
+      \infer2{\Gamma\vdash (T_1\wedge T_2)\in\textbf{Type}}
+    \end{prooftree}
+    
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash a:T_1}
+      \hypo{\Gamma\vdash a:T_2}
+      \infer2{\Gamma\vdash a:(T_1\wedge T_2)}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash a:(T_1\wedge T_2)}
+      \infer1{\Gamma\vdash a:T_1}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash a:(T_1\wedge T_2)}
+      \infer1{\Gamma\vdash a:T_2}
+    \end{prooftree}
+ 
+\end{subex} 
+  
+\end{ex} 
+Just as we did for join types we can introduce a generalized version
+of meet types as in \nexteg{}, repeated in Appendix~\ref{app:meettypes}.
+\begin{ex} 
+A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+  generalized meet
+  types} if 
+
+\begin{enumerate} 
+ 
+\item for any non-empty finite set of types, $\mathbb{T}$, such that $\mathbb{T}
+  \subseteq\mathbf{Type}$, $\bigwedge\mathbb{T} \in \mathbf{Type}$ 
+ 
+\item for any finite $\mathbb{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigwedge\mathbb{T}$ iff
+  $a:_{\mathbf{TYPE_C}}T$ for all $T\in\mathbb{T}$
+ 
+\end{enumerate}
+\label{ex:genmeettypes}
+\end{ex} 
+In our informal proof theoretic notation this can be represented as
+\nexteg{}.
+\begin{ex} 
+  For $\Gamma$ a system of complex types
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash T_1,\ldots,T_n\in\textbf{Type}}
+      \infer1{\Gamma\vdash\bigwedge\{T_1,\ldots,T_n\}\in\textbf{Type}}
+    \end{prooftree}
+    
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash a:T_1,\ldots,a:T_n}
+      \infer1{\Gamma\vdash a:\bigwedge\{T_1,\ldots,T_n\}}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\vdash a:\bigwedge\{T_1,\ldots,T_n\}}
+      \hypo{1\leq i\leq n}
+      \infer2{\Gamma\vdash a:T_i}
+    \end{prooftree}
+    
+ 
+\end{subex} 
+  
+\end{ex}
+As with join types, we can, if we wish, use $T_1\wedge\ldots\wedge
+T_n$ to represent $\bigwedge\{T_1,\ldots,T_n\}$.
+  
 \end{shaded}
+
+If $T_1$ and $T_2$ are record types then there will always be a record
+type (not a meet) 
+$T_3$ which is necessarily equivalent to $T_1\wedge T_2$, that is any
+record, $r$ of type $T_1\wedge T_2$ will be of type $T_3$ and
+\textit{vice versa}.  We will call this the \textit{merge} of $T_1$
+and $T_2$ which we will represent as $T_1$\d{$\wedge$}$T_2$ (with a dot
+under `$\wedge$').  For example, \nexteg{a} will have the same set
+of witnesses as \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  \record{\tfield{f}{$T_1$}}$\wedge$\record{\tfield{g}{$T_2$}}
+ 
+\item \record{\tfield{f}{$T_1$}\\
+        \tfield{g}{$T_2$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+When a label only occurs in one of the types being merged then the
+field with that label is also a field of the merge of the two types.
+Thus \nexteg{} holds.
+\begin{ex} 
+\record{\tfield{f}{$T_1$}}\d{$\wedge$}\record{\tfield{g}{$T_2$}} = \record{\tfield{f}{$T_1$}\\
+        \tfield{g}{$T_2$}} 
+\end{ex} 
+When the same label, $\ell$, occurs in both types, then whatever
+occurs in the $\ell$-field must be of the types required in those
+fields by both the types.  Thus \nexteg{a} and \nexteg{b} will have
+the same witnesses.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{f}{$T_1$}}$\wedge$\record{\tfield{f}{$T_2$}} 
+ 
+\item \record{\tfield{f}{$T_1\wedge T_2$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+In a case like this we will make the merge recursive down inside the
+type, that is, we will make merge the types in the `f'-field in
+\preveg{b}.  Thus \nexteg{} will hold.
+\begin{ex} 
+  \record{\tfield{f}{$T_1$}}\d{$\wedge$}\record{\tfield{f}{$T_2$}} =
+  \record{\tfield{f}{$T_1$\d{$\wedge$}$T_2$}}
+\end{ex} 
+If one or the other of $T_1$ and $T_2$ is not a record type then
+$T_1$\d{$\wedge$}$T_2$ will be $T_1\wedge T_2$.  If $T_1\sqsubseteq T_2$
+then $T_1$\d{$\wedge$}$T_2$ is $T_1$ and if $T_2\sqsubseteq T_1$
+then $T_1$\d{$\wedge$}$T_2$ is $T_2$.  
 
 
 @@
