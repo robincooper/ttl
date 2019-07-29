@@ -428,13 +428,13 @@ A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has plurality types} if
 \begin{enumerate} 
  
-\item for any $T \in \textbf{Type}$, $\{\!\mid T\mid\!\} \in \textbf{Type}$ 
+\item for any $T \in \textbf{Type}$, $\mathrm{plurality}(T) \in \textbf{Type}$ 
  
 \item for any $T \in \textbf{Type}$, 
-$A:_{\mathbf{TYPE_C}}\{\!\mid T\mid\!\}$ iff  
+$A:_{\mathbf{TYPE_C}}\mathrm{plurality}(T)$ iff  
 \begin{enumerate} 
  
-\item $A :_{\mathbf{TYPE_C}} \{T\}$ 
+\item $A :_{\mathbf{TYPE_C}} \mathrm{set}(T)$ 
  
 \item if $a\in A$ then for any $b$ such that $a<b$, $b\not\in A$ 
  
@@ -1787,22 +1787,31 @@ extend-paths($\alpha$,$\pi$) is
 
 
 
-\todo{Revise list and set types, subtypes}We
-define a function $\mu$ which maps meets of record types to an
+We define a function $\mu$ which maps meets of record types to an
 equivalent record type, record types to equivalent types where meets
-in their values have been simplified by $\mu$ and any other types to themselves:
+in their values have been simplified by $\mu$ and any other types to
+themselves:
+\begin{enumerate}
+  \item if for some $T_1,T_2$, $T=(T_1\wedge T_2)$ and $T_1\sqsubseteq T_2$
+  then $\mu(T)=T_1$ 
+ 
+\item if for some $T_1,T_2$, $T=(T_1\wedge T_2)$ and $T_2\sqsubseteq T_1$
+  then $\mu(T)=T_2$
+  
+\item otherwise:
 \begin{enumerate} 
  
-\item If for some $T_1$, $T_2$, $T=T_1\wedge T_2$ then
+\item if for some $T_1$, $T_2$, $T=(T_1\wedge T_2)$ then
   $\mu(T)=\mu'(\mu(T_1)\wedge\mu(T_2))$. 
  
-\item If $T$ is a record type then $\mu(T)$ is $T'$ such that for any
+\item if $T$ is a record type then $\mu(T)$ is $T'$ such that for any
   $\ell$,$v$, $\langle\ell,\mu(v)\rangle\in T'$ iff
   $\langle\ell,v\rangle\in T$.
 
-\item Otherwise $\mu(T)=T$.
+\item otherwise $\mu(T)=T$.
  
-\end{enumerate} 
+\end{enumerate}
+\end{enumerate}
 
 $\mu'(T_1\wedge T_2)$ is defined by:
 \begin{enumerate} 
@@ -1816,25 +1825,50 @@ $\mu'(T_1\wedge T_2)$ is defined by:
 
 \begin{enumerate} 
  
-\item if $v_1$ and $v_2$ are $\langle\lambda u_1:T'_1\ldots\lambda
-  u_i:T'_i(\phi),\langle\pi_1\ldots\pi_i\rangle\rangle$ and $\langle\lambda u'_1:T''_1\ldots\lambda
-  u'_k:T''_k(\psi),\langle\pi'_1\ldots\pi'_k\rangle\rangle$
-  respectively, then $\langle\lambda u_1:T'_1\ldots\lambda
-  u_i:T'_i,\lambda u'_1:T''_1\ldots\lambda
-  u'_k:T''_k(\mu(\phi\wedge\psi)), \langle\pi_1\ldots\pi_i,\pi'_1\ldots\pi'_k\rangle\rangle\in T_3$
- 
-\item if $v_1$ is $\langle\lambda u_1:T'_1\ldots\lambda
-  u_i:T'_i(\phi),\langle\pi_1\ldots\pi_i\rangle\rangle$ and $v_2$ is a
-  type (i.e. not of the form $\langle f,\Pi\rangle$ for some function
-  $f$ and sequence of paths $\Pi$), then $\langle\lambda u_1:T'_1\ldots\lambda
-  u_i:T'_i(\mu(\phi\wedge
-  v_2)),\langle\pi_1\ldots\pi_i\rangle\rangle\in T_3$
+\item if $v_1$ and $v_2$ are
+\begin{quote}
+  $\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+  u_i\!\!:\!\!T'_i\ .\ \phi,\langle\pi_1\ldots\pi_i\rangle\rangle$
+  \end{quote}
+  and
+  \begin{quote}
+    $\langle\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\ \psi,\langle\pi'_1\ldots\pi'_k\rangle\rangle$
+\end{quote}
+respectively, then
+\begin{quote}
+$\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+  u_i\!\!:\!\!T'_i,\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\ \mu(\phi\wedge\psi), \langle\pi_1\ldots\pi_i,\pi'_1\ldots\pi'_k\rangle\rangle\in T_3$
+\end{quote}
 
-\item if $v_2$ is $\langle\lambda u'_1:T''_1\ldots\lambda
-  u'_k:T''_k(\psi),\langle\pi'_1\ldots\pi'_k\rangle\rangle$ and $v_1$
-  is a type, then $\langle\lambda u'_1:T''_1\ldots\lambda
-  u'_k:T''_k(\mu(v_1\wedge\psi)),\langle\pi'_1\ldots\pi'_k\rangle\rangle\in
+\item if $v_1$ is
+  \begin{quote}
+$\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+u_i\!\!:\!\!T'_i\ .\ \phi,\langle\pi_1\ldots\pi_i\rangle\rangle$
+\end{quote}
+and $v_2$ is a
+  type (i.e. not of the form $\langle f,\Pi\rangle$ for some function
+  $f$ and sequence of paths $\Pi$), then
+  \begin{quote}
+    $\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+  u_i\!\!:\!\!T'_i\ .\ \mu(\phi\wedge
+  v_2),\langle\pi_1\ldots\pi_i\rangle\rangle\in T_3$
+\end{quote}
+
+\item if $v_2$ is
+  \begin{quote}
+    $\langle\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\
+  \psi),\langle\pi'_1\ldots\pi'_k\rangle\rangle$
+\end{quote}
+and $v_1$
+is a type, then
+\begin{quote}
+  $\langle\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\ \mu(v_1\wedge\psi)),\langle\pi'_1\ldots\pi'_k\rangle\rangle\in
   T_3$
+  \end{quote}
 
 \item otherwise $\langle\ell,\mu(v_1\wedge
   v_2)\rangle\in T_3$ 
@@ -1854,62 +1888,78 @@ $\mu'(T_1\wedge T_2)$ is defined by:
  
 \end{enumerate} 
 
-\item if $T_1$ is \textit{Rec} and $T_2$ is a record type, then
-  $\mu'(T_1\wedge T_2)=T_2$
+% \item if $T_1$ and $T_2$ are record types and $T_2\sqsubseteq T_1$, then
+%   $\mu'(T_1\wedge T_2)=T_2$
 
-\item if $T_1$ is a record type  and $T_2$ is \textit{Rec}, then
-  $\mu'(T_1\wedge T_2)=T_1$
+% \item if $T_1$ and $T_2$ are record types and $T_1\sqsubseteq T_2$, then
+%   $\mu'(T_1\wedge T_2)=T_1$
 
-\item If $T_1$ is $[T_1']$ ($\{T_1'\}$, $\{\!\mid T_1'\mid\!\}$) and
-  $T_2$ is $[T_2']$ ($\{T_2'\}$, $\{\!\mid T_2'\mid\!\}$), then
-  $\mu'(T_1\wedge T_2)=[\mu(T_1'\wedge T_2')]$ ($\{\mu(T_1'\wedge
-  T_2')\}$, $\{\!\mid\mu(T_1'\wedge T_2')\mid\!\}$)
+\item if $T_1$ is $\mathrm{list}(T_1')$ ($\mathrm{set}(T_1')$, $\mathrm{plurality}(T_1')$) and
+  $T_2$ is $\mathrm{list}(T_2')$ ($\mathrm{set}(T_2')$, $\mathrm{plurality}( T_2')$), then
+  $\mu'(T_1\wedge T_2)=\mathrm{list}(\mu(T_1'\wedge T_2'))$ ($\mathrm{set}(\mu(T_1'\wedge
+  T_2'))$, $\mathrm{plurality}(\mu(T_1'\wedge T_2'))$)
    
  
-\item \label{item:mergeotherwise} Otherwise $\mu'(T_1\wedge T_2)=T_1\wedge T_2$ 
+\item \label{item:mergeotherwise} otherwise $\mu'(T_1\wedge T_2)=T_1\wedge T_2$ 
  
 \end{enumerate} 
 
-$T_1$ \d{$\wedge$} $T_2$ is used to represent $\mu(T_1\wedge T_2)$.
-We call  $T_1$ \d{$\wedge$} $T_2$ the \textit{merge} of $T_1$ and $T_2$.   
+$(T_1$ \d{$\wedge$} $T_2)$ is used to represent $\mu(T_1\wedge T_2)$.
+We call  $(T_1$ \d{$\wedge$} $T_2)$ the \textit{merge} of $T_1$ and $T_2$.   
 
-The following two clauses could be added at
-the beginning of the definition of $\mu$ (after providing a
-characterization of the subtype relation, $\sqsubseteq$).
-\begin{enumerate} 
+% The following two clauses could be added at
+% the beginning of the definition of $\mu$ (after providing a
+% characterization of the subtype relation, $\sqsubseteq$).
+% \begin{enumerate} 
  
-\item if for some $T_1,T_2$, $T=T_1\wedge T_2$ and $T_1\sqsubseteq T_2$
-  then $\mu(T)=T_1$ 
  
-\item if for some $T_1,T_2$, $T=T_1\wedge T_2$ and $T_2\sqsubseteq T_1$
-  then $\mu(T)=T_2$ 
  
-\end{enumerate} 
+% \end{enumerate} 
 
-The current first clause would then hold in case neither of the
-conditions of these two clauses are met.  The definition without these
-additional clauses only accounts for simplification of meets which
-have to do with merges of record types whereas the definition with the
-additional clauses would in addition have the effect, for example, that
-$\mu(T\wedge T_a)=T_a$ and $\mu(T_1\wedge(T_1\vee T_2))= T_1$
-(provided that we have an appropriate definition of $\sqsubseteq$)
-whereas the current definition without the additional clauses means
-that $\mu$ 
-leaves these types unchanged.
+% The current first clause would then hold in case neither of the
+% conditions of these two clauses are met.  The definition without these
+% additional clauses only accounts for simplification of meets which
+% have to do with merges of record types whereas the definition with the
+% additional clauses would in addition have the effect, for example, that
+% $\mu(T\wedge T_a)=T_a$ and $\mu(T_1\wedge(T_1\vee T_2))= T_1$
+% (provided that we have an appropriate definition of $\sqsubseteq$)
+% whereas the current definition without the additional clauses means
+% that $\mu$ 
+% leaves these types unchanged.
 
 We define also a notion of \textit{asymmetric merge} of $T_1$ and
-$T_2$ which is defined by a function exactly like $\mu$ except that
+$T_2$ which is defined by a function, $\mu_{\mathrm{asym}}$, exactly
+like $\mu$ except that the first two clauses of the definition of
+$\mu$ are missing and $\mu'$ is replaced by another function
+$\mu_{\mathrm{asym}}'$.  Thus the definition of $\mu_{\mathrm{asym}}$
+is:
+\begin{enumerate} 
+ 
+\item if for some $T_1$, $T_2$, $T=(T_1\wedge T_2)$ then
+  $\mu_{\mathrm{asym}}(T)=\mu_{\mathrm{asym}}'(\mu_{\mathrm{asym}}(T_1)\wedge\mu_{\mathrm{asym}}(T_2))$. 
+ 
+\item if $T$ is a record type then $\mu_{\mathrm{asym}}(T)$ is $T'$ such that for any
+  $\ell$,$v$, $\langle\ell,\mu_{\mathrm{asym}}(v)\rangle\in T'$ iff
+  $\langle\ell,v\rangle\in T$.
+
+\item otherwise $\mu_{\mathrm{asym}}(T)=T$.
+ 
+\end{enumerate}
+
+The definition of $\mu_{\mathrm{asym}}'$ is exactly like $\mu'$,
+replacing $\mu$ and $\mu'$ with $\mu_{\mathrm{asym}}$ and $\mu_{\mathrm{asym}}'$ respectively, except that
+the
 clause~\ref{item:mergeotherwise} of the definition of $\mu'$ is replaced by 
 \begin{enumerate} 
  
-\item[\ref{item:mergeotherwise}$'$.] Otherwise $\mu'(T_1\wedge T_2)=T_2$ 
+\item[\ref{item:mergeotherwise}$'$.] otherwise $\mu_{\mathrm{asym}}'(T_1\wedge T_2)=T_2$ 
  
 \end{enumerate} 
   
 We use $T_1$ \fbox{\d{$\wedge$}} $T_2$  to represent the asymmetric
 merge of $T_1$ and $T_2$.  
 
-These definitions do not in general avoid
+\todo{Is there a way to avoid this?}These definitions do not in general avoid
 the formation of ill-formed record types since they allow record types
 to be replaced with non-record types within a record type thus
 potentially removing paths that might be included in dependent type
