@@ -1445,7 +1445,9 @@ The second piece of information we need to provide is where to find
 the object(s) which will serve as the arguments to these functions.
 This will be a sequence of \textit{paths} in the record, providing a
 path for each argument to the function.  A path is a string of labels
-separated by `.'.  We will make this notion precise in
+separated by `.' and corresponds to the general notion of paths for
+labelled sets with the important exception that we exclude paths
+containing the distinguished labels used in non-record structures.  We will make this notion precise in
 Section~\ref{sec:recs-rectypes}.  In the case of our current example
 we only need paths consisting of one label.
 
@@ -1840,7 +1842,26 @@ is in $r$, we call $\langle\ell,v\rangle$ a \textit{field} of $r$,
 $\ell$ a {\it label\/} in $r$ and $v$ a {\it value\/} in $r$ (the
 \textit{value of $\ell$ in $r$}).
 We use $r.\ell$ to denote $v$.  \ignore{$r.\ell$ is called a \textit{path}
-in $r$.}
+  in $r$.}
+
+Records, as labelled sets, will have paths as defined for labelled
+sets.  However, we will want in addition a more restricted notion of
+path for records which excludes those paths which include the
+distinguished labels used in non-record structures which may be values
+in a record.
+\begin{ex} 
+If $X$ is a labelled set based on a set of labels, $\mathcal{L}$
+including a set of distinguished labels, $\mathcal{D}$, then
+\begin{enumerate} 
+ 
+\item if $\ell\in\mathrm{labels}(X)$ and $\ell\not\in\mathcal{D}$, then $\ell\in\mathrm{paths}_{\mathcal{L}\setminus\mathcal{D}}(X)$ 
+ 
+\item if $\ell\in\mathrm{labels}(X)$ and $\ell\not\in\mathcal{D}$, $X.\ell$ is a labelled set and
+  $\pi\in\mathrm{paths}_{\mathcal{L}\setminus\mathcal{D}}(X.\ell)$, then $\ell.\pi\in\mathrm{paths}_{\mathcal{L}\setminus\mathcal{D}}(X)$
+\end{enumerate}  
+\end{ex}
+We will sometimes use `$\mathrm{paths}$' without the subscript for this
+more restricted notion when there is no risk for confusion.
 
 We use a tabular format to
 represent records.  A record as given in \nexteg{a} 
@@ -2024,6 +2045,14 @@ provided $\ell$ is not already a label of $R$ (corresponding to
 the new type just in case $r:R$ and it contains a field
 $\langle\ell,a\rangle$ such that $a:T$ (corresponding to
 (\ref{ex:ndrectypes}), clause 8).
+
+The issue of what counts as a path in a record type is a little
+complex.  As for records it is based on the definition of paths for
+labelled sets but excluding the distinguished labels used in
+non-record structures such as ptypes.  However, we will make one
+exception to this when we introduce meet types since it will be
+important to include paths into meet types.  We will discuss this when
+we introduce meet types in Chapter~\ref{ch:infex}.
 
 We can add dependent record types to systems which have non-dependent
 record types.  In order to do this we need dependent types, that is,
