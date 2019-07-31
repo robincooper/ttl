@@ -3682,6 +3682,182 @@ $T_1$\d{$\wedge$}$T_2$ will be $T_1\wedge T_2$.  If $T_1\sqsubseteq T_2$
 then $T_1$\d{$\wedge$}$T_2$ is $T_1$ and if $T_2\sqsubseteq T_1$
 then $T_1$\d{$\wedge$}$T_2$ is $T_2$.  
 
+\begin{shaded}
+We can define the merge operation on types in the following way
+(repeated in Appendix~\ref{app:merge}).\label{pg:merge} The definition
+is closely related to the unification algorithms used in feature based
+grammar (see \citealp{Shieber1986} for the classic reference).
+
+We define a function $\mu$ which maps meets of record types to an
+equivalent record type, record types to equivalent types where meets
+in their values have been simplified by $\mu$ and any other types to
+themselves:
+\begin{enumerate}
+  \item if for some $T_1,T_2$, $T=(T_1\wedge T_2)$ and $T_1\sqsubseteq T_2$
+  then $\mu(T)=T_1$ 
+ 
+\item if for some $T_1,T_2$, $T=(T_1\wedge T_2)$ and $T_2\sqsubseteq T_1$
+  then $\mu(T)=T_2$
+  
+\item otherwise:
+\begin{enumerate} 
+ 
+\item if for some $T_1$, $T_2$, $T=(T_1\wedge T_2)$ then
+  $\mu(T)=\mu'(\mu(T_1)\wedge\mu(T_2))$. 
+ 
+\item if $T$ is a record type then $\mu(T)$ is $T'$ such that for any
+  $\ell$,$v$, $\langle\ell,\mu(v)\rangle\in T'$ iff
+  $\langle\ell,v\rangle\in T$.
+
+\item otherwise $\mu(T)=T$.
+ 
+\end{enumerate}
+\end{enumerate}
+
+$\mu'(T_1\wedge T_2)$ is defined by:
+\begin{enumerate} 
+ 
+\item if $T_1$ and $T_2$ are record types, then $\mu'(T_1\wedge
+  T_2)=T_3$ such that
+\begin{enumerate} 
+ 
+\item for any $\ell,v_1,v_2$, if $\langle\ell,v_1\rangle\in T_1$ and
+  $\langle\ell,v_2\rangle\in T_2$, then 
+
+\begin{enumerate} 
+ 
+\item if $v_1$ and $v_2$ are
+\begin{quote}
+  $\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+  u_i\!\!:\!\!T'_i\ .\ \phi,\langle\pi_1\ldots\pi_i\rangle\rangle$
+  \end{quote}
+  and
+  \begin{quote}
+    $\langle\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\ \psi,\langle\pi'_1\ldots\pi'_k\rangle\rangle$
+\end{quote}
+respectively, then
+\begin{quote}
+$\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+  u_i\!\!:\!\!T'_i,\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\ \mu(\phi\wedge\psi), \langle\pi_1\ldots\pi_i,\pi'_1\ldots\pi'_k\rangle\rangle\in T_3$
+\end{quote}
+
+\item if $v_1$ is
+  \begin{quote}
+$\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+u_i\!\!:\!\!T'_i\ .\ \phi,\langle\pi_1\ldots\pi_i\rangle\rangle$
+\end{quote}
+and $v_2$ is a
+  type (i.e. not of the form $\langle f,\Pi\rangle$ for some function
+  $f$ and sequence of paths $\Pi$), then
+  \begin{quote}
+    $\langle\lambda u_1\!\!:\!\!T'_1\ldots\lambda
+  u_i\!\!:\!\!T'_i\ .\ \mu(\phi\wedge
+  v_2),\langle\pi_1\ldots\pi_i\rangle\rangle\in T_3$
+\end{quote}
+
+\item if $v_2$ is
+  \begin{quote}
+    $\langle\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\
+  \psi),\langle\pi'_1\ldots\pi'_k\rangle\rangle$
+\end{quote}
+and $v_1$
+is a type, then
+\begin{quote}
+  $\langle\lambda u'_1\!\!:\!\!T''_1\ldots\lambda
+  u'_k\!\!:\!\!T''_k\ .\ \mu(v_1\wedge\psi)),\langle\pi'_1\ldots\pi'_k\rangle\rangle\in
+  T_3$
+  \end{quote}
+
+\item otherwise $\langle\ell,\mu(v_1\wedge
+  v_2)\rangle\in T_3$ 
+ 
+\end{enumerate} 
+  
+
+
+ 
+\item for any $\ell,v_1$, if $\langle\ell,v_1\rangle\in T_1$ and there
+  is no $v_2$ such that $\langle\ell,v_2\rangle\in T_2$, then
+  $\langle\ell,v_1\rangle\in T_3$
+
+\item for any $\ell,v_2$, if $\langle\ell,v_2\rangle\in T_2$ and there
+  is no $v_1$ such that $\langle\ell,v_1\rangle\in T_1$, then
+  $\langle\ell,v_2\rangle\in T_3$
+ 
+\end{enumerate} 
+
+% \item if $T_1$ and $T_2$ are record types and $T_2\sqsubseteq T_1$, then
+%   $\mu'(T_1\wedge T_2)=T_2$
+
+% \item if $T_1$ and $T_2$ are record types and $T_1\sqsubseteq T_2$, then
+%   $\mu'(T_1\wedge T_2)=T_1$
+
+\item if $T_1$ is $\mathrm{list}(T_1')$ ($\mathrm{set}(T_1')$, $\mathrm{plurality}(T_1')$) and
+  $T_2$ is $\mathrm{list}(T_2')$ ($\mathrm{set}(T_2')$, $\mathrm{plurality}( T_2')$), then
+  $\mu'(T_1\wedge T_2)=\mathrm{list}(\mu(T_1'\wedge T_2'))$ ($\mathrm{set}(\mu(T_1'\wedge
+  T_2'))$, $\mathrm{plurality}(\mu(T_1'\wedge T_2'))$)
+   
+ 
+\item \label{item:mergeotherwise} otherwise $\mu'(T_1\wedge T_2)=T_1\wedge T_2$ 
+ 
+\end{enumerate} 
+
+$(T_1$ \d{$\wedge$} $T_2)$ is used to represent $\mu(T_1\wedge T_2)$.
+We call  $(T_1$ \d{$\wedge$} $T_2)$ the \textit{merge} of $T_1$ and
+$T_2$.
+
+It is important for this characterization of merge to work properly
+that paths in record types extend into meet types within the record
+type.  Consider the merge expressed in \nexteg{a} where we assume that
+\textit{Sit} is a basic type, for example the type of situations.
+According to the above definition \nexteg{a} will be identical with
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{
+    \tfield{e}{\record{
+        \tfield{x}{\textit{Ind}}\\
+        \tfield{y}{\textit{Ind}}\\
+        \tfield{e}{hug(x,y)}}} \\
+    \tfield{c$_1$}{boy(e.x)}\\
+    \tfield{c$_2$}{dog(e.y)} 
+  } \d{$\wedge$} \record{\tfield{e}{\textit{Sit}}} 
+ 
+\item \record{
+    \tfield{e}{\record{
+        \tfield{x}{\textit{Ind}}\\
+        \tfield{y}{\textit{Ind}}\\
+        \tfield{e}{hug(x,y)}} $\wedge$ \textit{Sit}} \\
+    \tfield{c$_1$}{boy(e.x)}\\
+    \tfield{c$_2$}{dog(e.y)} 
+  } 
+ 
+\end{subex} 
+\label{ex:paths-into-meets}   
+\end{ex} 
+If the paths of record types do not extend into meet types then the
+paths of \preveg{b} would be \nexteg{} and \preveg{} would not be a
+well-formed record type since the `c$_1$' and `c$_2$'-fields would
+reference non-existant paths.
+\begin{ex} 
+\{e, c$_1$, c$_2$\} 
+\end{ex} 
+However, clearly any record which is of the type (\ref{ex:paths-into-meets}b)  must in addition
+have the paths `e.x' and `e.y' because of the requirement expressed by
+the meet type.  Thus it is appropriate and intuitive that these should
+count as paths in the record type thus making
+(\ref{ex:paths-into-meets}b) well-formed.  
+
+
+\end{shaded}
+
+In our update action rules we will make use of an operation called
+\textit{asymmetric merge}.
+
 
 @@
 

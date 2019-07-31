@@ -1429,7 +1429,44 @@ and \textbf{RType} $\subseteq$ \textbf{Type} and \textbf{RType}
 \end{enumerate}
 
 % We say that $T$ is a \textit{proper} record type if it is a non-empty
-% set of fields.\footnote{This terminology was not introduced in \cite{Cooper2012}.}\label{pg:proprectype} 
+% set of fields.\footnote{This terminology was not introduced in
+% \cite{Cooper2012}.}\label{pg:proprectype}
+
+The notion of paths for record types is the set of paths viewing the
+record type as a labelled set but without those paths which include
+distinguished labels used in the labelled sets for non-record
+structures except in the case of those used in meet types:
+`$\mathrm{conj}$', `$\mathrm{conj}_1$' and `$\mathrm{conj}_2$'.  We
+include modified versions of such paths where such labels have been
+removed.  For example, the record type (assuming \textit{Sit} is some
+basic type):
+\begin{quote}
+  $\{\text{RT}, \langle\text{e},
+  \{\langle\text{conj}_1,
+  \{\text{RT}, \langle\text{x},\textit{Ind}\rangle,
+  \langle\text{y},\textit{Ind}\rangle,
+  \langle\text{e},\langle\lambda v_1\!\!:\!\!\textit{Ind},
+  \lambda v_2\!\!:\!\!\textit{Ind} .
+  \text{hug}(v_1,v_2),
+  \langle\text{x},\text{y}\rangle\rangle\rangle\}\rangle,
+  \langle\text{conj}_2,\textit{Sit}\rangle\}\rangle\}$
+\end{quote}
+which we normally represent as
+\begin{quote}
+  \record{\tfield{e}{\record{
+        \tfield{x}{\textit{Ind}}\\
+        \tfield{y}{\textit{Ind}}\\
+        \tfield{e}{hug(x,y)}} $\wedge$ \textit{Sit}}}
+\end{quote}
+has the paths
+\begin{quote}
+  \{e, e.x, e.y, e.e\}
+\end{quote}
+
+          
+          
+  
+
 
 This gives us non-dependent record types in a system of complex types.
 We can extend this to intensional systems of complex types (with
@@ -1786,7 +1823,8 @@ extend-paths($\alpha$,$\pi$) is
 \label{app:merge}
 
 
-
+This definition of the merge operation on types is first introduced
+and discussed in Chapter~\ref{infex}, p.~\ref{pg:merge}.
 We define a function $\mu$ which maps meets of record types to an
 equivalent record type, record types to equivalent types where meets
 in their values have been simplified by $\mu$ and any other types to
@@ -1959,18 +1997,18 @@ clause~\ref{item:mergeotherwise} of the definition of $\mu'$ is replaced by
 We use $T_1$ \fbox{\d{$\wedge$}} $T_2$  to represent the asymmetric
 merge of $T_1$ and $T_2$.  
 
-\todo{Is there a way to avoid this?}These definitions do not in general avoid
-the formation of ill-formed record types since they allow record types
-to be replaced with non-record types within a record type thus
-potentially removing paths that might be included in dependent type
-fields elsewhere in the resulting type.  However, if merging is
-restricted to either two record types or two non-record types this
-problem should not occur since all paths from both types will be
-preserved.  In the case of asymmetric merges we can allow the
-replacement of non-record types by record types without risk.  Note
-that our definition of dependent record types in \ref{app:rectypes}
-allows for dependencies to fields that have conflicting types.  Such
-record types will be well-formed though will not have any witnesses.
+% \todo{Is there a way to avoid this?}These definitions do not in general avoid
+% the formation of ill-formed record types since they allow record types
+% to be replaced with non-record types within a record type thus
+% potentially removing paths that might be included in dependent type
+% fields elsewhere in the resulting type.  However, if merging is
+% restricted to either two record types or two non-record types this
+% problem should not occur since all paths from both types will be
+% preserved.  In the case of asymmetric merges we can allow the
+% replacement of non-record types by record types without risk.  Note
+% that our definition of dependent record types in \ref{app:rectypes}
+% allows for dependencies to fields that have conflicting types.  Such
+% record types will be well-formed though will not have any witnesses.
 
 \paragraph{Merging functions which return types}
 
