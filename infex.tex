@@ -3856,43 +3856,165 @@ count as paths in the record type thus making
 \end{shaded}
 
 In our update action rules we will make use of an operation called
-\textit{asymmetric merge}.
+\textit{asymmetric merge}.\label{pg:asymmerge}  The asymmetric merge of types $T_1$ and
+$T_2$, $T_1$\fbox{\d{$\wedge$}}$T_2$ is like their merge except that
+if either $T_1$ or $T_2$ is not a record type then
+$T_1$\fbox{\d{$\wedge$}}$T_2$ is $T_2$.  Also asymmetric merge does
+not check for subtyping in the way that ordinary merge does.  Thus
+when asymmetrically merging non-record types, $T_1$ and $T_2$,
+$T_1$\fbox{\d{$\wedge$}}$T_2$ will always be $T_2$ regardless of
+whether the subtype relation holds between the two types.
+
+\begin{shaded}
+We can define asymmetric merge in the following way (repeated in
+Appendix~\ref{app:merge}).  The definition is closely related to the
+priority unification algorithms used in feature based grammar
+\citep{Shieber1986}.
+
+The \textit{asymmetric merge} of $T_1$ and
+$T_2$ is defined by a function, $\mu_{\mathrm{asym}}$, exactly
+like $\mu$ except that the first two clauses of the definition of
+$\mu$ are missing and $\mu'$ is replaced by another function
+$\mu_{\mathrm{asym}}'$.  Thus the definition of $\mu_{\mathrm{asym}}$
+is:
+\begin{enumerate} 
+ 
+\item if for some $T_1$, $T_2$, $T=(T_1\wedge T_2)$ then
+  $\mu_{\mathrm{asym}}(T)=\mu_{\mathrm{asym}}'(\mu_{\mathrm{asym}}(T_1)\wedge\mu_{\mathrm{asym}}(T_2))$. 
+ 
+\item if $T$ is a record type then $\mu_{\mathrm{asym}}(T)$ is $T'$ such that for any
+  $\ell$,$v$, $\langle\ell,\mu_{\mathrm{asym}}(v)\rangle\in T'$ iff
+  $\langle\ell,v\rangle\in T$.
+
+\item otherwise $\mu_{\mathrm{asym}}(T)=T$.
+ 
+\end{enumerate}
+
+The definition of $\mu_{\mathrm{asym}}'$ is exactly like $\mu'$,
+replacing $\mu$ and $\mu'$ with $\mu_{\mathrm{asym}}$ and $\mu_{\mathrm{asym}}'$ respectively, except that
+the
+clause~\ref{item:mergeotherwise} of the definition of $\mu'$ is replaced by 
+\begin{enumerate} 
+ 
+\item[\ref{item:mergeotherwise}$'$.] otherwise $\mu_{\mathrm{asym}}'(T_1\wedge T_2)=T_2$ 
+ 
+\end{enumerate} 
+  
+We use $T_1$ \fbox{\d{$\wedge$}} $T_2$  to represent the asymmetric
+merge of $T_1$ and $T_2$.  
+
+Asymmetric merge may result in an ill-formed record type if we take
+the asymmetric merge of a record type, $T_1$, and a non-record type,
+$T_2$, since $T_1$ may be embedded in a larger type with fields
+dependent on paths into $T_1$ which will not be present in the result
+where $T_2$ has been substituted for $T_1$ thus removing the relevant
+paths.  Consider the asymmetric merge \nexteg{a} which is \nexteg{b},
+where, as above, \textit{Sit} is a basic type.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{
+    \tfield{e}{\record{
+        \tfield{x}{\textit{Ind}}\\
+        \tfield{y}{\textit{Ind}}\\
+        \tfield{e}{hug(x,y)}}} \\
+    \tfield{c$_1$}{boy(e.x)}\\
+    \tfield{c$_2$}{dog(e.y)} 
+  } \fbox{\d{$\wedge$}} \record{\tfield{e}{\textit{Sit}}} 
+ 
+\item \record{
+    \tfield{e}{\textit{Sit}} \\
+    \tfield{c$_1$}{boy(e.x)}\\
+    \tfield{c$_2$}{dog(e.y)} 
+  } 
+ 
+\end{subex} 
+
+\end{ex} 
+\preveg{b} is clearly not a well-formed type since the fields labelled
+by `c$_1$' and `c$_2$' address non-existent paths.
+
+\end{shaded}
+
+Armed with this technology we can define an update function,
+f$_{\textsc{PlanAccAss}}$,  and action
+rule which plan an acknowledgement to an assertion as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item f$_{\textsc{PlanAckAss}}$
+
+  $\lambda r$:\textit{InfoState} . \\
+  \hspace*{2em}$\lambda u$:\textit{Asserttion} . \\
+  \hspace*{4em}
+  \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+            \smalltfield{fst}{\smallrecord{
+                \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+                    \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
+                    \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
+                \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
+                \smalltfield{illoc}{acknowledge(s-event, cont)}}}\\
+            \smallmfield{rst}{$r$.private.agenda}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
+        
+ 
+\item \textsc{PlanAckAss}
+
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
+    \hypo{u:_A T_{\mathrm{utt}}}
+    \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
+    \infer[enth]4{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
+  \end{prooftree}
+  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
 
 
 @@
 
-\begin{ex} \mbox{}
+% \begin{ex} \mbox{}
 
-\hspace*{-3em}\begin{minipage}{\textwidth}$\lambda
-r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{MoveType}(\textit{SELF})]}}}}
-\\
-\hspace*{2em}$\lambda
-u$:\record{\tfield{move}{fst($r$.private.agenda)
-\d{$\wedge$}
-\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}
-      \\
-                                          \smalltfield{au}{\textit{Ind}}}}}
-\d{$\wedge$}
-\smallrecord{\smalltfield{e}{\textit{Assertion}}}} \\
-                                \tfield{chart}{\textit{Chart}} \\
-                                \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
-\hspace*{4em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}
-\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}  \\
-\hspace*{10em}$\mid$ rst($r$.private.agenda) \end{tabular}}{[\textit{MoveType}(\textit{SELF})]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}(\textit{SELF})} \\
-                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u$.e}{m-interp(chart,move)}}}}}}
-\end{minipage}
-\label{eg:updateFunIntegOwn}
+% \hspace*{-3em}\begin{minipage}{\textwidth}$\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{MoveType}(\textit{SELF})]}}}}
+% \\
+% \hspace*{2em}$\lambda
+% u$:\record{\tfield{move}{fst($r$.private.agenda)
+% \d{$\wedge$}
+% \smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}
+%       \\
+%                                           \smalltfield{au}{\textit{Ind}}}}}
+% \d{$\wedge$}
+% \smallrecord{\smalltfield{e}{\textit{Assertion}}}} \\
+%                                 \tfield{chart}{\textit{Chart}} \\
+%                                 \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{4em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}
+% \smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}  \\
+% \hspace*{10em}$\mid$ rst($r$.private.agenda) \end{tabular}}{[\textit{MoveType}(\textit{SELF})]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}(\textit{SELF})} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}}}}
+% \end{minipage}
+% \label{eg:updateFunIntegOwn}
 
-\end{ex}
+% \end{ex}
 
 
 

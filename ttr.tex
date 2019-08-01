@@ -1965,7 +1965,8 @@ We call  $(T_1$ \d{$\wedge$} $T_2)$ the \textit{merge} of $T_1$ and $T_2$.
 % that $\mu$ 
 % leaves these types unchanged.
 
-We define also a notion of \textit{asymmetric merge} of $T_1$ and
+We define also a notion of \textit{asymmetric merge}
+(Chapter~\ref{ch:infex}, p.~\pageref{pg:asymmerge}) of $T_1$ and
 $T_2$ which is defined by a function, $\mu_{\mathrm{asym}}$, exactly
 like $\mu$ except that the first two clauses of the definition of
 $\mu$ are missing and $\mu'$ is replaced by another function
@@ -1997,7 +1998,12 @@ clause~\ref{item:mergeotherwise} of the definition of $\mu'$ is replaced by
 We use $T_1$ \fbox{\d{$\wedge$}} $T_2$  to represent the asymmetric
 merge of $T_1$ and $T_2$.  
 
-% \todo{Is there a way to avoid this?}These definitions do not in general avoid
+Asymmetric merge may result in an ill-formed record type if we take
+the asymmetric merge of a record type, $T_1$, and a non-record type,
+$T_2$, since $T_1$ may be embedded in a larger type with fields
+dependent on paths into $T_1$ which will not be present in the result
+where $T_2$ has been substituted for $T_1$ thus removing the relevant
+paths.  % These definitions do not in general avoid
 % the formation of ill-formed record types since they allow record types
 % to be replaced with non-record types within a record type thus
 % potentially removing paths that might be included in dependent type
