@@ -3966,10 +3966,10 @@ rule which plan an acknowledgement to an assertion as in \nexteg{}.
   \begin{prooftree}
     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
-    \hypo{u:_A T_{\mathrm{utt}}}
+    \hypo{u^*:_A T_{\mathrm{utt}}}
     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
     \infer[enth]4{s_{i+1,A}:_A
-      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u^*)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
               \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
   \end{prooftree}
   
@@ -3981,7 +3981,7 @@ rule which plan an acknowledgement to an assertion as in \nexteg{}.
 
 
 
-@@
+
 
 % \begin{ex} \mbox{}
 
@@ -4018,245 +4018,241 @@ rule which plan an acknowledgement to an assertion as in \nexteg{}.
 
 
 
-This function maps information states (records), $r$, which have a non-empty
-agenda to a function that maps events to a type of information
-state. (See Appendix~\ref{app:listtypes} for an account of non-empty
-list types.)  It thus requires that the current information state (the
-first argument to the function) have a non-empty agenda.  The second
-argument to the function (represented by $u$) requires the move
-associated with the speech-event to be of the first type on the agenda
-in $r$, the current information state, and also to be an assertion
-with \textit{SELF} as the speaker (see Appendix~\ref{app:meettypes} for a
-discussion of meet types, that is, conjunction).  It also requires that the chart associated
-with this utterance can be interpreted as a move of that type.  The
-requirements on the arguments to the function represent the
-preconditions.  The type that results from applying the function to
+\preveg{a} maps information states (records), $r$, to a function that maps events to a type of information
+state. The second
+argument to the function (represented by $u$) requires a 
+speech event  which is an assertion.  The type that results from applying the function to
 its arguments represents the effect of the update.
-This type requires the agenda to be result of replacing the first type
-on the agenda in $r$ with an acknowledgement where the speaker is the
-audience of the assertion move and the audience of the acknolwedgement
-is \textit{SELF}.  The content of the acknowledgement is the same as
+This type requires the agenda to be result of pushing the type of an
+acknowledgement of the content of $u$ onto the agenda and recording
+$u$ as the latest utterance.  It also requires that the speaker of the
+acknowledgement is the addressee of $u$ and that the addressee of the
+acknolwedgement be the speaker of $u$.  The content of the acknowledgement is the same as
 the content of the assertion.  That is, what is being acknowledged is
-the content of the assertion.  It furthermore requires the latest-utterance field to contain the move and chart
-of the utterance $u$.  The idea is that
-this function should be used to predict the type of the next
-information state on the basis of the current information state and
-the observed event.  That
-is, if we believe the current information state to be of the domain
-type of the update function and we observe an event of the required
-type then we reason that the updated
-information state should be of the type resulting from applying the
-function to the current information state.  Thus this update function
-will be used in the same way as the update functions we discussed in
-Chapter~\ref{ch:percint}.  However, the gameboards involved are now
-more complex.
+the content of the assertion.
+
+\preveg{b} we give the action rule \textsc{PlanAckAss} which
+characterizes the conditions under which  an agent
+$A$ can be licensed to plan to acknowledge an assertion.  As before we
+use $s_{i,A}$ for $A$'s current information state and $s_{i+1,A}$ for
+$A$'s updated information state.  $T_{\mathrm{curr}}$ is used for the
+type $A$ assigns to her current information state.  $u^*$ is used for
+the current utterance and $T_{\mathrm{utt}}$ for the type that $A$
+assigns to the current utterance.  The rule says that if
+$T_{\mathrm{curr}}$ is a subtype of the domain type of the update
+function \preveg{a} and $T_{\mathrm{utt}}$ is a subtype of
+\textit{Assertion} then $A$ is licensed to judge that her updated
+information state is of the type $T_{\mathrm{curr}}$ asymmetrically
+merged with the result of applying the update function to the current
+information state and the current utterance and merged with the
+information that the latest utterance is of type $T_{\mathrm{utt}}$.
 
 
 
-We will now examine how such an update function could be used to
-reason about an update.  Let us suppose that the user considers the current information state
-to be of type:
+% We will now examine how such an update function could be used to
+% reason about an update.  Let us suppose that the user considers the current information state
+% to be of type:
 
-\begin{ex}
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
-                   \smallrecord{\smalltfield{e}{\textit{Assertion}
-                     \d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}}                               \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]
-}{[\textit{RecType}]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
-                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
-\label{eg:initialInfoDiac}
-\end{ex}
+% \begin{ex}
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
+%                    \smallrecord{\smalltfield{e}{\textit{Assertion}
+%                      \d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}}                               \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]
+% }{[\textit{RecType}]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+%                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+% \label{eg:initialInfoDiac}
+% \end{ex}
 
-This represents that the user intends to assert that Dudamel is a conductor
-represented by the record type
-\smallrecord{\smalltfield{e}{conductor(Dudamel)}}.  
-The user also believes that there was no previous utterance and no commitments,
-i.e. that the planned utterance will be dialogue initial.  
-% Given the
-% assumption that information states may not contain any additional fields, there is no question about what
-% the current information state is.  It must be:
+% This represents that the user intends to assert that Dudamel is a conductor
+% represented by the record type
+% \smallrecord{\smalltfield{e}{conductor(Dudamel)}}.  
+% The user also believes that there was no previous utterance and no commitments,
+% i.e. that the planned utterance will be dialogue initial.  
+% % Given the
+% % assumption that information states may not contain any additional fields, there is no question about what
+% % the current information state is.  It must be:
 
-% \record{\field{private}{\record{\field{agenda}{$\left[\mbox{\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
-%                                                               \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
-%                                                               \smallmfield{i-force}{assert}{\textit{IForce}} \\
-%                                                               \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
-%                                                               \smalltfield{c}{move(actor, audience, i-force, content)}}}\right]$}}} \\
-%         \field{shared}{\record{\field{latest-utterance}{\record{\field{moves}{$\emptyset$} \\
-%                                                                 \field{chart}{$\emptyset$}}}\\
-%                                \field{commitments}{[]}}}}
+% % \record{\field{private}{\record{\field{agenda}{$\left[\mbox{\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
+% %                                                               \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
+% %                                                               \smallmfield{i-force}{assert}{\textit{IForce}} \\
+% %                                                               \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
+% %                                                               \smalltfield{c}{move(actor, audience, i-force, content)}}}\right]$}}} \\
+% %         \field{shared}{\record{\field{latest-utterance}{\record{\field{moves}{$\emptyset$} \\
+% %                                                                 \field{chart}{$\emptyset$}}}\\
+% %                                \field{commitments}{[]}}}}
 
-Suppose now that the user utters \textit{Dudamel is a conductor} and
-judges this utterance event $u_1$ to be an event of type \nexteg{}.
-\begin{ex} 
- \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-          \tfield{chart}{\textit{Chart}} \\
-          \tfield{e}{m-interp(chart,move)}}
-\end{ex} 
+% Suppose now that the user utters \textit{Dudamel is a conductor} and
+% judges this utterance event $u_1$ to be an event of type \nexteg{}.
+% \begin{ex} 
+%  \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%           \tfield{chart}{\textit{Chart}} \\
+%           \tfield{e}{m-interp(chart,move)}}
+% \end{ex} 
   
 
 
 
-% \record{\field{moves}{\{$m$\}} \\
-%         \field{m}{$m$} \\
-%         \field{chart}{$K$}}
+% % \record{\field{moves}{\{$m$\}} \\
+% %         \field{m}{$m$} \\
+% %         \field{chart}{$K$}}
 
-% where $m$:\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
-%                        \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
-%                        \smallmfield{i-force}{assert}{\textit{IForce}} \\
-%                        \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
-%                        \smalltfield{c}{move(actor, audience, i-force,
-%                          content)}}
-The user will have more information about the nature of the chart
-(that is, about what was actually said and how it might be analyzed) than
-we have represented but we will leave this underspecified for now.
+% % where $m$:\smallrecord{\smallmfield{actor}{User}{\textit{Ind}} \\
+% %                        \smallmfield{audience}{System}{\{\textit{Ind}\}} \\
+% %                        \smallmfield{i-force}{assert}{\textit{IForce}} \\
+% %                        \smallmfield{content}{\smallrecord{\smalltfield{c}{conductor(Dudamel)}}}{\textit{RecType}} \\
+% %                        \smalltfield{c}{move(actor, audience, i-force,
+% %                          content)}}
+% The user will have more information about the nature of the chart
+% (that is, about what was actually said and how it might be analyzed) than
+% we have represented but we will leave this underspecified for now.
 
-Clearly in the user's judgement the utterance $u_1$ fulfils the requirements
-placed on it by (\ref{eg:updateFunIntegOwn}) since the move
-interpretation associated with it is of the type which occurs at
-the head of the agenda.  Note that we are reasoning with this function without actually
-providing it with an argument since we only have a (hypothesized) type
-of the current information state, not the actual information state.
-The crucial judgement is that the type of the current information state is
-a subtype of the domain type of the function.  This is sufficient to
-allow us to come to a conclusion about the type of the new information
-state.  
+% Clearly in the user's judgement the utterance $u_1$ fulfils the requirements
+% placed on it by (\ref{eg:updateFunIntegOwn}) since the move
+% interpretation associated with it is of the type which occurs at
+% the head of the agenda.  Note that we are reasoning with this function without actually
+% providing it with an argument since we only have a (hypothesized) type
+% of the current information state, not the actual information state.
+% The crucial judgement is that the type of the current information state is
+% a subtype of the domain type of the function.  This is sufficient to
+% allow us to come to a conclusion about the type of the new information
+% state.  
 
-According to the update function the next information state
-must be of the type \nexteg{}.
+% According to the update function the next information state
+% must be of the type \nexteg{}.
 
-\begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
-                                                                                \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}\label{eg:typepr} 
-\end{ex} 
-  
-
-% \record{\tfield{private}{\record{\mfield{agenda}{[]}{[\textit{Move}]}}}
+% \begin{ex} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
 %   \\
-%                       \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{\{$m$\}}{\{\textit{Move}\}} \\
-%                                                                                 \mfield{chart}{$K$}{\textit{Chart}}}}}}}
-
-\ignore{
-Note that we could have come to this conclusion even without the
-simplifying assumption that information states cannot contain
-additional fields.  Even if the type had been less specified we could
-still have drawn the conclusion as long as the agenda field was
-specified, e.g. the user might have been unsure whether the dialogue
-was already started or not:
-
-\record{\tfield{private}{\record{\mfield{agenda}{[move(User, System, assert, conductor(Dudamel))]}{[\textit{Move}]}}} \\
-        \tfield{shared}{\record{\tfield{latest-utterance}{\record{\tfield{moves}{\{\textit{Move}\}} \\
-                                                                  \tfield{utterance}{\textit{Chart}}}}\\
-                               \tfield{commitments}{\textit{RecType}}}}}
-}
-But we know more about the new information state than what is
-expressed by the type which results from the update function.
-Everything we know about the current information state which remains unchanged by the function must be carried
-over from the current information state.  This is related to the frame
-problem introduced by \cite{McCarthyHayes1969}.\footnote{For a recent
-  overview of the frame problem see \cite{Shanahan2009}.}  We 
-handle this performing an \textit{asymmetric merge} (see
-Appendix~\ref{app:merge}) of the type we have for the current
-information state with the type
-resulting from the update function.  The asymmetric merge of two types
-$T_1$ and $T_2$ is represented by $T_1$\fbox{\d{$\wedge$}}$T_2$.  If
-one or both of $T_1$ and $T_2$ are 
-non-record types then $T_1$\fbox{\d{$\wedge$}}$T_2$ will be $T_2$. If
-they are both record types, then for any label $\ell$ which occurs in
-both $T_1$ and $T_2$, $T_1$\fbox{\d{$\wedge$}}$T_2$ will contain a
-field labelled $\ell$ with the type resulting from the asymmetric
-merge of the corresponding types in the $\ell$-fields of the two types
-(in order).  For labels which do not occur in both types,
-$T_1$\fbox{\d{$\wedge$}}$T_2$ will contain the fields from $T_1$ and
-$T_2$ unchanged.  In this informal statement we have ignored
-complications that arise concerning dependent types in record types.
-This is discussed in Appendix~\ref{app:merge}.  Our notion of
-asymmetric merge is related to the notion of priority unification \citep{Shieber1986}.
-
-Let us see how this works with our example.  We have assumed that the
-type under consideration for the
-current information state, $T_{\mathit{curr}}$, is
-(\ref{eg:initialInfoDiac}) and computed that the predicted type of the updated information
-state, $T_{\mathit{pr}}$, is (\ref{eg:typepr}).  Therefore we need to
-compute $T_{\mathit{curr}}$\fbox{\d{$\wedge$}}$T_{\mathit{pr}}$, that
-is, \nexteg{}.
-\begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{Move}(SELF)]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
-                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
-\fbox{\d{$\wedge$}}
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
-                                                                                \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}} 
-\end{ex} 
-A straightforward way to think of the asymmetric merge of two record
-types is in terms of the
-paths in each of them.  Both $T_{\mathit{curr}}$ and
-$T_{\mathit{pr}}$ contain paths `private.agenda'.  The types at the
-end of the respective paths, however,  are distinct singleton types.
-(Recall that manifest fields
-\smallrecord{\smallmfield{$\ell$}{$a$}{$T$}} are a convenient notation
-for \smallrecord{\smalltfield{$\ell$}{$T_a$}} where $T_a$ is a
-restriction of the type $T$ whose only witness is $a$.)  Therefore we
-include the complete path from the second type in the result of the
-asymmetric merge.  In the case of the path `shared.latest-utterance'
-we have the type of the empty record \textit{ERec} compared with a
-record type of non-empty records
-in $T_{\mathit{pr}}$ and since these cannot be merged  we choose the
-second record type in the
-result.  Finally, the path `shared.commitments'
-occurs in the first type but not in the second and therefore it occurs
-in its form from the first type in the result of the asymmetric
-merge.  The result is given in \nexteg{} which represents the type of
-the new information state which has been computed as a result of the update.
-\begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
-                                                                                \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}
-                        \\
-\smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}} 
-\end{ex} 
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}\label{eg:typepr} 
+% \end{ex} 
   
-Why has the field `shared.commitments' not been updated after the user
-has asserted that Dudamel is a conductor?  This is because the
-audience has not yet confirmed that they have understood and accepted
-the move.  We assume that our agents are \textit{cautious} and do not
+
+% % \record{\tfield{private}{\record{\mfield{agenda}{[]}{[\textit{Move}]}}}
+% %   \\
+% %                       \tfield{shared}{\record{\tfield{latest-utterance}{\record{\mfield{moves}{\{$m$\}}{\{\textit{Move}\}} \\
+% %                                                                                 \mfield{chart}{$K$}{\textit{Chart}}}}}}}
+
+% \ignore{
+% Note that we could have come to this conclusion even without the
+% simplifying assumption that information states cannot contain
+% additional fields.  Even if the type had been less specified we could
+% still have drawn the conclusion as long as the agenda field was
+% specified, e.g. the user might have been unsure whether the dialogue
+% was already started or not:
+
+% \record{\tfield{private}{\record{\mfield{agenda}{[move(User, System, assert, conductor(Dudamel))]}{[\textit{Move}]}}} \\
+%         \tfield{shared}{\record{\tfield{latest-utterance}{\record{\tfield{moves}{\{\textit{Move}\}} \\
+%                                                                   \tfield{utterance}{\textit{Chart}}}}\\
+%                                \tfield{commitments}{\textit{RecType}}}}}
+% }
+% But we know more about the new information state than what is
+% expressed by the type which results from the update function.
+% Everything we know about the current information state which remains unchanged by the function must be carried
+% over from the current information state.  This is related to the frame
+% problem introduced by \cite{McCarthyHayes1969}.\footnote{For a recent
+%   overview of the frame problem see \cite{Shanahan2009}.}  We 
+% handle this performing an \textit{asymmetric merge} (see
+% Appendix~\ref{app:merge}) of the type we have for the current
+% information state with the type
+% resulting from the update function.  The asymmetric merge of two types
+% $T_1$ and $T_2$ is represented by $T_1$\fbox{\d{$\wedge$}}$T_2$.  If
+% one or both of $T_1$ and $T_2$ are 
+% non-record types then $T_1$\fbox{\d{$\wedge$}}$T_2$ will be $T_2$. If
+% they are both record types, then for any label $\ell$ which occurs in
+% both $T_1$ and $T_2$, $T_1$\fbox{\d{$\wedge$}}$T_2$ will contain a
+% field labelled $\ell$ with the type resulting from the asymmetric
+% merge of the corresponding types in the $\ell$-fields of the two types
+% (in order).  For labels which do not occur in both types,
+% $T_1$\fbox{\d{$\wedge$}}$T_2$ will contain the fields from $T_1$ and
+% $T_2$ unchanged.  In this informal statement we have ignored
+% complications that arise concerning dependent types in record types.
+% This is discussed in Appendix~\ref{app:merge}.  Our notion of
+% asymmetric merge is related to the notion of priority unification \citep{Shieber1986}.
+
+% Let us see how this works with our example.  We have assumed that the
+% type under consideration for the
+% current information state, $T_{\mathit{curr}}$, is
+% (\ref{eg:initialInfoDiac}) and computed that the predicted type of the updated information
+% state, $T_{\mathit{pr}}$, is (\ref{eg:typepr}).  Therefore we need to
+% compute $T_{\mathit{curr}}$\fbox{\d{$\wedge$}}$T_{\mathit{pr}}$, that
+% is, \nexteg{}.
+% \begin{ex} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$} \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(Dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{Move}(SELF)]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+%                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+% \fbox{\d{$\wedge$}}
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}} 
+% \end{ex} 
+% A straightforward way to think of the asymmetric merge of two record
+% types is in terms of the
+% paths in each of them.  Both $T_{\mathit{curr}}$ and
+% $T_{\mathit{pr}}$ contain paths `private.agenda'.  The types at the
+% end of the respective paths, however,  are distinct singleton types.
+% (Recall that manifest fields
+% \smallrecord{\smallmfield{$\ell$}{$a$}{$T$}} are a convenient notation
+% for \smallrecord{\smalltfield{$\ell$}{$T_a$}} where $T_a$ is a
+% restriction of the type $T$ whose only witness is $a$.)  Therefore we
+% include the complete path from the second type in the result of the
+% asymmetric merge.  In the case of the path `shared.latest-utterance'
+% we have the type of the empty record \textit{ERec} compared with a
+% record type of non-empty records
+% in $T_{\mathit{pr}}$ and since these cannot be merged  we choose the
+% second record type in the
+% result.  Finally, the path `shared.commitments'
+% occurs in the first type but not in the second and therefore it occurs
+% in its form from the first type in the result of the asymmetric
+% merge.  The result is given in \nexteg{} which represents the type of
+% the new information state which has been computed as a result of the update.
+% \begin{ex} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u_1$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}
+%                         \\
+% \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}} 
+% \end{ex} 
+
+
+Note that the field `shared.commitments' not been updated after the
+assertion.  This is because the assertion has not yet been acknowledged.
+This models cases in which  agents are \textit{cautious} and do not
 assume that commitments are shared until the dialogue participant(s)
 they are addressing have confirmed acceptance.  This interaction is
 known as grounding and is discussed (among other places) in
@@ -4264,60 +4260,59 @@ known as grounding and is discussed (among other places) in
 
 
 
-We shall call the update function (\ref{eg:updateFunIntegOwn})
-\textbf{IntegrateOwnAssertion} following the style of \cite{Larsson2002} although
-this does not correspond exactly to any of Larsson's particular update
-rules.  This then can be used to account for the state that the user
-is in after asserting that Dudamel is a conductor.  
+% We shall call the update function (\ref{eg:updateFunIntegOwn})
+% \textbf{IntegrateOwnAssertion} following the style of \cite{Larsson2002} although
+% this does not correspond exactly to any of Larsson's particular update
+% rules.  This then can be used to account for the state that the user
+% is in after asserting that Dudamel is a conductor.  
 
 
-We now need an
-update function that will account for the effect of this utterance on
-another dialogue participant.  For this we will define a function
-\textbf{IntegrateOtherAssertion} which allows an agent to integrate a
-move which it perceives to be an assertion.
+% We now need an
+% update function that will account for the effect of this utterance on
+% another dialogue participant.  For this we will define a function
+% \textbf{IntegrateOtherAssertion} which allows an agent to integrate a
+% move which it perceives to be an assertion.
 
 
-\begin{ex} 
-$\lambda
-r$:\record{\tfield{private}{\record{\tfield{agenda}{[\textit{RecType}]}}}}
-\\
-\hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}\smallrecord{\smalltfield{sp}{\textit{Ind}} \\
-                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smalltfield{cont}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
-                            \\
-                \smalltfield{chart}{\textit{Chart}} \\
-                \smalltfield{e}{m-interp(chart,move)}}\hspace*{.5em}.
-\hspace*{3em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-\d{$\wedge$}\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
-                           \smallmfield{au}{$u$.move.e.sp}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{$u$.move.cont}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}} \\
-\hspace*{12em}$|\ r$.private.agenda\end{tabular}}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
-                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u$.e}{m-interp(chart,move)}}
-                                                                          }}}} 
-\end{ex} 
-If an agent uses \preveg{} to update then the new information state
-will contain a move type on the agenda which involves acknowledging
-the content of the assertion by the other dialogue partner.  This
-update function is also cautious in that it does not yet update the
-shared commitments since the acknowledgement is only scheduled on the
-agenda but has not yet been performed.  
-
-If an agent performs an acknowledge-event (``ok'')
-and it can integrate it with the update function
-\textbf{IntegrateOwnAcknowledgement} which will finally perform an
+% \begin{ex} 
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{[\textit{RecType}]}}}}
+% \\
+% \hspace*{1em}$\lambda
+% u$:\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}\smallrecord{\smalltfield{sp}{\textit{Ind}} \\
+%                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smalltfield{cont}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
+%                             \\
+%                 \smalltfield{chart}{\textit{Chart}} \\
+%                 \smalltfield{e}{m-interp(chart,move)}}\hspace*{.5em}.
+% \hspace*{3em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+% \d{$\wedge$}\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
+%                            \smallmfield{au}{$u$.move.e.sp}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{$u$.move.cont}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}} \\
+% \hspace*{12em}$|\ r$.private.agenda\end{tabular}}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}
+%                                                                           }}}} 
+% \end{ex} 
+% If an agent uses \preveg{} to update then the new information state
+% will contain a move type on the agenda which involves acknowledging
+% the content of the assertion by the other dialogue partner.  This
+% update function is also cautious in that it does not yet update the
+% shared commitments since the acknowledgement is only scheduled on the
+% agenda but has not yet been performed.  
+It is at the point that an agent performs an acknowledge-event (``ok'')
+which will license an
 update of shared.commitments.  Before we define this update function
+and action rule
 we will examine what needs to happen in order to update the
 commitments.  
 
@@ -4327,7 +4322,7 @@ Dudamel is a conductor and that this is represented by the record type
 \begin{ex} 
 \record{\tfield{e}{conductor(Dudamel)}} 
 \end{ex} 
-Suppose further that the latest move has the content that Beethoven is
+Suppose further that the latest utterance has the content that Beethoven is
 a composer, namely \nexteg{}.
 \begin{ex} 
 \record{\tfield{e}{composer(Beethoven)}} 
@@ -4452,78 +4447,115 @@ return to these matters when we deal with anaphora in
 Chapter~\ref{ch:gram}.  Note that this strategy also gives us a
 straightforward record of the order in which content was added.
 
-The update function \textbf{IntegrateOwnAcknowledgement} is given in \nexteg{}.
+The update function f$_{\textsc{IntegAck}}$ and action rule
+\textsc{IntegAck} which allow for the integration of an
+acknowledgement into an information state are given in \nexteg{}.
+% \begin{ex} 
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
+%            \tfield{shared}{\record{\tfield{latest-utterance}{
+%                                       \record{\tfield{move}{
+%                                             \record{\tfield{content}{\textit{RecType}}}}}}
+%                                     \\
+%                                    \tfield{commitments}{\textit{RecType}}}}}
+% \\
+% \hspace*{1em}$\lambda
+% u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
+% \smalltfield{e}{\textit{Acknowledgement}}}\d{$\wedge$}\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}}}
+% } \\
+%            \tfield{chart}{\textit{Chart}} \\
+%            \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
+%                         \\
+% \smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cont}{\textit{RecType}}}}} 
+% \end{ex}
 \begin{ex} 
-$\lambda
-r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
-           \tfield{shared}{\record{\tfield{latest-utterance}{
-                                      \record{\tfield{move}{
-                                            \record{\tfield{content}{\textit{RecType}}}}}}
-                                    \\
-                                   \tfield{commitments}{\textit{RecType}}}}}
-\\
-\hspace*{1em}$\lambda
-u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
-\smalltfield{e}{\textit{Acknowledgement}}}\d{$\wedge$}\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}}}
-} \\
-           \tfield{chart}{\textit{Chart}} \\
-           \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
-\hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
-                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
-                        \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cont}{\textit{RecType}}}}} 
-\end{ex} 
-This function will
-\begin{enumerate} 
+\begin{subex} 
  
-\item update the agenda with the result of removing the first item on
-  the agenda in $r$, the information state prior to update 
- 
-\item update the latest utterance with the current utterance (e.g. the
-  utterance of \textit{ok})
+\item f$_{\textsc{IntegAck}}$
 
-\item update the commitments to be the result of placing the
-  commitments of $r$ under the label `prev'  and merging with the
-  content of the move in the acknolwedgement, $u$,
-  (which by the update function \textbf{IntegrateOtherAssertion} will
-  be the content of the previous assertion, e.g. the utterance of \textit{Dudamel is a conductor}) 
+  $\lambda r$:\textit{InfoState} . \\
+  \hspace*{2em}$\lambda u$:\textit{Acknowledgement} . \\
+  \hspace*{4em}\smallrecord{
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{commitments}{\smallrecord{
+            \smalltfield{prev}{$r$.shared.commitments}}\d{$\wedge$}$u$.cont}{\textit{RecType}}\\
+        \smallmfield{latest-utterance}{$u$}{\textit{Acknowledgement}}}}}
+        
  
-\end{enumerate} 
+\item \textsc{IntegAck}
+
+  \begin{prooftree}
+    \hypo{s_{i,a}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\mathrm{IntegAck}})}
+    \hypo{u^*:_A T_{\mathrm{utt}}}
+    \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Acknowledgement}}
+    \infer[enth]4{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{IntegAck}}(s_{i,A})(u^*)\text{
+        \d{$\wedge$} \smallrecord{\smalltfield{shared}{\smallrecord{
+             \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})} 
+ \end{prooftree}
+\end{subex} 
+   
+\end{ex}
+The update function \preveg{a} takes an information state and an
+acknowledgement to a type of information state where the content of
+the acknowledgement is used to update the shared commitments and the
+acknowledgement utterance is recorded as the latest utterance.  The
+action rule \preveg{b} is parallel to \textsc{PlanAckAss}.
+  
+% This function will
+% \begin{enumerate} 
+ 
+% \item update the agenda with the result of removing the first item on
+%   the agenda in $r$, the information state prior to update 
+ 
+% \item update the latest utterance with the current utterance (e.g. the
+%   utterance of \textit{ok})
+
+% \item update the commitments to be the result of placing the
+%   commitments of $r$ under the label `prev'  and merging with the
+%   content of the move in the acknolwedgement, $u$,
+%   (which by the update function \textbf{IntegrateOtherAssertion} will
+%   be the content of the previous assertion, e.g. the utterance of \textit{Dudamel is a conductor}) 
+ 
+% \end{enumerate} 
     
 
 
-We then need an update function
-  \textbf{IntegrateOtherAcknowledgement} which 
-is like \textbf{IntegrateOwnAcknowledgment} except that it requires
-that the move event is directed towards the agent doing the updating.  This is given in \nexteg{}.
-\begin{ex} 
-$\lambda
-r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
-           \tfield{shared}{\record{\tfield{latest-utterance}{
-                                      \record{\tfield{move}{
-                                            \record{\tfield{content}{\textit{RecType}}}}}}
-                                    \\
-                                   \tfield{commitments}{\textit{RecType}}}}}
-\\
-\hspace*{1em}$\lambda
-u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
-\smalltfield{e}{\textit{Acknowledgement}}}\d{$\wedge$}\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}}
-} \\
-           \tfield{chart}{\textit{Chart}} \\
-           \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
-\hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
-                                                                                \smallmfield{chart}{$u$.chart}{\textit{Chart}}
-                                                                              \\
-\smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
-                        \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cont}{\textit{RecType}}}}} 
-\end{ex}
+% We then need an update function
+%   \textbf{IntegrateOtherAcknowledgement} which 
+% is like \textbf{IntegrateOwnAcknowledgment} except that it requires
+% that the move event is directed towards the agent doing the updating.  This is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}\\
+%            \tfield{shared}{\record{\tfield{latest-utterance}{
+%                                       \record{\tfield{move}{
+%                                             \record{\tfield{content}{\textit{RecType}}}}}}
+%                                     \\
+%                                    \tfield{commitments}{\textit{RecType}}}}}
+% \\
+% \hspace*{1em}$\lambda
+% u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
+% \smalltfield{e}{\textit{Acknowledgement}}}\d{$\wedge$}\smallrecord{\smalltfield{e}{\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}}
+% } \\
+%            \tfield{chart}{\textit{Chart}} \\
+%            \tfield{e}{m-interp(chart,move)}}\hspace*{.5em}. \\
+% \hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{rst($r$.private.agenda)}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u$.move}{\textit{Move}} \\
+%                                                                                 \smallmfield{chart}{$u$.chart}{\textit{Chart}}
+%                                                                               \\
+% \smallmfield{e}{$u$.e}{m-interp(chart,move)}}}
+%                         \\
+% \smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.commitments}}\d{$\wedge$}$u$.move.cont}{\textit{RecType}}}}} 
+% \end{ex}
 
 
 % Note that neither of these update functions place constraints on the
@@ -4538,32 +4570,79 @@ u$:\record{\tfield{move}{fst($r$.private.agenda)\d{$\wedge$}\smallrecord{
 % themselves.
 
 
-We have so far talked of update functions in this chapter, functions
-which given an information state and an utterance will return
-a type for an updated information state.  Update functions specify
-something about the state that an agent will be in after the
-occurrence of a certain type of event.  We have not, however,
-specified what it is that will specify that an agent should carry out
-an action which gives rise to an event of the appropriate
-type. Formally, these will also be functions which map an information
-state of a given type to a new type, the type of event which the agent
-is to bring about.  Thus they too will be functions from objects to
-types (or dependent functions).  We will call such functions
-\textit{action functions}.  These are associated with creation type
-acts (Chapter~\ref{sec:typeacts}).  We will introduce one such function,
-\textbf{ExecTopAgenda}, which takes an information state with a
-non-empty agenda and returns a type for a move of that type and a
-chart which can be interpreted as that move.  It is given in
-\nexteg{}.
+% We have so far talked of update functions in this chapter, functions
+% which given an information state and an utterance will return
+% a type for an updated information state.  Update functions specify
+% something about the state that an agent will be in after the
+% occurrence of a certain type of event.  We have not, however,
+% specified what it is that will specify that an agent should carry out
+% an action which gives rise to an event of the appropriate
+% type. Formally, these will also be functions which map an information
+% state of a given type to a new type, the type of event which the agent
+% is to bring about.  Thus they too will be functions from objects to
+% types (or dependent functions).  We will call such functions
+% \textit{action functions}.  These are associated with creation type
+% acts (Chapter~\ref{sec:typeacts}).  We will introduce one such function,
+% \textbf{ExecTopAgenda}, which takes an information state with a
+% non-empty agenda and returns a type for a move of that type and a
+% chart which can be interpreted as that move.  It is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda
+% r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}}\hspace*{.5em}.
+% \\
+% \hspace*{2em}\record{\tfield{move}{fst($r$.private.agenda)} \\
+%                                 \tfield{chart}{\textit{Chart}} \\
+%                                 \tfield{e}{m-interp(chart,move)}} 
+% \label{eg:ExecTopAgenda}
+% \end{ex}
+
+We need two more action rules relating to the agenda:
+\textsc{ExecTopAgenda} which allows the agent to make their
+contribution to executing what is uppermost on the agenda and
+\textsc{DowndateAgenda} which allows the removal of a type from the
+top of the agenda if an the current event is of that type.  These two
+rules are given in \nexteg{}.
 \begin{ex} 
-$\lambda
-r$:\record{\tfield{private}{\record{\tfield{agenda}{$_{\mathit{ne}}$[\textit{RecType}]}}}}\hspace*{.5em}.
-\\
-\hspace*{2em}\record{\tfield{move}{fst($r$.private.agenda)} \\
-                                \tfield{chart}{\textit{Chart}} \\
-                                \tfield{e}{m-interp(chart,move)}} 
-\label{eg:ExecTopAgenda}
+\begin{subex} 
+ 
+\item \textsc{ExecTopAgenda}
+
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
+        \smallrecord{\smalltfield{private}{\smallrecord{
+              \smalltfield{agenda}{\smallrecord{
+                  \smalltfield{fst}{\textit{RecType}}\\
+                  \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+    \infer[enth]1{:_A
+      s_{i,A}.\text{private}.\text{agenda}.\text{fst}!}
+  \end{prooftree}
+  
+ 
+\item \textsc{DowndateAgenda}
+
+  \hspace*{-3em}\begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\text{
+        \smallrecord{
+          \smalltfield{private}{\smallrecord{
+              \smalltfield{agenda}{\smallrecord{
+                  \smalltfield{fst}{\textit{RecType}}\\
+                  \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+    \hypo{u^*:_A s_{i,A}.\text{private}.\text{agenda}.\text{fst}}
+    \infer[enth]3{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}
+        \smallrecord{
+          \smalltfield{private}{\smallrecord{
+              \smallmfield{agenda}{$s_{i,A}$.private.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+  \end{prooftree}
+  
+ 
+\end{subex} 
+   
 \end{ex} 
+
+@@
 
 \section{Resources}
 
