@@ -1968,8 +1968,11 @@ state of the agent $A$.
 % :_A$ \record{\mfield{agenda}{$T\!\mid\!
 %     R\ $}{[\textit{RecType}]}}, then $:_A T!$ is licensed.
 \begin{prooftree}
-\hypo{s_{i,A}:_A\text{\record{\tfield{agenda}{$\mathrm{nelist}(\textit{RecType})$}}}}
-\infer[enth]1{:_A \mathrm{fst}(s_{i,A}.\text{agenda})!}
+  \hypo{s_{i,A}:_A\text{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+            \smalltfield{fst}{\textit{RecType}}\\
+            \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+\infer[enth]1{:_A s_{i,A}.\text{agenda}.\text{fst}!}
 \end{prooftree} 
 \end{ex}
 % (Here we use the notation $T\!\mid\!R$ to represent a list whose first
@@ -1982,7 +1985,7 @@ licensing conditions in \nexteg{}, where we use $f$ to represent an
 update function available to the agent, $A$, and $e$ an event currently
 observed by the agent.  As before $s_{i,A}$ refers to $A$'s current
 information state and $s_{i+1,A}$ is used to refer to $A$'s updated
-information state.
+information state.  We use $e^*$ to refer to a current event.
 \begin{ex} 
 \begin{subex} 
  
@@ -1994,8 +1997,8 @@ information state.
 \begin{prooftree}
   \hypo{f:(T_1\rightarrow(T_2\rightarrow\textit{Type}))}
   \hypo{s_{i,A}:_A T_1}
-  \hypo{e:_A T_2}
-  \infer[enth]3{s_{i+1,A}:_A f(s_{i,A})(e)}
+  \hypo{e^*:_A T_2}
+  \infer[enth]3{s_{i+1,A}:_A f(s_{i,A})(e^*)}
 \end{prooftree}
 
  
@@ -3945,7 +3948,7 @@ rule which plan an acknowledgement to an assertion as in \nexteg{}.
 \item f$_{\textsc{PlanAckAss}}$
 
   $\lambda r$:\textit{InfoState} . \\
-  \hspace*{2em}$\lambda u$:\textit{Asserttion} . \\
+  \hspace*{2em}$\lambda u$:\textit{Assertion} . \\
   \hspace*{4em}
   \smallrecord{
     \smalltfield{private}{\smallrecord{
