@@ -4645,25 +4645,27 @@ rules are given in \nexteg{}.
    
 \end{ex} 
 
-@@
+
 
 \section{Resources}
 
-While there is no formal distinction between update functions and
-action functions they are to be used in different ways.  Update
-functions are to be used as instructions to conclude that there is
-something of the resulting type. Action functions are to be used as
-instructions to create something of the resulting type.  We shall say that they are different kinds of
-\textit{resources} that are available to an agent. The update and
-action functions we have discussed in this chapter belong to a general
-resource for \textit{dialogue management}.  We shall see that there
-are a number of resources which contain both update and action
-functions and that in general they can be viewed as the two kinds of
-enthymemes (inferential and imperative) discussed in Breitholtz' work
-in progress on Aristotelian enthymemes \citep{BreitholtzVilling2008,Breitholtz2010,BreitholtzCooper2011}.
+% While there is no formal distinction between update functions and
+% action functions they are to be used in different ways.  Update
+% functions are to be used as instructions to conclude that there is
+% something of the resulting type. Action functions are to be used as
+% instructions to create something of the resulting type.
+We shall say that update functions and action rules  are different kinds of
+\textit{resources} that are available to an agent. Those that we have
+discussed in the previous section are resources associated with
+\textit{dialogue management}.  We shall see more examples of resources
+as the book progresses.  In general they can be viewed as related to
+the theory of topoi and
+enthymemes as discussed in Breitholtz' work
+\citep{BreitholtzVilling2008,Breitholtz2010,BreitholtzCooper2011,Breitholtz2014,Breitholtzfthca}.
 
-We need more resources:  signs and move-interpretations of charts
-containing signs.  In this chapter we are taking signs to be objects
+% We need more resources:  signs and move-interpretations of charts
+% containing signs.  
+In this chapter we are taking signs to be objects
 of type (\ref{eg:infex-sign-type}) and the sign corresponding to
 \textit{Dudamel is a conductor} is (\ref{eg:diac}).  For compactness
 of representation we can define an operation which takes a speech
@@ -4761,37 +4763,37 @@ times we just treat the type as basic and only need to assume that the
 agent has some way of recognizing objects of the type.  It depends on
 the level of detail we are interested in for the particular analysis.
 
-We have used predicates other than those given in \preveg{} in the
-types that we have discussed in this chapter.  There are ``technical''
-predicates such as `m-interp' (``move interpretation'') which takes as
-its arguments a chart and a move.  If $c$ is a chart and $m$ is a move
-then m-interp($c$,$m$) will be a non-empty type just in case ``$m$ is
-an interpretation of $c$''.  Clearly, this is a case where it is of
-theoretical interest to us to say more about what constraints this
-places on $c$ and $m$.
+% We have used predicates other than those given in \preveg{} in the
+% types that we have discussed in this chapter.  There are ``technical''
+% predicates such as `m-interp' (``move interpretation'') which takes as
+% its arguments a chart and a move.  If $c$ is a chart and $m$ is a move
+% then m-interp($c$,$m$) will be a non-empty type just in case ``$m$ is
+% an interpretation of $c$''.  Clearly, this is a case where it is of
+% theoretical interest to us to say more about what constraints this
+% places on $c$ and $m$.
 
-For the purposes of this chapter, since the parsing involved is a
-trivial association of strings of words with signs without any
-constituent analysis, we will equate charts with signs, that is $a$ :
-\textit{Chart} just in case $a$ : \textit{Sign}.  Thus `m-interp' will
-relate signs to moves.  The definition is given in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
+% For the purposes of this chapter, since the parsing involved is a
+% trivial association of strings of words with signs without any
+% constituent analysis, we will equate charts with signs, that is $a$ :
+% \textit{Chart} just in case $a$ : \textit{Sign}.  Thus `m-interp' will
+% relate signs to moves.  The definition is given in \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item if $c$ : \textit{Chart} and $m$ : \textit{Move} and for some $\sigma$ and $\kappa$, $c$=sign($\sigma$,$\kappa$),
-  then m-interp($c$,$m$) is non-empty iff $m$ : 
-\smallrecord{\smalltfield{e}{\textit{Assertion}} \\
-             \smallmfield{cont}{$c$.cont}{\textit{RecType}}} 
+% \item if $c$ : \textit{Chart} and $m$ : \textit{Move} and for some $\sigma$ and $\kappa$, $c$=sign($\sigma$,$\kappa$),
+%   then m-interp($c$,$m$) is non-empty iff $m$ : 
+% \smallrecord{\smalltfield{e}{\textit{Assertion}} \\
+%              \smallmfield{cont}{$c$.cont}{\textit{RecType}}} 
  
-\item if $c$ : \textit{Chart} and $m$ : \textit{Move} and for some
-  $\sigma$, $c$=sign$_{uc}$($\sigma$),  then m-interp($c$,$m$) is
-  non-empty iff $m$ :
-\smallrecord{\smalltfield{e}{\textit{Acknowledgement}} \\
-             \smalltfield{cont}{\textit{RecType}}}
+% \item if $c$ : \textit{Chart} and $m$ : \textit{Move} and for some
+%   $\sigma$, $c$=sign$_{uc}$($\sigma$),  then m-interp($c$,$m$) is
+%   non-empty iff $m$ :
+% \smallrecord{\smalltfield{e}{\textit{Acknowledgement}} \\
+%              \smalltfield{cont}{\textit{RecType}}}
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex}
+% \end{ex}
 % The role that SELF plays in the move is determined by whether SELF is
 % the speaker or the audience in the speech event as defined in \nexteg{}.
 % \begin{ex} 
@@ -4825,6 +4827,9 @@ B: & ok & $u_6$ \\
 \multicolumn{2}{c}{$a_6$,$b_6$} & 
 \end{tabular} 
 \label{ex:ass-ack-dial}
+
+@@
+
 \end{ex} 
 We will assume that $a_0$ and $b_0$ are initial states, essentially
 empty except for $A$'s agenda to make the three assertions.  This is
