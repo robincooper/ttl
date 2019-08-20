@@ -4828,8 +4828,6 @@ B: & ok & $u_6$ \\
 \end{tabular} 
 \label{ex:ass-ack-dial}
 
-@@
-
 \end{ex} 
 We will assume that $a_0$ and $b_0$ are initial states, essentially
 empty except for $A$'s agenda to make the three assertions.  This is
@@ -4837,38 +4835,113 @@ shown in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item $a_0$ : \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
-                   \smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{6em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]
-}{[\textit{RecType}]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
-                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
- 
-\item $b_0$ :  \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\textit{Rec}}{[\textit{RecType}]}}} \\
+\item $a_0$ : % \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
+%                    \smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{6em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]
+% }{[\textit{RecType}]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+%                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+  \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+        \smallrecord{
+          \smalltfield{s-event}{\smallrecord{
+              \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+          \smallmfield{cont}{\smallrecord{
+              \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+      \smalltfield{rst}{\smallrecord{
+          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+        \smallrecord{
+          \smalltfield{s-event}{\smallrecord{
+              \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+          \smallmfield{cont}{\smallrecord{
+              \smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+      \smalltfield{rst}{\smallrecord{
+          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+              \smalltfield{s-event}{\smallrecord{
+                  \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+              \smallmfield{cont}{\smallrecord{
+              \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+      \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}\\
+\smalltfield{shared}{\smallrecord{
+    \smalltfield{latest-utterance}{\textit{ERec}}\\
+    \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+      
+\item $b_0$ :
+  \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
+          ]}{$\mathrm{list}(\textit{RecType})$}}} \\
         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}} 
  
 \end{subex} 
 \label{eg:initial-states}   
+\end{ex}
+
+
+
+\preveg{} indicates that $a_0$ meets the premise of the action rule
+\textsc{ExecTopAgenda} and in accordance with this $A$ creates the
+utterance $u_1$ which is of the first type on the agenda in $a_0$.
+The existence of $u_1$ will now trigger the action rule
+\textsc{DowndateAgenda} which will remove the first type on the agenda
+in $a_0$.  From this we derive that there is an intermediate
+information state for $A$ which is of the type \nexteg{}.
+\begin{ex} 
+ \smallrecord{
+    \smalltfield{private}{\smallrecord{
+          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+        \smallrecord{
+          \smalltfield{s-event}{\smallrecord{
+              \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+          \smallmfield{cont}{\smallrecord{
+              \smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+      \smalltfield{rst}{\smallrecord{
+          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+              \smalltfield{s-event}{\smallrecord{
+                  \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+              \smallmfield{cont}{\smallrecord{
+              \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+      \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+\smalltfield{shared}{\smallrecord{
+    \smalltfield{latest-utterance}{\textit{ERec}}\\
+    \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+      
+
+ 
+\end{ex}
+
+This in turn triggers the action rule \textsc{PlanAckAss} which will
+put the type of a speech act on the top of the agenda which
+acknowledges $u_0$ with speaker $B$ and addressee $A$ and also record
+$u_0$ as the latest utterance.  Thus the state $a_1$, $A$'s state
+after $u_0$, will be of the type \nexteg{}.
+\begin{ex} 
+ 
 \end{ex} 
-\preveg{} indicates that $a_0$ is an appropriate argument to the
+  
+
+  
+
+@@
+
+is an appropriate argument to the
 function \textbf{ExecTopAgenda} given in (\ref{eg:ExecTopAgenda}) and
 repeated in Appendix~\ref{app:dialrules}.  The result of applying
 \textbf{ExecTopAgenda} to $a_0$ is given in \nexteg{}.
