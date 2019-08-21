@@ -4858,8 +4858,10 @@ shown in \nexteg{}.
 % }{[\textit{RecType}]}}} \\
 %         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
 %                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
-  \smallrecord{
+  \hspace*{-2em}
+\smallrecord{
     \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
         \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
         \smallrecord{
           \smalltfield{s-event}{\smallrecord{
@@ -4879,7 +4881,7 @@ shown in \nexteg{}.
                   \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
               \smallmfield{cont}{\smallrecord{
               \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
-      \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}\\
+      \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}}}\\
 \smalltfield{shared}{\smallrecord{
     \smalltfield{latest-utterance}{\textit{ERec}}\\
     \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
@@ -4905,7 +4907,8 @@ in $a_0$.  From this we derive that there is an intermediate
 information state for $A$ which is of the type \nexteg{}.
 \begin{ex} 
  \smallrecord{
-    \smalltfield{private}{\smallrecord{
+   \smalltfield{private}{\smallrecord{
+       \smalltfield{agenda}{\smallrecord{
           \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
         \smallrecord{
           \smalltfield{s-event}{\smallrecord{
@@ -4918,7 +4921,7 @@ information state for $A$ which is of the type \nexteg{}.
                   \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
               \smallmfield{cont}{\smallrecord{
               \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
-      \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+      \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}\\
 \smalltfield{shared}{\smallrecord{
     \smalltfield{latest-utterance}{\textit{ERec}}\\
     \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
@@ -4932,227 +4935,280 @@ put the type of a speech act on the top of the agenda which
 acknowledges $u_0$ with speaker $B$ and addressee $A$ and also record
 $u_0$ as the latest utterance.  Thus the state $a_1$, $A$'s state
 after $u_0$, will be of the type \nexteg{}.
+\begin{ex}
+  \hspace*{-2em}
+  \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+            \smallmfield{fst}{(\textit{Acknowledgement} \d{$\wedge$}
+              \smallrecord{
+                \smalltfield{s-event}{\smallrecord{
+                    \smallmfield{sp}{$B$}{\textit{Ind}}\\
+                    \smallmfield{au}{$A$}{\textit{Ind}}}}\\
+                \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}})}{\textit{RecType}}\\
+            \smalltfield{rst}{\smallrecord{
+                \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+                  \smallrecord{
+                    \smalltfield{s-event}{\smallrecord{
+                        \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+                    \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}})}{\textit{RecType}}\\
+                \smalltfield{rst}{\smallrecord{
+                    \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+                        \smalltfield{s-event}{\smallrecord{
+                            \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+                        \smallmfield{cont}{\smallrecord{
+                            \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                    \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u_1$}{(\textit{Assertion}
+          \d{$\wedge$} \smallrecord{
+            \smalltfield{s-event}{\smallrecord{
+                \smallmfield{sp}{$A$}{\textit{Ind}}\\
+                \smallmfield{au}{$B$}{\textit{Ind}}}}\\
+            \smallmfield{cont}{\smallrecord{
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+        \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+\end{ex}
+This assumes that $A$ has judged $u_1$ to be of the type in \nexteg{}
+(corresponding to $T_{\mathrm{utt}}$ in \textsc{PlanAckAss}),
+as represented in the `shared.latest-utterance'-field in \preveg{}.
 \begin{ex} 
- 
+ (\textit{Assertion}
+          \d{$\wedge$} \smallrecord{
+            \smalltfield{s-event}{\smallrecord{
+                \smallmfield{sp}{$A$}{\textit{Ind}}\\
+                \smallmfield{au}{$B$}{\textit{Ind}}}}\\
+            \smallmfield{cont}{\smallrecord{
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})
 \end{ex} 
   
 
+Thus the first type on $A$'s agenda is now the type of an
+acknowledgement event in which $B$ is the speaker and $A$ is the
+audience.  This means that $A$ has to wait for $B$ to make the
+acknowledgement and to pay attention to it before continuing with the
+next item on the agenda.  
+
   
+
+
+
+% is an appropriate argument to the
+% function \textbf{ExecTopAgenda} given in (\ref{eg:ExecTopAgenda}) and
+% repeated in Appendix~\ref{app:dialrules}.  The result of applying
+% \textbf{ExecTopAgenda} to $a_0$ is given in \nexteg{}.
+% \begin{ex} 
+% \textbf{ExecTopAgenda}($a_0$) = 
+% \smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%      \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}} } 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
+%                             \\
+%              \smalltfield{chart}{\textit{Chart}} \\
+%              \smalltfield{e}{m-interp(chart,move)}} 
+% \label{eg:exectopag(a0)}
+% \end{ex} 
+% Note that given our notational convention on using \textit{SELF} (p.~\pageref{pg:SELF}), \preveg{} is
+% actually a dependent type as in \nexteg{}.
+% \begin{ex} 
+% $\lambda a$:\textit{Ind} . \smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
+%                             \\
+%              \smalltfield{chart}{\textit{Chart}} \\
+%              \smalltfield{e}{m-interp(chart,move)}} 
+% \end{ex} 
+% This means that the appropriate licensing condition on type acts
+% associated with \textbf{ExecTopAgenda} (given in
+% Appendix~\ref{app:actfuns}) is the \textit{de se} variant in \nexteg{}.
+% \begin{ex} 
+% If
+% $f:(T\rightarrow(\textit{Ind}\rightarrow\textit{Type}))$ is an action function then for any
+% object $a$ and agent $A$, $a:_A T$ licenses $:_A f(a)(A)!$ 
+% \end{ex} 
+% That is, $A$ is licensed to create (or contribute to the creation of) something of the type
+% (\ref{eg:exectopag(a0)}) with $A$ itself as \textit{SELF}.  We have not yet
+% said anything about what is involved in creating something of this
+% type.  The procedure involves generating a chart (in this chapter
+% conceived of as a sign) whose content corresponds to the content of
+% the move.  We will not make this formally precise here but will wait
+% until Chapter~\ref{ch:gram} where we have developed a more serious
+% approach to grammar.  Suffice it to say that the agent's resources
+% must include the sign types introduced in
+% (\ref{eg:signdef}) and that there is just one sign type here involving the
+% type `conductor(dudamel)' which figures in the content of the move
+% specified in (\ref{eg:exectopag(a0)}), namely sign(``Dudamel is a
+% conductor'', conductor(dudamel)).  For convenience we will abbreviate
+% the notation of this type as \signtype{``Dudamel is a conductor''}.  Only a sign of this type will
+% satisfy m-interp for a move of the move type.  Thus in order to
+% realize something of type (\ref{eg:exectopag(a0)}) $A$ must in fact
+% create something of type \nexteg{}, a subtype of
+% (\ref{eg:exectopag(a0)}).
+% \begin{ex} 
+% \record{\tfield{move}{\record{\tfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \mfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
+%                             \\
+%              \tfield{chart}{\signtype{``Dudamel is a conductor''}} \\
+%              \tfield{e}{m-interp(chart,move)}} 
+% \end{ex}
+% (Here it is important that \signtype{``Dudamel is a conductor''} is an
+% abbreviation for the \textit{notation} of the sign type, since when
+% the notation is interpreted \textit{in situ} in \preveg{} each
+% local path-name occurring as an argument to a predicate will be prefixed by
+% `chart.' and thus what occurs in the `chart'-field of \preveg{} is
+% actually a modified version of the original type.  It is possible to
+% develop a notation that is more explicit but it becomes cluttered and unwieldy.)
+
+% Thus we can conclude that $u_1$ is judged by $A$ to be of type \preveg{}.  We can now
+% predict that $a_1$ is of type
+% \textbf{IntegrateOwnAssertion}($a_0$)($u_1$) which, given the types we
+% have hypothesized for $a_0$ and $u_1$ will be \nexteg{}.
+% \begin{ex} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
+% \smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
+%           \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]}{[\textit{RecType}]}}} \\
+% \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
+% \smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}
+ 
+% \end{ex} 
+% We can now use \preveg{} to update the type we had for $a_0$, given in
+% (\ref{eg:initial-states}a), as in \nexteg{a} which is identical with
+% \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
+%                    \smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{6em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]
+% }{[\textit{RecType}]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+%                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+% \fbox{\d{$\wedge$}} \\
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
+%           \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]}{[\textit{RecType}]}}} \\
+% \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
+% \smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}
+ 
+ 
+% \item
+%   \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
+%           \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]}{[\textit{RecType}]}}} \\
+% \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
+% \smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}} \\
+% \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+ 
+ 
+% \end{subex} 
+% \label{ex:type-a1}
+   
+% \end{ex} 
+% Thus we can conclude that $a_1$ is of type \preveg{b}.
 
 @@
 
-is an appropriate argument to the
-function \textbf{ExecTopAgenda} given in (\ref{eg:ExecTopAgenda}) and
-repeated in Appendix~\ref{app:dialrules}.  The result of applying
-\textbf{ExecTopAgenda} to $a_0$ is given in \nexteg{}.
-\begin{ex} 
-\textbf{ExecTopAgenda}($a_0$) = 
-\smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-     \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}} } 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
-                            \\
-             \smalltfield{chart}{\textit{Chart}} \\
-             \smalltfield{e}{m-interp(chart,move)}} 
-\label{eg:exectopag(a0)}
-\end{ex} 
-Note that given our notational convention on using \textit{SELF} (p.~\pageref{pg:SELF}), \preveg{} is
-actually a dependent type as in \nexteg{}.
-\begin{ex} 
-$\lambda a$:\textit{Ind} . \smallrecord{\smalltfield{move}{\smallrecord{\smalltfield{e}{\textit{Assertion}\d{$\wedge$}
-\smallrecord{\smallmfield{sp}{$a$}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
-                            \\
-             \smalltfield{chart}{\textit{Chart}} \\
-             \smalltfield{e}{m-interp(chart,move)}} 
-\end{ex} 
-This means that the appropriate licensing condition on type acts
-associated with \textbf{ExecTopAgenda} (given in
-Appendix~\ref{app:actfuns}) is the \textit{de se} variant in \nexteg{}.
-\begin{ex} 
-If
-$f:(T\rightarrow(\textit{Ind}\rightarrow\textit{Type}))$ is an action function then for any
-object $a$ and agent $A$, $a:_A T$ licenses $:_A f(a)(A)!$ 
-\end{ex} 
-That is, $A$ is licensed to create (or contribute to the creation of) something of the type
-(\ref{eg:exectopag(a0)}) with $A$ itself as \textit{SELF}.  We have not yet
-said anything about what is involved in creating something of this
-type.  The procedure involves generating a chart (in this chapter
-conceived of as a sign) whose content corresponds to the content of
-the move.  We will not make this formally precise here but will wait
-until Chapter~\ref{ch:gram} where we have developed a more serious
-approach to grammar.  Suffice it to say that the agent's resources
-must include the sign types introduced in
-(\ref{eg:signdef}) and that there is just one sign type here involving the
-type `conductor(dudamel)' which figures in the content of the move
-specified in (\ref{eg:exectopag(a0)}), namely sign(``Dudamel is a
-conductor'', conductor(dudamel)).  For convenience we will abbreviate
-the notation of this type as \signtype{``Dudamel is a conductor''}.  Only a sign of this type will
-satisfy m-interp for a move of the move type.  Thus in order to
-realize something of type (\ref{eg:exectopag(a0)}) $A$ must in fact
-create something of type \nexteg{}, a subtype of
-(\ref{eg:exectopag(a0)}).
-\begin{ex} 
-\record{\tfield{move}{\record{\tfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \mfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
-                            \\
-             \tfield{chart}{\signtype{``Dudamel is a conductor''}} \\
-             \tfield{e}{m-interp(chart,move)}} 
-\end{ex}
-(Here it is important that \signtype{``Dudamel is a conductor''} is an
-abbreviation for the \textit{notation} of the sign type, since when
-the notation is interpreted \textit{in situ} in \preveg{} each
-local path-name occurring as an argument to a predicate will be prefixed by
-`chart.' and thus what occurs in the `chart'-field of \preveg{} is
-actually a modified version of the original type.  It is possible to
-develop a notation that is more explicit but it becomes cluttered and unwieldy.)
-
-Thus we can conclude that $u_1$ is judged by $A$ to be of type \preveg{}.  We can now
-predict that $a_1$ is of type
-\textbf{IntegrateOwnAssertion}($a_0$)($u_1$) which, given the types we
-have hypothesized for $a_0$ and $u_1$ will be \nexteg{}.
-\begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
-\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
-          \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]}{[\textit{RecType}]}}} \\
-\smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
-\smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}
- 
-\end{ex} 
-We can now use \preveg{} to update the type we had for $a_0$, given in
-(\ref{eg:initial-states}a), as in \nexteg{a} which is identical with
-\nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[
-                   \smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{6em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]
-}{[\textit{RecType}]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
-                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
-\fbox{\d{$\wedge$}} \\
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
-          \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]}{[\textit{RecType}]}}} \\
-\smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
-\smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}}}}}
- 
- 
-\item
-  \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}\d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion}
-          \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{7em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]}{[\textit{RecType}]}}} \\
-\smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
-\smallmfield{chart}{$u_1$.chart}{\signtype{``Dudamel is a conductor''}} \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}} \\
-\smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
- 
- 
-\end{subex} 
-\label{ex:type-a1}
-   
-\end{ex} 
-Thus we can conclude that $a_1$ is of type \preveg{b}. A type for
+A type for
 $b_1$ can be obtained in a similar fashion using
 \textbf{IntegrateOtherAssertion}($b_0$)($u_1$).  The type that $B$
 will assign to $u_1$ can be predicted by the perception function
