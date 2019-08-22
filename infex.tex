@@ -4951,7 +4951,7 @@ after $u_0$, will be of the type \nexteg{}.
                   \smallrecord{
                     \smalltfield{s-event}{\smallrecord{
                         \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
-                    \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}})}{\textit{RecType}}\\
+                    \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
                 \smalltfield{rst}{\smallrecord{
                     \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
                         \smalltfield{s-event}{\smallrecord{
@@ -5206,304 +5206,370 @@ next item on the agenda.
 % \end{ex} 
 % Thus we can conclude that $a_1$ is of type \preveg{b}.
 
-@@
-
 A type for
 $b_1$ can be obtained in a similar fashion using
-\textbf{IntegrateOtherAssertion}($b_0$)($u_1$).  The type that $B$
-will assign to $u_1$ can be predicted by the perception function
-(Appendix~\ref{app:dialrules}) in \nexteg{}.
+\textsc{PlanAckAss}, assuming that $B$ also classifies $u_1$ as a
+witness of the type \preveg{}.  This type is given in \nexteg{}.
 \begin{ex} 
-$\lambda e$:\smallrecord{\smalltfield{e}{``Dudamel is a conductor''} \\
-                         \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}\hspace*{.5em}. \\
-\hspace*{2em}\record{\tfield{move}{\record{\tfield{e}{\textit{SpeechAct}
-      \d{$\wedge$}
-\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                          \\
-                                                          \tfield{cont}{\textit{Cont}}
-                                                          \\
-                                                          \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
-                                                      \\
-                          \tfield{chart}{\signtype{``Dudamel is a conductor''}} \\
-                          \tfield{e}{m-interp(chart,move)}} 
+\smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+            \smallmfield{fst}{(\textit{Acknowledgement} \d{$\wedge$}
+              \smallrecord{
+                \smalltfield{s-event}{\smallrecord{
+                    \smallmfield{sp}{$B$}{\textit{Ind}}\\
+                    \smallmfield{au}{$A$}{\textit{Ind}}}}\\
+                \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}})}{\textit{RecType}}\\
+            \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u_1$}{(\textit{Assertion}
+          \d{$\wedge$} \smallrecord{
+            \smalltfield{s-event}{\smallrecord{
+                \smallmfield{sp}{$A$}{\textit{Ind}}\\
+                \smallmfield{au}{$B$}{\textit{Ind}}}}\\
+            \smallmfield{cont}{\smallrecord{
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+        \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}} 
 \end{ex} 
-\preveg{} together with the type we have for   
-$b_0$ predicts that \textbf{IntegrateOtherAssertion}($b_0$)($u_1$)
-will be the type \nexteg{}.
-\begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
-\end{tabular}}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-                                  \d{$\wedge$}
-\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-                                                                                \smallmfield{chart}{$u_1$.chart}{
-\signtype{``Dudamel is a conductor''}}
-                                                                              \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}
-                                                                          }}}}
+  
 
-\end{ex} 
-We can now use \preveg{} to update the type we had for $b_0$,
-obtaining \nexteg{a} identical with \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% The type that $B$
+% will assign to $u_1$ can be predicted by the perception function
+% (Appendix~\ref{app:dialrules}) in \nexteg{}.
+% \begin{ex} 
+% $\lambda e$:\smallrecord{\smalltfield{e}{``Dudamel is a conductor''} \\
+%                          \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}\hspace*{.5em}. \\
+% \hspace*{2em}\record{\tfield{move}{\record{\tfield{e}{\textit{SpeechAct}
+%       \d{$\wedge$}
+% \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                           \\
+%                                                           \tfield{cont}{\textit{Cont}}
+%                                                           \\
+%                                                           \tfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
+%                                                       \\
+%                           \tfield{chart}{\signtype{``Dudamel is a conductor''}} \\
+%                           \tfield{e}{m-interp(chart,move)}} 
+% \end{ex} 
+% \preveg{} together with the type we have for   
+% $b_0$ predicts that \textbf{IntegrateOtherAssertion}($b_0$)($u_1$)
+% will be the type \nexteg{}.
+% \begin{ex} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
+% \end{tabular}}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%                                   \d{$\wedge$}
+% \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%                                                                                 \smallmfield{chart}{$u_1$.chart}{
+% \signtype{``Dudamel is a conductor''}}
+%                                                                               \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}
+%                                                                           }}}}
+
+% \end{ex} 
+% We can now use \preveg{} to update the type we had for $b_0$,
+% obtaining \nexteg{a} identical with \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
-                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
-                         \fbox{\d{$\wedge$}} \\
-\hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
-\end{tabular}}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-                                  \d{$\wedge$}
-\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-                                                                                \smallmfield{chart}{$u_1$.chart}{
-\signtype{``Dudamel is a conductor''}}
-                                                                              \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}
-                                                                          }}}} 
+% \item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+%                                \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+%                          \fbox{\d{$\wedge$}} \\
+% \hspace*{2em}\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
+% \end{tabular}}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%                                   \d{$\wedge$}
+% \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%                                                                                 \smallmfield{chart}{$u_1$.chart}{
+% \signtype{``Dudamel is a conductor''}}
+%                                                                               \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}
+%                                                                           }}}} 
  
-\item
-  \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-              \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
-\end{tabular}}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
-                                  \d{$\wedge$}
-\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-                                                                                \smallmfield{chart}{$u_1$.chart}{
-\signtype{``Dudamel is a conductor''}}
-                                                                              \\
-\smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}
-                                                                          }}}
-                                                                    \\
-\smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}
+% \item
+%   \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%               \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}]
+% \end{tabular}}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_1$.move}{\smallrecord{\smalltfield{e}{\textit{Assertion}
+%                                   \d{$\wedge$}
+% \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%                                                                                 \smallmfield{chart}{$u_1$.chart}{
+% \signtype{``Dudamel is a conductor''}}
+%                                                                               \\
+% \smallmfield{e}{$u_1$.e}{m-interp(chart,move)}}
+%                                                                           }}}
+%                                                                     \\
+% \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}
  
-\end{subex} 
-\label{ex:type-b1}   
-\end{ex} 
+% \end{subex} 
+% \label{ex:type-b1}   
+% \end{ex} 
 
 Now we are in a situation where both $A$ and $B$ are in information
-states ($a_1$ and $b_1$) with non-empty agendas.  But they are
-coordinated in that $A$ has an acknowledgement to be spoken by $B$
-topmost on the agenda and $B$ has an acknowledgement with the same
-content to be spoken by $B$ with $A$ as the audience.  
-\textbf{ExecTopAgenda} is applicable to both $a_1$ and $b_1$.
-\nexteg{a} is \textbf{ExecTopAgenda}($a_1$) and \nexteg{b} is
-\textbf{ExecTopAgenda}($b_1$).
-\begin{ex} 
-\begin{subex} 
- 
-\item
-  \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-          \d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-             \tfield{chart}{\textit{Chart}} \\
-             \tfield{e}{m-interp(chart,move)}} 
- 
-\item \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
-             \smallmfield{au}{$u_1$.move.e.sp}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
-                            \\
-             \tfield{chart}{\textit{Chart}} \\
-             \tfield{e}{m-interp(chart,move)}}
- 
-\end{subex} 
-   
-\end{ex} 
-By substituting values for \textit{SELF} and values from $u_1$ we can
-see the extent to which $A$ and $B$ are coordinated.  Both \preveg{a}
-and \preveg{b} reduce to the type in 
-\nexteg{}.
-\begin{ex} 
+states ($a_1$ and $b_1$) with non-empty agendas.  $A$ and $B$ are
+\textit{coordinated} because the type labelled by `shared' on
+their respective gameboards are the same.  In addition, they are
+coordinated because they both
+have the same type at the top of their respective agendas. That is,
+they are both plannning that the next move will be one in which $B$
+acknowledges the content of $u_1$.  % But they are
+% coordinated in that $A$ has an acknowledgement to be spoken by $B$
+% topmost on the agenda and $B$ has an acknowledgement with the same
+% content to be spoken by $B$ with $A$ as the audience.
 
-  \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-          \d{$\wedge$}\smallrecord{\smallmfield{sp}{$B$}{\textit{Ind}}
-      \\
-                                                                           \smallmfield{au}{$A$}{\textit{Ind}}}}
-                                                                       \\
-             \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}} \\
-             \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-             \tfield{chart}{\textit{Chart}} \\
-             \tfield{e}{m-interp(chart,move)}} 
- 
-
-   
-\end{ex}      
-Both $A$ and $B$ can now, in virtue of \textbf{ExecTopAgenda} play
-their respective roles in creating an event of type \preveg{}, $A$ by
-waiting for and paying attention to the acknowledgement and $B$ by
-uttering the acknowledgement.  This is an elementary form of what is
+\textsc{ExecTopAgenda} is applicable to both $a_1$ and $b_1$ followed
+by \textsc{DowndateAgenda}.  In $A$'s case realizing the
+acknowledgement type involves waiting for $B$ to speak and paying
+attention to the acknowledgement when it comes.  In $B$'s case
+realizing the type involves making the utterance $u_2$.  
+% \nexteg{a} is \textbf{ExecTopAgenda}($a_1$) and \nexteg{b} is
+% \textbf{ExecTopAgenda}($b_1$).
+% \begin{ex} 
+% \begin{subex} 
+% 
+% \item
+%   \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%           \d{$\wedge$}\smallrecord{\smallmfield{sp}{$u_1$.move.e.au}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{\textit{SELF}}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{$u_1$.move.cont}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%              \tfield{chart}{\textit{Chart}} \\
+%              \tfield{e}{m-interp(chart,move)}} 
+% 
+% \item \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}} \\
+%              \smallmfield{au}{$u_1$.move.e.sp}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}
+%                             \\
+%              \tfield{chart}{\textit{Chart}} \\
+%              \tfield{e}{m-interp(chart,move)}}
+% 
+% \end{subex} 
+%   
+% \end{ex} 
+% By substituting values for \textit{SELF} and values from $u_1$ we can
+% see the extent to which $A$ and $B$ are coordinated.  Both \preveg{a}
+% and \preveg{b} reduce to the type in 
+% \nexteg{}.
+% \begin{ex} 
+%
+%   \record{\tfield{move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%           \d{$\wedge$}\smallrecord{\smallmfield{sp}{$B$}{\textit{Ind}}
+%       \\
+%                                                                            \smallmfield{au}{$A$}{\textit{Ind}}}}
+%                                                                        \\
+%              \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}} \\
+%              \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%              \tfield{chart}{\textit{Chart}} \\
+%              \tfield{e}{m-interp(chart,move)}} 
+%
+%
+%
+%
+%  
+% \end{ex}      
+% Both $A$ and $B$ can now, in virtue of \textbf{ExecTopAgenda} play
+% their respective roles in creating an event of type \preveg{}, $A$ by
+% waiting for and paying attention to the acknowledgement and $B$ by
+% uttering the acknowledgement. 
+This is an elementary form of what is
 known as \textit{turn-taking} in the dialogue literature
-\citep{SacksSchegloffJefferson1974}.  The acknowledgement is $u_2$ in
-(\ref{ex:ass-ack-dial}).  In virtue of what is on the top of their
-respective agendas both $A$ and $B$ can judge $u_2$ to be of the type
-\preveg{}. $A$ and $B$ can now update their gameboards in virtue of
-\textbf{IntegrateOtherAcknowledgement} and
-\textbf{IntegrateOwnAcknowledgement} respectively.  $A$ will thus judge
-$a_2$ to be of type \nexteg{a} as a result of updating
-(\ref{ex:type-a1}b) and $B$ will judge $b_2$ to be of type \nexteg{b}
-as a result of updating (\ref{ex:type-b1}b).
+\citep{SacksSchegloffJefferson1974}.  % The acknowledgement is $u_2$ in
+% (\ref{ex:ass-ack-dial}).  In virtue of what is on the top of their
+% respective agendas both $A$ and $B$ can judge $u_2$ to be of the type
+% \preveg{}.
+%
+
+Once $u_2$
+has been uttered, its content has to be integrated into
+`shared.commitments' on both $A$'s and $B$'s gameboards.  This can be
+achieved by applying \textsc{IntegAck}.  The results for both
+gameboards are given in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}
-{[\smallrecord{\smalltfield{e}{\textit{Assertion}
-          \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
-]}{[\textit{RecType}]}}} \\
-\smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_2$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-            \d{$\wedge$}
-\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
-\smallmfield{chart}{$u_2$.chart}{\signtype{``Aha''}} \\
-\smallmfield{e}{$u_2$.e}{m-interp(chart,move)}
-}} \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
-    \\
-                                       \smalltfield{e}{conductor(dudamel)}}}
-                                   {\textit{RecType}}
-                                 }}}
-  
+\item $a_2$ : \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+                \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+                  \smallrecord{
+                    \smalltfield{s-event}{\smallrecord{
+                        \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+                    \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                \smalltfield{rst}{\smallrecord{
+                    \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+                        \smalltfield{s-event}{\smallrecord{
+                            \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
+                        \smallmfield{cont}{\smallrecord{
+                            \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                    \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u_2$}{(\textit{Acknowledgement}
+          \d{$\wedge$} \smallrecord{
+            \smalltfield{s-event}{\smallrecord{
+                \smallmfield{sp}{$B$}{\textit{Ind}}\\
+                \smallmfield{au}{$A$}{\textit{Ind}}}}\\
+            \smallmfield{cont}{\smallrecord{
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+        \smallmfield{commitments}{\smallrecord{
+            \smalltfield{prev}{\textit{Rec}}\\
+            \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}}
  
-\item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[]
-\end{tabular}}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_2$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-                                  \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-                                                                                \smallmfield{chart}{$u_2$.chart}{
-\signtype{``Aha''}}
-                                                                              \\
-\smallmfield{e}{$u_2$.e}{m-interp(chart,move)}}
-                                                                          }
-                                                                    \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
-    \\
-                                       \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}}
-  
+ 
+\item $b_2$ : \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smallmfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u_2$}{(\textit{Acknowledgement}
+          \d{$\wedge$} \smallrecord{
+            \smalltfield{s-event}{\smallrecord{
+                \smallmfield{sp}{$B$}{\textit{Ind}}\\
+                \smallmfield{au}{$A$}{\textit{Ind}}}}\\
+            \smallmfield{cont}{\smallrecord{
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+        \smallmfield{commitments}{\smallrecord{
+            \smalltfield{prev}{\textit{Rec}}\\
+            \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}} 
  
 \end{subex} 
    
 \end{ex} 
+
+
+
+% $A$ and $B$ can now update their gameboards in virtue of
+% \textbf{IntegrateOtherAcknowledgement} and
+% \textbf{IntegrateOwnAcknowledgement} respectively.  $A$ will thus judge
+% $a_2$ to be of type \nexteg{a} as a result of updating
+% (\ref{ex:type-a1}b) and $B$ will judge $b_2$ to be of type \nexteg{b}
+% as a result of updating (\ref{ex:type-b1}b).
+% \begin{ex} 
+% \begin{subex} 
+% % 
+% \item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}
+% {[\smallrecord{\smalltfield{e}{\textit{Assertion}
+%           \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}, \\
+% \hspace*{5em}\smallrecord{\smalltfield{e}{\textit{Assertion} \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}
+% ]}{[\textit{RecType}]}}} \\
+% \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_2$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%             \d{$\wedge$}
+% \smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
+% \smallmfield{chart}{$u_2$.chart}{\signtype{``Aha''}} \\
+% \smallmfield{e}{$u_2$.e}{m-interp(chart,move)}
+% }} \\
+% \smallmfield{commitments}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
+%     \\
+%                                        \smalltfield{e}{conductor(dudamel)}}}
+%                                    {\textit{RecType}}
+%                                  }}}
+% %  
+% %
+% \item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{\begin{tabular}{l}[]
+% \end{tabular}}{[\textit{RecType}]}}}
+%   \\
+%                       \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_2$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+%                                   \d{$\wedge$}
+% \smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
+%                                 \\
+%                                 \smallmfield{cont}{\smallrecord{\smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}
+%                                 \\
+%                                 \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
+%                                                                                 \smallmfield{chart}{$u_2$.chart}{
+% \signtype{``Aha''}}
+%                                                                               \\
+% \smallmfield{e}{$u_2$.e}{m-interp(chart,move)}}
+%                                                                           }
+%                                                                     \\
+% \smallmfield{commitments}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
+%     \\
+%                                        \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}}
+% %  
+% %
+% \end{subex} 
+   
+% \end{ex} 
 $A$ and $B$ are coordinated in that they both hypothesize the same
 type for shared.commitments.  Now the assertion-acknowledgement cycle
 can begin again and repeat until both agents have gameboards with
-empty agendas.  The final gameboards for $A$ and $B$ respectively are
-given in \nexteg{}.
+empty agendas.  The final gameboards for $A$ and $B$  are both of the type
+given in \nexteg{}.  Thus $A$ and $B$ are aligned at the end of this dialogue.
 \begin{ex} 
-\begin{subex} 
- 
-\item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}
-{[]}{[\textit{RecType}]}}} \\
-\smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_6$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
+\smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smallmfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u_6$}{(\textit{Acknowledgement}
             \d{$\wedge$}
-\smallrecord{\smallmfield{au}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}}\\
-\smallmfield{chart}{$u_6$.chart}{\signtype{``ok''}} \\
-\smallmfield{e}{$u_6$.e}{m-interp(chart,move)}
-}} \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
-    \\
-                                                                                                       \smalltfield{e}{conductor(dudamel)}}}
-                                                                   \\
-                                                                       \smalltfield{e}{composer(beethoven)}}}
-                                   \\
-                                       \smalltfield{e}{pianist(uchida)}}}
+            \smallrecord{
+              \smalltfield{s-event}{\smallrecord{
+                  \smallmfield{sp}{$B$}{\textit{Ind}}\\
+                  \smallmfield{au}{$A$}{\textit{Ind}}}} \\
+              \smallmfield{cont}{\smallrecord{
+                  \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
+                                })} \\
+                              \smallmfield{commitments}{\smallrecord{
+                                \smalltfield{prev}{\smallrecord{
+                                    \smalltfield{prev}{\smallrecord{
+                                        \smalltfield{prev}{\textit{Rec}}\\
+                                        \smalltfield{e}{conductor(dudamel)}}}\\
+                                    \smalltfield{e}{composer(beethoven)}}}\\
+                                \smalltfield{e}{pianist(uchida)}}}
                                    {\textit{RecType}}
                                  }}}
   
  
-\item \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]
-}{[\textit{RecType}]}}}
-  \\
-                      \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smallmfield{move}{$u_6$.move}{\smallrecord{\smalltfield{e}{\textit{Acknowledgement}
-                                  \d{$\wedge$}
-\smallrecord{\smallmfield{sp}{\textit{SELF}}{\textit{Ind}}}} 
-                                \\
-                                \smallmfield{cont}{\smallrecord{\smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                \\
-                                \smalltfield{c$_{\mathrm{cont}}$}{content(e,cont)}}} \\
-                                                                                \smallmfield{chart}{$u_6$.chart}{
-\signtype{``ok''}}
-                                                                              \\
-\smallmfield{e}{$u_6$.e}{m-interp(chart,move)}}
-                                                                          }
-                                                                    \\
-\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\smallrecord{\smalltfield{prev}{\textit{Rec}}
-    \\
-                                                                                                       \smalltfield{e}{conductor(dudamel)}}}
-                                                                   \\
-                                                                       \smalltfield{e}{composer(beethoven)}}}
-                                   \\
-                                       \smalltfield{e}{pianist(uchida)}}}
-                                   {\textit{RecType}}
-                                 }}}
-
-
-  
- 
-\end{subex} 
 \label{ex:gameboardDudamelBeethovenUchida}   
 \end{ex}
   
