@@ -2,7 +2,9 @@
 \label{ch:gram}
 \setcounter{equation}{0}
 
-\todo{Christiansen and Chater Now-or-Never bottleneck}
+% \todo{Christiansen and Chater Now-or-Never bottleneck}
+
+\section{Introduction}
 
 In Chapter~\ref{ch:infex} we made the simplifying assumption that
 sentences come as single unanalyzed units (something like the
@@ -10,7 +12,9 @@ assumption that is made in propositional logic).  In this chapter we
 will deal with the same simple examples but break the sentences down
 into their constituent parts.  (This will be something like moving
 from propositional logic to predicate logic without quantifiers.)
-In order to do this we will need more complex signs.  
+In order to do this we will need more complex signs.
+
+\section{Constituent structure and events}
 
 We will first consider how linguistic constituent structure is related
 to our general perception of events.  We have so far talked of events
@@ -25,7 +29,7 @@ free grammars.\footnote{For a general introduction to automata theory
   \cite{ParteeMeulenWall1990}.}  Consider an event type of bus trips,
 \textit{BusTrip}.  This could be defined as in \nexteg{}.
 \begin{ex} 
-\textit{BusTrip} $\equiv$
+%\textit{BusTrip} $\equiv$
 \textit{GetBus}$^{\frown}$\textit{TravelOnBus}$^{\frown}$\textit{GetOffBus} 
 \label{ex:bustrip}
 \end{ex} 
@@ -33,7 +37,8 @@ Each of the three event types which are concatenated in \preveg{}
 could be further broken down into strings of events.  For example,
 \textit{GetBus} might be defined as in \nexteg{}.
 \begin{ex} 
-\textit{GetBus} $\equiv$ \textit{WaitAtBusstop}*$^{\frown}$\textit{BusArrive}$^{\frown}$\textit{GetOnBus} 
+  % \textit{GetBus} $\equiv$
+ \textit{WaitAtBusstop}*$^{\frown}$\textit{BusArrive}$^{\frown}$\textit{GetOnBus} 
 \end{ex} 
 The elements in \preveg{} could be broken down further.  For example,
 getting on the bus could be analyzed in terms of going towards a door
@@ -54,12 +59,13 @@ place to another followed (after intervening events) by a bus trip
 from the second place back to the first.  Both of those bus trips
 might involve several buses if the connection is not direct.   
 
-The notation we have used in (\ref{ex:bustrip}) and \preveg{} is used
-to mean that what occurs to the left of $\equiv$ is a convenient
-notational abbreviation for what occurs on the right.  That is,
-whenever we write the symbol on the left, that is just shorthand for
-the longer expression on the right.  Given the two definitions in
-(\ref{ex:bustrip}) and \preveg{}, \textit{BusTrip} is just an
+% The notation we have used in (\ref{ex:bustrip}) and \preveg{} is used
+% to mean that what occurs to the left of $\equiv$ is a convenient
+% notational abbreviation for what occurs on the right.  That is,
+% whenever we write the symbol on the left, that is just shorthand for
+% the longer expression on the right.
+Given the two definitions in
+(\ref{ex:bustrip}) and \preveg{}, \textit{BusTrip} could be seen as an
 abbreviation for the regular string type in \nexteg{}.
 \begin{ex} 
 \textit{WaitAtBusstop}*$^{\frown}$\textit{BusArrive}$^{\frown}$\textit{GetOnBus}$^{\frown}$\textit{TravelOnBus}$^{\frown}$\textit{GetOffBus} 
@@ -83,8 +89,8 @@ The statements in \preveg{} claim that there are distinct types
 \textit{BusTrip} and \textit{GetBus} in addition to the regular types
 used on the right-hand side of `iff'.  These types are
 \textit{equivalent} to the regular types in the sense that anything of
-the one type will be of the other type.  Now the actual type system
-(not just the notation) is
+the one type will be of the other type.  Now the type system
+is
 hierarchically organized and includes two additional ``higher''
 types \textit{BusTrip} and \textit{GetBus}.  On the face of it one
 might think that the type system with the additional higher types
@@ -240,7 +246,7 @@ sign type as in \nexteg{}.
          \tfield{syn}{\textit{Syn}} \\
         \tfield{cont}{\textit{Cont}}} 
 \end{ex}
-However, as we will see below, \textit{Syn} will require a
+As we will see below, \textit{Syn} will require a
 `daughters'-field for a string of signs.  This means that
 \textit{Sign} becomes a recursive type.  It will be a \textit{basic}
 type with its witnesses defined by \nexteg{}.
@@ -269,8 +275,8 @@ The type \textit{Sign}, as so far defined, can be seen as a
 \textit{universal resource}.  By this we mean that it is a type which
 is available for all languages. 
 \textit{Cat} is the type of names of syntactic categories.  In this chapter we
-will take the witnesses of \textit{Cat} to be: s (``sentence''), np (``noun phrase''),
-det (``determiner''), n (``noun''), v (``verb'') and vp (``verb
+will take the witnesses of \textit{Cat} to be: `s' (``sentence''), `np' (``noun phrase''),
+`det' (``determiner''), `n' (``noun''), `v' (``verb'') and `vp' (``verb
 phrase'').  These correspond to the categories we will use to cover
 the expressions of the fragment of English we introduced in
 Chapter~\ref{ch:infex}. We will use capitalized versions of these
@@ -279,22 +285,22 @@ sign type as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
 
-\item \textit{S} $\equiv$ \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}}
+\item \textit{S} represents (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
  
-\item \textit{NP} $\equiv$  \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}} 
+\item \textit{NP} represents  (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}}) 
  
-\item \textit{Det} $\equiv$
-   \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
+\item \textit{Det} represents
+   (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
 
-\item \textit{N} $\equiv$
-   \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}} 
+\item \textit{N} represents
+   (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}}) 
 
-\item \textit{V} $\equiv$
-   \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}}
+\item \textit{V} represents
+   (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
 
-\item \textit{VP} $\equiv$  \textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
+\item \textit{VP} represents  (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
  
-\end{subex} 
+\end{subex}
 \label{ex:catsigntypes}   
 \end{ex}
 
@@ -348,7 +354,7 @@ something in the sign-type that will indicate the arbitrary assignment
 of a category to a word.  For want of a better solution we will
 introduce the category names which belong to the type \textit{Cat}
 as a kind of ``book-keeping'' device that will identify a sign-type as
-being one whose witnesses belong to category bearing that name.  
+being one whose witnesses belong to the category bearing that name.  
 
 The `daughters'-field is required to be a string of signs, possibly
 the empty string, since the type \textit{Sign}$^*$ uses the Kleene-*,
@@ -359,16 +365,14 @@ string of daughters.  We will use \textit{NoDaughters} to represent
 the type
 \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}.
 
-@@Eliminate ``normally'' here.
-
-If $T_{\mathrm{phon}}$ is a type (normally a phonological type, that is,
+If $T_{\mathrm{phon}}$ is a phonological type (that is,
 $T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
-is a type (normally a sign type, that is,$T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$  , then we shall use
+is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$, then we shall use
 Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent \nexteg{}
 \begin{ex} 
-$T_{\mathrm{sign}}$ \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}}
-      \d{$\wedge$} \textit{NoDaughters} 
+(($T_{\mathrm{sign}}$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+      \d{$\wedge$} \textit{NoDaughters}) 
 \end{ex} 
 This means, for
 example, that \nexteg{a} represents the type in \nexteg{b}
@@ -379,9 +383,9 @@ type in \nexteg{c}.
 
 \item  Lex(``Dudamel'', \textit{NP})
  
-\item \textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel''}}}}
-      \d{$\wedge$} \textit{NoDaughters} 
+\item ((\textit{NP} \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel''}}}})
+      \d{$\wedge$} \textit{NoDaughters}) 
  
 \item \record{\tfield{s-event}{\record{\tfield{e-loc}{\textit{Loc}} \\
         \tfield{sp}{\textit{Ind}} \\
@@ -402,11 +406,11 @@ We can think of `Lex' as the function in \nexteg{}\footnote{We are
   for example, by
   \cite{Montague1973} that if $f$ is a function $f(a,b)$ is $f(b)(a)$.}
 \begin{ex} 
-$\lambda T_1$:\textit{Type}\\
-\hspace*{.25em}$\lambda T_2$:\textit{Type} . \\
-\hspace*{.5em}\mbox{$T_1$ \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_2$}}}}
-      \d{$\wedge$} \textit{NoDaughters}}
+$\lambda T_1$:\textit{SignType}\\
+\hspace*{.25em}$\lambda T_2$:\textit{PhonType} . \\
+\hspace*{.5em}\mbox{(($T_1$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_2$}}}})
+      \d{$\wedge$} \textit{NoDaughters})}
 \end{ex} 
 This function, which creates sign types for lexical items in a
 language, associating types with a syntactic category, can be seen as
@@ -416,8 +420,6 @@ can be speech events of given types which have
 no daughters (lexical items)''.  
   
    
-
-@@Make clear that NP and S for aha etc. is arbitrary.
 
 The lexical resources needed to cover our example
 fragment is given in \nexteg{}.
@@ -431,7 +433,12 @@ Lex(``is'', \textit{V}) \\
 Lex(``ok'', \textit{S}) \\
 Lex(``aha'',\textit{S})
 \label{ex:gramlexres} 
-\end{ex} 
+\end{ex}
+The choice of \textit{S} for ``ok'' and ``aha'' might be seen as an
+arbitrary choice for the sake of this particular restricted fragment
+of English.  We will not pursue details of the syntax of these
+particles here.
+
 The types in \preveg{} belong to the specific resources required for
 English. This is not to say that these resources cannot be shared with
 other languages.  Proper names like \textit{Dudamel} and
@@ -441,7 +448,7 @@ phonological type with which they are associated without this being
 perceived as quotation, code-switching or simply showing off that you
 know another language. 
 
-Resources like \preveg{} can be exploited by update rules.  If
+Resources like \preveg{} can be exploited by action rules.  If
 Lex($T_w$, $C$)
 is one of the lexical resources available to an agent $A$
 and $A$ judges an event $e$ to be of type $T_w$, then $A$ is
@@ -451,13 +458,21 @@ word ``composer'', then they can conclude that they have heard a sign
 which has the category noun.  This is the beginning of
 \textit{parsing}, which we will regard as the same kind of update
 involved in event perception as discussed in the previous chapters.
-The licensing condition corresponding to lexical resources
-like \preveg{} is given in \nexteg{}.  We will return below to how
+The action rule corresponding to lexical resources
+like \preveg{} is given in \nexteg{}, where we use `$T$
+resource$_A$' to mean that the type $T$ is a resource available to
+$A$.  Here the relevant resource is a type returned by the function `Lex'.)  We will return below to how
 this relates to gameboard update.  
 \begin{ex}
-If Lex($T$, $C$) is a resource available to agent $A$, then for any
-$u$, $u:_A T$ licenses $:_A$ Lex($T$, $C$)
-\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$u$}{$T_1$}}}}
+  \begin{prooftree}
+    \hypo{\text{Lex}(T,C) \text{ resource}_A}
+    \hypo{u:_A T}
+    \infer[enth]2{:_A(\text{Lex}(T,C)\text{\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$u$}{$T$}}}}})}
+  \end{prooftree}
+  
+% If Lex($T$, $C$) is a resource available to agent $A$, then for any
+% $u$, $u:_A T$ licenses $:_A$ Lex($T$, $C$)
+% \d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$u$}{$T_1$}}}}
 
 \end{ex} 
 \preveg{} says that an agent with lexical resource Lex($T$, $C$) who
@@ -486,6 +501,9 @@ model as the function in \nexteg{a} which we will represent as \nexteg{b}.
 \end{subex}
 \label{ex:NPDetNDaughters}
 \end{ex}
+
+@@
+
 `RuleDaughters' is to be the function in \nexteg{}.
 \begin{ex} 
 $\lambda T_1$ : \textit{Type} \\
