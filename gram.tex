@@ -406,13 +406,13 @@ We can think of `Lex' as the function in \nexteg{}\footnote{We are
   for example, by
   \cite{Montague1973} that if $f$ is a function $f(a,b)$ is $f(b)(a)$.}
 \begin{ex} 
-$\lambda T_1$:\textit{SignType}\\
-\hspace*{.25em}$\lambda T_2$:\textit{PhonType} . \\
+$\lambda T_1$:\textit{Type}\\
+\hspace*{.25em}$\lambda T_2$:\textit{Type} . \\
 \hspace*{.5em}\mbox{(($T_1$ \d{$\wedge$}
 \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_2$}}}})
       \d{$\wedge$} \textit{NoDaughters})}
 \end{ex} 
-This function, which creates sign types for lexical items in a
+This function, which is used to create sign types for lexical items in a
 language, associating types with a syntactic category, can be seen as
 a universal resource.  We can think of it as representing a (somewhat
 uninteresting, but nevertheless true) linguistic universal:  ``There
@@ -502,13 +502,13 @@ model as the function in \nexteg{a} which we will represent as \nexteg{b}.
 \label{ex:NPDetNDaughters}
 \end{ex}
 
-@@
+
 
 `RuleDaughters' is to be the function in \nexteg{}.
 \begin{ex} 
-$\lambda T_1$ : \textit{Type} \\
-\hspace*{1em} $\lambda T_2$ : \textit{Type}\ . \\
-\hspace*{2em} $\lambda u : T_1$\ . $T_2$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_1$}}}} 
+$\lambda T_1$:\textit{Type} \\
+\hspace*{1em} $\lambda T_2$:\textit{Type}\ . \\
+\hspace*{2em} $\lambda u\! :\! T_1$\ . $T_2$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_1$}}}} 
 \end{ex} 
 Thus `RuleDaughters', if provided with a subtype of \textit{Sign}$^+$
 and a subtype of \textit{Sign} as arguments, will return a function which 
@@ -516,18 +516,25 @@ maps a string of signs of the first type to the second type with the
 restriction that the daughters field is filled by the string of
 signs. `RuleDaughters' is one of a number of sign type construction
 operations which we will introduce as universal resources which have
-the property of returning what we will call a sign combination function.  The licencing conditions
-associated with sign combination functions are as characterized in
+the property of returning a which combine signs.  The action rule
+associated with `RuleDaughters' is characterized in
 \nexteg{}.
 
-@@ Give names to such principles
+%@@ Give names to such principles
 
-\begin{ex} 
-If $f:(T_1\rightarrow Type)$ is a sign combination function available to agent $A$, then for
-any $u$, $u :_A T_1$ licenses $:_A f(u)$ 
+\begin{ex}
+  \begin{prooftree}
+    \hypo{f=\text{RuleDaughters}(T_{\text{mother}},T_{\text{daughters}})}
+    \hypo{f\text{ resource}_A}
+    \hypo{u:_A T_{\text{daughters}}}
+    \infer[enth]3{:_A f(u)}
+  \end{prooftree}
+  
+% If $f:(T_1\rightarrow Type)$ is a sign combination function available to agent $A$, then for
+% any $u$, $u :_A T_1$ licenses $:_A f(u)$ 
 \end{ex} 
 This means, for example, that if you categorize a string of signs as
-being of type \textit{Det}$^{\frown}$\textit{N} then you can conclude
+being of type \textit{Det}$^{\frown}$\textit{N} then you are licensed to conclude
 that there is a sign of type \textit{NP} with the additional
 restriction that its daughters are $u$.   
 
@@ -538,8 +545,23 @@ concatenation of all the `s-event.e'-fields in the daughters. If
 $u:T^+$ where $T$ is a record type containing the path $\pi$, we will
 use concat$_i$($u[i].\pi$),
 the concatenation of all the values $u[i].\pi$ for each element in the
-string $u$ in the order in which they occur in the string. (This
-notation is made precise in Appendix~\ref{sec:regular}.) We can now
+string $u$ in the order in which they occur in the string.
+
+\begin{shaded}
+This
+definition is repeated in
+Appendix~\ref{sec:regular}.\label{pg:concat-i}.
+
+If $s$ is a string of length $n$ of records such that for each $i$,
+$0\leq i<n$, $s[i].\pi$ is a defined path, 
+$\displaystyle\mathop{\mathrm{concat}}_{0\leq i<n}(s[i].\pi)$ denotes
+$s[0].\pi^{\frown}\ldots^{\frown}s[n-1].\pi$.  We use
+concat$_i$($s[i].\pi$) to represent
+$\displaystyle\mathop{\mathrm{concat}}_{0\leq
+  i<\mathrm{length}(s)}(s[i].\pi)$.
+\end{shaded}
+
+We can now
 formulate the function ConcatPhon as in \nexteg{}
 \begin{ex} 
 $\lambda
@@ -574,25 +596,49 @@ notation for phrase structure rules could be represented as
 \end{subex}
 \label{eg:NPDetN}
 \end{ex}
-In general we say that if $C,C_1,\ldots,C_n$ are category sign types
-as in (\ref{ex:catsigntypes}) then $C \longrightarrow C_1 \ldots C_n$ represents RuleDaughters($C$,
-${C_1}^{\frown}\ldots^{\frown}C_n$) \d{\d{$\wedge$}} ConcatPhon where
-for any type returning functions $\lambda r\!:\!T_1\ .\ T_2(r)$ and
-$\lambda r\!:\!T_3\ .\ T_4(r)$, $\lambda r\!:\!T_1\ .\ T_2(r)$ \d{\d{$\wedge$}} $\lambda r\!:\!T_3\ .\ T_4(r)$
-denotes the function $\lambda r\!:\!T_1$\d{$\wedge$}$T_3\ .\
-T_2(r)$\d{$\wedge$}$T_4(r)$.  
 
-@@Make the definition of function merging displayed.
+For any dependent types (that is, functions which return a type) of
+the form \nexteg{a} and \nexteg{b}, \nexteg{c} (the merge of the two
+functions) represents the function \nexteg{d}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r\!:\!T_1\ .\ T_2\dep{r}$ 
+ 
+\item $\lambda r\!:\!T_3\ .\ T_4\dep{r}$
+  
+\item $\lambda r\!:\!T_1\ .\ T_2\dep{r}$ \d{\d{$\wedge$}} $\lambda
+  r\!:\!T_3\ .\ T_4\dep{r}$
+  
+\item $\lambda r\!:\!T_1$\d{$\wedge$}$T_3\ .\
+T_2\dep{r}$\d{$\wedge$}$T_4\dep{r}$
+ 
+\end{subex} 
+   
+\end{ex} 
 
-Thus the function in \preveg{} can be
+If $C,C_1,\ldots,C_n$ are category sign types
+as in (\ref{ex:catsigntypes}) then \nexteg{a} represents \nexteg{b}
+\begin{ex} 
+\begin{subex} 
+ 
+\item $C \longrightarrow C_1 \ldots C_n$ 
+ 
+\item RuleDaughters($C$,
+${C_1}^{\frown}\ldots^{\frown}C_n$) \d{\d{$\wedge$}} ConcatPhon 
+ 
+\end{subex} 
+   
+\end{ex} 
+Thus the function in (\ref{eg:NPDetN} can be
 represented in a third way as in \nexteg{}.
 \begin{ex} 
 RuleDaughters(\textit{NP}, \textit{Det}$^{\frown}$\textit{N})
 \d{\d{$\wedge$}} ConcatPhon 
 \end{ex} 
-The hope is that the ability to factorize rules into ``bite-size''
-components will enable us to build a theory of resources
-that will allow us to study them in isolation and will also facilitate
+The ability to factorize rules into 
+components in this way enables us to build a theory of resources
+that will allow us to study them in isolation and also facilitates
 the development of theories of learning.  It gives us a clue to how agents can build new
 rules by combining existing components in novel ways.  It has implications for universality
 as well. For example, while the rule
@@ -610,7 +656,7 @@ The rules associated with our small grammar are given by \nexteg{}
 \textit{VP} $\longrightarrow$ \textit{V} \textit{NP} 
 \end{ex} 
   
-It may seem that we have done an awful of work to arrive at simple
+It may seem that we have done an awful lot of work to arrive at simple
 phrase structure rules.  Some readers might wonder why it is worth all
 this trouble to ground the rules in a theory of events and action when
 what we come up with in the end is something that can be expressed in
@@ -633,9 +679,7 @@ syntax.  Now we need to specify the content in the `cont'-field.  We
 shall start by accounting for the contents of the lexical items
 specified in (\ref{ex:gramlexres}).  We consider first the common
 nouns \textit{composer} and \textit{conductor}.  For each of these we
-introduce a predicate of arity $\langle$\textit{Ind}$\rangle$.  (See
-Appendix~\ref{app:comptypes} for discussion of predicates and
-arity.)  Our universal resources will include a function,
+introduce a predicate of arity $\langle$\textit{Ind}$\rangle$.  Our universal resources will include a function,
 `SemCommonNoun' which will construct a common noun content from such a
 predicate, $p$.  This is defined as in \nexteg{}.
 \begin{ex} 
@@ -649,11 +693,15 @@ labelled `x' with an individual as value to a record type.  We will
 abbreviate this type as \textit{Ppty} (for ``property'') and we will
 call functions of this type \textit{properties}.  In our compositional
 semantics, properties will play a similar role as functions from
-individuals to truth values ($\langle e,t\rangle$) in Montague
-semantics.  In place of individuals, we use records with an `x'-field
+individuals to truth values  in Montague
+semantics, (that is, functions of type $\langle e,t\rangle$ in
+Montague's system).  In place of individuals, we use records with an `x'-field
 containing an individual.  The motivation for this will become
-apparent in Chapter~\ref{ch:commonnouns} when we discuss the temperature
-puzzle. In place of Montague's truth-values (that is, objects of
+apparent later. Basically, we want to be
+able to restrict the function by adding additional fields to the
+domain type of the function.
+
+In place of Montague's truth-values (that is, objects of
 Montague's type $t$) we use record types.  Record types play the role
 of ``propositions'' in our system.  Types, thought of as types of
 situations, can be considered as truth-bearing objects.  They are true
@@ -704,8 +752,15 @@ noun-phrase contents will be of type
 (\textit{Ppty}$\rightarrow$\textit{RecType}) which we will abbreviate
 as \textit{Quant} (for ``quantifier''). This means that we should now
 redefine the type of contents, \textit{Cont}, as \textit{RecType}
-$\vee$ \textit{Ppty} $\vee$ \textit{Quant}.\footnote{Omitting
-  parentheses for clarity.}
+$\vee$ \textit{Ppty} $\vee$ \textit{Quant}.
+
+Some readers may find this a rather old-fashioned approach to the
+treatment of proper names which in proposals after Montague are
+analyzed as representing individuals rather than quantifiers.  There
+is nothing in principle which rules out these more modern treatments
+in TTR but for now we will keep to the classical Montague approach.
+We will in any case change Montague's proposal in later chapters of
+this book.
    
 
 \textit{Dudamel} and
@@ -743,7 +798,12 @@ there is one and only one individual which can be referred to by an
 utterance belonging to the phonological type.  Names can be ambiguous.
 For example, there are many composers named Bach and Strauss.  We have
 the means to construct sign types for all of them on an as needed
-basis.
+basis.  This sign-based approach, even though it holds closely to
+Montague's original treatment of proper names, has the advantage that
+it does not require a proper name to be limited to a single individual
+for its content.  See \cite{Cooper2017a} for some further discussion.
+
+@@
 
 Now that we have both properties and quantifiers let us check at this
 point that we are on the right track for combining them in something
