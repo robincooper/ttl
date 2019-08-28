@@ -803,8 +803,6 @@ Montague's original treatment of proper names, has the advantage that
 it does not require a proper name to be limited to a single individual
 for its content.  See \cite{Cooper2017a} for some further discussion.
 
-@@
-
 Now that we have both properties and quantifiers let us check at this
 point that we are on the right track for combining them in something
 like the kind of way that we will need for compositional semantics.
@@ -815,7 +813,7 @@ the argument \nexteg{b} as represented in \nexteg{c}.  According to
 the definition of functional application in
 Appendix~\ref{app:funtypes}, \nexteg{c} is identical to \nexteg{d}
 which in turn is identical to \nexteg{e}.  In turn the dot notation
-for record path values defined in Appendix~\ref{app:rectypes} shows
+for record path values shows
 \nexteg{e} to be identical to \nexteg{f}.
 \begin{ex} 
 \begin{subex} 
@@ -1042,7 +1040,7 @@ $\{a\mid\exists
   r:\text{\smallrecord{\smalltfield{x}{\textit{Ind}}}}
   . \text{\record{\tfield{e}{dog($r$.x)}}}(r)} \not=\emptyset]\}$ 
 \end{ex} 
-By $\beta$-reduction \preveg{} is the same set as \nexteg{}.
+By $\beta$-reduction (that is, the definition of function application) \preveg{} is the same set as \nexteg{}.
 \begin{ex} 
 $\{a\mid\exists
   r[r$:\smallrecord{\smallmfield{x}{$a$}{\textit{Ind}}} and 
@@ -1139,8 +1137,90 @@ In \preveg{b} the restricted field\label{pg:restfld}
 \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}} requires that the
 object in `e'-field is not only of type `dog($r$.x)' but also that it
 is either $s$ itself or a component of $s$, that is, for some
-path $\pi$ in $s$ it is the object $s.\pi$.  See
-Appendix~\ref{app:rectypes} for the definition of components.  A definition of restriction for properties in general is given in
+path $\pi$ in $s$ it is the object $s.\pi$.\label{pg:component}
+\begin{shaded}
+The notion \textit{component} is defined in \nexteg{}, repeated in 
+Appendix~\ref{app:rec}.
+\begin{ex} 
+An object, $a$, is a \textit{component} of a record, $r$, in symbols,
+$a\varepsilon r$, just in case there is some path, $\pi$, in $r$ such
+that $r.\pi=a$. 
+\end{ex}
+
+In terms of our informal proof theoretic notation this could be
+expressed as \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\vdash r\text{ record}}
+    \hypo{\pi\in\text{paths(r)}}
+    \infer2{\Gamma\vdash r.\pi\ \varepsilon\ r}
+  \end{prooftree}
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\vdash r.\pi\ \varepsilon\ r}
+    \infer1{\Gamma\vdash r \text{ record}}
+  \end{prooftree}
+  \hspace*{2em}
+  \begin{prooftree}
+    \hypo{\Gamma\vdash r.\pi\ \varepsilon\ r}
+    \infer1{\pi\in\text{paths}(r)}
+  \end{prooftree}
+  
+    
+ 
+\end{subex} 
+   
+\end{ex}
+
+Based on this notion we can define a notion of \textit{present in a
+  record} as in \nexteg{}, repeated in 
+Appendix~\ref{app:rec}.\label{pg:present}
+\begin{ex} 
+An object, $a$, is \textit{present} in a record, $r$, in
+symbols, $a\underline{\varepsilon} r$, just in case either $a=r$ or
+$a\varepsilon r$. 
+\end{ex} 
+We can express this in our informal proof theoretic notation as in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\vdash r\text{ record}}
+    \infer1{\Gamma\vdash r\ \underline{\varepsilon}\ r}
+  \end{prooftree}
+  \hspace*{2em}
+  \begin{prooftree}
+    \hypo{\Gamma\vdash a\ \varepsilon\ r}
+    \infer1{\Gamma\vdash a\ \underline{\varepsilon}\ r}
+  \end{prooftree}
+  
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\vdash a\ \underline{\varepsilon}\ r}
+    \hypo{[\Delta\vdash r'\text{ record}]}
+    \ellipsis{}{\Delta\vdash\varphi}
+    \hypo{[\Delta\vdash a'\ \varepsilon\ r']}
+    \ellipsis{}{\Delta\vdash\varphi}
+    \infer3{\Gamma\vdash\varphi}
+  \end{prooftree}
+  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+ @@ 
+
+\end{shaded}
+
+A definition of restriction for properties in general is given in
 Appendix~\ref{app:gramrulesuniv}.  We will not be concerned with the
 general definition here.  
 
