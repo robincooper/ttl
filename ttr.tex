@@ -3048,9 +3048,25 @@ is that $T'$ whose unique identifier representation is $[r]_\eta$.
 
 (These definitions were not included in \citealp{Cooper2012}.)
 
-If $T$ is a type and $r$ is a record, then $T\!\restriction\!r$ is a
-type. $a:T\!\restriction\!r$ iff $a\underline{\varepsilon} r$ (see
-Appendix~\ref{app:rectypes}) and $a:T$.
+% If $T$ is a type and $r$ is a record, then the \textit{restriction of
+%   $T$ by $r$} (Chapter~\ref{ch:gram}, p.~\pageref{pg:typerestriction}),
+% $T\!\restriction\!r$, is a
+% type. $a:T\!\restriction\!r$ iff $a\underline{\varepsilon} r$ (see
+% Appendix~\ref{app:rectypes}) and $a:T$.
+
+  A type system $\mathbb{T}$ \textit{has restricted types according to a
+  set of labels} $\mathcal{L}$ (Chapter~\ref{ch:gram},
+p.~\pageref{pg:typerestriction}) if it is the case that
+\begin{enumerate} 
+ 
+\item   if  $T$ is a type according to $\mathbb{T}$ and
+  $r$ is a record according to $\mathcal{L}$ and $\mathbb{T}$, then the
+  restriction of $T$ by $r$, $T\!\restriction\!r$, is a
+type according to $\mathbb{T}$.
+ 
+\item $a:_{\mathbb{T}}T\!\restriction\!r$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
+ 
+\end{enumerate} 
 
 If $T$ is a record type and $r$ is a record, then $T\!\mid\!\restriction\! r$, the
 \textit{restriction} of $T$ by

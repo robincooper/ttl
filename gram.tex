@@ -1216,11 +1216,85 @@ We can express this in our informal proof theoretic notation as in
    
 \end{ex} 
   
- @@ 
+We define a general notion of restricting a type by a record as in
+\nexteg{}, repeated in Appendix~\ref{app:specrec}.\label{pg:typerestriction}
+\begin{ex}
+  A type system $\mathbb{T}$ \textit{has restricted types according to a
+  set of labels} $\mathcal{L}$ if it is the case that
+\begin{enumerate} 
+ 
+\item   if  $T$ is a type according to $\mathbb{T}$ and
+  $r$ is a record according to $\mathcal{L}$ and $\mathbb{T}$, then the
+  restriction of $T$ by $r$, $T\!\restriction\!r$, is a
+type according to $\mathbb{T}$.
+ 
+\item $a:_{\mathbb{T}}T\!\restriction\!r$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
+ 
+\end{enumerate} 
+   
+\end{ex}
+
+In terms of our informal prooftheoretic notation this can be expressed
+as \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
+    \hypo{\Gamma,\mathcal{L}\vdash r \text{ record}}
+    \infer2{\Gamma,\mathcal{L}\vdash
+      T\!\restriction\!r\in\textbf{Type}}
+  \end{prooftree}
+  
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma,\mathcal{L}\vdash r \text{ record}}
+    \hypo{a\ \underline{\varepsilon}\ r}
+    \hypo{\Gamma,\mathcal{L}\vdash a:T}
+    \infer3{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+  \end{prooftree}
+  
+  \begin{prooftree}
+    \hypo{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \infer1{\Gamma,\mathcal{L}\vdash r \text{ record}}
+  \end{prooftree}
+  \hspace*{2em}
+  \begin{prooftree}
+    \hypo{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \infer1{a\ \underline{\varepsilon}\ r}
+  \end{prooftree}
+  \hspace*{2em}
+  \begin{prooftree}
+    \hypo{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \infer1{\Gamma,\mathcal{L}\vdash a:T}
+  \end{prooftree}
+  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+We use a similar notation for restricted fields in record types as we
+do for manifest fields.  That is, we represent \nexteg{a} as
+\nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{$\ell$}{$T\!\restriction\!r$}} 
+ 
+\item \record{\rfield{$\ell$}{$r$}{$T$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+@@
 
 \end{shaded}
 
-A definition of restriction for properties in general is given in
+\todo{Revise definition of restricted property?} A definition of restriction for properties in general is given in
 Appendix~\ref{app:gramrulesuniv}.  We will not be concerned with the
 general definition here.  
 
