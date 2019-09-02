@@ -1288,15 +1288,32 @@ do for manifest fields.  That is, we represent \nexteg{a} as
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
 
-@@
+If $T$ is a record type other than \textit{Rec} and \textit{ERec} then
+\textit{the recursive restriction of $T$ by $r$},
+$T\!\restriction\restriction\!r$, is the result of replacing each
+field in $T$ of the form $[\ell:T']$, where $T'$ is a type, with the
+field $[\ell:T'\!\restriction\restriction\!r]$ and each field of the
+form $\langle\ell,\langle f,\Pi\rangle\rangle$ (where $f$ is a
+function and $\Pi$ a sequence of paths) with $\langle\ell,\langle
+f',\Pi\rangle\rangle$ where $f'$ is like $f$ except that for any
+arguments $a_1,\ldots,a_n$ appropriate to $f$,
+$f'(a_1)\ldots(a_n)=f(a_1)\ldots(a_n)\!\restriction\restriction r$.
+
+Otherwise if $T$ is a type, then
+$T\!\restriction\restriction\!r=T\!\restriction\!r$.
+
+If $\mathcal{T}$ is a dependent type (for example, a property)
+$\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
+T\dep{r_1,\ldots,r_n}$, then $\mathcal{T}\!\restriction\!s$ is $\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
+T\dep{r_1,\ldots,r_n}\!\restriction\restriction\!s$.
 
 \end{shaded}
 
-\todo{Revise definition of restricted property?} A definition of restriction for properties in general is given in
-Appendix~\ref{app:gramrulesuniv}.  We will not be concerned with the
-general definition here.  
+% A definition of restriction for properties in general is given in
+% Appendix~\ref{app:gramrulesuniv}.  We will not be concerned with the
+% general definition here.  
 
 Now we can compute the property extension of
 \preveg{b} in a similar fashion to the calculation for the
@@ -1535,7 +1552,10 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
           \tfield{e}{be(x)}})
 \label{ex:cont-is} 
-\end{ex} 
+\end{ex}
+
+@@
+
 Here we use a manifest field based on a multiple singleton type (a
 singleton type formed from a singleton type, see
 Appendices~\ref{app:singletontypes} and \ref{app:rectypes}) to require

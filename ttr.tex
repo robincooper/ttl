@@ -3066,9 +3066,28 @@ type according to $\mathbb{T}$.
  
 \item $a:_{\mathbb{T}}T\!\restriction\!r$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
  
-\end{enumerate} 
+\end{enumerate}
 
-If $T$ is a record type and $r$ is a record, then $T\!\mid\!\restriction\! r$, the
+If $T$ is a record type other than \textit{Rec} and \textit{ERec} then
+\textit{the recursive restriction of $T$ by $r$},
+$T\!\restriction\restriction\!r$, is the result of replacing each
+field in $T$ of the form $[\ell:T']$, where $T'$ is a type, with the
+field $[\ell:T'\!\restriction\restriction\!r]$ and each field of the
+form $\langle\ell,\langle f,\Pi\rangle\rangle$ (where $f$ is a
+function and $\Pi$ a sequence of paths) with $\langle\ell,\langle
+f',\Pi\rangle\rangle$ where $f'$ is like $f$ except that for any
+arguments $a_1,\ldots,a_n$ appropriate to $f$,
+$f'(a_1)\ldots(a_n)=f(a_1)\ldots(a_n)\!\restriction\restriction r$.
+
+Otherwise if $T$ is a type, then
+$T\!\restriction\restriction\!r=T\!\restriction\!r$.
+
+If $\mathcal{T}$ is a dependent type (for example, a property)
+$\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
+T\dep{r_1,\ldots,r_n}$, then $\mathcal{T}\!\restriction\!s$ is $\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
+T\dep{r_1,\ldots,r_n}\!\restriction\restriction\!s$.
+
+\todo{The remaining versions of restriction are perhaps not necessary}If $T$ is a record type and $r$ is a record, then $T\!\mid\!\restriction\! r$, the
 \textit{restriction} of $T$ by
 $r$ is the result
 of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
