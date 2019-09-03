@@ -456,7 +456,7 @@ Singleton types were not included in the formal definition in \cite{Cooper2012}.
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
-  singleton types} (Chapter~\ref{ch:percint}, p.~\pageref{ex:singleton-types}) if
+  singleton types} (Chapter~\ref{ch:infex}, p.~\pageref{ex:singleton-types}) if
 % \begin{enumerate} 
  
 % \item for any $T \in \textbf{Type}$ and $a:_{\mathbf{TYPE_C}}T$, $T_a \in \textbf{Type}$ 
@@ -488,12 +488,6 @@ $b:_{\mathbf{TYPE_C}}T_a$ iff  $b:_{\mathbf{TYPE_C}}T$ and $a=b$
 % the name ``singleton type'' is a misnomer.  The cases of empty types
 % are those where we have failed to define a singleton type.
 
-Note that this definition allows the formation of singleton types
-from singleton types.  We sometimes refer to these as
-\textit{multiple} singleton types and notate them as $T_{a,b,\ldots}$
-rather than the typographically unfortunate ${{T_a}_b}_{\ldots}$.
-Following the definition above an object $c$ will be of type $T_{a,b}$
-just in case $c:T$ and $a=b=c$.
 
 We let $T_a$ represent the labelled set
 $\{\langle\mathrm{singleton},\langle T,a\rangle\rangle\}$ where `singleton' is a reserved

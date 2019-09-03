@@ -1554,11 +1554,11 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 \label{ex:cont-is} 
 \end{ex}
 
-@@
+
 
 Here we use a manifest field based on a multiple singleton type (a
 singleton type formed from a singleton type, see
-Appendices~\ref{app:singletontypes} and \ref{app:rectypes}) to require
+Chapter~\ref{ch:infex}, p.~\pageref{pg:multiple-singleton-types}) to require
 the identity of $r_1$.x and $r_2$.x.  In the `e'-field of the type
 with the manifest field we use the predicate 'be' which we will take
 to be polymorphic with the set of arities  as given in \nexteg{a}.  The witness
@@ -1962,21 +1962,48 @@ to make the distinction required here.  However, there are other
 problems with the proposal which we will take up in
 Chapter~\ref{ch:intensional} when we discuss intensionality. 
 
-@@Do we really want to say that ``ok'' and ``aha'' don't have content?
+%@@Do we really want to say that ``ok'' and ``aha'' don't have content?
 
 Since acknowledgements like \textit{aha} and
 \textit{ok} do not have a specified content (\textit{cf.} the function
 `sign$_{\mathit{uc}}$' we used for these words in
 Chapter~\ref{ch:infex}), we do not need a function that specifies
 their content but can make do with the function `Lex' which associates
-them with a sign type in which the content is unspecified.
+them with a sign type in which the content is unspecified.  Their
+content in a given dialogue is given by the update functions and
+action rules.
 
-\section{Building a chart type}
+\section{Incremental processing and building a chart type}
 
-In Chapter~\ref{ch:infex} we made the simplifying assumption that a
-chart was a sign.  Now we have a grammar we need to complicate this
-picture.  We will present here a version of chart parsing as it is
-used in computational linguistics.  For a recent textbook introduction
+% In Chapter~\ref{ch:infex} we made the simplifying assumption that a
+% chart was a sign.  Now we have a grammar we need to complicate this
+% picture.
+
+If we are to take the idea that language is action seriously, we must
+take account of the fact that speech events happen in real time.
+People understand what is being said during the time that the
+utterance is produced.  If somebody stops talking mid-sentence we are
+often able to complete the sentence for them or respond to what we
+have heard so far.  There are many good accounts in the literature of
+why linguistic processing in \textit{incremental} in this way.  A
+couple of good recent overviews of the arguments are
+\cite{GinzburgPoesio2016} and
+\cite{KempsonCannGregoromichelakiChatzikyriakidis2016}.
+
+It may seem that recreating phrase structure rules and their
+compositional semantic interpretation in terms of a theory of action
+is not the best route to building a theory of the incremental nature
+of language processing.  However, drawing this conclusion would be
+over-hasty.  In the remainder of this chapter we will sketch a view of
+incrementality based on the computational technique of chart parsing
+which was prevalent in computational linguistics in the 1980's and
+1990's.  Despite the fact that it has fallen into disuse in current
+data-driven computational linguistics it still has significance for a
+theory of language as action.
+
+% We will present here a version of chart parsing as it is
+% used in computational linguistics.
+For a textbook introduction
 to chart parsing see \cite{JurafskyMartin2009}, Chap.~13.  The idea of
 a chart is that it should store all the hypotheses that we make during
 the processing of an utterance and allow us to compute new hypotheses
@@ -1986,7 +2013,8 @@ that a chart is a record and we will use our resources to compute a
 chart type on the basis of utterance events.  We will first go through
 an example of the incremental construction of a chart type for an
 agent processing an utterance of the sentence \textit{Dudamel is a
-  conductor}.  Then we will consider what kind of update functions are
+  conductor}.  Then we will consider what kind of update functions and
+action rules are
 needed in order to achieve this.  We will, as usual, make the
 simplifying assumption that what we have at bottom is a string of word
 utterances as we are not dealing with the details of phonology.  Thus
@@ -2001,7 +2029,7 @@ chart is \nexteg{}.
         \tfield{e}{\smallrecord{\smalltfield{e$_1$}{start($\Uparrow^2$e$_1$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end($\Uparrow^2$e$_1$)}}}} 
 \label{ex:Dudamelchart}
 \end{ex} 
-The main event of the chart type (represented by the e-field) breaks
+The main event of the chart type (represented by the `e'-field) breaks
 the phonological event of type ``Dudamel'' down into a string of two
 events, the start and the end of the ``Dudamel''-event.\footnote{These
   starting and ending events correspond to what are standardly called
@@ -2039,8 +2067,9 @@ Thus (\ref{ex:Dudamelchart})
 records that we have observed an event of the phonological type
 ``Dudamel'' and an event consisting of the start of that event
 followed by the end of that event.  Given that we have the resource
-the resource Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$) available
-(see Appendix~\ref{app:gramrules}), we can update \preveg{} to
+the resource Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$) available,
+% (see Appendix~\ref{app:gramrules})
+ we can update \preveg{} to
 \nexteg{}.
 \begin{ex} 
 \record{\tfield{e$_1$}{``Dudamel''} \\
@@ -2075,7 +2104,8 @@ records cannot be a part of themselves.\footnote{`e$_1$' and `e$_2$'
 The type Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$) is a subtype of
 \textit{NP}.  Thus the event labelled `e$_2$' could be the first item
 in a string that would be appropriate for the function which we have
-abbreviated as \nexteg{a} (see Appendix~\ref{app:gramrules}) which has the type \nexteg{b}.
+abbreviated as \nexteg{a} % (see Appendix~\ref{app:gramrules})
+which has the type \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
@@ -2089,8 +2119,8 @@ abbreviated as \nexteg{a} (see Appendix~\ref{app:gramrules}) which has the type 
 \end{ex} 
 Thus in a way that is similar to the prediction by the dog in
 Chapter~\ref{ch:percint} that it should run after the stick which is
-help up and the
-kind of event that this will contribute to is a game of fetch so on
+held up and the
+kind of event that this will contribute to is a game of fetch. Similarly, on
 observing a noun-phrase event we can predict that it might be followed
 by a verb phrase event thus creating a sentence event.  We will add a
 hypothesis event to our chart which takes place at the end of the
@@ -2120,7 +2150,10 @@ $\rightarrow$ \textit{Type})} \\
                               \\
          \smalltfield{e$_2$}{end($\Uparrow^2$e$_2$)} \\
          \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)}}}}  
-\end{ex}
+ \end{ex}
+
+ @@
+ 
 In the e$_3$-field the  `rule'-field is for a syntactic rule, that is,
 a function from a string of signs of a given type to a type.  The
 `fnd'-field is for a sign or string of signs so far found which match an initial
