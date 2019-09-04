@@ -2152,8 +2152,7 @@ $\rightarrow$ \textit{Type})} \\
          \smalltfield{e$_3$}{start($\Uparrow^3$e$_3$)$^{\frown}$end($\Uparrow^3$e$_3$)}}}}  
  \end{ex}
 
- @@
- 
+
 In the e$_3$-field the  `rule'-field is for a syntactic rule, that is,
 a function from a string of signs of a given type to a type.  The
 `fnd'-field is for a sign or string of signs so far found which match an initial
@@ -2202,6 +2201,7 @@ We can now go through similar procedures as we did for
 resources and a hypothesis event based on the only rule for
 strings beginning with a $V$ that we have in our resources. The result
 of these two steps is given in \nexteg{}.
+\begin{figure}
 \begin{ex} 
  \record{\tfield{e$_1$}{``Dudamel''} \\
         \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
@@ -2245,9 +2245,12 @@ $\rightarrow$ \textit{Type})} \\
          \smalltfield{e$_5$}{start($\Uparrow^2$e$_5$)}}$^{\frown}$\smallrecord{\smalltfield{e$_4$}{end($\Uparrow^2$e$_4$)}\\
                                                     \smalltfield{e$_5$}{end($\Uparrow^2$e$_5$)}\\
                                                   \smalltfield{e$_6$}{start($\Uparrow^3$e$_6$)$^{\frown}$end($\Uparrow^3$e$_6$)}}}}  
-\end{ex} 
+                                          \end{ex}
+                                        \end{figure}
+                                        
 Now we can add \textit{a} and \textit{conductor} in a similar way with
 the result shown in \nexteg{}.
+\begin{figure}
 \begin{ex} 
  \record{\tfield{e$_1$}{``Dudamel''} \\
         \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
@@ -2316,7 +2319,9 @@ $\rightarrow$ \textit{Type})} \\
                              \smalltfield{e$_{10}$}{start($\Uparrow^2$e$_{10}$)}\\
                              \smalltfield{e$_{11}$}{start($\Uparrow^2$e$_{11}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_{10}$}{end($\Uparrow^2$e$_{10}$)}\\
                                                                                            \smalltfield{e$_{11}$}{end($\Uparrow^2$e$_{11}$)}}}}  
-\end{ex}     
+                                                                                   \end{ex}
+                                                                                 \end{figure}
+                                                                                 
 Note that there is no possibility of adding a hypothesis event based
 on the utterance of \textit{conductor} given the resources we have
 since our small grammar does not include a phrase structure rule for
@@ -2333,6 +2338,7 @@ e$_9$.fnd$^{\frown}$e$_{11}$.  The start of this new \textit{NP}-event
 will be aligned with the start of e$_9$.fnd (that is, e$_8$).  The end
 of the new event is aligned with the end of e$_{11}$.  The resulting
 chart-type is given in \nexteg{}.
+\begin{figure}
 \begin{ex} 
  \record{\tfield{e$_1$}{``Dudamel''} \\
         \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
@@ -2404,7 +2410,9 @@ $\rightarrow$ \textit{Type})} \\
                              \smalltfield{e$_{11}$}{start($\Uparrow^2$e$_{11}$)}}$^{\frown}$\smallrecord{\smalltfield{e$_{10}$}{end($\Uparrow^2$e$_{10}$)}\\
                                                                                            \smalltfield{e$_{11}$}{end($\Uparrow^2$e$_{11}$)}\\
                                                                                            \smalltfield{e$_{12}$}{end($\Uparrow^2$e$_{12}$)}}}}  
-\end{ex}
+                                                                                   \end{ex}
+                                                                                 \end{figure}
+                                                                                 
 
 The event labelled `e$_{12}$' will be of type \textit{NP} and thus
 satisfy the requirement of e$_6$.  By carrying out the same procedure
@@ -2414,6 +2422,7 @@ allow us to add a new event (labelled `e$_{14}$') of type \textit{S}
 whose start is at the beginning of the string labelled `e' and whose
 end is at the end of that string.  The final chart type is given in
 \nexteg{}.
+\begin{figure}
 \begin{ex} 
  \record{\tfield{e$_1$}{``Dudamel''} \\
         \tfield{e$_2$}{Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$)
@@ -2491,37 +2500,64 @@ $\rightarrow$ \textit{Type})} \\
                                                                                            \smalltfield{e$_{12}$}{end($\Uparrow^2$e$_{12}$)}\\
                                                                                            \smalltfield{e$_{13}$}{end($\Uparrow^2$e$_{13}$)}\\
                                                                                            \smalltfield{e$_{14}$}{end($\Uparrow^2$e$_{14}$)}}}}  
-\end{ex}
+                                                                                   \end{ex}
+                                                                                 \end{figure}
+                                                                                \clearpage 
 
-We now need to turn our attention to the update functions that will
+We now need to turn our attention to the action rules that will
 achieve this building of the chart type.  We will introduce a field
 `current-utterance' into the field `shared' on the gameboard.  This
 field will be used for the incremental construction of a chart during
-the course of an utterance.  We will not at this point include a
-`move'-field here but reserve that for the field `latest-utterance',
-though one could, of course, consider an alternative with incremental hypotheses about
-moves that have or about to be made formed on the basis of the
-utterance so far.  Here, however, we will restrict ourselves to the
-mechanisms involved in the construction of the chart.  We will add a
-field to the gameboard `shared.current-utterance' which will be used
-to store the chart during the course of processing an utterance.  The
-new type \textit{InfoState} is given in \nexteg{}.
+the course of an utterance.  % We will not at this point include a
+% `move'-field here but reserve that for the field `latest-utterance',
+% though one could, of course, consider an alternative with incremental hypotheses about
+% moves that have or about to be made formed on the basis of the
+% utterance so far.  Here, however, we will restrict ourselves to the
+% mechanisms involved in the construction of the chart.  We will add a
+% field to the gameboard `shared.current-utterance' which will be used
+% to store the chart during the course of processing an utterance.
+The
+new type \textit{InfoState} (which is a modification of the
+\textit{InfoState} as defined in Chapter~\ref{ch:infex},
+example~(\ref{ex:InfoStatePrelim}), p.~\pageref{ex:InfoStatePrelim}) is given in \nexteg{}.
 \begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}} \\
-                                                                  \smalltfield{chart}{\textit{RecType}}
-                                                                \\
-                                                                  \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
-                               \smalltfield{current-utterance}{\smallrecord{\smalltfield{chart}{\textit{RecType}}}} \\                               
-                               \smalltfield{commitments}{\textit{RecType}}}}} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smalltfield{agenda}{[\textit{RecType}]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\smallrecord{\smalltfield{move}{\textit{Move}} \\
+%                                                                   \smalltfield{chart}{\textit{RecType}}
+%                                                                 \\
+%                                                                   \smalltfield{e}{m-interp(chart,move)}}$\vee$\textit{ERec}}\\
+%                                \smalltfield{current-utterance}{\smallrecord{\smalltfield{chart}{\textit{RecType}}}} \\                               
+%                                \smalltfield{commitments}{\textit{RecType}}}}} 
+\record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+        \tfield{current-utterance}{\textit{RecType}}\\
+        \tfield{commitments}{\textit{RecType}}}}} 
 \end{ex}
 The initial type \textit{InitInfoState} is now \nexteg{}.
 \begin{ex} 
-\smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}} \\
-        \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
-\smalltfield{current-utterance}{\smallrecord{\smallmfield{chart}{\textit{Rec}}{\textit{RecType}}}} \\
-                               \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
-\end{ex} 
+% \smallrecord{\smalltfield{private}{\smallrecord{\smallmfield{agenda}{[]}{[\textit{RecType}]}}} \\
+%         \smalltfield{shared}{\smallrecord{\smalltfield{latest-utterance}{\textit{ERec}}\\
+% \smalltfield{current-utterance}{\smallrecord{\smallmfield{chart}{\textit{Rec}}{\textit{RecType}}}} \\
+% \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+
+  \record{
+    \tfield{private}{
+      \record{
+        \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
+        \mfield{current-utterance}{\textit{ERec}}\textit{RecType}\\
+        \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}
+                         
+                       \end{ex}
+
+                     @@
 
 We first address update functions for integrating lexical events into
 the chart.  We introduce update functions defined by
