@@ -2557,10 +2557,57 @@ The initial type \textit{InitInfoState} is now \nexteg{}.
                          
                        \end{ex}
 
-                     @@
+We first characterize an update function, f$_{\textsc{IntegLex}}$, and
+action rule, \textsc{IntegLex}, for integrating lexical events into
+the chart.  In order to do this we will need to introduce two new
+technical notions.  First we will need to find the maximum $i$ such
+`e$_i$' is among the labels in the current chart type, so that we can
+make sure that what we add to the chart type will have the label
+`e$_{i+1}$'.  If $X$ is a labelled set, we say that $\mathrm{max}_\ell(X)$ is
+the number defined in \nexteg{}.
+\begin{ex} 
+$\mathrm{max}(\{i\mid\ell_i\in\mathrm{labels}(X)\})$ 
+\end{ex} 
+For convenience we abbreviate \nexteg{a} as \nexteg{b}, where
+`$\mathrm{incr}$' stands for ``increment''.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\mathrm{max}_\ell(X)+1$ 
+ 
+\item $\mathrm{incr}_\ell(X)$ 
+ 
+\end{subex} 
+   
+\end{ex} 
 
-We first address update functions for integrating lexical events into
-the chart.  We introduce update functions defined by
+Secondly, we introduce an operation of \textit{concatenative merge},
+`\d{$\wedge$}$_{\text{concat}}$', which is exactly like ordinary merge
+except in the case of two string types where $T_1$
+\d{$\wedge$}$_{\text{concat}}$ $T_2$ is $T_1^\frown T_2$.
+
+We can now define `f$_{\textsc{IntegLex}}$' as \nexteg{a} and
+`\textsc{IntegLex}' as \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  $\lambda T_{\text{chart}}$:\textit{RecType}\\
+  \hspace*{1em}$\lambda T_{\text{phon}}$:\textit{RecType} . \\
+  \hspace*{2em} $T_{\text{chart}}$ \d{$\wedge$}$_{\text{concat}}$
+  \smallrecord{
+    \smalltfield{e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$}{$T_{\text{phon}}$}\\
+    \smalltfield{e}{\smallrecord{
+        \smalltfield{e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$}{start($\Uparrow^2$e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$)}}$^\frown$\smallrecord{
+        \smalltfield{e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$}{end($\Uparrow^2$e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$)}}}}
+ 
+\item  @@
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
+We introduce update functions defined by
 \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
 $T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
 assigns to the
