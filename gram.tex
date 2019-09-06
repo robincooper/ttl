@@ -2600,64 +2600,79 @@ We can now define `f$_{\textsc{IntegLex}}$' as \nexteg{a} and
         \smalltfield{e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$}{start($\Uparrow^2$e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$)}}$^\frown$\smallrecord{
         \smalltfield{e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$}{end($\Uparrow^2$e$_{\text{incr}_{\text{e}}(T_{\text{chart}})}$)}}}}
  
-\item  @@
+\item 
+  \begin{prooftree}
+    \hypo{\text{Lex}(T_{\text{phon}}, T_{\text{sign}})
+      \text{ resource}_A}
+    \hypo{s_{i,A}:_A T_{\text{infstate}}}
+    \hypo{u^*:_A T_{\text{phon}}}
+    \infer[no rule]3{T_{\text{infstate}}\sqsubseteq\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{current-utterance}{$T_{\text{chart}}$}}}}}}
+    \infer[enth]1{s_{i+1,A}:_A T_{\text{infstate}}\text{
+        \fbox{\d{$\wedge$}} }
+      \text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{current-utterance}{f$_{\textsc{IntegLex}}$($T_{\text{chart}}$,
+                $T_{\text{phon}}$)}}}}}}
+    \end{prooftree}
  
 \end{subex} 
    
 \end{ex} 
   
 
-We introduce update functions defined by
-\textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
-$T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
-assigns to the
-phonological event perceived and $T_{\mathrm{chart}}$ is the type the
-agent assigns to the current chart.  This is governed by the clauses
-in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
+% We introduce update functions defined by
+% \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
+% $T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
+% assigns to the
+% phonological event perceived and $T_{\mathrm{chart}}$ is the type the
+% agent assigns to the current chart.  This is governed by the clauses
+% in \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item If $T_{\mathrm{phon}}$ is a lexical phonological resource and
-  $T_{\mathrm{chart}}$ is \textit{Rec}, then
-  \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
-  $T_{\mathrm{chart}}$) is
+% \item If $T_{\mathrm{phon}}$ is a lexical phonological resource and
+%   $T_{\mathrm{chart}}$ is \textit{Rec}, then
+%   \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
+%   $T_{\mathrm{chart}}$) is
 
-$\lambda
-r$:\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
-\\
-\hspace*{1em} $\lambda u$:$T_{\mathrm{phon}}$ . \\
-\hspace*{2em}
-\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_1$}{$T_{\mathrm{phon}}$}\\
-                                                                                                                        \smalltfield{e}{\smallrecord{\smalltfield{e$_1$}{start(e$_1$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end(e$_1$)}}}}}}}}}}
+% $\lambda
+% r$:\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
+% \\
+% \hspace*{1em} $\lambda u$:$T_{\mathrm{phon}}$ . \\
+% \hspace*{2em}
+% \smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_1$}{$T_{\mathrm{phon}}$}\\
+%                                                                                                                         \smalltfield{e}{\smallrecord{\smalltfield{e$_1$}{start(e$_1$)}}$^{\frown}$\smallrecord{\smalltfield{e$_1$}{end(e$_1$)}}}}}}}}}}
 
 
  
-\item If $T_{\mathrm{phon}}$ is a lexical phonological resource,
-  $T_{\mathrm{chart}}$ is a record type such that `e$_n$' is the maximal
-  distinguished label `e$_i$' in $T_{\mathrm{chart}}$ and
-  $T_{\mathrm{chart}}$ is
-  $T_1$\d{$\wedge$}\smallrecord{\smalltfield{e}{${T_2}^{\frown}T_3$}}
-  where $T_1$ is a record type, $T_2$ is a string type and
-  $T_3\sqsubseteq$ \smallrecord{\smalltfield{e$_n$}{end(e$_n$)}}, \\
-then
-  \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
-  $T_{\mathrm{chart}}$) is
+% \item If $T_{\mathrm{phon}}$ is a lexical phonological resource,
+%   $T_{\mathrm{chart}}$ is a record type such that `e$_n$' is the maximal
+%   distinguished label `e$_i$' in $T_{\mathrm{chart}}$ and
+%   $T_{\mathrm{chart}}$ is
+%   $T_1$\d{$\wedge$}\smallrecord{\smalltfield{e}{${T_2}^{\frown}T_3$}}
+%   where $T_1$ is a record type, $T_2$ is a string type and
+%   $T_3\sqsubseteq$ \smallrecord{\smalltfield{e$_n$}{end(e$_n$)}}, \\
+% then
+%   \textbf{IntegrateLexicalEvent}($T_{\mathrm{phon}}$,
+%   $T_{\mathrm{chart}}$) is
 
-  $\lambda
-r$:\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
-\\
-\hspace*{1em} $\lambda u$:$T_{\mathrm{phon}}$ . \\
-\hspace*{2em}
-\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_{n+1}$}{$T_{\mathrm{phon}}$}\\
-                                                                                                                        \smalltfield{e}{${T_2}^{\frown}$($T_3$
-                                                                                                                          \d{$\wedge$}
-\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$\\ \hspace*{1em}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}}}}}}}}}}
+%   $\lambda
+% r$:\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
+% \\
+% \hspace*{1em} $\lambda u$:$T_{\mathrm{phon}}$ . \\
+% \hspace*{2em}
+% \smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_{n+1}$}{$T_{\mathrm{phon}}$}\\
+%                                                                                                                         \smalltfield{e}{${T_2}^{\frown}$($T_3$
+%                                                                                                                           \d{$\wedge$}
+% \smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$\\ \hspace*{1em}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}}}}}}}}}}
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-The licensing condition associated with chart update functions is the
-same as for other update functions (see Appendix~\ref{app:updatefuns}).
+% \end{ex} 
+% The licensing condition associated with chart update functions is the
+% same as for other update functions (see Appendix~\ref{app:updatefuns}).
 
 We now need update rules that will add signs to the chart which are
 derived from the lexical resources for signs associated with
