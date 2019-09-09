@@ -2674,141 +2674,182 @@ We can now define `f$_{\textsc{IntegLex}}$' as \nexteg{a} and
 % The licensing condition associated with chart update functions is the
 % same as for other update functions (see Appendix~\ref{app:updatefuns}).
 
-We now need update rules that will add signs to the chart which are
+We now need action rules that will add signs to the chart which are
 derived from the lexical resources for signs associated with
-phonological types.  For the lexical resources associated with this
-chapter in Appendix~\ref{app:lexeng} we will define the notion of a
-resource lexical sign type based on a phonological type as in
-\nexteg{}.
-\begin{ex} 
-$T_{\mathrm{lex}}$ is a \textit{resource lexical sign type based on
-  phonological type $T_{\mathrm{phon}}$ according to a
-  collection of resources $R$} just in case $T_{\mathrm{lex}}$ is in
-$R$ and is identical with either
-Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$, $a$), for some
-$a$:\textit{Ind},  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
-$p$), for some predicate $p$,
-Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$) or Lex$_{\mathrm{be}}$($T_{\mathrm{phon}}$)
+phonological types.  % For the lexical resources associated with this
+% chapter in Appendix~\ref{app:lexeng} we will define the notion of a
+% resource lexical sign type based on a phonological type as in
+% \nexteg{}.
+% \begin{ex} 
+% $T_{\mathrm{lex}}$ is a \textit{resource lexical sign type based on
+%   phonological type $T_{\mathrm{phon}}$ according to a
+%   collection of resources $R$} just in case $T_{\mathrm{lex}}$ is in
+% $R$ and is identical with either
+% Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$, $a$), for some
+% $a$:\textit{Ind},  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+% $p$), for some predicate $p$,
+% Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$) or Lex$_{\mathrm{be}}$($T_{\mathrm{phon}}$)
+% \end{ex} 
+% We introduce update functions for integrating such lexical resources
+% into the chart.  These update functions are defined by
+% \textbf{IntegrateLexicalResources}($T_{\mathrm{phon}}$,
+% $T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
+% assigns to the phonological event perceived and $T_{\mathrm{chart}}$
+% is the type the agent assigns to the current chart.  This is governed
+% by the clause in \nexteg{}.
+% \begin{ex} 
+% If 
+% \begin{enumerate}
+% \item $T_{\mathrm{phon}}$ is a resource phonological type
+% \item $T_{\mathrm{event}}$ is either
+% ${T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ or
+% ${T_{\mathrm{evpref}}}^{\frown}{T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ 
+% \hspace*{1em}(where $T_{\mathrm{start}}\sqsubseteq$
+% \smallrecord{\smalltfield{e$_k$}{start(e$_k$)}},
+% $T_{\mathrm{end}}\sqsubseteq$
+% \smallrecord{\smalltfield{e$_k$}{end(e$_k$)}} and
+% $T_{\mathrm{evpref}}$, ``event prefix'', is a type)
+% \label{ex:integlexresTevent} 
+% \item $T_{\mathrm{chart}}\sqsubseteq$
+%   \smallrecord{\smalltfield{e$_k$}{$T_{\mathrm{phon}}$}\\
+%                \smalltfield{e}{$T_{\mathrm{event}}$}} whose maximal
+%              `e$_i$' label is `e$_n$' 
+% \label{ex:integlexresTchart}
+% \item $T_{\mathrm{sign}}$ is a resource lexical sign type based on
+% $T_{\mathrm{phon}}$ such that for no $j$
+% \begin{enumerate}
+% \item $T_{\mathrm{chart}}\sqsubseteq$
+% \smallrecord{\smalltfield{e$_j$}{$T_{\mathrm{sign}}$}},
+% \item   $T_{\mathrm{start}}\sqsubseteq$
+%   \smallrecord{\smalltfield{e$_j$}{start(e$_j$)}} and 
+% \item   $T_{\mathrm{end}}\sqsubseteq$
+%   \smallrecord{\smalltfield{e$_j$}{end(e$_j$)}} 
+% \end{enumerate}
+% \label{ex:integlexresTsign}
+% \end{enumerate}
+% then \textbf{IntegrateLexicalResources}($T_{\mathrm{phon}}$,
+% $T_{\mathrm{chart}}$) is 
+
+% \medskip
+
+% $\lambda
+% r:$\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
+% . \\
+% \hspace*{1em}\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_{n+1}$}{$T_{\mathrm{sign}}$}\\
+%                                                                                                                                      \smalltfield{e}{$T_{\mathrm{newevent}}$}}}}}}}}
+
+% \medskip                                                                                                                       
+
+% where $T_{\mathrm{newevent}}$ is 
+% \begin{enumerate}
+% \item []\textbf{either} 
+% ($T_{\mathrm{start}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}})
+
+% \item []\textbf{or} 
+% ${T_{\mathrm{evpref}}}^{\frown}$($T_{\mathrm{start}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}})
+% \end{enumerate}
+% depending on whether $T_{\mathrm{event}}$ is ${T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ or
+% ${T_{\mathrm{evpref}}}^{\frown}{T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ 
+% \label{ex:integlexres}
+% \end{ex} 
+% There are several complexities in \preveg{} which need some
+% explanation.  Firstly, notice that the update functions generated by
+% \textbf{IntegrateLexicalResources} are of the form \nexteg{}.
+% \begin{ex} 
+% $\lambda r$:$T_1$ . $T_2$ 
+% \end{ex} 
+% That is, they are \textit{tacit} update functions which do not require
+% a second event argument.  They map directly from an information state
+% of a certain type to a type for the new information state.  An update
+% using this update function is thus not driven by an agent-external
+% event, merely by the state that the agent is currently in. An
+% important issue in the design of tacit update functions is to develop
+% mechanisms to prevent them from applying indefinitely many times
+% adding the same information repeatedly and getting the agent carrying
+% out the updates into a infinite loop.  We will discuss how this has
+% been avoided here below.
+
+% Condition~\ref{ex:integlexresTevent} in (\ref{ex:integlexres}) allows
+% the `e'-field in the current chart to contain either a concatenation
+% of just two events or to be a string of events ending in two events.
+% The two final events of the event string are required to include the
+% starting and ending respectively of some particular event labelled by
+% `e$_k$' (for some natural number $k$).  Note that other things can
+% also be going on in these two final events as indicated by the use of
+% subtyping to characterize $T_{\mathrm{start}}$ and $T_{\mathrm{end}}$
+% here.
+
+% Condition~\ref{ex:integlexresTchart} in (\ref{ex:integlexres})
+% requires that the event labelled `e$_k$' in the current information
+% state is of the phonological type which we are going to use to construct
+% the sign which we are going to add to the chart.  We might have required
+% `e$_k$' to be the maximal `e$_i$', that is, we might have required
+% that the field labelled `e$_k$' was the last to have been added.  This
+% would have been one way of avoiding an infinite loop, since once we
+% have added the new field with the sign type, `e$_k$' would no longer
+% be maximal and \textbf{IntegrateLexicalResources} would not become
+% applicable again until a further lexical event was entered into the
+% chart.  This would in fact have worked given the restricted collection
+% of resources we are considering in this chapter, since they only allow
+% for one sign type to be associated with any phonological type
+% corresponding to a word.  In general, this will not be the case since
+% we want to allow for ambiguous words like \textit{bank} and
+% \textit{can} to be associated with different sign types and we want to
+% allow for all of the alternative sign types to be added to the same
+% chart.  For this reason we want \textbf{IntegrateLexicalResources} to
+% apply even if `e$_k$' is not maximal.
+
+% As condition~\ref{ex:integlexresTchart} does not prevent looping we
+% introduce a mechanism that will prevent it in
+% condition~\ref{ex:integlexresTsign} in (\ref{ex:integlexres})
+% instead.  This introduces a sign type based on the relevant
+% phonological type which is going to be used for the update.  But it
+% requires that the sign type has not already be introduced on the chart
+% with the start and end of the sign at the end of the event string we
+% are considering.  (We do not wish to prevent it having be associated
+% with a previous part of the event, of course, since the same word can
+% occur more than once in an utterance.)
+In \nexteg{} we specify an action rule \textsc{IntegPropName} for
+integrating proper names into the chart.
+\begin{ex}
+  \hspace*{-2em}
+  \begin{prooftree}
+    \hypo{\text{Lex}_{\text{PropName}}(T_{\text{Phon}},a)\text{
+        resource}_A}
+    \infer[no rule]1{s_{i,A}:_A T_{\text{infstate}}}
+    \infer[no rule]1{s_{i,A}.\text{shared}.\text{current-utterance}:_A
+      T_{\text{chart}}}
+    \hypo{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
+          \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{t$_k$}{start($\Uparrow^2$e$_j$)}\\
+              \smalltfield{t$_l$}{end($\Uparrow^2$e$_j$)}}}}}}
+    \infer[no rule]1{\hspace*{10em}}
+    \infer[enth]2[\begin{minipage}{.3\textwidth}\footnotesize$T_{\text{chart}}\not\sqsubseteq$\\ \smallrecord{
+      \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+      \smalltfield{e$_n$}{Lex$_{\text{PropName}}$($T_{\text{phon}}$,
+        $a$) \d{$\wedge$}\\ \hspace*{1em}\smallrecord{
+          \smalltfield{s-event}{\smallrecord{
+              \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}}\\
+    for any $n$\end{minipage}]{s_{i+1,A}:_A T_{\text{infstate}}
+      \text{ \fbox{\d{$\wedge$}} } \text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\\
+                \smallrecord{
+                  \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+                  \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{Lex$_{\text{PropName}}$($T_{\text{phon}}$,
+                    $a$) \d{$\wedge$}\\ \hspace*{3em}\smallrecord{
+                      \smalltfield{s-event}{\smallrecord{
+                          \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}\\
+                  \smalltfield{e}{\smallrecord{
+                      \smalltfield{t$_k$}{start($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}\\
+                      \smalltfield{t$_l$}{end($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}}}}}}}}
+    \end{prooftree}
 \end{ex} 
-We introduce update functions for integrating such lexical resources
-into the chart.  These update functions are defined by
-\textbf{IntegrateLexicalResources}($T_{\mathrm{phon}}$,
-$T_{\mathrm{chart}}$) where $T_{\mathrm{phon}}$ is the type the agent
-assigns to the phonological event perceived and $T_{\mathrm{chart}}$
-is the type the agent assigns to the current chart.  This is governed
-by the clause in \nexteg{}.
-\begin{ex} 
-If 
-\begin{enumerate}
-\item $T_{\mathrm{phon}}$ is a resource phonological type
-\item $T_{\mathrm{event}}$ is either
-${T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ or
-${T_{\mathrm{evpref}}}^{\frown}{T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ 
-\hspace*{1em}(where $T_{\mathrm{start}}\sqsubseteq$
-\smallrecord{\smalltfield{e$_k$}{start(e$_k$)}},
-$T_{\mathrm{end}}\sqsubseteq$
-\smallrecord{\smalltfield{e$_k$}{end(e$_k$)}} and
-$T_{\mathrm{evpref}}$, ``event prefix'', is a type)
-\label{ex:integlexresTevent} 
-\item $T_{\mathrm{chart}}\sqsubseteq$
-  \smallrecord{\smalltfield{e$_k$}{$T_{\mathrm{phon}}$}\\
-               \smalltfield{e}{$T_{\mathrm{event}}$}} whose maximal
-             `e$_i$' label is `e$_n$' 
-\label{ex:integlexresTchart}
-\item $T_{\mathrm{sign}}$ is a resource lexical sign type based on
-$T_{\mathrm{phon}}$ such that for no $j$
-\begin{enumerate}
-\item $T_{\mathrm{chart}}\sqsubseteq$
-\smallrecord{\smalltfield{e$_j$}{$T_{\mathrm{sign}}$}},
-\item   $T_{\mathrm{start}}\sqsubseteq$
-  \smallrecord{\smalltfield{e$_j$}{start(e$_j$)}} and 
-\item   $T_{\mathrm{end}}\sqsubseteq$
-  \smallrecord{\smalltfield{e$_j$}{end(e$_j$)}} 
-\end{enumerate}
-\label{ex:integlexresTsign}
-\end{enumerate}
-then \textbf{IntegrateLexicalResources}($T_{\mathrm{phon}}$,
-$T_{\mathrm{chart}}$) is 
 
-\medskip
+@@
 
-$\lambda
-r:$\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{$T_{\mathrm{chart}}$}}}}}}
-. \\
-\hspace*{1em}\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{current-move}{\smallrecord{\smalltfield{chart}{\smallrecord{\smalltfield{e$_{n+1}$}{$T_{\mathrm{sign}}$}\\
-                                                                                                                                     \smalltfield{e}{$T_{\mathrm{newevent}}$}}}}}}}}
-
-\medskip                                                                                                                       
-
-where $T_{\mathrm{newevent}}$ is 
-\begin{enumerate}
-\item []\textbf{either} 
-($T_{\mathrm{start}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}})
-
-\item []\textbf{or} 
-${T_{\mathrm{evpref}}}^{\frown}$($T_{\mathrm{start}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start(e$_{n+1}$)}})$^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{end(e$_{n+1}$)}})
-\end{enumerate}
-depending on whether $T_{\mathrm{event}}$ is ${T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ or
-${T_{\mathrm{evpref}}}^{\frown}{T_{\mathrm{start}}}^{\frown}T_{\mathrm{end}}$ 
-\label{ex:integlexres}
-\end{ex} 
-There are several complexities in \preveg{} which need some
-explanation.  Firstly, notice that the update functions generated by
-\textbf{IntegrateLexicalResources} are of the form \nexteg{}.
-\begin{ex} 
-$\lambda r$:$T_1$ . $T_2$ 
-\end{ex} 
-That is, they are \textit{tacit} update functions which do not require
-a second event argument.  They map directly from an information state
-of a certain type to a type for the new information state.  An update
-using this update function is thus not driven by an agent-external
-event, merely by the state that the agent is currently in. An
-important issue in the design of tacit update functions is to develop
-mechanisms to prevent them from applying indefinitely many times
-adding the same information repeatedly and getting the agent carrying
-out the updates into a infinite loop.  We will discuss how this has
-been avoided here below.
-
-Condition~\ref{ex:integlexresTevent} in (\ref{ex:integlexres}) allows
-the `e'-field in the current chart to contain either a concatenation
-of just two events or to be a string of events ending in two events.
-The two final events of the event string are required to include the
-starting and ending respectively of some particular event labelled by
-`e$_k$' (for some natural number $k$).  Note that other things can
-also be going on in these two final events as indicated by the use of
-subtyping to characterize $T_{\mathrm{start}}$ and $T_{\mathrm{end}}$
-here.
-
-Condition~\ref{ex:integlexresTchart} in (\ref{ex:integlexres})
-requires that the event labelled `e$_k$' in the current information
-state is of the phonological type which we are going to use to construct
-the sign which we are going to add to the chart.  We might have required
-`e$_k$' to be the maximal `e$_i$', that is, we might have required
-that the field labelled `e$_k$' was the last to have been added.  This
-would have been one way of avoiding an infinite loop, since once we
-have added the new field with the sign type, `e$_k$' would no longer
-be maximal and \textbf{IntegrateLexicalResources} would not become
-applicable again until a further lexical event was entered into the
-chart.  This would in fact have worked given the restricted collection
-of resources we are considering in this chapter, since they only allow
-for one sign type to be associated with any phonological type
-corresponding to a word.  In general, this will not be the case since
-we want to allow for ambiguous words like \textit{bank} and
-\textit{can} to be associated with different sign types and we want to
-allow for all of the alternative sign types to be added to the same
-chart.  For this reason we want \textbf{IntegrateLexicalResources} to
-apply even if `e$_k$' is not maximal.
-
-As condition~\ref{ex:integlexresTchart} does not prevent looping we
-introduce a mechanism that will prevent it in
-condition~\ref{ex:integlexresTsign} in (\ref{ex:integlexres})
-instead.  This introduces a sign type based on the relevant
-phonological type which is going to be used for the update.  But it
-requires that the sign type has not already be introduced on the chart
-with the start and end of the sign at the end of the event string we
-are considering.  (We do not wish to prevent it having be associated
-with a previous part of the event, of course, since the same word can
-occur more than once in an utterance.)
+For the remaining lexical resources
 
 After integrating lexical sign types into the chart, the next step is to
 integrate rules from our resources that apply to strings which could
