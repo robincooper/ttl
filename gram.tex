@@ -2822,9 +2822,11 @@ integrating proper names into the chart.
     \hypo{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
           \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
           \smalltfield{e}{\smallrecord{
-              \smalltfield{t$_k$}{start($\Uparrow^2$e$_j$)}\\
-              \smalltfield{t$_l$}{end($\Uparrow^2$e$_j$)}}}}}}
-    \infer[no rule]1{\hspace*{10em}}
+              \smalltfield{t$_k$}{\smallrecord{
+                  \smalltfield{e$_j$}{start($\Uparrow^2$e$_j$)}}}\\
+              \smalltfield{t$_l$}{\smallrecord{
+                  \smalltfield{e$_j$}{end($\Uparrow^2$e$_j$)}}}}}}}}
+    \infer[no rule]1{\hspace*{13em}}
     \infer[enth]2[\begin{minipage}{.3\textwidth}\footnotesize$T_{\text{chart}}\not\sqsubseteq$\\ \smallrecord{
       \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
       \smalltfield{e$_n$}{Lex$_{\text{PropName}}$($T_{\text{phon}}$,
@@ -2842,14 +2844,132 @@ integrating proper names into the chart.
                       \smalltfield{s-event}{\smallrecord{
                           \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}\\
                   \smalltfield{e}{\smallrecord{
-                      \smalltfield{t$_k$}{start($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}\\
-                      \smalltfield{t$_l$}{end($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}}}}}}}}
+                      \smalltfield{t$_k$}{\smallrecord{
+                          \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{start($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}\\
+                      \smalltfield{t$_l$}{\smallrecord{
+                          \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{end($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}}}}}}}}}}
     \end{prooftree}
 \end{ex} 
 
-@@
 
-For the remaining lexical resources
+
+For common nouns we have a similar rule, \textsc{IntegCommonNoun}, as in \nexteg{}.
+\begin{ex}
+  \hspace*{-2em}
+  \begin{prooftree}
+    \hypo{\text{Lex}_{\text{CommonNoun}}(T_{\text{Phon}},p)\text{
+        resource}_A}
+    \infer[no rule]1{s_{i,A}:_A T_{\text{infstate}}}
+    \infer[no rule]1{s_{i,A}.\text{shared}.\text{current-utterance}:_A
+      T_{\text{chart}}}
+    \hypo{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
+          \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{t$_k$}{\smallrecord{
+                  \smalltfield{e$_j$}{start($\Uparrow^2$e$_j$)}}}\\
+              \smalltfield{t$_l$}{\smallrecord{
+                  \smalltfield{e$_j$}{end($\Uparrow^2$e$_j$)}}}}}}}}
+    \infer[no rule]1{\hspace*{13em}}
+    \infer[enth]2[\begin{minipage}{.3\textwidth}\footnotesize$T_{\text{chart}}\not\sqsubseteq$\\ \smallrecord{
+      \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+      \smalltfield{e$_n$}{Lex$_{\text{CommonNoun}}$($T_{\text{phon}}$,
+        $p$) \d{$\wedge$}\\ \hspace*{1em}\smallrecord{
+          \smalltfield{s-event}{\smallrecord{
+              \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}}\\
+    for any $n$\end{minipage}]{s_{i+1,A}:_A T_{\text{infstate}}
+      \text{ \fbox{\d{$\wedge$}} } \text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\\
+                \smallrecord{
+                  \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+                  \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{Lex$_{\text{CommonNoun}}$($T_{\text{phon}}$,
+                    $p$) \d{$\wedge$}\\ \hspace*{3em}\smallrecord{
+                      \smalltfield{s-event}{\smallrecord{
+                          \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}\\
+                  \smalltfield{e}{\smallrecord{
+                      \smalltfield{t$_k$}{\smallrecord{
+                          \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{start($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}\\
+                      \smalltfield{t$_l$}{\smallrecord{
+                          \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{end($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}}}}}}}}}}
+    \end{prooftree}
+  \end{ex}
+Finally for indefinite articles we have \textsc{IntegIndefArt} given
+in \nexteg{}.
+\begin{ex}
+  \hspace*{-2em}
+  \begin{prooftree}
+    \hypo{\text{Lex}_{\text{IndefArt}}(T_{\text{Phon}})\text{
+        resource}_A}
+    \infer[no rule]1{s_{i,A}:_A T_{\text{infstate}}}
+    \infer[no rule]1{s_{i,A}.\text{shared}.\text{current-utterance}:_A
+      T_{\text{chart}}}
+    \hypo{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
+          \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{t$_k$}{\smallrecord{
+                  \smalltfield{e$_j$}{start($\Uparrow^2$e$_j$)}}}\\
+              \smalltfield{t$_l$}{\smallrecord{
+                  \smalltfield{e$_j$}{end($\Uparrow^2$e$_j$)}}}}}}}}
+    \infer[no rule]1{\hspace*{13em}}
+    \infer[enth]2[\begin{minipage}{.3\textwidth}\footnotesize$T_{\text{chart}}\not\sqsubseteq$\\ \smallrecord{
+      \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+      \smalltfield{e$_n$}{Lex$_{\text{IndefArt}}$($T_{\text{phon}}$) \d{$\wedge$}\\ \hspace*{1em}\smallrecord{
+          \smalltfield{s-event}{\smallrecord{
+              \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}}\\
+    for any $n$\end{minipage}]{s_{i+1,A}:_A T_{\text{infstate}}
+      \text{ \fbox{\d{$\wedge$}} } \text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\\
+                \smallrecord{
+                  \smalltfield{e$_j$}{$T_{\text{phon}}$}\\
+                  \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{Lex$_{\text{IndefArt}}$($T_{\text{phon}}$) \d{$\wedge$}\\ \hspace*{3em}\smallrecord{
+                      \smalltfield{s-event}{\smallrecord{
+                          \smallmfield{e}{$\Uparrow^2$e$_j$}{\textit{Phon}}}}}}\\
+                  \smalltfield{e}{\smallrecord{
+                      \smalltfield{t$_k$}{\smallrecord{
+                          \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{start($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}\\
+                      \smalltfield{t$_l$}{\smallrecord{
+                          \smalltfield{e$_{\text{incr}_e(T_{\text{chart}})}$}{end($\Uparrow^2$e$_{\text{incr}_e(T_{\text{chart}})}$)}}}}}}}}}}}}
+    \end{prooftree}
+\end{ex}
+These three rules are identical except for the different categories
+involved.  They are tacit action rules in that they do not require any
+external event such as an utterance in order for their premises (or
+preconditions) to be met.  This means that we have to be careful to
+avoid them being used repeatedly adding the same information over and
+over to the chart.  The side conditions one these rules are meant to
+check that the information that they will add is not already present
+on the chart.
+
+Recall that we use `t$_i$' where $i$ is a natural number as the
+distinguished labels in records that represent strings.  Thus the type
+\nexteg{} is the type of strings whose $k+1$th and $l+1$th positions
+are of type $T_1$ and $T_2$ respectively.
+\begin{ex} 
+  \record{
+    \tfield{t$_k$}{$T_1$}\\
+    \tfield{t$_l$}{$T_2$}}
+    
+\end{ex}
+Note that because we are modelling strings as records these types can
+be merged as required by these rules.  Thus the merge of \preveg{}
+with \nexteg{a} will be \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{
+    \tfield{t$_k$}{$T_1'$}\\
+    \tfield{t$_l$}{$T_2'$}} 
+ 
+\item \record{
+    \tfield{t$_k$}{$T_1$\d{$\wedge$}$T_1'$}\\
+    \tfield{t$_l$}{$T_2$\d{$\wedge$}$T_2'$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+@@
 
 After integrating lexical sign types into the chart, the next step is to
 integrate rules from our resources that apply to strings which could
