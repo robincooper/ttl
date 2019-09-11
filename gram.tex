@@ -2969,81 +2969,126 @@ with \nexteg{a} will be \nexteg{b}.
    
 \end{ex} 
   
-@@
+
 
 After integrating lexical sign types into the chart, the next step is to
 integrate rules from our resources that apply to strings which could
-begin with a lexical sign of this type.  We will use
-\textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$) to
-generate such update rules.  This is governed by the clause in
-\nexteg{}.
+begin with a lexical sign of this type.  We will use an action rule
+called \textsc{IntegRule} which integrates a syntactic rule of the
+kind we have discussed into the chart.  It is given in \nexteg{}.
 \begin{ex} 
-If
-\begin{enumerate}
-\item $T_{\mathrm{chart}}$ $\sqsubseteq$ 
-\smallrecord{\smalltfield{e$_k$}{$T_{\mathrm{sign}}$}\\
-             \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}T_{\mathrm{end}}$}}
+  \hspace*{-6em}
+\begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\text{infstate}}}
+    \infer[no rule]1{s_{i,A}.\text{shared}.\text{current-utterance}:_A
+      T_{\text{chart}}}
+    \infer[no rule]1{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
+          \tfield{e$_k$}{$T_{\text{sign}}$}\\
+          \tfield{e}{${T_{\text{evpref}}}^\frown T_{\text{end}}$}}}}
+    \infer[no
+    rule]1{\text{incr}_e(s_{i,A}.\text{shared}.\text{current-utterance})=n}
+    \infer[no rule]1{T_{\text{cat}}\in\{\textit{NP},\textit{VP},\ldots\}}
+    \infer[no rule]1{T_{\text{sign}}\sqsubseteq T_{\text{cat}}}
+    \infer[no rule]1{T_{\text{end}}\sqsubseteq\text{\smallrecord{
+          \tfield{e$_k$}{end(e$_k$)}}}}
+    \infer[no rule]1{f_{\text{rule}}\text{ resource$_A$}}
+    \infer[no
+    rule]1{f_{\text{rule}}:T_{\text{rule}}}
+    \infer[no rule]1{T_{\text{rule}}=(T_{\text{leftcorner}}^\frown T_{\text{rest}}\rightarrow\textit{Type})}
+    \infer[no rule]1{T_{\text{sign}}\sqsubseteq T_{\text{leftcorner}}}
+    \infer[enth]1[\tiny\begin{tabular}{l}$T_{\text{chart}}\not\sqsubseteq$\\\smallrecord{
+      \smallmfield{e$_l$}{$f_{\text{rule}}$}{$T_{\text{rule}}$}\\
+      \smalltfield{e}{${T_{\text{evpref}}}^\frown$\\\smallrecord{
+          \smalltfield{e$_1$}{start($\Uparrow^3$e$_l$)$^\frown$end($\Uparrow^3$e$_l$)}}}}
+        for any $l$\end{tabular}]
+        {\begin{array}{l}s_{i+1,A}:_A
+          T_{\text{infstate}}\\\text{\fbox{\d{$\wedge$}}\smallrecord{
+              \smalltfield{shared}{\smallrecord{
+\smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\smallrecord{
+                      \smalltfield{e$_n$}{\smallrecord{
+\smallmfield{rule}{$f_{\text{rule}}$}{$T_{\text{rule}}$}\\
+\smallmfield{fnd}{$s_{i,A}$.shared.current-utterance.e$_k$}{$T_{\text{sign}}$}\\
+                       \smallmfield{req}{$T_{\text{rest}}$}{\textit{Type}}}}\\
+\smalltfield{e}{${T_{\text{evpref}}}^\frown(T_{\text{end}}$\d{$\wedge$}\smallrecord{  \smalltfield{e$_n$}{start($\Uparrow^3$e$_n$)$^\frown$end($\Uparrow^3$e$_n$)}}$)$}}}}}}}\end{array}}
+\end{prooftree}
 
-where: 
-\begin{enumerate}
-
-\item [] $T_{\mathrm{sign}}$ $\sqsubseteq$ $T_{\mathrm{cat}}$
-($T_{\mathrm{cat}}$ is one of \textit{NP}, \textit{VP}, \ldots)
-
-\item [] $T_{\mathrm{end}}$ $\sqsubseteq$ 
- \smallrecord{\smalltfield{e$_k$}{end(e$_k$)}}
-\end{enumerate}
-
-
-\item `e$_i$' max in $T_{\mathrm{chart}}$ is `e$_n$'
-
-\item $f_{\mathrm{rule}} :
-  (({T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type})$
-  where $T_{\mathrm{sign}}\sqsubseteq T_1$
-
-\item there is no $l$ such that 
-\begin{enumerate}
-\item []$T_{\mathrm{chart}}$ $\sqsubseteq$ 
-\smallrecord{\smalltfield{e$_l$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{((${T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type}$)}}}
-  \\
-\smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}$\smallrecord{\smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)$^{\frown}$end($\Uparrow^3$e$_l$)}}}}
-\end{enumerate}
-\end{enumerate}
-
-then \textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$)
-is
-
-$\lambda r$:$T_{\mathrm{chart}}$ . \\
-\hspace*{1em}
-\smallrecord{\smallmfield{e$_k$}{$r$.e$_k$}{$T_{\mathrm{sign}}$}\\
-             \smalltfield{e$_{n+1}$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{$(({T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type})$}\\
-                                                 \smallmfield{fnd}{$\Uparrow$e$_k$}{\textit{Sign}}\\
-                                                 \smallmfield{req}{${T_2}^{\frown}\ldots^{\frown}T_m$}{\textit{Type}}\\
-                                                 \smalltfield{e}{required(req,rule)}}}\\
-             \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)$^{\frown}$end($\Uparrow^3$e$_{n+1}$)}})}}
-
+      
+    
 \end{ex}
 
-Condition~1 in \preveg{} identifies a category field in the chart
-whose event is the latest event in the event string which has been
-processed.  Condition~2 identifies the label of the latest addition to
-the chart so that it can be incremented for what is now going to be
-added.  Condition~3 identifies a rule whose ``left corner'' ($T_1$) is
-a supertype of the type in the category field and Condition~4 requires
-that this rule has not already been added to the chart and related to
-the current final event in the event string --- this in order to
-prevent an infinite loop.  The result of
-\mbox{\textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$)} is
-then a function which adds a new field to the chart which contains a
-record of the rule, what has so far been found matching the ``left
-corner'' of the rule (that is, the category field that has been
-identified by Condition~1), and what is still required in order for the
-rule to be fully satisfied (that is, that is the type of strings
-required by the rule minus the ``left corner'').  Finally, the new
-event is added as both starting and ending at the current end of the
-event string (that is, it does not extend the length of the event
-string, but the new event starts and ends simultaneously with the end
-of the event matching the ``left corner'' of the rule.\footnote{The fact that
+@@
+  
+% \textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$) to
+% generate such update rules.  This is governed by the clause in
+% \nexteg{}.
+% \begin{ex} 
+% If
+% \begin{enumerate}
+% \item $T_{\mathrm{chart}}$ $\sqsubseteq$ 
+% \smallrecord{\smalltfield{e$_k$}{$T_{\mathrm{sign}}$}\\
+%              \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}T_{\mathrm{end}}$}}
+
+% where: 
+% \begin{enumerate}
+
+% \item [] $T_{\mathrm{sign}}$ $\sqsubseteq$ $T_{\mathrm{cat}}$
+% ($T_{\mathrm{cat}}$ is one of \textit{NP}, \textit{VP}, \ldots)
+
+% \item [] $T_{\mathrm{end}}$ $\sqsubseteq$ 
+%  \smallrecord{\smalltfield{e$_k$}{end(e$_k$)}}
+% \end{enumerate}
+
+
+% \item `e$_i$' max in $T_{\mathrm{chart}}$ is `e$_n$'
+
+% \item $f_{\mathrm{rule}} :
+%   (({T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type})$
+%   where $T_{\mathrm{sign}}\sqsubseteq T_1$
+
+% \item there is no $l$ such that 
+% \begin{enumerate}
+% \item []$T_{\mathrm{chart}}$ $\sqsubseteq$ 
+% \smallrecord{\smalltfield{e$_l$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{((${T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type}$)}}}
+%   \\
+% \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}$\smallrecord{\smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)$^{\frown}$end($\Uparrow^3$e$_l$)}}}}
+% \end{enumerate}
+% \end{enumerate}
+
+% then \textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$)
+% is
+
+% $\lambda r$:$T_{\mathrm{chart}}$ . \\
+% \hspace*{1em}
+% \smallrecord{\smallmfield{e$_k$}{$r$.e$_k$}{$T_{\mathrm{sign}}$}\\
+%              \smalltfield{e$_{n+1}$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{$(({T_1}^{\frown}{T_2}^{\frown}\ldots^{\frown}T_m)\rightarrow\textit{Type})$}\\
+%                                                  \smallmfield{fnd}{$\Uparrow$e$_k$}{\textit{Sign}}\\
+%                                                  \smallmfield{req}{${T_2}^{\frown}\ldots^{\frown}T_m$}{\textit{Type}}\\
+%                                                  \smalltfield{e}{required(req,rule)}}}\\
+%              \smalltfield{e}{${T_{\mathrm{evpref}}}^{\frown}$($T_{\mathrm{end}}$\d{$\wedge$}\smallrecord{\smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)$^{\frown}$end($\Uparrow^3$e$_{n+1}$)}})}}
+
+% \end{ex}
+
+% Condition~1 in \preveg{} identifies a category field in the chart
+% whose event is the latest event in the event string which has been
+% processed.  Condition~2 identifies the label of the latest addition to
+% the chart so that it can be incremented for what is now going to be
+% added.  Condition~3 identifies a rule whose ``left corner'' ($T_1$) is
+% a supertype of the type in the category field and Condition~4 requires
+% that this rule has not already been added to the chart and related to
+% the current final event in the event string --- this in order to
+% prevent an infinite loop.  The result of
+% \mbox{\textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$)} is
+% then a function which adds a new field to the chart which contains a
+% record of the rule, what has so far been found matching the ``left
+% corner'' of the rule (that is, the category field that has been
+% identified by Condition~1), and what is still required in order for the
+% rule to be fully satisfied (that is, that is the type of strings
+% required by the rule minus the ``left corner'').  Finally, the new
+% event is added as both starting and ending at the current end of the
+% event string (that is, it does not extend the length of the event
+% string, but the new event starts and ends simultaneously with the end
+% of the event matching the ``left corner'' of the rule.
+\footnote{The fact that
 the new event has a non-empty requirement for future events means that
 it corresponds to what is known in the chart parsing literature as an
 active edge and the new event encodes a dotted rule.}
