@@ -2980,29 +2980,27 @@ kind we have discussed into the chart.  It is given in \nexteg{}.
   \hspace*{-6em}
 \begin{prooftree}
     \hypo{s_{i,A}:_A T_{\text{infstate}}}
-    \infer[no rule]1{s_{i,A}.\text{shared}.\text{current-utterance}:_A
+    \hypo{s_{i,A}.\text{shared}.\text{current-utterance}:_A
       T_{\text{chart}}}
-    \infer[no rule]1{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
+    \infer[no rule]2{T_{\text{chart}}\sqsubseteq\text{\smallrecord{
           \tfield{e$_k$}{$T_{\text{sign}}$}\\
-          \tfield{e}{${T_{\text{evpref}}}^\frown T_{\text{end}}$}}}}
-    \infer[no
-    rule]1{\text{incr}_e(s_{i,A}.\text{shared}.\text{current-utterance})=n}
-    \infer[no rule]1{T_{\text{cat}}\in\{\textit{NP},\textit{VP},\ldots\}}
-    \infer[no rule]1{T_{\text{sign}}\sqsubseteq T_{\text{cat}}}
-    \infer[no rule]1{T_{\text{end}}\sqsubseteq\text{\smallrecord{
+          \tfield{e}{${T_{\text{evpref}}}^\frown T_{\text{end}}$}}}
+    \hspace*{2em}\text{incr}_e(s_{i,A}.\text{shared}.\text{current-utterance})=n}
+    \infer[no rule]1{T_{\text{cat}}\in\{\textit{NP},\textit{VP},\ldots\}
+    \hspace*{2em}T_{\text{sign}}\sqsubseteq T_{\text{cat}}
+    \hspace*{2em}T_{\text{end}}\sqsubseteq\text{\smallrecord{
           \tfield{e$_k$}{end(e$_k$)}}}}
-    \infer[no rule]1{f_{\text{rule}}\text{ resource$_A$}}
-    \infer[no
-    rule]1{f_{\text{rule}}:T_{\text{rule}}}
-    \infer[no rule]1{T_{\text{rule}}=(T_{\text{leftcorner}}^\frown T_{\text{rest}}\rightarrow\textit{Type})}
-    \infer[no rule]1{T_{\text{sign}}\sqsubseteq T_{\text{leftcorner}}}
+    \infer[no rule]1{f_{\text{rule}}\text{ resource$_A$}
+    \hspace*{2em}f_{\text{rule}}:T_{\text{rule}}}
+    \infer[no rule]1{T_{\text{rule}}=({T_{\text{leftcorner}}}^\frown T_{\text{rest}}\rightarrow\textit{Type})
+    \hspace*{2em}T_{\text{sign}}\sqsubseteq T_{\text{leftcorner}}}
     \infer[enth]1[\tiny\begin{tabular}{l}$T_{\text{chart}}\not\sqsubseteq$\\\smallrecord{
       \smallmfield{e$_l$}{$f_{\text{rule}}$}{$T_{\text{rule}}$}\\
-      \smalltfield{e}{${T_{\text{evpref}}}^\frown$\\\smallrecord{
-          \smalltfield{e$_1$}{start($\Uparrow^3$e$_l$)$^\frown$end($\Uparrow^3$e$_l$)}}}}
+      \smalltfield{e}{${T_{\text{evpref}}}^\frown$\\\hspace*{.5em}\smallrecord{
+          \smalltfield{e$_1$}{start($\Uparrow^3$e$_l$)$^\frown$end($\Uparrow^3$e$_l$)}}}}\\
         for any $l$\end{tabular}]
-        {\begin{array}{l}s_{i+1,A}:_A
-          T_{\text{infstate}}\\\text{\fbox{\d{$\wedge$}}\smallrecord{
+        {\begin{array}{l} s_{i+1,A}:_A
+          T_{\text{infstate}}\text{\fbox{\d{$\wedge$}}}\\\hspace*{1em}\text{\small\smallrecord{
               \smalltfield{shared}{\smallrecord{
 \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\smallrecord{
                       \smalltfield{e$_n$}{\smallrecord{
@@ -3016,7 +3014,7 @@ kind we have discussed into the chart.  It is given in \nexteg{}.
     
 \end{ex}
 
-@@
+
   
 % \textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$) to
 % generate such update rules.  This is governed by the clause in
@@ -3088,18 +3086,23 @@ kind we have discussed into the chart.  It is given in \nexteg{}.
 % event string (that is, it does not extend the length of the event
 % string, but the new event starts and ends simultaneously with the end
 % of the event matching the ``left corner'' of the rule.
-\footnote{The fact that
+The action rule in \preveg{} adds a rule to the chart if there is
+already something on the chart of the right type to match its ``left
+corner'', that is the first type in the string type which is the
+domain type of the function which models the rule.  It marks the rule
+as having its left corner found and requiring the remaining string
+type (without the left corner) as what is still required.\footnote{The fact that
 the new event has a non-empty requirement for future events means that
 it corresponds to what is known in the chart parsing literature as an
 active edge and the new event encodes a dotted rule.}
 
-The final kind of update functions that we need in order to build charts
+The final action rule that we need in order to build charts
 involves combining an event with a non-empty requirement with an event
 of a type matching the requirement whose start coincides with the end
-of the first event.  In general there are two variants of such update
-functions that we need: one for the case where what is required is a
-string of category signs and one for the case where what is required
-is a single category sign.  In the first case we need to create a new
+of the first event.  We will call this action rule \textsc{Combine}.
+There are two variants of this action rule: one for the case where what is required is a
+string of category signs of greater than length 1 and one for the case where what is required
+is a string of a single category sign.  In the first case we need to create a new
 event with a requirement which is the remainder of the requirement
 after removing the left corner of the original requirement and a found
 string which concatenates the found event at the end of the original
@@ -3107,101 +3110,164 @@ found event string.  In the second case we need to add an event of the type
 which results from applying the rule to the concatenation of the found
 event to
 original found event string. As we only have binary rules in our small
-grammar the first case will not be necessary as we will only introduce
+grammar the first case will not be necessary here as we will only introduce
 a rule onto the chart when we have found an event matching its first
 element and the requirement result from this addition will thus be a
+string consisting of a
 single event of a given category type.  We will thus only introduce
-update functions for the second case.  We will use
-\textbf{Combine}($T_{\mathrm{chart}}$, $\ell_1$, $\ell_2$) to generate
-such update rules.  This is governed by the clause in \nexteg{}.
-\begin{ex} 
-If
-\begin{enumerate} 
- 
-\item $T_{\mathrm{chart}}$ $\sqsubseteq$ 
-\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
-             \smalltfield{e$_k$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}
+the action rule for the second case here.  We do this in \nexteg{}.% We will use
+% \textbf{Combine}($T_{\mathrm{chart}}$, $\ell_1$, $\ell_2$) to generate
+% such update rules.  This is governed by the clause in \nexteg{}.
+\begin{ex}
+  \hspace*{-6em}
+\begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\text{infstate}}}
+    \hypo{s_{i,A}.\text{shared}.\text{current-utterance}:_A
+      T_{\text{chart}}}
+    \infer[no rule]2{T_{\text{chart}}\sqsubseteq\text{
+        \smallrecord{
+          \smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+          \smalltfield{e$_k$}{\smallrecord{
+              \smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}\\
+              \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}\\
+              \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
+          \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+          \smalltfield{e}{${T_1}^{\frown}$\smallrecord{
+              \smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}}$^{\frown}{T_2}^{\frown}$ \\
+            \hspace*{2.5em}\smallrecord{
+              \smalltfield{e$_f$}{end($\Uparrow^3$e$_f$)}\\
+              \smalltfield{e$_k$}{start($\Uparrow^3${e$_k$})$^{\frown}$end($\Uparrow^3$e$_k$)}\\
+              \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}$^{\frown}{T_3}^{\frown}$ \\
+            \hspace*{2.5em}\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}}$^{\frown}{T_4}$}}}}
+    \infer[no rule]1[$1\leq i\leq 3$]{T_{\text{sign}_i}\sqsubseteq
+      T_i\hspace*{2em}T_i\in\{\textit{NP},\textit{VP},\ldots\}}
+    \infer[no rule]1{\text{max}_e(s_{i,A}.\text{shared}.\text{current-utterance})=n}
+    \infer[enth]1[\tiny\begin{tabular}{l}$T_{\text{chat}}\not\sqsubseteq$\\
+                         \smallrecord{
+                         \smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+                         \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+                         \smalltfield{e$_i$}{$f_{\mathrm{rule}}$({e$_f$}$^{\frown}$e$_l$)} \\
+                         \smalltfield{e}{{\textit{Rec}$^*$}$^{\frown}$\smallrecord{\smalltfield{e$_i$}{start($\Uparrow$e$_i$)}
                  \\
-                                              \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}
-                                              \\
-                                              \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
-             \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
-             \smalltfield{e}{${T_1}^{\frown}$\smallrecord{\smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}}$^{\frown}{T_2}^{\frown}$ \\
-                                             \hspace*{2.5em}\smallrecord{\smalltfield{e$_f$}{end($\Uparrow^3$e$_f$)}\\
-                                                                      \smalltfield{e$_k$}{start($\Uparrow^3${e$_k$})$^{\frown}$end($\Uparrow^3$e$_k$)}
-                               \\
-                                                                      \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}$^{\frown}{T_3}^{\frown}$ \\
-                             \hspace*{2.5em}\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}}$^{\frown}{T_4}$}}
+                         \smalltfield{e$_f$}{start($\Uparrow$e$_f$)}}$^{\frown}$\textit{Rec}$^*$}}\\
+                         for any $i$\end{tabular}]{\begin{array}{l}s_{i+1,A}:_A
+                         T_{\text{infstate}}
+                         \text{\fbox{\d{$\wedge$}}}\\
+                         \text{\footnotesize\smallrecord{
+                             \smalltfield{shared}{\smallrecord{
+                                 \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\smallrecord{
+                                     \smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+                                     \smalltfield{e$_k$}{\smallrecord{
+                                         \smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}\\
+                                         \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}\\
+                                         \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
+                                     \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+                                     \smalltfield{e$_{n+1}$}{$r$.e$_k$.rule({$r$.e$_f$}$^{\frown}r$.e$_l$)}\\
+                                     \smalltfield{e}{${T_1}^{\frown}$\smallrecord{
+                                         \smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}\\
+                                         \smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)}}$^{\frown}{T_2}^{\frown}$\smallrecord{
+                                         \smalltfield{e$_k$}{start($\Uparrow^3$e$_k$)$^{\frown}$end($\Uparrow^3$e$_k$)}\\
+                                         \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}\\\hspace*{3em}$^{\frown}{T_3}^{\frown}$\smallrecord{
+                                         \smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}\\
+                                         \smalltfield{e$_{n+1}$}{end($\Uparrow^3$e$_{n+1}$)}}$^{\frown}T_4$}}}}}}}\end{array}}
+                     \end{prooftree}
+                     
+                         
+                                                            
+                                                            
+                                                            
+                   \end{ex}
 
-where
+                   @@
+  
+% \begin{ex} 
+% If
+% \begin{enumerate} 
+ 
+% \item $T_{\mathrm{chart}}$ $\sqsubseteq$ 
+% \smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+%              \smalltfield{e$_k$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}
+%                  \\
+%                                               \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}
+%                                               \\
+%                                               \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
+%              \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+%              \smalltfield{e}{${T_1}^{\frown}$\smallrecord{\smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}}$^{\frown}{T_2}^{\frown}$ \\
+%                                              \hspace*{2.5em}\smallrecord{\smalltfield{e$_f$}{end($\Uparrow^3$e$_f$)}\\
+%                                                                       \smalltfield{e$_k$}{start($\Uparrow^3${e$_k$})$^{\frown}$end($\Uparrow^3$e$_k$)}
+%                                \\
+%                                                                       \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}$^{\frown}{T_3}^{\frown}$ \\
+%                              \hspace*{2.5em}\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}}$^{\frown}{T_4}$}}
 
-\begin{enumerate} 
- 
-\item [] $T_{\mathrm{sign}_1}$, $T_{\mathrm{sign}_2}$ and
-  $T_{\mathrm{sign}_3}$ are subtypes of one of \textit{NP},
-  \textit{VP}, \ldots, that is, they are types of category signs.
+% where
 
-\item [] $T_{\mathrm{sign}_3}$ $\sqsubseteq$ $T_{\mathrm{sign}_2}$
+% \begin{enumerate} 
  
-\item [] $T$ is a type of strings of category signs
+% \item [] $T_{\mathrm{sign}_1}$, $T_{\mathrm{sign}_2}$ and
+%   $T_{\mathrm{sign}_3}$ are subtypes of one of \textit{NP},
+%   \textit{VP}, \ldots, that is, they are types of category signs.
+
+% \item [] $T_{\mathrm{sign}_3}$ $\sqsubseteq$ $T_{\mathrm{sign}_2}$
+ 
+% \item [] $T$ is a type of strings of category signs
  
  
-\end{enumerate} 
+% \end{enumerate} 
    
  
-\item `e$_i$' max in $T_{\mathrm{chart}}$ is `e$_n$'
+% \item `e$_i$' max in $T_{\mathrm{chart}}$ is `e$_n$'
 
-\item There is no $i$ such that
+% \item There is no $i$ such that
 
-\begin{enumerate}
-\item []$T_{\mathrm{chart}}\ \sqsubseteq$ 
-\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
-             \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
-             \smalltfield{e$_i$}{$f_{\mathrm{rule}}$({e$_f$}$^{\frown}$e$_l$)} \\
-             \smalltfield{e}{{\textit{Rec}$^*$}$^{\frown}$\smallrecord{\smalltfield{e$_i$}{start($\Uparrow$e$_i$)}
-                 \\
-                                                                    \smalltfield{e$_f$}{start($\Uparrow$e$_f$)}}$^{\frown}$\textit{Rec}$^*$}}
-\end{enumerate}
+% \begin{enumerate}
+% \item []$T_{\mathrm{chart}}\ \sqsubseteq$ 
+% \smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+%              \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+%              \smalltfield{e$_i$}{$f_{\mathrm{rule}}$({e$_f$}$^{\frown}$e$_l$)} \\
+%              \smalltfield{e}{{\textit{Rec}$^*$}$^{\frown}$\smallrecord{\smalltfield{e$_i$}{start($\Uparrow$e$_i$)}
+%                  \\
+%                                                                     \smalltfield{e$_f$}{start($\Uparrow$e$_f$)}}$^{\frown}$\textit{Rec}$^*$}}
+% \end{enumerate}
  
-\end{enumerate}
+% \end{enumerate}
 
-then \textbf{Compose}($T_{\mathrm{chart}}$, e$_k$, e$_l$) is
+% then \textbf{Compose}($T_{\mathrm{chart}}$, e$_k$, e$_l$) is
 
-$\lambda r$:$T_{\mathrm{chart}}$ . \\
-\hspace*{1em}\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
-                          \smalltfield{e$_k$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}
-                 \\
-                                                           \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}
-                                              \\
-                                                           \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
-             \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
-                          \smalltfield{e$_{n+1}$}{$r$.e$_k$.rule({$r$.e$_f$}$^{\frown}r$.e$_l$)}
-    \\
-                          \smalltfield{e}{${T_1}^{\frown}$\smallrecord{\smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}\\
-                                                                      \smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)}}$^{\frown}{T_2}^{\frown}$\smallrecord{\smalltfield{e$_k$}{start($\Uparrow^3$e$_k$)$^{\frown}$end($\Uparrow^3$e$_k$)}\\
-                                                                                                                                                              \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}\\\hspace*{3em}$^{\frown}{T_3}^{\frown}$\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}\\
-                                                               \smalltfield{e$_{n+1}$}{end($\Uparrow^3$e$_{n+1}$)}}$^{\frown}T_4$}} 
+% $\lambda r$:$T_{\mathrm{chart}}$ . \\
+% \hspace*{1em}\smallrecord{\smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
+%                           \smalltfield{e$_k$}{\smallrecord{\smallmfield{rule}{$f_{\mathrm{rule}}$}{($T\rightarrow\textit{Type}$)}
+%                  \\
+%                                                            \smallmfield{fnd}{$\Uparrow$e$_f$}{\textit{Sign}}
+%                                               \\
+%                                                            \smallmfield{req}{$T_{\mathrm{sign}_2}$}{\textit{Type}}}} \\
+%              \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
+%                           \smalltfield{e$_{n+1}$}{$r$.e$_k$.rule({$r$.e$_f$}$^{\frown}r$.e$_l$)}
+%     \\
+%                           \smalltfield{e}{${T_1}^{\frown}$\smallrecord{\smalltfield{e$_f$}{start($\Uparrow^3$e$_f$)}\\
+%                                                                       \smalltfield{e$_{n+1}$}{start($\Uparrow^3$e$_{n+1}$)}}$^{\frown}{T_2}^{\frown}$\smallrecord{\smalltfield{e$_k$}{start($\Uparrow^3$e$_k$)$^{\frown}$end($\Uparrow^3$e$_k$)}\\
+%                                                                                                                                                               \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}\\\hspace*{3em}$^{\frown}{T_3}^{\frown}$\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}\\
+%                                                                \smalltfield{e$_{n+1}$}{end($\Uparrow^3$e$_{n+1}$)}}$^{\frown}T_4$}} 
    
-\end{ex} 
-Condition~1 in \preveg{} requires that the chart to be updated has a
-rule event labelled `e$_k$' where the found event is labelled `e$_f$'
-and that there is an event `e$_l$', starting at the end of `e$_f$',
-simultaneously with `e$_k$'.  The type specified for `e$_l$' must be a
-subtype of the type identified as the required type in `e$_k$', that
-is $T_{\mathrm{sign}_2}$.
+% \end{ex} 
+% Condition~1 in \preveg{} requires that the chart to be updated has a
+% rule event labelled `e$_k$' where the found event is labelled `e$_f$'
+% and that there is an event `e$_l$', starting at the end of `e$_f$',
+% simultaneously with `e$_k$'.  The type specified for `e$_l$' must be a
+% subtype of the type identified as the required type in `e$_k$', that
+% is $T_{\mathrm{sign}_2}$.
 
-Condition~2 identifies the maximum event index in the chart as $n$.
+% Condition~2 identifies the maximum event index in the chart as $n$.
 
-Condition~3 requires that the result of applying the rule to the event
-string {e$_f$}$^{\frown}$e$_l$ has not already been added to the
-chart.  (This will prevent the creation of an infinite loop.)
+% Condition~3 requires that the result of applying the rule to the event
+% string {e$_f$}$^{\frown}$e$_l$ has not already been added to the
+% chart.  (This will prevent the creation of an infinite loop.)
 
-The resulting update function \textbf{Compose}($T_{\mathrm{chart}}$,
-e$_k$, e$_l$) is a function which adds a new event field labelled
-`e$_{n+1}$' for an event of the type returned by applying the rule to
-the event string consisting of the found event, `e$_f$', followed by the
-required event, `e$_l$'.  Event `e$_{n+1}$' starts at the beginning of
-`e$_f$' and ends at the end of `e$_l$'.    
+% The resulting update function \textbf{Compose}($T_{\mathrm{chart}}$,
+% e$_k$, e$_l$) is a function which adds a new event field labelled
+% `e$_{n+1}$' for an event of the type returned by applying the rule to
+% the event string consisting of the found event, `e$_f$', followed by the
+% required event, `e$_l$'.  Event `e$_{n+1}$' starts at the beginning of
+% `e$_f$' and ends at the end of `e$_l$'.    
  
   
 \section{Summary}
