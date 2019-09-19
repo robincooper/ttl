@@ -224,7 +224,8 @@ is not dictated by physical reality.
 \section{Syntax}
 
 We now turn our attention to how this hierarchical organization is
-reflected in the nature of linguistic events.  In
+reflected in the nature of linguistic events.\footnote{A version of
+  some material from this section has appeared in \cite{Cooper2014}.}  In
 Chapter~\ref{ch:infex} we used \nexteg{} as our sign type.
 \begin{ex} 
 \record{\tfield{s-event}{\textit{SEvent}} \\
@@ -2976,8 +2977,9 @@ integrate rules from our resources that apply to strings which could
 begin with a lexical sign of this type.  We will use an action rule
 called \textsc{IntegRule} which integrates a syntactic rule of the
 kind we have discussed into the chart.  It is given in \nexteg{}.
+\begin{sidewaysfigure}
 \begin{ex} 
-  \hspace*{-6em}
+  %\hspace*{-6em}
 \begin{prooftree}
     \hypo{s_{i,A}:_A T_{\text{infstate}}}
     \hypo{s_{i,A}.\text{shared}.\text{current-utterance}:_A
@@ -2994,13 +2996,13 @@ kind we have discussed into the chart.  It is given in \nexteg{}.
     \hspace*{2em}f_{\text{rule}}:T_{\text{rule}}}
     \infer[no rule]1{T_{\text{rule}}=({T_{\text{leftcorner}}}^\frown T_{\text{rest}}\rightarrow\textit{Type})
     \hspace*{2em}T_{\text{sign}}\sqsubseteq T_{\text{leftcorner}}}
-    \infer[enth]1[\tiny\begin{tabular}{l}$T_{\text{chart}}\not\sqsubseteq$\\\smallrecord{
+    \infer[enth]1[\begin{tabular}{l}$T_{\text{chart}}\not\sqsubseteq$\\\smallrecord{
       \smallmfield{e$_l$}{$f_{\text{rule}}$}{$T_{\text{rule}}$}\\
       \smalltfield{e}{${T_{\text{evpref}}}^\frown$\\\hspace*{.5em}\smallrecord{
           \smalltfield{e$_1$}{start($\Uparrow^3$e$_l$)$^\frown$end($\Uparrow^3$e$_l$)}}}}\\
         for any $l$\end{tabular}]
         {\begin{array}{l} s_{i+1,A}:_A
-          T_{\text{infstate}}\text{\fbox{\d{$\wedge$}}}\\\hspace*{1em}\text{\small\smallrecord{
+          T_{\text{infstate}}\text{\fbox{\d{$\wedge$}}}\\\hspace*{1em}\text{\smallrecord{
               \smalltfield{shared}{\smallrecord{
 \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\smallrecord{
                       \smalltfield{e$_n$}{\smallrecord{
@@ -3013,7 +3015,7 @@ kind we have discussed into the chart.  It is given in \nexteg{}.
       
     
 \end{ex}
-
+\end{sidewaysfigure}
 
   
 % \textbf{IntegrateRule}($f_{\mathrm{rule}}$, $T_{\mathrm{chart}}$) to
@@ -3118,6 +3120,8 @@ single event of a given category type.  We will thus only introduce
 the action rule for the second case here.  We do this in \nexteg{}.% We will use
 % \textbf{Combine}($T_{\mathrm{chart}}$, $\ell_1$, $\ell_2$) to generate
 % such update rules.  This is governed by the clause in \nexteg{}.
+\begin{sidewaysfigure}
+%\hspace*{-5em}
 \begin{ex}
   \hspace*{-6em}
 \begin{prooftree}
@@ -3138,11 +3142,11 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
               \smalltfield{e$_f$}{end($\Uparrow^3$e$_f$)}\\
               \smalltfield{e$_k$}{start($\Uparrow^3${e$_k$})$^{\frown}$end($\Uparrow^3$e$_k$)}\\
               \smalltfield{e$_l$}{start($\Uparrow^3$e$_l$)}}$^{\frown}{T_3}^{\frown}$ \\
-            \hspace*{2.5em}\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}}$^{\frown}{T_4}$}}}}
-    \infer[no rule]1[$1\leq i\leq 3$]{T_{\text{sign}_i}\sqsubseteq
+            \hspace*{9em}\smallrecord{\smalltfield{e$_l$}{end($\Uparrow^3$e$_l$)}}$^{\frown}{T_4}$}}}}
+    \infer[no rule]1{1\leq i\leq 3\hspace*{2em}T_{\text{sign}_i}\sqsubseteq
       T_i\hspace*{2em}T_i\in\{\textit{NP},\textit{VP},\ldots\}}
     \infer[no rule]1{\text{max}_e(s_{i,A}.\text{shared}.\text{current-utterance})=n}
-    \infer[enth]1[\tiny\begin{tabular}{l}$T_{\text{chat}}\not\sqsubseteq$\\
+    \infer[enth]1[\begin{tabular}{l}$T_{\text{chat}}\not\sqsubseteq$\\
                          \smallrecord{
                          \smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
                          \smalltfield{e$_l$}{$T_{\mathrm{sign}_3}$} \\
@@ -3150,10 +3154,10 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
                          \smalltfield{e}{{\textit{Rec}$^*$}$^{\frown}$\smallrecord{\smalltfield{e$_i$}{start($\Uparrow$e$_i$)}
                  \\
                          \smalltfield{e$_f$}{start($\Uparrow$e$_f$)}}$^{\frown}$\textit{Rec}$^*$}}\\
-                         for any $i$\end{tabular}]{\begin{array}{l}s_{i+1,A}:_A
+                         for any $i$\end{tabular}]{\hspace*{-.5em}\begin{array}{l}s_{i+1,A}:_A
                          T_{\text{infstate}}
                          \text{\fbox{\d{$\wedge$}}}\\
-                         \text{\footnotesize\smallrecord{
+                         \hspace*{.5em}\text{\smallrecord{
                              \smalltfield{shared}{\smallrecord{
                                  \smalltfield{current-utterance}{$T_{\text{chart}}$\d{$\wedge$}\smallrecord{
                                      \smalltfield{e$_f$}{$T_{\mathrm{sign}_1}$} \\
@@ -3177,8 +3181,9 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
                                                             
                                                             
                    \end{ex}
+\end{sidewaysfigure}
 
-                   @@
+ 
   
 % \begin{ex} 
 % If
@@ -3268,21 +3273,62 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
 % the event string consisting of the found event, `e$_f$', followed by the
 % required event, `e$_l$'.  Event `e$_{n+1}$' starts at the beginning of
 % `e$_f$' and ends at the end of `e$_l$'.    
- 
+
+\clearpage
   
 \section{Summary}
 
-In this chapter we have explored how the type theoretical apparatus
-developed in Chapters~\ref{ch:percint} and \ref{ch:infex} can be
-applied to the notion of grammar, viewing grammatical phenomena in
-terms of event perception and information state update.  While we have
-included both syntax and semantics in this framework and taken a
-fairly detailed look at how incremental parsing can be incorporated in
-this approach, the actual grammatical phenomena that we have looked at
-are linguistically trivial. In Part~\ref{part:sem} we will look at
-a variety of linguistic phenomena and argue that this approach
-provides theoretically interesting insights into the way that they
-function in dialogue.
+% In this chapter we have explored how the type theoretical apparatus
+% developed in Chapters~\ref{ch:percint} and \ref{ch:infex} can be
+% applied to the notion of grammar, viewing grammatical phenomena in
+% terms of event perception and information state update.
+
+This chapter has focussed on a view of grammar within a theory of
+action.  We started by relating the kind of constituent structure
+found in syntax to the hierarchical structure of event types which
+seems necessary for even non-linguistic agents to interact effectively
+with their environment and to learn new types of actions efficiently
+by exploiting components of actions they already know how to perform.
+The kind of syntax we proposed builds closely on the insights of
+Head-Driven Phrase Structure Grammar (HPSG) and exploits the
+similarities between the feature structures used there and records.
+One major difference between the two approaches is that we have both
+records and record types where HPSG has just feature structures which
+sometimes leads to confusion as to whether they should be thought of intuitively
+as objects or types within the theory.
+
+Another important difference
+is that the type theoretical approach includes functions and function
+types which cannot be characterized in terms of feature structures.
+This was important, for example, when we modelled phrase structure
+rules in terms of functions and associated action rules.  It was, of
+course, of central importance when we turned our attention to
+semantics, where much of what we did in this chapter followed the
+classical formal semantic analyses proposed by Montague.
+
+If we are going to give a theoretical account of language in terms of
+a theory of action, we need to take seriously the fact that language
+is processed incrementally, that is, not in terms of complete
+sentences but in terms of small phonological events corresponding to
+words or parts of words.  Our suggestion for this was to adopt the
+notion of parse chart which was developed in computational linguistics
+in the 1980's, developed from formal methods used for the parsing of
+programming languages in computer science.  We sketched how chart
+parsing could be conceived of in terms of our types and action rules
+and showed how this could be integrated into our view of updates
+carried out on information states in terms of gameboards.  Thus the
+incremental processing of an utterance becomes part of the general
+theory of information state update needed to account for dialogical interaction.
+
+While we have included both syntax and semantics in this framework and
+taken a fairly detailed look at how incremental parsing can be
+incorporated in this approach, the actual grammatical phenomena that
+we have looked at are linguistically trivial. In Part~\ref{part:sem}
+we will look at a variety of linguistic phenomena and argue that the
+approach we have developed provides theoretically interesting insights
+both in terms of old problems and into new problems that arise when we
+view language from a dialogical perspective.
+
 
 
 %%% Local Variables: 
