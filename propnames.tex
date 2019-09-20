@@ -158,8 +158,6 @@ orthographical type and allow the individuation of names by either
 phonology or orthography or a combination of both depending on what is
 most useful to the purpose at hand.
 
-@@
-
 Using signs in this way seems to give us a clear, if rather simple,
 advantage over Montague's formal language approach, even though we
 have so far essentiually just transplanted Montague's analysis of
@@ -185,8 +183,7 @@ called Sam, important though that might be for performing adequately
 in linguistic situations.  In Chapter~\ref{ch:gram} we introduced sign
 type contruction operations and in particular
 `Lex$_{\mathrm{PropName}}$' which maps a phonological type and an
-individual to an appropiate proper name sign type (see
-Appendix~\ref{app:gramrules}).  We called this a universal resource
+individual to an appropiate proper name sign type.  We called this a universal resource
 since it represents the general knowledge that utterances can be used
 to name individuals.  In the English resources we defined there we
 named sign types such as `Lex$_{\mathrm{PropName}}$(``Sam'', sam)',
@@ -226,7 +223,9 @@ be publically known as a name for $a$.  We will follow the analysis of
 content.  As such it relates to Montague's technical notion of
   \textit{meaning} in his paper `Universal Grammar'
   \citep{Montague1970,Montague1974} where he regarded meaning as a
-  function from possible worlds and contexts of use to denotations.
+  function from possible worlds and contexts of use to
+  denotations.\footnote{See Section~4 (Semantics: Theory of Reference)
+    of `Universal Grammar'.}
   This also corresponds to the notion of \textit{character} in
   \cite{Kaplan1978}.
 
@@ -251,7 +250,7 @@ Associating the phonological type ``Sam'' with
 (\ref{ex:paramcontpropname}) would essentially be a way of
 encapsulating in the interpretation of \textit{Sam} what is expressed
 by (\ref{ex:lexpropnameSamResource}) --- namely, that potentially any
-individual can be called Sam.  We want the parametric content of
+individual can be called Sam.  However, we want the parametric content of
 \textit{Sam} to be
 more restrictive than this.  It is going to be the tool that we use to
 help us identify an appropriate referent when we are confronted with
@@ -297,7 +296,7 @@ An alternative to the use of parametric contents is to use parametric
 signs.  This could be formulated as in \nexteg{} where
 Lex$_{\mathrm{PropName}}$ is the function for associating lexical
 content with phonological types that was introduced in
-Chapter~\ref{ch:gram} and summarized in Appendix~\ref{app:signtypeconstr}.
+Chapter~\ref{ch:gram}.
 \begin{ex} 
 $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, ``Sam'')}} . \\
@@ -329,14 +328,22 @@ function (representing the ``presupposition'') which is the parametric
 content varies from case to case depending on what the intuitive
 presupposition of the phrase is.  According to our rules it will
 always be some subtype of \textit{RecType} (since we are thinking of
-contexts as records/situations) but it would not be possible to state
-a single type of parametric content for proper names or other
-syntactic categories.  For this reason we will say that a parametric
-content is a pair (that is, a record with two fields) containing a
-type and a function whose domain type is that type.
-We can create such a parametric content by using a redefined
-version of `SemPropName' which we introduced in Chapter~\ref{ch:gram},
-see Appendix~\ref{app:gramrulesuniv}.  Whereas the version from
+contexts as records/situations) and we can therefore assign them to
+the type of partial functions from records to quantifiers,
+$(\textit{Rec}\rightharpoonup\textit{Quant})$. However, while types of
+partial functions as we have defined them are useful for gathering together functions of
+different types into a single class they are not useful in a setting
+where we need to guarantee that a given function is provided with an
+argument which is in its domain.
+%but it would not be possible to state
+% a single type of parametric content for proper names or other
+% syntactic categories.
+
+For this reason we will say that a parametric content is a pair
+(construed as a record with two fields) containing a type and a
+function whose domain type is that type.  We can create such a
+parametric content by using a redefined version of `SemPropName' which
+we introduced in Chapter~\ref{ch:gram}.  Whereas the version from
 Chapter~\ref{ch:gram} took an individual as argument and created the
 content of a name of that individual, the new version will take a
 phonological type as argument and create a parametric content
@@ -357,7 +364,37 @@ Here the field labelled `bg' (``background'') contains a record type
 and the field labelled `fg' (``foreground'') is a function whose
 domain type is the background record type.  From now on we will mean
 records of this kind by \textit{parametric content}.
-The type of a parametric content of proper names is thus \nexteg{}.
+
+While it is useful to think of parametric contents as records of this
+kind the record notation in \preveg{} is clumsy and repetitive and we
+will need to talk a good deal about different parametric contents.  We
+will therefore use a more concise notation for such records as given
+in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda v\!:\!T\ .\ \varphi\urcorner$ represents the record
+  \begin{quote}
+    \record{\field{bg}{$T$}\\
+      \field{fg}{$\lambda v\!:\!T\ .\ \varphi$}}
+  \end{quote}
+\label{ex:cornerquote-notation} 
+\end{ex}
+This means that we can write (\ref{ex:SemPropName-chpropnames}) more
+economically as \nexteg{}
+\begin{ex} 
+SemPropName($T$), where $T$ is a phonological type,
+is
+\begin{quote}
+$\ulcorner\lambda r$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}} . $\lambda
+                       P$:\textit{Ppty} . $P(r)\urcorner$
+                     \end{quote}
+                     
+\label{ex:SemPropName-chpropnames-econ} 
+\end{ex}
+  
+
+
+The type of a parametric content of proper names is \nexteg{}.
 \begin{ex}
 \record{\tfield{bg}{\textit{RecType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
@@ -368,7 +405,7 @@ That is, the foreground is a function from
 records of the  background type (modelling contexts) to quantifiers.  We will refer to this type as
 \textit{PQuant} (``parametric quantifiers'').  The universal resource
 Lex$_{\mathrm{PropName}}$ for associating proper name content with
-phonological types, creating a sign type for a proper name (see Appendix~\ref{app:gramrulesuniv}), will now be
+phonological types, creating a sign type for a proper name, will now be
 redefined so that it only takes a phonological type as argument as in
 \nexteg{}.
 
@@ -399,9 +436,8 @@ could represent its parametric content as \nexteg{a} which is of the
 type for parametric properties (\textit{PPpty}) given in \nexteg{b}.
 \begin{ex}
 \begin{subex}
-\item \record{\field{bg}{\textit{Rec}}\\ 
-        \field{fg}{$\lambda r_1$:\textit{Rec}.$\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_2$.x)}}}}
+\item $\ulcorner\lambda r_1$:\textit{Rec}.$\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_2$.x)}}$\urcorner$
 
 \item \record{\tfield{bg}{\textit{RecType}}\\
               \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
@@ -409,18 +445,25 @@ type for parametric properties (\textit{PPpty}) given in \nexteg{b}.
 \label{ex:parametricLeave}
 
 \end{ex}
-The foreground of this parametric property will map any context $r_1$ to the function $\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_2$.x)}} which does not depend in
-any way on $r_1$. Such a content could be introduced by a resource for
+The foreground of this parametric property will map any context $r_1$ to the function \nexteg{} which does not depend in
+any way on $r_1$.
+\begin{ex} 
+$\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r_2$.x)}} 
+\end{ex} 
+  
+Such a content could be introduced by a resource for
 lexical content construction `SemIntransVerb' as characterized in
 \nexteg{}, where $T_{\mathrm{bg}}$, the
 ``background'' or ``presupposition'' type, is a record type and $p$ is a predicate with arity $\langle$\textit{Ind}$\rangle$.
 \begin{ex} 
-SemIntransVerb($T_{\mathrm{bg}}$, $p$) is \\ 
-\record{\field{bg}{$T_{\mathrm{bg}}$}\\
-        \field{fg}{$\lambda r_1$:$T_{\mathrm{bg}}$ . $\lambda
+  SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+  \begin{quote}
+$\ulcorner\lambda r_1$:$T_{\mathrm{bg}}$ . $\lambda
 r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{$p$($r_2$.x)}}}} 
+. \record{\tfield{e}{$p$($r_2$.x)}}$\urcorner$
+\end{quote}
+
 \end{ex}
 
 
@@ -454,7 +497,7 @@ using parametric contents is to use a version of what is known in
 combinatorial logic as the S-combinator.  In its $\lambda$-calculus
 version this is \nexteg{}.
 \begin{ex} 
-$\lambda z. \alpha(z)(\beta(z))$ 
+$\lambda z\ .\ \alpha(z)(\beta(z))$ 
 \end{ex} 
 Our version of the S-combinator including different type requirements
 on the context arising from the function and the argument will be
@@ -468,10 +511,8 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
 \begin{quote}
-\record{\field{bg}{\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
-                                \smalltfield{a}{$\beta$.bg}}}\\
-        \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
-                                \smalltfield{a}{$\beta$.bg}} . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))}}
+$\ulcorner\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
+                                \smalltfield{a}{$\beta$.bg}} . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))$\urcorner$
 \end{quote}
 % if $\alpha : (T_1 \rightarrow (T_2 \rightarrow T_3))$ and 
 % \hspace*{1em}$\beta
@@ -481,7 +522,10 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 % $\lambda r$:\smallrecord{\smalltfield{f}{$T_1$} \\
 %                          \smalltfield{a}{$T_4$}}. $\alpha(r.\textrm{f})(\beta(r.\textrm{a}))$
 % \end{quote} 
-\end{ex} 
+\end{ex}
+
+@@
+
 Note that in the background for the result we have kept the
 backgrounds of $\alpha$ and $\beta$
 separated in their own fields labelled `f' (``function'') and `a'
