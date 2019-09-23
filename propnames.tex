@@ -524,34 +524,50 @@ $\ulcorner\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
 % \end{quote} 
 \end{ex}
 
-@@
+
 
 Note that in the background for the result we have kept the
 backgrounds of $\alpha$ and $\beta$
 separated in their own fields labelled `f' (``function'') and `a'
-(``argument'').\footnote{While textually this statement of the combination
-  will be correct, we need to take account of the fact that the
-  abbreviatory notation for labels in argument positions to predicates
-  now represent path-names in $\alpha$.bg and $\beta$.bg to which the labels `f'
-  and `a' have been prefixed respectively.  To be precise we could
-  notate this as $[\alpha.\text{bg}]^{f.}$ and $[\beta.\text{bg}]^{a.}$.}  This means that we avoid an unwanted clash of labels
+(``argument'').% \footnote{While textually this statement of the combination
+  % will be correct, we need to take account of the fact that the
+  % abbreviatory notation for labels in argument positions to predicates
+  % now represent path-names in $\alpha$.bg and $\beta$.bg to which the labels `f'
+  % and `a' have been prefixed respectively.  To be precise we could
+  % notate this as $[\alpha.\text{bg}]^{f.}$ and $[\beta.\text{bg}]^{a.}$.}
+This means that we avoid an unwanted clash of labels
 if $\alpha$.bg and $\beta$.bg should happen to share
-labels.\footnote{This new method of combination for parametric
-  contents means that we also have to adjust the sign combination operation
-  CntForwardApp (``forward application of contents'') used in the
-  definition of interpreted phrase structure rules.  See
-  Appendix~\ref{app:signcomb} for details.}  We could use
-\preveg{} to combine the contents (\ref{ex:parametricSam}) and
-(\ref{ex:parametricLeave}).  The foreground of the result is given in \nexteg{} where we can
+labels.
+
+This new method of combination for parametric contents means that we
+also have to adjust the sign combination operation CntForwardApp
+(``forward application of contents'') used in the definition of
+interpreted phrase structure rules (see Chapter~\ref{ch:gram},
+example~(\ref{ex:ContForwardApp})).  The new version using `@' rather
+than straightforward application is given in \nexteg{}.
+\begin{ex} 
+$\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
+\hspace*{1em}$\lambda
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow$($T_2\rightarrow T_1$))}}}}$^{\frown}$
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow T_2$)}}}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                                                                                \smalltfield{fg}{(bg$\rightarrow T_1$)}}}}  
+\end{ex} 
+  
+
+We can use \preveg{} to combine the contents (\ref{ex:parametricSam}) and
+(\ref{ex:parametricLeave}).  The result is given in \nexteg{} where we can
 show by successive applications of $\beta$-reduction that
-\nexteg{a--d} all represent the same function.
+\nexteg{a--d} are all identical.
 
 
 
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda
+\item $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
@@ -559,43 +575,45 @@ show by successive applications of $\beta$-reduction that
 \hspace*{2em}($\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, ``Sam'')}} . $\lambda P$:\textit{Ppty} . $P(r_2)$)($r_1$.f)\\
 \hspace*{4em}($\lambda r_3$:\textit{Rec}.$\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.a)) 
+\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.a))$\urcorner$ 
  
-\item  $\lambda
+\item  $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
                   \smalltfield{a}{\textit{Rec}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} . $P$($r_1$.f)\\
 \hspace*{4em}($\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_4$.x)}}) 
+\smallrecord{\smalltfield{e}{leave($r_4$.x)}})$\urcorner$ 
 
-\item $\lambda
+\item $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
                   \smalltfield{a}{\textit{Rec}}} . \\
 \hspace*{2em}$\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.f)
+\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.f)$\urcorner$
 
-\item $\lambda
+\item $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
                   \smalltfield{a}{\textit{Rec}}} . \\
 \hspace*{2em}
-\smallrecord{\smalltfield{e}{leave($r_1$.f.x)}}
+\smallrecord{\smalltfield{e}{leave($r_1$.f.x)}}$\urcorner$
  
  
 \end{subex} 
 \label{ex:paramcontSamLeft}   
-\end{ex} 
-\preveg{} represents the foreground of the parametric content of \textit{Sam leaves}.
-Given a situation containing an individual, $a$, named by ``Sam'' it
+\end{ex}
+
+\preveg{} represents the parametric content of \textit{Sam leaves}.
+Given a situation containing an individual, $a$, named by ``Sam'' the
+function which is its foreground
 returns a type of situation in which $a$ leaves.  As usual this type
-can play the role of a ``proposition''.  It  is, for example, ``true''
+can play the role of a ``proposition''.  It  is ``true''
 if there is a situation of the type and ``false'' if there is no
-situation of the type.  
+situation of the type.
 
 The background of the parametric content, that is the domain type
 of it foreground,
