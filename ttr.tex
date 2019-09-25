@@ -34,7 +34,7 @@ flavours when we need to distinguish objects which correspond to the
 same set of ordered pairs.
 
 We refer to the first members of the pairs in a
-labelled set (flavoured or unfalvoured) as \textit{labels} used in the labelled set and we will refer to
+labelled set (flavoured or unflavoured) as \textit{labels} used in the labelled set and we will refer to
 the second members of the ordered pairs as the \textit{labelled
   elements} of the labelled set.  If $X$ is a labelled set we use
 $\mathrm{labels}(X)$ to represent the set $\{\ell\mid\exists 
@@ -54,6 +54,11 @@ If $X$ is a labelled set, then
  
 \end{enumerate} 
 \end{quote}
+
+The set of \textit{total paths} in a labelled set, $X$,
+$\mathrm{tpaths}(X)$ is the set of paths, $\pi$, such that
+\mbox{$\pi\in\mathrm{paths}(X)$} and $X.\pi$ is not a labelled set.
+ 
   
 % When we introduced complex
 % objects and types
@@ -1075,6 +1080,8 @@ then $\mathrm{labels}(r)$ is $\{\mathrm{x},\mathrm{y}\}$. That is, `labels' pick
 the ``highest level'' of labels in a complex record.
 We use $\mathrm{tpaths}(r)$ to represent the \textit{set of total
   paths} of $r$, $\mathrm{labels}(\varphi(r))$.
+
+
 
 If $L$ is a set of labels,
 then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
