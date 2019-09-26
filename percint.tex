@@ -1804,9 +1804,11 @@ whose labels are included in $\mathcal{L}$ and whose labelled elements
 are witnesses of some type according to $\mathbb{T}$.
 Records are characterized by the definition in \nexteg{}.
 \begin{ex} 
-$r$ is a \textit{record according to a set of labels $\mathcal{L}$ and a type
+$r$ is a \textit{record according to a set of labels $\mathcal{L}$, a
+  set of distinguished labels, $\mathcal{D}$, and a type
 system $\mathbb{T}$} (Appendix~\ref{app:rec}) iff $r$ is a finite labelled set
 (Appendix~\ref{app:sets}) whose labels are included in $\mathcal{L}$
+but not in $\mathcal{D}$
 and for any labelled element, $v$, in $r$, there is some type $T$ such
 that $v:_{\mathbb{T}}T$.
 \label{ex:records} 
@@ -1821,7 +1823,8 @@ $\Gamma,\mathcal{L}\vdash r \text{ record}$
 We give the characterization inductively in
 \nexteg{}.
 \begin{ex}
-For $\Gamma$ a type system and $\mathcal{L}$ a set of labels 
+For $\Gamma$ a type system, $\mathcal{L}$ a set of labels and
+$\mathcal{D}$ a set of distinguished labels
 \begin{subex} 
  
 \item \begin{prooftree}
@@ -1831,7 +1834,7 @@ For $\Gamma$ a type system and $\mathcal{L}$ a set of labels
 \item \begin{prooftree}
 \hypo{\Gamma\vdash a:T}
 \hypo{\Gamma,\mathcal{L}\vdash r \text{ record}}
-\hypo{\ell\in\mathcal{L}-\mathrm{labels}(r)}
+\hypo{\ell\in\mathcal{L}-(\mathcal{D}\cup\mathrm{labels}(r))}
 \infer3{\Gamma,\mathcal{L}\vdash r\cup\{\langle\ell,a\rangle\}\text{
     record}}
 \end{prooftree} 
@@ -1854,18 +1857,21 @@ path for records which excludes those paths which include the
 distinguished labels used in non-record structures which may be values
 in a record.
 \begin{ex} 
-If $X$ is a labelled set based on a set of labels, $\mathcal{L}$
-including a set of distinguished labels, $\mathcal{D}$, then
+If $r$ is a record, then
 \begin{enumerate} 
  
-\item if $\ell\in\mathrm{labels}(X)$ and $\ell\not\in\mathcal{D}$, then $\ell\in\mathrm{paths}_{\mathcal{L}\setminus\mathcal{D}}(X)$ 
+\item if $\ell\in\mathrm{labels}(r)$, then $\ell\in\mathrm{paths}_{\text{rec}}(r)$ 
  
-\item if $\ell\in\mathrm{labels}(X)$ and $\ell\not\in\mathcal{D}$, $X.\ell$ is a labelled set and
-  $\pi\in\mathrm{paths}_{\mathcal{L}\setminus\mathcal{D}}(X.\ell)$, then $\ell.\pi\in\mathrm{paths}_{\mathcal{L}\setminus\mathcal{D}}(X)$
+\item if $\ell\in\mathrm{labels}(r)$, $r.\ell$ is a record and
+  $\pi\in\mathrm{paths}_{\text{rec}}(r.\ell)$, then $\ell.\pi\in\mathrm{paths}_{\text{rec}}(r)$
 \end{enumerate}  
 \end{ex}
-We will sometimes use `$\mathrm{paths}$' without the subscript for this
-more restricted notion when there is no risk for confusion.
+Similarly, $\mathrm{tpaths}_{\text{rec}}(r)$ is the set of paths,
+$\pi$, such that $\pi\in\mathrm{paths}_{\text{rec}}(r)$ and $r.\pi$ is
+not a record.
+
+We will sometimes use `$\mathrm{paths}$' and `$\mathrm{tpaths}$' without the subscript for these
+more restricted notions when there is no risk for confusion.
 
 We use a tabular format to
 represent records.  A record as given in \nexteg{a} 
