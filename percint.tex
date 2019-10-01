@@ -2059,10 +2059,16 @@ $\langle\ell,a\rangle$ such that $a:T$ (corresponding to
 The issue of what counts as a path in a record type is a little
 complex.  As for records it is based on the definition of paths for
 labelled sets but excluding the distinguished labels used in
-non-record structures such as ptypes.  However, we will make one
+non-record structures such as ptypes.  However, we will make an
 exception to this when we introduce meet types since it will be
 important to include paths into meet types.  We will discuss this when
-we introduce meet types in Chapter~\ref{ch:infex}.
+we introduce meet types in Chapter~\ref{ch:infex}. We will also want
+paths to go into dependent fields which always return a record type
+such that for any appropriate arguments to the function in the
+dependent field the resulting record types will all have same paths.
+This will become important when we introduce relabelling for record
+types in Chapter~\ref{ch:propnames} and we will give a precise
+definition of paths for record types at that point.
 
 We can add dependent record types to systems which have non-dependent
 record types.  In order to do this we need dependent types, that is,

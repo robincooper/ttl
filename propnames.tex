@@ -859,8 +859,6 @@ capture the relationship.
 %         \tfield{a}{\textit{Rec}}}
 %       \end{ex}
 
-@@
-
 In order to match (\ref{ex:namedSam})  against \preveg{}  we look
 for a relabelling, $\eta$, of (\ref{ex:namedSam}) that would make
 \preveg{} be a subtype of (\ref{ex:namedSam}).  Such a
@@ -894,18 +892,17 @@ the shared commitments would, modulo the relabelling, be of the type
 which is the background of the parametric content under consideration,
 spelled out in \nexteg{}.
 \begin{ex}
-\record{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                               \smalltfield{e}{named(x,
-                                                 ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}}}\\
-        \field{fg}{$\lambda
+$\ulcorner\lambda
   r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
                   \smalltfield{a}{\textit{Rec}}} . 
-\smallrecord{\smalltfield{e}{leave($r$.f.x)}}}} 
+\smallrecord{\smalltfield{e}{leave($r$.f.x)}}$\urcorner$ 
  
-\end{ex} 
+\end{ex}
+
+@@
+
 The background of the parametric content is
 being used as a presupposition which is being matched against the
 hearer's current information state.
