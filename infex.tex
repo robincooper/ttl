@@ -2723,8 +2723,8 @@ The notation
 `$\Uparrow$' in (\ref{eg:diac}) indicates that the path `x' is not to
 be found in the local record type which is required to be the value of `cont'
 but in the next higher record type with the fields `s-event' and
-`cont'.  This notation is explained in
-Appendix~\ref{app:rectypes}.
+`cont'.  % This notation is explained in
+% Appendix~\ref{app:rectypes}.
 
 \begin{shaded}
 (\ref{eg:diac}) is a more friendly
@@ -2739,7 +2739,22 @@ notation for \nexteg{}.
                                $\langle$e$\rangle\rangle$}}}},
                        $\langle$s-event.e$\rangle\rangle$}}
                    }
+                 \end{ex}
+
+The `$\Uparrow$' notation is inspired by the use of `$\Uparrow$' in
+Lexical Function Grammar \citep{DalrympleKaplanMaxwellZaenen1995}
+pointing up a hierarchical structure.
+
+An alternative involves unique identifiers and is inspired by the
+notation used for reentrancy in Head-Driven Phrase Structure Grammar
+\citep{Sag:Wasow:ea:03}.  The example in this notation is given in
+\nexteg{}.
+\begin{ex} 
+\record{\smalltfield{s-event}{\record{\tfield{e$_{\text{\fbox{0}}}$}{``Dudamel is a conductor''}} } \\
+        \mfield{cont}{\record{\tfield{e$_{\text{\fbox{1}}}$}{conductor(dudamel)} \\
+                             \tfield{c$_{\mathrm{tns}}$}{final\_align(\fbox{0},\fbox{1})}}}{\textit{RecType}}}  
 \end{ex} 
+  
 
 \end{shaded}
 
