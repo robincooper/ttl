@@ -2751,16 +2751,116 @@ notation used for reentrancy in Head-Driven Phrase Structure Grammar
 \nexteg{}.
 \begin{ex} 
 \record{\smalltfield{s-event}{\record{\tfield{e$_{\text{\fbox{0}}}$}{``Dudamel is a conductor''}} } \\
-        \mfield{cont}{\record{\tfield{e$_{\text{\fbox{1}}}$}{conductor(dudamel)} \\
-                             \tfield{c$_{\mathrm{tns}}$}{final\_align(\fbox{0},\fbox{1})}}}{\textit{RecType}}}  
-\end{ex} 
+        \smallmfield{cont}{\record{\tfield{e$_{\text{\fbox{1}}}$}{conductor(dudamel)} \\
+                             \tfield{c$_{\mathrm{tns}}$}{final\_align(\fbox{0},\fbox{1})}}}{\textit{RecType}}}  \label{ex:unique-diac}
+                     \end{ex}
+
+We will call this last notation \textit{unique identifier
+  notation}.\label{pg:unique-identifier-notation} We will go into this
+notation with some rigour because it will be useful later when we
+introduce relabelling of record types in Chapter~\ref{ch:propnames}.
+The unique identifier notation for a type, $T$, can be obtained from the official
+notation for $T$ by carrying out in order the manipulations characterized in \nexteg{}
+\begin{ex}
+\begin{enumerate} 
+ 
+\item adding a unique identifier \fbox{$i$} (where $i$ is a natural
+  number) to the last label occurrence in any path,$\pi$, which is referenced
+  in a dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, somewhere in $T$. 
+
+\item replacing $\pi$ any dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, with the unique identifier
+  associated with the final label occurrence in $\pi$.
+ 
+\item replacing any pair in a dependent field of the form 
+\begin{quote}
+$\langle\lambda v_1:T_1\ldots\lambda v_n:T_n\
+.\ \varphi\dep{v_1,\ldots,v_n}, \langle \text{\fbox{$i_1$}},\ldots,\text{\fbox{$i_n$}}\rangle\rangle$
+\end{quote}
+with
+\begin{quote}
+$\varphi\dep{\text{\fbox{$i_1$}}:T_1,\ldots,\text{\fbox{$i_n$}}:T_n}$
+\end{quote}
+ 
+\end{enumerate}
+\end{ex}
+The final step involves a variant of $\beta$-conversion.  It is
+important to represent the type restriction associated with the unique
+identifier by the domain type of the function since the domain type of
+the function may be distinct from the type associated with the
+identifier in the field labelled by the identifier.  However, we
+suppress the type when the
+domain type of the function is identical with the type associated with
+the path in $T$ which is referenced  (as is most often the case in
+the examples we discuss). This is illustrated in (\ref{ex:unique-diac}).
+
+% It is important to note that we are manipulating the representations
+% of types here, not the types themselves.  The unique identifier
+% notation does not introduce additional types.
+
+@@
+
+We also show how to convert back from unique identifier
+notation for a type, $T$, to official notation.   We can do this by
+carrying out the following in order:
+\begin{enumerate} 
+ 
+\item  replace all the dependencies on unique identifiers with
+appropriate pairs of functions and sequences of paths
+ 
+\item  remove the unique identifiers
+ 
+\end{enumerate} 
+  
+We replace all the dependencies on
+unique identifiers by carrying out the
+following for each occurrence of a label, $\ell$, in $T^*$ associated with
+an identifier, $\{i\}$, which is referenced elsewhere in $T^*$:
+\begin{enumerate} 
+ 
+\item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
+  dominates
+  a subtree, $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
+\begin{quote}
+if $\tau$ is not an ordered pair consisting of a function and a
+sequence of paths:
+\begin{quote}
+replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\ell\rangle\rangle$
+\end{quote}
+otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+\begin{quote}
+replace $\tau$ with $\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
+\langle\ell,\pi_1,\ldots,\pi_n\rangle\rangle$
+\end{quote}
+\end{quote}
+ 
+\item Let $\ell_0.\ldots.\ell_n.\ell\{i\}$ be the path ending in
+  $\ell\{i\}$ in $T^*$.  For each $\ell_k$ in order in
+  $\langle\ell_n,\ldots,\ell_0\rangle$, where $\pi^*$ is the path starting
+  with $\ell_k$ and ending with $\ell\{i\}$, and for each sister,
+  $\ell'$, of $\ell_k$, if $\ell'$ immediately dominates a subtree,
+  $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
+ \begin{quote}
+if $\tau$ is not an ordered pair consisting of a function and a
+sequence of paths:
+\begin{quote}
+replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\pi^*\rangle\rangle$
+\end{quote}
+otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+\begin{quote}
+replace $\tau$ with $\langle\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
+\langle\pi^*,\pi_1,\ldots,\pi_n\rangle\rangle$
+\end{quote}
+\end{quote}
+ 
+\end{enumerate} 
+                     
   
 
 \end{shaded}
 
 
 
-The sign type (\ref{eg:diac})/\preveg{} seems to give us what we need in order to explain how
+The sign type (\ref{eg:diac}) seems to give us what we need in order to explain how
 an utterance of \textit{Dudamel is a conductor} can convey the
 information that Dudamel is a conductor.  If both dialogue
 participants have this sign type among their resources then the User
