@@ -2768,7 +2768,7 @@ notation for $T$ by carrying out in order the manipulations characterized in \ne
   number) to the last label occurrence in any path,$\pi$, which is referenced
   in a dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, somewhere in $T$. 
 
-\item replacing $\pi$ any dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, with the unique identifier
+\item replacing $\pi$ in any dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, with the unique identifier
   associated with the final label occurrence in $\pi$.
  
 \item replacing any pair in a dependent field of the form 
@@ -2797,62 +2797,85 @@ the examples we discuss). This is illustrated in (\ref{ex:unique-diac}).
 % of types here, not the types themselves.  The unique identifier
 % notation does not introduce additional types.
 
-@@
-
 We also show how to convert back from unique identifier
 notation for a type, $T$, to official notation.   We can do this by
 carrying out the following in order:
+
 \begin{enumerate} 
  
-\item  replace all the dependencies on unique identifiers with
-appropriate pairs of functions and sequences of paths
+\item For each occurrence of \fbox{$i$} in a dependent field labelled
+  $\ell_d$ (the label for the dependent field) for some
+  natural number, $i$, locate the smallest record structure, $\Delta$, in $T$
+  which contains a path, $\pi_d$, to $\ell_d$ and a path $\pi_a$ to a
+  label $\ell_{\text{\fbox{i}}}$ (the label for the addressed field)
  
-\item  remove the unique identifiers
+\item Let $\ell$ be the first label on $\pi_d$. If $\Delta.\ell$ is an
+  ordered pair $\langle \lambda v_j\!:\!T_j\ .\ \varphi\dep{\text{\fbox{$i$}}\!:\!T_i},
+  \langle\pi_1,\ldots,\pi_n\rangle\rangle$, then replace $\Delta.\ell$
+  with $\langle \lambda v_i\!:\!T_i\ .\ \lambda v_j\!:\!T_j\ .\
+  \varphi[\text{\fbox{$i$}}\!:\!T_i\leadsto v_i],
+  \langle\pi_1,\ldots,\pi_n,\pi_a\rangle\rangle$.  Otherwise, if
+  $\Delta.\ell$ is $\varphi\dep{\text{\fbox{$i$}}\!:\!T_i}$, replace
+  $\Delta.\ell$ with $\langle \lambda v_i\!:\!T_i\ .\
+  \varphi[\text{\fbox{$i$}}\!:\!T_i\leadsto v_i],
+  \langle\pi_a\rangle\rangle$
+
+\item For any number $i$, remove the subscript \fbox{$i$} on any label
+  on which it occurs.
  
 \end{enumerate} 
   
-We replace all the dependencies on
-unique identifiers by carrying out the
-following for each occurrence of a label, $\ell$, in $T^*$ associated with
-an identifier, $\{i\}$, which is referenced elsewhere in $T^*$:
-\begin{enumerate} 
+% \begin{enumerate} 
  
-\item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
-  dominates
-  a subtree, $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
-\begin{quote}
-if $\tau$ is not an ordered pair consisting of a function and a
-sequence of paths:
-\begin{quote}
-replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\ell\rangle\rangle$
-\end{quote}
-otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
-\begin{quote}
-replace $\tau$ with $\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
-\langle\ell,\pi_1,\ldots,\pi_n\rangle\rangle$
-\end{quote}
-\end{quote}
+% \item  replace all the dependencies on unique identifiers with
+% appropriate pairs of functions and sequences of paths
  
-\item Let $\ell_0.\ldots.\ell_n.\ell\{i\}$ be the path ending in
-  $\ell\{i\}$ in $T^*$.  For each $\ell_k$ in order in
-  $\langle\ell_n,\ldots,\ell_0\rangle$, where $\pi^*$ is the path starting
-  with $\ell_k$ and ending with $\ell\{i\}$, and for each sister,
-  $\ell'$, of $\ell_k$, if $\ell'$ immediately dominates a subtree,
-  $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
- \begin{quote}
-if $\tau$ is not an ordered pair consisting of a function and a
-sequence of paths:
-\begin{quote}
-replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\pi^*\rangle\rangle$
-\end{quote}
-otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
-\begin{quote}
-replace $\tau$ with $\langle\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
-\langle\pi^*,\pi_1,\ldots,\pi_n\rangle\rangle$
-\end{quote}
-\end{quote}
+% \item  remove the unique identifiers
  
-\end{enumerate} 
+% \end{enumerate} 
+  
+% We replace all the dependencies on
+% unique identifiers by carrying out the
+% following for each occurrence of a label, $\ell$, in $T^*$ associated with
+% an identifier, $\{i\}$, which is referenced elsewhere in $T^*$:
+% \begin{enumerate} 
+ 
+% \item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
+%   dominates
+%   a subtree, $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
+% \begin{quote}
+% if $\tau$ is not an ordered pair consisting of a function and a
+% sequence of paths:
+% \begin{quote}
+% replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\ell\rangle\rangle$
+% \end{quote}
+% otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+% \begin{quote}
+% replace $\tau$ with $\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
+% \langle\ell,\pi_1,\ldots,\pi_n\rangle\rangle$
+% \end{quote}
+% \end{quote}
+ 
+% \item Let $\ell_0.\ldots.\ell_n.\ell\{i\}$ be the path ending in
+%   $\ell\{i\}$ in $T^*$.  For each $\ell_k$ in order in
+%   $\langle\ell_n,\ldots,\ell_0\rangle$, where $\pi^*$ is the path starting
+%   with $\ell_k$ and ending with $\ell\{i\}$, and for each sister,
+%   $\ell'$, of $\ell_k$, if $\ell'$ immediately dominates a subtree,
+%   $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
+%  \begin{quote}
+% if $\tau$ is not an ordered pair consisting of a function and a
+% sequence of paths:
+% \begin{quote}
+% replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\pi^*\rangle\rangle$
+% \end{quote}
+% otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+% \begin{quote}
+% replace $\tau$ with $\langle\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
+% \langle\pi^*,\pi_1,\ldots,\pi_n\rangle\rangle$
+% \end{quote}
+% \end{quote}
+ 
+% \end{enumerate} 
                      
   
 

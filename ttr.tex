@@ -2553,94 +2553,94 @@ In the unique identfier notation these will be:
         \tfield{c}{\smallrecord{\smalltfield{e}{dog(\{0\}:\textit{Ind})}}}}
 
 \end{quote}
-The unique identifier notation can be obtained from the official
-notation by 
-\begin{enumerate} 
+% The unique identifier notation can be obtained from the official
+% notation by 
+% \begin{enumerate} 
  
-\item adding a unique identifier $\{i\}$ (where $i$ is a natural
-  number) to each occurrence of a label in the type, other than in the paths
-  following a function in dependent fields.  In practice we only add
-  identifiers to those labels which are addressed in some dependent
-  field. 
+% \item adding a unique identifier $\{i\}$ (where $i$ is a natural
+%   number) to each occurrence of a label in the type, other than in the paths
+%   following a function in dependent fields.  In practice we only add
+%   identifiers to those labels which are addressed in some dependent
+%   field. 
 
-\item replacing any path in a dependent field with the unique identifier
-  associated with the final label occurrence on the path which it references.
+% \item replacing any path in a dependent field with the unique identifier
+%   associated with the final label occurrence on the path which it references.
  
-\item replacing any pair in a dependent field of the form 
-\begin{quote}
-$\langle\lambda v_1:T_1\ldots\lambda v_n:T_n\
-.\ \varphi[v_1,\ldots,v_n], \langle \{i_1\},...,\{i_n\}\rangle\rangle$
-\end{quote}
-with
-\begin{quote}
-$\varphi[\{i_1\}:T_1,\ldots,\{i_n\}:T_n]$
-\end{quote}
+% \item replacing any pair in a dependent field of the form 
+% \begin{quote}
+% $\langle\lambda v_1:T_1\ldots\lambda v_n:T_n\
+% .\ \varphi[v_1,\ldots,v_n], \langle \{i_1\},...,\{i_n\}\rangle\rangle$
+% \end{quote}
+% with
+% \begin{quote}
+% $\varphi[\{i_1\}:T_1,\ldots,\{i_n\}:T_n]$
+% \end{quote}
  
-\end{enumerate} 
-The final step involves a variant of $\beta$-conversion.  It is
-important to represent the type restriction associated with the unique
-identifier by the domain type of the function since the domain type of
-the function may be distinct from the type associated with the
-identifier in the field labelled by the identifier.
+% \end{enumerate} 
+% The final step involves a variant of $\beta$-conversion.  It is
+% important to represent the type restriction associated with the unique
+% identifier by the domain type of the function since the domain type of
+% the function may be distinct from the type associated with the
+% identifier in the field labelled by the identifier.
 
-It is important to note that we are manipulating the representations
-of types here, not the types themselves.  The unique identifier
-notation does not introduce additional types.
+% It is important to note that we are manipulating the representations
+% of types here, not the types themselves.  The unique identifier
+% notation does not introduce additional types.
 
-We also need to show how to convert back from unique identifier
-notation for a type, $T^*$, to official notation.   We can do this by
-carrying out the following in order:
-\begin{enumerate} 
+% We also need to show how to convert back from unique identifier
+% notation for a type, $T^*$, to official notation.   We can do this by
+% carrying out the following in order:
+% \begin{enumerate} 
  
-\item  replace all the dependencies on unique identifiers with
-appropriate pairs of functions and sequences of paths
+% \item  replace all the dependencies on unique identifiers with
+% appropriate pairs of functions and sequences of paths
  
-\item  remove the unique identifiers
+% \item  remove the unique identifiers
  
-\end{enumerate} 
+% \end{enumerate} 
   
-We replace all the dependencies on
-unique identifiers by carrying out the
-following for each occurrence of a label, $\ell$, in $T^*$ associated with
-an identifier, $\{i\}$, which is referenced elsewhere in $T^*$:
-\begin{enumerate} 
+% We replace all the dependencies on
+% unique identifiers by carrying out the
+% following for each occurrence of a label, $\ell$, in $T^*$ associated with
+% an identifier, $\{i\}$, which is referenced elsewhere in $T^*$:
+% \begin{enumerate} 
  
-\item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
-  dominates
-  a subtree, $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
-\begin{quote}
-if $\tau$ is not an ordered pair consisting of a function and a
-sequence of paths:
-\begin{quote}
-replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\ell\rangle\rangle$
-\end{quote}
-otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
-\begin{quote}
-replace $\tau$ with $\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
-\langle\ell,\pi_1,\ldots,\pi_n\rangle\rangle$
-\end{quote}
-\end{quote}
+% \item for each sister, $\ell'$, of $\ell\{i\}$, if $\ell'$ immediately
+%   dominates
+%   a subtree, $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
+% \begin{quote}
+% if $\tau$ is not an ordered pair consisting of a function and a
+% sequence of paths:
+% \begin{quote}
+% replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\ell\rangle\rangle$
+% \end{quote}
+% otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+% \begin{quote}
+% replace $\tau$ with $\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
+% \langle\ell,\pi_1,\ldots,\pi_n\rangle\rangle$
+% \end{quote}
+% \end{quote}
  
-\item Let $\ell_0.\ldots.\ell_n.\ell\{i\}$ be the path ending in
-  $\ell\{i\}$ in $T^*$.  For each $\ell_k$ in order in
-  $\langle\ell_n,\ldots,\ell_0\rangle$, where $\pi^*$ is the path starting
-  with $\ell_k$ and ending with $\ell\{i\}$, and for each sister,
-  $\ell'$, of $\ell_k$, if $\ell'$ immediately dominates a subtree,
-  $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
- \begin{quote}
-if $\tau$ is not an ordered pair consisting of a function and a
-sequence of paths:
-\begin{quote}
-replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\pi^*\rangle\rangle$
-\end{quote}
-otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
-\begin{quote}
-replace $\tau$ with $\langle\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
-\langle\pi^*,\pi_1,\ldots,\pi_n\rangle\rangle$
-\end{quote}
-\end{quote}
+% \item Let $\ell_0.\ldots.\ell_n.\ell\{i\}$ be the path ending in
+%   $\ell\{i\}$ in $T^*$.  For each $\ell_k$ in order in
+%   $\langle\ell_n,\ldots,\ell_0\rangle$, where $\pi^*$ is the path starting
+%   with $\ell_k$ and ending with $\ell\{i\}$, and for each sister,
+%   $\ell'$, of $\ell_k$, if $\ell'$ immediately dominates a subtree,
+%   $\tau$, containing $\{i\}\!:\!T$ for some type, $T$, then:
+%  \begin{quote}
+% if $\tau$ is not an ordered pair consisting of a function and a
+% sequence of paths:
+% \begin{quote}
+% replace $\tau$ with $\langle\lambda v_i\!:\!T\ .\ \tau[\{i\}\!:\!T\leadsto v_i],\langle\pi^*\rangle\rangle$
+% \end{quote}
+% otherwise, if $\tau$ is $\langle f, \langle\pi_1,\ldots,\pi_n\rangle\rangle$:
+% \begin{quote}
+% replace $\tau$ with $\langle\lambda v_i\!:\!T\ . \ f[\{i\}\!:\!T\leadsto v_i],
+% \langle\pi^*,\pi_1,\ldots,\pi_n\rangle\rangle$
+% \end{quote}
+% \end{quote}
  
-\end{enumerate} 
+% \end{enumerate} 
    
 Consider as an example the type which in abbreviatory notation is
 written (with abbreviatory representation of the path `id$_0$.x' in
