@@ -901,6 +901,40 @@ $\ulcorner\lambda
  
 \end{ex}
 
+\begin{shaded}
+In order to give a more precise characterization of relabelling we
+will need two auxiliary notions.  If $T$ is a record type, we will use
+$\mathrm{dpaths}(T)$ to represent the dependent paths of $T$, that is,
+the set of paths which occur in any field within $T$ in a dependent
+field, that is any path $\pi$ that occurs in $\Pi$ in some dependent
+field $[\ell:\langle f,\Pi\rangle]$ anywhere within $T$.  We also use
+a notion of \textit{initial subpath}.  To characterize this we will
+use the notation given in \nexteg{}.
+\begin{ex} 
+If $\pi_1$ is $\ell_1.\ \ldots\ .\ell_n$ and $\pi_2$ is
+$\ell_{n+1}.\ \ldots\ .\ell_m$ (where all $\ell_i$ are labels), then
+$\pi_1.\pi_2$ represents $\ell_1.\ \ldots\ .\ell_n.\ell_{n+1}.\
+\ldots\ .\ell_m$ 
+\end{ex}
+We can now characterize initial subpath as in \nexteg{}.
+\begin{ex}
+  \begin{subex}
+  \item $\pi_1$ is an \textit{initial subpath} of $\pi_2$,
+    $\pi_1\leq\pi_2$, just in case either $\pi_1=\pi_2$ or there is
+    some $\pi$ such that $pi_2=\pi_1.\pi$.
+    
+  \item $\pi_1$ is a \textit{proper initial subpath} of $\pi_2$,
+    $\pi_1<\pi_2$, just in case there is
+    some $\pi$ such that $pi_2=\pi_1.\pi$.
+  \end{subex}
+  
+\end{ex} 
+  
+  
+
+\end{shaded}
+
+
 @@
 
 The background of the parametric content is

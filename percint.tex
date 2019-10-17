@@ -2067,8 +2067,48 @@ paths to go into dependent fields which always return a record type
 such that for any appropriate arguments to the function in the
 dependent field the resulting record types will all have same paths.
 This will become important when we introduce relabelling for record
-types in Chapter~\ref{ch:propnames} and we will give a precise
-definition of paths for record types at that point.
+types in Chapter~\ref{ch:propnames}. We will define paths for record
+types in terms of the paths of the records which are their
+witnesses. The relevant definitions are given in \nexteg{}.
+\begin{ex}
+  For a record type, $T$, 
+\begin{subex} 
+ 
+\item 
+  $\pi\in\mathrm{paths}_{\text{rectype}}(T)$ iff for any $r:T$, $\pi\in\mathrm{paths}_{\text{rec}}(r)$ 
+ 
+\item $\pi\in\mathrm{tpaths}_{\text{rectype}}(T)$ iff for any $r:T$, $\pi\in\mathrm{tpaths}_{\text{rec}}(r)$  
+ 
+\end{subex} 
+\label{ex:paths-rectype}   
+\end{ex}
+In terms of our informal proof theoretic notation this can be
+expressed as \nexteg{}.
+\begin{ex} 
+  For a record type, $T$,
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{[r:T]}
+      \ellipsis{}{\pi\in\mathrm{paths}_{\text{rec}}(r)}
+      \infer1{\pi\in\mathrm{paths}_{\text{rectype}}(T)}
+    \end{prooftree}
+    
+ 
+\item \begin{prooftree}
+      \hypo{[r:T]}
+      \ellipsis{}{\pi\in\mathrm{tpaths}_{\text{rec}}(r)}
+      \infer1{\pi\in\mathrm{tpaths}_{\text{rectype}}(T)}
+    \end{prooftree} 
+ 
+\end{subex} 
+  
+\end{ex} 
+As with $\mathrm{paths}_{\text{rec}}$, we will often suppress the
+subscript on $\mathrm{paths}_{\text{rectype}}$ when there is no risk
+of confusion.  
+  
 
 We can add dependent record types to systems which have non-dependent
 record types.  In order to do this we need dependent types, that is,
