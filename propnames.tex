@@ -916,19 +916,99 @@ $\ell_{n+1}.\ \ldots\ .\ell_m$ (where all $\ell_i$ are labels), then
 $\pi_1.\pi_2$ represents $\ell_1.\ \ldots\ .\ell_n.\ell_{n+1}.\
 \ldots\ .\ell_m$ 
 \end{ex}
-We can now characterize initial subpath as in \nexteg{}.
+We can now characterize the notion of initial subpath as in \nexteg{}.
 \begin{ex}
   \begin{subex}
   \item $\pi_1$ is an \textit{initial subpath} of $\pi_2$,
     $\pi_1\leq\pi_2$, just in case either $\pi_1=\pi_2$ or there is
-    some $\pi$ such that $pi_2=\pi_1.\pi$.
+    some $\pi$ such that $\pi_2=\pi_1.\pi$.
     
   \item $\pi_1$ is a \textit{proper initial subpath} of $\pi_2$,
     $\pi_1<\pi_2$, just in case there is
-    some $\pi$ such that $pi_2=\pi_1.\pi$.
+    some $\pi$ such that $\pi_2=\pi_1.\pi$.
   \end{subex}
   
+\end{ex}
+
+If $\mathcal{L}$ is a set of labels, we use $\mathcal{L}^\pi$ to
+represent the set of potential paths $\ell_1.\ \ldots\ .\ell_n$ where
+$n$ is a natural number and each $\ell_i$ is a member of $\mathcal{L}$. The notion of a relabelling of a record type can now be characterized
+as in \nexteg{}.
+\begin{ex} 
+A \textit{relabelling, $\eta$, of a record type $T$ relative to a set of
+  labels $\mathcal{L}$ on which $T$ is based} is a one-one function whose
+domain is included in $\mathrm{paths(T)}$ and whose range is included
+in $\mathcal{L}^\pi$ such that
+\begin{enumerate} 
+ 
+\item if $\pi_1,\pi_2\in\mathrm{dom}(\eta)$ then $\pi_1<\pi_2$ iff $\eta(\pi_1)<\eta(\pi_2)$ 
+ 
+\item if $\pi\in\mathrm{dpaths}(T)$, then $\pi\in\mathrm{dom}(\eta)$
+
+  
+\item if $\pi\in\mathrm{paths}(T)-\mathrm{dom}(\eta)$, then it is not
+  the case for any $\pi'\in\mathrm{dom}(\eta)$ that $\eta(\pi')=\pi$
+ 
+\end{enumerate} 
+  
 \end{ex} 
+Note that we allow $\eta(\pi)=\pi$.  Thus while clause~2 of \preveg{} requires each path
+mentioned in a dependent field of the record type
+(i.e. $\mathrm{dpaths}(T)$) is in the domain of
+the relabelling, we do not require that the relabelling actually
+change that path.  It is, however, important that we guarantee that
+there is a path in the relabelled type which the dependent field can
+refer to.  This becomes important when we have paths in dependent
+fields which are not total.  Consider \nexteg{} which could
+intuitively be a type corresponding to \textit{Sam saw a dog run}.
+\begin{ex} 
+\record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{c}{dog(x)}\\
+                           \tfield{e}{run(x)}}}\\
+        \tfield{e}{see(sam,s)}} 
+\end{ex} 
+Suppose that we tried to apply the relabelling in \nexteg{} to this.
+\begin{ex} 
+  s.x $\leadsto$ x\\
+  s.c $\leadsto$ c\\
+  s.e $\leadsto$ e$_1$
+\end{ex} 
+We might expect this relabelling to result in the type in \nexteg{}
+which is ill-formed because the `e'-field depends on a path `s' which
+is not present.
+\begin{ex} 
+  \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{dog(x)}\\
+    \tfield{e$_1$}{run(x)}\\
+    \tfield{e}{see(sam,s)}}
+    
+\end{ex} 
+This relabelling is prevented by the requirement in clause~2 that all
+paths mentioned in dependent fields (the ``dpaths'') be assigned something by the
+relabelling.  In this example the dpaths are `s' and `s.x'
+(represented just by `x' in the abbreviatory notation).  Furthermore,
+it is required that $\eta(\text{s})<\eta(\text{s.x})$ by clause~1.
+That is, in intuitive terms, we must provide a path to what Sam sees
+in the relabelled type.  In \nexteg{} is an example of a relabelling
+which respects the requirements.
+\begin{ex} 
+  s $\leadsto$ sit\\
+  s.x $\leadsto$ sit.id.x\\
+  s.c $\leadsto$ sit.id.e\\
+  s.e $\leadsto$ sit.e
+\end{ex} 
+This results in \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{sit}{\record{
+        \tfield{id}{\record{
+            \tfield{x}{\textit{Ind}}\\
+            \tfield{e}{dog(x)}}}\\
+        \tfield{e}{run(x)}}}\\
+    \tfield{e}{see(sam,sit)}}
+\end{ex} 
+  
   
   
 
