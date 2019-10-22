@@ -1008,6 +1008,113 @@ This results in \nexteg{}.
         \tfield{e}{run(x)}}}\\
     \tfield{e}{see(sam,sit)}}
 \end{ex} 
+
+We represent the result of relabelling a type $T$ with a relabelling,
+$\eta$, for $T$, as $[T]_\eta$.  We characterize this in terms of the
+unique identifier notation for record types introduced in
+Chapter~\ref{ch:infex}, p.~\pageref{pg:unique-identifier-notation}.
+We will use three additional notions based on this notation as given
+in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item A \textit{unique identifier segment} is a path $\ell_1.\ \ldots\
+  .{\ell_n}_{\text{\fbox{$i$}}}$ such that only
+  ${\ell_n}_{\text{\fbox{$i$}}}$ has a unique identifier subscript in $\ell_1,\ldots,{\ell_n}_{\text{\fbox{$i$}}}$
+ 
+\item A \textit{unique identifier segmentation} is a path
+  ${\pi_1}_{\text{\fbox{$i$}}}.{\pi_2}_{\text{\fbox{j}}}.\ \ldots\
+  .{\pi_n}_{\text{\fbox{$k$}}}$ or ${\pi_1}_{\text{\fbox{$i$}}}.{\pi_2}_{\text{\fbox{j}}}.\ \ldots\
+  .{\pi_n}$ where ${\pi_1}_{\text{\fbox{$i$}}},{\pi_2}_{\text{\fbox{j}}},\ldots,
+  {\pi_n}_{\text{\fbox{$k$}}}$ or ${\pi_1}_{\text{\fbox{$i$}}},{\pi_2}_{\text{\fbox{j}}},\ldots,
+  {\pi_{n-1}}_{\text{\fbox{$k$}}}$ are unique identifier segments
+
+  
+\item The \textit{result of removing the prefix $\pi_1$ from a path
+  $\pi_1.\pi_2$}, in symbols $\pi_1.\pi_2\backslash\pi_1$, is $\pi_2$
+ 
+\end{subex} 
+   
+\end{ex}
+We can now characterize $[T]_\eta$ as in \nexteg{}.
+\begin{ex} 
+The \textit{result of relabelling a type $T$ with a relabelling,
+  $\eta$, for $T$}, $[T]_\eta$, is defined by carrying out the
+following on the unique identifier notation of $T$.
+\begin{enumerate} 
+ 
+\item if $\pi\in\mathrm{dom}(\eta)$ and $\pi$ (that is, without unique
+  identifiers) is represented as a path in $T$, then replace $\pi$
+  with $\eta(\pi)$ 
+ 
+\item if ${\pi_1}_{\text{\fbox{$i$}}}.{\pi_2}_{\text{\fbox{j}}}.\ \ldots\
+  .{\pi_n}_{\text{\fbox{$k$}}}$ is a unique identifier
+  segmentation in $\mathrm{dom}(\eta)$ then replace it with
+  $\eta(\pi_1)_{\text{\fbox{$i$}}}.(\eta(\pi_1.\pi_2)\backslash\eta(\pi_1))_{\text{\fbox{$j$}}}.\
+  \ldots\ .(\eta(\pi_1.\pi_2.\ \ldots\
+  .\pi_n)\backslash\eta(\pi_1.\pi_2.\ \ldots\
+  .\pi_{n-1}))_{\text{\fbox{$k$}}}$
+
+  
+\item if ${\pi_1}_{\text{\fbox{$i$}}}.{\pi_2}_{\text{\fbox{j}}}.\ \ldots\
+  .{\pi_n}$ is a unique identifier segmentation in
+  $\mathrm{dom}(\eta)$ then replace it with $\eta(\pi_1)_{\text{\fbox{$i$}}}.(\eta(\pi_1.\pi_2)\backslash\eta(\pi_1))_{\text{\fbox{$j$}}}.\
+  \ldots\ .\eta(\pi_1.\pi_2.\ \ldots\
+  .\pi_n)\backslash\eta(\pi_1.\pi_2.\ \ldots\
+  .\pi_{n-1})$
+
+\end{enumerate} 
+  
+\end{ex}
+
+Note that using this definition in terms of unique identifier notation
+will automatically account for cases in which the scope of the
+dependent field has to be adjusted in the relabelling.  Consider the
+record type in \nexteg{a} and the relabelling in \nexteg{b} which
+should result in \nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
+                           \tfield{e}{$\langle\lambda v$:\textit{Ind}
+                             .  dog($v$), $\langle$x$\rangle\rangle$}}}} 
+ 
+\item x.x $\leadsto$ y
+
+                     
+\item \record{\tfield{y}{\textit{Ind}}\\
+        \tfield{x}{$\langle\lambda v$:\textit{Ind}
+                             . \record{\tfield{e}{dog($v$)}},
+                             $\langle$y$\rangle\rangle$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+The unique identifier notation for \preveg{a} and \preveg{c} are
+\nexteg{a} and \nexteg{b} respectively and \nexteg{b} is the result of
+relabelling \nexteg{a} with \preveg{b} according to the definition we
+have given.
+\begin{ex} 
+\begin{subex} 
+ 
+\item
+  \record{
+    \tfield{x}{\record{
+        \tfield{x$_{\text{\fbox{0}}}$}{\textit{Ind}}\\
+        \tfield{e}{dog(\fbox{0})}}}}
+ 
+  \item
+    \record{
+      \tfield{y$_{\text{\fbox{0}}}$}{\textit{Ind}}\\
+      \tfield{x}{\record{
+          \tfield{e}{dog(\fbox{0})}}}}
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
+
   
   
   

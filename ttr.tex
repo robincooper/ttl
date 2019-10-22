@@ -2185,203 +2185,203 @@ when $T_1$ and $T_2$ are merged.
 % in $T$, with bg.$\pi$.
 % \end{quote}
 
-\section{Relabelling of record types}
-\label{app:relabelling-rectypes}
+% \section{Relabelling of record types}
+% \label{app:relabelling-rectypes}
 
-\subsection{Some considerations}
-\label{app:relabelling-rectypes-considerations}
+% \subsection{Some considerations}
+% \label{app:relabelling-rectypes-considerations}
 
-We extend the notion relabelling of records
-discussed in Appendix~\ref{app:rectypes} to record types.\footnote{This was
-not made explicit in \cite{Cooper2012}.}  For non-dependent record
-types both flattening and relabelling can be regarded as exactly parallel to that of
-records since non-dependent record types are sets of ordered pairs of
-labels and types.  They are just like records except that the second
-members of the pairs are types.  However, in the case of dependent
-record types, flattening and relabelling introduces some complications
-which need to be taken account of.  We shall start with an informal
-discussion of the complications.  
+% We extend the notion relabelling of records
+% discussed in Appendix~\ref{app:rectypes} to record types.\footnote{This was
+% not made explicit in \cite{Cooper2012}.}  For non-dependent record
+% types both flattening and relabelling can be regarded as exactly parallel to that of
+% records since non-dependent record types are sets of ordered pairs of
+% labels and types.  They are just like records except that the second
+% members of the pairs are types.  However, in the case of dependent
+% record types, flattening and relabelling introduces some complications
+% which need to be taken account of.  We shall start with an informal
+% discussion of the complications.  
 
-\paragraph{Labels in dependent fields} First of all we need to
-note that labels not only occur as the first members of the ordered
-pairs that constitute the record type but also in the paths which
-occur in dependent fields.  This introduces complications if we
-attempt to define an operation of flattening for record types.
-Also in relabelling we need to make sure that the relabelling applies
-to the paths in the dependent fields as well as the labels of the
-record type.  
+% \paragraph{Labels in dependent fields} First of all we need to
+% note that labels not only occur as the first members of the ordered
+% pairs that constitute the record type but also in the paths which
+% occur in dependent fields.  This introduces complications if we
+% attempt to define an operation of flattening for record types.
+% Also in relabelling we need to make sure that the relabelling applies
+% to the paths in the dependent fields as well as the labels of the
+% record type.  
 
-Consider the record type which in abbreviatory notation
-we write as:
-\begin{quote}
-\record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
-                           \tfield{e}{dog(x)}}}}
-\end{quote}
-It would be incorrect to represent the flattening of this type as:
-\begin{quote}
-\record{\tfield{x.x}{\textit{Ind}}\\
-        \tfield{x.e}{dog(x)}}
-\end{quote}
-The `x' in `dog(x)' does not represent a path in the flattened record
-type. Rather the flattened type should be, in abbreviatory notation:
-\begin{quote}
-\record{\tfield{x.x}{\textit{Ind}}\\
-        \tfield{x.e}{dog(x.x)}}
-\end{quote}
-This is a notational complication.  Recall that 'dog(x)' in the first
-type uses 'x' to represent the path 'x.x', that is, the path to the
-'x' in the immediate record containing 'dog(x)'.
-
-Let us consider how this would work in the official notation with full
-paths represented in dependent fields.  In order to define flattening
-and unflattening we would need to convert:
-% We need also to guarantee that the unflattening of this type returns
-% the original unflattened type.  We will, of course, work to achieve
-% this, not with the abbreviatory notation but with the official
-% notation, or rather with the set theoretic objects which the official
-% notation represents.  That is, we need to convert: 
-\begin{quote}
-\record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
-                           \tfield{e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$x.x$\rangle\rangle$}}}}
-\end{quote}
-to:
-\begin{quote}
-\record{\tfield{x.x}{\textit{Ind}}\\
-        \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$x.x$\rangle\rangle$}}
-\end{quote}
-and back again.
-
-% But now consider a slightly different (equivalent) type:
+% Consider the record type which in abbreviatory notation
+% we write as:
 % \begin{quote}
-% \record{\tfield{x}{$\langle\lambda v$:\textit{Ind}
-%     . \record{\tfield{x}{\textit{Ind}}\\
-%               \tfield{e}{dog($v$)}}, $\langle$x.x$\rangle\rangle$}}
+% \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
+%                            \tfield{e}{dog(x)}}}}
 % \end{quote}
-% [No!  This is not a type according to the definition since x.x is not
-% a path in the type before you add the dependent field!]
-
-
-% or, in abbreviatory notation:
+% It would be incorrect to represent the flattening of this type as:
+% \begin{quote}
+% \record{\tfield{x.x}{\textit{Ind}}\\
+%         \tfield{x.e}{dog(x)}}
+% \end{quote}
+% The `x' in `dog(x)' does not represent a path in the flattened record
+% type. Rather the flattened type should be, in abbreviatory notation:
 % \begin{quote}
 % \record{\tfield{x.x}{\textit{Ind}}\\
 %         \tfield{x.e}{dog(x.x)}}
 % \end{quote}
-\paragraph{Relabelling can require adjustment of dependent fields}
-A relabelling such as:
-\begin{quote}
-x.x $\leadsto$ y
-\end{quote}
-applied to the flattened type leads to a different problem involved in
-expansion.  
-The relabelled flattened record would be:
-\begin{quote}
-\record{\tfield{y}{\textit{Ind}}\\
-        \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$y$\rangle\rangle$}}
-\end{quote}
-% or, in abbreviatory notation:
+% This is a notational complication.  Recall that 'dog(x)' in the first
+% type uses 'x' to represent the path 'x.x', that is, the path to the
+% 'x' in the immediate record containing 'dog(x)'.
+
+% Let us consider how this would work in the official notation with full
+% paths represented in dependent fields.  In order to define flattening
+% and unflattening we would need to convert:
+% % We need also to guarantee that the unflattening of this type returns
+% % the original unflattened type.  We will, of course, work to achieve
+% % this, not with the abbreviatory notation but with the official
+% % notation, or rather with the set theoretic objects which the official
+% % notation represents.  That is, we need to convert: 
+% \begin{quote}
+% \record{\tfield{x}{\record{\tfield{x}{\textit{Ind}}\\
+%                            \tfield{e}{$\langle\lambda v$:\textit{Ind}
+%                              .  dog($v$), $\langle$x.x$\rangle\rangle$}}}}
+% \end{quote}
+% to:
+% \begin{quote}
+% \record{\tfield{x.x}{\textit{Ind}}\\
+%         \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
+%                              .  dog($v$), $\langle$x.x$\rangle\rangle$}}
+% \end{quote}
+% and back again.
+
+% % But now consider a slightly different (equivalent) type:
+% % \begin{quote}
+% % \record{\tfield{x}{$\langle\lambda v$:\textit{Ind}
+% %     . \record{\tfield{x}{\textit{Ind}}\\
+% %               \tfield{e}{dog($v$)}}, $\langle$x.x$\rangle\rangle$}}
+% % \end{quote}
+% % [No!  This is not a type according to the definition since x.x is not
+% % a path in the type before you add the dependent field!]
+
+
+% % or, in abbreviatory notation:
+% % \begin{quote}
+% % \record{\tfield{x.x}{\textit{Ind}}\\
+% %         \tfield{x.e}{dog(x.x)}}
+% % \end{quote}
+% \paragraph{Relabelling can require adjustment of dependent fields}
+% A relabelling such as:
+% \begin{quote}
+% x.x $\leadsto$ y
+% \end{quote}
+% applied to the flattened type leads to a different problem involved in
+% expansion.  
+% The relabelled flattened record would be:
 % \begin{quote}
 % \record{\tfield{y}{\textit{Ind}}\\
-%         \tfield{x.e}{dog(y)}}
+%         \tfield{x.e}{$\langle\lambda v$:\textit{Ind}
+%                              .  dog($v$), $\langle$y$\rangle\rangle$}}
 % \end{quote}
-Expanding the relabelled flattened type in the way we did for records will result in:
-\begin{quote}
-\record{\tfield{y}{\textit{Ind}}\\
-        \tfield{x}{\record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$y$\rangle\rangle$}}}}
-\end{quote}
-This is incorrect because the label `y' is not present in 
-\begin{quote}
-\record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
-                             .  dog($v$), $\langle$y$\rangle\rangle$}}
-\end{quote}
-and this is not a type as require in Clause~\ref{cl:ndrectype-emb} of
-the definition of non-dependent record types on
-p.~\pageref{cl:ndrectype-emb}.  Rather the correct result should be:
-\begin{quote}
-\record{\tfield{y}{\textit{Ind}}\\
-        \tfield{x}{$\langle\lambda v$:\textit{Ind}
-                             . \record{\tfield{e}{dog($v$)}},
-                             $\langle$y$\rangle\rangle$}}
-\end{quote}
-In abbreviatory notation this is:
-\begin{quote}
-\record{\tfield{y}{\textit{Ind}}\\
-        \tfield{x}{\record{\tfield{e}{dog($\Uparrow$y)}}}}
-\end{quote}
-
-This, then, is a problem for defining relabelling of record types in
-terms of a notion of flattening and unflattening as we did for
-records.  This problem is not insurmountable given the techniques that
-we will develop below.  However, there is another problem which seems
-to strongly suggest that we should not use flattening in the same way
-that we did for records.
-
-
-% This is well-formed when we consider that the `y' in the dependent
-% field is a total path beginning at the top of the record.  [Is this
-% true?  What happens with ``appears to be approaching''?  Should we
-% push the label inside the function?]
-
-\paragraph{Dependencies involving paths which are not total}  
-In the examples above the dependencies involve objects at the end of
-paths.  It is also possible to have dependencies on records
-corresponding to the value of a partial path.  Consider the following
-example:
-\begin{quote}
-\record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
-                           \tfield{c}{dog(x)}\\
-                           \tfield{e}{run(x)}}}\\
-        \tfield{e}{see(sam,s)}}
-\end{quote}
-which might be a way of representing the type which is the content of
-\textit{Sam saw a dog run}.  The official notation for this type (with
-unabbreviated paths) is:
-\begin{quote}
-\record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
-                           \tfield{c}{$\langle\lambda v$:\textit{Ind}
-                             . dog($v$), $\langle$s.x$\rangle\rangle$}\\
-                           \tfield{e}{$\langle\lambda v$:\textit{Ind}
-                             . run($v$),
-                             $\langle$s.x$\rangle\rangle$}}}\\
-        \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
-\end{quote}
-\label{pg:sam-saw-a-dog-run}
-We might think that the flattening of this type is:
-\begin{quote}
-\record{\tfield{s.x}{\textit{Ind}}\\
-        \tfield{s.c}{$\langle\lambda v$:\textit{Ind}
-                             . dog($v$), $\langle$s.x$\rangle\rangle$}\\
-        \tfield{s.e}{$\langle\lambda v$:\textit{Ind}
-                             . run($v$),
-                             $\langle$s.x$\rangle\rangle$}\\
-        \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
-\end{quote} 
-But this is, of course, not correct since the path `s' in the
-`e'-field is not a path in the flattened type.  
-% This shows that we
-% cannot naively adapt the technique for flattening we used with records
-% to dependent record types.  Instead we will make
-% the flattened type depend on a record of the type required for the
-% argument to `see' in the original unflattened type (and also on any
-% objects on which that type depends):
+% % or, in abbreviatory notation:
+% % \begin{quote}
+% % \record{\tfield{y}{\textit{Ind}}\\
+% %         \tfield{x.e}{dog(y)}}
+% % \end{quote}
+% Expanding the relabelled flattened type in the way we did for records will result in:
 % \begin{quote}
-% $\lambda r$:\smallrecord{\smalltfield{s}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-%                          \smalltfield{c}{dog(x)}\\
-%                          \smalltfield{e}{run(x)}}}} . 
-% \record{\tfield{e}{see(sam, $r$.s)}}
+% \record{\tfield{y}{\textit{Ind}}\\
+%         \tfield{x}{\record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
+%                              .  dog($v$), $\langle$y$\rangle\rangle$}}}}
 % \end{quote}
-% Call this $\mathcal{T}$.  This is, of course, not a type to which the 
-% flattening of a record
-% belonging to the unflattened type can belong. 
-Our strategy will be not
-to define relabelling in terms of flattening as we did for records,
-but to define relabelling of types in terms of direct replacement of
-paths in unflattened types.  In order to do this we will, however,
-find it convenient to use a ``flattened'' representation of the
-unflattened type which explicitly lists its paths. 
+% This is incorrect because the label `y' is not present in 
+% \begin{quote}
+% \record{\tfield{e}{$\langle\lambda v$:\textit{Ind}
+%                              .  dog($v$), $\langle$y$\rangle\rangle$}}
+% \end{quote}
+% and this is not a type as require in Clause~\ref{cl:ndrectype-emb} of
+% the definition of non-dependent record types on
+% p.~\pageref{cl:ndrectype-emb}.  Rather the correct result should be:
+% \begin{quote}
+% \record{\tfield{y}{\textit{Ind}}\\
+%         \tfield{x}{$\langle\lambda v$:\textit{Ind}
+%                              . \record{\tfield{e}{dog($v$)}},
+%                              $\langle$y$\rangle\rangle$}}
+% \end{quote}
+% In abbreviatory notation this is:
+% \begin{quote}
+% \record{\tfield{y}{\textit{Ind}}\\
+%         \tfield{x}{\record{\tfield{e}{dog($\Uparrow$y)}}}}
+% \end{quote}
+
+% This, then, is a problem for defining relabelling of record types in
+% terms of a notion of flattening and unflattening as we did for
+% records.  This problem is not insurmountable given the techniques that
+% we will develop below.  However, there is another problem which seems
+% to strongly suggest that we should not use flattening in the same way
+% that we did for records.
+
+
+% % This is well-formed when we consider that the `y' in the dependent
+% % field is a total path beginning at the top of the record.  [Is this
+% % true?  What happens with ``appears to be approaching''?  Should we
+% % push the label inside the function?]
+
+% \paragraph{Dependencies involving paths which are not total}  
+% In the examples above the dependencies involve objects at the end of
+% paths.  It is also possible to have dependencies on records
+% corresponding to the value of a partial path.  Consider the following
+% example:
+% \begin{quote}
+% \record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
+%                            \tfield{c}{dog(x)}\\
+%                            \tfield{e}{run(x)}}}\\
+%         \tfield{e}{see(sam,s)}}
+% \end{quote}
+% which might be a way of representing the type which is the content of
+% \textit{Sam saw a dog run}.  The official notation for this type (with
+% unabbreviated paths) is:
+% \begin{quote}
+% \record{\tfield{s}{\record{\tfield{x}{\textit{Ind}}\\
+%                            \tfield{c}{$\langle\lambda v$:\textit{Ind}
+%                              . dog($v$), $\langle$s.x$\rangle\rangle$}\\
+%                            \tfield{e}{$\langle\lambda v$:\textit{Ind}
+%                              . run($v$),
+%                              $\langle$s.x$\rangle\rangle$}}}\\
+%         \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
+% \end{quote}
+% \label{pg:sam-saw-a-dog-run}
+% We might think that the flattening of this type is:
+% \begin{quote}
+% \record{\tfield{s.x}{\textit{Ind}}\\
+%         \tfield{s.c}{$\langle\lambda v$:\textit{Ind}
+%                              . dog($v$), $\langle$s.x$\rangle\rangle$}\\
+%         \tfield{s.e}{$\langle\lambda v$:\textit{Ind}
+%                              . run($v$),
+%                              $\langle$s.x$\rangle\rangle$}\\
+%         \tfield{e}{$\langle\lambda v$:\textit{Rec} . see(sam,$v$), $\langle$s$\rangle\rangle$}}
+% \end{quote} 
+% But this is, of course, not correct since the path `s' in the
+% `e'-field is not a path in the flattened type.  
+% % This shows that we
+% % cannot naively adapt the technique for flattening we used with records
+% % to dependent record types.  Instead we will make
+% % the flattened type depend on a record of the type required for the
+% % argument to `see' in the original unflattened type (and also on any
+% % objects on which that type depends):
+% % \begin{quote}
+% % $\lambda r$:\smallrecord{\smalltfield{s}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+% %                          \smalltfield{c}{dog(x)}\\
+% %                          \smalltfield{e}{run(x)}}}} . 
+% % \record{\tfield{e}{see(sam, $r$.s)}}
+% % \end{quote}
+% % Call this $\mathcal{T}$.  This is, of course, not a type to which the 
+% % flattening of a record
+% % belonging to the unflattened type can belong. 
+% Our strategy will be not
+% to define relabelling in terms of flattening as we did for records,
+% but to define relabelling of types in terms of direct replacement of
+% paths in unflattened types.  In order to do this we will, however,
+% find it convenient to use a ``flattened'' representation of the
+% unflattened type which explicitly lists its paths. 
 % Instead we say if $r$
 % is of the non-flattened type, then there is some $r'$ such that
 % $\varphi(r):\mathcal{T}(r')$ and there is some flattening, $T_{\varphi}$, of the
@@ -2462,97 +2462,97 @@ unflattened type which explicitly lists its paths.
 
 
 
-\subsection{Relabellings of record types}
+% \subsection{Relabellings of record types}
 
-% The definitions in Section~\ref{app:flattening-def} enable us to tell
-% whether one type is a flattening or relabelling of another but they do
-% not give us an algorithm for constructing a flattening or relabelling
-% of a particular type.
-Here we will consider how, for a given record
-type, $T$, an $\eta$-relabelling of $T$, $[T]_\eta$ can be defined.
+% % The definitions in Section~\ref{app:flattening-def} enable us to tell
+% % whether one type is a flattening or relabelling of another but they do
+% % not give us an algorithm for constructing a flattening or relabelling
+% % of a particular type.
+% Here we will consider how, for a given record
+% type, $T$, an $\eta$-relabelling of $T$, $[T]_\eta$ can be defined.
 
-We start by defining the notion of paths for record types.  This can
-be defined in terms of the paths which are common to all witnesses for
-the types.  If $T$ is a record type, then the \textit{set of paths of}
-$T$, $\mathrm{paths}(T)$, is
-\begin{quote}
-$\mathrm{cpaths}(\down{T})$
-\end{quote}
-where $\mathrm{cpaths}$ is as defined on p.~\pageref{pg:cpaths} and the
-\textit{set of total paths of} $T$, $\mathrm{tpaths}(T)$, is
-\begin{quote}
-$\mathrm{ctpaths}(\down{T})$
-\end{quote}
-where $\mathrm{ctpaths}$ is as defined on p.~\pageref{pg:ctpaths}.
+% We start by defining the notion of paths for record types.  This can
+% be defined in terms of the paths which are common to all witnesses for
+% the types.  If $T$ is a record type, then the \textit{set of paths of}
+% $T$, $\mathrm{paths}(T)$, is
+% \begin{quote}
+% $\mathrm{cpaths}(\down{T})$
+% \end{quote}
+% where $\mathrm{cpaths}$ is as defined on p.~\pageref{pg:cpaths} and the
+% \textit{set of total paths of} $T$, $\mathrm{tpaths}(T)$, is
+% \begin{quote}
+% $\mathrm{ctpaths}(\down{T})$
+% \end{quote}
+% where $\mathrm{ctpaths}$ is as defined on p.~\pageref{pg:ctpaths}.
 
-It may look from these definitions as if you have to compute all the
-witnesses for a record type before you can compute its paths, but in
-fact this is not true.  For any type, we can compute what paths are
-witness of that type must have. For example, any witness of the type
-\begin{quote}
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{c}{$\langle\lambda v$:\textit{Ind}
-          . \smallrecord{\smalltfield{e}{dog($v$)}},
-          $\langle$x$\rangle\rangle$}}
-\end{quote}
-must be a record of the form
-\begin{quote}
-\record{\field{x}{$a$}\\
-        \field{c}{\record{\field{e}{$s$}\\
-                          \ldots}}\\
-        \ldots}
+% It may look from these definitions as if you have to compute all the
+% witnesses for a record type before you can compute its paths, but in
+% fact this is not true.  For any type, we can compute what paths are
+% witness of that type must have. For example, any witness of the type
+% \begin{quote}
+% \record{\tfield{x}{\textit{Ind}}\\
+%         \tfield{c}{$\langle\lambda v$:\textit{Ind}
+%           . \smallrecord{\smalltfield{e}{dog($v$)}},
+%           $\langle$x$\rangle\rangle$}}
+% \end{quote}
+% must be a record of the form
+% \begin{quote}
+% \record{\field{x}{$a$}\\
+%         \field{c}{\record{\field{e}{$s$}\\
+%                           \ldots}}\\
+%         \ldots}
 
-where:
+% where:
 
-$a$ : \textit{Ind}\\
-$s$ : dog($a$)
-\end{quote}
-Hence, any record of this type must have `x' and `c.e' among its total
-paths and these will be the only total paths that are common to all
-witnesses for the type.  
+% $a$ : \textit{Ind}\\
+% $s$ : dog($a$)
+% \end{quote}
+% Hence, any record of this type must have `x' and `c.e' among its total
+% paths and these will be the only total paths that are common to all
+% witnesses for the type.  
 
-In a similar way, we can say that tree relations holding in all
-witnesses of a type hold for the types (see
-p.~\pageref{pg:imm-dom}). Thus, for example, we can say that `c'
-immediately dominates `e' in the type in virtue of the fact that the
-relation holds in all witnesses of the type, despite the fact the `e'
-is embedded in a function below `c' in the type.
+% In a similar way, we can say that tree relations holding in all
+% witnesses of a type hold for the types (see
+% p.~\pageref{pg:imm-dom}). Thus, for example, we can say that `c'
+% immediately dominates `e' in the type in virtue of the fact that the
+% relation holds in all witnesses of the type, despite the fact the `e'
+% is embedded in a function below `c' in the type.
 
-It will be convenient to define the computation of 
-relabellings of types in terms of a notation which gives unique
-identifiers to the occurrences of labels and which eshews representing
-the functions in dependent fields explicitly, rather representing the
-dependencies by using the unique identifiers.  To increase
-readability, we will only represent the unique identifiers on those
-labels which are referenced in some dependent field.  As an example,
-consider the following types, presented in official notation.
-\begin{quote}
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{c}{$\langle\lambda v$:\textit{Ind} . dog($v$),
-          $\langle$x$\rangle\rangle$}\\
-        \tfield{e}{$\langle\lambda v$:\textit{Ind} . 
-                             appear(\smallrecord{\smalltfield{e}{approach($v$)}}),
-                             $\langle$x$\rangle\rangle$}}
+% It will be convenient to define the computation of 
+% relabellings of types in terms of a notation which gives unique
+% identifiers to the occurrences of labels and which eshews representing
+% the functions in dependent fields explicitly, rather representing the
+% dependencies by using the unique identifiers.  To increase
+% readability, we will only represent the unique identifiers on those
+% labels which are referenced in some dependent field.  As an example,
+% consider the following types, presented in official notation.
+% \begin{quote}
+% \record{\tfield{x}{\textit{Ind}}\\
+%         \tfield{c}{$\langle\lambda v$:\textit{Ind} . dog($v$),
+%           $\langle$x$\rangle\rangle$}\\
+%         \tfield{e}{$\langle\lambda v$:\textit{Ind} . 
+%                              appear(\smallrecord{\smalltfield{e}{approach($v$)}}),
+%                              $\langle$x$\rangle\rangle$}}
 
-\bigskip
+% \bigskip
 
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{c}{$\langle\lambda v$:\textit{Ind}
-          . \smallrecord{\smalltfield{e}{dog($v$)}},
-          $\langle$x$\rangle\rangle$}}
-\end{quote}
-In the unique identfier notation these will be:
-\begin{quote}
-\record{\tfield{x\{0\}}{\textit{Ind}}\\
-        \tfield{c}{dog(\{0\}:\textit{Ind})}\\
-        \tfield{e}{appear(\smallrecord{\smalltfield{e}{approach(\{0\}:\textit{Ind})}})}}
+% \record{\tfield{x}{\textit{Ind}}\\
+%         \tfield{c}{$\langle\lambda v$:\textit{Ind}
+%           . \smallrecord{\smalltfield{e}{dog($v$)}},
+%           $\langle$x$\rangle\rangle$}}
+% \end{quote}
+% In the unique identfier notation these will be:
+% \begin{quote}
+% \record{\tfield{x\{0\}}{\textit{Ind}}\\
+%         \tfield{c}{dog(\{0\}:\textit{Ind})}\\
+%         \tfield{e}{appear(\smallrecord{\smalltfield{e}{approach(\{0\}:\textit{Ind})}})}}
 
-\bigskip
+% \bigskip
 
-\record{\tfield{x\{0\}}{\textit{Ind}}\\
-        \tfield{c}{\smallrecord{\smalltfield{e}{dog(\{0\}:\textit{Ind})}}}}
+% \record{\tfield{x\{0\}}{\textit{Ind}}\\
+%         \tfield{c}{\smallrecord{\smalltfield{e}{dog(\{0\}:\textit{Ind})}}}}
 
-\end{quote}
+% \end{quote}
 % The unique identifier notation can be obtained from the official
 % notation by 
 % \begin{enumerate} 
@@ -2642,283 +2642,283 @@ In the unique identfier notation these will be:
  
 % \end{enumerate} 
    
-Consider as an example the type which in abbreviatory notation is
-written (with abbreviatory representation of the path `id$_0$.x' in
-the `id$_0$.e'-field) as:
-\begin{quote}
+% Consider as an example the type which in abbreviatory notation is
+% written (with abbreviatory representation of the path `id$_0$.x' in
+% the `id$_0$.e'-field) as:
+% \begin{quote}
 
-\record{\tfield{id$_0$}{\record{\tfield{x}{\textit{Ind}}\\
-                                \tfield{e}{dog(x)}}}\\
-        \tfield{id$_1$}{\record{\tfield{e}{run($\Uparrow$id$_0$.x)}}}}
+% \record{\tfield{id$_0$}{\record{\tfield{x}{\textit{Ind}}\\
+%                                 \tfield{e}{dog(x)}}}\\
+%         \tfield{id$_1$}{\record{\tfield{e}{run($\Uparrow$id$_0$.x)}}}}
 
-\end{quote}
-This is a type which relates to our discussion of long term memory in
-Chapters~\ref{ch:propnames}--\ref{ch:intensional}.  In official
-notation this type is represented as:
-\begin{quote}
+% \end{quote}
+% This is a type which relates to our discussion of long term memory in
+% Chapters~\ref{ch:propnames}--\ref{ch:intensional}.  In official
+% notation this type is represented as:
+% \begin{quote}
 
-\record{\tfield{id$_0$}{\record{\tfield{x}{\textit{Ind}}\\
-                                \tfield{e}{$\langle\lambda
-                                  v$:\textit{Ind} . dog($v$),
-                                  $\langle$x$\rangle\rangle$}}}\\
-        \tfield{id$_1$}{$\langle\lambda v$:\textit{Ind}
-          . \record{\tfield{e}{run($v$)}},
-          $\langle$id$_0$.x$\rangle\rangle$}}
+% \record{\tfield{id$_0$}{\record{\tfield{x}{\textit{Ind}}\\
+%                                 \tfield{e}{$\langle\lambda
+%                                   v$:\textit{Ind} . dog($v$),
+%                                   $\langle$x$\rangle\rangle$}}}\\
+%         \tfield{id$_1$}{$\langle\lambda v$:\textit{Ind}
+%           . \record{\tfield{e}{run($v$)}},
+%           $\langle$id$_0$.x$\rangle\rangle$}}
 
-\end{quote}
-In the unique identifier notation this would be
-\begin{quote}
+% \end{quote}
+% In the unique identifier notation this would be
+% \begin{quote}
 
-\record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
-                                \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
-        \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}}
+% \record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+%                                 \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
+%         \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}}
 
-\end{quote}
-This in turn can be represented in tree-notation to make the
-sisterhood relations clear.
-\begin{quote}
+% \end{quote}
+% This in turn can be represented in tree-notation to make the
+% sisterhood relations clear.
+% \begin{quote}
 
-\Tree [ [.id$_0$
-          [.x\{0\} \textit{Ind} ]
-          [.e dog(\{0\}:\textit{Ind}) ] ]
-        [.id$_1$
-          [.e run(\{0\}:\textit{Ind}) ] ] ]
+% \Tree [ [.id$_0$
+%           [.x\{0\} \textit{Ind} ]
+%           [.e dog(\{0\}:\textit{Ind}) ] ]
+%         [.id$_1$
+%           [.e run(\{0\}:\textit{Ind}) ] ] ]
 
-\end{quote}
-To convert this back to official notation, we first look at the sister
-of `x\{0\}', that is, `e', and replace the subtree it immediately
-dominates with the corresponding dependent field.
-\begin{quote}
+% \end{quote}
+% To convert this back to official notation, we first look at the sister
+% of `x\{0\}', that is, `e', and replace the subtree it immediately
+% dominates with the corresponding dependent field.
+% \begin{quote}
 
-\Tree [ [.id$_0$
-          [.x\{0\} \textit{Ind} ]
-          [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
-        [.id$_1$
-          [.e run(\{0\}:\textit{Ind}) ] ] ]
+% \Tree [ [.id$_0$
+%           [.x\{0\} \textit{Ind} ]
+%           [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
+%         [.id$_1$
+%           [.e run(\{0\}:\textit{Ind}) ] ] ]
 
-\end{quote} 
-Next we go up one node from `x\{0\}' to `id$_0$' and look at its
-sister, `id$_1$'.  We then form an appropriate dependent field from
-its immediate subtree.
-\begin{quote}
+% \end{quote} 
+% Next we go up one node from `x\{0\}' to `id$_0$' and look at its
+% sister, `id$_1$'.  We then form an appropriate dependent field from
+% its immediate subtree.
+% \begin{quote}
 
-\Tree [ [.id$_0$
-          [.x\{0\} \textit{Ind} ]
-          [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
-        [.id$_1$
-          {$\langle\lambda v_0$:\textit{Ind} .  \smallrecord{\smalltfield{e}{run($v_0$)}},
-            $\langle$id$_0$.x$\rangle\rangle$} ] ]
+% \Tree [ [.id$_0$
+%           [.x\{0\} \textit{Ind} ]
+%           [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
+%         [.id$_1$
+%           {$\langle\lambda v_0$:\textit{Ind} .  \smallrecord{\smalltfield{e}{run($v_0$)}},
+%             $\langle$id$_0$.x$\rangle\rangle$} ] ]
 
-\end{quote}
-Finally, we remove the unique identifier `\{0\}'.
-\begin{quote}
+% \end{quote}
+% Finally, we remove the unique identifier `\{0\}'.
+% \begin{quote}
 
-\Tree [ [.id$_0$
-          [.x \textit{Ind} ]
-          [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
-        [.id$_1$
-          {$\langle\lambda v_0$:\textit{Ind} .  \smallrecord{\smalltfield{e}{run($v_0$)}},
-            $\langle$id$_0$.x$\rangle\rangle$} ] ]
+% \Tree [ [.id$_0$
+%           [.x \textit{Ind} ]
+%           [.e {$\langle\lambda v_0$:\textit{Ind} . dog($v_0$), $\langle$x$\rangle\rangle$} ] ]
+%         [.id$_1$
+%           {$\langle\lambda v_0$:\textit{Ind} .  \smallrecord{\smalltfield{e}{run($v_0$)}},
+%             $\langle$id$_0$.x$\rangle\rangle$} ] ]
 
-\end{quote}
-This is now the tree variant of the official notation for the type.
+% \end{quote}
+% This is now the tree variant of the official notation for the type.
 
-The flattened variant of the unique identifier notation,
-\begin{quote}
-\record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
-                                \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
-        \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}}
-\end{quote}
-is:
-\begin{quote}
-\record{\tfield{id$_0$.x\{0\}}{\textit{Ind}}\\
-        \tfield{id$_0$.e}{dog(\{0\}:\textit{Ind})}\\
-        \tfield{id$_1$.e}{run(\{0\}:\textit{Ind})}}
-\end{quote}
-where we have made the paths in the original type explicit.  Note,
-that this again is not introducing a new type.  It is merely a variant
-notation for the original unflattened type.  If we think of the
-notation itself as a record, that is, a set of ordered pairs, we can
-obtain the flattened representation of the type by applying the same
-procedure as we used for records.  Thus the unflattened representation
-corresponds to the set
-\begin{quote}
-\begin{tabbing}
-\{\=$\langle$id$_0$, \{\=$\langle$x\{0\}, \textit{Ind}$\rangle$,\\
-\>\>                    $\langle$e, dog(\{0\}:\textit{Ind})$\rangle$\}\\
-\>$\langle$id$_1$, \{$\langle$e, run(\{0\}:\textit{Ind})$\rangle$\}\}
-\end{tabbing}
-\end{quote}
-We can now apply the flattening algorithm defined on
-p.~\pageref{pg:flattening} to this set, yielding the set:
-\begin{quote}
-\begin{tabbing}
-\{\=$\langle$id$_0$.x\{0\}, \textit{Ind}$\rangle$\\
-\>  $\langle$id$_0$.e, dog(\{0\}:\textit{Ind})$\rangle$\\
-\>  $\langle$id$_1$.e, run(\{0\}:\textit{Ind})\}
-\end{tabbing}
-\end{quote}
-Thus we are not flattening the
-type, but we \emph{are} flattening the \emph{representation} of the type
-which can itself
-be conceived of as a record.
+% The flattened variant of the unique identifier notation,
+% \begin{quote}
+% \record{\tfield{id$_0$}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+%                                 \tfield{e}{dog(\{0\}:\textit{Ind})}}}\\
+%         \tfield{id$_1$}{\record{\tfield{e}{run(\{0\}:\textit{Ind})}}}}
+% \end{quote}
+% is:
+% \begin{quote}
+% \record{\tfield{id$_0$.x\{0\}}{\textit{Ind}}\\
+%         \tfield{id$_0$.e}{dog(\{0\}:\textit{Ind})}\\
+%         \tfield{id$_1$.e}{run(\{0\}:\textit{Ind})}}
+% \end{quote}
+% where we have made the paths in the original type explicit.  Note,
+% that this again is not introducing a new type.  It is merely a variant
+% notation for the original unflattened type.  If we think of the
+% notation itself as a record, that is, a set of ordered pairs, we can
+% obtain the flattened representation of the type by applying the same
+% procedure as we used for records.  Thus the unflattened representation
+% corresponds to the set
+% \begin{quote}
+% \begin{tabbing}
+% \{\=$\langle$id$_0$, \{\=$\langle$x\{0\}, \textit{Ind}$\rangle$,\\
+% \>\>                    $\langle$e, dog(\{0\}:\textit{Ind})$\rangle$\}\\
+% \>$\langle$id$_1$, \{$\langle$e, run(\{0\}:\textit{Ind})$\rangle$\}\}
+% \end{tabbing}
+% \end{quote}
+% We can now apply the flattening algorithm defined on
+% p.~\pageref{pg:flattening} to this set, yielding the set:
+% \begin{quote}
+% \begin{tabbing}
+% \{\=$\langle$id$_0$.x\{0\}, \textit{Ind}$\rangle$\\
+% \>  $\langle$id$_0$.e, dog(\{0\}:\textit{Ind})$\rangle$\\
+% \>  $\langle$id$_1$.e, run(\{0\}:\textit{Ind})\}
+% \end{tabbing}
+% \end{quote}
+% Thus we are not flattening the
+% type, but we \emph{are} flattening the \emph{representation} of the type
+% which can itself
+% be conceived of as a record.
 
-Now consider the relabelling:
-\begin{quote}
-id$_0$.x$\leadsto$x\\
-id$_0$.e$\leadsto$e$_1$\\
-id$_1$.e$\leadsto$e$_2$
-\end{quote}
-This relabelling can be decorated with the unique identifiers
-corresponding to the flattened representation of the type.  On the
-left hand side of the relabelling we copy whatever unique identifiers
-occur associated with the label in the type.  We then place a copy of
-the unique identifier occurring on the left hand side also on the
-right hand side.  Thus the decorated version of this relabelling
-corresponding to this type will be:
-\begin{quote}
-id$_0$.x\{0\}$\leadsto$x\{0\}\\
-id$_0$.e$\leadsto$e$_1$\\
-id$_1$.e$\leadsto$e$_2$
-\end{quote}
-Now, again considering the flattened representation of the type as a
-record, we can apply the relabelling to the representation in the
-manner characterized on pp.~\pageref{pg:relabelling}ff.
-Thus for the above type
-this relabelling will yield:
-\begin{quote}
-\record{\tfield{x\{0\}}{\textit{Ind}}\\
-        \tfield{e$_1$}{dog(\{0\}:\textit{Ind})}\\
-        \tfield{e$_2$}{run(\{0\}:\textit{Ind})}}
-\end{quote}
-which in official notation is
-\begin{quote}
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{e$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
-          $\langle$x$\rangle\rangle$}\\
-        \tfield{e$_2$}{$\langle\lambda v$:\textit{Ind} . run($v$),
-          $\langle$x$\rangle\rangle$}}
-\end{quote}
-In this example the unique identifier occurred at the end of a path,
-but this is not always the case.  Consider the example discussed on
-p.~\pageref{pg:sam-saw-a-dog-run}.  In unique identifier notation this
-is
-\begin{quote}
-\record{\tfield{s\{1\}}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
-                                \tfield{c}{dog(\{0\}:\textit{Ind})}\\
-                                \tfield{e}{run(\{0\}:\textit{Ind})}}}\\
-        \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
+% Now consider the relabelling:
+% \begin{quote}
+% id$_0$.x$\leadsto$x\\
+% id$_0$.e$\leadsto$e$_1$\\
+% id$_1$.e$\leadsto$e$_2$
+% \end{quote}
+% This relabelling can be decorated with the unique identifiers
+% corresponding to the flattened representation of the type.  On the
+% left hand side of the relabelling we copy whatever unique identifiers
+% occur associated with the label in the type.  We then place a copy of
+% the unique identifier occurring on the left hand side also on the
+% right hand side.  Thus the decorated version of this relabelling
+% corresponding to this type will be:
+% \begin{quote}
+% id$_0$.x\{0\}$\leadsto$x\{0\}\\
+% id$_0$.e$\leadsto$e$_1$\\
+% id$_1$.e$\leadsto$e$_2$
+% \end{quote}
+% Now, again considering the flattened representation of the type as a
+% record, we can apply the relabelling to the representation in the
+% manner characterized on pp.~\pageref{pg:relabelling}ff.
+% Thus for the above type
+% this relabelling will yield:
+% \begin{quote}
+% \record{\tfield{x\{0\}}{\textit{Ind}}\\
+%         \tfield{e$_1$}{dog(\{0\}:\textit{Ind})}\\
+%         \tfield{e$_2$}{run(\{0\}:\textit{Ind})}}
+% \end{quote}
+% which in official notation is
+% \begin{quote}
+% \record{\tfield{x}{\textit{Ind}}\\
+%         \tfield{e$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
+%           $\langle$x$\rangle\rangle$}\\
+%         \tfield{e$_2$}{$\langle\lambda v$:\textit{Ind} . run($v$),
+%           $\langle$x$\rangle\rangle$}}
+% \end{quote}
+% In this example the unique identifier occurred at the end of a path,
+% but this is not always the case.  Consider the example discussed on
+% p.~\pageref{pg:sam-saw-a-dog-run}.  In unique identifier notation this
+% is
+% \begin{quote}
+% \record{\tfield{s\{1\}}{\record{\tfield{x\{0\}}{\textit{Ind}}\\
+%                                 \tfield{c}{dog(\{0\}:\textit{Ind})}\\
+%                                 \tfield{e}{run(\{0\}:\textit{Ind})}}}\\
+%         \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
 
-\end{quote}
-The flattened variant of the unique identifier notation for this type
-is below, where the unique identifier `\{1\}' occurs on three copies
-of the label `s':
-\begin{quote}
-\record{\tfield{s\{1\}.x\{0\}}{\textit{Ind}}\\
-        \tfield{s\{1\}.c}{dog(\{0\}:\textit{Ind})}\\
-        \tfield{s\{1\}.e}{run(\{0\}:\textit{Ind})}\\
-        \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
-\end{quote}
-We require that any relabelling for a type must preserve partial paths
-terminated with a label associated with a unique identifier in the sense that
-while the partial path itself may be changed, it must be changed to the same
-partial path in each path where the unique identifier occurs.  Thus the
-following would be an admissible relabelling for this type:
-\begin{quote}
-s.x $\leadsto$ id$_0$.id$_1$.x \\
-s.c $\leadsto$ id$_0$.id$_1$.e \\
-s.e $\leadsto$ id$_0$.e \\
-e $\leadsto$ id$_2$.e
-\end{quote}
-We can decorate this relabelling with unique identifiers corresponding
-to the type:
-\begin{quote}
-s\{1\}.x\{0\} $\leadsto$ id$_0$\{1\}.id$_1$.x\{0\} \\
-s\{1\}.c $\leadsto$ id$_0$\{1\}.id$_1$.e \\
-s\{1\}.e $\leadsto$ id$_0$\{1\}.e \\
-e $\leadsto$ id$_2$.e
-\end{quote}
-How do we know where to place the identifier `\{1\}' on the right-hand
-side of the annotated relabelling?  It goes after the longest partial
-path which the three paths corresponding to left-hand side paths
-containing \{1\} have in common.  So, for example, if the relabelling
-had been:
-\begin{quote}
-s.x $\leadsto$ id$_0$.id$_1$.x \\
-s.c $\leadsto$ id$_0$.id$_1$.e$_1$ \\
-s.e $\leadsto$ id$_0$.id$_1$.e$_2$ \\
-e $\leadsto$ id$_2$.e
-\end{quote}
-the decorated version would be:
-\begin{quote}
-s\{1\}.x\{0\} $\leadsto$ id$_0$.id$_1$\{1\}.x\{0\} \\
-s\{1\}.c $\leadsto$ id$_0$.id$_1$\{1\}.e$_1$ \\
-s\{1\}.e $\leadsto$ id$_0$.id$_1$\{1\}.e$_2$ \\
-e $\leadsto$ id$_2$.e
-\end{quote}
+% \end{quote}
+% The flattened variant of the unique identifier notation for this type
+% is below, where the unique identifier `\{1\}' occurs on three copies
+% of the label `s':
+% \begin{quote}
+% \record{\tfield{s\{1\}.x\{0\}}{\textit{Ind}}\\
+%         \tfield{s\{1\}.c}{dog(\{0\}:\textit{Ind})}\\
+%         \tfield{s\{1\}.e}{run(\{0\}:\textit{Ind})}\\
+%         \tfield{e}{see(sam,\{1\}:\textit{Rec})}}
+% \end{quote}
+% We require that any relabelling for a type must preserve partial paths
+% terminated with a label associated with a unique identifier in the sense that
+% while the partial path itself may be changed, it must be changed to the same
+% partial path in each path where the unique identifier occurs.  Thus the
+% following would be an admissible relabelling for this type:
+% \begin{quote}
+% s.x $\leadsto$ id$_0$.id$_1$.x \\
+% s.c $\leadsto$ id$_0$.id$_1$.e \\
+% s.e $\leadsto$ id$_0$.e \\
+% e $\leadsto$ id$_2$.e
+% \end{quote}
+% We can decorate this relabelling with unique identifiers corresponding
+% to the type:
+% \begin{quote}
+% s\{1\}.x\{0\} $\leadsto$ id$_0$\{1\}.id$_1$.x\{0\} \\
+% s\{1\}.c $\leadsto$ id$_0$\{1\}.id$_1$.e \\
+% s\{1\}.e $\leadsto$ id$_0$\{1\}.e \\
+% e $\leadsto$ id$_2$.e
+% \end{quote}
+% How do we know where to place the identifier `\{1\}' on the right-hand
+% side of the annotated relabelling?  It goes after the longest partial
+% path which the three paths corresponding to left-hand side paths
+% containing \{1\} have in common.  So, for example, if the relabelling
+% had been:
+% \begin{quote}
+% s.x $\leadsto$ id$_0$.id$_1$.x \\
+% s.c $\leadsto$ id$_0$.id$_1$.e$_1$ \\
+% s.e $\leadsto$ id$_0$.id$_1$.e$_2$ \\
+% e $\leadsto$ id$_2$.e
+% \end{quote}
+% the decorated version would be:
+% \begin{quote}
+% s\{1\}.x\{0\} $\leadsto$ id$_0$.id$_1$\{1\}.x\{0\} \\
+% s\{1\}.c $\leadsto$ id$_0$.id$_1$\{1\}.e$_1$ \\
+% s\{1\}.e $\leadsto$ id$_0$.id$_1$\{1\}.e$_2$ \\
+% e $\leadsto$ id$_2$.e
+% \end{quote}
 
-According to the first relabelling the relabelled type would be:
-\begin{quote}
-\record{\tfield{id$_0$\{1\}.id$_1$.x\{0\}}{\textit{Ind}}\\
-        \tfield{id$_0$\{1\}.id$_1$.e}{dog(\{0\}:\textit{Ind})}\\
-        \tfield{id$_0$\{1\}.e}{run(\{0\}:\textit{Ind})}\\
-        \tfield{id$_2$.e}{see(sam,\{1\}:\textit{Rec})}}
-\end{quote}
-In standard notation with unabbreviated paths this type is represented
-as
-\begin{quote}
-\record{\tfield{id$_0$}{\record{\tfield{id$_1$}{\record{\tfield{x}{\textit{Ind}}\\
-                                                        \tfield{e}{$\langle\lambda
-                                                          v$:\textit{Ind}
-                                                          . dog($v$),
-                                                          $\langle$id$_0$.id$_1$.x$\rangle\rangle$}}}\\
-                                \tfield{e}{$\langle\lambda
-                                  v$:\textit{Ind} . run($v$),
-                                  $\langle$id$_0$.id$_1$.x$\rangle\rangle$}}}\\
-        \tfield{id$_2$}{$\langle\lambda
-              v$:\textit{Rec} . \smallrecord{\smalltfield{e}{see(sam,$v$)}},
-              $\langle$id$_0\rangle\rangle$}}
-\end{quote}
-Using abbreviated paths, this is
-\begin{quote}
-\record{\tfield{id$_0$}{\record{\tfield{id$_1$}{\record{\tfield{x}{\textit{Ind}}\\
-                                                        \tfield{e}{$\langle\lambda
-                                                          v$:\textit{Ind}
-                                                          . dog($v$),
-                                                          $\langle$x$\rangle\rangle$}}}\\
-                                \tfield{e}{$\langle\lambda
-                                  v$:\textit{Ind} . run($v$),
-                                  $\langle$id$_1$.x$\rangle\rangle$}}}\\
-        \tfield{id$_2$}{$\langle\lambda
-              v$:\textit{Rec} . \smallrecord{\smalltfield{e}{see(sam,$v$)}},
-              $\langle$id$_0\rangle\rangle$}}
-\end{quote}
-Suppose we had tried to use the following relabelling instead.
-\begin{quote}
-s.x $\leadsto$ id$_0$.id$_1$.x \\
-s.c $\leadsto$ id$_0$.id$_1$.e \\
-s.e $\leadsto$ id$_1$.e \\
-e $\leadsto$ id$_2$.e
-\end{quote}
-This relabelling cannot be decorated according to the unique identifiers
-of the type because the three occurrences of `s' do not have a
-corresponding partial path on the right-hand side.  This relabelling
-is thus inadmissible for this type.  We thus define admissibility of a
-relabelling for a type as follows:
-\begin{quote}
-A relabelling, $\eta$, is \textit{admissible} for a record type, $T$,
-just in case $\eta$ can be decorated according to the flattened unique
-identifier representation of $T$.
+% According to the first relabelling the relabelled type would be:
+% \begin{quote}
+% \record{\tfield{id$_0$\{1\}.id$_1$.x\{0\}}{\textit{Ind}}\\
+%         \tfield{id$_0$\{1\}.id$_1$.e}{dog(\{0\}:\textit{Ind})}\\
+%         \tfield{id$_0$\{1\}.e}{run(\{0\}:\textit{Ind})}\\
+%         \tfield{id$_2$.e}{see(sam,\{1\}:\textit{Rec})}}
+% \end{quote}
+% In standard notation with unabbreviated paths this type is represented
+% as
+% \begin{quote}
+% \record{\tfield{id$_0$}{\record{\tfield{id$_1$}{\record{\tfield{x}{\textit{Ind}}\\
+%                                                         \tfield{e}{$\langle\lambda
+%                                                           v$:\textit{Ind}
+%                                                           . dog($v$),
+%                                                           $\langle$id$_0$.id$_1$.x$\rangle\rangle$}}}\\
+%                                 \tfield{e}{$\langle\lambda
+%                                   v$:\textit{Ind} . run($v$),
+%                                   $\langle$id$_0$.id$_1$.x$\rangle\rangle$}}}\\
+%         \tfield{id$_2$}{$\langle\lambda
+%               v$:\textit{Rec} . \smallrecord{\smalltfield{e}{see(sam,$v$)}},
+%               $\langle$id$_0\rangle\rangle$}}
+% \end{quote}
+% Using abbreviated paths, this is
+% \begin{quote}
+% \record{\tfield{id$_0$}{\record{\tfield{id$_1$}{\record{\tfield{x}{\textit{Ind}}\\
+%                                                         \tfield{e}{$\langle\lambda
+%                                                           v$:\textit{Ind}
+%                                                           . dog($v$),
+%                                                           $\langle$x$\rangle\rangle$}}}\\
+%                                 \tfield{e}{$\langle\lambda
+%                                   v$:\textit{Ind} . run($v$),
+%                                   $\langle$id$_1$.x$\rangle\rangle$}}}\\
+%         \tfield{id$_2$}{$\langle\lambda
+%               v$:\textit{Rec} . \smallrecord{\smalltfield{e}{see(sam,$v$)}},
+%               $\langle$id$_0\rangle\rangle$}}
+% \end{quote}
+% Suppose we had tried to use the following relabelling instead.
+% \begin{quote}
+% s.x $\leadsto$ id$_0$.id$_1$.x \\
+% s.c $\leadsto$ id$_0$.id$_1$.e \\
+% s.e $\leadsto$ id$_1$.e \\
+% e $\leadsto$ id$_2$.e
+% \end{quote}
+% This relabelling cannot be decorated according to the unique identifiers
+% of the type because the three occurrences of `s' do not have a
+% corresponding partial path on the right-hand side.  This relabelling
+% is thus inadmissible for this type.  We thus define admissibility of a
+% relabelling for a type as follows:
+% \begin{quote}
+% A relabelling, $\eta$, is \textit{admissible} for a record type, $T$,
+% just in case $\eta$ can be decorated according to the flattened unique
+% identifier representation of $T$.
 
-\end{quote}
+% \end{quote}
 
-We can now define the notion of relabelling for types using the
-notions of flattening and relabelling we used for records:
-\begin{quote}
-If $T$ is a record type with unique identifier representation, $r$, and $\eta$ is an admissible relabelling for $T$,
-then the \textit{result of relabelling $T$ with $\eta$}, $[T]_\eta$,
-is that $T'$ whose unique identifier representation is $[r]_\eta$.
-\end{quote}
+% We can now define the notion of relabelling for types using the
+% notions of flattening and relabelling we used for records:
+% \begin{quote}
+% If $T$ is a record type with unique identifier representation, $r$, and $\eta$ is an admissible relabelling for $T$,
+% then the \textit{result of relabelling $T$ with $\eta$}, $[T]_\eta$,
+% is that $T'$ whose unique identifier representation is $[r]_\eta$.
+% \end{quote}
 
 
 
