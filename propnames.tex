@@ -898,8 +898,11 @@ $\ulcorner\lambda
                                                  ``Sam'')}}}\\
                   \smalltfield{a}{\textit{Rec}}} . 
 \smallrecord{\smalltfield{e}{leave($r$.f.x)}}$\urcorner$ 
- 
+\label{ex:pcont-samleft} 
 \end{ex}
+The background of the parametric content is
+being used as a presupposition which is being matched against the
+hearer's current information state.
 
 \begin{shaded}
 In order to give a more precise characterization of relabelling we
@@ -1112,7 +1115,8 @@ have given.
 \end{subex} 
    
 \end{ex} 
-  
+To understand why this works, see the characterization of unique
+identifier notation in Chapter~\ref{ch:infex}, p.~\pageref{pg:unique-identifier-notation}.  
 
 
   
@@ -1122,11 +1126,6 @@ have given.
 \end{shaded}
 
 
-@@
-
-The background of the parametric content is
-being used as a presupposition which is being matched against the
-hearer's current information state.
 
 Given that we have now found a match, how can we go about updating the
 shared commitments with the new information represented by the
@@ -1169,7 +1168,7 @@ parametric content?  % The technique for doing this will involve the
 % p.~\pageref{pg:fixedpointtype}. 
 
 If we are updating (\ref{ex:sharedcommsnonexpanded}) with the parametric
-content \preveg{a} then the result should be \nexteg{} where
+content (\ref{ex:pcont-samleft}a) then the result should be \nexteg{} where
 (\ref{ex:sharedcommsnonexpanded}) has been embedded under the label
 `prev' and the new information provided by the parametric content has
 been added at the top level of the new type, suitably relabelled so as
@@ -1231,8 +1230,9 @@ Suppose that we have a record, $r_{\mathrm{comm}}$, of type
 $T_{\mathrm{comm}}$.  We can use this together with $\eta$ to anchor
 $T_{\mathrm{bg}}$.  The result of the anchoring is notated as 
 $T_{\mathrm{bg}}\parallel_\eta r_{\mathrm{comm}}$. The operation
-$T \parallel_\eta r$ (defined explicitly in
-Appendix~\ref{app:specrec}) replaces fields in $T$, \smallrecord{\smalltfield{$\ell$}{$T'$}}, such
+$T \parallel_\eta r$ % (defined explicitly in
+% Appendix~\ref{app:specrec})
+replaces fields in $T$, \smallrecord{\smalltfield{$\ell$}{$T'$}}, such
 that $\ell$ is in the
 domain of the relabelling, $\eta$, and for which $\eta$ returns a
 path, $\pi$,
@@ -1270,7 +1270,15 @@ will thus be that given in \nexteg{}.
              \tfield{bg}{$T_{\mathrm{bg}}$ $\parallel_\eta$
                prev}\\
              \tfield{fg}{$f$(bg)}}
-\end{ex} 
+         \end{ex}
+
+@@
+
+\begin{shaded}
+  anchoring types with records
+
+\end{shaded}
+           
 We can tie all this together in a single update function, given in
 \nexteg{}, a preliminary version which we will revise slightly later
 in the light of other accommodation functions which we will introduce
