@@ -3130,91 +3130,92 @@ singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
 \end{enumerate}  
 
 
-If $T$ is a record type and $r$ is a record, then $T\parallel r$, the
-\textit{specification} (or \textit{anchoring}) of $T$ by
-$r$\footnote{$r$ could also be referred to as a \textit{partial
-    specifier} or \textit{partial assignment} for $T$} is the result
-of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
-$\ell$ is a label in $r$, with 
-\begin{enumerate}
-\item  $\langle\ell,T'_{r.\ell}\rangle$\footnote{That is, in our
-standard graphical notation, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
-replaced by \smallrecord{\smallmfield{$\ell$}{$r.\ell$}{$T'$}}}, if
-$T'$ is a type
-\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
-  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
-  paths of length $n$ and for any
-  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
-  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)_{r.\ell}$
-\end{enumerate}
+% If $T$ is a record type and $r$ is a record, then $T\parallel r$, the
+% \textit{specification} (or \textit{anchoring}) of $T$ by
+% $r$\footnote{$r$ could also be referred to as a \textit{partial
+%     specifier} or \textit{partial assignment} for $T$} is the result
+% of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+% $\ell$ is a label in $r$, with 
+% \begin{enumerate}
+% \item  $\langle\ell,T'_{r.\ell}\rangle$\footnote{That is, in our
+% standard graphical notation, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
+% replaced by \smallrecord{\smallmfield{$\ell$}{$r.\ell$}{$T'$}}}, if
+% $T'$ is a type
+% \item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+%   f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+%   paths of length $n$ and for any
+%   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+%   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)_{r.\ell}$
+% \end{enumerate}
 
-A variant of this notion of specification is default specification
-which will only require specification of fields which are not already
-specified. If $T$ is a record type and $r$ is a record, then
-$T\dspec r$, the
-\textit{default specification} (or \textit{default anchoring}) of $T$ by
-$r$ is the result
-of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
-$\ell$ is a label in $r$, with 
-\begin{enumerate}
-\item  $\langle\ell,T'_{r.\ell}\rangle$, if
-$T'$ is a type but not a singleton type.\footnote{That is, $\langle
-  \ell, T'\rangle$ is not already a manifest field.} If $T'$ is a
-singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
-\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
-  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
-  paths of length $n$ and for any
-  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
-  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)_{r.\ell}$ if $f(a_1)\ldots(a_n)$ is not a
-  singleton type. Otherwise, $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)$.
-\end{enumerate}  
+% A variant of this notion of specification is default specification
+% which will only require specification of fields which are not already
+% specified. If $T$ is a record type and $r$ is a record, then
+% $T\dspec r$, the
+% \textit{default specification} (or \textit{default anchoring}) of $T$ by
+% $r$ is the result
+% of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+% $\ell$ is a label in $r$, with 
+% \begin{enumerate}
+% \item  $\langle\ell,T'_{r.\ell}\rangle$, if
+% $T'$ is a type but not a singleton type.\footnote{That is, $\langle
+%   \ell, T'\rangle$ is not already a manifest field.} If $T'$ is a
+% singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
+% \item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+%   f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+%   paths of length $n$ and for any
+%   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+%   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)_{r.\ell}$ if $f(a_1)\ldots(a_n)$ is not a
+%   singleton type. Otherwise, $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)$.
+% \end{enumerate}
 
-Types can also be specified by records which have different labels to
-the type by using a relabelling.  Thus $T\parallel_\eta r$ is the
-result of replacing each field in $T$, $\langle\ell,T'\rangle$,  such
-that $\eta(\ell)$ is a label in $r$ and $r.\eta(\ell):T'$, with a
-manifest field$\langle\ell,T'_{r.\eta(\ell)}\rangle$.  More exactly we
-will define $T\parallel_\eta r$ in terms of flattening, relabelling
-and specification by a record:
-\begin{quote}
-$T\parallel_\eta r$ =
-$\varphi^-([[\varphi(T)]_\eta\parallel\varphi(r)]_{\eta^-})$
-\end{quote}
-Here are two examples:  suppose that % $a:T_1$, $b:T_2$ and 
-$\eta$ is a
-function with domain $\{\ell_1,\ell_2\}$ such that
-$\eta(\ell_1)=\ell_3$ and $\eta(\ell_2)=\ell_4$.  Then:
-\begin{quote}
-\record{\tfield{$\ell_1$}{$T_1$}\\
-        \tfield{$\ell_2$}{$T_2$}} $\parallel_\eta$ 
-\record{\field{$\ell_3$}{$a$}\\
-        \field{$\ell_4$}{$b$}}
-=
-\record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
-        \mfield{$\ell_2$}{$b$}{$T_2$}}
-\end{quote}
-Suppose now that % $a$ and $b$ are as above and that 
-$\eta$ is a
-function with domain $\{\ell_5.\ell_1, \ell_5.\ell_2, \ell_6\}$ (where
-$\ell_5.\ell_1$ and $\ell_5.\ell_2$ are complex labels) such that
-$\eta(\ell_5.\ell_1)=\ell_7.\ell_3$,
-$\eta(\ell_5.\ell_2)=\ell_8.\ell_4$ and $\eta(\ell_6)=\ell_6$.  Then:
-\begin{quote}
-\record{\tfield{$\ell_5$}{\record{\tfield{$\ell_1$}{$T_1$}\\
-                                  \tfield{$\ell_2$}{$T_2$}}}\\
-        \tfield{$\ell_6$}{$T_3$}} $\parallel_\eta$
-\record{\field{$\ell_7$}{\record{\field{$\ell_3$}{$a$}}}\\
-        \field{$\ell_8$}{\record{\field{$\ell_4$}{$b$}\\
-                                 \field{$\ell_9$}{$c$}}}} =
-\begin{quote}
-\record{\tfield{$\ell_5$}{\record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
-                                  \mfield{$\ell_2$}{$b$}{$T_2$}}}\\
-        \tfield{$\ell_6$}{$T_3$}}
-\end{quote}
-\end{quote}  
+
+% Types can also be specified by records which have different labels to
+% the type by using a relabelling.  Thus $T\parallel_\eta r$ is the
+% result of replacing each field in $T$, $\langle\ell,T'\rangle$,  such
+% that $\eta(\ell)$ is a label in $r$ and $r.\eta(\ell):T'$, with a
+% manifest field$\langle\ell,T'_{r.\eta(\ell)}\rangle$.  More exactly we
+% will define $T\parallel_\eta r$ in terms of flattening, relabelling
+% and specification by a record:
+% \begin{quote}
+% $T\parallel_\eta r$ =
+% $\varphi^-([[\varphi(T)]_\eta\parallel\varphi(r)]_{\eta^-})$
+% \end{quote}
+% Here are two examples:  suppose that % $a:T_1$, $b:T_2$ and 
+% $\eta$ is a
+% function with domain $\{\ell_1,\ell_2\}$ such that
+% $\eta(\ell_1)=\ell_3$ and $\eta(\ell_2)=\ell_4$.  Then:
+% \begin{quote}
+% \record{\tfield{$\ell_1$}{$T_1$}\\
+%         \tfield{$\ell_2$}{$T_2$}} $\parallel_\eta$ 
+% \record{\field{$\ell_3$}{$a$}\\
+%         \field{$\ell_4$}{$b$}}
+% =
+% \record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
+%         \mfield{$\ell_2$}{$b$}{$T_2$}}
+% \end{quote}
+% Suppose now that % $a$ and $b$ are as above and that 
+% $\eta$ is a
+% function with domain $\{\ell_5.\ell_1, \ell_5.\ell_2, \ell_6\}$ (where
+% $\ell_5.\ell_1$ and $\ell_5.\ell_2$ are complex labels) such that
+% $\eta(\ell_5.\ell_1)=\ell_7.\ell_3$,
+% $\eta(\ell_5.\ell_2)=\ell_8.\ell_4$ and $\eta(\ell_6)=\ell_6$.  Then:
+% \begin{quote}
+% \record{\tfield{$\ell_5$}{\record{\tfield{$\ell_1$}{$T_1$}\\
+%                                   \tfield{$\ell_2$}{$T_2$}}}\\
+%         \tfield{$\ell_6$}{$T_3$}} $\parallel_\eta$
+% \record{\field{$\ell_7$}{\record{\field{$\ell_3$}{$a$}}}\\
+%         \field{$\ell_8$}{\record{\field{$\ell_4$}{$b$}\\
+%                                  \field{$\ell_9$}{$c$}}}} =
+% \begin{quote}
+% \record{\tfield{$\ell_5$}{\record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
+%                                   \mfield{$\ell_2$}{$b$}{$T_2$}}}\\
+%         \tfield{$\ell_6$}{$T_3$}}
+% \end{quote}
+% \end{quote}  
 
 \section{Generalizing record types}
 \label{app:gen-rectypes}
