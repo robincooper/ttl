@@ -1272,31 +1272,40 @@ will thus be that given in \nexteg{}.
              \tfield{fg}{$f$(bg)}}
          \end{ex}
 
-@@
 
-\todo{needs defining in terms of paths}
 
 \begin{shaded}
-  %anchoring types with records
-
-
+  % anchoring types with records
+  Recall that a dependent field in a record type normally represented
+  as $[\ell=a:T]$ is in actual fact $[\ell:T_a]$ where $T_a$ is a
+  singleton type.  The intuition in defining $T\parallel r$ is 
+  that for any path, $\pi$, in $T$ leading to a type $T.\pi$, $T.\pi$ is
+  replaced by the singleton type constructed from $T.\pi$ and $r.\pi$.
+  This is made precise in \nexteg{}.
+  \begin{ex} 
   If $T$ is a record type and $r$ is a record, then $T\parallel r$,  the
-\textit{specification} (or \textit{anchoring}) of $T$ by
-$r$ is the result
-of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
-$\ell$ is a label in $r$, with 
+\textit{specification (or anchoring) of $T$ by
+$r$} is a type, $T'$, like $T$ except that if $\pi$ is a path in both
+$T$ and $r$,  
 \begin{enumerate}
-\item  $\langle\ell,T'_{r.\ell}\rangle$, if
-$T'$ is a type (that is, in our
-standard graphical notation, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
-replaced by \smallrecord{\smallmfield{$\ell$}{$r.\ell$}{$T'$}})
-\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
-  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
-  paths of length $n$ and for any
+\item  if
+$T.\pi$ is a type, then $T'.\pi$ is $(T.\pi)_{r.\pi}$ (that is, if
+$\ell$ is the last label in $\pi$ then $[\ell:T.\pi]$ is replaced by
+$[\ell=r.\pi:T.\pi]$ at the end of $\pi$ in $T$)
+
+\item if $T.\pi$ is $\langle f,\langle\pi_1,\ldots,\pi_n\rangle\rangle$, then
+  $T'.\pi$ is $\langle f',\langle\pi_1,\ldots,\pi_n\rangle\rangle$ where for any
   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)_{r.\ell}$
+  (f(a_1)\ldots(a_n))_{r.\ell}$
 \end{enumerate}
+\end{ex}
+Note that according to this definition is the type at the end of path
+$\pi$ is already a singleton type, that is, the field is already
+manifest, this will add an additional identity constraint.  Recall
+that $c:(T_a)_b$ iff $c:T_a$ and $c=b$.  Thus $c:(T_a)_b$ requires $a=b=c$.
+
+@@
 
 A variant of this notion of specification is default specification
 which will only require specification of fields which are not already
