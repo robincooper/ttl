@@ -1297,7 +1297,7 @@ $[\ell=r.\pi:T.\pi]$ at the end of $\pi$ in $T$)
   $T'.\pi$ is $\langle f',\langle\pi_1,\ldots,\pi_n\rangle\rangle$ where for any
   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  (f(a_1)\ldots(a_n))_{r.\ell}$
+  (f(a_1)\ldots(a_n))_{r.\pi}$
 \end{enumerate}
 \end{ex}
 Note that according to this definition is the type at the end of path
@@ -1305,66 +1305,109 @@ $\pi$ is already a singleton type, that is, the field is already
 manifest, this will add an additional identity constraint.  Recall
 that $c:(T_a)_b$ iff $c:T_a$ and $c=b$.  Thus $c:(T_a)_b$ requires $a=b=c$.
 
-@@
-
 A variant of this notion of specification is default specification
 which will only require specification of fields which are not already
-specified. If $T$ is a record type and $r$ is a record, then
-$T\dspec r$, the
-\textit{default specification} (or \textit{default anchoring}) of $T$ by
-$r$ is the result
-of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
-$\ell$ is a label in $r$, with 
+specified, that is, manifest fields will remain unchanged. This
+variant is given in \nexteg{}.
+  \begin{ex} 
+  If $T$ is a record type and $r$ is a record, then $T\dspec r$,  the
+\textit{default specification (or anchoring) of $T$ by
+$r$} is a type, $T'$, like $T$ except that if $\pi$ is a path in both
+$T$ and $r$,  
 \begin{enumerate}
-\item  $\langle\ell,T'_{r.\ell}\rangle$, if
-$T'$ is a type but not a singleton type. (That is, $\langle
-  \ell, T'\rangle$ is not already a manifest field.) If $T'$ is a
-singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
-\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
-  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
-  paths of length $n$ and for any
+\item  if
+$T.\pi$ is a type but not a singleton type, then $T'.\pi$ is $(T.\pi)_{r.\pi}$ 
+
+\item if $T.\pi$ is $\langle f,\langle\pi_1,\ldots,\pi_n\rangle\rangle$, then
+  $T'.\pi$ is $\langle f',\langle\pi_1,\ldots,\pi_n\rangle\rangle$ where for any
+  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+  $f(a_1)\ldots(a_n)$ is defined  and $f'(a_1)\ldots(a_n) =
+  (f(a_1)\ldots(a_n))_{r.\pi}$ if $f(a_1)\ldots(a_n)$ is not a
+  singleton type and otherwise $f'(a_1)\ldots(a_n) = f(a_1)\ldots(a_n)$ 
+\end{enumerate}
+\end{ex}
+
+% If $T$ is a record type and $r$ is a record, then
+% $T\dspec r$, the
+% \textit{default specification} (or \textit{default anchoring}) of $T$ by
+% $r$ is the result
+% of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+% $\ell$ is a label in $r$, with 
+% \begin{enumerate}
+% \item  $\langle\ell,T'_{r.\ell}\rangle$, if
+% $T'$ is a type but not a singleton type. (That is, $\langle
+%   \ell, T'\rangle$ is not already a manifest field.) If $T'$ is a
+% singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
+% \item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+%   f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+%   paths of length $n$ and for any
+%   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+%   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)_{r.\ell}$ if $f(a_1)\ldots(a_n)$ is not a
+%   singleton type. Otherwise, $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)$.
+% \end{enumerate}  
+
+Types can also be specified by records which have different paths to
+the type by using a relabelling.  Thus $T\parallel_\eta r$ anchors the
+value of a path, $\pi$, in $T$ with the value of $\eta(\pi)$ in
+$r$. % is the
+% result of replacing each field in $T$, $\langle\ell,T'\rangle$,  such
+% that $\eta(\ell)$ is a label in $r$ and $r.\eta(\ell):T'$, with a
+% manifest field$\langle\ell,T'_{r.\eta(\ell)}\rangle$.  More exactly we
+% will define $T\parallel_\eta r$ in terms of flattening, relabelling
+% and specification by a record:
+% \begin{quote}
+% $T\parallel_\eta r$ =
+% $\varphi^-([[\varphi(T)]_\eta\parallel\varphi(r)]_{\eta^-})$
+% \end{quote}
+This is defined in \nexteg{}.
+\begin{ex} 
+ If $T$ is a record type, $r$ is a record and $\eta$ is a relabelling
+ of $T$ whose range is included in $\mathrm{paths}(r)$, then $T\parallel_\eta r$,  the
+\textit{specification (or anchoring) of $T$ by
+$r$ relative to $\eta$} is a type, $T'$, like $T$ except that if $\pi$
+is in the domain of $\eta$,  
+\begin{enumerate}
+\item  if
+$T.\pi$ is a type, then $T'.\pi$ is $(T.\pi)_{r.\eta(\pi)}$ 
+
+\item if $T.\pi$ is $\langle f,\langle\pi_1,\ldots,\pi_n\rangle\rangle$, then
+  $T'.\pi$ is $\langle f',\langle\pi_1,\ldots,\pi_n\rangle\rangle$ where for any
   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)_{r.\ell}$ if $f(a_1)\ldots(a_n)$ is not a
-  singleton type. Otherwise, $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)$.
-\end{enumerate}  
-
-Types can also be specified by records which have different labels to
-the type by using a relabelling.  Thus
-  $T\parallel_\eta r$ is the
-result of replacing each field in $T$, $\langle\ell,T'\rangle$,  such
-that $\eta(\ell)$ is a label in $r$ and $r.\eta(\ell):T'$, with a
-manifest field$\langle\ell,T'_{r.\eta(\ell)}\rangle$.  More exactly we
-will define $T\parallel_\eta r$ in terms of flattening, relabelling
-and specification by a record:
-\begin{quote}
-$T\parallel_\eta r$ =
-$\varphi^-([[\varphi(T)]_\eta\parallel\varphi(r)]_{\eta^-})$
-\end{quote}
-Here are two examples:  suppose that % $a:T_1$, $b:T_2$ and 
-$\eta$ is a
-function with domain $\{\ell_1,\ell_2\}$ such that
-$\eta(\ell_1)=\ell_3$ and $\eta(\ell_2)=\ell_4$.  Then:
-\begin{quote}
-\record{\tfield{$\ell_1$}{$T_1$}\\
-        \tfield{$\ell_2$}{$T_2$}} $\parallel_\eta$ 
+  (f(a_1)\ldots(a_n))_{r.\eta(\pi)}$
+\end{enumerate} 
+\end{ex} 
+In \nexteg{} we provide two simple examples.
+\begin{ex} 
+\begin{subex} 
+ 
+\item let $\eta_1$ be characterized by
+  \begin{quote}
+    $\ell_1\leadsto\ell_3$\\
+    $\ell_2\leadsto\ell_4$
+  \end{quote}
+  
+ 
+\item then \record{\tfield{$\ell_1$}{$T_1$}\\
+        \tfield{$\ell_2$}{$T_2$}} $\parallel_{\eta_1}$ 
 \record{\field{$\ell_3$}{$a$}\\
         \field{$\ell_4$}{$b$}}
 =
 \record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
-        \mfield{$\ell_2$}{$b$}{$T_2$}}
-\end{quote}
-Suppose now that % $a$ and $b$ are as above and that 
-$\eta$ is a
-function with domain $\{\ell_5.\ell_1, \ell_5.\ell_2, \ell_6\}$ (where
-$\ell_5.\ell_1$ and $\ell_5.\ell_2$ are complex labels) such that
-$\eta(\ell_5.\ell_1)=\ell_7.\ell_3$,
-$\eta(\ell_5.\ell_2)=\ell_8.\ell_4$ and $\eta(\ell_6)=\ell_6$.  Then:
-\begin{quote}
-\record{\tfield{$\ell_5$}{\record{\tfield{$\ell_1$}{$T_1$}\\
+  \mfield{$\ell_2$}{$b$}{$T_2$}}
+\item let $\eta_2$ be characterized by
+  \begin{quote}
+    $\ell_5.\ell_1\leadsto\ell_7.\ell_3$\\
+    $\ell_5.\ell_2\leadsto\ell_8.\ell_4$
+  \end{quote}
+
+
+  
+\item then \record{\tfield{$\ell_5$}{\record{\tfield{$\ell_1$}{$T_1$}\\
                                   \tfield{$\ell_2$}{$T_2$}}}\\
-        \tfield{$\ell_6$}{$T_3$}} $\parallel_\eta$
+        \tfield{$\ell_6$}{$T_3$}} $\parallel_{\eta_2}$
 \record{\field{$\ell_7$}{\record{\field{$\ell_3$}{$a$}}}\\
         \field{$\ell_8$}{\record{\field{$\ell_4$}{$b$}\\
                                  \field{$\ell_9$}{$c$}}}} =
@@ -1373,32 +1416,86 @@ $\eta(\ell_5.\ell_2)=\ell_8.\ell_4$ and $\eta(\ell_6)=\ell_6$.  Then:
                                   \mfield{$\ell_2$}{$b$}{$T_2$}}}\\
         \tfield{$\ell_6$}{$T_3$}}
 \end{quote}
-\end{quote}  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+  
+% Here are two examples:  suppose that % $a:T_1$, $b:T_2$ and 
+% $\eta$ is a
+% function with domain $\{\ell_1,\ell_2\}$ such that
+% $\eta(\ell_1)=\ell_3$ and $\eta(\ell_2)=\ell_4$.  Then:
+% \begin{quote}
+% \record{\tfield{$\ell_1$}{$T_1$}\\
+%         \tfield{$\ell_2$}{$T_2$}} $\parallel_\eta$ 
+% \record{\field{$\ell_3$}{$a$}\\
+%         \field{$\ell_4$}{$b$}}
+% =
+% \record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
+%         \mfield{$\ell_2$}{$b$}{$T_2$}}
+% \end{quote}
+% Suppose now that % $a$ and $b$ are as above and that 
+% $\eta$ is a
+% function with domain $\{\ell_5.\ell_1, \ell_5.\ell_2, \ell_6\}$ (where
+% $\ell_5.\ell_1$ and $\ell_5.\ell_2$ are complex labels) such that
+% $\eta(\ell_5.\ell_1)=\ell_7.\ell_3$,
+% $\eta(\ell_5.\ell_2)=\ell_8.\ell_4$ and $\eta(\ell_6)=\ell_6$.  Then:
+% \begin{quote}
+% \record{\tfield{$\ell_5$}{\record{\tfield{$\ell_1$}{$T_1$}\\
+%                                   \tfield{$\ell_2$}{$T_2$}}}\\
+%         \tfield{$\ell_6$}{$T_3$}} $\parallel_\eta$
+% \record{\field{$\ell_7$}{\record{\field{$\ell_3$}{$a$}}}\\
+%         \field{$\ell_8$}{\record{\field{$\ell_4$}{$b$}\\
+%                                  \field{$\ell_9$}{$c$}}}} =
+% \begin{quote}
+% \record{\tfield{$\ell_5$}{\record{\mfield{$\ell_1$}{$a$}{$T_1$}\\
+%                                   \mfield{$\ell_2$}{$b$}{$T_2$}}}\\
+%         \tfield{$\ell_6$}{$T_3$}}
+% \end{quote}
+% \end{quote}  
 
 \end{shaded}
 
            
-We can tie all this together in a single update function, given in
+We can tie all this together in a single action rule, given in
 \nexteg{}, a preliminary version which we will revise slightly later
 in the light of other accommodation functions which we will introduce
 in Section~\ref{sec:accommodation}.
 \begin{ex} 
-\textbf{AccGB}($\eta$) -- preliminary version
+\textsc{AccGB} -- preliminary version
 
-$\lambda T$:\textit{GameBoard} . \\
-\hspace*{1em} $\lambda
-f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-                \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
-              . \\
-\hspace*{2em} $\lambda r$:$T$ . \\ 
-\hspace*{3em} $T$ \fbox{\d{$\wedge$}} 
-\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.shared.commitments}\\
-                                                                                      \smalltfield{bg}{$f$.bg
-                                                                                        $\parallel_\eta$
-                                                                                        prev}\\
-                                                                                      \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}
+% $\lambda T$:\textit{GameBoard} . \\
+% \hspace*{1em} $\lambda
+% f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+%                 \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+%               . \\
+% \hspace*{2em} $\lambda r$:$T$ . \\ 
+% \hspace*{3em} $T$ \fbox{\d{$\wedge$}} 
+% \smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.shared.commitments}\\
+%                                                                                       \smalltfield{bg}{$f$.bg
+%                                                                                         $\parallel_\eta$
+%                                                                                         prev}\\
+%                                                                                         \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}
+\begin{prooftree}
+  \hypo{s_{i,A}:_A T}
+  \hypo{u^*.\text{cont}:_A\text{\record{
+        \tfield{bg}{\textit{RecType}}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
+  \infer[enth]2[$\eta$]{s_{i+1,A}:_A T \text{\fbox{\d{$\wedge$}}
+      \smallrecord{
+        \smalltfield{shared}{\smallrecord{
+            \smallmfield{commitments}{\smallrecord{
+                \smalltfield{prev}{$s_{i,A}$.shared.commitments}\\
+                \smalltfield{bg}{$u^*$.cont.bg$\parallel_\eta$prev}\\
+                \smalltfield{fg}{$u^*$.cont.fg(bg)}}}{\textit{RecType}}}}}}}
+\end{prooftree}
+where $\eta$ is a relabelling for $u^*$.cont.bg with range included in $s_{i,A}$.shared.commitments
 \label{ex:AccGBprelim} 
-\end{ex} 
+\end{ex}
+
+@@
+
 This function takes a game-board, $T$, (recall that a gameboard is a type of
 an information state which in turn is a record) and a parametric
 content and returns a function that will map an information state of
