@@ -1479,10 +1479,13 @@ in Section~\ref{sec:accommodation}.
 %                                                                                         \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}
 \begin{prooftree}
   \hypo{s_{i,A}:_A T}
-  \hypo{u^*.\text{cont}:_A\text{\record{
-        \tfield{bg}{\textit{RecType}}\\
-        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
-  \infer[enth]2[$\eta$]{s_{i+1,A}:_A T \text{\fbox{\d{$\wedge$}}
+  \hypo{T\sqsubseteq\text{\smallrecord{
+        \smalltfield{shared}{\smallrecord{
+            \smalltfield{commitments}{\textit{RecType}}}}}}}
+  \hypo{u^*.\text{cont}:_A\text{\smallrecord{
+        \smalltfield{bg}{\textit{RecType}}\\
+        \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
+  \infer[enth]3[$\eta$]{s_{i+1,A}:_A T \text{\fbox{\d{$\wedge$}}
       \smallrecord{
         \smalltfield{shared}{\smallrecord{
             \smallmfield{commitments}{\smallrecord{
@@ -1494,16 +1497,30 @@ where $\eta$ is a relabelling for $u^*$.cont.bg with range included in $s_{i,A}$
 \label{ex:AccGBprelim} 
 \end{ex}
 
-@@
-
-This function takes a game-board, $T$, (recall that a gameboard is a type of
-an information state which in turn is a record) and a parametric
-content and returns a function that will map an information state of
-type $T$ to a new type which is the result of an asymmetric merge of
-$T$ with a type that will replace the type representing shared
-commitments according to $T$ with a new type where the old shared
-commitments is labelled with `prev'  and new `bg' and `fg' fields are
-added as described above.
+This action rule requires that an agent, $A$, judges her current
+information state, $s_{i,A}$, to be of type, $T$, which includes
+shared commitments.  Furthermore, $A$ judges the content of the
+current utterance, $u^*$, to be a parametric content which will yield
+a record type when applied to a context of the appropriate background
+type.  Given an appropriate relabelling, $\eta$, of the background type of the
+parametric content which associates it with elements of the shared
+commitments in the current information state, $A$ is licensed
+(afforded) to make the judgement that her next information state is
+like the current one except that the shared commitments have been
+changed so that the current shared commitments are marked as previous,
+the background of the parametric content anchored to those previous
+shared commitments constrains a background situation under the label
+`bg' and a foreground situation is added, under the label `fg', resulting from applying the
+(foreground of) the parametric content to the background thus
+introduced.  \preveg{} abstracts away from the problem of exactly how
+to choose an appropriate relabelling, $\eta$.  % takes a game-board, $T$, (recall that a gameboard is a type of
+% an information state which in turn is a record) and a parametric
+% content and returns a function that will map an information state of
+% type $T$ to a new type which is the result of an asymmetric merge of
+% $T$ with a type that will replace the type representing shared
+% commitments according to $T$ with a new type where the old shared
+% commitments is labelled with `prev'  and new `bg' and `fg' fields are
+% added as described above.
 
   
 
@@ -1530,7 +1547,7 @@ match.  In that case there will be a choice of relabellings $\eta$.
 In this case we may wish to choose the relabelling that corresponds to
 a match with the most salient match in terms of recency of
 introduction into the shared commitments.  Technically, this means
-that we choose the relabelling which introduces labels with the least
+that we choose the relabelling which introduces paths with the least
 number of occurrences of `prev'.  Note that the most recent match may
 be anchored to a match that was introduced earlier in the manner we
 have just described.  There may be other factors than recency which
@@ -1585,7 +1602,8 @@ will be of the type \nexteg{}.
         \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} 
 \end{ex} 
 Here we use \textit{GameBoard} as the type of types which are a
-subtype of \textit{InfoState} (as defined in Appendix~\ref{app:infostate}), that is, a gameboard is a type of
+subtype of \textit{InfoState} (for example, as defined most recently
+in Chapter~\ref{ch:gram}, p.\pageref{ex:InfoState-chgram}), that is, a gameboard is a type of
 information states.  Formally, this is expressed as in \nexteg{}.
 \begin{ex} 
 $T$ : \textit{GameBoard} iff $T\sqsubseteq$ \textit{InfoState}
@@ -1638,14 +1656,15 @@ illustrated schematically in \nexteg{} where we use $M$ to represent
 the long term memory \preveg{} and leave out all irrelevant details of
 the gameboard.
 \begin{ex} 
-\smallrecord{\smallmfield{ltm}{$M$}{\textit{RecType}}\\
+\scalebox{.85}{\smallrecord{\smallmfield{ltm}{$M$}{\textit{RecType}}\\
         \smallmfield{gb}{$\lambda r$:ltm . \smallrecord{\ldots\\
                                               \smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\ldots\\
                                                                                                    \smalltfield{bg}{\smallrecord{\smallmfield{x}{$r$.id$_7$.x}{\textit{Ind}}\\
                                                                                                                                  \smallmfield{e}{$r$.id$_7$.e}{named(x,``Sam'')}}}\\
                                                                                                    \smalltfield{fg}{\smallrecord{\smalltfield{e}{leave($\Uparrow$bg.x)}}}
                                                                                                    }}{\textit{RecType}}}}\\
-                                              \ldots}}{\\ \hspace*{27em}(ltm$\rightarrow$\textit{RecType})}}
+                                                                                             \ldots}}{(ltm$\rightarrow$\textit{RecType})}}
+                                                                                       }
 \label{ex:tisSamLeaves}
 \end{ex} 
 The intuition expressed in \preveg{} is as follows:  given a
@@ -1694,45 +1713,46 @@ gameboard if that is desired.
 Let us now consider how the update of a gameboard dependent on long
 term memory can be carried out when there is a match between the
 parametric content used for updating and an item in long term memory.
-Suppose that the current total information state, $\iota_{\mathrm{curr}}$, is of the type in \nexteg{}
+Suppose that agent $A$'s current total information state, $s_{i,A}^{\text{tot}}$, is of the type in \nexteg{}.
 \begin{ex} 
 \record{\tfield{ltm}{\textit{RecType}}\\
-        \mfield{gb}{$\lambda r$:ltm . $T_{\mathrm{gb}}(r)$}{(ltm$\rightarrow$\textit{RecType})}}
+        \mfield{gb}{$\lambda r$:ltm . $T_{\mathrm{gb}}\dep{r}$}{(ltm$\rightarrow$\textit{RecType})}}
 \end{ex} 
 and that we wish to update this with the parametric content, $f$, given in \nexteg{} (where
 $T_{\mathrm{bg}}\sqsubseteq$ \smallrecord{\smalltfield{x}{\textit{Ind}}}).
 \begin{ex}
 \record{\field{bg}{$T_{\mathrm{bg}}$}\\ 
-        \field{fg}{$\lambda r$:$T_{\mathrm{bg}}$ . $T_{\mathrm{upd}}(r)$}}
+        \field{fg}{$\lambda r$:$T_{\mathrm{bg}}$ . $T_{\mathrm{upd}}\dep{r}$}}
 \end{ex} 
-In order to find a match between $f$.bg, that is, $T_{\mathrm{bg}}$ and $\iota_{\mathrm{curr}}$.ltm
+In order to find a match between $f$.bg, that is, $T_{\mathrm{bg}}$ and $s_{i,A}^{\text{tot}}$.ltm
 (that is, to ascertain that the presupposition associated with the
 parametric content is met by the long term memory of the current total
 information state) we need to find a relabelling, $\eta$, of $T_{\mathrm{bg}}$ such that
 \nexteg{} holds.
 \begin{ex} 
-$\iota_{\mathrm{curr}}$.ltm $\sqsubseteq$ $[T_{\mathrm{bg}}]_\eta$ 
+$s_{i,A}^{\text{tot}}$.ltm $\sqsubseteq$ $[T_{\mathrm{bg}}]_\eta$ 
 \end{ex} 
 Then we can derive \nexteg{} as a type of the updated total
 information state.
 \begin{ex} 
-\smallrecord{\smallmfield{ltm}{$\iota_{\mathrm{curr}}$.ltm}{\textit{RecType}}\\
+\smallrecord{\smallmfield{ltm}{$s_{i,A}^{\text{tot}}$.ltm}{\textit{RecType}}\\
         \smallmfield{gb}{$\lambda r$:ltm
-          . ($T_{\mathrm{gb}}(r)$\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$\iota_{\mathrm{curr}}$.gb.shared.commitments}\\
+          . ($T_{\mathrm{gb}}\dep{r}$\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$s_{i,A}^{\text{tot}}$.gb.shared.commitments}\\
                                                                                                                            \smalltfield{bg}{$T_{\mathrm{bg}}\parallel_\eta
                                                                                                                              r$}\\
                                                                                                                            \smalltfield{fg}{$f$(bg)}}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{RecType})}}
 
  
 \end{ex}
-Here the notation $T_{\mathrm{bg}}\parallel_\eta r$ represents the
-specification or anchoring of the type $T_{\mathrm{bg}}$ by the record $r$
-according to the relabelling $\eta$.  That is, we replace fields in
-$T_{\mathrm{bg}}$ with manifest fields according to the matches we
-have in the `ltm'-field.  Thus, for example, if $T_{\mathrm{bg}}$ is
+% Here the notation $T_{\mathrm{bg}}\parallel_\eta r$ represents the
+% specification or anchoring of the type $T_{\mathrm{bg}}$ by the record $r$
+% according to the relabelling $\eta$.  That is, we replace fields in
+% $T_{\mathrm{bg}}$ with manifest fields according to the matches we
+% have in the `ltm'-field.
+Thus, for example, if $T_{\mathrm{bg}}$ is
 (\ref{ex:namedSam}), repeated as \nexteg{a}, $r$ is a record
 representing long term memory of type (\ref{ex:ltm}), repeated as
-\nexteg{b} and $\eta$ is the relabelling in \nexteg{c}, then
+\nexteg{b}, and $\eta$ is the relabelling in \nexteg{c}, then
 $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
 \begin{ex} 
 \begin{subex} 
@@ -1772,12 +1792,16 @@ $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
 \end{subex} 
    
 \end{ex} 
-A precise and general definition of this notation is in Appendix~\ref{app:specrec}.   
+% A precise and general definition of this notation is in Appendix~\ref{app:specrec}.   
 
 
  
-We can now put all this together as the update function in \nexteg{},
-which we call \textbf{AccLTM}($\eta$) (``accommodate match with long term memory'').
+We can now put all this together as the action rule in \nexteg{},
+which we call \textsc{AccLTM} (``accommodate match with long term
+memory'').
+
+@@
+
 \begin{ex}
 \textbf{AccLTM}($\eta$) =\\ 
 $\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
