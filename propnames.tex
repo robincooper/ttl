@@ -1477,15 +1477,16 @@ in Section~\ref{sec:accommodation}.
 %                                                                                         $\parallel_\eta$
 %                                                                                         prev}\\
 %                                                                                         \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}
-\begin{prooftree}
-  \hypo{s_{i,A}:_A T}
-  \hypo{T\sqsubseteq\text{\smallrecord{
+\hspace*{-2.5em}\begin{prooftree}[separation=.5em]
+  \hypo{s_{i,A}:_A T_{\text{inf}}}
+  \hypo{T_{\text{inf}}\sqsubseteq\text{\smallrecord{
         \smalltfield{shared}{\smallrecord{
             \smalltfield{commitments}{\textit{RecType}}}}}}}
-  \hypo{u^*.\text{cont}:_A\text{\smallrecord{
+  \hypo{u^*.\text{cont}:_A T_{\text{utt}}}
+  \hypo{T_{\text{utt}}\sqsubseteq\text{\smallrecord{
         \smalltfield{bg}{\textit{RecType}}\\
         \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
-  \infer[enth]3[$\eta$]{s_{i+1,A}:_A T \text{\fbox{\d{$\wedge$}}
+  \infer[enth]4[$\eta$]{s_{i+1,A}:_A T_{\text{inf}} \text{\fbox{\d{$\wedge$}}
       \smallrecord{
         \smalltfield{shared}{\smallrecord{
             \smallmfield{commitments}{\smallrecord{
