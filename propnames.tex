@@ -1799,39 +1799,69 @@ $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
  
 We can now put all this together as the action rule in \nexteg{},
 which we call \textsc{AccLTM} (``accommodate match with long term
-memory'').
+memory'').  
 
-@@
+\begin{sidewaysfigure}
+  \begin{ex}
+    
+    % \hspace*{-4em}
+    \scalebox{.85}{
+  \begin{prooftree}[separation=.5em]
+    \hypo{s_{i,A}^{\text{tot}}:T_{\text{tot}}}
+    \hypo{T_{\text{tot}}\sqsubseteq\text{\smallrecord{\
+          \smalltfield{ltm}{\textit{RecType}}\\
+          \smalltfield{gb}{ltm$\rightarrow$\textit{GameBoard}}}}}
+    \hypo{s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}.\text{ltm})\sqsubseteq\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{commitments}{\textit{RecType}}}}}}}
+    \hypo{u^*.\text{cont}:_A T_{\text{utt}}}
+    \hypo{T_{\text{utt}}\sqsubseteq\text{\smallrecord{
+          \smalltfield{bg}{\textit{RecType}}\\
+          \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
+    \infer[enth]5[$\eta$]{s_{i+1,A}^{\text{tot}}:_A\text{\smallrecord{
+          \smallmfield{ltm}{$s_{i,A}^{\text{tot}}$.ltm}{\textit{RecType}}\\
+          \smallmfield{gb}{$\lambda r$:ltm
+            . $s_{i,A}^{\text{tot}}$.gb$(r)$\fbox{\d{$\wedge$}}\smallrecord{
+              \smalltfield{shared}{\smallrecord{
+                  \smallmfield{commitments}{\smallrecord{
+                      \smalltfield{prev}{$(s_{i,A}^{\text{tot}}.\text{gb}(r))$.shared.commitments}\\
+                      \smalltfield{bg}{$u^*$.cont.bg$\parallel_\eta
+                        r$}\\
+                      \smalltfield{fg}{$u^*$.cont.fg$($bg$)$}}}{\textit{RecType}}}}}}{$($ltm$\rightarrow$\textit{GameBoard}$)$}}}}
+  \end{prooftree}
+  }
 
-\begin{ex}
-\textbf{AccLTM}($\eta$) =\\ 
-$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
-        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
-\hspace*{1em}$\lambda
-f$: \record{\tfield{bg}{\textit{RecType}}\\
-            \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
-\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
-        \smallmfield{gb}{$\lambda r_1$:ltm
-          . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
-\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
-             \smalltfield{bg}{$f$.bg $\parallel_\eta r_1$}\\
-             \smalltfield{fg}{$f$.fg(bg)}
-}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
+  where $\eta$ is a relabelling for $u^*$.cont.bg with range included
+  in $s_{i,A}^{\text{tot}}$.ltm
+% \textbf{AccLTM}($\eta$) =\\ 
+% $\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+%         \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+% \hspace*{1em}$\lambda
+% f$: \record{\tfield{bg}{\textit{RecType}}\\
+%             \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
+% \hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+%         \smallmfield{gb}{$\lambda r_1$:ltm
+%           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
+% \smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
+%              \smalltfield{bg}{$f$.bg $\parallel_\eta r_1$}\\
+%              \smalltfield{fg}{$f$.fg(bg)}
+% }}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
 \label{ex:AccLTM}
 \end{ex}
+\end{sidewaysfigure}
 \label{pg:inverserelabelling} 
-Here \textit{GameBoard} is as defined in (\ref{ex:GameBoard}).
+%Here \textit{GameBoard} is as defined in (\ref{ex:GameBoard}).
      
 We have used accommodation from long term memory to represent the kind
 of accommodation where the agent has a resource which provides a
 match.  In a more complete treatment we could use this technique for
 accommodation from other available resources such as the visual scene.
+
 We now turn our attention to accommodation where there is no
 appropriate match
 with other resources.  This corresponds to the case where the hearer
 does not know any appropriate person named Sam but merely adds that
 there is a person named Sam to the shared dialogue commitments.
-
 The first step in this update is to create a type from the parametric
 content under consideration so that we can merge it with
 \smallrecord{\smalltfield{prev}{$T$}}, where $T$ is the type
@@ -1844,22 +1874,27 @@ representing the current shared commitments.
 % content given in (\ref{ex:parcontfixedpoint}) and in \nexteg{b} we
 % give the corresponding backgrounding type. 
 Suppose we are considering the parametric content, $\xi$, given in
-\nexteg{a}.  Then the type we will create from $\xi$ is defined as in
+\nexteg{a}. (Recall the corner quotes notation introduced on p.~\pageref{ex:cornerquote-notation}.) Then the type we will create from $\xi$ is defined as in
 \nexteg{b} which is identical with \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\xi$ = \record{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                               \smalltfield{e}{named(x,
-                                                 ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}}}\\
-              \field{fg}{$\lambda
+\item $\xi$ = $\ulcorner\lambda
   r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
                   \smalltfield{a}{\textit{Rec}}} . 
-%\hspace*{2em}
-\smallrecord{\smalltfield{e}{leave($r$.f.x)}}}} 
+\smallrecord{\smalltfield{e}{leave($r$.f.x)}}$\urcorner$ % \record{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                \smalltfield{e}{named(x,
+%                                                  ``Sam'')}}}\\
+%                   \smalltfield{a}{\textit{Rec}}}}\\
+%               \field{fg}{$\lambda
+%   r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                \smalltfield{e}{named(x,
+%                                                  ``Sam'')}}}\\
+%                   \smalltfield{a}{\textit{Rec}}} . 
+% %\hspace*{2em}
+% \smallrecord{\smalltfield{e}{leave($r$.f.x)}}}} 
 
 \item \record{\tfield{bg}{$\xi$.bg}\\
               \tfield{fg}{\record{\tfield{e}{$\xi$.fg(bg)}}}}
@@ -1936,23 +1971,58 @@ Then the new shared commitments will be \nexteg{a} which is
 \end{subex} 
    
 \end{ex} 
-We can now put this together as the update function in \nexteg{},
-which we call \textbf{AccNM} (``accommodate no match'').  [???? Fix formatting]
-\begin{ex}
+We can now put this together as the action rule in \nexteg{},
+which we call \textsc{AccNM} (``accommodate no match'').  This is the same as \textsc{AccLTM} in (\ref{ex:AccLTM}) except that
+in the update for shared commitments 
+there is no anchoring to long term memory.
 
-\textbf{AccNM} =\\
-$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
-        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
-\hspace*{1em}$\lambda
-f$: \record{\tfield{bg}{\textit{RecType}}\\
-            \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
-\hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
-        \smallmfield{gb}{$\lambda r_1$:ltm
-          . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
-\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
-             \smalltfield{bg}{$f$.bg}\\
-             \smalltfield{fg}{$f$.fg(bg)}
-}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}} 
+  \begin{sidewaysfigure}
+  \begin{ex}
+    
+    % \hspace*{-4em}
+    \scalebox{.85}{
+  \begin{prooftree}[separation=.5em]
+    \hypo{s_{i,A}^{\text{tot}}:T_{\text{tot}}}
+    \hypo{T_{\text{tot}}\sqsubseteq\text{\smallrecord{\
+          \smalltfield{ltm}{\textit{RecType}}\\
+          \smalltfield{gb}{ltm$\rightarrow$\textit{GameBoard}}}}}
+    \hypo{s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}.\text{ltm})\sqsubseteq\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{commitments}{\textit{RecType}}}}}}}
+    \hypo{u^*.\text{cont}:_A T_{\text{utt}}}
+    \hypo{T_{\text{utt}}\sqsubseteq\text{\smallrecord{
+          \smalltfield{bg}{\textit{RecType}}\\
+          \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
+    \infer[enth]5[$\eta$]{s_{i+1,A}^{\text{tot}}:_A\text{\smallrecord{
+          \smallmfield{ltm}{$s_{i,A}^{\text{tot}}$.ltm}{\textit{RecType}}\\
+          \smallmfield{gb}{$\lambda r$:ltm
+            . $s_{i,A}^{\text{tot}}$.gb$(r)$\fbox{\d{$\wedge$}}\smallrecord{
+              \smalltfield{shared}{\smallrecord{
+                  \smallmfield{commitments}{\smallrecord{
+                      \smalltfield{prev}{$(s_{i,A}^{\text{tot}}.\text{gb}(r))$.shared.commitments}\\
+                      \smalltfield{bg}{$u^*$.cont.bg}\\
+                      \smalltfield{fg}{$u^*$.cont.fg$($bg$)$}}}{\textit{RecType}}}}}}{$($ltm$\rightarrow$\textit{GameBoard}$)$}}}}
+  \end{prooftree}
+  }
+
+  where $\eta$ is a relabelling for $u^*$.cont.bg with range included
+  in $s_{i,A}^{\text{tot}}$.ltm
+\end{ex}
+\end{sidewaysfigure}
+
+% \textbf{AccNM} =\\
+% $\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+%         \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
+% \hspace*{1em}$\lambda
+% f$: \record{\tfield{bg}{\textit{RecType}}\\
+%             \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} . \\
+% \hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+%         \smallmfield{gb}{$\lambda r_1$:ltm
+%           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{3em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{
+% \smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}\\
+%              \smalltfield{bg}{$f$.bg}\\
+%              \smalltfield{fg}{$f$.fg(bg)}
+% }}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}} 
 % $\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
 %                     \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}\\
 % \hspace*{1em}$\lambda
@@ -1960,44 +2030,73 @@ f$: \record{\tfield{bg}{\textit{RecType}}\\
 % \hspace*{2em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
 %                            \smallmfield{gb}{$\lambda r_1$:ltm
 %           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}}\d{$\wedge$}$\mathcal{B}(f)$}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
-\end{ex}
+%\end{ex}
 
 
-This is the same as \textbf{AccLTM} in (\ref{ex:AccLTM}) except that
-in the update for shared commitments 
-there is no anchoring to long term memory.
 
-We can now adjust the preliminary version of \textbf{AccGB} given in
-(\ref{ex:AccGBprelim}) which was the update function for cases where there is a
-match on the gameboard so that it is accommodated in the general format of update functions for
-total information states.  % Assuming that we have relabellings $\eta$ and $\eta'$
+
+We can now adjust the preliminary version of \textsc{AccGB} given in
+(\ref{ex:AccGBprelim}) which was the action rule for cases where there is a
+match on the gameboard so that it matches the general format of action
+rules for
+total information states.  This is given in \nexteg{}.% Assuming that we have relabellings $\eta$ and $\eta'$
 % as defined on p.~% \pageref{pg:etaprime}
 % we can formulate the update
 % function in \nexteg{}, which we call \textbf{AccGB}($\eta'$)
 % (``accommodate match on gameboard'').
-
-
+\begin{sidewaysfigure}
 \begin{ex} 
-%\scalebox{.9}{
-\textbf{AccGB}($\eta$) -- final version
+  \textsc{AccGB} -- final version
+  
+\hspace*{-2.5em}\scalebox{.85}{\begin{prooftree}[separation=.5em]
+  \hypo{s_{i,A}^{\text{tot}}:_A T_{\text{tot}}}
+  \hypo{T_{\text{tot}}\sqsubseteq\text{\smallrecord{\
+          \smalltfield{ltm}{\textit{RecType}}\\
+          \smalltfield{gb}{ltm$\rightarrow$\textit{GameBoard}}}}}
+    \hypo{s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}.\text{ltm})\sqsubseteq\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{commitments}{\textit{RecType}}}}}}}
+  \hypo{u^*.\text{cont}:_A T_{\text{utt}}}
+  \hypo{T_{\text{utt}}\sqsubseteq\text{\smallrecord{
+        \smalltfield{bg}{\textit{RecType}}\\
+        \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
+  \infer[enth]5[$\eta$]{s_{i+1,A}^{\text{tot}}:_A \text{\smallrecord{
+          \smallmfield{ltm}{$s_{i,A}^{\text{tot}}$.ltm}{\textit{RecType}}\\
+          \smallmfield{gb}{$\lambda r$:ltm
+            . $s_{i,A}^{\text{tot}}$.gb$(r)$\fbox{\d{$\wedge$}}\smallrecord{
+              \smalltfield{shared}{\smallrecord{
+                  \smallmfield{commitments}{\smallrecord{
+                      \smalltfield{prev}{$(s_{i,A}^{\text{tot}}.\text{gb}(r))$.shared.commitments}\\
+                      \smalltfield{bg}{$u^*$.cont.bg$\parallel_\eta(s_{i,A}^{\text{tot}}.\text{gb}(r))$.shared.commitments}\\
+                      \smalltfield{fg}{$u^*$.cont.fg$($bg$)$}}}{\textit{RecType}}}}}}{$($ltm$\rightarrow$\textit{GameBoard}$)$}}}}
+  \end{prooftree}
+  }
+where $\eta$ is a relabelling for $u^*$.cont.bg with range included in $(s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}.\text{ltm}))$.shared.commitments
+\label{ex:AccGBfinal} 
+\end{ex}
+\end{sidewaysfigure}
+
+% \begin{ex} 
+% %\scalebox{.9}{
+% \textbf{AccGB}($\eta$) -- final version
 
 
-\hspace*{-3em}$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
-        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} . \\
-\hspace*{-2em} $\lambda
-f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-                \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
-              . \\
-\hspace*{-1em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
-        \smallmfield{gb}{$\lambda r_1$:ltm
-          . $r$.gb($r_1$)\fbox{\d{$\wedge$}} 
-\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.gb.shared.commitments}\\
-                                                                                      \smalltfield{bg}{$f$.bg
-                                                                                        $\parallel_\eta$
-                                                                                        prev}\\
-                                                                                      \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}}{\\\hspace*{30em}(ltm$\rightarrow$\textit{RecType})}}
-%} 
-\end{ex}  
+% \hspace*{-3em}$\lambda r$:\record{\tfield{ltm}{\textit{RecType}}\\
+%         \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}} . \\
+% \hspace*{-2em} $\lambda
+% f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+%                 \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+%               . \\
+% \hspace*{-1em} \smallrecord{\smallmfield{ltm}{$r$.ltm}{\textit{RecType}}\\
+%         \smallmfield{gb}{$\lambda r_1$:ltm
+%           . $r$.gb($r_1$)\fbox{\d{$\wedge$}} 
+% \smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{\smallrecord{\smalltfield{prev}{$r$.gb.shared.commitments}\\
+%                                                                                       \smalltfield{bg}{$f$.bg
+%                                                                                         $\parallel_\eta$
+%                                                                                         prev}\\
+%                                                                                       \smalltfield{fg}{$f$.fg(bg)}}}{\textit{RecType}}}}}}{\\\hspace*{30em}(ltm$\rightarrow$\textit{RecType})}}
+% %} 
+% \end{ex}  
 
 % \scalebox{.9}
 % {\begin{ex}
@@ -2010,7 +2109,9 @@ f$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 %                            \smallmfield{gb}{$\lambda r_1$:ltm
 %           . (($r$.gb)($r_1$)\fbox{\d{$\wedge$}}\\\hspace*{5em}\smallrecord{\smalltfield{shared}{\smallrecord{\smallmfield{commitments}{$\varphi^-$($\varphi$(\smallrecord{\smalltfield{prev}{($r$.gb)($\Uparrow^3$ltm).shared.commitments}})\d{$\wedge$}$[\varphi(\mathcal{F}(f))]_{\eta'}$)\\\hspace*{25em}}{\textit{RecType}}}}})\\\hspace*{25em}}{(ltm$\rightarrow$\textit{GameBoard})}}
 
-% \end{ex}}
+%         \end{ex}}
+
+@@
 
 The three update functions for accommodation that we have defined are
 governed by the single licensing condition given in \nexteg{}.
