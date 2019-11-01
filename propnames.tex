@@ -1993,7 +1993,7 @@ there is no anchoring to long term memory.
     \hypo{T_{\text{utt}}\sqsubseteq\text{\smallrecord{
           \smalltfield{bg}{\textit{RecType}}\\
           \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}}}}
-    \infer[enth]5[$\eta$]{s_{i+1,A}^{\text{tot}}:_A\text{\smallrecord{
+    \infer[enth]5{s_{i+1,A}^{\text{tot}}:_A\text{\smallrecord{
           \smallmfield{ltm}{$s_{i,A}^{\text{tot}}$.ltm}{\textit{RecType}}\\
           \smallmfield{gb}{$\lambda r$:ltm
             . $s_{i,A}^{\text{tot}}$.gb$(r)$\fbox{\d{$\wedge$}}\smallrecord{
@@ -2005,8 +2005,8 @@ there is no anchoring to long term memory.
   \end{prooftree}
   }
 
-  where $\eta$ is a relabelling for $u^*$.cont.bg with range included
-  in $s_{i,A}^{\text{tot}}$.ltm
+  % where $\eta$ is a relabelling for $u^*$.cont.bg with range included
+  % in $s_{i,A}^{\text{tot}}$.ltm
 \end{ex}
 \end{sidewaysfigure}
 
@@ -2111,48 +2111,68 @@ where $\eta$ is a relabelling for $u^*$.cont.bg with range included in $(s_{i,A}
 
 %         \end{ex}}
 
-@@
 
-The three update functions for accommodation that we have defined are
-governed by the single licensing condition given in \nexteg{}.
+
+The three action rules for accommodation that we have defined do not
+specify how we choose the relabelling $\eta$.  They are governed by
+the regime in \nexteg{}.
 \begin{ex} 
-If $A$ is an agent, $s_i$ is $A$'s current information state, $f$ is a
-parametric content of type $T_f$ such that
-\begin{quote}
-$T_f$ $\sqsubseteq$ \record{\tfield{bg}{\textit{RecType}}\\
-        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
-\end{quote}
- and
-$s_i:_A T_i$ for some $T_i$ such that 
-\begin{quote}
-$T_i$ $\sqsubseteq$ \smallrecord{\smalltfield{ltm}{\textit{RecType}}\\
-                                 \smalltfield{gb}{\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{commitments}{\textit{RecType}}\\
-                                                                                                 \smalltfield{latest-move}{\smallrecord{\smallmfield{cont}{$f$}{$T_f$}}}}}}}}
-\end{quote}
-then \\
-\begin{quote}
-if there is some $\eta$ which is a relabelling of $f$.bg such that 
-\begin{quote}
-\mbox{$s_i$.gb.shared.commitments $\sqsubseteq$ $[f.\mathrm{bg}]_\eta$}
-\end{quote}
-% and there is some $\eta'$ which is a labelling of $\mathcal{F}(f)$ such that $\eta'$ is an extension of
-% $\eta$,\\[.25\baselineskip]  
-then $s_{i+1} :_A
-T_i$\fbox{\d{$\wedge$}}\textbf{AccGB}($\eta$)($s_i$)($f$) is
-licensed\\[\baselineskip]
-else if there is some $\eta$ which is a relabelling of
-$f$.bg such that $s_i$.ltm
-$\sqsubseteq$ $[f.\mathrm{bg}]_\eta$\\[.25\baselineskip]
-then $s_{i+1} :_A
-T_i$\fbox{\d{$\wedge$}}\textbf{AccLTM}($\eta$)($s_i$)($f$) is
-licensed\\[\baselineskip] 
-else $s_{i+1} :_A
-T_i$\fbox{\d{$\wedge$}}\textbf{AccNM}($s_i$)($f$) is
-licensed
-\end{quote} 
-\label{ex:propname-acc-lic}
-\end{ex}
+\begin{subex} 
+ 
+\item if there is a labelling, $\eta$, such that
+$s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\text{commitments}\sqsubseteq[u^*.\text{cont}.\text{bg}]_\eta$,
+  then use \text{AccGB} with $\eta$ 
+ 
+\item else if there is a labelling, $\eta$, such that
+  $s_{i,A}^{\text{tot}}.\text{ltm}\sqsubseteq[u^*.\text{cont}.\text{bg}]_\eta$
+  then use \text{AccLTM} with $\eta$
 
+  
+\item else use \textsc{AccNM}
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+% \begin{ex} 
+% If $A$ is an agent, $s_i$ is $A$'s current information state, $f$ is a
+% parametric content of type $T_f$ such that
+% \begin{quote}
+% $T_f$ $\sqsubseteq$ \record{\tfield{bg}{\textit{RecType}}\\
+%         \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+% \end{quote}
+%  and
+% $s_i:_A T_i$ for some $T_i$ such that 
+% \begin{quote}
+% $T_i$ $\sqsubseteq$ \smallrecord{\smalltfield{ltm}{\textit{RecType}}\\
+%                                  \smalltfield{gb}{\smallrecord{\smalltfield{shared}{\smallrecord{\smalltfield{commitments}{\textit{RecType}}\\
+%                                                                                                  \smalltfield{latest-move}{\smallrecord{\smallmfield{cont}{$f$}{$T_f$}}}}}}}}
+% \end{quote}
+% then \\
+% \begin{quote}
+% if there is some $\eta$ which is a relabelling of $f$.bg such that 
+% \begin{quote}
+% \mbox{$s_i$.gb.shared.commitments $\sqsubseteq$ $[f.\mathrm{bg}]_\eta$}
+% \end{quote}
+% % and there is some $\eta'$ which is a labelling of $\mathcal{F}(f)$ such that $\eta'$ is an extension of
+% % $\eta$,\\[.25\baselineskip]  
+% then $s_{i+1} :_A
+% T_i$\fbox{\d{$\wedge$}}\textbf{AccGB}($\eta$)($s_i$)($f$) is
+% licensed\\[\baselineskip]
+% else if there is some $\eta$ which is a relabelling of
+% $f$.bg such that $s_i$.ltm
+% $\sqsubseteq$ $[f.\mathrm{bg}]_\eta$\\[.25\baselineskip]
+% then $s_{i+1} :_A
+% T_i$\fbox{\d{$\wedge$}}\textbf{AccLTM}($\eta$)($s_i$)($f$) is
+% licensed\\[\baselineskip] 
+% else $s_{i+1} :_A
+% T_i$\fbox{\d{$\wedge$}}\textbf{AccNM}($s_i$)($f$) is
+% licensed
+% \end{quote} 
+% \label{ex:propname-acc-lic}
+% \end{ex}
+
+@@
 
 This account of accommodation for proper names where a new item is
 allowed to be created in memory when attempts at matching have failed
