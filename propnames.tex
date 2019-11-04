@@ -2172,7 +2172,7 @@ $s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\
 % \label{ex:propname-acc-lic}
 % \end{ex}
 
-@@
+
 
 This account of accommodation for proper names where a new item is
 allowed to be created in memory when attempts at matching have failed
@@ -2193,8 +2193,7 @@ selection. What we have in common, though, is that in order to account
 for the way accommodation is carried out we both add an additional
 layer to a type
 theory based  semantics and talk in procedural terms of
-actions to be carried out:  we with our licensing conditions for type
-acts and \citeauthor{GrooteLebedeva2010} with their error handling mechanism.
+actions to be carried out:  we with our action rules and \citeauthor{GrooteLebedeva2010} with their error handling mechanism.
      
 \section{Paderewski}
 \label{sec:Paderewski}
@@ -2290,7 +2289,7 @@ Peter believes there to be two Paderewskis.  Checking for the
 inconsistency in the two concept state involves reasoning about the
 identity expressed by the manifest field.  One could imagine a simple
 consistency checker that does not do this -- logically inadequate, of
-course, but human perhaps.  The single concept state could however
+course, but human perhaps.  The single concept state could, however,
 involve a direct conflict between type and its negation which, one
 imagines, even the simplest of consistency checkers would find.  Thus
 if Peter finds himself in such a state he might need to refine the
@@ -2343,7 +2342,7 @@ individual whereas here the same proper name is being used for the
 same individual, though without awareness that the proper name is
 being associated with the same individual on both occasions.    
 
-\cite{Ludlow2014} has discussed Kripke's Paderewski recently and
+\cite{Ludlow2014} discusses Kripke's Paderewski and
 argues that the reason that proper names can be used to refer to
 different individuals can be due to the fact that our lexicons are
 dynamic and that we use different microlanguages on different
@@ -2548,13 +2547,26 @@ approach employing a sign-based analysis they seem to be a natural
 consequence of the way that communication takes place and knowledge
 gets stored.
 
-\section{The interpretation of unbound pronouns}\todo{Moved from
-  Ch.~\ref{ch:quant}.  Needs rewriting}
+\section{The interpretation of unbound pronouns}
 \label{sec:unbound}
+So far in this chapter we have talked about reference associated with
+uses of proper names and seen that mental states play
+an important role in explaining how reference works.  The sign-based
+approach to proper names that we have taken is essentially different
+from the traditional approach to proper names as being something like
+constants in a logic, since it allows proper name phonologies to be
+paired with different referents in different utterances.  In this way
+our proper names are behaving more like free variables whose referents
+are determined by a context.  So called deictic or unbound uses of
+pronouns are often related to free variables in logic.  The following
+question now arises:  how does our treatment of proper names relate to
+our treatment of unbound pronouns?  In this section we will give a
+treatment of unbound pronouns which will also lay a basis for the
+treatment of binding in Chapter~\ref{ch:quant}.
+
 We will consider how to recreate a simple interpretation of pronouns
 ranging over individuals, first treating them in a similar way to free
-variables in logic and then showing how they can be bound by
-quantifiers.  The central idea is to use records as \textit{pronominal
+variables in logic.  The central idea is to use records as \textit{pronominal
   contexts} which correspond to partial assignments to variables in
 standard logical treatments.  Consider first a simple sentence with a deictic
 pronoun as in \nexteg{}.
@@ -2566,9 +2578,57 @@ of gender to make things simpler.  The content of \preveg{} is a type
 which depends on a context (a situation) which provides a value of the
 pronoun \textit{he}. Thus it will have a parametric content which is a
 function from a context assigning a value to the pronoun to a
-type.\footnote{We will consider later how to combine types of context
-  which assign values to pronouns with other context types which we
-  have introduced with parametric contents.}  We will use the variable
+type.  In order to do this we will make use of \textit{structured
+  contexts}.
+
+The
+contexts that we have used so far are records of general types corresponding to presuppositions
+\citep{BeaverGeurts2014} or content not \textit{under discussion}
+\citep{Ginzburg1994,Ginzburg2012}  or not \textit{at issue}
+\citep{Potts2005}.  For example, \nexteg{} puts a constraint on the
+context (expresses a presupposition) that there is an individual named
+Sam.
+\begin{ex} 
+\record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{named(x, ``Sam'')}} 
+\end{ex} 
+In the treatment of unbound pronouns we will use records that are much
+more restricted in nature and which correspond to partial assignments to 
+variables.  Their labels will all be of the form `x$_i$' where $i$ is
+a natural number and the record types that we will use will be
+resticted to using a restricted number of non-dependent types. For the
+current account of singular unbound pronouns we will restrict
+ourselves to the type \textit{Ind}.  Thus \nexteg{} is an example of
+the kind of record type we will use.
+\begin{ex} 
+\record{\tfield{x$_0$}{\textit{Ind}}\\
+              \tfield{x$_1$}{\textit{Ind}}} 
+\end{ex} 
+  
+We will regard these different kinds of
+context as separate components of the context as they may be treated differently by compositional
+semantics, for example, in terms of their projection properties which
+regulates to what extent contexts required by lower constituents are
+also required by higher constituents, as discussed, for example, by
+\cite{Potts2005}.  we will have parametric
+contents which look like \nexteg{}.
+\begin{ex} 
+$\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+              \smalltfield{x$_1$}{\textit{Ind}}}}\\
+                \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+              \smalltfield{e}{named(x, ``Sam'')}}}\\
+\ldots} . $\varphi\dep{c}$ 
+\end{ex}
+
+We use the label `$\mathfrak{s}$' for the component in the context which
+assigns entities to occurrences of pronouns and the label
+`$\mathfrak{c}$' for the component which corresponds to
+presuppositions.  We leave open the possibility of adding further
+components to the context later.
+
+@@
+
+We will use the variable
 `$\mathfrak{s}$' to represent such contexts.  Thus the foreground of a parametric content for
 \textit{he} could be that given in \nexteg{a}, for \textit{left}
 (ignoring tense) that given in \nexteg{b} and their combination, using a variant
@@ -2637,82 +2697,68 @@ French), neuter can be used for objects which do not have gender (like
 tables) and for animals other than humans which do have gender and
 which can be referred to with masculine and feminine pronouns.
 
-\section{Structured contexts\ignore{, binding principles and
-    projection}}\todo{Moved from Ch~\ref{ch:quant}.  Needs rewriting.}
-\label{sec:struc-cntxt}
+% \section{Structured contexts\ignore{, binding principles and
+%     projection}}\todo{Moved from Ch~\ref{ch:quant}.  Needs rewriting.}
+% \label{sec:struc-cntxt}
 
-The nature of the context that we have been using in this chapter is
-different from that of the contexts we used with parametric contents
-in previous chapters starting with Chapter~\ref{ch:propnames}.  The
-contexts in this chapter are records which constitute partial
-assignments of objects to labels `x$_0$', `x$_1$', \ldots whereas the
-contexts in the previous chapters are records of more general types.
-Thus an example of the kind of context type used in this chapter is
-\nexteg{a} whereas an example of the kind of context types used
-previously is \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% The nature of the context that we have been using in this chapter is
+% different from that of the contexts we used with parametric contents
+% in previous chapters starting with Chapter~\ref{ch:propnames}.  The
+% contexts in this chapter are records which constitute partial
+% assignments of objects to labels `x$_0$', `x$_1$', \ldots whereas 
+
+% Thus an example of the kind of context type used in this chapter is
+% \nexteg{a} whereas an example of the kind of context types used
+% previously is \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \record{\tfield{x$_0$}{\textit{Ind}}\\
-              \tfield{x$_1$}{\textit{Ind}}} 
+% \item \record{\tfield{x$_0$}{\textit{Ind}}\\
+%               \tfield{x$_1$}{\textit{Ind}}} 
  
-\item \record{\tfield{x}{\textit{Ind}}\\
-              \tfield{e}{named(x, ``Sam'')}} 
+% \item  
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-Contexts of types like \preveg{a} correspond to partial assignments to
-variables in logic where the labels `x$_0$', `x$_1$', \ldots
-correspond to a countably infinite set of variables in a logic.
-Context types like those in \preveg{b} correspond to presuppositions
-\citep{BeaverGeurts2014} or content not \textit{under discussion}
-\citep{Ginzburg2012}  or \textit{at issue} \citep{Potts2005}. We
-reserve the labels `x$_0$', `x$_1$' for contexts giving assignments to
-pronouns which can be involved in binding of the kind described in
-this chapter.  In principle we could combine both kinds of contexts
-by, for example, merging the two types in \preveg{} as given in
-\nexteg{}.
-\begin{ex} 
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{x$_0$}{\textit{Ind}}\\
-        \tfield{x$_1$}{\textit{Ind}}\\
-        \tfield{e}{named(x, ``Sam'')}} 
-\end{ex} 
-However, it seems that it is a good idea to keep different kinds of
-context separate as they may be treated differently by compositional
-semantics, for example, in terms of their projection properties which
-regulates to what extent contexts required by lower constituents are
-also required by higher constituents, as discussed, for example, by
-\cite{Potts2005}.  We could try to do this by having several layers of
-lambda abstraction for each of the different kinds of contexts.  That
-is, parametric contents taking into account several different kinds of
-contexts may have the kind of form represented in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-              \smalltfield{x$_1$}{\textit{Ind}}} $\lambda c$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-              \smalltfield{e}{named(x, ``Sam'')}} \ldots\ \  . $\varphi(\mathfrak{s},c,\ldots)$
-\end{ex} 
-where the `\ldots' represent further lambda abstractions for any other
-kinds of contexts that might need to be distinguished and $\varphi$ is
-some content which may depend on all of these contexts.  One
-difficulty with this kind of proposal is that it is difficult to
-motivate what order the lambda abstractions should come in and it
-could become impossible to decide if we want to allow the different
-kinds of contexts to depend on each other.  In addition, it could
-become unnecessarily complicated to write down the compositional
-interpretation rules.  For this we will keep to having a single lambda
-abstraction for a context with several components which can be
-addressed separately when it comes to characterizing projection
-properties.  Thus instead of \preveg{} we will have parametric
-contents which look like \nexteg{}.
-\begin{ex} 
-$\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-              \smalltfield{x$_1$}{\textit{Ind}}}}\\
-                \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-              \smalltfield{e}{named(x, ``Sam'')}}}\\
-\ldots} . $\varphi(c)$ 
-\end{ex} 
+% \end{ex} 
+% Contexts of types like \preveg{a} correspond to partial assignments to
+% variables in logic where the labels `x$_0$', `x$_1$', \ldots
+% correspond to a countably infinite set of variables in a logic.
+% Context types like those in \preveg{b}  We
+% reserve the labels `x$_0$', `x$_1$' for contexts giving assignments to
+% pronouns which can be involved in binding of the kind described in
+% this chapter.  In principle we could combine both kinds of contexts
+% by, for example, merging the two types in \preveg{} as given in
+% \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{x}{\textit{Ind}}\\
+%         \tfield{x$_0$}{\textit{Ind}}\\
+%         \tfield{x$_1$}{\textit{Ind}}\\
+%         \tfield{e}{named(x, ``Sam'')}} 
+% \end{ex}
+
+% However, it seems that   We could try to do this by having several layers of
+% lambda abstraction for each of the different kinds of contexts.  That
+% is, parametric contents taking into account several different kinds of
+% contexts may have the kind of form represented in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+%               \smalltfield{x$_1$}{\textit{Ind}}} $\lambda c$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%               \smalltfield{e}{named(x, ``Sam'')}} \ldots\ \  . $\varphi(\mathfrak{s},c,\ldots)$
+% \end{ex} 
+% where the `\ldots' represent further lambda abstractions for any other
+% kinds of contexts that might need to be distinguished and $\varphi$ is
+% some content which may depend on all of these contexts.  One
+% difficulty with this kind of proposal is that it is difficult to
+% motivate what order the lambda abstractions should come in and it
+% could become impossible to decide if we want to allow the different
+% kinds of contexts to depend on each other.  In addition, it could
+% become unnecessarily complicated to write down the compositional
+% interpretation rules.  For this we will keep to having a single lambda
+% abstraction for a context with several components which can be
+% addressed separately when it comes to characterizing projection
+% properties.  Thus instead of \preveg{} 
+ 
 
 [Perhaps we should have introduced structured contexts already in
 Ch. \ref{ch:propnames} on proper names, together with pronouns like
