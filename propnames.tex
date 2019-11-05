@@ -2613,11 +2613,11 @@ also required by higher constituents, as discussed, for example, by
 \cite{Potts2005}.  we will have parametric
 contents which look like \nexteg{}.
 \begin{ex} 
-$\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+$\ulcorner\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
               \smalltfield{x$_1$}{\textit{Ind}}}}\\
                 \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
               \smalltfield{e}{named(x, ``Sam'')}}}\\
-\ldots} . $\varphi\dep{c}$ 
+\ldots} . $\varphi\dep{c}\urcorner$ 
 \end{ex}
 
 We use the label `$\mathfrak{s}$' for the component in the context which
@@ -2626,10 +2626,7 @@ assigns entities to occurrences of pronouns and the label
 presuppositions.  We leave open the possibility of adding further
 components to the context later.
 
-@@
-
-We will use the variable
-`$\mathfrak{s}$' to represent such contexts.  Thus the foreground of a parametric content for
+The parametric content for
 \textit{he} could be that given in \nexteg{a}, for \textit{left}
 (ignoring tense) that given in \nexteg{b} and their combination, using a variant
 of S-combination which we will discuss as we progress, is represented
@@ -2637,16 +2634,20 @@ in \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_0$}})
+\item $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . 
+        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} . 
+\item $\ulcorner\lambda c$:\textit{Rec} . 
         $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
-              \record{\tfield{e}{leave($r$.x)}}
+              \record{\tfield{e}{leave($r$.x)}}$\urcorner$
 
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+            \item $\ulcorner\lambda c$:\smallrecord{
+                \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                    \smalltfield{x$_0$}{\textit{Ind}}}}}
   . 
-         \record{\tfield{e}{leave($\mathfrak{s}$.x$_0$)}}
+         \record{\tfield{e}{leave($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
  
 \end{subex} 
    
@@ -2654,9 +2655,11 @@ in \nexteg{c}.
 We follow Montague's strategy in allowing the content of \textit{he}
 to be \nexteg{} for any natural number $i$.
 \begin{ex}
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}} . 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} . 
         $\lambda P$:\textit{Ppty}
-        . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_i$}})
+        . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_i$}})$\urcorner$
 \label{ex:pronoun-cont}
 \end{ex} 
 Thus considering the boy and the dog, a
@@ -2666,28 +2669,40 @@ content for \nexteg{a} will be \nexteg{b}.
  
 \item he hugged it 
  
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-                                   \smalltfield{x$_1$}{\textit{Ind}}}
+\item $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}\\
+        \smalltfield{x$_1$}{\textit{Ind}}}}}
                                  . 
-\record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
+\record{\tfield{e}{hug($c.\mathfrak{s}$.x$_0$, $c.\mathfrak{s}$.x$_1$)}}$\urcorner$ 
  
 \end{subex} 
    
 \end{ex} 
-An advantage of using record types to characterize pronominal contexts
+A potential advantage of using record types to characterize pronominal contexts
 rather than variable assignments is that we can add further
 information represented by the pronoun such as gender.   Thus a simple
 treatment of gender for \preveg{} might be given by making the content
 be \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
-                             \smalltfield{c$_0$}{male(x$_0$)}\\
-                             \smalltfield{x$_1$}{\textit{Ind}}\\
-                             \smalltfield{c$_1$}{neuter(x$_1$)}}
+\begin{ex}
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}\\
+        \smalltfield{x$_1$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+          \smalltfield{c$_0$}{male($\Uparrow\!\!\mathfrak{s}$.x$_0$)}\\
+          \smalltfield{c$_1$}{neuter($\Uparrow\!\!\mathfrak{s}$.x$_0$)}}}
+}
                                  . 
-\record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
+\record{\tfield{e}{hug($c.\mathfrak{s}$.x$_0$, $c.\mathfrak{s}$.x$_1$)}}$\urcorner$ 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
+%                              \smalltfield{c$_0$}{male(x$_0$)}\\
+%                              \smalltfield{x$_1$}{\textit{Ind}}\\
+%                              \smalltfield{c$_1$}{neuter(x$_1$)}}
+%                                  . 
+% \record{\tfield{e}{hug($\mathfrak{s}$.x$_0$, $\mathfrak{s}$.x$_1$)}} 
 \end{ex} 
-As we will see below, there are some complications with this simple
+There are some complications with this simple
 idea when it comes to the interpretation of pronouns which are bound
 by quantifiers.  Even for deictic pronouns there are problems
 determining which predicates should be used in a semantic treatment of
@@ -2695,7 +2710,14 @@ gender.  Even for a language like English which apparently has
 semantic gender (as opposed to grammatical gender like German or
 French), neuter can be used for objects which do not have gender (like
 tables) and for animals other than humans which do have gender and
-which can be referred to with masculine and feminine pronouns.
+which can be referred to with masculine and feminine pronouns.  We
+will not explore this further here.
+
+\section{Compositional semantics}
+
+
+
+@@
 
 % \section{Structured contexts\ignore{, binding principles and
 %     projection}}\todo{Moved from Ch~\ref{ch:quant}.  Needs rewriting.}
@@ -2760,259 +2782,16 @@ which can be referred to with masculine and feminine pronouns.
 % properties.  Thus instead of \preveg{} 
  
 
-[Perhaps we should have introduced structured contexts already in
-Ch. \ref{ch:propnames} on proper names, together with pronouns like
-\textit{him}, \textit{himself} and simple ``binding'' principles.  Use
-`x$_i$' to distinguish proper noun occurrences like we do for pronouns rather
-than `f' and `a' as currently??]
+% [Perhaps we should have introduced structured contexts already in
+% Ch. \ref{ch:propnames} on proper names, together with pronouns like
+% \textit{him}, \textit{himself} and simple ``binding'' principles.  Use
+% `x$_i$' to distinguish proper noun occurrences like we do for pronouns rather
+% than `f' and `a' as currently??]
 
-\subsection{\textit{Sam likes him/himself}}
-
-The parametric content for \textit{him} is given in \nexteg{}.
-
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
-\end{ex} 
-
-The parametric content of the reflexive pronoun \textit{himself} is
-the same as \preveg{} except that the values associated with the
-labels `local' and `refl' are switched, as shown in \nexteg{}.
-
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}}
- . 
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
-\end{ex} 
-We will refer to \preveg{} as \textbf{himself}.  The idea is that the `local'-field in the context must be passed up to
-the VP unchanged, whereas the `refl'-field must be emptied
-(discharged) at the VP-level.  Thus \textit{likes him} has the
-parametric content in \nexteg{a} whereas \textit{likes himself} has
-the parametric content in \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
-$\lambda P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}} 
- 
-\item $\lambda
-c$:\smallrecord{\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-  \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
-  \textbf{himself}(\smallrecord{\field{$\mathfrak{s}$}{\smallrecord{\field{x$_0$}{$r$.x}}}\\
-                                \field{local}{$\mathfrak{T}$($\emptyset$)}\\
-                                \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))}}
- 
- 
-\end{subex} 
-   
-\end{ex}
-The idea is that context parameters represented by `$\mathfrak{s}$'
-are open for binding unless object supplying that parameter are
-required to be of type `$c$.local'.  Reflexive parameters are, however,
-required to be of type `$c$.refl' and these must be bound within the VP.
-Note that since the reflexive is bound by `$r$.x' in \preveg{b} it is
-not represented in `$c$.refl' in the context for the VP.  Thus
-\textit{himself} on its own requires an individual to be supplied by
-the context to give it a referent.  However, for the content of
-\textit{likes himself} no such individual is required from the context
-since the property which is the content of the VP is that of ``being
-an $x$ such that $x$ likes $x$''.  [Better way to talk about this?].
-
-[Possible revision of treatment of proper names:]
-The content of an utterance of \textit{Sam} is given in \nexteg{}.
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                                           \smalltfield{e}{named(x,
-                                                                                             ``Sam'')}}}}}}
-                                                                                 . $\lambda
-                                                                                 P$:\textit{Ppty}
-                                                                                 . $P$($c$.$\mathfrak{c}$.id$_0$) 
-\end{ex} 
-The content of \textit{Sam likes him} is given in \nexteg{a} and
-\textit{Sam likes himself} in \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $\lambda
-  c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                  \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(x,
-                                                                              ``Sam'')}}}}}}
-                                                                  . 
-\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
-    P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
- 
-\item $\lambda
-  c$:\smallrecord{
-\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(x,
-                                                                              ``Sam'')}}}}}}
-                                                                  . \\
-\hspace*{3em}                                                                   
-\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
-    P$:\textit{Ppty} . 
-$P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}} 
- 
-\end{subex} 
-   
-\end{ex} 
     
-[This material should possibly be moved to Ch.~\ref{ch:propnames} so we have
-structured contexts from the beginning.]  
 
 
-\section{Long distance dependencies}\todo{Moved from
-  Ch~\ref{ch:quant}.  Is this the right place to put this?}
-\label{sec:long-distance}
-
-Let us consider how to derive the content of \textit{who Sam hugged}
-as a relative clause.  We use \textbf{hug}$_V$ to represent the
-foreground of the content of \textit{hug} as a transitive verb,
-characterized as in \nexteg{}.
-\begin{ex} 
-\textbf{hug}$_V$ = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} . $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}} 
-\end{ex} 
-Our theory of syntax in terms of event types means that what have been
-called ``gaps'' or ``traces'' in other theories of syntax would
-somehow have to correspond to non-events in which nothing happens and
-do not have any temporal extent.  This strongly suggests that they do
-not exist.  Instead we will take a strategy similar to that pursued,
-for example, in combinatory categorial grammar (see, for example,
-\citealp{Steedman2012}) where \textit{hug} can also be interpreted as
-a verb phrase whose content is ``looking for'' a \textit{wh}-phrase
-content.  We will represent the foreground of this content as
-\textbf{hug}$_{\mathit{VP}}$ and characterize it in terms of
-\textbf{hug}$_V$ as in \nexteg{a} which is identical with \nexteg{b}.
-\begin{ex} 
-\begin{subex}
-\item \textbf{hug}$_{\mathit{VP}}$ = $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-. \textbf{hug}$_V$($\mathfrak{s}$)($\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}})) 
-
-\item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . $\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug($r_1$.x, $\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
-\end{subex}
-\end{ex}
-
-Let us now consider the content of \textit{Sam hugged}.  In order to
-avoid the additional complexity of combining different kinds of
-context which we will undertake in Section~\ref{sec:struc-cntxt} we
-will go back to the treatment of proper names in Chapter~\ref{ch:gram}
-rather than the treatment in Chapter~\ref{ch:propnames} where proper
-names introduce a constraint on the context. Thus we will consider the
-foreground of the parametric content of \textit{Sam}, which we will
-represent as \textbf{Sam}, to be \nexteg{}
-where `sam' is a particular individual named Sam.
-\begin{ex} 
-\textbf{Sam} = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{sam}}) 
-\end{ex}
-The foreground of the content of \textit{Sam hugged}, which we will
-represent as \textbf{Sam$^\frown$hugged}, is \nexteg{a} which is
-identical with \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item \textbf{Sam$^\frown$hugged} =
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . \textbf{Sam}($\mathfrak{s}$)(\textbf{hug}$_{\mathit{VP}}$($\mathfrak{s}$)) 
- 
-\item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
- 
-\end{subex} 
-   
-\end{ex}
-The foreground of the content of \textit{who}, which we will represent
-as \textbf{who}, is given in \nexteg{}.
-\begin{ex} 
-\textbf{who} =
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
-. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh}}) 
-\end{ex} 
-In order to be able to characterize the kind of binding involved in
-combining \textit{who} with \textit{Sam hugged} we will define an
-operation, $\oplus$, which adds a field to a record or, if the label
-of the field being added
-is already present in the record, will replace that field with the new
-field.  This operation is characterized in \nexteg{}.
-\begin{ex} 
-If $r$ is a record, $\ell$ is a label and $v$ is some TTR object, then
-\\
-\hspace*{1em} $r\oplus[\ell=v]$ is \\
-\hspace*{2em} $r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$
-such that $\langle\ell,v'\rangle\in r$\\
-\hspace*{2em}
-$(r-\{\langle\ell,r.\ell\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
-\end{ex} 
-We are using records here to do the work of partial variable
-assignments in logic and the $\oplus$-operation carries out the kind
-of modification which is performed on variable assignments when
-defining binding in the logical treatment.  This now gives us what we
-need to characterize the foreground of the content of the relative
-clause \textit{who Sam hugged}, which we will represent as
-\textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged}, as in
-\nexteg{a} which is identical with \nexteg{b}.  \nexteg{b} is in turn
-equivalent to \nexteg{c} because of the constraint on the extensional
-predicate `hug' similar to that for `find' given in  (\ref{ex:mp-find})
-on p.~\pageref{ex:mp-find}. 
-\begin{ex} 
-\begin{subex} 
- 
-\item \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged} = \\
-  \hspace*{1em}$\lambda\mathfrak{s}$:\textit{Rec} . \\
-\hspace*{2em}$\lambda
-  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \\
-\hspace*{3em}\textbf{who}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}]$)
-($\lambda
-  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$)) 
- 
-\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty}
-      . $P$(\smallrecord{\field{x}{$r_1$.x}}))}}
-
-\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-  r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug$^\dagger$(sam, $r_1$.x))}} 
- 
-\end{subex} 
-   
-\end{ex} 
-To form the content of a noun modified by a relative clause such as
-\textit{child who Sam hugged} we use a record type which requires of
-an individual that it has both the property of being a child and being
-hugged by Sam as given in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e$_1$}{child$'$\{$r$.x\}}\\
-          \tfield{e$_2$}{\textbf{who$^\frown$Sam$^\frown$hugged}($\mathfrak{s}$)\{$r$.x\}}}  
-\end{ex} 
-[Has the $P\{x\}$ notation already been introduced?]  
+  
 
 
 
