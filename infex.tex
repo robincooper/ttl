@@ -4084,7 +4084,7 @@ by `c$_1$' and `c$_2$' address non-existent paths.
 \end{shaded}
 
 Armed with this technology we can define an update function,
-f$_{\textsc{PlanAccAss}}$,  and action
+f$_{\textsc{PlanAckAss}}$,  and action
 rule which plan an acknowledgement to an assertion as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
@@ -5730,7 +5730,126 @@ concerns into an action based framework capable of dealing with
 dialogue phenomena and examining what might be gained by taking a
 dialogical approach to these concerns. 
 
-    
+\section{Summary of resources introduced}
+
+\subsection{Universal grammatical resources}
+
+\subsubsection{Types}
+
+\begin{description}
+  
+\item[\textnormal{\textit{Sign}}] --- \record{\tfield{s-event}{\textit{SEvent}} \\
+    \tfield{cont}{\textit{Cont}}}
+
+  
+\item[\textnormal{\textit{SignType}}] --- a basic type
+
+  $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$
+
+\end{description}
+
+\subsection{Universal speech act resources}
+
+\subsubsection{Types}
+
+\begin{description}
+  
+\item[\textnormal{\textit{Assertion}}] --- \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{RecType}}\\
+  \tfield{illoc}{assert(s-event, cont)}
+}
+\item[\textnormal{\textit{Query}}] --- \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{Question}}\\
+  \tfield{illoc}{query(s-event, cont)}
+}
+
+\item[\textnormal{\textit{Command}}] --- \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{RecType}}\\
+  \tfield{illoc}{command(s-event, cont)}
+}
+
+\item[\textnormal{\textit{Acknowledgement}}] --- \record{
+  \tfield{s-event}{\textit{SEvent}}\\
+  \tfield{cont}{\textit{RecType}}\\
+  \tfield{illoc}{acknowledge(s-event, cont)}
+}
+
+\item[\textnormal{\textit{AssertionType}}] --- a basic type
+
+  $T:\textit{AssertionType}$ iff $T\sqsubseteq \textit{Assertion}$
+
+  
+\item[\textnormal{\textit{QueryType}}] --- a basic type
+
+  $T:\textit{QueryType}$ iff $T\sqsubseteq \textit{Query}$
+
+  
+\item[\textnormal{\textit{CommandType}}] --- a basic type
+
+  $T:\textit{CommandType}$ iff $T\sqsubseteq \textit{Command}$
+
+
+ 
+\item[\textnormal{\textit{AcknowledgementType}}] --- a basic type
+
+  $T:\textit{AcknowledgementType}$ iff $T\sqsubseteq \textit{Acknowledgement}$
+
+\end{description}
+
+\subsection{Universal dialogue resources}
+
+\subsubsection{Types}
+
+\begin{description}
+\item[\textnormal{\textit{InfoState}}] --- \record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+        \tfield{commitments}{\textit{RecType}}}}}
+  
+\item[\textnormal{\textit{InitInfoState}}] --- \record{
+    \tfield{private}{
+      \record{
+        \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
+        \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+
+
+
+\end{description}
+
+\subsubsection{Update functions and action rules}
+
+\begin{description}
+\item[\textnormal{f$_{\textsc{PlanAckAss}}$}] $\lambda r$:\textit{InfoState} . \\
+  \hspace*{4em}$\lambda u$:\textit{Assertion} . \\
+  \hspace*{6em}
+  \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+            \smalltfield{fst}{\smallrecord{
+                \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+                    \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
+                    \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
+                \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
+                \smalltfield{illoc}{acknowledge(s-event, cont)}}}\\
+            \smallmfield{rst}{$r$.private.agenda}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
+  
+
+\end{description}
+
+
+@@
  
   
 \section{Summary}
