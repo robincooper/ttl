@@ -4791,7 +4791,7 @@ rules are given in \nexteg{}.
 
 
 
-\section{Resources}
+\section{English resources}
 
 % While there is no formal distinction between update functions and
 % action functions they are to be used in different ways.  Update
@@ -5732,7 +5732,7 @@ dialogical approach to these concerns.
 
 \section{Summary of resources introduced}
 
-\subsection{Universal grammatical resources}
+\subsection{Universal resources}
 
 \subsubsection{Types}
 
@@ -5845,8 +5845,76 @@ dialogical approach to these concerns.
     \smalltfield{shared}{\smallrecord{
         \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
   
+\item[\textnormal{\textsc{PlanAckAss}}]
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
+    \hypo{u^*:_A T_{\mathrm{utt}}}
+    \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
+    \infer[enth]4{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u^*)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
+  \end{prooftree}
+
+  
+\item[\textnormal{f$_{\textsc{IntegAck}}$}]
+  $\lambda r$:\textit{InfoState} . \\
+  \hspace*{2em}$\lambda u$:\textit{Acknowledgement} . \\
+  \hspace*{4em}\smallrecord{
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{commitments}{\smallrecord{
+            \smalltfield{prev}{$r$.shared.commitments}}\d{$\wedge$}$u$.cont}{\textit{RecType}}\\
+        \smallmfield{latest-utterance}{$u$}{\textit{Acknowledgement}}}}}
+
+  
+\item[\textnormal{\textsc{IntegAck}}]
+   \begin{prooftree}
+    \hypo{s_{i,a}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\mathrm{IntegAck}})}
+    \hypo{u^*:_A T_{\mathrm{utt}}}
+    \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Acknowledgement}}
+    \infer[enth]4{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{IntegAck}}(s_{i,A})(u^*)\text{
+        \d{$\wedge$} \smallrecord{\smalltfield{shared}{\smallrecord{
+             \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})} 
+ \end{prooftree}
+
+ 
+\item[\textnormal{\textsc{ExecTopAgenda}}]
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
+        \smallrecord{\smalltfield{private}{\smallrecord{
+              \smalltfield{agenda}{\smallrecord{
+                  \smalltfield{fst}{\textit{RecType}}\\
+                  \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+    \infer[enth]1{:_A
+      s_{i,A}.\text{private}.\text{agenda}.\text{fst}!}
+  \end{prooftree}
+
+  
+\item[\textnormal{\textsc{DowndateAgenda}}]
+  \mbox{}
+
+  \hspace*{-2.5em}
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\text{
+        \smallrecord{
+          \smalltfield{private}{\smallrecord{
+              \smalltfield{agenda}{\smallrecord{
+                  \smalltfield{fst}{\textit{RecType}}\\
+                  \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+    \hypo{u^*:_A s_{i,A}.\text{private}.\text{agenda}.\text{fst}}
+    \infer[enth]3{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}
+        \smallrecord{
+          \smalltfield{private}{\smallrecord{
+              \smallmfield{agenda}{$s_{i,A}$.private.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+  \end{prooftree}
 
 \end{description}
+
+\subsection{English resources}
 
 
 @@
