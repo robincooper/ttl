@@ -3277,6 +3277,306 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
 % `e$_f$' and ends at the end of `e$_l$'.    
 
 \clearpage
+
+\section{Summary of resources introduced}
+
+\subsection{Universal grammar resources} 
+
+\subsubsection{Types}
+
+\begin{description}
+\item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{\textit{Phon}} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in Chapter~\ref{ch:infex})
+
+    \item[\textnormal{\textit{Cont}}] --- \textit{RecType}
+
+      
+    \item[\textnormal{\textit{Cat}}] --- a basic type
+
+      s, np, det, n, v, vp : \textit{Cat}
+
+    
+    \item[\textnormal{\textit{Syn}}] ---  \record{\tfield{cat}{\textit{Cat}} \\
+        \tfield{daughters}{\textit{Sign}$^*$}} 
+ 
+
+
+  
+    \item[\textnormal{\textit{Sign}}] ---  a basic type
+
+      $\sigma$ : \textit{Sign} iff $\sigma$ :
+      \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}}} 
+
+  
+\item[\textnormal{\textit{SignType}}] --- a basic type
+
+  $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ (as in
+  Chapter~\ref{ch:infex})
+
+  
+\item[\textnormal{\textit{S}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{NP}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}})
+
+  
+\item[\textnormal{\textit{Det}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{N}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{V}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{VP}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
+
+  
+\item[\textnormal{\textit{NoDaughters}}] --- \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+
+\end{description}
+
+\subsection{Universal speech act resources} (as in Chapter~\ref{ch:infex})
+
+% \subsubsection{Types}
+
+% \begin{description}
+  
+% \item[\textnormal{\textit{Assertion}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{RecType}}\\
+%   \tfield{illoc}{assert(s-event, cont)}
+% }
+% \item[\textnormal{\textit{Query}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{Question}}\\
+%   \tfield{illoc}{query(s-event, cont)}
+% }
+
+% \item[\textnormal{\textit{Command}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{RecType}}\\
+%   \tfield{illoc}{command(s-event, cont)}
+% }
+
+% \item[\textnormal{\textit{Acknowledgement}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{RecType}}\\
+%   \tfield{illoc}{acknowledge(s-event, cont)}
+% }
+
+% \item[\textnormal{\textit{AssertionType}}] --- a basic type
+
+%   $T:\textit{AssertionType}$ iff $T\sqsubseteq \textit{Assertion}$
+
+  
+% \item[\textnormal{\textit{QueryType}}] --- a basic type
+
+%   $T:\textit{QueryType}$ iff $T\sqsubseteq \textit{Query}$
+
+  
+% \item[\textnormal{\textit{CommandType}}] --- a basic type
+
+%   $T:\textit{CommandType}$ iff $T\sqsubseteq \textit{Command}$
+
+
+ 
+% \item[\textnormal{\textit{AcknowledgementType}}] --- a basic type
+
+%   $T:\textit{AcknowledgementType}$ iff $T\sqsubseteq \textit{Acknowledgement}$
+
+% \end{description}
+
+\subsection{Universal dialogue resources} (as in Chapter~\ref{ch:infex})
+
+% \subsubsection{Types}
+
+% \begin{description}
+% \item[\textnormal{\textit{InfoState}}] --- \record{
+%     \tfield{private}{
+%       \record{
+%         \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
+%     \tfield{shared}{
+%       \record{
+%         \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+%         \tfield{commitments}{\textit{RecType}}}}}
+  
+% \item[\textnormal{\textit{InitInfoState}}] --- \record{
+%     \tfield{private}{
+%       \record{
+%         \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+%     \tfield{shared}{
+%       \record{
+%         \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
+%         \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+
+
+
+% \end{description}
+
+% \subsubsection{Update functions and action rules}
+
+% \begin{description}
+% \item[\textnormal{f$_{\textsc{PlanAckAss}}$}] $\lambda r$:\textit{InfoState} . \\
+%   \hspace*{4em}$\lambda u$:\textit{Assertion} . \\
+%   \hspace*{6em}
+%   \smallrecord{
+%     \smalltfield{private}{\smallrecord{
+%         \smalltfield{agenda}{\smallrecord{
+%             \smalltfield{fst}{\smallrecord{
+%                 \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+%                     \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
+%                     \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
+%                 \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
+%                 \smalltfield{illoc}{acknowledge(s-event, cont)}}}\\
+%             \smallmfield{rst}{$r$.private.agenda}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+%     \smalltfield{shared}{\smallrecord{
+%         \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
+  
+% \item[\textnormal{\textsc{PlanAckAss}}]
+%   \begin{prooftree}
+%     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+%     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
+%     \hypo{u^*:_A T_{\mathrm{utt}}}
+%     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
+%     \infer[enth]4{s_{i+1,A}:_A
+%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u^*)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
+%               \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
+%   \end{prooftree}
+
+  
+% \item[\textnormal{f$_{\textsc{IntegAck}}$}]
+%   $\lambda r$:\textit{InfoState} . \\
+%   \hspace*{2em}$\lambda u$:\textit{Acknowledgement} . \\
+%   \hspace*{4em}\smallrecord{
+%     \smalltfield{shared}{\smallrecord{
+%         \smallmfield{commitments}{\smallrecord{
+%             \smalltfield{prev}{$r$.shared.commitments}}\d{$\wedge$}$u$.cont}{\textit{RecType}}\\
+%         \smallmfield{latest-utterance}{$u$}{\textit{Acknowledgement}}}}}
+
+  
+% \item[\textnormal{\textsc{IntegAck}}]
+%    \begin{prooftree}
+%     \hypo{s_{i,a}:_A T_{\mathrm{curr}}}
+%     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\mathrm{IntegAck}})}
+%     \hypo{u^*:_A T_{\mathrm{utt}}}
+%     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Acknowledgement}}
+%     \infer[enth]4{s_{i+1,A}:_A
+%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{IntegAck}}(s_{i,A})(u^*)\text{
+%         \d{$\wedge$} \smallrecord{\smalltfield{shared}{\smallrecord{
+%              \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})} 
+%  \end{prooftree}
+
+ 
+% \item[\textnormal{\textsc{ExecTopAgenda}}]
+%   \begin{prooftree}
+%     \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
+%         \smallrecord{\smalltfield{private}{\smallrecord{
+%               \smalltfield{agenda}{\smallrecord{
+%                   \smalltfield{fst}{\textit{RecType}}\\
+%                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+%     \infer[enth]1{:_A
+%       s_{i,A}.\text{private}.\text{agenda}.\text{fst}!}
+%   \end{prooftree}
+
+  
+% \item[\textnormal{\textsc{DowndateAgenda}}]
+%   \mbox{}
+
+%   \hspace*{-2.5em}
+%   \begin{prooftree}
+%     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+%     \hypo{T_{\mathrm{curr}}\sqsubseteq\text{
+%         \smallrecord{
+%           \smalltfield{private}{\smallrecord{
+%               \smalltfield{agenda}{\smallrecord{
+%                   \smalltfield{fst}{\textit{RecType}}\\
+%                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+%     \hypo{u^*:_A s_{i,A}.\text{private}.\text{agenda}.\text{fst}}
+%     \infer[enth]3{s_{i+1,A}:_A
+%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}
+%         \smallrecord{
+%           \smalltfield{private}{\smallrecord{
+%               \smallmfield{agenda}{$s_{i,A}$.private.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+%   \end{prooftree}
+
+% \end{description}
+
+\subsection{English resources} 
+
+\subsubsection{Basic types and predicates} (as in Chapter~\ref{ch:infex})
+
+\begin{description}
+
+  
+\item[Basic phonological  types for words] \mbox{}
+
+  \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
+  ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok''\}
+
+\item [Witnesses for basic types] \mbox{}
+
+  \begin{description}
+\item[\textnormal{\textit{Ind}}] --- dudamel, beethoven, uchida :
+  \textit{Ind}
+  \end{description}
+
+  
+\item[Predicates] \mbox{}
+  
+  \begin{description}
+  
+  \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}] \{conductor, composer, pianist\}
+  \end{description}
+  
+
+\end{description}
+
+\subsubsection{Sign types}
+
+\begin{description}
+
+
+\item[Notation] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type (that is,
+$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$, then we shall use
+Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
+\begin{quote}
+(($T_{\mathrm{sign}}$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+\d{$\wedge$} \textit{NoDaughters})
+\end{quote}
+
+\item[Lexical sign types] \mbox{}
+
+\begin{tabbing}
+    \{\=Lex(``Dudamel'', \textit{NP}) \\
+\> Lex(``Beethoven'', \textit{NP}) \\
+\> Lex(``a'', \textit{Det}) \\
+\> Lex(``composer'', \textit{N}) \\
+\> Lex(``conductor'', \textit{N}) \\
+\> Lex(``is'', \textit{V}) \\
+\> Lex(``ok'', \textit{S}) \\
+\> Lex(``aha'',\textit{S})\}
+\end{tabbing}
+
+\end{description}
+
+      
+
+
+
   
 \section{Summary}
 

@@ -5732,11 +5732,23 @@ dialogical approach to these concerns.
 
 \section{Summary of resources introduced}
 
-\subsection{Universal resources}
+\subsection{Universal grammar resources}
 
 \subsubsection{Types}
 
 \begin{description}
+
+  
+\item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{\textit{Phon}} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}}
+
+      
+    \item[\textnormal{\textit{Cont}}] --- \textit{RecType}
   
 \item[\textnormal{\textit{Sign}}] --- \record{\tfield{s-event}{\textit{SEvent}} \\
     \tfield{cont}{\textit{Cont}}}
@@ -5916,8 +5928,67 @@ dialogical approach to these concerns.
 
 \subsection{English resources}
 
+\subsubsection{Basic types and predicates}
 
-@@
+\begin{description}
+
+  
+\item[Basic phonological  types for words] \mbox{}
+
+  \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
+  ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok''\}
+
+\item [Witnesses for basic types] \mbox{}
+
+  \begin{description}
+\item[\textnormal{\textit{Ind}}] --- dudamel, beethoven, uchida :
+  \textit{Ind}
+  \end{description}
+
+  
+\item[Predicates] \mbox{}
+  
+  \begin{description}
+  
+  \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}] \{conductor, composer, pianist\}
+  \end{description}
+  
+
+\end{description}
+
+\subsubsection{Sign types}
+
+\begin{description}
+
+
+\item[Notation] \mbox{}
+
+  If $\sigma$ is a type of speech event and $\kappa$ is a type (of
+situation) then \\
+sign($\sigma$,$\kappa$)= \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$\sigma$}} } \\
+        \mfield{cont}{\smallrecord{\smalltfield{e}{$\kappa$} \\
+            \smalltfield{c$_{\mathrm{tns}}$}{final\_align($\Uparrow$s-event.e,e)}}}{\textit{RecType}}}
+
+If $\sigma$ is a type of speech event then \\
+sign$_{\mathit{uc}}$($\sigma$)= \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$\sigma$}} } \\
+  \smalltfield{cont}{\textit{RecType}}}
+
+\item[Lexical sign types] \mbox{}
+
+  \{sign(``Dudamel is a conductor'', conductor(dudamel)), \\ 
+\hspace*{1em}sign(``Beethoven
+is a composer'', composer(beethoven)), \\
+\hspace*{1em}sign(``Uchida is a
+pianist'', pianist(uchida)), \\
+\hspace*{1em}sign$_{\mathit{uc}}$(``ok''), \\
+\hspace*{1em}sign$_{\mathit{uc}}$(``aha'')\}
+
+\end{description}
+
+      
+
+
+
  
   
 \section{Summary}
