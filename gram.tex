@@ -460,7 +460,7 @@ which has the category noun.  This is the beginning of
 \textit{parsing}, which we will regard as the same kind of update
 involved in event perception as discussed in the previous chapters.
 The action rule corresponding to lexical resources
-like \preveg{} is given in \nexteg{}, where we use `$T$
+like \preveg{}, \textsc{LexRes}, is given in \nexteg{}, where we use `$T$
 resource$_A$' to mean that the type $T$ is a resource available to
 $A$.  Here the relevant resource is a type returned by the function `Lex'.)  We will return below to how
 this relates to gameboard update.  
@@ -518,7 +518,7 @@ restriction that the daughters field is filled by the string of
 signs. `RuleDaughters' is one of a number of sign type construction
 operations which we will introduce as universal resources which have
 the property of returning a which combine signs.  The action rule
-associated with `RuleDaughters' is characterized in
+associated with `RuleDaughters', \textsc{CombineDaughters}, is characterized in
 \nexteg{}.
 
 %@@ Give names to such principles
@@ -556,7 +556,7 @@ Appendix~\ref{sec:regular}.\label{pg:concat-i}.
 If $s$ is a string of length $n$ of records such that for each $i$,
 $0\leq i<n$, $s[i].\pi$ is a defined path, 
 $\displaystyle\mathop{\mathrm{concat}}_{0\leq i<n}(s[i].\pi)$ denotes
-$s[0].\pi^{\frown}\ldots^{\frown}s[n-1].\pi$.  We use
+$s[0].\pi\ldots s[n-1].\pi$.  We use
 concat$_i$($s[i].\pi$) to represent
 $\displaystyle\mathop{\mathrm{concat}}_{0\leq
   i<\mathrm{length}(s)}(s[i].\pi)$.
@@ -3341,9 +3341,88 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
 
   
-\item[\textnormal{\textit{NoDaughters}}] --- \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+\item[\textnormal{\textit{NoDaughters}}] ---
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+
+  
+\item[\textnormal{\textit{Ppty}}] --- (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
 
 \end{description}
+
+\subsubsection{Functions}
+\begin{description}
+\item[Notation] \mbox{}
+
+If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
+type of strings of signs then
+\begin{quote}
+RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
+\end{quote}
+
+\item[\textnormal{ConcatPhon}] \mbox{}
+
+  $\lambda
+u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
+. \\
+\hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+
+\item[Notation] \mbox{}
+
+  If $T_{\text{mother}}$ is a sign type and
+  $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
+  then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+    T_{\text{daughter}_n}$
+  \end{quote}
+  represents
+  \begin{quote}
+RuleDaughters($T_{\text{mother}}$,
+${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
+  \end{quote}
+  
+  
+
+\end{description}
+
+
+\subsubsection{Action rules}
+
+\begin{description}
+
+  \item[Notation] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type (that is,
+$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
+Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
+\begin{quote}
+(($T_{\mathrm{sign}}$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+\d{$\wedge$} \textit{NoDaughters})
+\end{quote}
+
+
+
+
+
+\item[\textnormal{\textsc{LexRes}}] \mbox{}
+
+  \begin{prooftree}
+    \hypo{\text{Lex}(T,C) \text{ resource}_A}
+    \hypo{u:_A T}
+    \infer[enth]2{:_A(\text{Lex}(T,C)\text{\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$u$}{$T$}}}}})}
+  \end{prooftree}
+
+
+  \end{description}
+
+
 
 \subsection{Universal speech act resources} (as in Chapter~\ref{ch:infex})
 
@@ -3546,17 +3625,6 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
 \begin{description}
 
 
-\item[Notation] \mbox{}
-
-  If $T_{\mathrm{phon}}$ is a phonological type (that is,
-$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
-is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$, then we shall use
-Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
-\begin{quote}
-(($T_{\mathrm{sign}}$ \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
-\d{$\wedge$} \textit{NoDaughters})
-\end{quote}
 
 \item[Lexical sign types] \mbox{}
 
