@@ -3291,9 +3291,15 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
         \tfield{e}{\textit{Phon}} \\
         \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
-        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in Chapter~\ref{ch:infex})
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
+      Chapter~\ref{ch:infex})
 
-    \item[\textnormal{\textit{Cont}}] --- \textit{RecType}
+      \item[\textnormal{\textit{Ppty}}] ---
+        (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+        
+      \item[\textnormal{\textit{Quant}}] --- (\textit{Ppty}$\rightarrow$\textit{Quant})
+
+    \item[\textnormal{\textit{Cont}}] --- \textit{RecType}$\vee$\textit{Ppty}$\vee$\textit{Quant}$\vee$(\textit{Ppty}$\rightarrow$\textit{Quant})
 
       
     \item[\textnormal{\textit{Cat}}] --- a basic type
@@ -3345,13 +3351,92 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
 
   
-\item[\textnormal{\textit{Ppty}}] --- (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+
 
 \end{description}
 
-\subsubsection{Functions}
+\subsubsection{Lexicon}
 \begin{description}
-\item[Notation] \mbox{}
+\item[\textnormal{Lex}] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type (that is,
+$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
+Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
+\begin{quote}
+(($T_{\mathrm{sign}}$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+\d{$\wedge$} \textit{NoDaughters})
+\end{quote}
+
+\item[\textnormal{SemCommonNoun($p$)}] \mbox{}
+
+  If $p$ is a predicate, then SemCommonNoun($p$) is
+  \begin{quote}
+    $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{$p$($r$.x)}}
+\end{quote}
+
+\item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+    $p$)}] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type and $p$ is a
+  predicate, then Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+  $p$) is
+  \begin{quote}
+    Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+    \smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{Ppty}}}
+  \end{quote}
+  
+\item[\textnormal{SemPropName($a$)}] \mbox{}
+
+  If $a$:\textit{Ind}, then SemPropName($a$) is
+  \begin{quote}
+    $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$a$}})
+  \end{quote}
+  
+\item[\textnormal{Lex$_{\mathrm{PropName}}$($T_{\mathrm{Phon}}$,
+    $a$)}] \mbox{}
+
+  If $T_{\mathrm{Phon}}$ is a phonological type and $a$:\textit{Ind},
+  then Lex$_{\mathrm{PropName}}$($T_{\mathrm{Phon}}$,
+  $a$) is
+  \begin{quote}
+    Lex($T_{\mathrm{Phon}}$, \textit{NP}) \d{$\wedge$}
+    \smallrecord{\smallmfield{cont}{SemPropName($a$)}{\textit{Quant}}}
+  \end{quote}
+
+  
+\item[\textnormal{SemIndefArt}] \mbox{}
+
+  $\lambda Q$:\textit{Ppty} . \\
+\hspace*{1em} $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+
+        
+      \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
+        \mbox{}
+
+        If $T_{\mathrm{Phon}}$ is a phonological type, then
+        Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+        \begin{quote}
+          Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
+        \end{quote}
+        
+
+  
+  
+\end{description}
+
+
+\subsubsection{Constituent structure}
+\begin{description}
+\item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)}] \mbox{}
 
 If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
 type of strings of signs then
@@ -3371,7 +3456,8 @@ u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}
 . \\
 \hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
 
-\item[Notation] \mbox{}
+\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+    T_{\text{daughter}_n}$}] \mbox{}
 
   If $T_{\text{mother}}$ is a sign type and
   $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
@@ -3384,7 +3470,18 @@ u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}
   \begin{quote}
 RuleDaughters($T_{\text{mother}}$,
 ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
-  \end{quote}
+\end{quote}
+
+\item[\textnormal{ContForwardApp}($T_{\text{arg}}$, $T_{\text{res}}$)] \mbox{}
+
+  If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+  ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+\begin{quote}
+  $\lambda
+u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{$T_{\text{res}}$}}
+\end{quote}
   
   
 
@@ -3395,18 +3492,7 @@ ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedg
 
 \begin{description}
 
-  \item[Notation] \mbox{}
-
-  If $T_{\mathrm{phon}}$ is a phonological type (that is,
-$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
-is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
-Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
-\begin{quote}
-(($T_{\mathrm{sign}}$ \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
-\d{$\wedge$} \textit{NoDaughters})
-\end{quote}
-
+  
 
 
 
@@ -3629,13 +3715,13 @@ Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
 \item[Lexical sign types] \mbox{}
 
 \begin{tabbing}
-    \{\=Lex(``Dudamel'', \textit{NP}) \\
-\> Lex(``Beethoven'', \textit{NP}) \\
-\> Lex(``a'', \textit{Det}) \\
-\> Lex(``composer'', \textit{N}) \\
-\> Lex(``conductor'', \textit{N}) \\
-\> Lex(``is'', \textit{V}) \\
-\> Lex(``ok'', \textit{S}) \\
+    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$), \\
+\> Lex$_{\mathrm{PropName}}$(``Beethoven'', $b$), \\
+\> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+\> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
+\> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
+\> Lex(``is'', \textit{V}), \\
+\> Lex(``ok'', \textit{S}), \\
 \> Lex(``aha'',\textit{S})\}
 \end{tabbing}
 
