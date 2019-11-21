@@ -947,9 +947,18 @@ u$:\smallrecord{\smalltfield{cont}{$(\mathit{Ppty}\rightarrow
    
 \end{ex}
 A convenient abbreviatory notation for this interpreted phrase
-structure rule is given in \nexteg{}.
-\begin{ex} 
-\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$ \textit{Det}$'$(\textit{N}$'$)
+structure rule is given in \nexteg{a} or more simply, since we can
+read the content types off the types \textit{Det} and \textit{N}, \nexteg{b}.
+\begin{ex}
+  \begin{subex}
+  \item \textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant}
+    
+  \item \textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$(\textit{N}$'$)
+  \end{subex}
+  
+
 \end{ex} 
 Here \textit{Det}$'$ and \textit{N}$'$ represent the contents of the
 determiner and noun.
@@ -1381,7 +1390,7 @@ Now we can use the notion of property restriction to characterize the
 witness condition for ptypes constructed with `exist', as in
 \nexteg{}.
 \begin{ex} 
-$e$:exist($P$,$Q$) iff $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$ 
+$e$ : exist($P$,$Q$) iff $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$ 
 \label{ex:existwitcond}
 \end{ex} 
 This will have the consequence that any record of the type \nexteg{a}
@@ -3355,6 +3364,22 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
 
 \end{description}
 
+\subsubsection{Predicates}
+
+\begin{description}
+
+  
+\item[with arity $\langle\textit{Ppty},\textit{Ppty}\rangle$] \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{exist}] --- $e$ : exist($P$,$Q$) iff
+    $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
+
+  \end{description}
+\end{description}
+
+
 \subsubsection{Lexicon}
 \begin{description}
 \item[\textnormal{Lex}] \mbox{}
@@ -3463,7 +3488,7 @@ u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}
   $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
   then
   \begin{quote}
-    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
     T_{\text{daughter}_n}$
   \end{quote}
   represents
@@ -3481,7 +3506,28 @@ ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedg
 u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
 \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{$T_{\text{res}}$}}
+
 \end{quote}
+
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+  \mbox{}
+
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote}
   
   
 
@@ -3706,7 +3752,7 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 \end{description}
 
-\subsubsection{Sign types}
+\subsubsection{Grammar}
 
 \begin{description}
 
@@ -3725,9 +3771,18 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 \> Lex(``aha'',\textit{S})\}
 \end{tabbing}
 
-\end{description}
 
-      
+\item[Constituent structure rules] \mbox{}
+  
+  \begin{tabbing}
+    \{\=\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant}\}
+
+  \end{tabbing}
+
+\end{description}
+  
+  
 
 
 
