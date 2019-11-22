@@ -1760,8 +1760,8 @@ content of the verb phrase be the content of the noun.  Furthermore,
 it requires the verb and determiner utterances be of the specific
 types ``is'' and ``a'' respectively.  This gives \preveg{} the flavour
 of representing a construction type as discussed in a variety of
-approaches to Construction Grammar, see, for example,
-\cite{BoasSag2012}.  We can allow the type corresponding to
+approaches to Construction Grammar 
+\citep[see, for example,][]{BoasSag2012}.  We can allow the type corresponding to
 \preveg{} by introducing the update function \nexteg{}.
 \begin{ex} 
 $\lambda
@@ -1960,8 +1960,8 @@ Montague's terms.
    
 \end{ex} 
 Here the challenge would be to give an explanatory account of why one
-expression in an artificial language \preveg{a} should be preferred
-over another \preveg{b} when they both express the same content.  An
+expression in an artificial language, \preveg{a}, should be preferred
+over another, \preveg{b}, when they both express the same content.  An
 alternative is to follow \cite{Lewis1972} (further developed by
 \citealp{Cresswell1985}). The idea here is that we keep a record not
 only of the final content but the way in which that content is
@@ -1985,6 +1985,7 @@ content in a given dialogue is given by the update functions and
 action rules.
 
 \section{Incremental processing and building a chart type}
+\label{sec:chart}
 
 % In Chapter~\ref{ch:infex} we made the simplifying assumption that a
 % chart was a sign.  Now we have a grammar we need to complicate this
@@ -1997,7 +1998,7 @@ utterance is produced.  If somebody stops talking mid-sentence we are
 often able to complete the sentence for them or respond to what we
 have heard so far.  There are many good accounts in the literature of
 why linguistic processing in \textit{incremental} in this way.  A
-couple of good recent overviews of the arguments are
+couple of good overviews of the arguments are
 \cite{GinzburgPoesio2016} and
 \cite{KempsonCannGregoromichelakiChatzikyriakidis2016}.
 
@@ -3289,6 +3290,9 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
 
 \section{Summary of resources introduced}
 
+This summary does not include the resources for chart processing
+introduced in Section~\ref{sec:chart}.
+
 \subsection{Universal grammar resources} 
 
 \subsubsection{Types}
@@ -3369,7 +3373,7 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
 \begin{description}
 
   
-\item[with arity $\langle\textit{Ppty},\textit{Ppty}\rangle$] \mbox{}
+\item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
 
   \begin{description}
     
@@ -3377,6 +3381,16 @@ the action rule for the second case here.  We do this in \nexteg{}.% We will use
     $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
 
   \end{description}
+\item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
+  \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
+
+  \end{description}
+  
+
 \end{description}
 
 
@@ -3451,6 +3465,27 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
           \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
         \end{quote}
+        
+      \item[\textnormal{SemBe}] \mbox{}
+
+        $\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{1em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{2em} $\mathcal{Q}$($\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
+  \tfield{e}{be(x)}})
+
+\item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
+
+  If $T_{\mathrm{Phon}}$ is a phonological type, then
+  Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$) is
+\begin{quote}
+  Lex($T_{\mathrm{Phon}}$,
+\textit{V}) \d{$\wedge$}
+\smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+\end{quote}
+  
         
 
   
@@ -3528,6 +3563,10 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
   \end{quote}
+
+  
+
+
   
   
 
@@ -3766,22 +3805,41 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
 \> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
 \> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
-\> Lex(``is'', \textit{V}), \\
-\> Lex(``ok'', \textit{S}), \\
-\> Lex(``aha'',\textit{S})\}
+\> Lex$_{\mathrm{be}}$(``is''), \\
+\> Lex(``ok'', \textit{S}) (as in Chapter~\ref{ch:infex}),  \\
+\> Lex(``aha'', \textit{S}) (as in Chapter~\ref{ch:infex}) \}
 \end{tabbing}
+
+\item[Constituent structure rule components] \mbox{}
+  \begin{description}
+
+    \item[\textnormal{CnstrIsA}] \mbox{}
+
+  $\lambda
+u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
+}}}. \\
+\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
+
+  \end{description}
+  
 
 
 \item[Constituent structure rules] \mbox{}
   
   \begin{tabbing}
-    \{\=\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
-    \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant}\}
+    \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
+    \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant},\\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
+    \d{\d{$\wedge$}} CnstrIsA, \\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
+    \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
 
   \end{tabbing}
 
 \end{description}
-  
   
 
 
