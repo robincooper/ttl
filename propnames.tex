@@ -233,8 +233,8 @@ We will take a context to be a situation
 modelled as a record.  A simple proposal for a parametric content for
 a proper name might be \nexteg{}.
 \begin{ex} 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
-\hspace*{1em}$\lambda P$:\textit{Ppty} . $P(r)$
+$\lambda c$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
+\hspace*{1em}$\lambda P$:\textit{Ppty} . $P(c)$
 \label{ex:paramcontpropname} 
 \end{ex} 
 This would allow any record with an individual labelled `x' to be
@@ -261,13 +261,26 @@ content for \textit{Sam} rather than something that appears to be a
 parametric content appropriate to proper names in general.  The
 modification is given in \nexteg{}.
 \begin{ex} 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+$\lambda c$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, ``Sam'')}} . \\
-\hspace*{5em}$\lambda P$:\textit{Ppty} . $P(r)$ 
+\hspace*{5em}$\lambda P$:\textit{Ppty} . $P(c)$ 
+%\label{ex:parametricSam}
+\end{ex}
+
+We will see in Section~\ref{sec:unbound} that there is more that one
+component in the context since we will use a separate component to
+assign individuals to unbound pronouns.  In preparation for this we
+will use the label `$\mathfrak{c}$' for the component of the context
+we are introducing here as shown in \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, ``Sam'')}}}} . \\
+\hspace*{5em}$\lambda P$:\textit{Ppty} . $P(c.\mathfrak{c})$ 
 \label{ex:parametricSam}
-\end{ex} 
-This is closely related to treatments of proper
-names that were proposed earlier in situation semantics
+\end{ex}
+
+This treatment of proper names is closely related to treatments that were proposed earlier in situation semantics
 \citep{GawronPeters1990,Cooper1991,BarwiseCooper1993}.  A more recent
 close relation is Maier's (\citeyear{Maier2009}) proposal for the
 treatment of proper names in terms of layered discourse representation
@@ -298,9 +311,10 @@ Lex$_{\mathrm{PropName}}$ is the function for associating lexical
 content with phonological types that was introduced in
 Chapter~\ref{ch:gram}.
 \begin{ex} 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, ``Sam'')}} . \\
-\hspace*{5em}Lex$_{\mathrm{PropName}}$(``Sam'', $r$.x) 
+  $\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, ``Sam'')}}}} . \\
+\hspace*{5em}Lex$_{\mathrm{PropName}}$(``Sam'', $c.\mathfrak{c}$.x) 
 \end{ex} 
 Intuitively, \preveg{} says that given a situation in which there is
 an individual named by the phonological type ``Sam'' we can construct
@@ -353,11 +367,13 @@ version is given in \nexteg{}.
 SemPropName($T$), where $T$ is a phonological type,
 is
 
-\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}}} \\
-        \field{fg}{$\lambda r$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}} . \\
-& & \hspace*{5em}$\lambda P$:\textit{Ppty} . $P(r)$}}
+\record{\field{bg}{\smallrecord{
+      \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}}}}} \\
+                 \field{fg}{$\lambda c$: \smallrecord{
+                     \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}}}} . \\
+& & \hspace*{5em}$\lambda P$:\textit{Ppty} . $P(c.\mathfrak{c})$}}
 \label{ex:SemPropName-chpropnames} 
 \end{ex}
 Here the field labelled `bg' (``background'') contains a record type
@@ -384,9 +400,10 @@ economically as \nexteg{}
 SemPropName($T$), where $T$ is a phonological type,
 is
 \begin{quote}
-$\ulcorner\lambda c$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}} . $\lambda
-                       P$:\textit{Ppty} . $P(c)\urcorner$
+  $\ulcorner\lambda c$: \smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}}}} . $\lambda
+                       P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
                      \end{quote}
                      
 \label{ex:SemPropName-chpropnames-econ} 
@@ -486,14 +503,13 @@ Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
 \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}  
 \end{ex}
 
-@@
-
 This means that the English resource corresponding to the lexical
 entry for \textit{leave} can be defined as \nexteg{}.
 \begin{ex} 
 Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave) 
 \end{ex} 
-       
+
+@@
 
 A standard strategy for dealing with compositional semantics when
 using parametric contents is to use a version of what is known in
@@ -2872,9 +2888,10 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
-    $\ulcorner\lambda c$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}} . $\lambda
-                       P$:\textit{Ppty} . $P(c)\urcorner$
+    $\ulcorner\lambda c$: \smallrecord{
+      \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}}}} . $\lambda
+                       P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
   \end{quote}
   
 \item[\textnormal{Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$
@@ -3228,85 +3245,88 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 
 % \end{description}
 
-\subsection{English resources} (as in Chapter~\ref{ch:gram})
+\subsection{English resources} 
 
-% \subsubsection{Basic types and predicates} (as in Chapter~\ref{ch:infex})
+\subsubsection{Basic types and predicates} 
 
-% \begin{description}
-
-  
-% \item[Basic phonological  types for words] \mbox{}
-
-%   \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
-%   ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok''\}
-
-% \item [Witnesses for basic types] \mbox{}
-
-%   \begin{description}
-% \item[\textnormal{\textit{Ind}}] --- dudamel, beethoven, uchida :
-%   \textit{Ind}
-%   \end{description}
+\begin{description}
 
   
-% \item[Predicates] \mbox{}
+\item[Basic phonological  types for words] \mbox{}
+
+  \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
+  ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves'' \textbf{New!}\}
+
+\item [Witnesses for basic types] \mbox{}
+
+  \begin{description}
+\item[\textnormal{\textit{Ind}}] --- dudamel, beethoven, uchida :
+  \textit{Ind}
+  \end{description}
+
   
-%   \begin{description}
+\item[Predicates] \mbox{}
   
-%   \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}] \{conductor, composer, pianist\}
-%   \end{description}
+  \begin{description}
   
-
-% \end{description}
-
-% \subsubsection{Grammar}
-
-% \begin{description}
-
-
-
-% \item[Lexical sign types] \mbox{}
-
-% \begin{tabbing}
-%     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$), \\
-% \> Lex$_{\mathrm{PropName}}$(``Beethoven'', $b$), \\
-% \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
-% \> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
-% \> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
-% \> Lex$_{\mathrm{be}}$(``is''), \\
-% \> Lex(``ok'', \textit{S}) (as in Chapter~\ref{ch:infex}),  \\
-% \> Lex(``aha'', \textit{S}) (as in Chapter~\ref{ch:infex}) \}
-% \end{tabbing}
-
-% \item[Constituent structure rule components] \mbox{}
-%   \begin{description}
-
-%     \item[\textnormal{CnstrIsA}] \mbox{}
-
-%   $\lambda
-% u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
-%                                                                     \hspace*{5em}$^{\frown}$
-% \textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
-% }}}. \\
-% \hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
-
-%   \end{description}
+  \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}]
+    \{conductor, composer, pianist, leave \textbf{New!}\}
+  \end{description}
   
 
+\end{description}
 
-% \item[Constituent structure rules] \mbox{}
+\subsubsection{Grammar} 
+
+\begin{description}
+
+
+
+\item[Lexical sign types] \mbox{}
+
+\begin{tabbing}
+    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$), \\
+\> Lex$_{\mathrm{PropName}}$(``Beethoven'', $b$), \\
+\> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+\> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
+\> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave)
+\textbf{New!} \\
+\> Lex$_{\mathrm{be}}$(``is''), \\
+\> Lex(``ok'', \textit{S}) (as in Chapter~\ref{ch:infex}),  \\
+\> Lex(``aha'', \textit{S}) (as in Chapter~\ref{ch:infex}) \}
+\end{tabbing}
+
+\item[Constituent structure rule components] \mbox{}
+  \begin{description}
+
+    \item[\textnormal{CnstrIsA}] \mbox{}
+
+  $\lambda
+u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
+}}}. \\
+\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
+
+  \end{description}
   
-%   \begin{tabbing}
-%     \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
-%     \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
-%     \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant},\\
-%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
-%     \d{\d{$\wedge$}} CnstrIsA, \\
-%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
-%     \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
 
-%   \end{tabbing}
 
-% \end{description}
+\item[Constituent structure rules] \mbox{}
+  
+  \begin{tabbing}
+    \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
+    \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant},\\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
+    \d{\d{$\wedge$}} CnstrIsA, \\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
+    \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
+
+  \end{tabbing}
+
+\end{description}
   
 
 
