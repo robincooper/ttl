@@ -509,7 +509,7 @@ entry for \textit{leave} can be defined as \nexteg{}.
 Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave) 
 \end{ex} 
 
-@@
+
 
 A standard strategy for dealing with compositional semantics when
 using parametric contents is to use a version of what is known in
@@ -520,7 +520,8 @@ $\lambda z\ .\ \alpha(z)(\beta(z))$
 \end{ex} 
 Our version of the S-combinator including different type requirements
 on the context arising from the function and the argument will be
-\nexteg{}.
+\nexteg{}, a preliminary version which we will modify in order to
+include the treatment of free pronouns in Section~\ref{sec:unbound}.
 \begin{ex}
 If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
@@ -530,8 +531,12 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
 \begin{quote}
-$\ulcorner\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
-                                \smalltfield{a}{$\beta$.bg}} . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))$\urcorner$
+% $\ulcorner\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
+%                                 \smalltfield{a}{$\beta$.bg}}
+%                                 . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))$\urcorner$
+  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$[\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$
+  . $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\beta.\text{fg}(c.\mathfrak{c}.\text{a}))\urcorner$
 \end{quote}
 % if $\alpha : (T_1 \rightarrow (T_2 \rightarrow T_3))$ and 
 % \hspace*{1em}$\beta
@@ -543,12 +548,13 @@ $\ulcorner\lambda r$:\smallrecord{\smalltfield{f}{$\alpha$.bg}\\
 % \end{quote} 
 \end{ex}
 
-
-
-Note that in the background for the result we have kept the
+The notation $[T]_{\pi_1\leadsto\pi_2}$ used here refers to the type
+like $T$ except that the path $\pi_1$ has been replaced by $\pi_2$.
+We will discuss such relabellings in detail on pp.~\pageref{pg:relabelling-intro}\textit{ff}.
+The use of relabelling here means that in the background for the result we have kept the
 backgrounds of $\alpha$ and $\beta$
 separated in their own fields labelled `f' (``function'') and `a'
-(``argument'').% \footnote{While textually this statement of the combination
+(``argument''). % \footnote{While textually this statement of the combination
   % will be correct, we need to take account of the fact that the
   % abbreviatory notation for labels in argument positions to predicates
   % now represent path-names in $\alpha$.bg and $\beta$.bg to which the labels `f'
@@ -581,7 +587,7 @@ We can use \preveg{} to combine the contents (\ref{ex:parametricSam}) and
 show by successive applications of $\beta$-reduction that
 \nexteg{a--d} are all identical.
 
-
+@@
 
 \begin{ex} 
 \begin{subex} 
@@ -781,7 +787,7 @@ Intuitively, this should enable a match since this does commit to an
 individual named Sam.  However, there is not a direct formal
 relationship between (\ref{ex:namedSam}) and \preveg{} corresponding
 to this intuition. We will use relabelling of record
-types (see Appendix~\ref{app:relabelling-rectypes}) in order to
+types \label{pg:relabelling-intro} in order to
 capture the relationship.  
 % First recall that
 % \preveg{} is an abbreviated form of \nexteg{} where we have expanded
@@ -2977,76 +2983,93 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 \end{description}
 
 
-\subsubsection{Constituent structure} (as in Chapter~\ref{ch:gram})
-% \begin{description}
-% \item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
-% $T_{\text{mother}}$)}] \mbox{}
+\subsubsection{Constituent structure} 
+\begin{description}
+\item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)}] \mbox{}
 
-% If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
-% type of strings of signs then
-% \begin{quote}
-% RuleDaughters($T_{\text{daughters}}$,
-% $T_{\text{mother}}$)
-% \end{quote}
-% is
-% \begin{quote}
-%   $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
-% \end{quote}
+If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
+type of strings of signs then
+\begin{quote}
+RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
+\end{quote}
 
-% \item[\textnormal{ConcatPhon}] \mbox{}
+\item[\textnormal{ConcatPhon}] \mbox{}
 
-%   $\lambda
-% u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
-% . \\
-% \hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+  $\lambda
+u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
+. \\
+\hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
 
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
-%     T_{\text{daughter}_n}$}] \mbox{}
+\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+    T_{\text{daughter}_n}$}] \mbox{}
 
-%   If $T_{\text{mother}}$ is a sign type and
-%   $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
-%   then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
-%     T_{\text{daughter}_n}$
-%   \end{quote}
-%   represents
-%   \begin{quote}
-% RuleDaughters($T_{\text{mother}}$,
-% ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
-% \end{quote}
+  If $T_{\text{mother}}$ is a sign type and
+  $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
+  then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
+    T_{\text{daughter}_n}$
+  \end{quote}
+  represents
+  \begin{quote}
+RuleDaughters($T_{\text{mother}}$,
+${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
+\end{quote}
 
-% \item[\textnormal{ContForwardApp}($T_{\text{arg}}$, $T_{\text{res}}$)] \mbox{}
+\item[\textnormal{$\alpha\text{@}\beta$} New!] \mbox{}\todo{Needs
+    revising for unbound pronouns}
 
-%   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
-%   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
-% \begin{quote}
-%   $\lambda
-% u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
-%     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{$T_{\text{res}}$}}
+  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+\begin{quote}
+  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$[\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$
+  . $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\beta.\text{fg}(c.\mathfrak{c}.\text{a}))\urcorner$
+\end{quote}
 
-% \end{quote}
 
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
-%   \mbox{}
+\item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)} Revised!] \mbox{}
 
-%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-%   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
-%   $T_{\text{res}}$ are content types, then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-%   \end{quote}
-%   is
-%   \begin{quote}
-%   $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-%     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
-%   \end{quote}
+  If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+  ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+\begin{quote}
+  $\lambda
+u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+\end{quote}
+
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+  \mbox{}
+
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote}
 
   
 
@@ -3054,7 +3077,7 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
   
   
 
-% \end{description}
+\end{description}
 
 
 \subsubsection{Action rules} (as in Chapter~\ref{ch:gram})
