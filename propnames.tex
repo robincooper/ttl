@@ -587,45 +587,56 @@ We can use \preveg{} to combine the contents (\ref{ex:parametricSam}) and
 show by successive applications of $\beta$-reduction that
 \nexteg{a--d} are all identical.
 
-@@
+
 
 \begin{ex} 
 \begin{subex} 
  
 \item $\ulcorner\lambda
-  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}} . \\
-\hspace*{2em}($\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, ``Sam'')}} . $\lambda P$:\textit{Ppty} . $P(r_2)$)($r_1$.f)\\
-\hspace*{4em}($\lambda r_3$:\textit{Rec}.$\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.a))$\urcorner$ 
+                  \smalltfield{a}{\textit{Rec}}}}} . \\
+            \hspace*{2em}($\lambda c$:\smallrecord{
+              \smalltfield{$\mathfrak{c}$}{\smallrecord{
+                  \smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, ``Sam'')}}}} . $\lambda P$:\textit{Ppty} . $P(c.\mathfrak{c})$)($c.\mathfrak{c}$.f)\\
+\hspace*{4em}(($\lambda c$:\textit{Rec} . $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} .
+\smallrecord{\smalltfield{e}{leave($r$.x)}})($c.\mathfrak{c}$.a))$\urcorner$ 
  
 \item  $\ulcorner\lambda
-  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}} . \\
-\hspace*{2em}$\lambda P$:\textit{Ppty} . $P$($r_1$.f)\\
-\hspace*{4em}($\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_4$.x)}})$\urcorner$ 
+                  \smalltfield{a}{\textit{Rec}}}}} . \\
+\hspace*{2em}$\lambda P$:\textit{Ppty} . $P$($c.\mathfrak{c}$.f)\\
+\hspace*{4em}($\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} .
+\smallrecord{\smalltfield{e}{leave($r$.x)}})$\urcorner$ 
 
 \item $\ulcorner\lambda
-  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}} . \\
-\hspace*{2em}$\lambda r_4$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
-\smallrecord{\smalltfield{e}{leave($r_4$.x)}}($r_1$.f)$\urcorner$
+                  \smalltfield{a}{\textit{Rec}}}}} . \\
+\hspace*{2em}$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
+\smallrecord{\smalltfield{e}{leave($r$.x)}}($c.\mathfrak{c}$.f)$\urcorner$
 
 \item $\ulcorner\lambda
-  r_1$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}} . \\
+                  \smalltfield{a}{\textit{Rec}}}}} . \\
 \hspace*{2em}
-\smallrecord{\smalltfield{e}{leave($r_1$.f.x)}}$\urcorner$
+\smallrecord{\smalltfield{e}{leave($c.\mathfrak{c}$.f.x)}}$\urcorner$
  
  
 \end{subex} 
@@ -641,7 +652,7 @@ if there is a situation of the type and ``false'' if there is no
 situation of the type.
 
 The background of the parametric content, that is the domain type
-of it foreground,
+of its foreground,
 is to be thought of as placing a constraint on the context.  The idea
 is that you can only get to the non-parametric content if you have an
 appropriate situation available.  The background of the parametric
@@ -754,10 +765,12 @@ in (\ref{ex:paramcontSamLeft}), that is, the type which is the
 background of the paramertric content, repeated in \nexteg{}, against the types of shared commitments
 in (\ref{ex:gameboardDudamelBeethovenUchidaBg}) or \preveg{}.
 \begin{ex} 
-\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+  \smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}}
+                  \smalltfield{a}{\textit{Rec}}}}}
 \label{ex:namedSam} 
 \end{ex} 
 Intuitively, this attempt at matching should fail since there is no
@@ -891,16 +904,16 @@ relabelling is given in \nexteg{a} which we will write as \nexteg{b}.and the res
 (\ref{ex:namedSam}) is given in \nexteg{c}.
 \begin{ex}
 \begin{subex}
-\item $\eta$ is a function with domain \{f.x,f.e,a\} such that
+\item $\eta$ is a function with domain \{$\mathfrak{c}$.f.x,$\mathfrak{c}$.f.e,$\mathfrak{c}$.a\} such that
 \begin{quote}
-$\eta$(f.x) = bg.x\\
-$\eta$(f.e) = bg.e\\
-$\eta$(a) = prev$^4$
+$\eta$($\mathfrak{c}$.f.x) = bg.x\\
+$\eta$($\mathfrak{c}$.f.e) = bg.e\\
+$\eta$($\mathfrak{c}$.a) = prev$^4$
 \end{quote}
 where prev$^4$ stands for prev.prev.prev.prev
-\item f.x $\leadsto$ bg.x\\
-f.e $\leadsto$ bg.e\\
-a $\leadsto$ prev$^4$
+\item $\mathfrak{c}$.f.x $\leadsto$ bg.x\\
+$\mathfrak{c}$.f.e $\leadsto$ bg.e\\
+$\mathfrak{c}$.a $\leadsto$ prev$^4$
  
 \item 
 \record{\tfield{bg}{\record{\tfield{x}{\textit{Ind}}\\
@@ -918,11 +931,13 @@ which is the background of the parametric content under consideration,
 spelled out in \nexteg{}.
 \begin{ex}
 $\ulcorner\lambda
-  r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+c$:\smallrecord{
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}} . 
-\smallrecord{\smalltfield{e}{leave($r$.f.x)}}$\urcorner$ 
+                  \smalltfield{a}{\textit{Rec}}}}} . 
+\smallrecord{\smalltfield{e}{leave($c.\mathfrak{c}$.f.x)}}$\urcorner$ 
 \label{ex:pcont-samleft} 
 \end{ex}
 The background of the parametric content is
@@ -1325,7 +1340,7 @@ $[\ell=r.\pi:T.\pi]$ at the end of $\pi$ in $T$)
   (f(a_1)\ldots(a_n))_{r.\pi}$
 \end{enumerate}
 \end{ex}
-Note that according to this definition is the type at the end of path
+Note that according to this definition if the type at the end of path
 $\pi$ is already a singleton type, that is, the field is already
 manifest, this will add an additional identity constraint.  Recall
 that $c:(T_a)_b$ iff $c:T_a$ and $c=b$.  Thus $c:(T_a)_b$ requires $a=b=c$.
@@ -1783,10 +1798,12 @@ $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
 \begin{ex} 
 \begin{subex} 
  
-\item \smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+\item \smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                                \smalltfield{e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smalltfield{a}{\textit{Rec}}} 
+                  \smalltfield{a}{\textit{Rec}}}}} 
  
 \item \smallrecord{\smalltfield{id$_0$}{\textit{Rec}}\\
              \smalltfield{id$_1$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
@@ -1806,21 +1823,23 @@ $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
                                                  ``Sam'')}}}\\
              \smalltfield{id$_8$}{\smallrecord{\smalltfield{e}{singer(id$_7$.x)}}}}
 
-\item  f.x $\leadsto$ id$_7$.x\\
-       f.e $\leadsto$ id$_7$.e\\
-       a $\leadsto$ id$_0$
+\item  $\mathfrak{c}$.f.x $\leadsto$ id$_7$.x\\
+       $\mathfrak{c}$.f.e $\leadsto$ id$_7$.e\\
+       $\mathfrak{c}$.a $\leadsto$ id$_0$
 
-\item \smallrecord{\smalltfield{f}{\smallrecord{\smallmfield{x}{$r$.id$_7$.x}{\textit{Ind}}\\
+     \item \smallrecord{
+         \smalltfield{$\mathfrak{c}$}{\smallrecord{
+           \smalltfield{f}{\smallrecord{\smallmfield{x}{$r$.id$_7$.x}{\textit{Ind}}\\
                                                \smallmfield{e}{$r$.id$_7$.e}{named(x,
                                                  ``Sam'')}}}\\
-                  \smallmfield{a}{$r$.id$_0$}{\textit{Rec}}} 
+                  \smallmfield{a}{$r$.id$_0$}{\textit{Rec}}}}} 
  
 \end{subex} 
    
 \end{ex} 
 % A precise and general definition of this notation is in Appendix~\ref{app:specrec}.   
 
-
+@@
  
 We can now put all this together as the action rule in \nexteg{},
 which we call \textsc{AccLTM} (``accommodate match with long term
@@ -3153,34 +3172,43 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 % \end{description}
 
-\subsection{Universal dialogue resources} (as in Chapter~\ref{ch:infex})
+\subsection{Universal dialogue resources} 
 
-% \subsubsection{Types}
+\subsubsection{Types}
 
-% \begin{description}
-% \item[\textnormal{\textit{InfoState}}] --- \record{
-%     \tfield{private}{
-%       \record{
-%         \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
-%     \tfield{shared}{
-%       \record{
-%         \tfield{latest-utterance}{\textit{Sign}$^*$}\\
-%         \tfield{commitments}{\textit{RecType}}}}}
+\begin{description}
+\item[\textnormal{\textit{InfoState}}] --- \record{
+    \tfield{private}{
+      \record{
+        \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+        \tfield{commitments}{\textit{RecType}}}}}
   
-% \item[\textnormal{\textit{InitInfoState}}] --- \record{
-%     \tfield{private}{
-%       \record{
-%         \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
-%     \tfield{shared}{
-%       \record{
-%         \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
-%         \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+\item[\textnormal{\textit{InitInfoState}}] --- \record{
+    \tfield{private}{
+      \record{
+        \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+    \tfield{shared}{
+      \record{
+        \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
+        \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+
+  
+\item[\textnormal{\textit{GameBoard}} New!] --- a basic type
+
+  $T$ : \textit{GameBoard} iff $T\sqsubseteq$ \textit{InfoState}
+  
+\item[\textnormal{\textit{TotalInfoState}} New!] --- \record{\tfield{ltm}{\textit{RecType}} \\
+        \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}
 
 
+\end{description}
 
-% \end{description}
+\subsubsection{Update functions and action rules}
 
-% \subsubsection{Update functions and action rules}
+(as in Chapter~\ref{ch:infex})
 
 % \begin{description}
 % \item[\textnormal{f$_{\textsc{PlanAckAss}}$}] $\lambda r$:\textit{InfoState} . \\
@@ -3284,7 +3312,8 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
   \begin{description}
 \item[\textnormal{\textit{Ind}}] --- dudamel, beethoven, uchida :
-  \textit{Ind}
+  \textit{Ind} \textbf{No longer necessary for interpretation of
+    proper names!}
   \end{description}
 
   
