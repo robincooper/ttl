@@ -1839,9 +1839,9 @@ $T_{\mathrm{bg}}\parallel_\eta r$ is \nexteg{d}.
 \end{ex} 
 % A precise and general definition of this notation is in Appendix~\ref{app:specrec}.   
 
-@@
+
  
-We can now put all this together as the action rule in \nexteg{},
+We can now put all this together as the action rule in \nexteg{} on p.~\pageref{ex:AccLTM},
 which we call \textsc{AccLTM} (``accommodate match with long term
 memory'').  
 
@@ -1873,6 +1873,7 @@ memory'').
                         r$}\\
                       \smalltfield{fg}{$u^*$.cont.fg$($bg$)$}}}{\textit{RecType}}}}}}{$($ltm$\rightarrow$\textit{GameBoard}$)$}}}}
   \end{prooftree}
+  \label{ex:AccLTM}
   }
 
   where $\eta$ is a relabelling for $u^*$.cont.bg with range included
@@ -2015,7 +2016,7 @@ Then the new shared commitments will be \nexteg{a} which is
 \end{subex} 
    
 \end{ex} 
-We can now put this together as the action rule in \nexteg{},
+We can now put this together as the action rule in \nexteg{} on p.~\pageref{ex:AccNM},
 which we call \textsc{AccNM} (``accommodate no match'').  This is the same as \textsc{AccLTM} in (\ref{ex:AccLTM}) except that
 in the update for shared commitments 
 there is no anchoring to long term memory.
@@ -2051,6 +2052,7 @@ there is no anchoring to long term memory.
 
   % where $\eta$ is a relabelling for $u^*$.cont.bg with range included
   % in $s_{i,A}^{\text{tot}}$.ltm
+  \label{ex:AccNM}
 \end{ex}
 \end{sidewaysfigure}
 
@@ -2083,7 +2085,8 @@ We can now adjust the preliminary version of \textsc{AccGB} given in
 (\ref{ex:AccGBprelim}) which was the action rule for cases where there is a
 match on the gameboard so that it matches the general format of action
 rules for
-total information states.  This is given in \nexteg{}.% Assuming that we have relabellings $\eta$ and $\eta'$
+total information states.  This is given in \nexteg{} on
+p.~\pageref{ex:AccGBfinal}.% Assuming that we have relabellings $\eta$ and $\eta'$
 % as defined on p.~% \pageref{pg:etaprime}
 % we can formulate the update
 % function in \nexteg{}, which we call \textbf{AccGB}($\eta'$)
@@ -2237,7 +2240,10 @@ selection. What we have in common, though, is that in order to account
 for the way accommodation is carried out we both add an additional
 layer to a type
 theory based  semantics and talk in procedural terms of
-actions to be carried out:  we with our action rules and \citeauthor{GrooteLebedeva2010} with their error handling mechanism.
+actions to be carried out:  we with our action rules and
+\citeauthor{GrooteLebedeva2010} with their error handling mechanism.
+
+@@
      
 \section{Paderewski}
 \label{sec:Paderewski}
@@ -3208,93 +3214,117 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 \subsubsection{Update functions and action rules}
 
-(as in Chapter~\ref{ch:infex})
+%(as in Chapter~\ref{ch:infex})
 
-% \begin{description}
-% \item[\textnormal{f$_{\textsc{PlanAckAss}}$}] $\lambda r$:\textit{InfoState} . \\
-%   \hspace*{4em}$\lambda u$:\textit{Assertion} . \\
-%   \hspace*{6em}
-%   \smallrecord{
-%     \smalltfield{private}{\smallrecord{
-%         \smalltfield{agenda}{\smallrecord{
-%             \smalltfield{fst}{\smallrecord{
-%                 \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
-%                     \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
-%                     \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
-%                 \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
-%                 \smalltfield{illoc}{acknowledge(s-event, cont)}}}\\
-%             \smallmfield{rst}{$r$.private.agenda}{$\mathrm{list}(\textit{RecType})$}}}}}\\
-%     \smalltfield{shared}{\smallrecord{
-%         \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
+\begin{description}
+\item[\textnormal{f$_{\textsc{PlanAckAss}}$}] $\lambda r$:\textit{InfoState} . \\
+  \hspace*{4em}$\lambda u$:\textit{Assertion} . \\
+  \hspace*{6em}
+  \smallrecord{
+    \smalltfield{private}{\smallrecord{
+        \smalltfield{agenda}{\smallrecord{
+            \smalltfield{fst}{\smallrecord{
+                \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+                    \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
+                    \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
+                \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
+                \smalltfield{illoc}{acknowledge(s-event, cont)}}}\\
+            \smallmfield{rst}{$r$.private.agenda}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
   
-% \item[\textnormal{\textsc{PlanAckAss}}]
-%   \begin{prooftree}
-%     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
-%     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
-%     \hypo{u^*:_A T_{\mathrm{utt}}}
-%     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
-%     \infer[enth]4{s_{i+1,A}:_A
-%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u^*)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
-%               \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
-%   \end{prooftree}
-
-  
-% \item[\textnormal{f$_{\textsc{IntegAck}}$}]
-%   $\lambda r$:\textit{InfoState} . \\
-%   \hspace*{2em}$\lambda u$:\textit{Acknowledgement} . \\
-%   \hspace*{4em}\smallrecord{
-%     \smalltfield{shared}{\smallrecord{
-%         \smallmfield{commitments}{\smallrecord{
-%             \smalltfield{prev}{$r$.shared.commitments}}\d{$\wedge$}$u$.cont}{\textit{RecType}}\\
-%         \smallmfield{latest-utterance}{$u$}{\textit{Acknowledgement}}}}}
+\item[\textnormal{\textsc{PlanAckAss}}]
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
+    \hypo{u^*:_A T_{\mathrm{utt}}}
+    \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
+    \infer[enth]4{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u^*)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
+  \end{prooftree}
 
   
-% \item[\textnormal{\textsc{IntegAck}}]
-%    \begin{prooftree}
-%     \hypo{s_{i,a}:_A T_{\mathrm{curr}}}
-%     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\mathrm{IntegAck}})}
-%     \hypo{u^*:_A T_{\mathrm{utt}}}
-%     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Acknowledgement}}
-%     \infer[enth]4{s_{i+1,A}:_A
-%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{IntegAck}}(s_{i,A})(u^*)\text{
-%         \d{$\wedge$} \smallrecord{\smalltfield{shared}{\smallrecord{
-%              \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})} 
-%  \end{prooftree}
+\item[\textnormal{f$_{\textsc{IntegAck}}$}]
+  $\lambda r$:\textit{InfoState} . \\
+  \hspace*{2em}$\lambda u$:\textit{Acknowledgement} . \\
+  \hspace*{4em}\smallrecord{
+    \smalltfield{shared}{\smallrecord{
+        \smallmfield{commitments}{\smallrecord{
+            \smalltfield{prev}{$r$.shared.commitments}}\d{$\wedge$}$u$.cont}{\textit{RecType}}\\
+        \smallmfield{latest-utterance}{$u$}{\textit{Acknowledgement}}}}}
+
+  
+\item[\textnormal{\textsc{IntegAck}}]
+   \begin{prooftree}
+    \hypo{s_{i,a}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\mathrm{IntegAck}})}
+    \hypo{u^*:_A T_{\mathrm{utt}}}
+    \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Acknowledgement}}
+    \infer[enth]4{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{IntegAck}}(s_{i,A})(u^*)\text{
+        \d{$\wedge$} \smallrecord{\smalltfield{shared}{\smallrecord{
+             \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})} 
+ \end{prooftree}
 
  
-% \item[\textnormal{\textsc{ExecTopAgenda}}]
-%   \begin{prooftree}
-%     \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
-%         \smallrecord{\smalltfield{private}{\smallrecord{
-%               \smalltfield{agenda}{\smallrecord{
-%                   \smalltfield{fst}{\textit{RecType}}\\
-%                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
-%     \infer[enth]1{:_A
-%       s_{i,A}.\text{private}.\text{agenda}.\text{fst}!}
-%   \end{prooftree}
+\item[\textnormal{\textsc{ExecTopAgenda}}]
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
+        \smallrecord{\smalltfield{private}{\smallrecord{
+              \smalltfield{agenda}{\smallrecord{
+                  \smalltfield{fst}{\textit{RecType}}\\
+                  \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+    \infer[enth]1{:_A
+      s_{i,A}.\text{private}.\text{agenda}.\text{fst}!}
+  \end{prooftree}
 
   
-% \item[\textnormal{\textsc{DowndateAgenda}}]
-%   \mbox{}
+\item[\textnormal{\textsc{DowndateAgenda}}]
+  \mbox{}
 
-%   \hspace*{-2.5em}
-%   \begin{prooftree}
-%     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
-%     \hypo{T_{\mathrm{curr}}\sqsubseteq\text{
-%         \smallrecord{
-%           \smalltfield{private}{\smallrecord{
-%               \smalltfield{agenda}{\smallrecord{
-%                   \smalltfield{fst}{\textit{RecType}}\\
-%                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
-%     \hypo{u^*:_A s_{i,A}.\text{private}.\text{agenda}.\text{fst}}
-%     \infer[enth]3{s_{i+1,A}:_A
-%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}
-%         \smallrecord{
-%           \smalltfield{private}{\smallrecord{
-%               \smallmfield{agenda}{$s_{i,A}$.private.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
-%   \end{prooftree}
+  \hspace*{-2.5em}
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+    \hypo{T_{\mathrm{curr}}\sqsubseteq\text{
+        \smallrecord{
+          \smalltfield{private}{\smallrecord{
+              \smalltfield{agenda}{\smallrecord{
+                  \smalltfield{fst}{\textit{RecType}}\\
+                  \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+    \hypo{u^*:_A s_{i,A}.\text{private}.\text{agenda}.\text{fst}}
+    \infer[enth]3{s_{i+1,A}:_A
+      T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}
+        \smallrecord{
+          \smalltfield{private}{\smallrecord{
+              \smallmfield{agenda}{$s_{i,A}$.private.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+  \end{prooftree}
+  
+\item[\textnormal{\textsc{AccGB}} New!] See p.~\pageref{ex:AccGBfinal}.
 
-% \end{description}
+  
+\item[\textnormal{\textsc{AccLTM}} New!] See p.~\pageref{ex:AccLTM}.
+  
+\item[\textnormal{\textsc{AccNM}} New!] See p.~\pageref{ex:AccNM}.
+  
+\item[Control regime for accommodation New!] \mbox{}
+
+  \begin{subex} 
+ 
+\item if there is a labelling, $\eta$, such that
+$s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\text{commitments}\sqsubseteq[u^*.\text{cont}.\text{bg}]_\eta$,
+  then use \text{AccGB} with $\eta$ 
+ 
+\item else if there is a labelling, $\eta$, such that
+  $s_{i,A}^{\text{tot}}.\text{ltm}\sqsubseteq[u^*.\text{cont}.\text{bg}]_\eta$
+  then use \text{AccLTM} with $\eta$
+
+  
+\item else use \textsc{AccNM}
+ 
+\end{subex} 
+
+\end{description}
 
 \subsection{English resources} 
 
