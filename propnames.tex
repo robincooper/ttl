@@ -2243,7 +2243,7 @@ theory based  semantics and talk in procedural terms of
 actions to be carried out:  we with our action rules and
 \citeauthor{GrooteLebedeva2010} with their error handling mechanism.
 
-@@
+
      
 \section{Paderewski}
 \label{sec:Paderewski}
@@ -2628,11 +2628,12 @@ of gender to make things simpler.  The content of \preveg{} is a type
 which depends on a context (a situation) which provides a value of the
 pronoun \textit{he}. Thus it will have a parametric content which is a
 function from a context assigning a value to the pronoun to a
-type.  In order to do this we will make use of \textit{structured
-  contexts}.
+type.  In order to do this we will make use of the fact that our
+contexts are structured.
 
 The
-contexts that we have used so far are records of general types corresponding to presuppositions
+contexts that we have used so far have a single component (labelled
+`$\mathfrak{c}$') which are records of general types corresponding to presuppositions
 \citep{BeaverGeurts2014} or content not \textit{under discussion}
 \citep{Ginzburg1994,Ginzburg2012}  or not \textit{at issue}
 \citep{Potts2005}.  For example, \nexteg{} puts a constraint on the
@@ -2646,7 +2647,7 @@ In the treatment of unbound pronouns we will use records that are much
 more restricted in nature and which correspond to partial assignments to 
 variables.  Their labels will all be of the form `x$_i$' where $i$ is
 a natural number and the record types that we will use will be
-resticted to using a restricted number of non-dependent types. For the
+restricted to using a restricted number of non-dependent types. For the
 current account of singular unbound pronouns we will restrict
 ourselves to the type \textit{Ind}.  Thus \nexteg{} is an example of
 the kind of record type we will use.
@@ -2655,12 +2656,12 @@ the kind of record type we will use.
               \tfield{x$_1$}{\textit{Ind}}} 
 \end{ex} 
   
-We will regard these different kinds of
+We regard these different kinds of
 context as separate components of the context as they may be treated differently by compositional
 semantics, for example, in terms of their projection properties which
 regulates to what extent contexts required by lower constituents are
 also required by higher constituents, as discussed, for example, by
-\cite{Potts2005}.  we will have parametric
+\cite{Potts2005}.  We will have parametric
 contents which look like \nexteg{}.
 \begin{ex} 
 $\ulcorner\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}\\
@@ -2672,7 +2673,7 @@ $\ulcorner\lambda c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\sma
 
 We use the label `$\mathfrak{s}$' for the component in the context which
 assigns entities to occurrences of pronouns and the label
-`$\mathfrak{c}$' for the component which corresponds to
+`$\mathfrak{c}$', as before, for the component which corresponds to
 presuppositions.  We leave open the possibility of adding further
 components to the context later.
 
@@ -2702,16 +2703,54 @@ in \nexteg{c}.
 \end{subex} 
    
 \end{ex}
-We follow Montague's strategy in allowing the content of \textit{he}
-to be \nexteg{} for any natural number $i$.
-\begin{ex}
+We will define `SemPron' to be \nexteg{}.
+\begin{ex} 
   $\ulcorner\lambda c$:\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_i$}{\textit{Ind}}}}} . 
-        $\lambda P$:\textit{Ppty}
-        . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_i$}})$\urcorner$
-\label{ex:pronoun-cont}
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
+\end{ex}
+We will define `LexPron($T_{\text{phon}}$)', where $T_{\text{phon}}$
+is a phonological type, to be \nexteg{}.
+\begin{ex} 
+Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{SemPron($T_{\mathrm{phon}}$)}{\textit{PQuant}}} 
+\end{ex}
+This means that every instance of a pronoun when viewed in isolation
+as an utterance of a lexical item will involve the label `x$_0$'.
+However, when we combine phrases we will increment the indexes on `x'
+in one of the constituents so that no two occurrences of pronouns will
+have the same index.  This will be done in our combination rule based
+on the S-combinator (and would also need to be done in other
+combination rules if they were addded).  In order to define this we
+will is the notation $\pi_i$ to represent a path in which the last
+label is indexed with $i$.  If $T$ is a record type we characterize
+the maximum index associated with a path of the form $\pi$ (without
+the index), $\mathrm{max}_\pi(T)$, as \nexteg{}.
+\begin{ex} 
+$\mathrm{max}(\{i\mid\pi_i\in\mathrm{paths}(T)\})$ 
+\end{ex}
+Here for convenience we assume that $\mathrm{max}(\emptyset)$ is $-1$
+and that $\mathrm{max}$ picks out the highest of a non-empty set of
+natural numbers, as normal.  This simplifies our definition of incrementation.
+We characterize the incrementation of the $\pi$-indexes in a record
+type $T_1$ with respect to another record type $T_2$,
+$\mathrm{incr}_\pi(T_1,T_2)$, is \nexteg{}.
+\begin{ex} 
+$[T_1]_{\pi_i\leadsto\pi_{i+max_\pi(T_2)+1}}$
 \end{ex} 
+Now combination @@  
+  
+  
+% We follow Montague's strategy in allowing the content of \textit{he}
+% to be \nexteg{} for any natural number $i$.
+% \begin{ex}
+%   $\ulcorner\lambda c$:\smallrecord{
+%     \smalltfield{$\mathfrak{s}$}{\smallrecord{
+%         \smalltfield{x$_i$}{\textit{Ind}}}}} . 
+%         $\lambda P$:\textit{Ppty}
+%         . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_i$}})$\urcorner$
+% \label{ex:pronoun-cont}
+% \end{ex} 
 Thus considering the boy and the dog, a
 content for \nexteg{a} will be \nexteg{b}.
 \begin{ex} 
