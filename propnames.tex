@@ -536,7 +536,8 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 %                                 . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))$\urcorner$
   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
       \d{$\wedge$}$[\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$
-  . $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\beta.\text{fg}(c.\mathfrak{c}.\text{a}))\urcorner$
+      . $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\beta.\text{fg}(c.\mathfrak{c}.\text{a}))\urcorner$
+      
 \end{quote}
 % if $\alpha : (T_1 \rightarrow (T_2 \rightarrow T_3))$ and 
 % \hspace*{1em}$\beta
@@ -545,7 +546,8 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 % \begin{quote}
 % $\lambda r$:\smallrecord{\smalltfield{f}{$T_1$} \\
 %                          \smalltfield{a}{$T_4$}}. $\alpha(r.\textrm{f})(\beta(r.\textrm{a}))$
-% \end{quote} 
+%                        \end{quote}
+\label{ex:s-combination-prelim}
 \end{ex}
 
 The notation $[T]_{\pi_1\leadsto\pi_2}$ used here refers to the type
@@ -2713,7 +2715,7 @@ We will define `LexPron($T_{\text{phon}}$)', where $T_{\text{phon}}$
 is a phonological type, to be \nexteg{}.
 \begin{ex} 
 Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemPron($T_{\mathrm{phon}}$)}{\textit{PQuant}}} 
+\smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}} 
 \end{ex}
 This means that every instance of a pronoun when viewed in isolation
 as an utterance of a lexical item will involve the label `x$_0$'.
@@ -2721,7 +2723,7 @@ However, when we combine phrases we will increment the indexes on `x'
 in one of the constituents so that no two occurrences of pronouns will
 have the same index.  This will be done in our combination rule based
 on the S-combinator (and would also need to be done in other
-combination rules if they were addded).  In order to define this we
+combination rules if they were added).  In order to define this we
 will is the notation $\pi_i$ to represent a path in which the last
 label is indexed with $i$.  If $T$ is a record type we characterize
 the maximum index associated with a path of the form $\pi$ (without
@@ -2732,13 +2734,53 @@ $\mathrm{max}(\{i\mid\pi_i\in\mathrm{paths}(T)\})$
 Here for convenience we assume that $\mathrm{max}(\emptyset)$ is $-1$
 and that $\mathrm{max}$ picks out the highest of a non-empty set of
 natural numbers, as normal.  This simplifies our definition of incrementation.
-We characterize the incrementation of the $\pi$-indexes in a record
+We use the notation $[T]_{\pi_i\leadsto\pi_{f(i)}}$ to represent the
+result of relabelling each path in $T$ of the form $\pi_i$ where $i$
+is a natural number with $\pi_{f(i)}$ where $f$ is a function from
+natural numbers to natural numbers.  We characterize the incrementation of the $\pi$-indexes in a record
 type $T_1$ with respect to another record type $T_2$,
 $\mathrm{incr}_\pi(T_1,T_2)$, is \nexteg{}.
 \begin{ex} 
 $[T_1]_{\pi_i\leadsto\pi_{i+max_\pi(T_2)+1}}$
+\end{ex}
+Similarly, we characterize the incrementation of the $\pi$-indexes of a function, $\lambda
+v\!:\!T_1\ .\ T_2\dep{v}$, where $T_1$ and $T_2\dep{v}$ are record
+types, with respect to a record type, $T_3$, that is, \nexteg{a},
+as \nexteg{b}.
+\begin{ex}
+  \begin{subex}
+    \item $\mathrm{incr}_\pi(\lambda
+v\!:\!T_1\ .\ T_2\dep{v}, T_3)$
+\item $\lambda v\!:\!\mathrm{incr}_\pi(T_1,T_3)\ .\
+  [T_2\dep{v}]_{v.\pi_i\leadsto v.\pi_{i+max_{\pi}(T_3)+1}}$
+\end{subex}
+
 \end{ex} 
-Now combination @@  
+  
+
+We can now modify the combination rule in
+(\ref{ex:s-combination-prelim}) to take account of the incrementation
+of free pronouns. This is given in \nexteg{}.
+\begin{ex}
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+\begin{quote}
+  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}
+$\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
+      
+\end{quote}
+
+\label{ex:s-combination} 
+\end{ex}
+
   
   
 % We follow Montague's strategy in allowing the content of \textit{he}
@@ -2750,7 +2792,8 @@ Now combination @@
 %         $\lambda P$:\textit{Ppty}
 %         . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_i$}})$\urcorner$
 % \label{ex:pronoun-cont}
-% \end{ex} 
+% \end{ex}
+@@
 Thus considering the boy and the dog, a
 content for \nexteg{a} will be \nexteg{b}.
 \begin{ex} 
@@ -2968,11 +3011,29 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
     )} Revised!] \mbox{}
 
   If $T_{\mathrm{phon}}$ is a phonological type,
+
   then Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$) is
   \begin{quote}
     Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 \smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{phon}}$)}{\textit{PQuant}}}
-  \end{quote}
+\end{quote}
+
+\item[\textnormal{SemPron} New!] \mbox{}
+
+$\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty}
+  . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
+
+\item[\textnormal{LexPron($T_{\text{phon}}$)} New!] \mbox{}
+
+If $T_{\text{phon}}$ is a phonological type, then
+LexPron($T_{\text{phon}}$) is
+\begin{quote}
+Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}}
+\end{quote}
 
   
 \item[\textnormal{SemIndefArt}] \mbox{}
@@ -3086,8 +3147,7 @@ RuleDaughters($T_{\text{mother}}$,
 ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
 \end{quote}
 
-\item[\textnormal{$\alpha\text{@}\beta$} New!] \mbox{}\todo{Needs
-    revising for unbound pronouns}
+\item[\textnormal{$\alpha\text{@}\beta$} New!] \mbox{}
 
   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
@@ -3098,8 +3158,11 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
 \begin{quote}
   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$[\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$
-  . $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\beta.\text{fg}(c.\mathfrak{c}.\text{a}))\urcorner$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}
+$\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
+      
 \end{quote}
 
 
