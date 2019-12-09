@@ -2793,7 +2793,10 @@ $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}
 %         . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_i$}})$\urcorner$
 % \label{ex:pronoun-cont}
 % \end{ex}
-@@
+While each pronoun consider on its own will have a content involving
+the label `x$_0$' whenever constituents are combined relabelling will
+take place that ensures that none of the `x$_i$' in the contents of
+the two constituents are the same.
 Thus considering the boy and the dog, a
 content for \nexteg{a} will be \nexteg{b}.
 \begin{ex} 
@@ -2810,7 +2813,37 @@ content for \nexteg{a} will be \nexteg{b}.
  
 \end{subex} 
    
+\end{ex}
+In order to achieve this we need to introduce resources for transitive
+verbs as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          q$:\textit{Quant} . $\lambda
+          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $q(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
+        \end{quote}
+ 
+\item  If $T_{\mathrm{phon}}$ is a phonological type,
+        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+        $T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          Lex($T_{\mathrm{phon}}$, \textit{V$_t$}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cnt}{SemTransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+        \end{quote}
+        
+      \item Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug)
+        
+ 
+\end{subex} 
+   
 \end{ex} 
+  
 A potential advantage of using record types to characterize pronominal contexts
 rather than variable assignments is that we can add further
 information represented by the pronoun such as gender.   Thus a simple
@@ -2823,7 +2856,7 @@ be \nexteg{}.
         \smalltfield{x$_1$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
           \smalltfield{c$_0$}{male($\Uparrow\!\!\mathfrak{s}$.x$_0$)}\\
-          \smalltfield{c$_1$}{neuter($\Uparrow\!\!\mathfrak{s}$.x$_0$)}}}
+          \smalltfield{c$_1$}{neuter($\Uparrow\!\!\mathfrak{s}$.x$_1$)}}}
 }
                                  . 
 \record{\tfield{e}{hug($c.\mathfrak{s}$.x$_0$, $c.\mathfrak{s}$.x$_1$)}}$\urcorner$ 
@@ -2979,7 +3012,7 @@ Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
 
 \item[\textnormal{SemCommonNoun($p$)}] \mbox{}
 
-  If $p$ is a predicate, then SemCommonNoun($p$) is
+  If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$, then SemCommonNoun($p$) is
   \begin{quote}
     $\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
@@ -2990,7 +3023,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
     $p$)}] \mbox{}
 
   If $T_{\mathrm{phon}}$ is a phonological type and $p$ is a
-  predicate, then Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+  predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
   $p$) is
   \begin{quote}
     Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
@@ -3059,7 +3092,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         \mbox{}
 
         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
-        predicate, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+        predicate with arity $\langle\textit{Ind}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
@@ -3072,21 +3105,47 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 
         If $T_{\mathrm{phon}}$ is a phonological type,
         $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
-        predicate, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+        predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
         $T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
           \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
         \end{quote}
+
+        
+      \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)} New!] \mbox{}
+
+        If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          \mathcal{Q}$:\textit{Quant} . $\lambda
+          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
+        \end{quote}
+        
+\item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+          $T_{\mathrm{bg}}$, $p$)} New!] \mbox{}
+
+        If $T_{\mathrm{phon}}$ is a phonological type,
+        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+        $T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          Lex($T_{\mathrm{phon}}$, \textit{V$_t$}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cnt}{SemTransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+        \end{quote}
+
         
 
         
-      \item[\textnormal{SemBe}] \mbox{}
+      \item[\textnormal{SemBe} Revised!] \mbox{}
 
-        $\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{1em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+        $\lambda c:T_{\text{bg}}$ . \\
+        \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \\
-\hspace*{2em} $\mathcal{Q}$($\lambda
+\hspace*{3em} $\mathcal{Q}$($\lambda
 r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
   \tfield{e}{be(x)}})
@@ -3438,7 +3497,8 @@ $s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\
 \item[Basic phonological  types for words] \mbox{}
 
   \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
-  ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves'' \textbf{New!}\}
+  ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves''
+  \textbf{New!}, ``hugs'' \textbf{New!}\}
 
 \item [Witnesses for basic types] \mbox{}
 
@@ -3454,7 +3514,7 @@ $s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\
   \begin{description}
   
   \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}]
-    \{conductor, composer, pianist, leave \textbf{New!}\}
+    \{conductor, composer, pianist, leave \textbf{New!}, hug \textbf{New!}\}
   \end{description}
   
 
@@ -3469,16 +3529,18 @@ $s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\
 \item[Lexical sign types] \mbox{}
 
 \begin{tabbing}
-    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel'', $d$), \\
-\> Lex$_{\mathrm{PropName}}$(``Beethoven'', $b$), \\
+    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel'') \textbf{Revised!}, \\
+\> Lex$_{\mathrm{PropName}}$(``Beethoven'') \textbf{Revised!}, \\
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
 \> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
 \> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave)
-\textbf{New!} \\
+\textbf{New!}, \\
+\> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug)
+\textbf{New!}, \\
 \> Lex$_{\mathrm{be}}$(``is''), \\
-\> Lex(``ok'', \textit{S}) (as in Chapter~\ref{ch:infex}),  \\
-\> Lex(``aha'', \textit{S}) (as in Chapter~\ref{ch:infex}) \}
+\> Lex(``ok'', \textit{S}),  \\
+\> Lex(``aha'', \textit{S})  \}
 \end{tabbing}
 
 \item[Constituent structure rule components] \mbox{}
