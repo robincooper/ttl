@@ -2886,7 +2886,9 @@ will not explore this further here.
 
 Items that are new since Chapter~\ref{ch:gram} are marked
 ``\textbf{New!}'' and items that have been revised since
-Chapter~\ref{ch:gram} are marked ``\textbf{Revised!}''.
+Chapter~\ref{ch:gram} are marked ``\textbf{Revised!}''.  We have
+included some items for completeness which were not explicitly
+introduced in the text.
 
 \subsection{Universal grammar resources} 
 
@@ -2912,9 +2914,23 @@ Chapter~\ref{ch:gram} are marked ``\textbf{Revised!}''.
         (\textit{Ppty}$\rightarrow$\textit{RecType})
         
       \item[\textnormal{\textit{PQuant}} New!] --- \record{\tfield{bg}{\textit{RecType}} \\
-        \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
+          \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
+        
+      \item[\textnormal{\textit{QuantDet}} New!] ---
+        (\textit{Ppty}$\rightarrow$\textit{Quant})
+        
+      \item[\textnormal{\textit{PQuantDet}} New!] ---
+        \record{
+          \tfield{bg}{\textit{RecType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
+        
+      \item[\textnormal{\textit{PRecType}} New!] ---
+        \record{
+          \tfield{bg}{\textit{RecType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+          
 
-    \item[\textnormal{\textit{Cont}} Revised!] --- \textit{RecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$(\textit{Ppty}$\rightarrow$\textit{Quant})
+    \item[\textnormal{\textit{Cont}} Revised!] --- \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
 
       
     \item[\textnormal{\textit{Cat}}] --- a basic type
@@ -3010,11 +3026,11 @@ Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
 \d{$\wedge$} \textit{NoDaughters})
 \end{quote}
 
-\item[\textnormal{SemCommonNoun($p$)}] \mbox{}
+\item[\textnormal{SemCommonNoun($p$)} Revised!] \mbox{}
 
   If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$, then SemCommonNoun($p$) is
   \begin{quote}
-    $\lambda
+    $\lambda c$:\textit{Rec} . $\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 . \record{\tfield{e}{$p$($r$.x)}}
 \end{quote}
@@ -3069,10 +3085,11 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 \end{quote}
 
   
-\item[\textnormal{SemIndefArt}] \mbox{}
+\item[\textnormal{SemIndefArt} Revised!] \mbox{}
 
-  $\lambda Q$:\textit{Ppty} . \\
-\hspace*{1em} $\lambda P$:\textit{Ppty}
+  $\lambda c$:\textit{Rec} . \\
+\hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+\hspace*{2em} $\lambda P$:\textit{Ppty}
 . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
           \mfield{scope}{$P$}{\textit{Ppty}} \\
           \tfield{e}{exist(restr, scope)}}
@@ -3578,7 +3595,7 @@ u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallt
 
 
 
-@@
+
 
 % \section{Structured contexts\ignore{, binding principles and
 %     projection}}\todo{Moved from Ch~\ref{ch:quant}.  Needs rewriting.}
@@ -3658,7 +3675,8 @@ u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallt
 
 \section{Summary}
 
-In this chapter we have looked at the analysis of proper names.  We
+In this chapter we have looked at the analysis of proper names and
+unbound pronouns.  We
 started by showing how Montague's analysis of proper names could be
 recast in TTR and we showed that there was an advantage in the
 sign-based approach that we have adopted in accounting for the fact
@@ -3670,12 +3688,26 @@ from among a number of potential referents which might be available.
 We showed how this could be treated by introducing parametric
 contents for proper names and we showed how accommodation phenomena
 could be accounted for including a simple-minded analysis of salience
-analyzed in terms of the information states of agents.  Finally, we
+analyzed in terms of the information states of agents.   We
 discussed Kripke's puzzle concerning Paderewski and its possible
-relation to a theory of microlanguages as discussed recently by
+relation to a theory of microlanguages as discussed by
 Ludlow.  While in general we find the idea of microlanguages appealing
 we suggested that it plays a role in the analysis of proper names in a
-rather different way to that suggested by Ludlow.  
+rather different way to that suggested by Ludlow.
+
+Finally, we gave an analysis of unbound pronouns.  Our treatment of
+proper names and pronouns shows them to be similar in that they can be
+related to different individuals depending on context.  However, they
+are associated with different components of the context.  Proper names
+add a restriction on the context that the individual referred to has
+the appropriate name whereas pronouns are associated with labels
+indexed by natural numbers.  These are the labels of the component of
+the context which keeps track of pronouns.  We can think of this
+component as corresponding to a partial assignment to variables in
+logic based treatments of pronouns.  Just as in logical treatments
+it will be this assignment based on subsets of the natural numbers
+which will be operated when we come to the treatment of pronouns bound
+by quantifiers in Chapter~\ref{ch:quant}.
   
   
 
