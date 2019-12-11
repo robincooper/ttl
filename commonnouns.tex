@@ -18,16 +18,34 @@ be a corresponding predicate `dog' with arity
 $\langle$\textit{Ind}$\rangle$ as well as a phonological type
 ``dog''.  Then an utterance event of the type ``dog'' will be
 associated with the content in \nexteg{a} whose foreground is of type
-\nexteg{b}. @@\todo{Need to include context.}
+\nexteg{b}. 
 \begin{ex} 
 \begin{subex}
-\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+\item $\ulcorner\lambda c$:\textit{Rec} . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   . \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$ 
 \item
-  (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType})
+  (\textit{Rec}$\rightarrow$(\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType}))
 \end{subex}
 \label{ex:dog}
+\end{ex}
+Once we have applied the foreground of \preveg{a} to a context
+(modelled as a record) we will obtain the function \nexteg{a} of type
+\nexteg{b}
+\begin{ex} 
+\begin{subex} 
+ 
+\item  $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{e}{dog($r$.x)}}
+\item
+  (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType})
+ 
+
+ 
+\end{subex} 
+   
 \end{ex} 
+There is a correspondence between this and Montague's treatment of
+common nouns.  
 \cite{Montague1973} introduces predicates corresponding to common
 nouns which in his type system are of the type $\langle\langle
 s,e\rangle,t\rangle$.  The type $\langle s,e\rangle$ for Montague is
@@ -50,11 +68,19 @@ This alternative would correspond to \nexteg{} in our terms.
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+\textit{Ind} corresponds to Montague's type $e$, the type of entities
+or individuals. Instead of Montague's $t$, the type of truth values we
+have \textit{RecType}.  Record types serve as our propositions.  Thus
+instead of mapping to a truth value (for Montague, following Frege,
+the denotation corresponding to a proposition), we map to the
+proposition itself (see the discussion in Chapter~\ref{ch:gram}, Section~\ref{sec:gram-semantics}).
 We will argue that (\ref{ex:dog}) is preferable to \preveg{} in that records which
 are arguments to such a function are frames and that, among other
 things, frames as arguments enable us to account for the Partee
-puzzle. We made this proposal in previous work
+puzzle. One way of seeing this is that we are using frames to replace
+Montague's use of individual concepts to approach this problem.  In
+this way our proposal is closely related to work by \cite{Loebner2015}.  We made this proposal in previous work
 \citep{Cooper2010,Cooper2012}.  Here we will present a modification of
 that proposal which uses frames to introduce scales and measure
 functions and yields a more general treatment of the semantics of
@@ -67,9 +93,10 @@ introduction of frame semantics into formal semantics.
 
 \section{The Partee puzzle}
 
-Perhaps the most recent discussion of the Partee puzzle is that of
-\cite{Lobnerinprep}.  As we will see, his proposal is closely related
-to our own.  The puzzle is one that Barbara Partee raised while
+% Perhaps the most recent discussion of the Partee puzzle is that of
+% \cite{Lobnerinprep}.  As we will see, his proposal is closely related
+% to our own.
+The puzzle is one that Barbara Partee raised while
 sitting in on an early presentation of the material that led to
 \cite{Montague1973}.  In its simplest form it is that \nexteg{c}
 should follow from \nexteg{a,b} given some otherwise apparently
@@ -173,7 +200,7 @@ $f(w,t)$ just in case
 of $f$ at $w$ and $t$, we are predicating `bark$_*$' of $f(w,t)$.
 (Given Montague's notion of proposition, bark($f$) and
 bark$_*$($f(w,t)$) are the \textit{same} proposition since they are
-true at exactly the same possibles worlds and times.)  When we
+true at exactly the same possible worlds and times.)  When we
 say that the dog is Fido at $w$ and $t$ what we mean is that
 $f(w,t)=g(w,t)$ where $g$ is the individual concept corresponding to
 \textit{Fido}.  According to Montague's theory of proper names $g$ too
@@ -193,7 +220,7 @@ bark($g$), then bark($f$) and bark($g$) are equivalent.  Thus if
 bark($f$) is true, then so is bark($g$). 
 
 Despite the obvious ingenuity and formal correctness of this solution
-it fell into disuse.  As \cite{Lobnerinprep} points out one objection
+it fell into disuse.  As \cite{Loebner2015} points out one objection
 is to the interpretation of (\ref{ex:parteepuzzle}) as an identity
 statement rather than the location of the temperature value on a
 scale.  This point was made by \cite{Jackendoff1979}, a paper which
@@ -348,8 +375,8 @@ Löbner's early work on this topic \citep{Lobner1979,Lobner1981}
 treated this problem by removing what he called \textit{functional
   concepts} (\textit{Funktionalbegriffe}) from the general notion of
 intension and allowing them to have different numbers and 
-types of argument roles.  These insights have led him in later work
-\citep{Lobner2014,Lobnerinprep} to adopt a frame semantic approach
+types of argument roles.  These insights led him in later work
+\citep{Lobner2014,Loebner2015} to adopt a frame semantic approach
 where the parameters that are relevant for interpretation can vary
 between different words and phrases and there is no fixed set of
 indices as there was in the original work on formal semantics.  This
@@ -387,7 +414,10 @@ we wish to make.  This is the type \textit{AmbTempFrame} defined in \nexteg{}.
         \tfield{loc}{\textit{Loc}} \\
         \tfield{e}{temp(loc, x)}}
 \label{ex:AmbTempFrame} 
-\end{ex} 
+\end{ex}
+
+@@\todo{add predicate temp}
+
 This is different from the earlier proposal we made in
 \cite{Cooper2012} which is given in \nexteg{}.
 \begin{ex} 
@@ -3256,129 +3286,171 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 % included some items for completeness which were not explicitly
 % introduced in the text.
 
-\subsection{Universal grammar resources} (as in Chapter~\ref{ch:propnames})
+\subsection{Universal grammar resources} 
 
-% \subsubsection{Types} 
+\subsubsection{Types} 
 
-% \begin{description}
-% \item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
-%         \tfield{sp}{\textit{Ind}} \\
-%         \tfield{au}{\textit{Ind}} \\
-%         \tfield{e}{\textit{Phon}} \\
-%         \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
-%         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
-%         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
-%       Chapter~\ref{ch:infex})
+\begin{description}
 
-%       \item[\textnormal{\textit{Ppty}}] ---
-%         (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+  \item[\textnormal{\textit{Loc}}] --- a basic type
+
+  $l$ : \textit{Loc} iff $l$ is a region in three dimensional space
+
+  
+\item[\textnormal{\textit{Phon}}] --- a basic type
+
+  $e$ : \textit{Phon} iff $e$ is a phonological event
+  
+\item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{\textit{Phon}} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
+      Chapter~\ref{ch:infex})
+
+      \item[\textnormal{\textit{Ppty}}] ---
+        (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
         
-%       \item[\textnormal{\textit{PPpty}} New!] --- \record{\tfield{bg}{\textit{RecType}} \\
-%         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
+      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
+        \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
         
-%       \item[\textnormal{\textit{Quant}}] ---
-%         (\textit{Ppty}$\rightarrow$\textit{RecType})
+      \item[\textnormal{\textit{Quant}}] ---
+        (\textit{Ppty}$\rightarrow$\textit{RecType})
         
-%       \item[\textnormal{\textit{PQuant}} New!] --- \record{\tfield{bg}{\textit{RecType}} \\
-%           \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
+      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{RecType}} \\
+          \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
         
-%       \item[\textnormal{\textit{QuantDet}} New!] ---
-%         (\textit{Ppty}$\rightarrow$\textit{Quant})
+      \item[\textnormal{\textit{QuantDet}}] ---
+        (\textit{Ppty}$\rightarrow$\textit{Quant})
         
-%       \item[\textnormal{\textit{PQuantDet}} New!] ---
-%         \record{
-%           \tfield{bg}{\textit{RecType}}\\
-%           \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
+      \item[\textnormal{\textit{PQuantDet}}] ---
+        \record{
+          \tfield{bg}{\textit{RecType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
         
-%       \item[\textnormal{\textit{PRecType}} New!] ---
-%         \record{
-%           \tfield{bg}{\textit{RecType}}\\
-%           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+      \item[\textnormal{\textit{PRecType}}] ---
+        \record{
+          \tfield{bg}{\textit{RecType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
-%     \item[\textnormal{\textit{Cont}} Revised!] --- \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
+    \item[\textnormal{\textit{Cont}}] --- \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
 
       
-%     \item[\textnormal{\textit{Cat}}] --- a basic type
+    \item[\textnormal{\textit{Cat}}] --- a basic type
 
-%       s, np, det, n, v, vp : \textit{Cat}
+      s, np, det, n, v, vp : \textit{Cat}
 
     
-%     \item[\textnormal{\textit{Syn}}] ---  \record{\tfield{cat}{\textit{Cat}} \\
-%         \tfield{daughters}{\textit{Sign}$^*$}} 
+    \item[\textnormal{\textit{Syn}}] ---  \record{\tfield{cat}{\textit{Cat}} \\
+        \tfield{daughters}{\textit{Sign}$^*$}} 
  
 
 
   
-%     \item[\textnormal{\textit{Sign}}] ---  a basic type
+    \item[\textnormal{\textit{Sign}}] ---  a basic type
 
-%       $\sigma$ : \textit{Sign} iff $\sigma$ :
-%       \record{\tfield{s-event}{\textit{SEvent}} \\
-%          \tfield{syn}{\textit{Syn}} \\
-%         \tfield{cont}{\textit{Cont}}} 
-
-  
-% \item[\textnormal{\textit{SignType}}] --- a basic type
-
-%   $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ (as in
-%   Chapter~\ref{ch:infex})
+      $\sigma$ : \textit{Sign} iff $\sigma$ :
+      \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}}} 
 
   
-% \item[\textnormal{\textit{S}}] --- (\textit{Sign} \d{$\wedge$}
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
-  
-% \item[\textnormal{\textit{NP}}] --- (\textit{Sign} \d{$\wedge$}
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}})
+\item[\textnormal{\textit{SignType}}] --- a basic type
+
+  $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ 
 
   
-% \item[\textnormal{\textit{Det}}] --- (\textit{Sign} \d{$\wedge$}
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
+\item[\textnormal{\textit{S}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
   
-% \item[\textnormal{\textit{N}}] --- (\textit{Sign} \d{$\wedge$}
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}})
-  
-% \item[\textnormal{\textit{V}}] --- (\textit{Sign} \d{$\wedge$}
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
-  
-% \item[\textnormal{\textit{VP}}] --- (\textit{Sign} \d{$\wedge$}
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
+\item[\textnormal{\textit{NP}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}})
 
   
-% \item[\textnormal{\textit{NoDaughters}}] ---
-%   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+\item[\textnormal{\textit{Det}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{N}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{V}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{VP}}] --- (\textit{Sign} \d{$\wedge$}
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
+
+  
+\item[\textnormal{\textit{NoDaughters}}] ---
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+
+  
+\item[\textnormal{\textit{Real}} New!] --- a basic type
+
+  $n$ : \textit{Real} iff $n$ is a real number
+ 
 
   
 
+\item[\textnormal{\textit{AmbTempFrame}} New!] --- \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{temp(loc, x)}}  
 
-% \end{description}
 
-% \subsubsection{Predicates} (as in Chapter~\ref{ch:gram})
+\end{description}
 
-% % \begin{description}
+ \subsubsection{Predicates} 
 
+\begin{description}
+
+ \item[with arity \textnormal{$\langle$\textit{Phon},
+    \textit{Loc}$\rangle$}] \mbox{}
   
-% % \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+    \begin{description}
 
-% %   \begin{description}
+    \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
+      at $l$ in $e$
+
+    \end{description}
     
-% %   \item[\textnormal{exist}] --- $e$ : exist($P$,$Q$) iff
-% %     $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
+  \item[with arity \textnormal{$\langle$\textit{Phon},
+      \textit{Ind}$\rangle$}] \mbox{}
 
-% %   \end{description}
-% % \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
-% %   \mbox{}
+    \begin{description}
 
-% %   \begin{description}
+    \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
+        is the speaker of $u$ in $e$
+
+    \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
+        $u$ is the audience of $u$ in $e$
+
+    \end{description}
+
+  
+\item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+
+  \begin{description}
     
-% %   \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
+  \item[\textnormal{exist}] --- $e$ : exist($P$,$Q$) iff
+    $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
 
-% %   \end{description}
+  \end{description}
+\item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
+  \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
+
+  \end{description}
   
 
-% % \end{description}
+\end{description}
 
 
-% \subsubsection{Lexicon}
+\subsubsection{Lexicon} (as in Chapter~\ref{ch:propnames})
 % \begin{description}
 % \item[\textnormal{Lex}] \mbox{}
 
@@ -3550,7 +3622,7 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 % \end{description}
 
 
-% \subsubsection{Constituent structure} 
+\subsubsection{Constituent structure} (as in Chapter~\ref{ch:propnames})
 % \begin{description}
 % \item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
 % $T_{\text{mother}}$)}] \mbox{}
@@ -3649,7 +3721,7 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 % \end{description}
 
 
-% \subsubsection{Action rules} (as in Chapter~\ref{ch:gram})
+\subsubsection{Action rules} (as in Chapter~\ref{ch:gram})
 
 % % \begin{description}
 

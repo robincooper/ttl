@@ -675,6 +675,7 @@ different kind of theory.
 
  
 \section{Semantics}
+\label{sec:gram-semantics}
 We have so far specified our sign types in terms of phonology and
 syntax.  Now we need to specify the content in the `cont'-field.  We
 shall start by accounting for the contents of the lexical items
@@ -3298,6 +3299,16 @@ introduced in Section~\ref{sec:chart}.
 \subsubsection{Types}
 
 \begin{description}
+
+  \item[\textnormal{\textit{Loc}}] --- a basic type
+
+  $l$ : \textit{Loc} iff $l$ is a region in three dimensional space
+
+  
+\item[\textnormal{\textit{Phon}}] --- a basic type
+
+  $e$ : \textit{Phon} iff $e$ is a phonological event
+  
 \item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
         \tfield{sp}{\textit{Ind}} \\
         \tfield{au}{\textit{Ind}} \\
@@ -3372,8 +3383,32 @@ introduced in Section~\ref{sec:chart}.
 
 \begin{description}
 
+  \item[with arity \textnormal{$\langle$\textit{Phon},
+    \textit{Loc}$\rangle$}] \mbox{}
   
-\item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+    \begin{description}
+
+    \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
+      at $l$ in $e$
+
+    \end{description}
+    
+  \item[with arity \textnormal{$\langle$\textit{Phon},
+      \textit{Ind}$\rangle$}] \mbox{}
+
+    \begin{description}
+
+    \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
+        is the speaker of $u$ in $e$
+
+    \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
+        $u$ is the audience of $u$ in $e$
+
+    \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$} New!] \mbox{}
 
   \begin{description}
     
@@ -3381,7 +3416,7 @@ introduced in Section~\ref{sec:chart}.
     $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
 
   \end{description}
-\item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
+\item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}} New!]
   \mbox{}
 
   \begin{description}

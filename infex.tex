@@ -5739,6 +5739,16 @@ dialogical approach to these concerns.
 \begin{description}
 
   
+\item[\textnormal{\textit{Loc}}] --- a basic type
+
+  $l$ : \textit{Loc} iff $l$ is a region in three dimensional space
+
+  
+\item[\textnormal{\textit{Phon}}] --- a basic type
+
+  $e$ : \textit{Phon} iff $e$ is a phonological event
+
+  
 \item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
         \tfield{sp}{\textit{Ind}} \\
         \tfield{au}{\textit{Ind}} \\
@@ -5759,6 +5769,36 @@ dialogical approach to these concerns.
   $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$
 
 \end{description}
+
+\subsubsection{Predicates}
+
+\begin{description}
+\item[with arity \textnormal{$\langle$\textit{Phon},
+    \textit{Loc}$\rangle$}] \mbox{}
+  
+    \begin{description}
+
+    \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
+      at $l$ in $e$
+
+    \end{description}
+    
+  \item[with arity \textnormal{$\langle$\textit{Phon},
+      \textit{Ind}$\rangle$}] \mbox{}
+
+    \begin{description}
+
+    \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
+        is the speaker of $u$ in $e$
+
+    \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
+        $u$ is the audience of $u$ in $e$
+
+    \end{description}
+      
+    
+\end{description}
+
 
 \subsection{Universal speech act resources}
 
