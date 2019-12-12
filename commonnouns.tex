@@ -416,7 +416,7 @@ we wish to make.  This is the type \textit{AmbTempFrame} defined in \nexteg{}.
 \label{ex:AmbTempFrame} 
 \end{ex}
 
-@@\todo{add predicate temp}
+
 
 This is different from the earlier proposal we made in
 \cite{Cooper2012} which is given in \nexteg{}.
@@ -481,7 +481,14 @@ $\langle$\textit{Real}, \textit{Real}$\rangle$ which obeys the
 constraint in \nexteg{}.
 \begin{ex} 
 less-than($n$, $m$) is non-empty (``true'') iff $n<m$ 
+\end{ex}
+One way to meet this constraint is to specify the witness conditions
+for `less-than($n$, $m$)' as in \nexteg{}.
+\begin{ex} 
+$e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$ 
 \end{ex} 
+  
+
 A more general type for temperature rises is given by \nexteg{} where
 we abstract away from the particular temperature scale used by
 introducing a field for the scale into the record type.  This, for
@@ -633,7 +640,8 @@ assignment of values to fields in the type.  To emphasize this
 important role and to facilitate making general statements without
 having to name the particular fields involved, we shall introduce an operation which maps a record
 type, $T$, and a record, $r$ to the result of specifying $T$ with $r$,
-which we will notate as $T\parallel r$.  \nexteg{} provides an abstract example of how it works. 
+which we will notate as $T\parallel r$.@@\todo{Refer to
+  specification/anchoring on p. 178.  Put this in the appendix?}  \nexteg{} provides an abstract example of how it works. 
 \begin{ex} 
 \smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
              \smalltfield{$\ell_2$}{$T_2$}\\
@@ -3445,9 +3453,41 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
   \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
 
   \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{Loc},\textit{Real}\rangle$}] \mbox{}
+  \begin{description}
+    
+  \item[\textnormal{temp} New!] --- $e:\text{temp}(l,n)$ iff $n$ is
+    the temperature at $l$ in $e$.
+
+    
   
 
+  \end{description}
+  
+\item[with arity
+  \textnormal{$\langle\textit{Real},\textit{Real}\rangle$}] \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{less-than} New!] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
+
+    \end{description}
+
 \end{description}
+
+\subsubsection{Scales}
+
+\begin{description}
+  
+\item[\textnormal{$\zeta_{\text{temp}}$} New!] ---
+  $\lambda r$:\textit{AmbTempFrame} . $r$.x : (\textit{AmbTempFrame}
+  $\rightarrow$ \textit{Real})
+
+\end{description}
+
 
 
 \subsubsection{Lexicon} (as in Chapter~\ref{ch:propnames})
@@ -3969,7 +4009,9 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
   \begin{description}
   
   \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}]
-    \{conductor, composer, pianist, leave, hug, dog \textbf{New!}\}
+    \{conductor, composer, pianist, leave,  dog \textbf{New!}\}
+    
+  \item[with arity \textnormal{$\langle\textit{Ind},\textit{Ind}\rangle$}] \{hug\}
   \end{description}
   
 
@@ -3984,16 +4026,14 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 \item[Lexical sign types] \mbox{}
 
 \begin{tabbing}
-    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel'') \textbf{Revised!}, \\
-\> Lex$_{\mathrm{PropName}}$(``Beethoven'') \textbf{Revised!}, \\
+    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
+\> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
 \> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
 \> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
 \> Lex$_{\text{CommonNoun}}$(``dog'', dog), \\
-\> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave)
-\textbf{New!}, \\
-\> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug)
-\textbf{New!}, \\
+\> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
+\> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
 \> Lex$_{\mathrm{be}}$(``is''), \\
 \> Lex(``ok'', \textit{S}),  \\
 \> Lex(``aha'', \textit{S})  \}
