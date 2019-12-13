@@ -638,47 +638,46 @@ some of its fields.  One can think of the `fix'-record as playing the
 role of a partial
 assignment of values to fields in the type.  To emphasize this
 important role and to facilitate making general statements without
-having to name the particular fields involved, we shall introduce an operation which maps a record
+having to name the particular fields involved, we shall use the
+operation of specification or anchoring introduced on p.~\pageref{pg:anchoring}ff. This operation maps a record
 type, $T$, and a record, $r$ to the result of specifying $T$ with $r$,
-which we will notate as $T\parallel r$.@@\todo{Refer to
-  specification/anchoring on p. 178.  Put this in the appendix?}  \nexteg{} provides an abstract example of how it works. 
-\begin{ex} 
-\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
-             \smalltfield{$\ell_2$}{$T_2$}\\
-             \smalltfield{$\ell_3$}{$T_3$}}$\parallel$
-\smallrecord{\field{$\ell_2$}{$a$}\\
-             \field{$\ell_3$}{$b$}\\
-             \field{$\ell_4$}{$c$}} = 
-\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
-             \smallmfield{$\ell_2$}{$a$}{$T_2$}\\
-             \smallmfield{$\ell_3$}{$b$}{$T_3$}}
-
-provided that $a:T_2$ and $b:T_3$ 
-\end{ex} 
-In a case where for example $a:T_2$ but not $b:T_3$ we would have
-\nexteg{}.
-\begin{ex} 
-\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
-             \smalltfield{$\ell_2$}{$T_2$}\\
-             \smalltfield{$\ell_3$}{$T_3$}}$\parallel$
-\smallrecord{\field{$\ell_2$}{$a$}\\
-             \field{$\ell_3$}{$b$}\\
-             \field{$\ell_4$}{$c$}} = 
-\smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
-             \smallmfield{$\ell_2$}{$a$}{$T_2$}\\
-             \smalltfield{$\ell_3$}{$T_3$}}
-
- 
-\end{ex}   
-The result \preveg{} would also have obtained if $T_3$ had not been a
-type but a pair consisting of a dependent type and a sequence of
-paths, that is, the kind of thing which in our standard abbreviation
-we represent as a predicate with a label as argument such as
-`walk($\ell_1$)'.  A precise definition of this operation is given in
-Appendix~\ref{app:specrec}.
-
-Using this notation we can now rewrite (\ref{ex:temprisefixloc}) as
-\nexteg{}.
+which we notate as $T\parallel r$.
+% \begin{ex} 
+% \smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+%              \smalltfield{$\ell_2$}{$T_2$}\\
+%              \smalltfield{$\ell_3$}{$T_3$}}$\parallel$
+% \smallrecord{\field{$\ell_2$}{$a$}\\
+%              \field{$\ell_3$}{$b$}\\
+%              \field{$\ell_4$}{$c$}} = 
+% \smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+%              \smallmfield{$\ell_2$}{$a$}{$T_2$}\\
+%              \smallmfield{$\ell_3$}{$b$}{$T_3$}}
+%
+% provided that $a:T_2$ and $b:T_3$ 
+% \end{ex} 
+% In a case where for example $a:T_2$ but not $b:T_3$ we would have
+% \nexteg{}.
+% \begin{ex} 
+% \smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+%              \smalltfield{$\ell_2$}{$T_2$}\\
+%              \smalltfield{$\ell_3$}{$T_3$}}$\parallel$
+% \smallrecord{\field{$\ell_2$}{$a$}\\
+%              \field{$\ell_3$}{$b$}\\
+%              \field{$\ell_4$}{$c$}} = 
+% \smallrecord{\smalltfield{$\ell_1$}{$T_1$}\\
+%              \smallmfield{$\ell_2$}{$a$}{$T_2$}\\
+%              \smalltfield{$\ell_3$}{$T_3$}}
+%
+% 
+% \end{ex}   
+% The result \preveg{} would also have obtained if $T_3$ had not been a
+% type but a pair consisting of a dependent type and a sequence of
+% paths, that is, the kind of thing which in our standard abbreviation
+% we represent as a predicate with a label as argument such as
+% `walk($\ell_1$)'.  A precise definition of this operation is given in
+% Appendix~\ref{app:specrec}.
+Using this notation we can rewrite (\ref{ex:temprisefixloc}) as
+\nexteg{}.@@\todo{Should this be thought of as a parametric content?}
 \begin{ex} 
 $\lambda r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}}}\\
                          \smalltfield{scale}{(\textit{AmbTempFrame}
