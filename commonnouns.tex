@@ -677,7 +677,7 @@ which we notate as $T\parallel r$.
 % `walk($\ell_1$)'.  A precise definition of this operation is given in
 % Appendix~\ref{app:specrec}.
 Using this notation we can rewrite (\ref{ex:temprisefixloc}) as
-\nexteg{}.@@\todo{Should this be thought of as a parametric content?}
+\nexteg{}.
 \begin{ex} 
 $\lambda r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}}}\\
                          \smalltfield{scale}{(\textit{AmbTempFrame}
@@ -685,10 +685,68 @@ $\lambda r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\texti
 \hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}$\parallel$$r$.fix)$^2$}\\
         \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}} 
 \label{ex:temprisespecfix}
+\end{ex}
+We will call \preveg{} \textit{TempRiseEvent} and its domain type
+\textit{TempRiseEventCntxt}.  This means that given a record, $c$, of
+type \textit{TempRiseEventCntxt} we can make a judgement such as that
+given in \nexteg{}.
+\begin{ex} 
+$e$ : \textit{TempRiseEvent}$(c)$ 
 \end{ex} 
+That is, we judge that $e$ is a temperature rising event according to
+the context $c$.  
 
 This is still a very simple theory of what a temperature rise event
-may be but it will be sufficient for our current purposes.  We move on
+may be but it will be sufficient for our current purposes.  How might
+we use this to specify a content for the intransitive verb
+\textit{rise} in a sentence like \textit{the temperature is rising}?
+First we define a predicated `rise' which takes two arguments which
+are both records.  Thus the arity of `rise' is $\langle$\textit{Rec},
+\textit{Rec}$\rangle$.  The first record can be an ambient temperature
+frame and the second a temperature rise event context.  We specify
+a witness condition associated with `rise' in \nexteg{}.
+\begin{ex} 
+  $e$ : rise$(r,c)$ if
+  \begin{quote}
+    $r$ : \textit{AmbTempFrame},\\
+    $c$ : \textit{TempRiseEventCntxt} and \\
+    $e$ : \textit{TempRiseEvent}$(c)$ \d{$\wedge$}
+    \smallrecord{
+      \smalltfield{e}{\smallrecord{
+          \smallmfield{t$_0$}{$r$}{\textit{AmbTempFrame}}}}}
+  \end{quote}
+  
+\end{ex} 
+Note first that in \preveg{} we use `if' rather than `iff'.  This is
+not the only witness condition which we will associate with `rise'; it
+represents a sufficient but not necessary condition.  Note also that
+the third condition specifies that $e$ is a temperature rise event and
+that the first item in the string of two ambient temperature frames
+thus specified is the temperature frame $r$, that is, the first
+argument to the predicate.  (Recall that a string $e_1e_2$ is modelled
+as the record in \nexteg{}.)
+\begin{ex} 
+  \record{
+    \field{t$_0$}{$e_1$}\\
+    \field{t$_1$}{$e_2$}}
+\end{ex} 
+The intuition is, then, that when we predicate `rise'  of an
+ambient temperature frame, we are saying that it is the initial frame
+in a temperature rising event.  We can use this predicate in the
+characterization of a parametric content for the verb \textit{rise},
+given in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}} .
+  $\lambda r$:\textit{Rec} . \record{
+    \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
+\end{ex} 
+However, the verb \textit{rise} can be used to talk about other kinds
+of rising events than temperature rises and we will need different
+parametric contents for other cases.  
+
+
+We move on
 now to price rise events.  We will take \nexteg{} to be the type of
 price frames, \textit{PriceFrame}.
 \begin{ex} 
@@ -720,7 +778,10 @@ r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}\\
                              $\rightarrow$ \textit{Real})}} .\\  
 \hspace*{2em}\record{\tfield{e}{(\textit{PriceFrame}$\parallel$$r$.fix)$^2$}\\
         \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}  
-\end{ex} 
+    \end{ex}
+We call \preveg{} \textit{PriceRiseEvent} and its domain type
+\textit{PriceRiseEventCntxt}.  We can add a new witness condition
+associated with `rise'.@@
 
 Finally we consider a third kind of rising event discussed in
 \cite{Cooper2012} based on the example in \nexteg{}.
