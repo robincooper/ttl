@@ -734,7 +734,8 @@ The intuition is, then, that when we predicate `rise'  of an
 ambient temperature frame, we are saying that it is the initial frame
 in a temperature rising event.  We can use this predicate in the
 characterization of a parametric content for the verb \textit{rise},
-given in \nexteg{}.
+given in \nexteg{}. @@ \todo{Think about \textit{Ppty} and record
+  level predicates/properties.}
 \begin{ex} 
   $\ulcorner\lambda c$:\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}} .
@@ -781,7 +782,22 @@ r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{loc}{\textit{Loc}}\\
     \end{ex}
 We call \preveg{} \textit{PriceRiseEvent} and its domain type
 \textit{PriceRiseEventCntxt}.  We can add a new witness condition
-associated with `rise'.@@
+associated with `rise'.
+\begin{ex} 
+  $e$ : rise$(r,c)$ if
+  \begin{quote}
+    $r$ : \textit{PriceFrame},\\
+    $c$ : \textit{PriceRiseEventCntxt} and \\
+    $e$ : \textit{PriceRiseEvent}$(c)$ \d{$\wedge$}
+    \smallrecord{
+      \smalltfield{e}{\smallrecord{
+          \smallmfield{t$_0$}{$r$}{\textit{PriceFrame}}}}}
+  \end{quote}
+
+\end{ex}
+
+
+@@
 
 Finally we consider a third kind of rising event discussed in
 \cite{Cooper2012} based on the example in \nexteg{}.
@@ -3464,7 +3480,22 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 
 \item[\textnormal{\textit{AmbTempFrame}} New!] --- \record{\tfield{x}{\textit{Real}} \\
         \tfield{loc}{\textit{Loc}} \\
-        \tfield{e}{temp(loc, x)}}  
+        \tfield{e}{temp(loc, x)}}
+
+      
+    \item[\textnormal{\textit{TempRiseEventCntxt}} New!] ---
+      \record{
+        \tfield{fix}{\record{
+            \tfield{loc}{\textit{Loc}}}}\\
+        \tfield{scale}{(\textit{AmbTempFrame}
+          $\rightarrow$ \textit{Real})}}
+      
+    \item[\textnormal{\textit{TempRiseEvent}} New!] ---
+      
+      $\lambda r$:\textit{TempRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}
+      
 
 
 \end{description}
@@ -3534,7 +3565,10 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
     
   \item[\textnormal{less-than} New!] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
 
-    \end{description}
+  \end{description}
+
+  
+
 
 \end{description}
 
@@ -3550,21 +3584,21 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 
 
 
-\subsubsection{Lexicon} (as in Chapter~\ref{ch:propnames})
-% \begin{description}
-% \item[\textnormal{Lex}] \mbox{}
+\subsubsection{Lexicon} 
+\begin{description}
+\item[\textnormal{Lex}] \mbox{}
 
-%   If $T_{\mathrm{phon}}$ is a phonological type (that is,
-% $T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
-% is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
-% Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
-% \begin{quote}
-% (($T_{\mathrm{sign}}$ \d{$\wedge$}
-% \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
-% \d{$\wedge$} \textit{NoDaughters})
-% \end{quote}
+  If $T_{\mathrm{phon}}$ is a phonological type (that is,
+$T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
+Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
+\begin{quote}
+(($T_{\mathrm{sign}}$ \d{$\wedge$}
+\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+\d{$\wedge$} \textit{NoDaughters})
+\end{quote}
 
-% \item[\textnormal{SemCommonNoun($p$)} Revised!] \mbox{}
+% \item[\textnormal{SemCommonNoun($p$)}] \mbox{}
 
 %   If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$, then SemCommonNoun($p$) is
 %   \begin{quote}
@@ -3581,145 +3615,209 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 %   $p$) is
 %   \begin{quote}
 %     Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
-%     \smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{Ppty}}}
+%     \smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{PPpty}}}
 %   \end{quote}
+
+\item[\textnormal{SemCommonNoun($T_{\mathrm{bg}}$, $p$)} Revised!]
+  \mbox{}
+
+    If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$ and
+    $T_{\mathrm{bg}}$ is a type (of context), then
+    SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+  \begin{quote}
+    $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \record{\tfield{e}{$p$($r$.x)}}
+\end{quote}
   
-% \item[\textnormal{SemPropName($T_{\text{phon}}$)} Revised!] \mbox{}
+    If $p$ is a predicate with arity $\langle\textit{Rec},
+    \textit{Rec}\rangle$ and $T_{\mathrm{bg}}$ is a type (of context), then
+    SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+  \begin{quote}
+    $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+r$:\textit{Rec}
+. \record{\tfield{e}{$p$($r$, $c$)}}
+\end{quote}
 
-%   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
-%   \begin{quote}
-%     $\ulcorner\lambda c$: \smallrecord{
-%       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-%                          \smalltfield{e}{named(x, $T$)}}}} . $\lambda
-%                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
-%   \end{quote}
+\item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+    $T_{\mathrm{bg}}$, $p$)} Revised!] \mbox{}
+
+    If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+  predicate with arity $\langle\textit{Ind}\rangle$ and
+  $T_{\mathrm{bg}}$ is a type (of context), then
+  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+  $p$) is
+  \begin{quote}
+    Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+    \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+        $p$)}{\textit{PPpty}}}
+  \end{quote}
+
+
+  If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+  predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$ and
+  $T_{\mathrm{bg}}$ is a type (of context), then
+  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+  $p$) is
+  \begin{quote}
+    Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+    \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+        $p$)}{\textit{PPpty}}}
+  \end{quote}
   
-% \item[\textnormal{Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$
-%     )} Revised!] \mbox{}
+\item[\textnormal{SemPropName($T_{\text{phon}}$)}] \mbox{}
 
-%   If $T_{\mathrm{phon}}$ is a phonological type,
-
-%   then Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$) is
-%   \begin{quote}
-%     Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
-% \smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{phon}}$)}{\textit{PQuant}}}
-% \end{quote}
-
-% \item[\textnormal{SemPron} New!] \mbox{}
-
-% $\ulcorner\lambda c$:\smallrecord{
-%     \smalltfield{$\mathfrak{s}$}{\smallrecord{
-%         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
-%   P$:\textit{Ppty}
-%   . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
-
-% \item[\textnormal{LexPron($T_{\text{phon}}$)} New!] \mbox{}
-
-% If $T_{\text{phon}}$ is a phonological type, then
-% LexPron($T_{\text{phon}}$) is
-% \begin{quote}
-% Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
-% \smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}}
-% \end{quote}
-
+  If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
+  \begin{quote}
+    $\ulcorner\lambda c$: \smallrecord{
+      \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{e}{named(x, $T$)}}}} . $\lambda
+                       P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
+  \end{quote}
   
-% \item[\textnormal{SemIndefArt} Revised!] \mbox{}
+\item[\textnormal{Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$
+    )}] \mbox{}
 
-%   $\lambda c$:\textit{Rec} . \\
-% \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
-% \hspace*{2em} $\lambda P$:\textit{Ppty}
-% . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
-%           \mfield{scope}{$P$}{\textit{Ppty}} \\
-%           \tfield{e}{exist(restr, scope)}}
+  If $T_{\mathrm{phon}}$ is a phonological type,
 
-        
-%       \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
-%         \mbox{}
+  then Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$) is
+  \begin{quote}
+    Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{phon}}$)}{\textit{PQuant}}}
+\end{quote}
 
-%         If $T_{\mathrm{Phon}}$ is a phonological type, then
-%         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
-%         \begin{quote}
-%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
-%           \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
-%         \end{quote}
-        
-%       \item[\textnormal{SemIntransVerb($T_{\mathrm{bg}}$, $p$)} New!]
-%         \mbox{}
+\item[\textnormal{SemPron} ] \mbox{}
 
-%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
-%         predicate with arity $\langle\textit{Ind}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
-%         \begin{quote}
-%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-%           . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$
-%         \end{quote}
+$\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty}
+  . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
 
-        
-%       \item[\textnormal{Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
-%           $T_{\mathrm{bg}}$, $p$)} New!] \mbox{}
+\item[\textnormal{LexPron($T_{\text{phon}}$)}] \mbox{}
 
-%         If $T_{\mathrm{phon}}$ is a phonological type,
-%         $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
-%         predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
-%         $T_{\mathrm{bg}}$, $p$) is
-%         \begin{quote}
-%           Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
-%           \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
-%         \end{quote}
-
-        
-%       \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)} New!] \mbox{}
-
-%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
-%         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
-%         \begin{quote}
-%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-%           \mathcal{Q}$:\textit{Quant} . $\lambda
-%           r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-%           . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
-%         \end{quote}
-        
-% \item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
-%           $T_{\mathrm{bg}}$, $p$)} New!] \mbox{}
-
-%         If $T_{\mathrm{phon}}$ is a phonological type,
-%         $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
-%         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
-%         $T_{\mathrm{bg}}$, $p$) is
-%         \begin{quote}
-%           Lex($T_{\mathrm{phon}}$, \textit{V$_t$}) \d{$\wedge$}
-%           \smallrecord{\smallmfield{cnt}{SemTransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
-%         \end{quote}
-
-        
-
-        
-%       \item[\textnormal{SemBe} Revised!] \mbox{}
-
-%         $\lambda c:T_{\text{bg}}$ . \\
-%         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-% \hspace*{2em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
-% . \\
-% \hspace*{3em} $\mathcal{Q}$($\lambda
-% r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
-% . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
-%   \tfield{e}{be(x)}})
-
-% \item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
-
-%   If $T_{\mathrm{Phon}}$ is a phonological type, then
-%   Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$) is
-% \begin{quote}
-%   Lex($T_{\mathrm{Phon}}$,
-% \textit{V}) \d{$\wedge$}
-% \smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
-% \end{quote}
-  
-        
+If $T_{\text{phon}}$ is a phonological type, then
+LexPron($T_{\text{phon}}$) is
+\begin{quote}
+Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+\smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}}
+\end{quote}
 
   
+\item[\textnormal{SemIndefArt}] \mbox{}
+
+  $\lambda c$:\textit{Rec} . \\
+\hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+\hspace*{2em} $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{exist(restr, scope)}}
+
+        
+      \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
+        \mbox{}
+
+        If $T_{\mathrm{Phon}}$ is a phonological type, then
+        Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+        \begin{quote}
+          Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
+        \end{quote}
+        
+      \item[\textnormal{SemIntransVerb($T_{\mathrm{bg}}$, $p$)} Revised!]
+        \mbox{}
+
+        If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$
+        \end{quote}
+
+        If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          r$:\textit{Rec}
+          . \record{\tfield{e}{$p$($r$, $c$)}}$\urcorner$
+        \end{quote}
+
+        
+      \item[\textnormal{Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+          $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+        If $T_{\mathrm{phon}}$ is a phonological type,
+        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+        $T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+        \end{quote}
+
+        If $T_{\mathrm{phon}}$ is a phonological type,
+        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+        $T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+        \end{quote}
+
+        
+      \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)}] \mbox{}
+
+        If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          \mathcal{Q}$:\textit{Quant} . $\lambda
+          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
+        \end{quote}
+        
+\item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+          $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+        If $T_{\mathrm{phon}}$ is a phonological type,
+        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+        $T_{\mathrm{bg}}$, $p$) is
+        \begin{quote}
+          Lex($T_{\mathrm{phon}}$, \textit{V$_t$}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cnt}{SemTransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+        \end{quote}
+
+        
+
+        
+      \item[\textnormal{SemBe}] \mbox{}
+
+        $\lambda c:T_{\text{bg}}$ . \\
+        \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \\
+\hspace*{3em} $\mathcal{Q}$($\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
+  \tfield{e}{be(x)}})
+
+\item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
+
+  If $T_{\mathrm{Phon}}$ is a phonological type, then
+  Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$) is
+\begin{quote}
+  Lex($T_{\mathrm{Phon}}$,
+\textit{V}) \d{$\wedge$}
+\smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+\end{quote}
   
-% \end{description}
+        
+
+  
+  
+\end{description}
 
 
 \subsubsection{Constituent structure} (as in Chapter~\ref{ch:propnames})
@@ -4071,7 +4169,23 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
   \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}]
     \{conductor, composer, pianist, leave,  dog \textbf{New!}\}
     
-  \item[with arity \textnormal{$\langle\textit{Ind},\textit{Ind}\rangle$}] \{hug\}
+  \item[with arity
+    \textnormal{$\langle\textit{Ind},\textit{Ind}\rangle$}] \{hug\}
+
+    \item[with arity
+  \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise \textbf{New!}\}
+
+      $e$ : rise$(r,c)$ if
+  \begin{quote}
+    $r$ : \textit{AmbTempFrame},\\
+    $c$ : \textit{TempRiseEventCntxt} and \\
+    $e$ : \textit{TempRiseEvent}$(c)$ \d{$\wedge$}
+    \smallrecord{
+      \smalltfield{e}{\smallrecord{
+          \smallmfield{t$_0$}{$r$}{\textit{AmbTempFrame}}}}}
+  \end{quote}
+
+ 
   \end{description}
   
 
@@ -4089,9 +4203,9 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
 \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
-\> Lex$_{\text{CommonNoun}}$(``composer'', composer), \\
-\> Lex$_{\text{CommonNoun}}$(``conductor'', conductor), \\
-\> Lex$_{\text{CommonNoun}}$(``dog'', dog), \\
+\> Lex$_{\text{CommonNoun}}$(``composer'', composer, \textit{Rec}) \textbf{Revised!},\\
+\> Lex$_{\text{CommonNoun}}$(``conductor'', conductor, \textit{Rec}) \textbf{Revised!}, \\
+\> Lex$_{\text{CommonNoun}}$(``dog'', dog, \textit{Rec}) \textbf{Revised!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
 \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
 \> Lex$_{\mathrm{be}}$(``is''), \\
