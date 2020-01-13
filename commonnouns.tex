@@ -734,8 +734,7 @@ The intuition is, then, that when we predicate `rise'  of an
 ambient temperature frame, we are saying that it is the initial frame
 in a temperature rising event.  We can use this predicate in the
 characterization of a parametric content for the verb \textit{rise},
-given in \nexteg{}. @@ \todo{Think about \textit{Ppty} and record
-  level predicates/properties.}
+given in \nexteg{}. 
 \begin{ex} 
   $\ulcorner\lambda c$:\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}} .
@@ -746,6 +745,7 @@ However, the verb \textit{rise} can be used to talk about other kinds
 of rising events than temperature rises and we will need different
 parametric contents for other cases.  
 
+@@
 
 We move on
 now to price rise events.  We will take \nexteg{} to be the type of
@@ -3394,8 +3394,8 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
       Chapter~\ref{ch:infex})
 
-      \item[\textnormal{\textit{Ppty}}] ---
-        (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+      \item[\textnormal{\textit{Ppty}} Revised!] ---
+        (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})$\vee$(\textit{Rec}$\rightarrow$\textit{RecType})
         
       \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
@@ -3631,32 +3631,32 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 \end{quote}
   
     If $p$ is a predicate with arity $\langle\textit{Rec},
-    \textit{Rec}\rangle$ and $T_{\mathrm{bg}}$ is a type (of context), then
+    \textit{Rec}\rangle$ and $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
   \begin{quote}
     $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
 r$:\textit{Rec}
-. \record{\tfield{e}{$p$($r$, $c$)}}
+. \record{\tfield{e}{$p$($r$, $c.\mathfrak{c}$)}}
 \end{quote}
 
 \item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
     $T_{\mathrm{bg}}$, $p$)} Revised!] \mbox{}
 
-    If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
-  predicate with arity $\langle\textit{Ind}\rangle$ and
-  $T_{\mathrm{bg}}$ is a type (of context), then
-  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
-  $p$) is
-  \begin{quote}
-    Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
-    \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
-        $p$)}{\textit{PPpty}}}
-  \end{quote}
+    % If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+  % predicate with arity $\langle\textit{Ind}\rangle$ and
+  % $T_{\mathrm{bg}}$ is a type (of context), then
+  % Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+  % $p$) is
+  % \begin{quote}
+  %   Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+  %   \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+  %       $p$)}{\textit{PPpty}}}
+  % \end{quote}
 
 
   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
-  predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$ and
-  $T_{\mathrm{bg}}$ is a type (of context), then
+  predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}, \textit{Rec}\rangle$ and
+  $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
   $p$) is
   \begin{quote}
@@ -3671,7 +3671,7 @@ r$:\textit{Rec}
   \begin{quote}
     $\ulcorner\lambda c$: \smallrecord{
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}}}} . $\lambda
+                         \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
   \end{quote}
   
@@ -3735,30 +3735,30 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
           . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$
         \end{quote}
 
-        If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+        If $T_{\text{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a record type (for context) and $p$ is a
         predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
           r$:\textit{Rec}
-          . \record{\tfield{e}{$p$($r$, $c$)}}$\urcorner$
+          . \record{\tfield{e}{$p$($r$, $c.\mathfrak{c}$)}}$\urcorner$
         \end{quote}
 
         
       \item[\textnormal{Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
-          $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+          $T_{\mathrm{bg}}$, $p$)} Revised!] \mbox{}
+
+        % If $T_{\mathrm{phon}}$ is a phonological type,
+        % $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+        % predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+        % $T_{\mathrm{bg}}$, $p$) is
+        % \begin{quote}
+        %   Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+        %   \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+        % \end{quote}
 
         If $T_{\mathrm{phon}}$ is a phonological type,
-        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
-        predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
-        $T_{\mathrm{bg}}$, $p$) is
-        \begin{quote}
-          Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
-          \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
-        \end{quote}
-
-        If $T_{\mathrm{phon}}$ is a phonological type,
-        $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
-        predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+        $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} a record type (for context) and $p$ is a
+        predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}, \textit{Rec}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
         $T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
@@ -4203,10 +4203,12 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
 \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
-\> Lex$_{\text{CommonNoun}}$(``composer'', composer, \textit{Rec}) \textbf{Revised!},\\
-\> Lex$_{\text{CommonNoun}}$(``conductor'', conductor, \textit{Rec}) \textbf{Revised!}, \\
-\> Lex$_{\text{CommonNoun}}$(``dog'', dog, \textit{Rec}) \textbf{Revised!}, \\
+\> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer) \textbf{Revised!},\\
+\> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor) \textbf{Revised!}, \\
+\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) \textbf{Revised!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
+rise) \textbf{New!}, \\
 \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
 \> Lex$_{\mathrm{be}}$(``is''), \\
 \> Lex(``ok'', \textit{S}),  \\
