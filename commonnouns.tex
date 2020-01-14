@@ -745,8 +745,6 @@ However, the verb \textit{rise} can be used to talk about other kinds
 of rising events than temperature rises and we will need different
 parametric contents for other cases.  
 
-@@
-
 We move on
 now to price rise events.  We will take \nexteg{} to be the type of
 price frames, \textit{PriceFrame}.
@@ -796,8 +794,14 @@ associated with `rise'.
 
 \end{ex}
 
-
-@@
+We can construct a parametric content for the verb \textit{rise} which
+exploits this witness condition.  This is given in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}} .
+  $\lambda r$:\textit{Rec} . \record{
+    \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
+\end{ex} 
 
 Finally we consider a third kind of rising event discussed in
 \cite{Cooper2012} based on the example in \nexteg{}.
@@ -824,7 +828,7 @@ can use location frames of the type \textit{LocFrame} as given in
         \tfield{loc}{\textit{Loc}} \\
         \tfield{e}{at(x, loc)}} 
 \end{ex} 
-The dependent type for a rise in location event is \nexteg{}.
+The dependent type, \textit{LocRiseEvent}, with domain type \textit{LocRiseEventCntxt}, for a rise in location event is \nexteg{}.
 \begin{ex} 
 $\lambda
 r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{x}{\textit{Ind}}
@@ -849,7 +853,7 @@ Each of the fields in \preveg{} corresponds to a coordinate in
 Euclidean space.  A more adequate treatment would be to consider
 locations as regions in Euclidean space but we will not pursue that
 here.  Treating \textit{Loc} as \preveg{} means that we can
-characterize the scale function as returning the height of the
+characterize the scale function, $\zeta_{\mathrm{height}}$, as returning the height of the
 location in the location frame, as in \nexteg{}.
 \begin{ex} 
 $\lambda r$:\textit{LocFrame} . $r$.loc.z-coord 
@@ -867,7 +871,33 @@ r$:\smallrecord{\smalltfield{fix}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                              $\rightarrow$ \textit{Real})}} .\\  
 \hspace*{2em}\record{\tfield{e}{(\textit{LocFrame}$\parallel$$r$.fix)$^2$}\\
         \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}  
+    \end{ex}
+
+We can now add a new witness condition associated with `rise', given
+in \nexteg{}.
+\begin{ex} 
+  $e$ : rise$(r,c)$ if
+  \begin{quote}
+    $r$ : \textit{LocFrame},\\
+    $c$ : \textit{LocRiseEventCntxt} and \\
+    $e$ : \textit{LocRiseEvent}$(c)$ \d{$\wedge$}
+    \smallrecord{
+      \smalltfield{e}{\smallrecord{
+          \smallmfield{t$_0$}{$r$}{\textit{LocFrame}}}}}
+  \end{quote}
+  
 \end{ex}
+We can use this predicate to create a parametric content for the
+intransitive verb \textit{rise}, as in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}} .
+  $\lambda r$:\textit{Rec} . \record{
+    \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
+\end{ex}
+
+@@ \todo{Check that we can get \textit{Kim rises} but not
+  \textit{ninety rises}}
 
 We have now characterized three kinds of rising events.  In
 \cite{Cooper2010,Cooper2012}  we argued that there is in principle no
@@ -3376,9 +3406,9 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 
 \begin{description}
 
-  \item[\textnormal{\textit{Loc}}] --- a basic type
-
-  $l$ : \textit{Loc} iff $l$ is a region in three dimensional space
+  \item[\textnormal{\textit{Loc}} Revised!] --- \record{\tfield{x-coord}{\textit{Real}}\\
+        \tfield{y-coord}{\textit{Real}}\\
+        \tfield{z-coord}{\textit{Real}}}
 
   
 \item[\textnormal{\textit{Phon}}] --- a basic type
@@ -3494,8 +3524,47 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
       
       $\lambda r$:\textit{TempRiseEventCntxt} .\\  
 \hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}$\parallel$$r$.fix)$^2$}\\
-        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
       
+    \item[\textnormal{\textit{PriceFrame}} New!] --- \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{commodity}{\textit{Ind}} \\
+        \tfield{e}{price(commodity, loc, x)}}
+      
+    \item[\textnormal{\textit{PriceRiseEventCntxt}} New!] --- \record{
+        \tfield{fix}{\record{
+            \tfield{loc}{\textit{Loc}}\\
+            \tfield{commodity}{\textit{Ind}}}}\\
+        \tfield{scale}{(\textit{PriceFrame}
+                             $\rightarrow$ \textit{Real})}}
+ 
+  \item[\textnormal{\textit{PriceRiseEvent}} New!] --- \mbox{}
+
+   $\lambda
+r$:\textit{TempRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{PriceFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+      
+    \item[\textnormal{\textit{LocFrame}} New!] --- \record{\tfield{x}{\textit{Ind}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{at(x, loc)}}
+      
+    \item[\textnormal{\textit{LocRiseEventCntxt}} New!] ---
+      \record{\tfield{fix}{\record{\tfield{x}{\textit{Ind}}
+                                               }}\\
+                         \tfield{scale}{(\textit{LocFrame}
+                           $\rightarrow$ \textit{Real})}}
+                       
+ \item[\textnormal{\textit{LocRiseEvent}} New!] ---
+
+   $\lambda
+r$:\textit{LocRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{LocFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$ $r$.scale(e[1])}}
+
+                       
 
 
 \end{description}
@@ -3578,6 +3647,11 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
   
 \item[\textnormal{$\zeta_{\text{temp}}$} New!] ---
   $\lambda r$:\textit{AmbTempFrame} . $r$.x : (\textit{AmbTempFrame}
+  $\rightarrow$ \textit{Real})
+
+  
+\item[\textnormal{$\zeta_{\mathrm{height}}$} New!] ---
+  $\lambda r$:\textit{LocFrame} . $r$.loc.z-coord : (\textit{LocFrame}
   $\rightarrow$ \textit{Real})
 
 \end{description}
@@ -4184,6 +4258,24 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
       \smalltfield{e}{\smallrecord{
           \smallmfield{t$_0$}{$r$}{\textit{AmbTempFrame}}}}}
   \end{quote}
+  \textbf{or} if
+  \begin{quote}
+    $r$ : \textit{PriceFrame},\\
+    $c$ : \textit{PriceRiseEventCntxt} and \\
+    $e$ : \textit{PriceRiseEvent}$(c)$ \d{$\wedge$}
+    \smallrecord{
+      \smalltfield{e}{\smallrecord{
+          \smallmfield{t$_0$}{$r$}{\textit{PriceFrame}}}}}
+  \end{quote}
+  \textbf{or} if
+  \begin{quote}
+    $r$ : \textit{LocFrame},\\
+    $c$ : \textit{LocRiseEventCntxt} and \\
+    $e$ : \textit{LocRiseEvent}$(c)$ \d{$\wedge$}
+    \smallrecord{
+      \smalltfield{e}{\smallrecord{
+          \smallmfield{t$_0$}{$r$}{\textit{LocFrame}}}}}
+  \end{quote}
 
  
   \end{description}
@@ -4208,6 +4300,10 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 \> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) \textbf{Revised!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
 \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
+rise) \textbf{New!}, \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
+rise) \textbf{New!}, \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
 rise) \textbf{New!}, \\
 \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
 \> Lex$_{\mathrm{be}}$(``is''), \\
