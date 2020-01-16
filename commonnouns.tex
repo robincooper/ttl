@@ -31,7 +31,8 @@ associated with the content in \nexteg{a} whose foreground is of type
 Once we have applied the foreground of \preveg{a} to a context
 (modelled as a record) we will obtain the function \nexteg{a} of type
 \nexteg{b}
-\begin{ex} 
+\begin{ex}
+  \label{ex:non-paradog}
 \begin{subex} 
  
 \item  $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
@@ -896,8 +897,6 @@ intransitive verb \textit{rise}, as in \nexteg{}.
     \tfield{e}{rise($r$.x, $c.\mathfrak{c}$)}}$\urcorner$
 \end{ex}
 
-@@ 
-
 We have now characterized three kinds of rising events.  In
 \cite{Cooper2010,Cooper2012}  we argued that there is in principle no
 limit to the different kinds of rising events which can be referred to
@@ -937,15 +936,15 @@ which specifies what kind of contents can be associated with the word
 of \cite{Halliday1977} where meanings are spoken of informally as
 being ``created by the social system'' and charaterized as
 ``integrated systems of meaning potential'' (p. 199).  The notion is much
-discussed in more recent literature, for example, \cite{Linell2009},
+discussed in more recent literature, for example, \cite{Linell2009}, 
 where meaning potential is discussed in the following terms: ``Lexical
 meaning potentials are (partly) open meaning resources, where actual
 meanings can only emerge in specific, situated interactions''
-(p. 330).
+(p. 330).  The parametric contents for \textit{rise} that we have
+presented here (and included in the summary of resources in
+Section~\ref{sec:summresch5}) are examples of what Linell is calling here ``actual meanings''.
 
-\section[Using frames in a compositional semantics for the Partee
-  puzzle][Using frames in compositional semantics]{Using frames in a compositional semantics for the Partee
-  puzzle}
+\section{Frames and common nouns}
 \label{sec:compsemPartee}
 
 A central aspect of our analysis of the Partee puzzle is that the
@@ -956,7 +955,7 @@ $\langle\textit{Ind}\rangle$ and frame level predicates like
 `temperature' whose arity is $\langle\textit{Rec}\rangle$.  Leaving
 aside for now the need for parametric contents, the content for
 associated with an utterance event of type ``dog'' would be
-(\ref{ex:dog}a) repeated here as \nexteg{a}.  This is contrasted with
+(\ref{ex:non-paradog}a) repeated here as \nexteg{a}.  This is contrasted with
 the content for an utterance of type ``temperature'' given in
 \nexteg{b}.
 \begin{ex} 
@@ -1006,77 +1005,78 @@ and \preveg{b} are both record types requiring a field with the label `x'.  Up u
 used \textit{Ppty} (``property'') to designate \preveg{a}.  Now we
 might be more specific and designate it as \textit{IndPpty}
 (``property of individuals'') and use \textit{FramePpty} (``property
-of frames'') to designate \preveg{b}. In our previous treatment of the
-temperature puzzle both individual level and frame level properties
-were of the type \preveg{a} because we treated numbers as individuals,
-that is, as being of type \textit{Ind}.  On this view
-\textit{AmbTempFrame} can be
-defined as \nexteg{a} rather than our current proposal repeated in
-\nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+of frames'') to designate \preveg{b}. % In our previous treatment of the
+% temperature puzzle both individual level and frame level properties
+% were of the type \preveg{a} because we treated numbers as individuals,
+% that is, as being of type \textit{Ind}.  On this view
+% \textit{AmbTempFrame} can be
+% defined as \nexteg{a} rather than our current proposal repeated in
+% \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item  \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{loc}{\textit{Loc}} \\
-        \tfield{e}{temp(loc, x)}}
+% \item  \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{loc}{\textit{Loc}} \\
+%         \tfield{e}{temp(loc, x)}}
  
-\item \record{\tfield{x}{\textit{Real}} \\
-        \tfield{loc}{\textit{Loc}} \\
-        \tfield{e}{temp(loc, x)}} 
+% \item \record{\tfield{x}{\textit{Real}} \\
+%         \tfield{loc}{\textit{Loc}} \\
+%         \tfield{e}{temp(loc, x)}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-Choosing \preveg{a} rather than \preveg{b} would mean that the
-distinction between individual level and frame level properties would
-not be one of the type of properties as such (since they would both be
-of type (\ref{ex:pptytypes}a)) but rather in the arity of the
-predicate used within the record type that they returned, that is, for
-example, $\langle$\textit{Ind}$\rangle$ for `dog' and
-$\langle$\textit{Rec}$\rangle$ for `temperature'.  This represents an
-appealing feature of using record types with subtyping, namely that fine-grained type
-distinctions can be introduced by predicates within record types which
-all belong to the same type \textit{RecType}. For a compositional
-semantics this means  that fine grained type distinctions associated
-with lexical items need not be reflected in the types of the contents
-of the phrases in which those lexical items occur.  This is in
-significant contrast to the simple type theory used by Montague where
-there was not subtyping and any type distinction introduced in a
-constituent would be reflected as a type distinction in higher level
-phrases.  To exploit this feature of the type system here we would
-have to treat (real) numbers as individuals.  This would not
-necessarily mean abandoning the type \textit{Real} but it would mean
-stipulating that \textit{Real} is a subtype of \textit{Ind}.  For
-example, we could let \textit{AmbTempFrame} be \preveg{a} but require
-that the predicate `temp' used in this type have arity
-\mbox{$\langle$\textit{Loc}, \textit{Real}$\rangle$}.  This, together with the
-requirement \textit{Real}$\sqsubseteq$\textit{Ind}, would mean that
-\preveg{a} and \preveg{b} would be equivalent in the sense that they
-would have the same set of witnesses.
+% \end{ex} 
+% Choosing \preveg{a} rather than \preveg{b} would mean that the
+% distinction between individual level and frame level properties would
+% not be one of the type of properties as such (since they would both be
+% of type (\ref{ex:pptytypes}a)) but rather in the arity of the
+% predicate used within the record type that they returned, that is, for
+% example, $\langle$\textit{Ind}$\rangle$ for `dog' and
+% $\langle$\textit{Rec}$\rangle$ for `temperature'.  This represents an
+% appealing feature of using record types with subtyping, namely that fine-grained type
+% distinctions can be introduced by predicates within record types which
+% all belong to the same type \textit{RecType}. For a compositional
+% semantics this means  that fine grained type distinctions associated
+% with lexical items need not be reflected in the types of the contents
+% of the phrases in which those lexical items occur.  This is in
+% significant contrast to the simple type theory used by Montague where
+% there was not subtyping and any type distinction introduced in a
+% constituent would be reflected as a type distinction in higher level
+% phrases.  To exploit this feature of the type system here we would
+% have to treat (real) numbers as individuals.  This would not
+% necessarily mean abandoning the type \textit{Real} but it would mean
+% stipulating that \textit{Real} is a subtype of \textit{Ind}.  For
+% example, we could let \textit{AmbTempFrame} be \preveg{a} but require
+% that the predicate `temp' used in this type have arity
+% \mbox{$\langle$\textit{Loc}, \textit{Real}$\rangle$}.  This, together with the
+% requirement \textit{Real}$\sqsubseteq$\textit{Ind}, would mean that
+% \preveg{a} and \preveg{b} would be equivalent in the sense that they
+% would have the same set of witnesses.
 
-The alternative sketched above where numbers are treated as
-individuals has much to commend it.  But nevertheless we have not
-chosen it here for a number of intuitive and practical reasons:
-\begin{enumerate} 
+% The alternative sketched above where numbers are treated as
+% individuals has much to commend it.  But nevertheless we have not
+% chosen it here for a number of intuitive and practical reasons:
+% \begin{enumerate} 
  
-\item There is a fairly robust intuition that numbers are not, in
-  fact, individuals. 
+% \item There is a fairly robust intuition that numbers are not, in
+%   fact, individuals. 
  
-\item The proposed solution involves stipulating a subtype relation
-  between basic types.  While this is not ruled out in TTR, we would
-  like to keep it to a minimum and not use it where there is an
-  alternative of analyzing the subtyping in terms of record types.
-  Using record types you can see (and compute) whether one type is a
-  subtype of another whereas subtyping between basic types is not
-  explicit in the representation of the types.
+% \item The proposed solution involves stipulating a subtype relation
+%   between basic types.  While this is not ruled out in TTR, we would
+%   like to keep it to a minimum and not use it where there is an
+%   alternative of analyzing the subtyping in terms of record types.
+%   Using record types you can see (and compute) whether one type is a
+%   subtype of another whereas subtyping between basic types is not
+%   explicit in the representation of the types.
 
-\item There are types in TTR of which both types in
-  (\ref{ex:pptytypes}) are subtypes and these types are candidates for
-  the general type \textit{Ppty}, i.e. properties in general as
-  opposed to properties of particular types of objects. 
+% \item There are types in TTR of which both types in
+%   (\ref{ex:pptytypes}) are subtypes and these types are candidates for
+%   the general type \textit{Ppty}, i.e. properties in general as
+%   opposed to properties of particular types of objects. 
  
-\end{enumerate} 
-The last point here requires some explanation. Given that TTR has join
+% \end{enumerate} 
+% The last point here requires some explanation.
+Given that TTR has join
 (disjunctive) types (Appendix~\ref{app:jointypes}) we always have the
 option of forming the join of those types which we want to represent
 types of properties.  Thus, given the two types of properties we have
@@ -1091,206 +1091,222 @@ If there are more types of properties we wish to add to the general
 type of properties we can form a larger join type to include them.  We
 can always form a join type based on any finite collection of types.
 Using join types in this way we can create a type which has all the
-witnesses of any finite collection of types.  We cannot express a type
-corresponding to an infinite set of types.  Also it does not make
-explicit any relationship between the various types in the collection,
-in this case that all the types in the collection are function types
-whose range type is \textit{RecType} and whose domain type is a
-subtype of \textit{Rec} with an `x'-field.  In order to deal with this
-kind of case, we will use the same technique as we used for parametric
-contents in Chapter~\ref{ch:propnames}.  We will treat properties as a
-pair consisting of a type (labelled with `bg') and the function
-(labelled with `fg') which we have up to now
-been calling a property.  \nexteg{a} is an example of the new kind of
-property and \nexteg{b} is the new definition of the type,
-\textit{Ppty}, of properties.\footnote{% Many type
-  % theorists find types such as (\ref{ex:pptyT}) problematic since they
-  % involve quantification over subtypes.  If you are one of those and
-  % you do not mind there only being a finite number of property types then
-  % you can retract to the kind of join type in (\ref{ex:indorrecppty}).
-  % If you are a type theorist who also finds this kind of type
-  % problematic (and there are many) or you want to have a type
-  % corresponding to an infinite variety of properties then you can
-  % think of \textit{Ppty} as being a function of two arguments which is
-  % defined when the second argument is a subtype of
-  % \smallrecord{\smalltfield{x}{$T$}}, where $T$ is the first argument.  Thus
-  % \textit{Ppty}($T$)($T'$) would yield the type
-  % ($T'$ $\rightarrow$
-  % \textit{RecType}).
-  For a similar kind of case, though a different approach to treating
-  it, see the discussion in \cite{GinzburgCooperFernando2014}, p. 93,
-  of the type of Austinian questions.  We have also treated this kind
-  of case in terms of a limited kind of polymorphism, for example, in \cite{GinzburgCooper2014}.}
-\begin{ex} 
-\begin{subex} 
+witnesses of any finite collection of types.  % We cannot express a type
+% corresponding to an infinite set of types.  Also it does not make
+% explicit any relationship between the various types in the collection,
+% in this case that all the types in the collection are function types
+% whose range type is \textit{RecType} and whose domain type is a
+% subtype of \textit{Rec} with an `x'-field.  In order to deal with this
+% kind of case, we will use the same technique as we used for parametric
+% contents in Chapter~\ref{ch:propnames}.  We will treat properties as a
+% pair consisting of a type (labelled with `bg') and the function
+% (labelled with `fg') which we have up to now
+% been calling a property.  \nexteg{a} is an example of the new kind of
+% property and \nexteg{b} is the new definition of the type,
+% \textit{Ppty}, of properties.\footnote{% Many type
+%   % theorists find types such as (\ref{ex:pptyT}) problematic since they
+%   % involve quantification over subtypes.  If you are one of those and
+%   % you do not mind there only being a finite number of property types then
+%   % you can retract to the kind of join type in (\ref{ex:indorrecppty}).
+%   % If you are a type theorist who also finds this kind of type
+%   % problematic (and there are many) or you want to have a type
+%   % corresponding to an infinite variety of properties then you can
+%   % think of \textit{Ppty} as being a function of two arguments which is
+%   % defined when the second argument is a subtype of
+%   % \smallrecord{\smalltfield{x}{$T$}}, where $T$ is the first argument.  Thus
+%   % \textit{Ppty}($T$)($T'$) would yield the type
+%   % ($T'$ $\rightarrow$
+%   % \textit{RecType}).
+%   For a similar kind of case, though a different approach to treating
+%   it, see the discussion in \cite{GinzburgCooperFernando2014}, p. 93,
+%   of the type of Austinian questions.  We have also treated this kind
+%   of case in terms of a limited kind of polymorphism, for example, in \cite{GinzburgCooper2014}.}
+% \begin{ex} 
+% \begin{subex} 
  
-\item \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}\\
-              \field{fg}{$\lambda
-                r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{dog($r$.x)}}}}} 
+% \item \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}\\
+%               \field{fg}{$\lambda
+%                 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{dog($r$.x)}}}}} 
  
-\item \record{\tfield{bg}{\smallrecord{\smalltfield{x}{\textit{Type}}}\\
-              \tfield{fg}(bg$\rightarrow$\textit{RecType})}} 
+% \item \record{\tfield{bg}{\smallrecord{\smalltfield{x}{\textit{Type}}}\\
+%               \tfield{fg}(bg$\rightarrow$\textit{RecType})}} 
  
-\end{subex} 
-\label{ex:dog-Ppty}   
-\end{ex} 
+% \end{subex} 
+% \label{ex:dog-Ppty}   
+% \end{ex} 
   
 
-% TTR
-% introduces a restricted kind of polymorphism in function types which
-% allows for certain kinds of infinite joins of function types
-% (Appendix~\ref{app:funtypes}).  Given a type, $T$, we can
-% give the type to which a function belongs just in case its domain type
-% is a subtype of $T$ and its range is included among the witnesses of
-% \textit{RecType}.  This type is given in \nexteg{}.
-% \begin{ex} 
-% % $\displaystyle{\bigvee_{T:\textit{Type},
-% %     T'\sqsubseteq\text{\smallrecord{\smalltfield{x}{$T$}}}}}(T'\rightarrow
+% % TTR
+% % introduces a restricted kind of polymorphism in function types which
+% % allows for certain kinds of infinite joins of function types
+% % (Appendix~\ref{app:funtypes}).  Given a type, $T$, we can
+% % give the type to which a function belongs just in case its domain type
+% % is a subtype of $T$ and its range is included among the witnesses of
+% % \textit{RecType}.  This type is given in \nexteg{}.
+% % \begin{ex} 
+% % % $\displaystyle{\bigvee_{T:\textit{Type},
+% % %     T'\sqsubseteq\text{\smallrecord{\smalltfield{x}{$T$}}}}}(T'\rightarrow
+% % % \textit{RecType})$ 
+
+% % $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow
 % % \textit{RecType})$ 
+% % \label{ex:pptyT}
+% % \end{ex}
+% % We can denote \preveg{} as \textit{Ppty}($T$) and let \textit{Ppty}
+% % represent the function, a dependent type, in \nexteg{}.
+% % \begin{ex} 
+% % $\lambda T$:\textit{Type} .  $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow \textit{RecType})$
+% % \end{ex}
+% % Then we can say that $P$ is a property just in case for some type,
+% % $T$, $P:\textit{Ppty}(T)$ and it is convenient to let the notation `$P$
+% % : \textit{Ppty}' designate this.  (In general, we could let $a:T$,
+% % where $T$ is a dependent type, mean ``there is some $b$ such that $a:T(b)$''.)  In this way
+% % we are saying that a property is a function whose domain is
+% % characterized by some record type with an 'x'-field and whose result for any
+% % object in its domain will be a record type.
 
-% $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow
-% \textit{RecType})$ 
-% \label{ex:pptyT}
-% \end{ex}
-% We can denote \preveg{} as \textit{Ppty}($T$) and let \textit{Ppty}
-% represent the function, a dependent type, in \nexteg{}.
+
+% Suppose that a situation $e$ is of type temperature($r$).  What does
+% that tell us about $r$? Given what we have seen so far we might expect
+% that $r$ is an ambient temperature frame, that is, \mbox{$r$ :
+% \textit{AmbTempFrame}}.  We might be tempted to express this as a
+% constraint on assignments to types, that is, a constraint on
+% possibilities in the sense of Appendix~\ref{app:modal}.  This might be
+% expressed as in \nexteg{}.
 % \begin{ex} 
-% $\lambda T$:\textit{Type} .  $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow \textit{RecType})$
-% \end{ex}
-% Then we can say that $P$ is a property just in case for some type,
-% $T$, $P:\textit{Ppty}(T)$ and it is convenient to let the notation `$P$
-% : \textit{Ppty}' designate this.  (In general, we could let $a:T$,
-% where $T$ is a dependent type, mean ``there is some $b$ such that $a:T(b)$''.)  In this way
-% we are saying that a property is a function whose domain is
-% characterized by some record type with an 'x'-field and whose result for any
-% object in its domain will be a record type.
+% We restrict attention to those assignments to types (possibilities)
+% such that for any situations $e$ and $r$, if $e$ : temperature($r$) then
+% $r$ : \textit{AmbTempFrame}. 
+% \end{ex} 
+% Intuitively \preveg{} is similar to Montague's
+% (\citeyear{Montague1973}) constraints on the interpretations of
+% intensional logic to which we should restrict attention.  These
+% constraints are standardly referred to as \textit{meaning postulates}
+% in the literature although Montague himself did not give them this
+% label. \preveg{} is fine if we are only concerned with ambient
+% temperature or wish the predicate `temperature' to relate only to
+% ambient temperature.  In general, however, we must take account of the
+% fact that there are other kinds of temperature such as the temperature
+% of objects, substances and human bodies.  If we choose to have
+% separate predicates for all of these then \preveg{} is a possible
+% constraint to have.  On the other hand, if we want to have a single
+% predicate that covers all of these cases then \preveg{} will have to
+% be modified.  One thing we might be tempted to do in this case is turn
+% the implication around.  Instead of saying ``If it's a temperature
+% then it's an ambient temperature frame'' as in \preveg{} we say ``If
+% it's an ambient temperature frame then it's a temperature''.  This
+% might look like \nexteg{}.
+% \begin{ex} 
+% We restrict attention to those assignments to types (possibilities)
+% such that for any situation $r$, if \mbox{$r$ :
+% \textit{AmbTempFrame}} then there is a situation $e$, such that $e$ :
+% temperature($r$). 
+% \label{ex:ambtemptopos-prose}
+% \end{ex}       
+% Note that it is important here that we changed the quantification over
+% $e$ to existential quantification with scope over the consequent of
+% the conditional.  It would have been wrong to have universal
+% quantification as in \nexteg{}.
+% \begin{ex} 
+% For any situations $r$ and $e$, if \mbox{$r$ :
+% \textit{AmbTempFrame}} then $e$ : temperature($r$) 
+% \end{ex} 
+% \preveg{} would require that every situation would have to be of the
+% type temperature($r$) if the antecedent holds and this would have the
+% unintuitive consequence that every situation would be a proof object
+% for the temperature in every available location.  This would be
+% particularly unwieldy if we wish to consider uncountably many
+% locations as would be natural when considering geometric spaces.
 
+% One advantage of (\ref{ex:ambtemptopos-prose}) is that it fits well
+% into the kind of cognitive approach to semantics that we are trying to
+% promote where we focus on how an agent with limited knowledge will use
+% language rather than on a complete mathematical treatment of how
+% a language considered as an abstract object relates to the world at
+% large as Montague did. (\ref{ex:ambtemptopos-prose}) expresses one way
+% in which a situation can be considered to be a temperature situation.
+% It leaves open whether there are other kinds of situations which can
+% be considered as temperature situations.  Consider an agent acquiring
+% the concept of temperature, that is, what the temperature predicate can
+% be applied to.  Such an agent may first become aware of the relevance
+% of ambient
+% temperature as expressed by (\ref{ex:ambtemptopos-prose}) and then
+% subsequently add similar constraints on the same predicate for, say,
+% the temperature of food, body temperature and so on.  By adding
+% constraints to its resources in this way, an agent can incrementally
+% build up an increasingly rich appreciation of a concept like
+% temperature.  Another advantage of this is that an agent which has a
+% collection of such constraints as resources can focus on some subset
+% of those constraints or one particular constraint in a given context.
+% Thus in Montague's example \textit{The temperature is 90°} we
+% know that the temperature that is being referred to is ambient
+% temperature.  
 
-Suppose that a situation $e$ is of type temperature($r$).  What does
-that tell us about $r$? Given what we have seen so far we might expect
-that $r$ is an ambient temperature frame, that is, \mbox{$r$ :
-\textit{AmbTempFrame}}.  We might be tempted to express this as a
-constraint on assignments to types, that is, a constraint on
-possibilities in the sense of Appendix~\ref{app:modal}.  This might be
-expressed as in \nexteg{}.
-\begin{ex} 
-We restrict attention to those assignments to types (possibilities)
-such that for any situations $e$ and $r$, if $e$ : temperature($r$) then
-$r$ : \textit{AmbTempFrame}. 
-\end{ex} 
-Intuitively \preveg{} is similar to Montague's
-(\citeyear{Montague1973}) constraints on the interpretations of
-intensional logic to which we should restrict attention.  These
-constraints are standardly referred to as \textit{meaning postulates}
-in the literature although Montague himself did not give them this
-label. \preveg{} is fine if we are only concerned with ambient
-temperature or wish the predicate `temperature' to relate only to
-ambient temperature.  In general, however, we must take account of the
-fact that there are other kinds of temperature such as the temperature
-of objects, substances and human bodies.  If we choose to have
-separate predicates for all of these then \preveg{} is a possible
-constraint to have.  On the other hand, if we want to have a single
-predicate that covers all of these cases then \preveg{} will have to
-be modified.  One thing we might be tempted to do in this case is turn
-the implication around.  Instead of saying ``If it's a temperature
-then it's an ambient temperature frame'' as in \preveg{} we say ``If
-it's an ambient temperature frame then it's a temperature''.  This
-might look like \nexteg{}.
-\begin{ex} 
-We restrict attention to those assignments to types (possibilities)
-such that for any situation $r$, if \mbox{$r$ :
-\textit{AmbTempFrame}} then there is a situation $e$, such that $e$ :
-temperature($r$). 
-\label{ex:ambtemptopos-prose}
-\end{ex}       
-Note that it is important here that we changed the quantification over
-$e$ to existential quantification with scope over the consequent of
-the conditional.  It would have been wrong to have universal
-quantification as in \nexteg{}.
-\begin{ex} 
-For any situations $r$ and $e$, if \mbox{$r$ :
-\textit{AmbTempFrame}} then $e$ : temperature($r$) 
-\end{ex} 
-\preveg{} would require that every situation would have to be of the
-type temperature($r$) if the antecedent holds and this would have the
-unintuitive consequence that every situation would be a proof object
-for the temperature in every available location.  This would be
-particularly unwieldy if we wish to consider uncountably many
-locations as would be natural when considering geometric spaces.
-
-One advantage of (\ref{ex:ambtemptopos-prose}) is that it fits well
-into the kind of cognitive approach to semantics that we are trying to
-promote where we focus on how an agent with limited knowledge will use
-language rather than on a complete mathematical treatment of how
-a language considered as an abstract object relates to the world at
-large as Montague did. (\ref{ex:ambtemptopos-prose}) expresses one way
-in which a situation can be considered to be a temperature situation.
-It leaves open whether there are other kinds of situations which can
-be considered as temperature situations.  Consider an agent acquiring
-the concept of temperature, that is, what the temperature predicate can
-be applied to.  Such an agent may first become aware of the relevance
-of ambient
-temperature as expressed by (\ref{ex:ambtemptopos-prose}) and then
-subsequently add similar constraints on the same predicate for, say,
-the temperature of food, body temperature and so on.  By adding
-constraints to its resources in this way, an agent can incrementally
-build up an increasingly rich appreciation of a concept like
-temperature.  Another advantage of this is that an agent which has a
-collection of such constraints as resources can focus on some subset
-of those constraints or one particular constraint in a given context.
-Thus in Montague's example \textit{The temperature is 90°} we
-know that the temperature that is being referred to is ambient
-temperature.  
-
-This suggests that the appropriate notion for these
-constraints is that of \textit{topos} as discussed by
-\cite{Breitholtz2014a}.  According to Breitholtz a topos can be
-modelled as a function returning a type, that is, a dependent type
-similar to those we have used as update functions in this work.  Thus
-we can replace the prose statement (\ref{ex:ambtemptopos-prose}) with
-the function in \nexteg{a} which is associated with the licensing
-condition \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% This suggests that the appropriate notion for these
+% constraints is that of \textit{topos} as discussed by
+% \cite{Breitholtz2014a}.  According to Breitholtz a topos can be
+% modelled as a function returning a type, that is, a dependent type
+% similar to those we have used as update functions in this work.  Thus
+% we can replace the prose statement (\ref{ex:ambtemptopos-prose}) with
+% the function in \nexteg{a} which is associated with the licensing
+% condition \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}} . \record{\tfield{e}{temperature($r$.x)}} 
+% \item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}} . \record{\tfield{e}{temperature($r$.x)}} 
  
-\item If $f : (T\rightarrow Type)$ is a topos and $r$ is a record
-  (situation or frame) then for any
-  agent $A$, $r :_A T$ licenses $:_A f(r)$
+% \item If $f : (T\rightarrow Type)$ is a topos and $r$ is a record
+%   (situation or frame) then for any
+%   agent $A$, $r :_A T$ licenses $:_A f(r)$
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-\preveg{}  absorbs the prose statement in
-(\ref{ex:ambtemptopos-prose}) into our theory of dependent types
-(which we assume can be implemented in memory) and our general theory
-of action which is supervenient on the type system.  The licensing
-condition \preveg{b} says that a topos will license an agent which
-judges a situation to be of the domain type of the topos to make a
-judgement that there is something of the type which the topos returns
-for that situation.  Different agents will have different topoi in
-their resources and may choose to act or not on the basis of a
-particular judgement and topos.  Different collections of the topoi
-available in an agent's resources may be activated in different
-circumstances.  And, of course, the collection of resources is dynamic
-in the sense that an agent may be learning new topoi or adjusting old
-ones depending on input from the environment.  Thus while topoi can
-be used to replace Montague's meaning postulates they represent a much
-more flexible tool which can be used to model the reasoning mechanisms
-available to an agent at a given time.
+% \end{ex} 
+% \preveg{}  absorbs the prose statement in
+% (\ref{ex:ambtemptopos-prose}) into our theory of dependent types
+% (which we assume can be implemented in memory) and our general theory
+% of action which is supervenient on the type system.  The licensing
+% condition \preveg{b} says that a topos will license an agent which
+% judges a situation to be of the domain type of the topos to make a
+% judgement that there is something of the type which the topos returns
+% for that situation.  Different agents will have different topoi in
+% their resources and may choose to act or not on the basis of a
+% particular judgement and topos.  Different collections of the topoi
+% available in an agent's resources may be activated in different
+% circumstances.  And, of course, the collection of resources is dynamic
+% in the sense that an agent may be learning new topoi or adjusting old
+% ones depending on input from the environment.  Thus while topoi can
+% be used to replace Montague's meaning postulates they represent a much
+% more flexible tool which can be used to model the reasoning mechanisms
+% available to an agent at a given time.
 
-Another advantage of \preveg{a} is that it is also the right kind of
-object to be used as a more specified content of \textit{temperature}.
-It represents a restriction of the function in
-(\ref{ex:dogtemperaturecont}b) obtained by replacing its domain type
-with a subtype.  This is a natural restriction of
-(\ref{ex:dogtemperaturecont}b) given that we have \preveg{a} as a resource.
-While it might seem intuitive that a particular utterance of the noun
-\textit{temperature} might be restricted to ambient temperature,
-something that might seem puzzling for a formulation of compositional
-semantics is that this restriction is passed on to the verb as well
-although intuitively obvious.  When we say \textit{the temperature is
+% Another advantage of \preveg{a} is that it is also the right kind of
+% object to be used as a more specified content of \textit{temperature}.
+% It represents a restriction of the function in
+% (\ref{ex:dogtemperaturecont}b) obtained by replacing its domain type
+% with a subtype.  This is a natural restriction of
+% (\ref{ex:dogtemperaturecont}b) given that we have \preveg{a} as a resource.
+% While it might seem intuitive that a particular utterance of the noun
+% \textit{temperature} might be restricted to ambient temperature,
+% something that might seem puzzling for a formulation of compositional
+% semantics is that this restriction is passed on to the verb as well
+% although intuitively obvious.
+
+In characterizing the content of the noun \textit{temperature} we used
+the predicate `temperature'.  This predicate has the arity
+$\langle$\textit{Rec}$\rangle$.  What is the relationship between this
+predicate and the type \textit{AmbTempFrame}, which is a type of
+records.  An intuition that seems reasonable if we are treating
+\textit{temperature} as a frame level noun is that one kind of frame
+that could count as a temperature is an ambient temperature frame.  We
+can express this by the witness condition in \nexteg{}.
+\begin{ex} 
+$s$ : temperature$(r)$ if $s=r$ and $s$ : \textit{AmbTempFrame} 
+\end{ex} 
+
+@@\todo{Think about this.}
+
+When we say \textit{the temperature is
   rising} we are talking about an event which is a temperature rise,
 not a price rise or any other kind of rise.  Somehow we have to
 coordinate the frame which is chosen in connection with the
@@ -3389,6 +3405,7 @@ $\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\w
 % \section{Comparison with other work on frames in semantics}
 
 \section{Summary of resources introduced}
+\label{sec:summresch5}
 
 % This summary does not include the resources for chart processing
 % introduced in Section~\ref{sec:chart}.
@@ -3422,9 +3439,16 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
       Chapter~\ref{ch:infex})
+      
+    \item[\textnormal{\textit{IndPpty}} New!] ---
+      (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+
+      
+    \item[\textnormal{\textit{FramePpty}} New!] ---
+      (\smallrecord{\smalltfield{x}{\textit{Rec}}}$\rightarrow$\textit{RecType})
 
       \item[\textnormal{\textit{Ppty}} Revised!] ---
-        (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})$\vee$(\textit{Rec}$\rightarrow$\textit{RecType})
+        \textit{IndPpty}$\vee$\textit{FramePpty}
         
       \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
