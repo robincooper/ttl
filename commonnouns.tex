@@ -1301,10 +1301,28 @@ records.  An intuition that seems reasonable if we are treating
 that could count as a temperature is an ambient temperature frame.  We
 can express this by the witness condition in \nexteg{}.
 \begin{ex} 
-$s$ : temperature$(r)$ if $s=r$ and $s$ : \textit{AmbTempFrame} 
-\end{ex} 
+  $s$ : temperature$(r)$ if $r$ : \textit{AmbTempFrame} and $s=r$
+  \label{ex:temperature-witcond}
+\end{ex}
 
-@@\todo{Think about this.}
+This witness condition corresponds to the inference rule in \nexteg{}.
+\begin{ex} 
+  \begin{prooftree}
+    \hypo{r:\textit{AmbTempFrame}}
+    \infer1{r:\text{temperature}(r)}
+  \end{prooftree}
+  
+\end{ex} 
+ Note that in (\ref{ex:temperature-witcond}) we again use \textit{if}
+ rather than \textit{iff}.  This represents one way in which a record
+ can be regarded as a temperature.  This allows for there to be other
+ ways to be regarded as a temperature.  Note also that we are talking
+ of judgements of the form $a:p(a)$ where the witness for the type is
+ identical with the argument to the predicate.  This might appear to
+ be introducing some kind of non-wellfoundedness.  However, this is
+ not the case.  We can think of the type $p(a)$ in such a case as
+ corresponding to a singleton type $T_a$, that is, it is either
+ witnessed by $a$ or nothing.
 
 When we say \textit{the temperature is
   rising} we are talking about an event which is a temperature rise,
@@ -1330,13 +1348,15 @@ is passed to the verb.
 
 We introduce first a function `SemDefArt' on the model of `SemIndefArt'
 which was defined in Chapter~\ref{ch:gram}, example
-(\ref{ex:semindefart}).  Given the new definition of properties as
-pairs of a type and a function (labelled `bg' and `fg', respectively)
-we have to specify that the arguments to the quantifier relation are
-the functions (i.e. `fg').  This is given in \nexteg{}.
-\begin{ex} 
-$\lambda Q$:\textit{Ppty} . \\
-\hspace*{1em} $\lambda P$:\textit{Ppty}
+(\ref{ex:semindefart}), although modified to accommodate parametric contents.  % Given the new definition of properties as
+% pairs of a type and a function (labelled `bg' and `fg', respectively)
+% we have to specify that the arguments to the quantifier relation are
+% the functions (i.e. `fg').
+This is given in \nexteg{}.
+\begin{ex}
+  $\lambda c$:\textit{Rec} . \\
+\hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+\hspace*{2em} $\lambda P$:\textit{Ppty}
 . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
           \mfield{scope}{$P$}{\textit{Ppty}} \\
           \tfield{e}{the(restr, scope)}} 
@@ -1386,9 +1406,11 @@ type (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
 a notion of property extension for our new definition of
 \textit{Ppty}.  This is done in \nexteg{}.\label{pg:property-extension-rev}
 \begin{ex} 
-$\downP{P}$ = $\{a\mid\exists r[r:P$.bg
-$\wedge\ r.\mathrm{x}=a\wedge\down{P.\mathrm{fg}(r)}\not=\emptyset]\}$  
-\end{ex} 
+If $P$ : (\smallrecord{\smalltfield{x}{$T$}}$\rightarrow$\textit{RecType}) then $\downP{P}$ = $\{a\mid\exists r[r:\text{\smallrecord{\smalltfield{x}{$T$}}}$
+$\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$  
+\end{ex}
+
+@@\todo{Perhaps \preveg{} should be more general to include restricted properties}
   
 % Our strategy for doing this will build on a proposal in
 % \cite{Cooper2011} which had to do with different ways of counting
@@ -3818,9 +3840,29 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
         \begin{quote}
           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
-          \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{Quant})}}
+          \smallrecord{\smallmfield{cont}{SemIndefArt}{\textit{PQuantDet}}}
         \end{quote}
+
+        \item[\textnormal{SemDefArt} New!] \mbox{}
+
+  $\lambda c$:\textit{Rec} . \\
+\hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+\hspace*{2em} $\lambda P$:\textit{Ppty}
+. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+          \mfield{scope}{$P$}{\textit{Ppty}} \\
+          \tfield{e}{the(restr, scope)}}
+
         
+      \item[\textnormal{Lex$_{\mathrm{DefArt}}$($T_{\mathrm{Phon}}$)} New!]
+        \mbox{}
+
+        If $T_{\mathrm{Phon}}$ is a phonological type, then
+        Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+        \begin{quote}
+          Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cont}{SemDefArt}{\textit{PQuantDet}}}
+        \end{quote}
+
       \item[\textnormal{SemIntransVerb($T_{\mathrm{bg}}$, $p$)} Revised!]
         \mbox{}
 
@@ -4270,7 +4312,8 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
     \textnormal{$\langle\textit{Ind},\textit{Ind}\rangle$}] \{hug\}
 
     \item[with arity
-  \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise \textbf{New!}\}
+  \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise
+  \textbf{New!}\}
 
       $e$ : rise$(r,c)$ if
   \begin{quote}
@@ -4300,6 +4343,16 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
           \smallmfield{t$_0$}{$r$}{\textit{LocFrame}}}}}
   \end{quote}
 
+  
+
+  
+\item[with arity \textnormal{$\langle\textit{Rec}\rangle$}] ---
+  \{temperature \textbf{New!}\}
+  
+$e$ : temperature$(r)$ if 
+  \begin{quote}
+    $r$ : \textit{AmbTempFrame} and $e=r$
+  \end{quote}
  
   \end{description}
   
