@@ -1091,79 +1091,92 @@ If there are more types of properties we wish to add to the general
 type of properties we can form a larger join type to include them.  We
 can always form a join type based on any finite collection of types.
 Using join types in this way we can create a type which has all the
-witnesses of any finite collection of types.  % We cannot express a type
-% corresponding to an infinite set of types.  Also it does not make
-% explicit any relationship between the various types in the collection,
-% in this case that all the types in the collection are function types
-% whose range type is \textit{RecType} and whose domain type is a
-% subtype of \textit{Rec} with an `x'-field.  In order to deal with this
-% kind of case, we will use the same technique as we used for parametric
-% contents in Chapter~\ref{ch:propnames}.  We will treat properties as a
-% pair consisting of a type (labelled with `bg') and the function
-% (labelled with `fg') which we have up to now
-% been calling a property.  \nexteg{a} is an example of the new kind of
-% property and \nexteg{b} is the new definition of the type,
-% \textit{Ppty}, of properties.\footnote{% Many type
-%   % theorists find types such as (\ref{ex:pptyT}) problematic since they
-%   % involve quantification over subtypes.  If you are one of those and
-%   % you do not mind there only being a finite number of property types then
-%   % you can retract to the kind of join type in (\ref{ex:indorrecppty}).
-%   % If you are a type theorist who also finds this kind of type
-%   % problematic (and there are many) or you want to have a type
-%   % corresponding to an infinite variety of properties then you can
-%   % think of \textit{Ppty} as being a function of two arguments which is
-%   % defined when the second argument is a subtype of
-%   % \smallrecord{\smalltfield{x}{$T$}}, where $T$ is the first argument.  Thus
-%   % \textit{Ppty}($T$)($T'$) would yield the type
-%   % ($T'$ $\rightarrow$
-%   % \textit{RecType}).
-%   For a similar kind of case, though a different approach to treating
-%   it, see the discussion in \cite{GinzburgCooperFernando2014}, p. 93,
-%   of the type of Austinian questions.  We have also treated this kind
-%   of case in terms of a limited kind of polymorphism, for example, in \cite{GinzburgCooper2014}.}
-% \begin{ex} 
-% \begin{subex} 
+witnesses of any finite collection of types.  We cannot, however, express a type
+corresponding to an infinite set of types in this way.  In addition
+using join types in this way does not make
+explicit any relationship between the various types in the collection,
+in this case that all the types are function types
+whose range type is \textit{RecType} and whose domain type is a
+record type with an `x'-field.  In order to deal with this
+kind of case, we will use the same technique as we used for parametric
+contents in Chapter~\ref{ch:propnames}.  We will first define the type
+\textit{xType} as a basic type of record types that have a `x' among its
+labels, as specified in \nexteg{}.
+\begin{ex} 
+$T$ : \textit{xType} iff $T$ : \textit{RecType} and $\text{x}\in\mathrm{labels}(T)$ 
+\end{ex} 
+  We will treat properties as a
+pair (that is, a record with two fields) consisting of a type (labelled with `bg') and a function
+(labelled with `fg') corresponding to what we have up to now
+been calling a property.  \nexteg{a} is an example of the new kind of
+property which we normally represent as \nexteg{b} and \nexteg{c} is the new definition of the type,
+\textit{Ppty}, of properties.\footnote{% Many type
+  % theorists find types such as (\ref{ex:pptyT}) problematic since they
+  % involve quantification over subtypes.  If you are one of those and
+  % you do not mind there only being a finite number of property types then
+  % you can retract to the kind of join type in (\ref{ex:indorrecppty}).
+  % If you are a type theorist who also finds this kind of type
+  % problematic (and there are many) or you want to have a type
+  % corresponding to an infinite variety of properties then you can
+  % think of \textit{Ppty} as being a function of two arguments which is
+  % defined when the second argument is a subtype of
+  % \smallrecord{\smalltfield{x}{$T$}}, where $T$ is the first argument.  Thus
+  % \textit{Ppty}($T$)($T'$) would yield the type
+  % ($T'$ $\rightarrow$
+  % \textit{RecType}).
+  For a similar kind of case, though a different approach to treating
+  it, see the discussion in \cite{GinzburgCooperFernando2014}, p. 93,
+  of the type of Austinian questions.  We have also treated this kind
+  of case in terms of a limited kind of polymorphism, for example, in \cite{GinzburgCooper2014}.}
+\begin{ex} 
+\begin{subex} 
  
-% \item \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}\\
-%               \field{fg}{$\lambda
-%                 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{dog($r$.x)}}}}} 
+\item \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}\\
+              \field{fg}{$\lambda
+                r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+                . \smallrecord{\smalltfield{e}{dog($r$.x)}}}}}
+
+          
+        \item $\ulcorner\lambda
+                r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+                . \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$
  
-% \item \record{\tfield{bg}{\smallrecord{\smalltfield{x}{\textit{Type}}}\\
-%               \tfield{fg}(bg$\rightarrow$\textit{RecType})}} 
+\item \record{\tfield{bg}{\textit{xType}}\\
+              \tfield{fg}(bg$\rightarrow$\textit{RecType})} 
  
-% \end{subex} 
-% \label{ex:dog-Ppty}   
-% \end{ex} 
+\end{subex} 
+\label{ex:dog-Ppty}   
+\end{ex} 
   
 
-% % TTR
-% % introduces a restricted kind of polymorphism in function types which
-% % allows for certain kinds of infinite joins of function types
-% % (Appendix~\ref{app:funtypes}).  Given a type, $T$, we can
-% % give the type to which a function belongs just in case its domain type
-% % is a subtype of $T$ and its range is included among the witnesses of
-% % \textit{RecType}.  This type is given in \nexteg{}.
-% % \begin{ex} 
-% % % $\displaystyle{\bigvee_{T:\textit{Type},
-% % %     T'\sqsubseteq\text{\smallrecord{\smalltfield{x}{$T$}}}}}(T'\rightarrow
-% % % \textit{RecType})$ 
-
-% % $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow
+% TTR
+% introduces a restricted kind of polymorphism in function types which
+% allows for certain kinds of infinite joins of function types
+% (Appendix~\ref{app:funtypes}).  Given a type, $T$, we can
+% give the type to which a function belongs just in case its domain type
+% is a subtype of $T$ and its range is included among the witnesses of
+% \textit{RecType}.  This type is given in \nexteg{}.
+% \begin{ex} 
+% % $\displaystyle{\bigvee_{T:\textit{Type},
+% %     T'\sqsubseteq\text{\smallrecord{\smalltfield{x}{$T$}}}}}(T'\rightarrow
 % % \textit{RecType})$ 
-% % \label{ex:pptyT}
-% % \end{ex}
-% % We can denote \preveg{} as \textit{Ppty}($T$) and let \textit{Ppty}
-% % represent the function, a dependent type, in \nexteg{}.
-% % \begin{ex} 
-% % $\lambda T$:\textit{Type} .  $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow \textit{RecType})$
-% % \end{ex}
-% % Then we can say that $P$ is a property just in case for some type,
-% % $T$, $P:\textit{Ppty}(T)$ and it is convenient to let the notation `$P$
-% % : \textit{Ppty}' designate this.  (In general, we could let $a:T$,
-% % where $T$ is a dependent type, mean ``there is some $b$ such that $a:T(b)$''.)  In this way
-% % we are saying that a property is a function whose domain is
-% % characterized by some record type with an 'x'-field and whose result for any
-% % object in its domain will be a record type.
+
+% $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow
+% \textit{RecType})$ 
+% \label{ex:pptyT}
+% \end{ex}
+% We can denote \preveg{} as \textit{Ppty}($T$) and let \textit{Ppty}
+% represent the function, a dependent type, in \nexteg{}.
+% \begin{ex} 
+% $\lambda T$:\textit{Type} .  $\displaystyle{\bigvee_{T'\sqsubseteq[\text{x}:T]}}(T'\rightarrow \textit{RecType})$
+% \end{ex}
+% Then we can say that $P$ is a property just in case for some type,
+% $T$, $P:\textit{Ppty}(T)$ and it is convenient to let the notation `$P$
+% : \textit{Ppty}' designate this.  (In general, we could let $a:T$,
+% where $T$ is a dependent type, mean ``there is some $b$ such that $a:T(b)$''.)  In this way
+% we are saying that a property is a function whose domain is
+% characterized by some record type with an 'x'-field and whose result for any
+% object in its domain will be a record type.
 
 
 % Suppose that a situation $e$ is of type temperature($r$).  What does
@@ -1406,11 +1419,11 @@ type (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
 a notion of property extension for our new definition of
 \textit{Ppty}.  This is done in \nexteg{}.\label{pg:property-extension-rev}
 \begin{ex} 
-If $P$ : (\smallrecord{\smalltfield{x}{$T$}}$\rightarrow$\textit{RecType}) then $\downP{P}$ = $\{a\mid\exists r[r:\text{\smallrecord{\smalltfield{x}{$T$}}}$
+If $T$ : \textit{xType} and $P$ : ($T\rightarrow\textit{RecType}$) then $\downP{P}$ = $\{a\mid\exists r[r:T$
 $\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$  
 \end{ex}
 
-@@\todo{Perhaps \preveg{} should be more general to include restricted properties}
+@@
   
 % Our strategy for doing this will build on a proposal in
 % \cite{Cooper2011} which had to do with different ways of counting
@@ -3462,15 +3475,20 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
       Chapter~\ref{ch:infex})
       
-    \item[\textnormal{\textit{IndPpty}} New!] ---
-      (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+    % \item[\textnormal{\textit{IndPpty}} New!] ---
+    %   (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
 
       
-    \item[\textnormal{\textit{FramePpty}} New!] ---
-      (\smallrecord{\smalltfield{x}{\textit{Rec}}}$\rightarrow$\textit{RecType})
+    % \item[\textnormal{\textit{FramePpty}} New!] ---
+    %   (\smallrecord{\smalltfield{x}{\textit{Rec}}}$\rightarrow$\textit{RecType})
+      
+    \item[\textnormal{\textit{xType}} New!] --- a basic type
+
+      $T$ : \textit{xType} iff $T$ : \textit{RecType} and $\text{x}\in\mathrm{labels}(T)$
 
       \item[\textnormal{\textit{Ppty}} Revised!] ---
-        \textit{IndPpty}$\vee$\textit{FramePpty}
+        \record{\tfield{bg}{\textit{xType}}\\
+              \tfield{fg}(bg$\rightarrow$\textit{RecType})}
         
       \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
