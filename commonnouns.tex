@@ -1146,7 +1146,9 @@ property which we normally represent as \nexteg{b} and \nexteg{c} is the new def
  
 \end{subex} 
 \label{ex:dog-Ppty}   
-\end{ex} 
+\end{ex}
+If $P$ is a property as in \preveg{a,b}, we will use $P(r)$ to
+represent $P.\text{fg}(r)$ (the result of applying the function $P$.fg to $r$).
   
 
 % TTR
@@ -1349,6 +1351,8 @@ quantifiers proposed in \cite{Cooper2011,Cooper2013}.
 \section{Definite descriptions as dynamic generalized quantifiers}
 \label{sec:dgqs}
 
+@@  \todo{Clean up Russellian vs. presuppositional account}
+
 In Chapter~\ref{ch:gram} we showed how to treat indefinite
 descriptions (consisting of an indefinite article and a common noun
 phrase) as generalized quantifiers.  We will now do something similar
@@ -1423,7 +1427,7 @@ If $T$ : \textit{xType} and $P$ : ($T\rightarrow\textit{RecType}$) then $\downP{
 $\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$  
 \end{ex}
 
-@@
+
   
 % Our strategy for doing this will build on a proposal in
 % \cite{Cooper2011} which had to do with different ways of counting
@@ -1490,7 +1494,7 @@ $\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$
 % \end{ex} 
 We can meet the constraint in (\ref{ex:theconstruniv}) by defining the witness condition for
 the($P$, $Q$) as in \nexteg{}, using the definition of restricted
-properties introduced in Chapter~\ref{ch:gram} and Appendix~\ref{app:gramrulesuniv}.
+properties introduced in Chapter~\ref{ch:gram}, example~(\ref{ex:restricteddog}) on pp.~\pageref{ex:restricteddog}\textit{ff}.
 \begin{ex} 
 % \begin{subex} 
  
@@ -1514,9 +1518,7 @@ properties introduced in Chapter~\ref{ch:gram} and Appendix~\ref{app:gramrulesun
 This gives the predicate `the' the flavour of Russell's
 \rotiota-operator.\footnote{An alternative is to maintain the intuition
   that witnesses for ptypes are situation-like (i.e. records) and let
-  the witnesses be represented as \smallrecord{\field{x}{$r$}} and \smallrecord{\field{x}{$a$}} respectively.} (See \citealp{Elbourne2012} for recent discussion
-of the use of this in the semantics of definite
-descriptions.)
+  the witnesses be represented as \smallrecord{\field{x}{$r$}} and \smallrecord{\field{x}{$a$}} respectively.} 
 %  The constraints and witness conditions in
 % (\ref{ex:therelconstrs}) and \preveg{} should be viewed as different
 % resources available to the language user which can be used separately
@@ -1528,7 +1530,7 @@ descriptions.)
 
 It is well-known that the uniqueness condition in
 the Russellian treatment of definite descriptions is not quite right
-for natural language.  (For a recent detailed discussion of the issues
+for natural language.  (For a detailed discussion of the issues
 involved see \citealp{Elbourne2012}.)  We can, for example, use the
 definite description \textit{the dog} even though there are several
 dogs.  It is not a simple matter of restricting ourselves to a
@@ -1545,9 +1547,8 @@ Our solution to this is to introduce resource situations
 and exploit the fact that properties can be restricted to a particular
 situation by introducing a restricted field in the foreground as in \nexteg{}.
 \begin{ex}
-\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\ 
-        \field{fg}{$\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}}} 
+$\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}$\urcorner$ 
 \end{ex} 
 For the restricted field notation \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}} see
 Chapter~\ref{ch:gram}, p.~\pageref{pg:restfld}.  \preveg{} can be glossed as ``the property of being a dog in $s$''.
@@ -1558,20 +1559,35 @@ abbreviations are represented in \nexteg{}.
 \begin{subex} 
  
 \item dog$'$ abbreviates 
-\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
-        \field{fg}{$\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smalltfield{e}{dog($r$.x)}}}} 
+$\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$ 
  
 \item dog$'$$\restriction$$s$ abbreviates 
-\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
-        \field{fg}{$\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}}} 
+$\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}$\urcorner$ 
 
 \end{subex} 
 \label{ex:dogprime}    
 \end{ex} 
-General definitions of these abbreviations are given in
-Appendix~\ref{app:gramrulesuniv}.
+\begin{shaded}
+In general we can say that if $p$ is a predicate with arity $\langle
+T\rangle$ then $p'$ represents \nexteg{a} and $p'\!\restriction\!s$
+represents \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item  $\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{$T$}} . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$ 
+ 
+\item $\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{$T$}} . \record{\rfield{e}{$s$}{$p$($r$.x)}}$\urcorner$  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+\end{shaded}
+
 
 In \cite{Cooper2013b} we introduced a predicate `unique' which takes two arguments, a
 property and a record (situation).  That is, its arity is
@@ -1668,7 +1684,7 @@ Introducing the predicate `unique' in the way that we have allows us
 to place a constraint on the types to which a situation belongs
 without having to give a complete characterization of all the types to
 which it belongs.  Defining it as a predicate whose argument is a
-property means that it argument, the
+property means that its argument, the
 property, involves a type.  A property is a function which returns a type.
 Technically, we call it a dependent type.  In
 Chapter~\ref{ch:intensional} we will suggest that allowing types or
