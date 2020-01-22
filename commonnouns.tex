@@ -1148,7 +1148,31 @@ property which we normally represent as \nexteg{b} and \nexteg{c} is the new def
 \label{ex:dog-Ppty}   
 \end{ex}
 If $P$ is a property as in \preveg{a,b}, we will use $P(r)$ to
-represent $P.\text{fg}(r)$ (the result of applying the function $P$.fg to $r$).
+represent $P.\text{fg}(r)$ (the result of applying the function $P$.fg
+to $r$).
+
+Now that we have generalized our definition of property in this way,
+we need also to adjust our definition of property extension.  The definition we gave in
+Chapter~\ref{ch:gram}, example (\ref{ex:propext}), is repeated in
+\nexteg{}.\footnote{Recall that the notation $\down{T}$ is defined by
+\begin{quote}  
+$\down{T} = \{a\mid a:T\}$
+\end{quote} 
+}
+\begin{ex} 
+$\downP{P}$ = $\{a\mid\exists r[r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}
+$\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$ 
+\end{ex} 
+This definition is based on the assumption that all properties are of
+type (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
+\textit{RecType}).  Now we need to modify it so that we will have
+a notion of property extension for our new definition of
+\textit{Ppty}.  This is done in \nexteg{}.\label{pg:property-extension-rev}
+\begin{ex} 
+If $T$ : \textit{xType} and $P$ : ($T\rightarrow\textit{RecType}$) then $\downP{P}$ = $\{a\mid\exists r[r:T$
+$\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$  
+\end{ex}
+
   
 
 % TTR
@@ -1351,8 +1375,6 @@ quantifiers proposed in \cite{Cooper2011,Cooper2013}.
 \section{Definite descriptions as dynamic generalized quantifiers}
 \label{sec:dgqs}
 
-@@  \todo{Clean up Russellian vs. presuppositional account}
-
 In Chapter~\ref{ch:gram} we showed how to treat indefinite
 descriptions (consisting of an indefinite article and a common noun
 phrase) as generalized quantifiers.  We will now do something similar
@@ -1362,6 +1384,16 @@ interpretation of generalized quantifiers so that it becomes a dynamic
 treatment as presented in \cite{Cooper2011}.  We will see that the
 dynamic treatment accounts for how the frame associated with the noun
 is passed to the verb.
+
+We will treat the definite article \textit{the} as introducing a
+uniqueness condition.  We say that a property is unique in a situation
+just in case its property extension in that situation is a singleton
+set.  We will make this precise by introducing a predicate `unique'
+whose arity is $\langle\textit{Ppty}\rangle$.  We characterize a
+witness condition associated with this predicate using the notion of
+restricted type introduced in Chapter~\ref{ch:gram},
+pp.~\pageref{pg:restfld}\textit{ff}.@@\todo{Need to redefine this for
+  the new notion of property.}
 
 We introduce first a function `SemDefArt' on the model of `SemIndefArt'
 which was defined in Chapter~\ref{ch:gram}, example
@@ -1404,28 +1436,6 @@ which also has $Q$ or that every object that has $P$ also has
 $Q$. \preveg{} is the way the constraint is stated in
 \cite{Cooper2013b}. 
 
-However, it is not quite right now that we have
-allowed \textit{Ppty} to be polymorphic.  The problem has to do with
-the definition of $[\downarrow\cdot]$, that is, property extension.  The definition we gave in
-Chapter~\ref{ch:gram}, example (\ref{ex:propext}), is repeated in
-\nexteg{}.\footnote{Recall that the notation $\down{T}$ is defined by
-\begin{quote}  
-$\down{T} = \{a\mid a:T\}$
-\end{quote} 
-}
-\begin{ex} 
-$\downP{P}$ = $\{a\mid\exists r[r:$\smallrecord{\smalltfield{x}{\textit{Ind}}}
-$\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$ 
-\end{ex} 
-This definition is based on the assumption that all properties are of
-type (\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$
-\textit{RecType}).  Now we need to modify it so that we will have
-a notion of property extension for our new definition of
-\textit{Ppty}.  This is done in \nexteg{}.\label{pg:property-extension-rev}
-\begin{ex} 
-If $T$ : \textit{xType} and $P$ : ($T\rightarrow\textit{RecType}$) then $\downP{P}$ = $\{a\mid\exists r[r:T$
-$\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$  
-\end{ex}
 
 
   
