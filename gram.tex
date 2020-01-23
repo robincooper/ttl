@@ -1238,16 +1238,31 @@ We define a general notion of restricting a type by a record as in
 \item   if  $T$ is a type according to $\mathbb{T}$ and
   $r$ is a record according to $\mathcal{L}$ and $\mathbb{T}$, then the
   restriction of $T$ by $r$, $T\!\restriction\!r$, is a
-type according to $\mathbb{T}$.
+  type according to $\mathbb{T}$.
+  
+\item if $T$ is a record type
+  \begin{quote}
+    \record{
+      \tfield{$\ell_1$}{$T_1$}\\
+      \vdots \\
+      \tfield{$\ell_n$}{$T_n$}}
+  \end{quote}
+  then $T\!\restriction\!r$ is
+  \begin{quote}
+    \record{
+      \tfield{$\ell_1$}{$T_1\!\restriction\!r$}\\
+      \vdots \\
+      \tfield{$\ell_n$}{$T_n\!\restriction\!r$}}
+  \end{quote}
  
-\item $a:_{\mathbb{T}}T\!\restriction\!r$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
+\item otherwise:  $a:_{\mathbb{T}}T\!\restriction\!r$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
 \label{ex:restrictedtypes} 
 \end{enumerate} 
    
 \end{ex}
 
 In terms of our informal prooftheoretic notation this can be expressed
-as \nexteg{}.
+as \nexteg{}.\todo{Need to fix}
 \begin{ex} 
 \begin{subex} 
  

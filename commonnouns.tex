@@ -1392,8 +1392,20 @@ set.  We will make this precise by introducing a predicate `unique'
 whose arity is $\langle\textit{Ppty}\rangle$.  We characterize a
 witness condition associated with this predicate using the notion of
 restricted type introduced in Chapter~\ref{ch:gram},
-pp.~\pageref{pg:restfld}\textit{ff}.@@\todo{Need to redefine this for
-  the new notion of property.}
+pp.~\pageref{pg:restfld}\textit{ff}.  This is given in \nexteg{}.
+\begin{ex} 
+If $P$:\textit{Ppty} and $s$:\textit{Rec}, 
+
+\hspace*{1em} then $s:\textrm{unique}(P)$ iff
+  $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$  
+\end{ex}
+\preveg{} says that a situation, $s$, is of the type `unique($P$)'
+(where $P$ is a property) just in case there is exactly one object
+which has the property $P$ in some component of $s$.
+
+  
+
+@@
 
 We introduce first a function `SemDefArt' on the model of `SemIndefArt'
 which was defined in Chapter~\ref{ch:gram}, example
@@ -1635,10 +1647,7 @@ which is associated with the witness condition in \nexteg{}.
 \begin{ex} 
 % \begin{subex} 
 % \item
-  If $P$:\textit{Ppty} and $s$:\textit{Rec}, 
-
-\hspace*{1em} then $s:\textrm{unique}(P)$ iff
-  $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$ 
+  
 
 % \item If $P$:\textit{Ppty} and $\ell$ is a label in $P$.bg,
 
@@ -1647,10 +1656,7 @@ which is associated with the witness condition in \nexteg{}.
 
 % \end{subex} 
 \end{ex}
-\preveg{} says that a situation, $s$, is of the type `unique($P$)'
-(where $P$ is a property) just in case there is exactly one component
-of $s$ which has the property $P$.
- 
+
 The reason that we need a uniqueness predicate of this kind has to do
 with the nature of our type theory.  The typing mechanism allows us to
 say for example what is given in \nexteg{}.
