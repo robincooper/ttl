@@ -1235,43 +1235,31 @@ We define a general notion of restricting a type by a record as in
   set of labels} $\mathcal{L}$ if it is the case that
 \begin{enumerate} 
  
-\item   if  $T$ is a type according to $\mathbb{T}$ and
+\item   if  $T$ is a type, but not a record type, according to $\mathbb{T}$ and
   $r$ is a record according to $\mathcal{L}$ and $\mathbb{T}$, then the
-  restriction of $T$ by $r$, $T\!\restriction\!r$, is a
+  restriction of $T$ by $r$, $\rho(T, r)$, is a
   type according to $\mathbb{T}$.
   
-\item if $T$ is a record type
-  \begin{quote}
-    \record{
-      \tfield{$\ell_1$}{$T_1$}\\
-      \vdots \\
-      \tfield{$\ell_n$}{$T_n$}}
-  \end{quote}
-  then $T\!\restriction\!r$ is
-  \begin{quote}
-    \record{
-      \tfield{$\ell_1$}{$T_1\!\restriction\!r$}\\
-      \vdots \\
-      \tfield{$\ell_n$}{$T_n\!\restriction\!r$}}
-  \end{quote}
  
-\item otherwise:  $a:_{\mathbb{T}}T\!\restriction\!r$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
+\item $a:_{\mathbb{T}}\rho(T,r)$ iff $a\underline{\varepsilon} r$  and $a:_{\mathbb{T}}T$. 
 \label{ex:restrictedtypes} 
 \end{enumerate} 
    
 \end{ex}
 
+
+
 In terms of our informal prooftheoretic notation this can be expressed
-as \nexteg{}.\todo{Need to fix}
+as \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
 \item
   \begin{prooftree}
-    \hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}}
+    \hypo{\Gamma,\mathcal{L}\vdash T\in\textbf{Type}-\text{RType}}
     \hypo{\Gamma,\mathcal{L}\vdash r \text{ record}}
     \infer2{\Gamma,\mathcal{L}\vdash
-      T\!\restriction\!r\in\textbf{Type}}
+      \rho(T,r)\in\textbf{Type}}
   \end{prooftree}
   
  
@@ -1280,32 +1268,85 @@ as \nexteg{}.\todo{Need to fix}
     \hypo{\Gamma,\mathcal{L}\vdash r \text{ record}}
     \hypo{a\ \underline{\varepsilon}\ r}
     \hypo{\Gamma,\mathcal{L}\vdash a:T}
-    \infer3{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \infer3{\Gamma,\mathcal{L}\vdash a:\rho(T,r)}
   \end{prooftree}
   
   \begin{prooftree}
-    \hypo{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \hypo{\Gamma,\mathcal{L}\vdash a:\rho(T,r)}
     \infer1{\Gamma,\mathcal{L}\vdash r \text{ record}}
   \end{prooftree}
   \hspace*{2em}
   \begin{prooftree}
-    \hypo{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \hypo{\Gamma,\mathcal{L}\vdash a:\rho(T,r)}
     \infer1{a\ \underline{\varepsilon}\ r}
   \end{prooftree}
   \hspace*{2em}
   \begin{prooftree}
-    \hypo{\Gamma,\mathcal{L}\vdash a:T\!\restriction\!r}
+    \hypo{\Gamma,\mathcal{L}\vdash a:\rho(T,r)}
     \infer1{\Gamma,\mathcal{L}\vdash a:T}
   \end{prooftree}
+
   
+  
+ 
+\end{subex} 
+   
+\end{ex}
+
+We then generalize restriction to record types and other objects using
+$o\!\restriction\!r$ to represent the object $o$ restricted to $r$.
+This is given by the definition in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T$ is a non-record type then
+  \begin{quote}
+    $T\!\restriction\!r=\rho(T,r)$
+  \end{quote}
+  
+ 
+\item If $X$ is a labelled set
+  \begin{quote}
+    $\{\langle\ell_1,o_1\rangle,\ldots,\langle\ell_n,o_n\rangle\}$
+  \end{quote}
+  then
+  \begin{quote}
+    $X\!\restriction\!r=\{\langle\ell_1,o_1\!\restriction\!r\rangle,\ldots,\langle\ell_n,o_n\!\restriction\!r\rangle\}$
+  \end{quote}
+
+  
+\item if $o$ is
+  \begin{quote}
+    $\langle\mathcal{T},\Pi\rangle$
+  \end{quote}
+  where $\mathcal{T}$ is
+  a dependent type and $\Pi$ is a sequence of paths, then
+  \begin{quote}
+    $o\!\restriction\!r=\langle\mathcal{T}\!\restriction\!r,\Pi\rangle$
+  \end{quote}
+  
+\item if $\mathcal{T}$ is a dependent type
+  \begin{quote}
+    $\lambda v_1\!:\!T_1\ .\ \ldots\ .\ \lambda v_n\!:\!T_n\ .\
+    T\dep{v_1,\ldots,v_n}$
+  \end{quote}
+  then
+  \begin{quote}
+    $\mathcal{T}\!\restriction\!r=\lambda v_1\!:\!T_1\ .\ \ldots\ .\
+    \lambda v_n\!:\!T_n\ .\ T\dep{v_1,\ldots,v_n}\!\restriction\!r$
+  \end{quote}
+  
+\item otherwise $o\!\restriction\!r=o$
  
 \end{subex} 
    
 \end{ex} 
   
+  
 We use a similar notation for restricted fields in record types as we
 do for manifest fields.  That is, we represent \nexteg{a} as
-\nexteg{b}.
+\nexteg{b} in the case where $T$ is not a record type or a pair of a
+dependent type and a sequence of paths.
 \begin{ex} 
 \begin{subex} 
  
@@ -1317,24 +1358,24 @@ do for manifest fields.  That is, we represent \nexteg{a} as
    
 \end{ex}
 
-If $T$ is a record type other than \textit{Rec} and \textit{ERec} then
-\textit{the recursive restriction of $T$ by $r$},
-$T\!\restriction\restriction\!r$, is the result of replacing each
-field in $T$ of the form $[\ell:T']$, where $T'$ is a type, with the
-field $[\ell:T'\!\restriction\restriction\!r]$ and each field of the
-form $\langle\ell,\langle f,\Pi\rangle\rangle$ (where $f$ is a
-function and $\Pi$ a sequence of paths) with $\langle\ell,\langle
-f',\Pi\rangle\rangle$ where $f'$ is like $f$ except that for any
-arguments $a_1,\ldots,a_n$ appropriate to $f$,
-$f'(a_1)\ldots(a_n)=f(a_1)\ldots(a_n)\!\restriction\restriction r$.
+% If $T$ is a record type other than \textit{Rec} and \textit{ERec} then
+% \textit{the recursive restriction of $T$ by $r$},
+% $T\!\restriction\restriction\!r$, is the result of replacing each
+% field in $T$ of the form $[\ell:T']$, where $T'$ is a type, with the
+% field $[\ell:T'\!\restriction\restriction\!r]$ and each field of the
+% form $\langle\ell,\langle f,\Pi\rangle\rangle$ (where $f$ is a
+% function and $\Pi$ a sequence of paths) with $\langle\ell,\langle
+% f',\Pi\rangle\rangle$ where $f'$ is like $f$ except that for any
+% arguments $a_1,\ldots,a_n$ appropriate to $f$,
+% $f'(a_1)\ldots(a_n)=f(a_1)\ldots(a_n)\!\restriction\restriction r$.
 
-Otherwise if $T$ is a type, then
-$T\!\restriction\restriction\!r=T\!\restriction\!r$.
+% Otherwise if $T$ is a type, then
+% $T\!\restriction\restriction\!r=T\!\restriction\!r$.
 
-If $\mathcal{T}$ is a dependent type (for example, a property)
-$\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
-T\dep{r_1,\ldots,r_n}$, then $\mathcal{T}\!\restriction\!s$ is $\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
-T\dep{r_1,\ldots,r_n}\!\restriction\restriction\!s$.
+% If $\mathcal{T}$ is a dependent type (for example, a property)
+% $\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
+% T\dep{r_1,\ldots,r_n}$, then $\mathcal{T}\!\restriction\!s$ is $\lambda r_1\!:\!T_1\ldots\lambda r_n\!:\!T_n\ .\
+% T\dep{r_1,\ldots,r_n}\!\restriction\restriction\!s$.
 
 \end{shaded}
 
