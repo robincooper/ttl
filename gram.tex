@@ -1299,13 +1299,15 @@ This is given by the definition in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item If $T$ is a non-record type then
+\item If $T$ is a type but not a record type then
   \begin{quote}
     $T\!\restriction\!r=\rho(T,r)$
   \end{quote}
   
  
-\item If $X$ is a labelled set
+\item If $X$ is a labelled set whose labels are not distinguished (as
+  for example in ptypes, that is $\mathrm{labels}(X)$ is a set of
+  labels which can be used in record types)
   \begin{quote}
     $\{\langle\ell_1,o_1\rangle,\ldots,\langle\ell_n,o_n\rangle\}$
   \end{quote}

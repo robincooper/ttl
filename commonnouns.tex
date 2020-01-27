@@ -1392,7 +1392,20 @@ set.  We will make this precise by introducing a predicate `unique'
 whose arity is $\langle\textit{Ppty}\rangle$.  We characterize a
 witness condition associated with this predicate using the notion of
 restricted type introduced in Chapter~\ref{ch:gram},
-pp.~\pageref{pg:restfld}\textit{ff}.  This is given in \nexteg{}.
+pp.~\pageref{pg:restfld}\textit{ff}, but adjusted to take account of
+the new kind of property as in \nexteg{}.
+\begin{ex} 
+  If $P$ is a property, then $P\!\restriction\!r$ is
+  \begin{quote}
+    \record{
+      \field{bg}{$P$.bg}\\
+      \field{fg}{$P$.fg$\restriction\!r$}}
+  \end{quote}
+  
+\end{ex} 
+  
+
+The witness condition for `unique' is given in \nexteg{}.
 \begin{ex} 
 If $P$:\textit{Ppty} and $s$:\textit{Rec}, 
 
@@ -1401,13 +1414,89 @@ If $P$:\textit{Ppty} and $s$:\textit{Rec},
 \end{ex}
 \preveg{} says that a situation, $s$, is of the type `unique($P$)'
 (where $P$ is a property) just in case there is exactly one object
-which has the property $P$ in some component of $s$.
+which has the property $P$ in some component of $s$.  We could
+introduce a generalized quantifier predicate, `the', with arity
+$\langle\textit{Ppty},\textit{Ppty}\rangle$, associated with the
+witness condition in \nexteg{}.
+\begin{ex} 
+If $P,Q$:\textit{Ppty} then, 
+\begin{quote}
+ $s:\mathrm{the}(P,Q)$ iff
+ $s$ : unique($P$)
+  and
+  $\downP{P\!\!\restriction\!\!s}\subseteq\downP{Q\!\!\restriction\!\!s}$
+\end{quote}
 
+\end{ex} 
+This corresponds to the Russellian definite description analysis as
+used by Montague (see \citealp{DowtyWallPeters1981} for an explanation of
+this) except that here the uniqueness is restricted to a particular
+situation.  This means that we could talk about ``the dog'' without
+requiring that there is exactly one dog in the universe.
+
+It is well-known that the uniqueness condition in
+the Russellian treatment of definite descriptions used by Montague is not quite right
+for natural language.  (For a detailed discussion of the issues
+involved see \citealp{Elbourne2012}.)  We can, for example, use the
+definite description \textit{the dog} even though there are several
+dogs.  It is not a simple matter of restricting ourselves to a
+particular situation that we are describing since we may be describing
+a situation with several dogs but still refer to some particular dog
+in the situation as \textit{the dog}.  Such examples are discussed in
+\cite{Cooper1996a} citing \nexteg{} from \cite{McCawley1979}.
+\begin{ex} 
+The dog had a fight with another dog yesterday 
+\end{ex} 
+Our solution to this is to in effect introduce resource situations
+\citep{BarwisePerry1983,Cooper1996a}.  (A similar proposal is made by
+\citealp{Elbourne2012}.) We follow the analysis in \cite{Cooper2013b}
+and exploit the fact that properties can be restricted to a particular
+situation by introducing a restricted field in the foreground as in \nexteg{}.
+\begin{ex}
+$\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}$\urcorner$ 
+\end{ex} 
+For the restricted field notation \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}} see
+Chapter~\ref{ch:gram}, p.~\pageref{pg:restfld}.  \preveg{} can be glossed as ``the property of being a dog in $s$''.
+We will abbreviate this as `dog$'$$\restriction$$s$' where we use
+`dog$'$' to abbreviate the property without the restricted field.  These
+abbreviations are represented in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item dog$'$ abbreviates 
+$\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$ 
+ 
+\item dog$'$$\restriction$$s$ abbreviates 
+$\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}$\urcorner$ 
+
+\end{subex} 
+\label{ex:dogprime}    
+\end{ex} 
+\begin{shaded}
+In general we can say that if $p$ is a predicate with arity $\langle
+T\rangle$ then $p'$ represents \nexteg{} % and $p'\!\restriction\!s$
+% represents \nexteg{b}.
+\begin{ex} 
+%\begin{subex} 
+ 
+%\item
+  $\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{$T$}} . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$ 
+ 
+% \item $\ulcorner\lambda
+%   r$:\smallrecord{\smalltfield{x}{$T$}} . \record{\rfield{e}{$s$}{$p$($r$.x)}}$\urcorner$  
+ 
+% \end{subex} 
+   
+\end{ex} 
   
+\end{shaded}
 
-@@
 
-We introduce first a function `SemDefArt' on the model of `SemIndefArt'
+We could introduce a function `SemDefArt' on the model of `SemIndefArt'
 which was defined in Chapter~\ref{ch:gram}, example
 (\ref{ex:semindefart}), although modified to accommodate parametric contents.  % Given the new definition of properties as
 % pairs of a type and a function (labelled `bg' and `fg', respectively)
@@ -1415,38 +1504,38 @@ which was defined in Chapter~\ref{ch:gram}, example
 % the functions (i.e. `fg').
 This is given in \nexteg{}.
 \begin{ex}
-  $\lambda c$:\textit{Rec} . \\
+  $\ulcorner\lambda c$:\textit{Rec} . \\
 \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
 \hspace*{2em} $\lambda P$:\textit{Ppty}
 . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
           \mfield{scope}{$P$}{\textit{Ppty}} \\
-          \tfield{e}{the(restr, scope)}} 
+          \tfield{e}{the(restr, scope)}}$\urcorner$ 
 \end{ex} 
-This is exactly the same as `SemIndefArt' except that instead of the
-predicate `exist' we have `the'.  The constraint on `the' which
-relates it to classical generalized quantifier theory is a refinement
-of the constraint given for `exist' in Chapter~\ref{ch:gram}, example
-(\ref{ex:constraintexist}).  This is given in \nexteg{}.
-\begin{ex} 
-$\down{\mathrm{the}(P,Q)}\not=\emptyset$ iff
-$\mid\downP{P}\mid\ =1$ and $\downP{P}\cap\downP{Q}\not=\emptyset$ 
-\end{ex} 
-\preveg{} is like the constraint on `exist' except that it adds the
-additional requirement that the property extension of the first
-argument to `the' has cardinality exactly one.  This replicates
-Montague's Russellian treatment of the definite article.  We could
-equivalently define this constraint as \nexteg{}.  
-\begin{ex} 
-$\down{\mathrm{the}(P,Q)}\not=\emptyset$ iff
-$\mid\downP{P}\mid\ =1$ and $\downP{P}\subseteq\downP{Q}$
-\label{ex:theconstruniv} 
-\end{ex}   
-Since we require
-that there be exactly one object which has $P$ it does not make a
-difference whether we require that there is some object which has $P$
-which also has $Q$ or that every object that has $P$ also has
-$Q$. \preveg{} is the way the constraint is stated in
-\cite{Cooper2013b}. 
+% This is exactly the same as `SemIndefArt' except that instead of the
+% predicate `exist' we have `the'.  The constraint on `the' which
+% relates it to classical generalized quantifier theory is a refinement
+% of the constraint given for `exist' in Chapter~\ref{ch:gram}, example
+% (\ref{ex:constraintexist}).  This is given in \nexteg{}.
+% \begin{ex} 
+% $\down{\mathrm{the}(P,Q)}\not=\emptyset$ iff
+% $\mid\downP{P}\mid\ =1$ and $\downP{P}\cap\downP{Q}\not=\emptyset$ 
+% \end{ex} 
+% \preveg{} is like the constraint on `exist' except that it adds the
+% additional requirement that the property extension of the first
+% argument to `the' has cardinality exactly one.  This replicates
+% Montague's Russellian treatment of the definite article.  We could
+% equivalently define this constraint as \nexteg{}.  
+% \begin{ex} 
+% $\down{\mathrm{the}(P,Q)}\not=\emptyset$ iff
+% $\mid\downP{P}\mid\ =1$ and $\downP{P}\subseteq\downP{Q}$
+% \label{ex:theconstruniv} 
+% \end{ex}   
+% Since we require
+% that there be exactly one object which has $P$ it does not make a
+% difference whether we require that there is some object which has $P$
+% which also has $Q$ or that every object that has $P$ also has
+% $Q$. \preveg{} is the way the constraint is stated in
+% \cite{Cooper2013b}. 
 
 
 
@@ -1514,33 +1603,33 @@ $Q$. \preveg{} is the way the constraint is stated in
 % \end{subex} 
 % \label{ex:therelconstrs}   
 % \end{ex} 
-We can meet the constraint in (\ref{ex:theconstruniv}) by defining the witness condition for
-the($P$, $Q$) as in \nexteg{}, using the definition of restricted
-properties introduced in Chapter~\ref{ch:gram}, example~(\ref{ex:restricteddog}) on pp.~\pageref{ex:restricteddog}\textit{ff}.
-\begin{ex} 
-% \begin{subex} 
+% We can meet the constraint in (\ref{ex:theconstruniv}) by defining the witness condition for
+% the($P$, $Q$) as in \nexteg{}, using the definition of restricted
+% properties introduced in Chapter~\ref{ch:gram}, example~(\ref{ex:restricteddog}) on pp.~\pageref{ex:restricteddog}\textit{ff}.
+% \begin{ex} 
+% % \begin{subex} 
  
-% \item
-  If $P,Q$:\textit{Ppty} then, 
+% % \item
+%   If $P,Q$:\textit{Ppty} then, 
 
- \hspace*{1em}$s:\mathrm{the}(P,Q)$ iff
- $\mid\!\downP{P\!\!\restriction\!\!s}\!\mid\ = 1$
-  and $\downP{P\!\!\restriction\!\!s}\subseteq\downP{Q\!\!\restriction\!\!s}$
+%  \hspace*{1em}$s:\mathrm{the}(P,Q)$ iff
+%  $\mid\!\downP{P\!\!\restriction\!\!s}\!\mid\ = 1$
+%   and $\downP{P\!\!\restriction\!\!s}\subseteq\downP{Q\!\!\restriction\!\!s}$
  
-% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in both
-%   $P.\mathrm{bg}$ and $Q.\mathrm{bg}$ then, 
+% % \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in both
+% %   $P.\mathrm{bg}$ and $Q.\mathrm{bg}$ then, 
 
-% \hspace*{1em}$a:\mathrm{the}(P,Q)$ if
-% $\downPl{P}{\ell}=\{a\}$
-%   and $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
+% % \hspace*{1em}$a:\mathrm{the}(P,Q)$ if
+% % $\downPl{P}{\ell}=\{a\}$
+% %   and $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
  
-% \end{subex} 
-\label{ex:thewitcond}   
-\end{ex} 
-This gives the predicate `the' the flavour of Russell's
-\rotiota-operator.\footnote{An alternative is to maintain the intuition
-  that witnesses for ptypes are situation-like (i.e. records) and let
-  the witnesses be represented as \smallrecord{\field{x}{$r$}} and \smallrecord{\field{x}{$a$}} respectively.} 
+% % \end{subex} 
+% \label{ex:thewitcond}   
+% \end{ex} 
+% This gives the predicate `the' the flavour of Russell's
+% \rotiota-operator.\footnote{An alternative is to maintain the intuition
+%   that witnesses for ptypes are situation-like (i.e. records) and let
+%   the witnesses be represented as \smallrecord{\field{x}{$r$}} and \smallrecord{\field{x}{$a$}} respectively.} 
 %  The constraints and witness conditions in
 % (\ref{ex:therelconstrs}) and \preveg{} should be viewed as different
 % resources available to the language user which can be used separately
@@ -1550,112 +1639,53 @@ This gives the predicate `the' the flavour of Russell's
 % counting rather than to succeed just in case there is some way of
 % counting with respect to which it succeeds.
 
-It is well-known that the uniqueness condition in
-the Russellian treatment of definite descriptions is not quite right
-for natural language.  (For a detailed discussion of the issues
-involved see \citealp{Elbourne2012}.)  We can, for example, use the
-definite description \textit{the dog} even though there are several
-dogs.  It is not a simple matter of restricting ourselves to a
-particular situation that we are describing since we may be describing
-a situation with several dogs but still refer to some particular dog
-in the situation as \textit{the dog}.  Such examples are discussed in
-\cite{Cooper1996a} citing \nexteg{} from \cite{McCawley1979}.
-\begin{ex} 
-The dog had a fight with another dog yesterday 
-\end{ex} 
-Our solution to this is to introduce resource situations
-\citep{BarwisePerry1983,Cooper1996a}.  (A similar proposal is made by
-\citealp{Elbourne2012}.) We follow the analysis in \cite{Cooper2013b}
-and exploit the fact that properties can be restricted to a particular
-situation by introducing a restricted field in the foreground as in \nexteg{}.
-\begin{ex}
-$\ulcorner\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}$\urcorner$ 
-\end{ex} 
-For the restricted field notation \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}} see
-Chapter~\ref{ch:gram}, p.~\pageref{pg:restfld}.  \preveg{} can be glossed as ``the property of being a dog in $s$''.
-We will abbreviate this as `dog$'$$\restriction$$s$' where we use
-`dog$'$' to abbreviate the property without the restricted field.  These
-abbreviations are represented in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
- 
-\item dog$'$ abbreviates 
-$\ulcorner\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$ 
- 
-\item dog$'$$\restriction$$s$ abbreviates 
-$\ulcorner\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}. \smallrecord{\smallrfield{e}{$s$}{dog($r$.x)}}$\urcorner$ 
-
-\end{subex} 
-\label{ex:dogprime}    
-\end{ex} 
-\begin{shaded}
-In general we can say that if $p$ is a predicate with arity $\langle
-T\rangle$ then $p'$ represents \nexteg{a} and $p'\!\restriction\!s$
-represents \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
- 
-\item  $\ulcorner\lambda
-  r$:\smallrecord{\smalltfield{x}{$T$}} . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$ 
- 
-\item $\ulcorner\lambda
-  r$:\smallrecord{\smalltfield{x}{$T$}} . \record{\rfield{e}{$s$}{$p$($r$.x)}}$\urcorner$  
- 
-\end{subex} 
-   
-\end{ex} 
-  
-\end{shaded}
 
 
-In \cite{Cooper2013b} we introduced a predicate `unique' which takes two arguments, a
-property and a record (situation).  That is, its arity is
-$\langle$\textit{Ppty}, \textit{Rec}$\rangle$.  
-We required that the constraint in \nexteg{} hold of `unique'. % As with
-% our characterization of the constraints on the predicate `the' we give
-% alternative contraints which can be employed depending on the way of
-% counting that is being employed.
-\begin{ex}
-% \begin{subex} 
-% \item
-  If $P$:\textit{Ppty}, $T$ is a type and $s$:$T$, 
+% In \cite{Cooper2013b} we introduced a predicate `unique' which takes two arguments, a
+% property and a record (situation).  That is, its arity is
+% $\langle$\textit{Ppty}, \textit{Rec}$\rangle$.  
+% We required that the constraint in \nexteg{} hold of `unique'. % As with
+% % our characterization of the constraints on the predicate `the' we give
+% % alternative contraints which can be employed depending on the way of
+% % counting that is being employed.
+% \begin{ex}
+% % \begin{subex} 
+% % \item
+%   If $P$:\textit{Ppty}, $T$ is a type and $s$:$T$, 
 
-\hspace*{1em} then $\down{\textrm{unique}(P,s)} \not=\emptyset$ iff
-  $\mid\downP{P\!\restriction\!s}\mid\ =1$ 
+% \hspace*{1em} then $\down{\textrm{unique}(P,s)} \not=\emptyset$ iff
+%   $\mid\downP{P\!\restriction\!s}\mid\ =1$ 
 
-% \item If $P$:\textit{Ppty}, $T$ is a type,
-%   $s$:$T$ and $\ell$ is a label in $P.\mathrm{bg}$,
+% % \item If $P$:\textit{Ppty}, $T$ is a type,
+% %   $s$:$T$ and $\ell$ is a label in $P.\mathrm{bg}$,
 
-% \hspace*{1em} then $\down{\textrm{unique}(P,s)} \not=\emptyset$ if
-%   $\mid\downPl{P\!\restriction\!s}{\ell}\mid\ =1$
+% % \hspace*{1em} then $\down{\textrm{unique}(P,s)} \not=\emptyset$ if
+% %   $\mid\downPl{P\!\restriction\!s}{\ell}\mid\ =1$
 
-% \end{subex}
-\label{ex:uniqueconstraint} 
-\end{ex} 
+% % \end{subex}
+% \label{ex:uniqueconstraint} 
+% \end{ex} 
 
-The constraint in (\ref{ex:uniqueconstraint}) expresses that uniqueness holds between a
-property and a situation just in case the result of restricting the
-property to that situation is a property whose property extension is a
-singleton set.  
+% The constraint in (\ref{ex:uniqueconstraint}) expresses that uniqueness holds between a
+% property and a situation just in case the result of restricting the
+% property to that situation is a property whose property extension is a
+% singleton set.  
 
-Here we will do things slightly differently.  We introduce a one-place
-predicate `unique' whose arity is $\langle$\textit{Ppty}$\rangle$ and
-which is associated with the witness condition in \nexteg{}.
-\begin{ex} 
-% \begin{subex} 
-% \item
+% Here we will do things slightly differently.  We introduce a one-place
+% predicate `unique' whose arity is $\langle$\textit{Ppty}$\rangle$ and
+% which is associated with the witness condition in \nexteg{}.
+% \begin{ex} 
+% % \begin{subex} 
+% % \item
   
 
-% \item If $P$:\textit{Ppty} and $\ell$ is a label in $P$.bg,
+% % \item If $P$:\textit{Ppty} and $\ell$ is a label in $P$.bg,
 
-% \hspace*{1em} then $a:\down{\textrm{unique}(P,s)}$ if
-%   $\downPl{P\!\restriction\!s}{\ell} =\{a\}$
+% % \hspace*{1em} then $a:\down{\textrm{unique}(P,s)}$ if
+% %   $\downPl{P\!\restriction\!s}{\ell} =\{a\}$
 
-% \end{subex} 
-\end{ex}
+% % \end{subex} 
+% \end{ex}
 
 The reason that we need a uniqueness predicate of this kind has to do
 with the nature of our type theory.  The typing mechanism allows us to
@@ -1714,6 +1744,37 @@ However, it seems unintuitive that such a simple organism would be
 programmed to engage in eating behaviour when exactly one item of food
 is present and not otherwise.
 
+Despite the success of our analysis so far in reducing the uniqueness
+condition to a particular situation rather than applying it to the
+whole universe, there is another problem with the use of Russellian
+definite descriptions which it does not address.  This is that the
+uniqueness is treated as part of the assertion, that is, as something
+that is at issue.   This means that we should be able to deny an
+utterance of a sentence like \nexteg{a} or answer the question
+\nexteg{b} with something like
+\nexteg{c}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The dog barked.
+  
+\item Did the dog bark?
+ 
+\item No, we don't have a dog. 
+ 
+\end{subex} 
+   
+\end{ex}
+If \preveg{c} is at all a possible response to \preveg{a or b} then it
+feels like the denial of a presupposition.  When a definite
+description is used in dialogue it seems that there is an assumption
+that the interlocutor will be able to identify a relevant situation
+in which there is a unique dog in a similar way as is suggested in our proposal for
+the identification of referents of uses of proper names in
+Chapter~\ref{ch:propnames}, that is, looking first on the dialogue
+gameboard, then in long term memory and if nothing is to be found then
+accommodating a situation in which there is a unique dog.
+  
 We shall use uniqueness to create a presuppositional account of
 definite descriptions using the techniques for parametric contents
 which we developed in Chapter~\ref{ch:propnames}.  The presupposition
@@ -1741,23 +1802,30 @@ in \nexteg{}.
 \begin{subex} 
  
 \item $\lambda
-  r$:\smallrecord{\smalltfield{e}{unique(dog$'$)}} . \\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
-\record{\tfield{e}{the(dog$'$$\restriction$$r$.e, $P$)}} 
+\record{\tfield{e}{the(dog$'$$\restriction$$c.\mathfrak{c}$.e, $P$)}} 
  
 \item $\lambda
-  r$:\smallrecord{\smalltfield{e}{unique(dog$'$)}} . \\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
-\record{\tfield{e}{exist(dog$'$$\restriction$$r$.e, $P$)}}
+\record{\tfield{e}{exist(dog$'$$\restriction$$c.\mathfrak{c}$.e, $P$)}}
 
 \item $\lambda
-  r$:\smallrecord{\smalltfield{e}{unique(dog$'$)}} . \\
+  c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
-\record{\tfield{e}{every(dog$'$$\restriction$$r$.e, $P$)}} 
+\record{\tfield{e}{every(dog$'$$\restriction$$c.\mathfrak{c}$.e, $P$)}} 
  
 \end{subex} 
 \label{ex:threethes}   
-\end{ex} 
+\end{ex}
+
+@@
+
 It does not make much difference which of these you choose for the
 analysis of singular definite descriptions.  Since we are relating the
 generalized quantifier predicates to the classical set relations given
