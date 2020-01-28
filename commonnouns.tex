@@ -1796,86 +1796,122 @@ situations.
 
 \preveg{} will, then, be the background of the
 parametric content of the noun-phrase \textit{the dog}. Three
-different options for the foreground of this parametric content present themselves, as
+different options for this parametric content present themselves, as
 in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda
+\item $\ulcorner\lambda
   c$:\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
-\record{\tfield{e}{the(dog$'$$\restriction$$c.\mathfrak{c}$.e, $P$)}} 
+\record{
+  \mfield{restr}{dog$'$$\restriction$$c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+  \mfield{scope}{$P$}{\textit{Ppty}}\\
+  \tfield{e}{the(restr, scope)}}$\urcorner$ 
  
-\item $\lambda
+\item $\ulcorner\lambda
   c$:\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
-\record{\tfield{e}{exist(dog$'$$\restriction$$c.\mathfrak{c}$.e, $P$)}}
+\record{
+  \mfield{restr}{dog$'$$\restriction$$c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+  \mfield{scope}{$P$}{\textit{Ppty}}\\
+  \tfield{e}{exist(restr, scope)}}$\urcorner$ 
 
-\item $\lambda
+\item $\ulcorner\lambda
   c$:\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
-\record{\tfield{e}{every(dog$'$$\restriction$$c.\mathfrak{c}$.e, $P$)}} 
+\record{
+  \mfield{restr}{dog$'$$\restriction$$c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+  \mfield{scope}{$P$}{\textit{Ppty}}\\
+  \tfield{e}{every(restr, scope)}}$\urcorner$  
  
 \end{subex} 
 \label{ex:threethes}   
 \end{ex}
 
-@@
+  % Since we are relating the
+% generalized quantifier predicates to the classical set relations given
+% in \cite{BarwiseCooper1981} and we are requiring uniqueness by the
+% presupposition, it will not make a difference in terms of which
+% objects are required to have which properties whether we choose
+% \preveg{a} (using the predicate constraint in
+% (\ref{ex:theconstruniv})), \preveg{b} (using the predicate constraint
+% in \nexteg{}, which repeats Chapter~\ref{ch:gram},
+% example~(\ref{ex:constraintexist}))
+% \begin{ex} 
+% % \begin{subex} 
+ 
+% % \item
+%   If 
+%   $P,Q$:\textit{Ppty} then 
 
+%  \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff  $\downP{P}\cap\downP{Q}\not=\emptyset$
+ 
+% % \item If $P,Q$:\textit{Ppty} and
+% %   $\ell$ is a label in both $P$.bg and $Q$.bg then 
+
+% % \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ if
+% % $\downPl{P}{\ell}\cap\downPl{Q}{\ell}\not=\emptyset$ 
+ 
+% % \end{subex} 
+   
+% \end{ex} 
+% or (\ref{ex:threethes}c) using the constraint in \nexteg{}.
+% \begin{ex} 
+% % \begin{subex} 
+ 
+% % \item
+%   If $P,Q$:\textit{Ppty} then 
+
+%  \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ iff $\downP{P}\subseteq\downP{Q}$
+ 
+% % \item If $P,Q$:\textit{Ppty} and
+% %   $\ell$ is a label in both $P$.bg and $Q$.bg then 
+
+% % \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
+% %   $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
+ 
+% % \end{subex} 
+   
+% \end{ex} 
 It does not make much difference which of these you choose for the
-analysis of singular definite descriptions.  Since we are relating the
-generalized quantifier predicates to the classical set relations given
-in \cite{BarwiseCooper1981} and we are requiring uniqueness by the
-presupposition, it will not make a difference in terms of which
-objects are required to have which properties whether we choose
-\preveg{a} (using the predicate constraint in
-(\ref{ex:theconstruniv})), \preveg{b} (using the predicate constraint
-in \nexteg{}, which repeats Chapter~\ref{ch:gram},
-example~(\ref{ex:constraintexist}))
-\begin{ex} 
-% \begin{subex} 
- 
-% \item
-  If 
-  $P,Q$:\textit{Ppty} then 
-
- \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff  $\downP{P}\cap\downP{Q}\not=\emptyset$
- 
-% \item If $P,Q$:\textit{Ppty} and
-%   $\ell$ is a label in both $P$.bg and $Q$.bg then 
-
-% \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ if
-% $\downPl{P}{\ell}\cap\downPl{Q}{\ell}\not=\emptyset$ 
- 
-% \end{subex} 
-   
-\end{ex} 
-or (\ref{ex:threethes}c) using the constraint in \nexteg{}.
-\begin{ex} 
-% \begin{subex} 
- 
-% \item
-  If $P,Q$:\textit{Ppty} then 
-
- \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ iff $\downP{P}\subseteq\downP{Q}$
- 
-% \item If $P,Q$:\textit{Ppty} and
-%   $\ell$ is a label in both $P$.bg and $Q$.bg then 
-
-% \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
-%   $\downPl{P}{\ell}\subseteq\downPl{Q}{\ell}$ 
- 
-% \end{subex} 
-   
-\end{ex} 
-In \cite{Cooper2013b} we chose the option corresponding to (\ref{ex:threethes}c), which offers
+analysis of singular definite descriptions.  In \cite{Cooper2013b} we
+chose the option corresponding to (\ref{ex:threethes}c), which offers
 some vague hope of being able to draw a parallel with plural
 definites.  Note that choosing (\ref{ex:threethes}b) or
 (\ref{ex:threethes}c) eliminates the need for the predicate `the'.
+Here we will choose \preveg{c}.
+
+From the perspective of compositional semantics it is important that
+the common noun \textit{dog} in these examples plays a role twice in
+the parametric content of the noun phrase \textit{the dog}:  once in
+determining the type of the context and once as the first argument to
+the quantifier.  In order to achieve the contribution to the context
+we will need to treat the content of \textit{the} not as a parametric
+content but as a function from properties (corresponding to the common
+noun) to a parametric content.  The content of \textit{the} is given
+in \nexteg{}.
+\begin{ex} 
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace{1em}$\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{e}{unique($Q$)}}}} . \\
+  \hspace{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace{3em}\record{
+    \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$
+\end{ex} 
+How should this content be combined with the content of a common noun
+to form the content of the noun-phrase?
+
+@@
+
+
 
 What we have characterized so far is a static treatment of generalized
 quantifiers.  Dynamic generalized quantifiers as presented in
