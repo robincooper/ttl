@@ -1907,9 +1907,73 @@ in \nexteg{}.
     \tfield{e}{every(restr, scope)}}$\urcorner$
 \end{ex} 
 How should this content be combined with the content of a common noun
-to form the content of the noun-phrase?
+to form the content of the noun-phrase?  Let us refer to \preveg{} as
+\textbf{the} and use \textbf{dog} to refer to the parametric content
+associated with \textit{dog} given in \nexteg{}, where `dog$'$'
+represents the property of being a dog as we defined earlier.
+\begin{ex} 
+$\lambda c$:\textit{Rec} . dog$'$ 
+\end{ex} 
+(This assumes that the content for \textit{dog} does not depend on the
+context.)  We can derive a parametric content for \textit{the dog} as
+indicated in \nexteg{}.
 
-@@
+@@\todo{\nexteg{} needs correcting}
+
+\begin{ex} 
+  $\lambda c$:\smallrecord{
+    \smalltfield{f}{(\textbf{the}(\textbf{dog}(a))).bg}\\
+    \smalltfield{a}{\textbf{dog}.bg}} . \textbf{the}(\textbf{dog}($c$.a))($c$.f)
+\end{ex} 
+In order to achieve this we need a variant of the operation
+`ContForwardApp' which we will call `ContForwardCntxtApp'.  In
+\nexteg{a} we repeat `ContForwardApp' for comparison and in \nexteg{b}
+we give `ContForwardCntxtApp'.
+\begin{ex} 
+\begin{subex} 
+ 
+\item   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+  ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+\begin{quote}
+  $\lambda
+u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+\end{quote} 
+ 
+\item If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+  ContForwardCntxtApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+\begin{quote}
+  $\lambda
+u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+\end{quote}  
+ 
+\end{subex} 
+   
+\end{ex}
+
+  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+\begin{quote}
+  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}
+$\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
+      
+\end{quote}
+  
+
+
 
 
 
