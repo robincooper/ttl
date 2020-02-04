@@ -536,7 +536,7 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 %                                 . $\alpha$.fg($r$.f)($\beta$.fg($r$.a))$\urcorner$
   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
       \d{$\wedge$}$[\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$
-      . $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\beta.\text{fg}(c.\mathfrak{c}.\text{a}))\urcorner$
+      . $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))\urcorner$
       
 \end{quote}
 % if $\alpha : (T_1 \rightarrow (T_2 \rightarrow T_3))$ and 
@@ -550,8 +550,38 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 \label{ex:s-combination-prelim}
 \end{ex}
 
-The notation $[T]_{\pi_1\leadsto\pi_2}$ used here refers to the type
-like $T$ except that the path $\pi_1$ has been replaced by $\pi_2$.
+The notation $[o]_{\pi_1\rightarrow\pi_2}$ used here refers to an
+object like $o$ except that any occurrence of the path $\pi_1$ has
+been replaced by the path $\pi_2$.
+
+\begin{shaded}
+If $T$ is a record type, the notation $[T]_{\pi_1\leadsto\pi_2}$ refers to the type
+like $T$ except that the path $\pi_1$ has been replaced by $\pi_2$. If
+$r$ is a record, then $[r]_{\pi_1\leadsto\pi_2}$ is defined similarly
+except in the special case where $r$ is of the type \nexteg{}
+\begin{ex} 
+\record{
+  \tfield{bg}{\textit{RecType}}\\
+  \tfield{fg}{(bg$\rightarrow T$)}} 
+\end{ex} 
+   for some type $T$ and has
+exactly two fields, we use
+$[r]_{\pi_1\leadsto\pi_2}$ to represent the record in \nexteg{}
+\begin{ex}
+\record{
+  \field{bg}{$[r.\text{bg}]_{\pi_1\leadsto\pi_2}$}\\
+  \field{fg}{$[r.\text{fg}]_{\pi_1\leadsto\pi_2}$}}
+\end{ex}
+If $f$ is a function of the form $\lambda v\!:\!T\
+.\ \varphi\dep{v}$ then we use $[f]_{\pi_1\leadsto\pi_2}$ to
+represent \nexteg{}.
+\begin{ex}
+$\lambda v\!:\![T]_{\pi_1\leadsto\pi_2}\
+.\ [\varphi]_{\pi_1\leadsto\pi_2}\dep{v}$
+\end{ex}
+Otherwise $[o]_{\pi_1\leadsto\pi_2}$ refers to $o$.
+\end{shaded}
+
 We will discuss such relabellings in detail on pp.~\pageref{pg:relabelling-intro}\textit{ff}.
 The use of relabelling here means that in the background for the result we have kept the
 backgrounds of $\alpha$ and $\beta$
@@ -2769,12 +2799,15 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-\begin{quote}
-  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+  \begin{quote}
+   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-      . \\
-      \hspace*{2em}
-$\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+  % $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+%       . \\
+%       \hspace*{2em}
+% $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
       
 \end{quote}
 
@@ -3265,12 +3298,15 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-\begin{quote}
-  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+  \begin{quote}
+    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-      . \\
-      \hspace*{2em}
-$\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+  % $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+%       . \\
+%       \hspace*{2em}
+% $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
       
 \end{quote}
 

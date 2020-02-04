@@ -1912,19 +1912,32 @@ to form the content of the noun-phrase?  Let us refer to \preveg{} as
 associated with \textit{dog} given in \nexteg{}, where `dog$'$'
 represents the property of being a dog as we defined earlier.
 \begin{ex} 
-$\lambda c$:\textit{Rec} . dog$'$ 
+  $\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\textit{Rec}}\\
+    \smalltfield{$\mathfrak{s}$}{\textit{Rec}}} . dog$'$ 
 \end{ex} 
 (This assumes that the content for \textit{dog} does not depend on the
 context.)  We can derive a parametric content for \textit{the dog} as
 indicated in \nexteg{}.
 
-@@\todo{\nexteg{} needs correcting}
 
-\begin{ex} 
-  $\lambda c$:\smallrecord{
-    \smalltfield{f}{(\textbf{the}(\textbf{dog}(a))).bg}\\
-    \smalltfield{a}{\textbf{dog}.bg}} . \textbf{the}(\textbf{dog}($c$.a))($c$.f)
-\end{ex} 
+
+\begin{ex}
+  $\lambda c$:\record{
+    \tfield{$\mathfrak{c}$}{\record{
+        \tfield{s}{\textbf{dog}.bg}\\
+        \tfield{f}{\textbf{the}(\textbf{dog}(s)).bg}\\
+        \mfield{a}{s.$\mathfrak{c}$}{\textbf{dog}.bg.$\mathfrak{c}$}}}\\
+    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textbf{dog}.bg.$\mathfrak{s}$}}
+  . [\textbf{the}]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$([\textbf{dog}]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$($c$))($c$)
+  
+  % $\lambda c$:\smallrecord{
+  %   \smalltfield{f}{(\textbf{the}(\textbf{dog}(a))).bg}\\
+  %   \smalltfield{a}{\textbf{dog}.bg}} . \textbf{the}(\textbf{dog}($c$.a))($c$.f)
+\end{ex}
+
+@@
+
 In order to achieve this we need a variant of the operation
 `ContForwardApp' which we will call `ContForwardCntxtApp'.  In
 \nexteg{a} we repeat `ContForwardApp' for comparison and in \nexteg{b}
