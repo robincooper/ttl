@@ -3838,7 +3838,9 @@ grammar (see \citealp{Shieber1986} for the classic reference).
 We define a function $\mu$ which maps meets of record types to an
 equivalent record type, record types to equivalent types where meets
 in their values have been simplified by $\mu$ and any other types to
-themselves:
+themselves.  $\mu$ is also defined on labelled sets which are not
+types in order to account for merging inside a record type of
+structures which depend on fields in the type outside the structure:
 \begin{enumerate}
   \item if for some $T_1,T_2$, $T=(T_1\wedge T_2)$ and $T_1\sqsubseteq T_2$
   then $\mu(T)=T_1$ 
@@ -3849,10 +3851,10 @@ themselves:
 \item otherwise:
 \begin{enumerate} 
  
-\item if for some $T_1$, $T_2$, $T=(T_1\wedge T_2)$ then
+\item if for some labelled sets $T_1$, $T_2$, $T=(T_1\wedge T_2)$ then
   $\mu(T)=\mu'(\mu(T_1)\wedge\mu(T_2))$. 
  
-\item if $T$ is a record type then $\mu(T)$ is $T'$ such that for any
+\item if $T$ is a labelled set then $\mu(T)$ is $T'$ such that for any
   $\ell$,$v$, $\langle\ell,\mu(v)\rangle\in T'$ iff
   $\langle\ell,v\rangle\in T$.
 
@@ -3864,7 +3866,7 @@ themselves:
 $\mu'(T_1\wedge T_2)$ is defined by:
 \begin{enumerate} 
  
-\item if $T_1$ and $T_2$ are record types, then $\mu'(T_1\wedge
+\item if $T_1$ and $T_2$ are labelled sets, then $\mu'(T_1\wedge
   T_2)=T_3$ such that
 \begin{enumerate} 
  

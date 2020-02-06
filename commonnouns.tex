@@ -1997,8 +1997,7 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 
 
-@@\todo{Need to introduce and revise fixed point types --- no longer
-introduced in Ch. 4}
+
 
 What we have characterized so far is a static treatment of generalized
 quantifiers.  Dynamic generalized quantifiers as presented in
@@ -2006,7 +2005,41 @@ quantifiers.  Dynamic generalized quantifiers as presented in
 constraint on the quantifier predicate so that the information
 represented by the first argument to the quantifier predicate is passed on as a
 restriction to the second argument of the predicate.  What we mean by
-the information associated with a property $P$ is the fixed point type
+the information associated with a property $P$ is essentially the
+merge of the domain type and the range type of the dependent type
+which is the foreground of the property.  Consider the example
+`dog$'$' repeated in \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}} 
+\end{ex} 
+Informally the information associated with this which is to be passed
+on to the second argument of the quantifier is that we are talking
+about some individual which is a dog.  This is represented by the
+record type in \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{dog(x)}}
+  \label{ex:dog-fptype}
+\end{ex} 
+Technically, the type in \preveg{} can be obtained from `dog$'$' by
+merging the domain type with the result of relabelling the range type
+so that `$r$.x' is replaced by `x', that is, \nexteg{}.
+\begin{ex} 
+\record{\tfield{e}{dog(x)}}
+\end{ex} 
+(Recall that the merge operation
+introduced on p.~\pageref{pg:merge} is defined on labelled sets so that
+it will apply to objects like this that are not well-formed types.)
+We call (\ref{ex:dog-fptype}) a \textit{fixed point type} for `dog$'$'
+because for any record $r$ of this type, $r$ : dog$'$($r$).  We use
+`$\mathcal{F}$(dog$'$)' to designate (\ref{ex:dog-fptype}).
+\begin{shaded}
+  @@
+\end{shaded}
+
+
+the fixed point type
 $\mathcal{F}(P.\mathrm{fg})$ as introduced in Chapter~\ref{ch:propnames} and
 defined in Appendix~\ref{app:merge}, p.~\pageref{pg:fixedpointtype}.
 We shall use the fixed point type of the first argument to restrict
