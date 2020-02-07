@@ -2022,7 +2022,7 @@ record type in \nexteg{}.
     \tfield{e}{dog(x)}}
   \label{ex:dog-fptype}
 \end{ex} 
-Technically, the type in \preveg{} can be obtained from `dog$'$' by
+Intuitively, the type in \preveg{} can be obtained from `dog$'$' by
 merging the domain type with the result of relabelling the range type
 so that `$r$.x' is replaced by `x', that is, \nexteg{}.
 \begin{ex} 
@@ -2030,12 +2030,49 @@ so that `$r$.x' is replaced by `x', that is, \nexteg{}.
 \end{ex} 
 (Recall that the merge operation
 introduced on p.~\pageref{pg:merge} is defined on labelled sets so that
-it will apply to objects like this that are not well-formed types.)
+it will apply to objects like this that are not well-formed types.
+However, in the precise definition below we will not use this
+ill-formed type.)
 We call (\ref{ex:dog-fptype}) a \textit{fixed point type} for `dog$'$'
 because for any record $r$ of this type, $r$ : dog$'$($r$).  We use
 `$\mathcal{F}$(dog$'$)' to designate (\ref{ex:dog-fptype}).
 \begin{shaded}
-  @@
+  Defining $\mathcal{F}$ precisely is a little tricky.  If $T$ is a
+  record type and $r$ is a record of any type, we will use
+  $T_{r.\pi\leadsto\pi}$ to designate the type like $T$ except that
+  for any $\pi\in\mathrm{paths}(T)$ any occurrence of $r.\pi$ is
+  replaced by $\pi$.  For example, suppose $T$ is \nexteg{} (using
+  official notation for dependent fields to be absolutely clear).
+  \begin{ex} 
+    \record{
+      \tfield{x}{\textit{Ind}}\\
+      \tfield{e}{$\langle\lambda v$:\textit{Ind} . dog($v$), $\langle r.\text{x}\rangle\rangle$}}
+  \end{ex}
+  Then $T_{r.\pi\leadsto\pi}$ will be \nexteg{}.
+  \begin{ex} 
+    \record{
+      \tfield{x}{\textit{Ind}}\\
+      \tfield{e}{$\langle\lambda v$:\textit{Ind} . dog($v$), $\langle\text{x}\rangle\rangle$}}
+\end{ex} 
+We then characterize $\mathcal{F}$ as in \nexteg{}, repeated in the
+Appendix on p.~\pageref{pg:fixedpointtype}.
+\begin{ex} 
+If $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type and for any
+$r$,
+$\mathrm{paths}(T_1)\cap\mathrm{paths}(\mathcal{T}(r))=\emptyset$,
+then
+\begin{quote}
+  $\mathcal{F}(\mathcal{T})$ is that type $T$ such that for any
+  $r^*:T_1$, $\lambda r\!:\!T_1\ .\
+  (T_1\text{\d{$\wedge$}}T_2)_{r.\pi\leadsto\pi}(r^*)=T$
+\end{quote}
+\label{ex:fixedpointtype}
+\end{ex} 
+@@We illustrate this with an example.
+
+The constraint on shared paths
+
 \end{shaded}
 
 

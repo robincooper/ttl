@@ -2028,120 +2028,136 @@ denotes the function $\lambda r\!:\!T_1$\d{$\wedge$}$T_3\ .\
 T_2(r)$\d{$\wedge$}$T_4(r)$.
 
 \paragraph{Constructing fixed point types for functions which return
-  types}
+  types} (Chapter~\ref{ch:commonnouns}, p.~\pageref{ex:fixedpointtype})
 \label{pg:fixedpointtype}
 
-If, for
-some type $T_1$, $f:(T_1\rightarrow\textit{Type})$ then $\mathcal{F}(f)$ is a \textit{fixed
-point type} for $f$, that is $a:\mathcal{F}(f)$ implies $a:f(a)$.
-$\mathcal{F}$ is defined by
-\begin{quote}
-$\mathcal{F}(\lambda r\!:\!T_1\ .\ T_2(r)) = T_1$\d{$\wedge$}$T'$
+% If, for
+% some type $T_1$, $f:(T_1\rightarrow\textit{Type})$ then $\mathcal{F}(f)$ is a \textit{fixed
+% point type} for $f$, that is $a:\mathcal{F}(f)$ implies $a:f(a)$.
+% $\mathcal{F}$ is defined by
+% \begin{quote}
+% $\mathcal{F}(\lambda r\!:\!T_1\ .\ T_2(r)) = T_1$\d{$\wedge$}$T'$
 
-where $T'$ is like $T_2(r)$ except that any path $r.\pi$ is
-replaced by $\pi$.
-\end{quote}
+% where $T'$ is like $T_2(r)$ except that any path $r.\pi$ is
+% replaced by $\pi$.
+% \end{quote}
 
-Strictly speaking this definition is not quite correct since $T'$ may
-not be a type because there may be a path occurring as an argument to
-a predicate which is not introduced in $T'$.  A more correct, though
-less perspicuous, definition would be
-\begin{quote}
-$\mathcal{F}(\lambda r\!:\!T_1\ .\ T_2(r)) =
-[(\lambda r\!:\!T_1\ .\ T_1$\d{$\wedge$}$T_2(r))(r^*)]^{-r^*}$
+If $T$ is a
+  record type and $r$ is a record of any type, we will use
+  $T_{r.\pi\leadsto\pi}$ to designate the type like $T$ except that
+  for any $\pi\in\mathrm{paths}(T)$ any occurrence of $r.\pi$ is
+  replaced by $\pi$.
 
-where $r^*$ is a record of type $T_1$ such that there is no path occurring as an
-argument to a predicate in $T_1$ or $T_2(r)$ of the form $r^*.\pi$ for
-any $\pi$ and $[T]^{-r}$ is the result of replacing any path of the
-form $r.\pi$, for any $\pi$, occurring as an argument to a predicate
-in $T$, with $\pi$.
+  If $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type and for any
+$r$,
+$\mathrm{paths}(T_1)\cap\mathrm{paths}(\mathcal{T}(r))=\emptyset$,
+then
+\begin{quote}
+  $\mathcal{F}(\mathcal{T})$ is that type $T$ such that for any
+  $r^*:T_1$, $\lambda r\!:\!T_1\ .\
+  (T_1\text{\d{$\wedge$}}T_2)_{r.\pi\leadsto\pi}(r^*)=T$
 \end{quote}
+% Strictly speaking this definition is not quite correct since $T'$ may
+% not be a type because there may be a path occurring as an argument to
+% a predicate which is not introduced in $T'$.  A more correct, though
+% less perspicuous, definition would be
+% \begin{quote}
+% $\mathcal{F}(\lambda r\!:\!T_1\ .\ T_2(r)) =
+% [(\lambda r\!:\!T_1\ .\ T_1$\d{$\wedge$}$T_2(r))(r^*)]^{-r^*}$
 
-This definition, however, fails to capture that $\mathcal{F}$ must be
-defined as a partial function which is undefined on functions meeting
-a certain condition.  This is taken account of in the following final
-definition:
-\begin{quote}
-$\mathcal{F}$ is a partial function on functions such that if, for
-some type $T_1$, $f:(T_1\rightarrow \textit{Type})$, $f=\lambda
-r\!:\!T_1\ .\ T_2(r)$, $g$ is the function
-\begin{quote}
-$\lambda r\!:\!T_1\ .\ T_1$\d{$\wedge$}$T_2(r)$
-\end{quote}
-and for any $r_1,r_2:T_1$
-\begin{quote}
-$[g(r_1)]^{-r_1} = [g(r_2)]^{-r_2}$
-\end{quote}
-then if $r^*:T_1$,
-\begin{quote}
-$\mathcal{F}(f) = [g(r*)]^{-r^*}$
-\end{quote}
+% where $r^*$ is a record of type $T_1$ such that there is no path occurring as an
+% argument to a predicate in $T_1$ or $T_2(r)$ of the form $r^*.\pi$ for
+% any $\pi$ and $[T]^{-r}$ is the result of replacing any path of the
+% form $r.\pi$, for any $\pi$, occurring as an argument to a predicate
+% in $T$, with $\pi$.
+% \end{quote}
 
-For any function $f$ not covered by the above, $\mathcal{F}(f)$ is undefined.
-\end{quote}
-Let us take some concrete examples based on the discussion in
-Chapter~\ref{ch:commonnouns}, Section~\ref{sec:dgqs}.  Suppose that
-$f$ is the function
-\begin{quote}
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \record{\tfield{e}{dog($r$.x)}}
-\end{quote}
-Then $g$ will be
-\begin{quote}
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{x}{\textit{Ind}}} \d{$\wedge$} \smallrecord{\smalltfield{e}{dog($r$.x)}}
-\end{quote}
-That is,
-\begin{quote}
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{x}{\textit{Ind}}\\
-          \tfield{e}{dog($r$.x)}}
-\end{quote}
-If we now compute $[g(r^*)]^{-r^*}$ for some
-$r^*$:\smallrecord{\smalltfield{x}{\textit{Ind}}}, that is we apply
-$g$ to $r^*$ and then remove $r^*$ from all path-names that begin with
-it we will obtain
-\begin{quote}
-\record{\tfield{x}{\textit{Ind}}\\
-          \tfield{e}{dog(x)}}
-\end{quote}
-We would have obtained the same result no matter which record we chose
-to be $r^*$, since $r$ only occurs in $g$ at the head of path names.
-Now consider $f$ to be a variant of what we propose to be the content
-of \textit{temperature} in Chapter~\ref{ch:commonnouns} (in fact,
-similar to a
-variant that we have proposed in previous work):
-\begin{quote}
-$\lambda r$:\textit{Rec} . \record{\tfield{e}{temperature($r$)}}
-\end{quote}
-Now $g$ will be
-\begin{quote}
-$\lambda r$:\textit{Rec} . \textit{Rec} \d{$\wedge$} \smallrecord{\smalltfield{e}{temperature($r$)}}
-\end{quote}
-That is,
-\begin{quote}
-$\lambda r$:\textit{Rec} . \record{\tfield{e}{temperature($r$)}}
-\end{quote}
-which happens to be identical with $f$.  If we apply this to a record
-$r^*$ we will obtain
-\begin{quote}
-\record{\tfield{e}{temperature($r^*$)}}
-\end{quote}
-The result of removing all occurrences of $r^*$ at the head of a path
-will be identical since $r^*$ occurs here not as the head of a path
-but as an argument to a predicate. Consequently if we choose a
-different record for $r^*$ the result will be a different type.  Thus
-$\mathcal{F}$ is not defined on this function.  This is intuitively
-correct since defining fixed points for this function would involve a
-kind of non-well foundedness which we have not allowed in TTR.
+% This definition, however, fails to capture that $\mathcal{F}$ must be
+% defined as a partial function which is undefined on functions meeting
+% a certain condition.  This is taken account of in the following final
+% definition:
+% \begin{quote}
+% $\mathcal{F}$ is a partial function on functions such that if, for
+% some type $T_1$, $f:(T_1\rightarrow \textit{Type})$, $f=\lambda
+% r\!:\!T_1\ .\ T_2(r)$, $g$ is the function
+% \begin{quote}
+% $\lambda r\!:\!T_1\ .\ T_1$\d{$\wedge$}$T_2(r)$
+% \end{quote}
+% and for any $r_1,r_2:T_1$
+% \begin{quote}
+% $[g(r_1)]^{-r_1} = [g(r_2)]^{-r_2}$
+% \end{quote}
+% then if $r^*:T_1$,
+% \begin{quote}
+% $\mathcal{F}(f) = [g(r*)]^{-r^*}$
+% \end{quote}
 
-The moral of this tale is that if you wish to define a dependent type
-(that is, a function returning a type), $\lambda r\!:\!T_1\ .\ T_2(r)$,
-for which you will be able to compute a fixed point type, make sure
-that $T_2$ only depends on $r$ in that $r$ may be the head of path
-names in $T_2(r)$.  Normally, you will also want to ensure that $T_1$
-and $T_2$ do not share any labels in order to avoid unwanted clashes
-when $T_1$ and $T_2$ are merged.
+% For any function $f$ not covered by the above, $\mathcal{F}(f)$ is undefined.
+% \end{quote}
+% Let us take some concrete examples based on the discussion in
+% Chapter~\ref{ch:commonnouns}, Section~\ref{sec:dgqs}.  Suppose that
+% $f$ is the function
+% \begin{quote}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{dog($r$.x)}}
+% \end{quote}
+% Then $g$ will be
+% \begin{quote}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \smallrecord{\smalltfield{x}{\textit{Ind}}} \d{$\wedge$} \smallrecord{\smalltfield{e}{dog($r$.x)}}
+% \end{quote}
+% That is,
+% \begin{quote}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{x}{\textit{Ind}}\\
+%           \tfield{e}{dog($r$.x)}}
+% \end{quote}
+% If we now compute $[g(r^*)]^{-r^*}$ for some
+% $r^*$:\smallrecord{\smalltfield{x}{\textit{Ind}}}, that is we apply
+% $g$ to $r^*$ and then remove $r^*$ from all path-names that begin with
+% it we will obtain
+% \begin{quote}
+% \record{\tfield{x}{\textit{Ind}}\\
+%           \tfield{e}{dog(x)}}
+% \end{quote}
+% We would have obtained the same result no matter which record we chose
+% to be $r^*$, since $r$ only occurs in $g$ at the head of path names.
+% Now consider $f$ to be a variant of what we propose to be the content
+% of \textit{temperature} in Chapter~\ref{ch:commonnouns} (in fact,
+% similar to a
+% variant that we have proposed in previous work):
+% \begin{quote}
+% $\lambda r$:\textit{Rec} . \record{\tfield{e}{temperature($r$)}}
+% \end{quote}
+% Now $g$ will be
+% \begin{quote}
+% $\lambda r$:\textit{Rec} . \textit{Rec} \d{$\wedge$} \smallrecord{\smalltfield{e}{temperature($r$)}}
+% \end{quote}
+% That is,
+% \begin{quote}
+% $\lambda r$:\textit{Rec} . \record{\tfield{e}{temperature($r$)}}
+% \end{quote}
+% which happens to be identical with $f$.  If we apply this to a record
+% $r^*$ we will obtain
+% \begin{quote}
+% \record{\tfield{e}{temperature($r^*$)}}
+% \end{quote}
+% The result of removing all occurrences of $r^*$ at the head of a path
+% will be identical since $r^*$ occurs here not as the head of a path
+% but as an argument to a predicate. Consequently if we choose a
+% different record for $r^*$ the result will be a different type.  Thus
+% $\mathcal{F}$ is not defined on this function.  This is intuitively
+% correct since defining fixed points for this function would involve a
+% kind of non-well foundedness which we have not allowed in TTR.
+
+% The moral of this tale is that if you wish to define a dependent type
+% (that is, a function returning a type), $\lambda r\!:\!T_1\ .\ T_2(r)$,
+% for which you will be able to compute a fixed point type, make sure
+% that $T_2$ only depends on $r$ in that $r$ may be the head of path
+% names in $T_2(r)$.  Normally, you will also want to ensure that $T_1$
+% and $T_2$ do not share any labels in order to avoid unwanted clashes
+% when $T_1$ and $T_2$ are merged.
  
 % \paragraph{Constructing backgrounding types corresponding to functions which return
 %   types}
