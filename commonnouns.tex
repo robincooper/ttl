@@ -2028,11 +2028,11 @@ so that `$r$.x' is replaced by `x', that is, \nexteg{}.
 \begin{ex} 
 \record{\tfield{e}{dog(x)}}
 \end{ex} 
-(Recall that the merge operation
-introduced on p.~\pageref{pg:merge} is defined on labelled sets so that
-it will apply to objects like this that are not well-formed types.
-However, in the precise definition below we will not use this
-ill-formed type.)
+% (Recall that the merge operation
+% introduced on p.~\pageref{pg:merge} is defined on labelled sets so that
+% it will apply to objects like this that are not well-formed types.
+% However, in the precise definition below we will not use this
+% ill-formed type.)
 We call (\ref{ex:dog-fptype}) a \textit{fixed point type} for `dog$'$'
 because for any record $r$ of this type, $r$ : dog$'$($r$).  We use
 `$\mathcal{F}$(dog$'$)' to designate (\ref{ex:dog-fptype}).
@@ -2068,18 +2068,67 @@ then
   (T_1\text{\d{$\wedge$}}T_2)_{r.\pi\leadsto\pi}(r^*)=T$
 \end{quote}
 \label{ex:fixedpointtype}
+\end{ex}
+We illustrate this with an example.  Suppose that $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ is
+`dog$'$', that is, \nexteg{}.
+\begin{ex} 
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}} 
+\end{ex}
+Then $\lambda r\!:\!T_1\ .\ T_1\text{\d{$\wedge$}}T_2\dep{r}$ is
+\nexteg{}.
+\begin{ex} 
+  $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{dog($r$.x)}} 
 \end{ex} 
-@@We illustrate this with an example.
+Removing any dependence on $r$ we obtain $\lambda r\!:\!T_1\ .\
+(T_1\text{\d{$\wedge$}}T_2)_{r.\pi\leadsto\pi}$, that is, \nexteg{}.
+\begin{ex} 
+ $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{dog(x)}}
+\end{ex} 
+Note that since we have removed all dependencies on $r$, \preveg{} is
+a constant function, that is, for any record of type
+\smallrecord{\smalltfield{x}{\textit{Ind}}} it will return the type
+\nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{dog(x)}} 
+\end{ex} 
+\preveg{} is, then, $\mathcal{F}$(dog$'$).  
+  
 
-The constraint on shared paths
+The importance of the constraint that there are no shared paths in the
+domain type and the resulting type of the function to which we apply
+$\mathcal{F}$ is made clear by the abstract example in \nexteg{}.
+Suppose that we did not have this restriction and allowed
+$\mathcal{F}$ to apply to a function like \nexteg{a}.  Then the putative result
+would be \nexteg{b} which is not well-formed since we do not allow
+dependent fields which depend on themselves.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{\smalltfield{$\ell$}{$T_1$}} . \record{\tfield{$\ell$}{$T_2\dep{r.\ell}$}} 
+ 
+\item \record{\tfield{$\ell$}{$T_1$\d{$\wedge$}$T_2\dep{\ell}$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+
+If we feel that we need to construct a fixed point type for a
+dependent type where there are shared paths, then we can achieve the
+effect we need by first relabelling the dependent type so that there
+are no shared paths.
 
 \end{shaded}
 
 
-the fixed point type
-$\mathcal{F}(P.\mathrm{fg})$ as introduced in Chapter~\ref{ch:propnames} and
-defined in Appendix~\ref{app:merge}, p.~\pageref{pg:fixedpointtype}.
 We shall use the fixed point type of the first argument to restrict
+the dependent type which is 
 the second argument.  We define the restriction of a function by a
 type as in \nexteg{}.
 \begin{ex} 
@@ -2095,9 +2144,17 @@ We can extend this notation to properties as in \nexteg{}.
 \begin{ex} 
 If $P$:\textit{Ppty}, then $P|_T$ is the property
 \begin{quote}
-\record{\field{bg}{$P$.bg\d{$\wedge$}$T$}\\
-        \field{fg}{$P$.fg$|_T$}} 
+  \record{
+    \field{bg}{$P$.bg\d{$\wedge$}$T$}\\
+    \field{fg}{$P$.fg$|_T$}} 
 \end{quote}
+that is,
+\begin{quote}
+  $\ulcorner P$.fg$|_T\urcorner$
+\end{quote}
+
+    
+   
 \end{ex} 
   
 We can then define dynamic versions of the constraints on
@@ -2108,23 +2165,23 @@ the quantifier predicates and their witness conditions as in \nexteg{}.  % Note 
 \begin{ex} 
 \begin{subex} 
  
-\item If $P,Q$:\textit{Ppty} then 
+% \item If $P,Q$:\textit{Ppty} then 
 
- \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff  $\downP{P}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}}\not=\emptyset$ 
+%  \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ iff  $\downP{P}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}}\not=\emptyset$ 
  
-% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in $P$.bg  then 
+% % \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in $P$.bg  then 
 
-% \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ if
-% $\downPl{P}{\ell}\cap\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}\not=\emptyset$ 
+% % \hspace*{1em}$\down{\mathrm{exist}(P,Q)}\not=\emptyset$ if
+% % $\downPl{P}{\ell}\cap\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}\not=\emptyset$ 
 
-\item If $P,Q$:\textit{Ppty} then 
+% \item If $P,Q$:\textit{Ppty} then 
 
- \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ iff $\downP{P}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}}$
+%  \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ iff $\downP{P}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}}$
 
-% \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in $P$.bg then 
+% % \item If $P,Q$:\textit{Ppty} and $\ell$ is a label in $P$.bg then 
 
-% \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
-%   $\downPl{P}{\ell}\subseteq\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}$ 
+% % \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
+% %   $\downPl{P}{\ell}\subseteq\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}$ 
 
 \item If $P,Q$:\textit{Ppty} then
 
@@ -2162,34 +2219,32 @@ on to the second argument.  Let us look in detail at how this will
 happen.  Consider the type in \nexteg{}.
 \begin{ex}
 
-every(\record{\field{bg}{\textit{AmbTempFrame}}\\
-              \field{fg}{
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}} . 
-            \smallrecord{\smallrfield{e}{$s$}{temperature($r$.x)}}}}, \\ 
-\hspace*{2.4em} \record{\field{bg}{\textit{Rec}}\\
-                        \field{fg}{
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
-            \smallrecord{\smalltfield{e}{rise($r$.x)}}}})
+every(
+$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}} . 
+            \smallrecord{\smallrfield{e}{$s$}{temperature($r$.x)}}$\urcorner$, \\ 
+\hspace*{2.4em} 
+$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+            \smallrecord{\smalltfield{e}{rise($r$.x)}}$\urcorner$)
 
 \label{ex:thetemprises}
 \end{ex} 
-This type might arise as a result of determining the content of
-\textit{the temperature rises} using the parametric content for
-\textit{the temperature} in \nexteg{} (based on (\ref{ex:threethes})).
-\begin{ex} 
-\mbox{$\lambda r$:\smallrecord{\smalltfield{e}{unique(
-\smallrecord{\field{bg}{\textit{AmbTempFrame}}\\
-        \field{fg}{$\lambda
-                           r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}}
-                           . \smallrecord{\smalltfield{e}{temperature($r$.x)}}}})}} .} \\
-\hspace*{2em}$\lambda P$:\textit{Ppty}
-. \smallrecord{\smalltfield{e}{every(
-\smallrecord{\field{bg}{\textit{AmbTempFrame}}\\
-        \field{fg}{$\lambda
-    r_1$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}}
-    . \smallrecord{\smallrfield{e}{$r$.e}{temperature($r_1$.x)}}}}, $P$)}} 
-\label{ex:thetemp}
-\end{ex} 
+% This type might arise as a result of determining the content of
+% \textit{the temperature rises} using the parametric content for
+% \textit{the temperature} in \nexteg{} (based on (\ref{ex:threethes})).
+% \begin{ex} 
+% \mbox{$\lambda r$:\smallrecord{\smalltfield{e}{unique(
+% \smallrecord{\field{bg}{\textit{AmbTempFrame}}\\
+%         \field{fg}{$\lambda
+%                            r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}}
+%                            . \smallrecord{\smalltfield{e}{temperature($r$.x)}}}})}} .} \\
+% \hspace*{2em}$\lambda P$:\textit{Ppty}
+% . \smallrecord{\smalltfield{e}{every(
+% \smallrecord{\field{bg}{\textit{AmbTempFrame}}\\
+%         \field{fg}{$\lambda
+%     r_1$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}}
+%     . \smallrecord{\smallrfield{e}{$r$.e}{temperature($r_1$.x)}}}}, $P$)}} 
+% \label{ex:thetemp}
+% \end{ex} 
 The result of applying $\mathcal{F}$ to the foreground of the first argument of (\ref{ex:thetemprises}) in
 order to obtain a fixed point type is given in \nexteg{}.
 \begin{ex} 
@@ -2280,6 +2335,8 @@ anomalous.  Similarly, if we wish to find a content for \textit{the
 individual property or alternatively associate \textit{dog} with a
 frame property.
  
+@@
+
 What then should be the content of \textit{is ninety}?  An obvious
 modification to the treatment of \textit{be} in Chapter~\ref{ch:gram}
 (see Appendix~\ref{app:lexuniversal}), substituting the type \textit{Real} for the type \textit{Ind},
