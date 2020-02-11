@@ -1893,7 +1893,7 @@ determining the type of the context and once as the first argument to
 the quantifier.  In order to achieve the contribution to the context
 we will need to treat the content of \textit{the} not as a parametric
 content but as a function from properties (corresponding to the common
-noun) to a parametric content.  The content of \textit{the} is given
+noun) to a parametric content.  The content of \textit{the}, `SemDefArt', is given
 in \nexteg{}.
 \begin{ex} 
   $\lambda Q$:\textit{Ppty} . \\
@@ -2334,22 +2334,19 @@ anomalous.  Similarly, if we wish to find a content for \textit{the
   dog rises} then we have to associate \textit{rises} with an
 individual property or alternatively associate \textit{dog} with a
 frame property.
- 
-@@
 
 What then should be the content of \textit{is ninety}?  An obvious
-modification to the treatment of \textit{be} in Chapter~\ref{ch:gram}
-(see Appendix~\ref{app:lexuniversal}), substituting the type \textit{Real} for the type \textit{Ind},
-would lead to the property foreground in \nexteg{}.
+modification to the treatment of \textit{be} in Chapter~\ref{ch:gram}, substituting the type \textit{Real} for the type \textit{Ind},
+would lead to the property in \nexteg{}.
 \begin{ex} 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Real}}}
+$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Real}}}
 . \record{\mfield{x}{$r$.x, 90}{\textit{Ind}}\\
-          \tfield{e}{be(x)}} 
+          \tfield{e}{be(x)}}$\urcorner$ 
 \end{ex} 
-A property with this as foreground might be the content you need if you are treating a sentence like
+This property might be the content you need if you are treating a sentence like
 \textit{2 times 45 is 90}.  However, if we use this content with
 \textit{the temperature} we will run into a similar problem as that
-represented in \preveg{}.  This is spelled out in \nexteg{}
+represented in (\ref{ex:runrestrictedambtemp}).  This is spelled out in \nexteg{}
 \begin{ex} 
 \begin{subex} 
  
@@ -2403,37 +2400,37 @@ That is, what is checked for being identical with 90 is the `x'-field of the tem
 `x'-field of the argument to the property.  If we choose this property
 as the content for \textit{is ninety} then the restriction of the
 property as second argument to the quantifier will give a property as
-result which is not necessarily empty.  The foreground of this property is shown in \nexteg{}.
+result which is not necessarily empty.  This property is shown in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
             \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
-                         \smalltfield{e}{be(x)}}$|_\text{\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
-        \smallrfield{e}{$s$}{temperature(x)}}}$ 
+                         \smalltfield{e}{be(x)}}$|_{\text{\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+        \smallrfield{e}{$s$}{temperature(x)}}}}\urcorner$ 
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
                                \smallmfield{e}{$s$}{temperature(x)}} . 
             \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
-                         \smalltfield{e}{be(x)}} 
+                         \smalltfield{e}{be(x)}}$\urcorner$ 
 
-\item $\lambda
+\item $\ulcorner\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Rec}\d{$\wedge$}\textit{AmbTempFrame}}\\
                   \smallrfield{e}{$s$}{temperature(x)}} . 
             \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
-                         \smalltfield{e}{be(x)}}
+                         \smalltfield{e}{be(x)}}$\urcorner$
 
-\item $\lambda
+\item $\ulcorner\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{AmbTempFrame}}\\
                   \smallrfield{e}{$s$}{temperature(x)}} . 
             \smallrecord{\smallmfield{x}{$\zeta$($r$.x), 90}{\textit{Ind}}\\
-                         \smalltfield{e}{be(x)}}
+                         \smalltfield{e}{be(x)}}$\urcorner$
  
 \end{subex}  
 \end{ex} 
 Now, as in (\ref{ex:riserestrambtemp}), \preveg{d} is equivalent
  to \preveg{c} in the sense that exactly the same objects will
-have the properties of which these functions are the foreground.  This is because \textit{AmbTempFrame} is a
+have the properties.  This is because \textit{AmbTempFrame} is a
 subtype of \textit{Rec}.  In the functions in \preveg{} there are two
 parameters which will need to be determined by context in
 compositional semantics, that is, will need to be found by matching
@@ -2463,7 +2460,7 @@ We have the same intuitions about \preveg{} as we do about the
 original temperature puzzle.  We cannot conclude \preveg{c} from
 \preveg{a,b}.  Does this mean that \textit{dog} is a frame level noun
 after all?  Certainly, if we think of frames as being like entries in
-relational databases it would be natural to think of age (or
+relational databases, it would be natural to think of age (or
 information allowing us to compute age such as date of birth) as being
 a natural field in a dog-frame.\footnote{Curiously, it does not seem
   to figure in FrameNet for \textit{dog} (as of 2nd March, 2015).  The
@@ -2493,18 +2490,18 @@ repeated as \nexteg{a} we have \nexteg{b}.
 The predicate `dog\_frame' is related to the predicate `dog' by the
 constraint in \nexteg{}.
 \begin{ex} 
-dog\_frame($r$) is non-empty implies $r$ : \smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}} 
+$e$ : dog\_frame($r$) implies $r$ : \smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}} 
 \end{ex} 
 There are several different kinds of dog frames
 with additional information about a dog which an agent may acquire or
 focus on.  Here we will consider just
-frames which contain a field labelled `age' as specified in \nexteg{}.
+frames which contain a field labelled `age' as exemplified in \nexteg{}.
 \begin{ex} 
-If $r$ : \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                       \smalltfield{e}{dog(x)}\\
                       \smalltfield{age}{\textit{Real}}\\
                       \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
-                    then dog\_frame($r$) is non-empty 
+                     
 \label{ex:dogframe}
 \end{ex} 
 An age scale, $\zeta_{\mathrm{age}}$, for individuals can then be
@@ -2518,7 +2515,7 @@ $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
   
 \label{ex:agescale}
 \end{ex} 
-The content foreground for \textit{is nine} in \textit{the dog is nine} is
+The content for \textit{is nine} in \textit{the dog is nine} is
 then like (\ref{ex:isninety}) with $\zeta$ set to
 $\zeta_{\mathrm{age}}$ and 9 replacing 90. Thus \textit{be} followed
 by a numeral can be coerced to a content depending on some scale which
@@ -2537,110 +2534,113 @@ temperature is 35 degrees'' rather than \textit{\#die Temperatur ist
 \textit{\#der Hund ist neun} ``the dog is nine''.  We will return to
 the matter of coercion or creation of new contents in Section~\ref{sec:passengers}.    
 
- We now
-turn our attention to the formulation of the compositional semantics.
+%  We now
+% turn our attention to the formulation of the compositional semantics.
 
-\section{Defining a compositional semantics for the Partee
-  puzzle}
+% \section{Defining a compositional semantics for the Partee
+%   puzzle}
 
-We will now make precise the resources that are needed in order to
-account for the data expressed in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
+% We will now make precise the resources that are needed in order to
+% account for the data expressed in \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item a/the dog runs 
+% \item a/the dog runs 
  
-\item the dog is nine
+% \item the dog is nine
 
-\item the temperature is ninety
+% \item the temperature is ninety
 
-\item the temperature rises 
+% \item the temperature rises 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
   
-We start with the determiners.  The background type
-(``presupposition'') introduced by \textit{the}
-(\ref{ex:bgthedog}) depends on the common noun. This means that the
-contents of 
-\textit{the} and \textit{dog} cannot be combined by the S-combinator
-strategy for the combination of parametric contents that was
-introduced in Chapter~\ref{ch:propnames}, defined in
-Appendix~\ref{app:signcomb}.  This combination method passes up the
-background requirements of the two daughters without modifying them as
-depicted graphically in \nexteg{}.
-\newsavebox{\m}
-\newsavebox{\done}
-\newsavebox{\dtwo}
-\sbox{\m}{\smallrecord{\field{bg}{\smallrecord{\field{f}{$T_{F_\mathrm{bg}}$}\\
-                                            \field{a}{$T_{A_\mathrm{bg}}$}}}\\
-                    \field{fg}{$\lambda r$:\smallrecord{\field{f}{$T_{F_\mathrm{bg}}$}\\
-                                            \field{a}{$T_{A_\mathrm{bg}}$}}
-                                          . $F_{\mathrm{fg}}(r.\mathrm{f})(A_{\mathrm{fg}}(r.\mathrm{a}))$}} }
-\sbox{\done}{\smallrecord{\field{bg}{$T_{F_\mathrm{bg}}$}\\
-                             \field{fg}{$F_{\mathrm{fg}}$}}}
-\sbox{\dtwo}{\smallrecord{\field{bg}{$T_{A_\mathrm{bg}}$}\\
-                              \field{fg}{$A_{\mathrm{fg}}$}}}
-\begin{ex} 
-\Tree [.$X$\\\usebox{\m}
-                $F$\\\usebox{\done} 
-                $A$\\\usebox{\dtwo} ] 
-\label{ex:scombtree}
-\end{ex} 
+% We start with the determiners.  The background type
+% (``presupposition'') introduced by \textit{the}
+% (\ref{ex:bgthedog}) depends on the common noun. This means that the
+% contents of 
+% \textit{the} and \textit{dog} cannot be combined by the S-combinator
+% strategy for the combination of parametric contents that was
+% introduced in Chapter~\ref{ch:propnames}, defined in
+% Appendix~\ref{app:signcomb}.  This combination method passes up the
+% background requirements of the two daughters without modifying them as
+% depicted graphically in \nexteg{}.
+% \newsavebox{\m}
+% \newsavebox{\done}
+% \newsavebox{\dtwo}
+% \sbox{\m}{\smallrecord{\field{bg}{\smallrecord{\field{f}{$T_{F_\mathrm{bg}}$}\\
+%                                             \field{a}{$T_{A_\mathrm{bg}}$}}}\\
+%                     \field{fg}{$\lambda r$:\smallrecord{\field{f}{$T_{F_\mathrm{bg}}$}\\
+%                                             \field{a}{$T_{A_\mathrm{bg}}$}}
+%                                           . $F_{\mathrm{fg}}(r.\mathrm{f})(A_{\mathrm{fg}}(r.\mathrm{a}))$}} }
+% \sbox{\done}{\smallrecord{\field{bg}{$T_{F_\mathrm{bg}}$}\\
+%                              \field{fg}{$F_{\mathrm{fg}}$}}}
+% \sbox{\dtwo}{\smallrecord{\field{bg}{$T_{A_\mathrm{bg}}$}\\
+%                               \field{fg}{$A_{\mathrm{fg}}$}}}
+% \begin{ex} 
+% \Tree [.$X$\\\usebox{\m}
+%                 $F$\\\usebox{\done} 
+%                 $A$\\\usebox{\dtwo} ] 
+% \label{ex:scombtree}
+% \end{ex} 
     
-Instead what we need is \nexteg{} where $\mathfrak{F}$ is a function
-from parametric contents to parametric contents and $\mathcal{A}$ is a
-parametric content.
-\begin{ex} 
-\Tree [.$X$\\$\mathfrak{F}(\mathcal{A})$ $F$\\$\mathfrak{F}$ $A$\\$\mathcal{A}$ ] 
-\end{ex} 
-Here the function $\mathfrak{F}$ has to do the S-combinator like work
-which was achieved by the combination method in
-(\ref{ex:scombtree}). In \nexteg{} we show a schematic version of the
-function and on the node $X$ we show the schematic result of applying
-the function to the argument.
-\sbox{\m}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(A_{\mathrm{fg}})$}\\
-                                               \smalltfield{a}{$T_{A_\mathrm{bg}}$}}}\\
-                       \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(A_{\mathrm{fg}})$}\\
-                                               \smalltfield{a}{$T_{A_\mathrm{bg}}$}}
-                                             . $F_{\mathrm{fn}}(A_{\mathrm{fg}}(r.\mathrm{a}))$}}}
-\sbox{\done}{$\lambda
-  p$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-                  \smalltfield{f}{$T_{A_\mathrm{fg}}$}} . 
-\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(p.\mathrm{fg})$}\\
-                                     \smalltfield{a}{$p$.bg}}}\\
-             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(p.\mathrm{fg})$}\\
-                                     \smalltfield{a}{$p$.bg}}
-                                   . $F_{\mathrm{fn}}(p.\mathrm{fg}(r.\mathrm{a}))$}}
-}
-\begin{ex} 
-\Tree [.$X$\\\usebox{\m}
-                $F$\\\usebox{\done} 
-                $A$\\\usebox{\dtwo} ] 
+% Instead what we need is \nexteg{} where $\mathfrak{F}$ is a function
+% from parametric contents to parametric contents and $\mathcal{A}$ is a
+% parametric content.
+% \begin{ex} 
+% \Tree [.$X$\\$\mathfrak{F}(\mathcal{A})$ $F$\\$\mathfrak{F}$ $A$\\$\mathcal{A}$ ] 
+% \end{ex} 
+% Here the function $\mathfrak{F}$ has to do the S-combinator like work
+% which was achieved by the combination method in
+% (\ref{ex:scombtree}). In \nexteg{} we show a schematic version of the
+% function and on the node $X$ we show the schematic result of applying
+% the function to the argument.
+% \sbox{\m}{\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(A_{\mathrm{fg}})$}\\
+%                                                \smalltfield{a}{$T_{A_\mathrm{bg}}$}}}\\
+%                        \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(A_{\mathrm{fg}})$}\\
+%                                                \smalltfield{a}{$T_{A_\mathrm{bg}}$}}
+%                                              . $F_{\mathrm{fn}}(A_{\mathrm{fg}}(r.\mathrm{a}))$}}}
+% \sbox{\done}{$\lambda
+%   p$:\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+%                   \smalltfield{f}{$T_{A_\mathrm{fg}}$}} . 
+% \smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(p.\mathrm{fg})$}\\
+%                                      \smalltfield{a}{$p$.bg}}}\\
+%              \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{$T_{F_\mathrm{bg}}(p.\mathrm{fg})$}\\
+%                                      \smalltfield{a}{$p$.bg}}
+%                                    . $F_{\mathrm{fn}}(p.\mathrm{fg}(r.\mathrm{a}))$}}
+% }
+% \begin{ex} 
+% \Tree [.$X$\\\usebox{\m}
+%                 $F$\\\usebox{\done} 
+%                 $A$\\\usebox{\dtwo} ] 
 
-\end{ex} 
-We will call a function from parametric contents to parametric
-contents a \textit{dependent parametric content}.  That is, it depends
-on another parametric content to yield a parametric content. The
-content of definite articles, SemDefArt, will be defined as an
-instance of the schema under $F$ in \preveg{}.  The definition is
-given in \nexteg{a} whose type is \nexteg{b}.
-\begin{ex}
-\begin{subex} 
-\item $\lambda Q$:\textit{PPpty} . 
-\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{e}{unique($Q$.fg($\Uparrow$a))}}}\\
-                                     \smalltfield{a}{$Q$.bg}}}\\
-             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{e}{unique($Q$.fg($\Uparrow$a))}}}\\
-                                     \smalltfield{a}{$Q$.bg}} . 
-$\lambda P$:\textit{Ppty} . 
-\smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
-             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
-             \smalltfield{e}{every(restr, scope)}}}}
+% \end{ex} 
+% We will call a function from parametric contents to parametric
+% contents a \textit{dependent parametric content}.  That is, it depends
+% on another parametric content to yield a parametric content. The
+% content of definite articles, SemDefArt, will be defined as an
+% instance of the schema under $F$ in \preveg{}.  The definition is
+% given in \nexteg{a} whose type is \nexteg{b}.
+% \begin{ex}
+% \begin{subex} 
+% \item $\lambda Q$:\textit{PPpty} . 
+% \smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{e}{unique($Q$.fg($\Uparrow$a))}}}\\
+%                                      \smalltfield{a}{$Q$.bg}}}\\
+%              \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\smallrecord{\smalltfield{e}{unique($Q$.fg($\Uparrow$a))}}}\\
+%                                      \smalltfield{a}{$Q$.bg}} . 
+% $\lambda P$:\textit{Ppty} . 
+% \smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+%              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+%              \smalltfield{e}{every(restr, scope)}}}}
 
-     \item (\textit{PPpty}$\to$\textit{PQuant})
-\end{subex}
-\end{ex} 
+%      \item (\textit{PPpty}$\to$\textit{PQuant})
+% \end{subex}
+% \end{ex} 
+
+@@\todo{Need to put `unique' into the summary}
+
 The lexical resource we need to include in the English lexicon is
 \nexteg{a} where Lex$_{\mathrm{DefArt}}$ is a universal resource
 defined in \nexteg{b}. (Lex is defined in
@@ -4014,8 +4014,12 @@ r$:\textit{LocRiseEventCntxt} .\\
 
   \begin{description}
     
-  \item[\textnormal{exist}] --- $e$ : exist($P$,$Q$) iff
-    $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
+  \item[\textnormal{exist} Revised!] --- % $e$ : exist($P$,$Q$) iff
+    % $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
+    $s$ : exist($P$,$Q$) iff
+    $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+    
+  \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
 
   \end{description}
 \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
@@ -4066,6 +4070,16 @@ r$:\textit{LocRiseEventCntxt} .\\
 \item[\textnormal{$\zeta_{\mathrm{height}}$} New!] ---
   $\lambda r$:\textit{LocFrame} . $r$.loc.z-coord : (\textit{LocFrame}
   $\rightarrow$ \textit{Real})
+
+  
+\item[\textnormal{$\zeta_{\text{age}}$} New!] ---  
+$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{age}{\textit{Real}}\\
+                         \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+                       . $r$.age : (\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                         \smalltfield{age}{\textit{Real}}\\
+                         \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+                       $\rightarrow$ \textit{Real})
 
 \end{description}
 
@@ -4193,12 +4207,12 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
   
 \item[\textnormal{SemIndefArt}] \mbox{}
 
-  $\lambda c$:\textit{Rec} . \\
+  $\ulcorner\lambda c$:\textit{Rec} . \\
 \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
 \hspace*{2em} $\lambda P$:\textit{Ppty}
 . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
           \mfield{scope}{$P$}{\textit{Ppty}} \\
-          \tfield{e}{exist(restr, scope)}}
+          \tfield{e}{exist(restr, scope)}}$\urcorner$
 
         
       \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
@@ -4213,12 +4227,22 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 
         \item[\textnormal{SemDefArt} New!] \mbox{}
 
-  $\lambda c$:\textit{Rec} . \\
-\hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
-\hspace*{2em} $\lambda P$:\textit{Ppty}
-. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
-          \mfield{scope}{$P$}{\textit{Ppty}} \\
-          \tfield{e}{the(restr, scope)}}
+ %  $\lambda c$:\textit{Rec} . \\
+% \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+% \hspace*{2em} $\lambda P$:\textit{Ppty}
+% . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+%           \mfield{scope}{$P$}{\textit{Ppty}} \\
+%           \tfield{e}{the(restr, scope)}}
+
+          $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{e}{unique($Q$)}}}} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$
 
         
       \item[\textnormal{Lex$_{\mathrm{DefArt}}$($T_{\mathrm{Phon}}$)} New!]
@@ -4228,7 +4252,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
         \begin{quote}
           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
-          \smallrecord{\smallmfield{cont}{SemDefArt}{\textit{PQuantDet}}}
+          \smallrecord{\smallmfield{cont}{SemDefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
         \end{quote}
 
       \item[\textnormal{SemIntransVerb($T_{\mathrm{bg}}$, $p$)} Revised!]
