@@ -1905,8 +1905,34 @@ in \nexteg{}.
     \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
     \mfield{scope}{$P$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$
+\end{ex}
+For the sake of consistency in how determiners are combined with nouns
+we shall adjust the definition of the
+`SemIndefArt' so that it too is a dependent parametric content of the
+same form as `SemDefArt' even
+though it does not introduce a presupposition that depends on the
+following noun.  `SemIndefArt' is defined as \nexteg{}.
+\begin{ex} 
+% $\lambda Q$:\textit{PPpty} . 
+% \smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+%                                      \smalltfield{a}{$Q$.bg}}}\\
+%              \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+%                                      \smalltfield{a}{$Q$.bg}} . 
+% $\lambda P$:\textit{Ppty} . 
+% \smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+%              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+%              \smalltfield{e}{exist(restr, scope)}}}}
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$
 \end{ex} 
-How should this content be combined with the content of a common noun
+
+
+How should these contents be combined with the content of a common noun
 to form the content of the noun-phrase?  Let us refer to \preveg{} as
 \textbf{the} and use \textbf{dog} to refer to the parametric content
 associated with \textit{dog} given in \nexteg{}, where `dog$'$'
@@ -2485,7 +2511,7 @@ repeated as \nexteg{a} we have \nexteg{b}.
   r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{dog\_frame($r$.x)}} 
  
 \end{subex} 
-   
+ \label{ex:dog-dogframe}  
 \end{ex} 
 The predicate `dog\_frame' is related to the predicate `dog' by the
 constraint in \nexteg{}.
@@ -2639,103 +2665,97 @@ the matter of coercion or creation of new contents in Section~\ref{sec:passenger
 % \end{subex}
 % \end{ex} 
 
-@@\todo{Need to put `unique' into the summary}
 
-The lexical resource we need to include in the English lexicon is
-\nexteg{a} where Lex$_{\mathrm{DefArt}}$ is a universal resource
-defined in \nexteg{b}. (Lex is defined in
-Appendix~\ref{app:lexuniversal}.)
-\begin{ex} 
-\begin{subex} 
+% The lexical resource we need to include in the English lexicon is
+% \nexteg{a} where Lex$_{\mathrm{DefArt}}$ is a universal resource
+% defined in \nexteg{b}. (Lex is defined in
+% Appendix~\ref{app:lexuniversal}.)
+% \begin{ex} 
+% \begin{subex} 
  
-\item Lex$_{\mathrm{DefArt}}$(``the'') 
+% \item Lex$_{\mathrm{DefArt}}$(``the'') 
  
-\item Lex$_{\mathrm{DefArt}}$($T_{\mathrm{phon}}$), where
-  $T_{\mathrm{phon}}$ is a phonological type, is defined as\\ 
-Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemDefArt}{(\textit{PPpty}$\to$\textit{PQuant})}} 
+% \item Lex$_{\mathrm{DefArt}}$($T_{\mathrm{phon}}$), where
+%   $T_{\mathrm{phon}}$ is a phonological type, is defined as\\ 
+% Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemDefArt}{(\textit{PPpty}$\to$\textit{PQuant})}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
  
-For the sake of consistency we shall adjust the definition of the
-SemIndefArt so that it too is a dependent parametric content of the
-same form as SemDefArt even
-though it does not introduce a presupposition that depends on the
-following noun.  SemIndefArt is defined as \nexteg{}.
-\begin{ex} 
-$\lambda Q$:\textit{PPpty} . 
-\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\textit{Rec}}\\
-                                     \smalltfield{a}{$Q$.bg}}}\\
-             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
-                                     \smalltfield{a}{$Q$.bg}} . 
-$\lambda P$:\textit{Ppty} . 
-\smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
-             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
-             \smalltfield{e}{exist(restr, scope)}}}} 
-\end{ex} 
-The lexical resource we need to include in the English lexicon is
-\nexteg{a} where Lex$_{\mathrm{IndefArt}}$ is a universal resource
-defined in \nexteg{b}. 
-\begin{ex} 
-\begin{subex} 
- 
-\item Lex$_{\mathrm{IndefArt}}$(``a'') 
- 
-\item Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$), where
-  $T_{\mathrm{phon}}$ is a phonological type, is defined as\\ 
-Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{PPpty}$\to$\textit{PQuant})}} 
- 
-\end{subex} 
-   
-\end{ex}    
 
-We now move on to common nouns.  We define SemCommonNoun($p$,
-$T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
-where $p$ is a predicate with arity $\langle T_{\mathrm{arg}}\rangle$,
-$T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
-$T_{\mathrm{bg}}$ is a record type representing the background requirements, as \nexteg{}.
-\begin{ex} 
-\record{\field{bg}{$T_{\mathrm{bg}}$}\\
-        \field{fg}{$\lambda c$:$T_{\mathrm{bg}}$ . \record{\field{bg}{$T_{\mathrm{restr}}$}\\
-                           \field{fg}{$\lambda r$:\smallrecord{\smalltfield{x}{$T_{\mathrm{restr}}$}} . 
-                      \smallrecord{\smalltfield{e}{$p$($r$.x)}}}}}} 
-\label{ex:semcommonnoun}
-\end{ex} 
-The lexical resources for common nouns we will include in the English
-lexicon are \nexteg{a} where Lex$_{\mathrm{CommonNoun}}$ is a
-universal resource defined in \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+
+% The lexical resource we need to include in the English lexicon is
+% \nexteg{a} where Lex$_{\mathrm{IndefArt}}$ is a universal resource
+% defined in \nexteg{b}. 
+% \begin{ex} 
+% \begin{subex} 
  
-\item Lex$_{\mathrm{CommonNoun}}$(``dog'', dog, \textit{Ind},
-  \textit{Ind}, \textit{Rec})\\
-      Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
-      \textit{Rec}, \textit{Rec}, \textit{Rec}) 
+% \item Lex$_{\mathrm{IndefArt}}$(``a'') 
  
-\item Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$,
-  $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
-  where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
-  with arity $\langle T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and $T_{\mathrm{bg}}$ is a record type, is defined as\\
-Lex($T_{\mathrm{phon}}$, $N$) \d{$\wedge$} 
-\smallrecord{\smallmfield{cnt}{SemCommonNoun($p$, $T_{\mathrm{arg}}$,
-    $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
+% \item Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{phon}}$), where
+%   $T_{\mathrm{phon}}$ is a phonological type, is defined as\\ 
+% Lex($T_{\mathrm{phon}}$, \textit{Det}) \d{$\wedge$} \smallrecord{\smallmfield{cnt}{SemIndefArt}{(\textit{PPpty}$\to$\textit{PQuant})}} 
  
-\end{subex} 
-\label{ex:lexdogtemp}   
-\end{ex}
-We can think of the common noun sign types in \preveg{a} as
+% \end{subex} 
+   
+% \end{ex} 
+
+
+% We now move on to common nouns.  We define SemCommonNoun($p$,
+% $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+% where $p$ is a predicate with arity $\langle T_{\mathrm{arg}}\rangle$,
+% $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
+% $T_{\mathrm{bg}}$ is a record type representing the background requirements, as \nexteg{}.
+% \begin{ex} 
+% \record{\field{bg}{$T_{\mathrm{bg}}$}\\
+%         \field{fg}{$\lambda c$:$T_{\mathrm{bg}}$ . \record{\field{bg}{$T_{\mathrm{restr}}$}\\
+%                            \field{fg}{$\lambda r$:\smallrecord{\smalltfield{x}{$T_{\mathrm{restr}}$}} . 
+%                       \smallrecord{\smalltfield{e}{$p$($r$.x)}}}}}} 
+% \label{ex:semcommonnoun}
+% \end{ex} 
+% The lexical resources for common nouns we will include in the English
+% lexicon are \nexteg{a} where Lex$_{\mathrm{CommonNoun}}$ is a
+% universal resource defined in \nexteg{b}.
+
+
+
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item Lex$_{\mathrm{CommonNoun}}$(``dog'', dog, \textit{Ind},
+%   \textit{Ind}, \textit{Rec})\\
+%       Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
+%       \textit{Rec}, \textit{Rec}, \textit{Rec}) 
+ 
+% \item Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $p$,
+%   $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+%   where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
+%   with arity $\langle T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and $T_{\mathrm{bg}}$ is a record type, is defined as\\
+% Lex($T_{\mathrm{phon}}$, $N$) \d{$\wedge$} 
+% \smallrecord{\smallmfield{cnt}{SemCommonNoun($p$, $T_{\mathrm{arg}}$,
+%     $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
+ 
+% \end{subex} 
+% \label{ex:lexdogtemp}   
+% \end{ex}
+
+
+
+We can think of the common noun sign types like (\ref{ex:dog-dogframe}a) as
 unmodulated in something like the sense of modulation discussed by
 \cite{Recanati2010} in that the restriction type yielding the type of
 the domain of the property is identical with the type that represents
-the arity of the predicate.  We will see a way to modulate the content
+the arity of the predicate.  We will see later a way to modulate the content
 of the noun by choosing a subtype of the type of the predicate
-argument as the domain type of the property (that is,
-$T_{\mathrm{restr}}$ above). 
+argument as the domain type of the property. 
 
-To this we add an operation CommonNounIndToFrame which is defined on 
+Here we discuss an operation `CommonNounIndToFrame' which is defined on 
 individual level common noun sign types and ``raises'' them to frame level common noun
 sign types.  This is defined in \nexteg{}.
+
+@@\todo{Definition needs fixing.}
+
 \begin{ex}
 If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
 $T_\mathrm{bg}$ is a record type (the ``background type'' or
@@ -4008,6 +4028,17 @@ r$:\textit{LocRiseEventCntxt} .\\
         $u$ is the audience of $u$ in $e$
 
     \end{description}
+      
+  \item[with arity \textnormal{$\langle$\textit{Ppty}$\rangle$}]
+    \mbox{}
+
+    \begin{description}
+      
+    \item[\textnormal{unique} New!] --- $s:\textrm{unique}(P)$ iff
+      $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$
+
+    \end{description}
+    
 
   
 \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
@@ -4130,15 +4161,23 @@ Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 . \record{\tfield{e}{$p$($r$.x)}}
 \end{quote}
-  
-    If $p$ is a predicate with arity $\langle\textit{Rec},
-    \textit{Rec}\rangle$ and $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
+
+If $p$ is a predicate with arity $\langle\textit{Rec}\rangle$ and $T_{\mathrm{bg}}$ is a type (of context), then
     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
   \begin{quote}
     $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-r$:\textit{Rec}
-. \record{\tfield{e}{$p$($r$, $c.\mathfrak{c}$)}}
+r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+. \record{\tfield{e}{$p$($r$.x)}}
 \end{quote}
+  
+%     \todo{Not sure this is used}If $p$ is a predicate with arity $\langle\textit{Rec},
+%     \textit{Rec}\rangle$ and $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
+%     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+% r$:\textit{Rec}
+% . \record{\tfield{e}{$p$($r$, $c.\mathfrak{c}$)}}
+% \end{quote}
 
 \item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
     $T_{\mathrm{bg}}$, $p$)} Revised!] \mbox{}
@@ -4156,8 +4195,8 @@ r$:\textit{Rec}
 
 
   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
-  predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}, \textit{Rec}\rangle$ and
-  $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
+  predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}\rangle$ and
+  $T_{\mathrm{bg}}$ is a type (of context), then
   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
   $p$) is
   \begin{quote}
@@ -4205,24 +4244,33 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 \end{quote}
 
   
-\item[\textnormal{SemIndefArt}] \mbox{}
+\item[\textnormal{SemIndefArt} Revised!] \mbox{}
 
-  $\ulcorner\lambda c$:\textit{Rec} . \\
-\hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
-\hspace*{2em} $\lambda P$:\textit{Ppty}
-. \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
-          \mfield{scope}{$P$}{\textit{Ppty}} \\
-          \tfield{e}{exist(restr, scope)}}$\urcorner$
+  % $\ulcorner\lambda c$:\textit{Rec} . \\
+% \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+% \hspace*{2em} $\lambda P$:\textit{Ppty}
+% . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+%           \mfield{scope}{$P$}{\textit{Ppty}} \\
+%           \tfield{e}{exist(restr, scope)}}$\urcorner$
+
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$
 
         
-      \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
+      \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}
+        Revised!]
         \mbox{}
 
         If $T_{\mathrm{Phon}}$ is a phonological type, then
         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
         \begin{quote}
           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
-          \smallrecord{\smallmfield{cont}{SemIndefArt}{\textit{PQuantDet}}}
+          \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
         \end{quote}
 
         \item[\textnormal{SemDefArt} New!] \mbox{}
@@ -4793,9 +4841,12 @@ $e$ : temperature$(r)$ if
     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
 \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+\> Lex$_{\mathrm{DefArt}}$(``the''), \textbf{New!}\\
 \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer) \textbf{Revised!},\\
 \> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor) \textbf{Revised!}, \\
-\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) \textbf{Revised!}, \\
+\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog)
+\textbf{New!}, \\
+\> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec}, temperature) \textbf{New!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
 \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
 rise) \textbf{New!}, \\
