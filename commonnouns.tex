@@ -2750,19 +2750,52 @@ the arity of the predicate.  We will see later a way to modulate the content
 of the noun by choosing a subtype of the type of the predicate
 argument as the domain type of the property. 
 
-Here we discuss an operation `CommonNounIndToFrame' which is defined on 
-individual level common noun sign types and ``raises'' them to frame level common noun
-sign types.  This is defined in \nexteg{}.
+Here we discuss an operation `CommonNounIndToFrame' which is defined
+on individual level common noun sign types and ``raises'' them to
+frame level common noun sign types.  In order to facilitate this we
+first introduce a function $\mathrm{FrameType}$ which maps predicates
+with arity $\langle\textit{Ind}\rangle$ to a type of frames.  The way
+$\mathrm{FrameType}$ is defined depends on a particular agent at a
+particular time, that is, $\mathrm{FrameType}(p)$ represents the type
+of frames that an agent associates with the predicate $p$.  A general
+constraint on $\mathrm{FrameType}$ is that for any $p$ in its domain
+\nexteg{} must hold.
+\begin{ex} 
+  $\mathrm{FrameType}(p)\sqsubseteq$ \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{$p$(x)}}
+\end{ex} 
+Using this we can derive a new predicate `$p$\_frame' from any
+predicate $p$ for which $\mathrm{FrameType}$ is defined.  This is
+characterized in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $p$ is a predicate in the domain of $\mathrm{FrameType}$,
+  then $p$\_frame is a predicate with arity $\langle\textit{Rec}\rangle$. 
+ 
+\item $e:p\_\text{frame}(r)$ iff $r:\mathrm{FrameType}(p)$ and $e=r$ 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
 
-@@\todo{Definition needs fixing.}
+
+`CommonNounIndToFrame' is defined in \nexteg{}.
 
 \begin{ex}
-If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
+If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+arity $\langle\textit{Ind}\rangle$ and
 $T_\mathrm{bg}$ is a record type (the ``background type'' or
 ``presupposition'') then \\ 
 \mbox{CommonNounIndToFrame(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
-$p$, \textit{Ind}, \textit{Ind}, $T_\mathrm{bg}$))} = Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
-$p$\_frame, \textit{Rec}, \textit{Rec}, $T_\mathrm{bg}$)
+  $T_\mathrm{bg}$, $p$))} =
+\begin{quote}
+  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+  $T_\mathrm{bg}$, $p$\_frame)
+\end{quote}
+
 \label{ex:CommonNounIndToFrame} 
 \end{ex} 
 This operation is a universal resource which may or may not be used by
@@ -2771,22 +2804,26 @@ Section~\ref{sec:indvsframe}, we suggest that it is used productively
 in English but not in German, for example.  This gives us a way of
 generating new lexical resources from already existing resources.
 Similarly, we can think of $p$\_frame as being the result of applying
-a ``raising'' operation to the predicate $p$ where the new predicate
-is associated with the general constraint expressed in \nexteg{}.
-\begin{ex} 
-If $p$ is a predicate with arity $\langle$\textit{Ind}$\rangle$, then
-for any $e$ and $r$,  
-\begin{quote}
-$e$ : $p$\_frame($r$) implies $r$ : 
-\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-             \smalltfield{e}{$p$(x)}}
-\end{quote}
-\label{ex:predframe}
-\end{ex} 
+a ``raising'' operation to the predicate $p$. % where the new predicate
+% is associated with the general constraint expressed in \nexteg{}.
+% \begin{ex} 
+% If $p$ is a predicate with arity $\langle$\textit{Ind}$\rangle$, then
+% for any $e$ and $r$,  
+% \begin{quote}
+% $e$ : $p$\_frame($r$) implies $r$ : 
+% \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%              \smalltfield{e}{$p$(x)}}
+% \end{quote}
+% \label{ex:predframe}
+% \end{ex}
+
 Another way to generate new lexical resources from basic common noun
 sign types is to restrict the domain of the common noun by some type
 (perhaps related to a topos as suggested in
 Section~\ref{sec:compsemPartee}).  This is formulated in \nexteg{}.
+
+@@
+
 \begin{ex} 
 If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate,
 $T_{\mathrm{arg}}$ is a type and that arity of $p$ is $\langle
@@ -4157,17 +4194,17 @@ Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
     $T_{\mathrm{bg}}$ is a type (of context), then
     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
   \begin{quote}
-    $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+    $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{$p$($r$.x)}}
+. \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
 \end{quote}
 
 If $p$ is a predicate with arity $\langle\textit{Rec}\rangle$ and $T_{\mathrm{bg}}$ is a type (of context), then
     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
   \begin{quote}
-    $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+    $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
-. \record{\tfield{e}{$p$($r$.x)}}
+. \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
 \end{quote}
   
 %     \todo{Not sure this is used}If $p$ is a predicate with arity $\langle\textit{Rec},
@@ -4309,17 +4346,17 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
         predicate with arity $\langle\textit{Ind}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
-          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-          . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$
+          . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
         \end{quote}
 
         If $T_{\text{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a record type (for context) and $p$ is a
         predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
-          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+          $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
           r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
-          . \record{\tfield{e}{$p$($r$.x, $c.\mathfrak{c}$)}}$\urcorner$
+          . \record{\tfield{e}{$p$($r$.x, $c.\mathfrak{c}$)}}$\urcorner\urcorner$
         \end{quote}
 
         
@@ -4390,6 +4427,41 @@ r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
   Lex($T_{\mathrm{Phon}}$,
 \textit{V}) \d{$\wedge$}
 \smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+\end{quote}
+
+\item[\textnormal{$\mathrm{FrameType}(p)$} New!] \mbox{}
+
+  $\mathrm{FrameType}$ is a partial function on predicates, $p$, with
+  arity $\langle\textit{Ind}\rangle$ which can be defined for
+  particular agents and particular times, which obeys the constraint:
+  \begin{quote}
+    $\mathrm{FrameType}(p)\sqsubseteq$ \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{$p$(x)}}
+\end{quote}
+
+\item[\textnormal{$p$\_frame} New!] \mbox{}
+
+  \begin{enumerate} 
+ 
+\item If $p$ is a predicate in the domain of $\mathrm{FrameType}$,
+  then $p$\_frame is a predicate with arity $\langle\textit{Rec}\rangle$. 
+ 
+\item $e:p\_\text{frame}(r)$ iff $r:\mathrm{FrameType}(p)$ and $e=r$ 
+ 
+\end{enumerate}
+
+\item[\textnormal{CommonNounIndToFrame} New!] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+arity $\langle\textit{Ind}\rangle$ and
+$T_\mathrm{bg}$ is a record type (the ``background type'' or
+``presupposition'') then \\ 
+\mbox{CommonNounIndToFrame(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+  $T_\mathrm{bg}$, $p$))} =
+\begin{quote}
+  Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+  $T_\mathrm{bg}$, $p$\_frame)
 \end{quote}
   
         
