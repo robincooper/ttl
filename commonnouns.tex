@@ -2499,16 +2499,15 @@ a natural field in a dog-frame.\footnote{Curiously, it does not seem
 Our strategy to deal with this will be to say that contents of individual level
 nouns can be coerced to frame level contents, whereas the contents of
 frame level nouns cannot be coerced ``down'' to individual level
-contents.  Thus in addition to (\ref{ex:dogtemperaturecont}a),
-repeated as \nexteg{a} we have \nexteg{b}.
+contents.  Thus in addition to \nexteg{a} we have \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}  
+\item $\ulcorner\lambda c$:\textit{Rec} . $\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}$\urcorner\urcorner$  
  
-\item  $\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{dog\_frame($r$.x)}} 
+\item  $\ulcorner\lambda c$:\textit{Rec} . $\ulcorner\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{dog\_frame($r$.x)}}$\urcorner\urcorner$ 
  
 \end{subex} 
  \label{ex:dog-dogframe}  
@@ -2822,36 +2821,37 @@ sign types is to restrict the domain of the common noun by some type
 (perhaps related to a topos as suggested in
 Section~\ref{sec:compsemPartee}).  This is formulated in \nexteg{}.
 
-@@
 
 \begin{ex} 
 If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate,
-$T_{\mathrm{arg}}$ is a type and that arity of $p$ is $\langle
-T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq
-T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$ is a record type and
-$T_{\mathrm{mod}}\sqsubseteq T_{\mathrm{restr}}$ then
-
-\mbox{RestrictCommonNoun(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
-$p$, $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
-$T_{\mathrm{mod}}$)} = Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
-$p$, $T_{\mathrm{arg}}$, $T_{\mathrm{mod}}$, $T_{\mathrm{bg}}$)   
+$T_{\mathrm{bg}}$ and $T_{\mathrm{res}}$ are record types and $\Sigma$
+is Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+$p$), then RestrictCommonNoun($\Sigma$, $T_{\mathrm{res}}$) is
+\begin{quote}
+$\Sigma$
+\fbox{\d{$\wedge$}} \record{
+  \mfield{cont}{$\ulcorner\lambda c\!:\!T_{\mathrm{bg}}\ .\
+    \ulcorner\text{SemCommonNoun}(T_{\mathrm{bg}},p)(c)\!\mid_{T_{\mathrm{res}}}\urcorner\urcorner$}{\textit{PPpty}}}
+\end{quote}
+  
 \end{ex} 
 This will enable us, for example,  to restrict the basic lexical entry
-for \textit{temperature} (repeated in \nexteg{a}) to obtain the
-additional lexical resource \nexteg{b}, which is needed to produce the
-noun-phrase content in (\ref{ex:thetemp}).
+for \textit{temperature}, $\Sigma_{\text{``temperature''}}$ (repeated in \nexteg{a}) to obtain the
+additional lexical resource \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
-      \textit{Rec}, \textit{Rec}, \textit{Rec}) 
+\item $\Sigma_{\text{``temperature''}}$ = Lex$_{\mathrm{CommonNoun}}$(``temperature'', \textit{Rec}, temperature)
+       
  
-\item Lex$_{\mathrm{CommonNoun}}$(``temperature'', temperature,
-      \textit{Rec}, \textit{AmbTempFrame}, \textit{Rec}) 
+\item RestrictCommonNoun($\Sigma_{\text{``temperature''}}$, \textit{AmbTempFrame})
  
 \end{subex} 
    
 \end{ex}
+This gives us a content for \textit{temperature} which is restricted
+to ambient temperature.
+
 We can combine restriction coercion with frame coercion.  While frame
 coercion gives us a general frame level property of records we can
 restrict the frame to be of a certain type corresponding to a
@@ -2866,15 +2866,25 @@ suppose that we have resource which is a frame type for dog frames, \textit{DogF
 \end{ex} 
 We can use \textit{DogFrame} to restrict the result of coercing our
 frame level dog sign type, that is there can be a two-step coercion
-from the basic lexical entry in (\ref{ex:lexdogtemp}a) as represented
-in \nexteg{}.
-\begin{ex} 
-Lex$_{\mathrm{CommonNoun}}$(``dog'', dog, \textit{Ind},
-  \textit{Ind}, \textit{Rec}) $\leadsto$ Lex$_{\mathrm{CommonNoun}}$(``dog'', dog\_frame, \textit{Rec},
-  \textit{Rec}, \textit{Rec}) $\leadsto$ Lex$_{\mathrm{CommonNoun}}$(``dog'', dog\_frame, \textit{Rec},
-  \textit{DogFrame}, \textit{Rec})
+from the basic lexical entry in \nexteg{a}, $\Sigma_{\text{``dog''}}$, as represented
+in \nexteg{a} to \nexteg{b}.
+\begin{ex}
+  \begin{subex} 
+ 
+\item  $\Sigma_{\text{``dog''}}$ = Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog)
+ 
+\item
+  RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$), \textit{DogFrame}) 
+ 
+\end{subex} 
+  
+% Lex$_{\mathrm{CommonNoun}}$(``dog'', dog, \textit{Ind},
+%   \textit{Ind}, \textit{Rec}) $\leadsto$ Lex$_{\mathrm{CommonNoun}}$(``dog'', dog\_frame, \textit{Rec},
+%   \textit{Rec}, \textit{Rec}) $\leadsto$ Lex$_{\mathrm{CommonNoun}}$(``dog'', dog\_frame, \textit{Rec},
+%   \textit{DogFrame}, \textit{Rec})
 \end{ex} 
-    
+
+@@
 
 We treat intransitive verbs in a parallel fashion to common nouns.
 Thus 
@@ -4463,6 +4473,19 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
   $T_\mathrm{bg}$, $p$\_frame)
 \end{quote}
+
+\item[\textnormal{RestrictCommonNoun} New!] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate,
+$T_{\mathrm{bg}}$ and $T_{\mathrm{res}}$ are record types and $\Sigma$
+is Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+$p$), then RestrictCommonNoun($\Sigma$, $T_{\mathrm{res}}$) is
+\begin{quote}
+$\Sigma$
+\fbox{\d{$\wedge$}} \record{
+  \mfield{cont}{$\ulcorner\lambda c\!:\!T_{\mathrm{bg}}\ .\
+    \ulcorner\text{SemCommonNoun}(T_{\mathrm{bg}},p)(c)\!\mid_{T_{\mathrm{res}}}\urcorner\urcorner$}{\textit{PPpty}}}
+\end{quote}
   
         
 
@@ -4823,7 +4846,7 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 \subsection{English resources} 
 
-\subsubsection{Basic types and predicates} 
+\subsubsection{Types and predicates} 
 
 \begin{description}
 
@@ -4896,7 +4919,21 @@ $e$ : temperature$(r)$ if
     $r$ : \textit{AmbTempFrame} and $e=r$
   \end{quote}
  
+\end{description}
+
+\item[Frame types] \mbox{}
+
+  \begin{description}
+
+    
+  \item[\textnormal{\textit{DogFrame}} New!] --- \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+                      \smalltfield{e}{dog(x)}\\
+                      \smalltfield{age}{\textit{Real}}\\
+                      \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+
+
   \end{description}
+  
   
 
 \end{description}
@@ -4916,9 +4953,14 @@ $e$ : temperature$(r)$ if
 \> Lex$_{\mathrm{DefArt}}$(``the''), \textbf{New!}\\
 \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer) \textbf{Revised!},\\
 \> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor) \textbf{Revised!}, \\
-\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog)
+\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$)
 \textbf{New!}, \\
-\> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec}, temperature) \textbf{New!}, \\
+\> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
+\textit{DogFrame}) \textbf{New!},\\
+\> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
+temperature) (= $\Sigma_{\text{``temperature''}}$) \textbf{New!}, \\
+\> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
+\textit{AmbTempFrame}) \textbf{New!},\\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
 \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
 rise) \textbf{New!}, \\
