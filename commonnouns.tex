@@ -2461,7 +2461,9 @@ subtype of \textit{Rec}.  In the functions in \preveg{} there are two
 parameters which will need to be determined by context in
 compositional semantics, that is, will need to be found by matching
 the domain type of a parametric content against an agent's resources.
-These are the resource situation, $s$, and the scale, $\zeta$. 
+These are the resource situation, $s$, and the scale, $\zeta$.
+
+
 
 \section{Individual vs. frame level nouns}
 \label{sec:indvsframe}
@@ -2884,36 +2886,36 @@ in \nexteg{a} to \nexteg{b}.
 %   \textit{DogFrame}, \textit{Rec})
 \end{ex} 
 
-@@
+@@\todo{Think about well-definedness for quantifiers with polymorphic properties}
 
-We treat intransitive verbs in a parallel fashion to common nouns.
-Thus 
-\begin{quote}
-SemIntransVerb($p$,
-$T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)
-\end{quote}
-where $p$ is a predicate with arity $\langle T_{\mathrm{arg}}\rangle$,
-$T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
-$T_{\mathrm{bg}}$ is the record type (\ref{ex:semcommonnoun}) as for
-common nouns.  We define  Lex$_{\mathrm{IntransVerb}}$ similarly to
-Lex$_{\mathrm{CommonNoun}}$ in \nexteg{}.
-\begin{ex} 
-Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $p$,
-  $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
-  where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
-  with arity $\langle T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and $T_{\mathrm{bg}}$ is a record type, is defined as\\
-Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
-\smallrecord{\smallmfield{cnt}{SemIntransVerb($p$, $T_{\mathrm{arg}}$,
-    $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
-\end{ex} 
-The basic lexical resources that we need for \textit{runs} and
-\textit{rises} are given in \nexteg{}.
-\begin{ex} 
-Lex$_{\mathrm{IntransVerb}}$(``runs'', run, \textit{Ind},
-  \textit{Ind}, \textit{Rec})\\
-      Lex$_{\mathrm{IntransVerb}}$(``rises'', rise,
-      \textit{Rec}, \textit{Rec}, \textit{Rec})  
-\end{ex} 
+% We treat intransitive verbs in a parallel fashion to common nouns.
+% Thus 
+% \begin{quote}
+% SemIntransVerb($p$,
+% $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)
+% \end{quote}
+% where $p$ is a predicate with arity $\langle T_{\mathrm{arg}}\rangle$,
+% $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
+% $T_{\mathrm{bg}}$ is the record type (\ref{ex:semcommonnoun}) as for
+% common nouns.  We define  Lex$_{\mathrm{IntransVerb}}$ similarly to
+% Lex$_{\mathrm{CommonNoun}}$ in \nexteg{}.
+% \begin{ex} 
+% Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$, $p$,
+%   $T_{\mathrm{arg}}$, $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$),
+%   where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
+%   with arity $\langle T_{\mathrm{arg}}\rangle$, $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and $T_{\mathrm{bg}}$ is a record type, is defined as\\
+% Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
+% \smallrecord{\smallmfield{cnt}{SemIntransVerb($p$, $T_{\mathrm{arg}}$,
+%     $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
+% \end{ex} 
+% The basic lexical resources that we need for \textit{runs} and
+% \textit{rises} are given in \nexteg{}.
+% \begin{ex} 
+% Lex$_{\mathrm{IntransVerb}}$(``runs'', run, \textit{Ind},
+%   \textit{Ind}, \textit{Rec})\\
+%       Lex$_{\mathrm{IntransVerb}}$(``rises'', rise,
+%       \textit{Rec}, \textit{Rec}, \textit{Rec})  
+% \end{ex} 
 
 
 We need a treatment of \textit{is} which will allow it to
@@ -4962,6 +4964,8 @@ temperature) (= $\Sigma_{\text{``temperature''}}$) \textbf{New!}, \\
 \> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
 \textit{AmbTempFrame}) \textbf{New!},\\
 \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``run'', \textit{Rec}, run),
+\textbf{New!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
 rise) \textbf{New!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
