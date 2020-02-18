@@ -1150,6 +1150,80 @@ property which we normally represent as \nexteg{b} and \nexteg{c} is the new def
 If $P$ is a property as in \preveg{a,b}, we will use $P(r)$ to
 represent $P.\text{fg}(r)$ (the result of applying the function $P$.fg
 to $r$).
+\begin{shaded}
+  Actually, things are a little more complicated than this.  Using
+  this polymorphic type for properties introduces a complication when
+  we define functions on properties. This is illustrated in the
+  example in \nexteg{} where we assume that $a$:\textit{Ind}, $p$
+  is a predicate whose arity is $\langle\textit{Rec}\rangle$ and that
+  the types \textit{Ind} and \textit{Rec} preclude each other, that
+  is, nothing can be of both type \textit{Ind} and type \textit{Rec}.
+  \begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$a$}})
+  ($\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$) 
+ 
+\item $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+  . \record{\tfield{e}{$p$($r$.x)}}$\urcorner$ (\smallrecord{\field{x}{$a$}}) 
+ 
+\end{subex} 
+   
+\end{ex}
+In \preveg{a} the argument $\ulcorner\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+. \record{\tfield{e}{$p$($r$.x)}}$\urcorner$ seems appropriate for the
+function $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$a$}})
+since according to our new definition the argument is indeed of type
+\textit{Ppty}.  However, it appears that the result of
+$\beta$-conversion given in \preveg{b} leads to a situation where the
+argument \smallrecord{\tfield{x}{$a$}} is not appropriate to the
+function $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+. \record{\tfield{e}{$p$($r$.x)}} because $a$ is an individual and not
+a record.  This appears to lead to a contradictory situation where
+\preveg{a} is both well-formed and ill-formed because by
+$\beta$-conversion \preveg{a and b} represent the same object.  We
+avoid this problem by saying that the application of a property, $P$,
+to an argument, $a$, if $P$.fg($a$) in the case where $a:P$.bg but
+that otherwise it returns a type that is necessarily empty.  We
+introduce a distinguished type, `$\bot$', called ``bottom'', which is
+necessarily empty.  We can achieve this, for example, by giving it the
+witness condition in \nexteg{}.
+\begin{ex} 
+$a:\bot$ iff $a\not=a$ 
+\end{ex} 
+We can then define property application more accurately than we did
+above as in \nexteg{}.
+\begin{ex} 
+  If $P$ : \textit{Ppty} and $a$ is some object, then
+  \begin{enumerate} 
+ 
+\item $P(a)=P.\text{fg}(a)$ if $a:P.\text{bg}$ 
+ 
+\item otherwise $P(a)=\bot$ 
+ 
+\end{enumerate} 
+  
+\end{ex} 
+
+An advantage of this approach to properties is that providing
+inappropriate arguments to properties will result in something that is
+necessarily false but not ill-formed while its negation will also be
+well-formed and true.  Thus while \nexteg{a} seems strange because
+individual numbers do not rise \nexteg{b} seems true for the same reason.
+\begin{ex} 
+\begin{subex} 
+ 
+\item 90 rises 
+ 
+\item 90 does not rise 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+\end{shaded}  
+
 
 Now that we have generalized our definition of property in this way,
 we need also to adjust our definition of property extension.  The definition we gave in
@@ -2886,7 +2960,7 @@ in \nexteg{a} to \nexteg{b}.
 %   \textit{DogFrame}, \textit{Rec})
 \end{ex} 
 
-@@\todo{Think about well-definedness for quantifiers with polymorphic properties}
+@@
 
 % We treat intransitive verbs in a parallel fashion to common nouns.
 % Thus 
