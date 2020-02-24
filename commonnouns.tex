@@ -2960,7 +2960,7 @@ in \nexteg{a} to \nexteg{b}.
 %   \textit{DogFrame}, \textit{Rec})
 \end{ex} 
 
-@@
+
 
 % We treat intransitive verbs in a parallel fashion to common nouns.
 % Thus 
@@ -2996,78 +2996,155 @@ We need a treatment of \textit{is} which will allow it to
 combine with numerals like \textit{nine} and \textit{ninety} to form a
 frame level predicate as indicated in (\ref{ex:isninety}).  We start
 from a parametrized version of the definition of SemBe which we
-introduced in Chapter~\ref{ch:gram} (repeated in
-Appendix~\ref{app:lexuniversal}).  We give the parametrized version in
+introduced in Chapter~\ref{ch:gram}, also adjusted for our new
+treatment of properties.  This is given in
 \nexteg{}. 
-\begin{ex} 
-$\lambda r$:\textit{Rec} . \\
-\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{2em}
-\record{\field{bg}{\textit{Ind}}\\
-             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+\begin{ex}
+$\ulcorner\lambda c:T_{\text{bg}}$ . \\
+        \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+\hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \\
-& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\textit{Ind}}\\
-                           \field{fg}{$\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\mfield{x}{$r_1$.x,$r_2$.x}{\textit{Ind}}\\
-          \tfield{e}{be(x)}}
-}
-}
-)}}
+\hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+. \record{\mfield{x}{$r_1$.x, $r_2$.x}{\textit{Ind}}\\
+  \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$ 
+% $\lambda r$:\textit{Rec} . \\
+% \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% \hspace*{2em}
+% \record{\field{bg}{\textit{Ind}}\\
+%              \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \\
+% & & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\textit{Ind}}\\
+%                            \field{fg}{$\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\mfield{x}{$r_1$.x,$r_2$.x}{\textit{Ind}}\\
+%           \tfield{e}{be(x)}}
+% }
+% }
+% )}}
  
 \end{ex} 
 Here the context represented by the first argument to the function,
-$r$, does not contribute anything to the final content of \textit{be}
+$c$, does not contribute anything to the final content of \textit{be}
 which represents straightforward equality.  In this chapter we want to
 allow equality not only between individuals but also objects of other
-types as well as introducing a type for the background.  We will thus
-give SemBe two arguments and represent \preveg{} as
-SemBe(\textit{Ind}, \textit{Rec}).  In general we will define
-SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$) to be \nexteg{}.
-\begin{ex}
-$\lambda r$:$T_{\mathrm{bg}}$ . \\
-\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{2em}
-\record{\field{bg}{$T_{\mathrm{arg}}$}\\
-             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+types.  We can do this by letting the content of \textit{be} be
+parametric on a type including the label `x' introduced in the context as in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{ty}{\textit{Type}}}}} . \\
+        \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+        \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+          \smalltfield{x}{$c.\mathfrak{c}$.ty}}
 . \\
-& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{$T_{\mathrm{arg}}$}\\
-                           \field{fg}{$\lambda
-r_2$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
-. \record{\mfield{x}{$r_1$.x, $r_2$.x}{$T_{\mathrm{arg}}$}\\
-          \tfield{e}{be(x)}}
-}
-}
-)}}
- 
-
-
-\end{ex} 
-We will say that this holds if $T_{\mathrm{bg}}$ does not require a
-scale, more precisely if $T_{\mathrm{bg}}$ is not a subtype of 
-\smallrecord{\smalltfield{sc}{($T_{\mathrm{arg}}\to\textit{Real}$)}}. If
-$T_{\mathrm{bg}}\sqsubseteq$
-\smallrecord{\smalltfield{sc}{($T_{\mathrm{arg}}\to\textit{Real}$)}}
-then SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$) is \nexteg{}.
-\begin{ex}
-$\lambda r$:$T_{\mathrm{bg}}$ . \\
-\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{2em}
-\record{\field{bg}{$T_{\mathrm{arg}}$}\\
-             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
-. \\
-& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Real}}}}\\
-                           \field{fg}{$\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Real}}}
-. \record{\mfield{x}{$r$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
-          \tfield{e}{be(x)}}
-}
-}
-)}}
- 
-
-
+\hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+r_2$:\smallrecord{
+  \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+. \record{\mfield{x}{$r_1$.x, $r_2$.x}{$c.\mathfrak{c}$.ty}\\
+  \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$ 
 \end{ex}
+This gives us a content for \textit{be} which will express identity
+for objects in any type.  Thus it will be appropriate for both
+sentences in \nexteg{} where \nexteg{a} expresses identity for
+individuals and \nexteg{b} expresses identity for numbers.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The dog is Fido 
+ 
+\item The number is nine 
+ 
+\end{subex} 
+   
+\end{ex} 
+We will call this `SemBe$_{\text{ID}}$'.  We need a slightly different
+content in order to deal with \nexteg{}.
+\begin{ex}
+  \begin{subex} 
+ 
+\item The dog is nine 
+ 
+\item The temperature is ninety 
+ 
+\end{subex} 
+  
+ 
+\end{ex} 
+Here we need to introduce a scale into the context and make sure that
+the second argument to \textit{be} is a number.  This is given in
+\nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{ty}{\textit{Type}}\\
+      \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
+        \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+        \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+          \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+. \\
+\hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+r_2$:\smallrecord{
+  \smalltfield{x}{\textit{Real}}}
+. \record{\mfield{x}{$c.\mathfrak{c}$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+  \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$  
+\end{ex} 
+We will refer to this as `SemBe$_{\text{scalar}}$'.  
+
+@@\todo{SemBe needs to be revised in the summary.}\todo[inline]{Two similar
+  contents and M's intuition that \textit{be} is the same and others
+  that different. Coercion.}
+
+% We will thus
+% give SemBe two arguments and represent \preveg{} as
+% SemBe(\textit{Ind}, \textit{Rec}).  In general we will define
+% SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$) to be \nexteg{}.
+% \begin{ex}
+% $\lambda r$:$T_{\mathrm{bg}}$ . \\
+% \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% \hspace*{2em}
+% \record{\field{bg}{$T_{\mathrm{arg}}$}\\
+%              \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+% . \\
+% & & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{$T_{\mathrm{arg}}$}\\
+%                            \field{fg}{$\lambda
+% r_2$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+% . \record{\mfield{x}{$r_1$.x, $r_2$.x}{$T_{\mathrm{arg}}$}\\
+%           \tfield{e}{be(x)}}
+% }
+% }
+% )}}
+ 
+
+
+% \end{ex} 
+% We will say that this holds if $T_{\mathrm{bg}}$ does not require a
+% scale, more precisely if $T_{\mathrm{bg}}$ is not a subtype of 
+% \smallrecord{\smalltfield{sc}{($T_{\mathrm{arg}}\to\textit{Real}$)}}. If
+% $T_{\mathrm{bg}}\sqsubseteq$
+% \smallrecord{\smalltfield{sc}{($T_{\mathrm{arg}}\to\textit{Real}$)}}
+% then SemBe($T_{\mathrm{arg}}$, $T_{\mathrm{bg}}$) is \nexteg{}.
+% \begin{ex}
+% $\lambda r$:$T_{\mathrm{bg}}$ . \\
+% \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% \hspace*{2em}
+% \record{\field{bg}{$T_{\mathrm{arg}}$}\\
+%              \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{$T_{\mathrm{arg}}$}}
+% . \\
+% & & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Real}}}}\\
+%                            \field{fg}{$\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Real}}}
+% . \record{\mfield{x}{$r$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+%           \tfield{e}{be(x)}}
+% }
+% }
+% )}}
+ 
+
+
+% \end{ex}
+
+
 Using the scale $\zeta_{\mathrm{age}}$ from (\ref{ex:agescale}),
 repeated as \nexteg{b}, we can
 use the domain type of that function, which we refer to as
@@ -4498,12 +4575,12 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 
         $\lambda c:T_{\text{bg}}$ . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{2em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+\hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \\
-\hspace*{3em} $\mathcal{Q}$($\lambda
+\hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
 r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
-  \tfield{e}{be(x)}})
+  \tfield{e}{be(x)}}$\urcorner$)$\urcorner$
 
 \item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
 
