@@ -1203,7 +1203,7 @@ above as in \nexteg{}.
 \item otherwise $P(a)=\bot$ 
  
 \end{enumerate} 
-  
+\label{ex:property-application}  
 \end{ex} 
 
 An advantage of this approach to properties is that providing
@@ -3089,11 +3089,44 @@ r_2$:\smallrecord{
 . \record{\mfield{x}{$c.\mathfrak{c}$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
   \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$  
 \end{ex} 
-We will refer to this as `SemBe$_{\text{scalar}}$'.  
+We will refer to this as `SemBe$_{\text{scalar}}$'.
 
-@@\todo{SemBe needs to be revised in the summary.}\todo[inline]{Two similar
-  contents and M's intuition that \textit{be} is the same and others
-  that different. Coercion.}
+We now have two similar contents for \textit{be}.  It would be a
+simple matter to define `SemBe$_{\text{scalar}}$' as the result of a
+coercion operation applied to `SemBe$_{\text{ID}}$' if we wanted to.
+\cite{Montague1973} treated both kinds of \textit{be} as identical and
+used individual concepts instead of individuals in order to account
+for the Partee puzzle.  Most following work avoids this use of
+individual concepts and instead assumes that the content of
+\textit{be} is different in the two cases.  The analysis we have
+presented is a way of capturing both intuitions.  We have two contents
+associated with \textit{be} but we have made explicit that they are
+closely related and both basically have \textit{be} express an
+identity relation, corresponding to Montague's intuition.  Note that
+technically both sentences in \nexteg{} are ambiguous according to
+this analysis.
+\begin{ex} 
+\begin{subex} 
+ 
+\item The dog is nine 
+ 
+\item The temperature is ninety 
+ 
+\end{subex} 
+   
+\end{ex} 
+They each have a nonsense necessarily false reading in which,
+respectively, the dog is identical with the number nine and the
+temperature is identical with the number ninety.  The derivation of
+both of these sentences involves a property application which results
+in `$\bot$' (see (\ref{ex:property-application}) on
+p.~\pageref{ex:property-application}).  It is natural to assume that
+speakers in general disprefer the content `$\bot$'.  Note that this
+does not necessarily mean that speakers disprefer all contradictory
+readings.  There are other necessarily empty types.  For example,
+suppose that $T_1$ and $T_2$ preclude each other, that is, no object
+can be a witness for both types.  Then $T_1\wedge T_2$ is a
+necessarily empty type but is distinct from `$\bot$'.
 
 % We will thus
 % give SemBe two arguments and represent \preveg{} as
@@ -3145,47 +3178,47 @@ We will refer to this as `SemBe$_{\text{scalar}}$'.
 % \end{ex}
 
 
-Using the scale $\zeta_{\mathrm{age}}$ from (\ref{ex:agescale}),
-repeated as \nexteg{b}, we can
-use the domain type of that function, which we refer to as
-\textit{AgeFrame} (as specified in \nexteg{a}) as $T_{\mathrm{arg}}$ and construct a meaning for
-\textit{be} SemBe(\textit{AgeFrame},
-\smallrecord{\smalltfield{sc}{(\textit{AgeFrame}$\to\textit{Real}$)}}),
-given in \nexteg{c}.
-\begin{ex} 
-\begin{subex}
+% Using the scale $\zeta_{\mathrm{age}}$ from (\ref{ex:agescale}),
+% repeated as \nexteg{b}, we can
+% use the domain type of that function, which we refer to as
+% \textit{AgeFrame} (as specified in \nexteg{a}) as $T_{\mathrm{arg}}$ and construct a meaning for
+% \textit{be} SemBe(\textit{AgeFrame},
+% \smallrecord{\smalltfield{sc}{(\textit{AgeFrame}$\to\textit{Real}$)}}),
+% given in \nexteg{c}.
+% \begin{ex} 
+% \begin{subex}
 
-\item \textit{AgeFrame} =  \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{age}{\textit{Real}}\\
-                         \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+% \item \textit{AgeFrame} =  \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                          \smalltfield{age}{\textit{Real}}\\
+%                          \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
  
-\item $\zeta_{\mathrm{age}}$ = 
-$\lambda r$:\textit{AgeFrame}
-                       . $r$.age 
+% \item $\zeta_{\mathrm{age}}$ = 
+% $\lambda r$:\textit{AgeFrame}
+%                        . $r$.age 
  
-\item $\lambda r$:\smallrecord{\smalltfield{sc}{(\textit{AgeFrame}$\to\textit{Real}$)}}
-  . \\
-\hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{2em}
-\record{\field{bg}{\textit{AgeFrame}}\\
-             \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{AgeFrame}}
-. \\
-& & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Real}}}}\\
-                           \field{fg}{$\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Real}}}
-. \record{\mfield{x}{$r$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
-          \tfield{e}{be(x)}}
-}
-}
-)}} 
+% \item $\lambda r$:\smallrecord{\smalltfield{sc}{(\textit{AgeFrame}$\to\textit{Real}$)}}
+%   . \\
+% \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% \hspace*{2em}
+% \record{\field{bg}{\textit{AgeFrame}}\\
+%              \field{fg}{$\lambda r_1$:\smallrecord{\smalltfield{x}{AgeFrame}}
+% . \\
+% & & \hspace*{1em}$\mathcal{Q}$(\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Real}}}}\\
+%                            \field{fg}{$\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Real}}}
+% . \record{\mfield{x}{$r$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+%           \tfield{e}{be(x)}}
+% }
+% }
+% )}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-The idea is that \preveg{c} will be created as a resource on the basis
-of the existence of \preveg{b} which will in turn rely on the fact
-that \preveg{a} is a resource.  \preveg{c} is available as a meaning
-of \textit{be} in English but not for German.
+% \end{ex} 
+% The idea is that \preveg{c} will be created as a resource on the basis
+% of the existence of \preveg{b} which will in turn rely on the fact
+% that \preveg{a} is a resource.  \preveg{c} is available as a meaning
+% of \textit{be} in English but not for German.
 
 To complete the picture we need to account for \textit{nine} and
 \textit{ninety}.  We will treat these as logically proper names of
@@ -3194,24 +3227,22 @@ presuppositions in the manner in which we suggested in
 Chapter~\ref{ch:propnames} but rather in the Montague-like manner
 which we used for proper names in Chapter~\ref{ch:gram}, except that
 we now adjust it to take account of parametric contents and the new
-definition of \textit{Ppty} (property), repeated in \nexteg{}.
-\begin{ex} 
-\record{\tfield{bg}{\textit{Type}}\\
-        \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\to$\textit{RecType})}} 
-\end{ex} 
-If $T$ is a type we let \textit{Ppty}($T$) represent the partial
-specification of \textit{Ppty} presented in \nexteg{}.
-\begin{ex} 
-\record{\mfield{bg}{$T$}{\textit{Type}}\\
-        \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\to$\textit{RecType})}} 
-\end{ex}        
+definition of \textit{Ppty} (property).
+% \begin{ex} 
+% \record{\tfield{bg}{\textit{Type}}\\
+%         \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\to$\textit{RecType})}} 
+% \end{ex} 
+% If $T$ is a type we let \textit{Ppty}($T$) represent the partial
+% specification of \textit{Ppty} presented in \nexteg{}.
+% \begin{ex} 
+% \record{\mfield{bg}{$T$}{\textit{Type}}\\
+%         \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\to$\textit{RecType})}} 
+% \end{ex}        
 In $n$ is a (real) number, then SemNumeral($n$) (the content for a
 number expression such as \textit{nine}) is as given in
 \nexteg{}.
 \begin{ex} 
-$\lambda r$:\textit{Rec} . \\
-\hspace*{1em}$\lambda P$:\textit{Ppty}(\textit{Real}) . \\
-\hspace*{2em}$P$.fg(\smallrecord{\field{x}{$n$}}) 
+$\ulcorner\lambda c$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$ 
 \end{ex} 
 Then we can define Lex$_{\mathrm{numeral}}$ as an operation which
 takes a phonological type $T_{\mathrm{phon}}$ and a (real) number $n$
@@ -3233,14 +3264,15 @@ The two sign types that we need as resources for our small fragment are given in
    
 \end{ex}
 
-Since we are now using two methods of semantic combination for
-contents, simple function application for \textit{Det N} constructions
-and our variant of S-combination for other constructions we need to
-use the variant of CntForwardApp from Chapter~\ref{ch:gram} for the
-former and the variant from Chapter~\ref{ch:propnames} for the latter.
-We will here call the Chapter~\ref{ch:gram} version CntForwardApp as
-before and rename the Chapter~\ref{ch:propnames} version to CntSForwardApp.  
-Details are given in Appendices~\ref{app:signcomb} and \ref{app:interpps}.        
+% Since we are now using two methods of semantic combination for
+% contents, simple function application for \textit{Det N} constructions
+% and our variant of S-combination for other constructions we need to
+% use the variant of CntForwardApp from Chapter~\ref{ch:gram} for the
+% former and the variant from Chapter~\ref{ch:propnames} for the latter.
+% We will here call the Chapter~\ref{ch:gram} version CntForwardApp as
+% before and rename the Chapter~\ref{ch:propnames} version to CntSForwardApp.  
+% Details are given in Appendices~\ref{app:signcomb} and \ref{app:interpps}.
+
 
   
 
@@ -3313,6 +3345,9 @@ FrameNet lexical entry for \textit{journey} is associated with this
 frame.  Let us take the type \textit{TravelFrame} to be the stripped
 down version of the travel frame type in \nexteg{a}.  Then we could
 take the type \textit{PassengerFrame} to be \nexteg{b}.
+
+@@
+
 \begin{ex} 
 \begin{subex} 
  
@@ -4443,6 +4478,26 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 \smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}}
 \end{quote}
 
+\item[\textnormal{SemNumeral($n$)} New!] \mbox{}
+
+  If $n$ is a real number, then SemNumeral($n$) is
+  \begin{quote}
+    $\ulcorner\lambda c$:\textit{Rec} . $\lambda P$:\textit{Ppty}
+    . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$
+  \end{quote}
+
+  
+\item[\textnormal{Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$)}
+    New!] \mbox{}
+
+    If $T_{\mathrm{phon}}$ is a phonological type and $n$ is a real
+    number, then Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$) is
+    \begin{quote}
+      Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+      \smallrecord{\smallmfield{cnt}{SemNumeral($n$)}{\textit{PQuant}}}
+    \end{quote}
+    
+
   
 \item[\textnormal{SemIndefArt} Revised!] \mbox{}
 
@@ -4571,25 +4626,69 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         
 
         
-      \item[\textnormal{SemBe}] \mbox{}
+      \item[\textnormal{SemBe} Revised!] \mbox{}
 
-        $\lambda c:T_{\text{bg}}$ . \\
+        % $\lambda c:T_{\text{bg}}$ . \\
+%         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+% . \\
+% \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+% . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
+% \tfield{e}{be(x)}}$\urcorner$)$\urcorner$
+
+        \begin{description}
+          
+        \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
+
+          $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
-\hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+        \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+          \smalltfield{x}{$c.\mathfrak{c}$.ty}}
 . \\
 \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
-r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
-. \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
-  \tfield{e}{be(x)}}$\urcorner$)$\urcorner$
+r_2$:\smallrecord{
+  \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+. \record{\mfield{x}{$r_1$.x, $r_2$.x}{$c.\mathfrak{c}$.ty}\\
+  \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$
 
-\item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
+\item[\textnormal{SemBe$_{\text{scalar}}$}] \mbox{}
+
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{ty}{\textit{Type}}\\
+      \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
+        \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+        \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+          \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+. \\
+\hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+r_2$:\smallrecord{
+  \smalltfield{x}{\textit{Real}}}
+. \record{\mfield{x}{$c.\mathfrak{c}$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+  \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$
+
+\end{description}
+
+
+\item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)} Revised!] \mbox{}
 
   If $T_{\mathrm{Phon}}$ is a phonological type, then
-  Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$) is
+  Lex$_{\mathrm{be}_{\text{ID}}}$($T_{\mathrm{Phon}}$) is
 \begin{quote}
   Lex($T_{\mathrm{Phon}}$,
 \textit{V}) \d{$\wedge$}
-\smallrecord{\smallmfield{cont}{SemBe}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+\smallrecord{\smallmfield{cont}{SemBe$_{\text{ID}}$}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+\end{quote}
+
+If $T_{\mathrm{Phon}}$ is a phonological type, then
+  Lex$_{\mathrm{be}_{\text{scalar}}}$($T_{\mathrm{Phon}}$) is
+\begin{quote}
+  Lex($T_{\mathrm{Phon}}$,
+\textit{V}) \d{$\wedge$}
+\smallrecord{\smallmfield{cont}{SemBe$_{\text{scalar}}$}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
 \end{quote}
 
 \item[\textnormal{$\mathrm{FrameType}(p)$} New!] \mbox{}
@@ -4771,7 +4870,26 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 \end{quote}
   
-  
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}
+  New!]
+  \mbox{}
+
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote}  
 
 \end{description}
 
@@ -5008,7 +5126,8 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
   \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
   ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves''
-  , ``hugs'', ``dog'' \textbf{New!}\}
+  , ``hugs'', ``dog'' \textbf{New!}, ``nine'' \textbf{New!},
+  ``ninety'' \textbf{New!}\}
 
 %\item [Witnesses for basic types] \mbox{}
 
@@ -5101,7 +5220,9 @@ $e$ : temperature$(r)$ if
 
 \begin{tabbing}
     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
-\> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
+    \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
+    \> Lex$_{\mathrm{numeral}}$(``nine'', 9) \textbf{New!}, \\
+    \> Lex$_{\mathrm{numeral}}$(``ninety'', 90) \textbf{New!}, \\ 
 \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
 \> Lex$_{\mathrm{DefArt}}$(``the''), \textbf{New!}\\
 \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer) \textbf{Revised!},\\
@@ -5124,7 +5245,8 @@ rise) \textbf{New!}, \\
 \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
 rise) \textbf{New!}, \\
 \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
-\> Lex$_{\mathrm{be}}$(``is''), \\
+\> Lex$_{\mathrm{be}_{\text{ID}}}$(``is'') \textbf{Revised!}, \\
+\> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is'') \textbf{Revised!}, \\
 \> Lex(``ok'', \textit{S}),  \\
 \> Lex(``aha'', \textit{S})  \}
 \end{tabbing}
@@ -5150,7 +5272,8 @@ u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallt
   \begin{tabbing}
     \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
     \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
-    \textit{Det}$'$(\textit{N}$'$:\textit{Ppty}):\textit{Quant},\\
+    \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{Ppty}):\textit{Quant}
+    \textbf{Revised!},\\
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
     \d{\d{$\wedge$}} CnstrIsA, \\
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
