@@ -3346,7 +3346,7 @@ frame.  Let us take the type \textit{TravelFrame} to be the stripped
 down version of the travel frame type in \nexteg{a}.  Then we could
 take the type \textit{PassengerFrame} to be \nexteg{b}.
 
-@@
+
 
 \begin{ex} 
 \begin{subex} 
@@ -3362,73 +3362,86 @@ take the type \textit{PassengerFrame} to be \nexteg{b}.
  
 \end{subex} 
    
-\end{ex} 
-A natural constraint to place on the predicate `take\_journey' is that
+\end{ex}
+
+Here `take\_journey' is a predicate with arity
+$\langle\textit{Ind},\textit{TravelFrame}\rangle$ with the witness
+condition 
 in \nexteg{}.
 \begin{ex} 
-If $a$:\textit{Ind} and $e$:\textit{TravelFrame}, then the type
-take\_journey($a$, $e$) is non-empty just in case $e$.traveller = $a$. 
+  If $a$:\textit{Ind} and $e$:\textit{TravelFrame}, then
+  \begin{quote}
+    $s$ : 
+    take\_journey($a$, $e$) iff $s=e$ and $e$.traveller = $a$
+  \end{quote}
+  
 \end{ex}
 
 Let us suppose that the basic lexical entry for \textit{passenger} is
-\nexteg{a}.  This will mean that its (parametric) content is
-\nexteg{b} (with vacuous dependence on the context).
+\nexteg{}, where `passenger' is a predicate with arity $\langle\textit{Ind}\rangle$.  % This will mean that its (parametric) content is
+% \nexteg{b} (with vacuous dependence on the context).
 \begin{ex} 
-\begin{subex} 
+ Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) 
  
-\item Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger,
-  \textit{Ind}, \textit{Ind}, \textit{Rec}) 
+% \item \record{\field{bg}{\textit{Rec}}\\
+%               \field{fg}{$\lambda c$:\textit{Rec} . 
+%                             \record{\field{bg}{\textit{Ind}}\\
+%                                     \field{fg}{$\lambda
+%                                       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%                                       . passenger($r$.x)}}}} 
  
-\item \record{\field{bg}{\textit{Rec}}\\
-              \field{fg}{$\lambda c$:\textit{Rec} . 
-                            \record{\field{bg}{\textit{Ind}}\\
-                                    \field{fg}{$\lambda
-                                      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-                                      . passenger($r$.x)}}}} 
- 
-\end{subex} 
+% \end{subex} 
    
 \end{ex} 
-That is, its non-parametric content is a property of individuals.
-Given the coercion CommonNounIndToFrame we have defined we can coerce
-this lexical item to \nexteg{a} which means that its parametric
-content will be \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% That is, its non-parametric content is a property of individuals.
+% Given the coercion CommonNounIndToFrame we have defined we can coerce
+% this lexical item to \nexteg{a} which means that its parametric
+% content will be \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \mbox{Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger\_frame,
-  \textit{Rec}, \textit{Rec}, \textit{Rec})} 
+% \item \mbox{Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger\_frame,
+%   \textit{Rec}, \textit{Rec}, \textit{Rec})} 
  
-\item \record{\field{bg}{\textit{Rec}}\\
-              \field{fg}{$\lambda c$:\textit{Rec} . 
-                            \record{\field{bg}{\textit{Rec}}\\
-                                    \field{fg}{$\lambda
-                                      r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
-                                      . passenger\_frame($r$.x)}}}} 
+% \item \record{\field{bg}{\textit{Rec}}\\
+%               \field{fg}{$\lambda c$:\textit{Rec} . 
+%                             \record{\field{bg}{\textit{Rec}}\\
+%                                     \field{fg}{$\lambda
+%                                       r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+%                                       . passenger\_frame($r$.x)}}}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex}    
-This means that the non-parametric content is a property of frames.  An agent who has the frame type \textit{PassengerFrame} available as a
-resource can use it to restrict the domain of the property using the
-coercion RestrictCommonNouns.  This produces \nexteg{a} which means
-that its parametric content will be \nexteg{b}.
+% \end{ex}
+Let us call \preveg{} $\Sigma_{\text{``passenger''}}$.  Just as we did
+for \textit{dog} we can introduce a coerced version of the lexical
+entry for \textit{passenger} as in \nexteg{}, using the type \textit{PassengerFrame}.
 \begin{ex} 
-\begin{subex} 
+RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
+\textit{PassengerFrame})
+\label{ex:passengerrestricted}
+\end{ex} 
+  
+% This means that the non-parametric content is a property of frames.  An agent who has the frame type \textit{PassengerFrame} available as a
+% resource can use it to restrict the domain of the property using the
+% coercion RestrictCommonNouns.  This produces \nexteg{a} which means
+% that its parametric content will be \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \mbox{Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger\_frame,
-  \textit{Rec}, \textit{PassengerFrame}, \textit{Rec})} 
+% \item \mbox{Lex$_{\mathrm{CommonNoun}}$(``passenger'', passenger\_frame,
+%   \textit{Rec}, \textit{PassengerFrame}, \textit{Rec})} 
  
-\item \record{\field{bg}{\textit{Rec}}\\
-              \field{fg}{$\lambda c$:\textit{Rec} . 
-                            \smallrecord{\field{bg}{\textit{PassengerFrame}}\\
-                                    \field{fg}{$\lambda
-                                      r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}}
-                                      . \smallrecord{\smalltfield{e}{passenger\_frame($r$.x)}}}}}} 
+% \item \record{\field{bg}{\textit{Rec}}\\
+%               \field{fg}{$\lambda c$:\textit{Rec} . 
+%                             \smallrecord{\field{bg}{\textit{PassengerFrame}}\\
+%                                     \field{fg}{$\lambda
+%                                       r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}}
+%                                       . \smallrecord{\smalltfield{e}{passenger\_frame($r$.x)}}}}}} 
  
-\end{subex} 
-\label{ex:passengerrestricted}   
-\end{ex}
+% \end{subex} 
+% \label{ex:passengerrestricted}   
+% \end{ex}
 This means that the non-parametric content will now be a property of
 passenger frames of type \textit{PassengerFrame}.  This introduces not
 only a passenger but also a journey, an event in which in which the
@@ -3487,50 +3500,60 @@ event reading of this sentence.  We will return to the matter of
 preferred readings below. We will treat the content of \textit{every}
 on the model of the content of the indefinite article, except that the
 quantifier relation will be `every' instead of `exist'.  Thus we will
-define SemUniversal on the model of SemIndefArt in
-Appendix~\ref{app:lexuniversal}.\footnote{We leave to one side the
+define SemUniversal on the model of SemIndefArt.\footnote{We leave to one side the
   issue of whether \textit{every} should introduce a background
   constraint that there are at least three objects which have the
   property associated with the noun.}  This is given in \nexteg{}.
 \begin{ex} 
-$\lambda Q$:\textit{PPpty} . 
-\smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\textit{Rec}}\\
-                                     \smalltfield{a}{$Q$.bg}}}\\
-             \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
-                                     \smalltfield{a}{$Q$.bg}} . 
-$\lambda P$:\textit{Ppty} . 
-\smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
-             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
-             \smalltfield{e}{every(restr, scope)}}}} 
+% $\lambda Q$:\textit{PPpty} . 
+% \smallrecord{\field{bg}{\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+%                                      \smalltfield{a}{$Q$.bg}}}\\
+%              \field{fg}{$\lambda r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+%                                      \smalltfield{a}{$Q$.bg}} . 
+% $\lambda P$:\textit{Ppty} . 
+% \smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+%              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+%              \smalltfield{e}{every(restr, scope)}}}}
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$
 \end{ex} 
    
 
 
 If we use the content associated with
 \textit{passenger} in (\ref{ex:passengerrestricted}) the
-non-parametric content associated with \textit{every passenger} will
+content associated with \textit{every passenger} will
 be \nexteg{}.
-\begin{ex} 
-$\lambda P$:\textit{Ppty} . 
-\smallrecord{\smallmfield{restr}{\smallrecord{\field{bg}{\textit{PassengerFrame}}\\
-                                    \field{fg}{$\lambda
-                                      r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}}
-                                      . passenger\_frame($r$.x)}}}{\textit{Ppty}}\\
-             \smallmfield{scope}{$P$}{\textit{Ppty}}\\
-             \smalltfield{e}{every(restr, scope)}} 
+\begin{ex}
+$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{1em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{2em}\record{
+    \mfield{restr}{$\ulcorner\lambda                                    r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}} . passenger\_frame($r$.x)$\urcorner$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$  
+% $\lambda P$:\textit{Ppty} . 
+% \smallrecord{\smallmfield{restr}{\smallrecord{\field{bg}{\textit{PassengerFrame}}\\
+%                                     \field{fg}{$\lambda
+%                                    r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}}
+%                                       . passenger\_frame($r$.x)}}}{\textit{Ppty}}\\
+%              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+%              \smalltfield{e}{every(restr, scope)}} 
 \label{ex:conteverypassenger}
 \end{ex} 
 In order to simplify matters let us treat \textit{gets a hot meal} as
 if it were an intransitive verb corresponding to a single predicate
 `get\_a\_hot\_meal'.  This is a predicate whose arity is
 $\langle$\textit{Ind}$\rangle$.  It is individuals, not frames
-(situations), that get hot meals.  Thus the non-parametric content of
+(situations), that get hot meals.  Thus the content of
 \textit{gets a hot meal} will be \nexteg{}.
 \begin{ex} 
-\smallrecord{\field{bg}{\textit{Ind}}\\
-             \field{fg}{$\lambda
-               r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
-                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal($r$.x)}}}} 
+$\ulcorner\lambda c$:\textit{Rec} . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+                 \record{\tfield{e}{get\_a\_hot\_meal($r$.x)}}$\urcorner\urcorner$ 
 \label{ex:contgetahotmeal}
 \end{ex} 
 While \preveg{} is the right type of argument for
@@ -3542,6 +3565,9 @@ a frame level intransitive verb to match the frame level noun.  This
 would be a coercion IntransVerbIndToFrame exactly parallel to
 CommonNounIndToFrame defined in (\ref{ex:CommonNounIndToFrame}).  Thus
 IntransVerbIndToFrame is defined as in \nexteg{}.
+
+@@
+
 \begin{ex}
 If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
 $T_\mathrm{bg}$ is a record type (the ``background type'' or
@@ -4528,6 +4554,29 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
           \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
         \end{quote}
 
+        
+      \item[\textnormal{SemUniversal} New!] \mbox{}
+
+        $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$
+
+  
+\item[\textnormal{Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$)}
+        New!]
+        \mbox{}
+
+        If $T_{\mathrm{Phon}}$ is a phonological type, then
+        Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$) is
+        \begin{quote}
+          Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+          \smallrecord{\smallmfield{cont}{SemUniversal}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+        \end{quote}
+
         \item[\textnormal{SemDefArt} New!] \mbox{}
 
  %  $\lambda c$:\textit{Rec} . \\
@@ -5143,7 +5192,8 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
   \begin{description}
   
   \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}]
-    \{conductor, composer, pianist, leave,  dog \textbf{New!}\}
+    \{conductor, composer, pianist, leave,  dog \textbf{New!},
+    passenger \textbf{New!}\}
     
   \item[with arity
     \textnormal{$\langle\textit{Ind},\textit{Ind}\rangle$}] \{hug\}
@@ -5190,6 +5240,13 @@ $e$ : temperature$(r)$ if
   \begin{quote}
     $r$ : \textit{AmbTempFrame} and $e=r$
   \end{quote}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{Ind},\textit{TravelFrame}\rangle$}] ---
+  \{take\_journey \textbf{New!}\}
+
+  $s$ : take\_journey($a$, $e$) iff $s=e$ and $e$.traveller = $a$
  
 \end{description}
 
@@ -5198,10 +5255,25 @@ $e$ : temperature$(r)$ if
   \begin{description}
 
     
-  \item[\textnormal{\textit{DogFrame}} New!] --- \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                      \smalltfield{e}{dog(x)}\\
-                      \smalltfield{age}{\textit{Real}}\\
-                      \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+  \item[\textnormal{\textit{DogFrame}} New!] ---
+    \record{
+      \tfield{x}{\textit{Ind}}\\
+      \tfield{e}{dog(x)}\\
+      \tfield{age}{\textit{Real}}\\
+      \tfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+                    
+  \item[\textnormal{\textit{TravelFrame}} New!] ---
+    \record{
+      \tfield{traveller}{\textit{Ind}}\\
+      \tfield{source}{\textit{Loc}}\\
+      \tfield{goal}{\textit{Loc}}}
+
+    
+  \item[\textnormal{\textit{PassengerFrame}} New!] ---
+    \record{\tfield{x}{\textit{Ind}}\\
+              \tfield{e}{passenger(x)}\\
+              \tfield{journey}{\textit{TravelFrame}}\\
+              \tfield{c$_{\mathrm{travel}}$}{take\_journey(x, journey)}}
 
 
   \end{description}
@@ -5223,14 +5295,19 @@ $e$ : temperature$(r)$ if
     \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
     \> Lex$_{\mathrm{numeral}}$(``nine'', 9) \textbf{New!}, \\
     \> Lex$_{\mathrm{numeral}}$(``ninety'', 90) \textbf{New!}, \\ 
-\> Lex$_{\mathrm{IndefArt}}$(``a''), \\
-\> Lex$_{\mathrm{DefArt}}$(``the''), \textbf{New!}\\
+    \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+    \> Lex$_{\mathrm{Universal}}$(``every'') \textbf{New!}, \\
+\> Lex$_{\mathrm{DefArt}}$(``the'') \textbf{New!},\\
 \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer) \textbf{Revised!},\\
 \> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor) \textbf{Revised!}, \\
 \> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$)
 \textbf{New!}, \\
 \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
 \textit{DogFrame}) \textbf{New!},\\
+\> Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) ($=\Sigma_{\text{``passenger''}}$)
+\textbf{New!}, \\
+\> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
+\textit{PassengerFrame}) \textbf{New!}, \\
 \> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
 temperature) (= $\Sigma_{\text{``temperature''}}$) \textbf{New!}, \\
 \> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
