@@ -1772,7 +1772,7 @@ that $s$ is of type `dog($a$)' but does not rule out that $s$ can be
 of other types as well including possibly `dog($b$)' where $b$ is
 distinct from $a$.  We do not have a way of saying that `dog($a$)' is
 the only type to which $s$ belongs. This would correspond to
-Schubert's (\citeyear{Schubert2000}) notion of characterizing a
+Schubert's (\citeyear{Schubert2000})\label{pg:Schubert-characterize} notion of characterizing a
 situation, that is, in our terms, presenting an exhaustive list of
 types to which it belongs, which given that we have meet types (Appendix~\ref{app:meettypes}),
 corresponds to providing a single type to which it belongs such that there is no
@@ -3566,36 +3566,47 @@ would be a coercion IntransVerbIndToFrame exactly parallel to
 CommonNounIndToFrame defined in (\ref{ex:CommonNounIndToFrame}).  Thus
 IntransVerbIndToFrame is defined as in \nexteg{}.
 
-@@
+
 
 \begin{ex}
-If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
+  If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+arity $\langle\textit{Ind}\rangle$ and
 $T_\mathrm{bg}$ is a record type (the ``background type'' or
 ``presupposition'') then \\ 
 \mbox{IntransVerbIndToFrame(Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
-$p$, \textit{Ind}, \textit{Ind}, $T_\mathrm{bg}$))} = Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
-$p$\_frame, \textit{Rec}, \textit{Rec}, $T_\mathrm{bg}$)
+  $T_\mathrm{bg}$, $p$))} =
+\begin{quote}
+  Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+  $T_\mathrm{bg}$, $p$\_frame)
+\end{quote}
+% If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate and
+% $T_\mathrm{bg}$ is a record type (the ``background type'' or
+% ``presupposition'') then \\ 
+% \mbox{IntransVerbIndToFrame(Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+% $p$, \textit{Ind}, \textit{Ind}, $T_\mathrm{bg}$))} = Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+% $p$\_frame, \textit{Rec}, \textit{Rec}, $T_\mathrm{bg}$)
 \label{ex:IntransVerbIndToFrame} 
 \end{ex} 
 Thus the new non-parametric content derived for
 \textit{get\_a\_hot\_meal} will be \nexteg{}.
 \begin{ex} 
-\smallrecord{\field{bg}{\textit{Rec}}\\
-             \field{fg}{$\lambda
-               r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
-                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame($r$.x)}}}}
+$\ulcorner\lambda c$:\smallrecord{Rec} . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+                 \record{\tfield{e}{get\_a\_hot\_meal\_frame($r$.x)}}$\urcorner\urcorner$
 \label{ex:contgetahotmealframe}  
-\end{ex} 
-Recall that if $p$ is a predicate of individuals then $p$\_frame is a
-predicate of frames that contain an individual of which $p$ holds (as
-required in (\ref{ex:predframe}).  This means that an argument, $r$, to
-`get\_a\_hot\_meal\_frame' which makes the type
-`get\_a\_hot\_meal\_frame($r$)' non-empty will be of type \nexteg{}.
+\end{ex}
+
+% Recall that if $p$ is a predicate of individuals then $p$\_frame is a
+% predicate of frames that contain an individual of which $p$ holds (as
+% required in (\ref{ex:predframe}).  This means that an argument, $r$, to
+% `get\_a\_hot\_meal\_frame' which makes the type
+% `get\_a\_hot\_meal\_frame($r$)' non-empty
+A ``get\_a\_hot\_meal'' frame will, according to our characterization
+of predicates of the form `$p$\_frame'  be of type \nexteg{}.
 \begin{ex} 
 \record{\tfield{x}{\textit{Ind}}\\
         \tfield{e}{get\_a\_hot\_meal(x)}} 
 \end{ex} 
-Thus intuitively the `every'
+Intuitively the `every'
 relation holding between the two frame-level coerced individual
 properties corresponding to \textit{passenger} and
 \textit{get\_a\_hot\_meal} will mean ``every frame (situation)
@@ -3672,17 +3683,17 @@ the same type.  We illustrate this with an abstract example in
 \item \record{\tfield{$\ell_1$}{$T_1$}\\
               \tfield{$\ell_2$}{$T_2$}} 
  
-\item \record{\tfield{$\ell_1$}{$a$}\\
-              \tfield{$\ell_2$}{$b$}}
+\item \record{\field{$\ell_1$}{$a$}\\
+              \field{$\ell_2$}{$b$}}
 
-\item \record{\tfield{$\ell_1$}{$a$}\\
-              \tfield{$\ell_2$}{$b$}\\
-              \tfield{$\ell_3$}{$a$}}
+\item \record{\field{$\ell_1$}{$a$}\\
+              \field{$\ell_2$}{$b$}\\
+              \field{$\ell_3$}{$a$}}
 
-\item \record{\tfield{$\ell_1$}{$a$}\\
-              \tfield{$\ell_2$}{$b$}\\
-              \tfield{$\ell_3$}{$a$}\\
-              \tfield{$\ell_4$}{$a$}}
+\item \record{\field{$\ell_1$}{$a$}\\
+              \field{$\ell_2$}{$b$}\\
+              \field{$\ell_3$}{$a$}\\
+              \field{$\ell_4$}{$a$}}
 
 \item \ldots
  
@@ -3702,92 +3713,111 @@ but still there is the robust intuition that we are only talking about
 one event of washing my hands here which is part of infinitely many
 larger events.
 
-Fortunately, this problem is easy to fix.  Recall that records are
-sets of fields (Appendix~\ref{app:rectypes}).  As a first
-approximation we can say that a
-record, $r_1$, is a proper part of a record, $r_2$, $r_1<r_2$, just in
-case $r_1$ is a proper subset of $r_2$. This definition is not quite
-sufficient, however, since records can contain records and we wish the
-proper part of relation to be recursive.  Consider \nexteg{}.  We
-would like to say that \nexteg{a} is a proper part of \nexteg{b} even
-though \nexteg{a} is not a proper subset of \nexteg{b}.
-%We can then define a notion of
-% being a \textit{minimal witness} for a record type as in \nexteg{}.
+Fortunately, this problem is easy to fix.  We use the notion of one
+record being a proper part of another, that is the set of paths of the
+first is a proper subset of the set of paths of the second and the
+objects at the end of the total paths of the first are the same as
+those at the end of the corresponding total path in the second.
+\begin{shaded}
+Technically this is given by
+the definition in \nexteg{}.  % Recall that records are
+% essentially sets of fields (Appendix~\ref{app:rec}).  As a first
+% approximation we can say that a
+% record, $r_1$, is a \textit{proper part of a record}, $r_2$, $r_1<r_2$, just in
+% case $r_1$ is a proper subset of $r_2$. This definition is not quite
+% sufficient, however, since records can contain records and we wish the
+% proper part of relation to be recursive.  Consider \nexteg{}.  We
+% would like to say that \nexteg{a} is a proper part of \nexteg{b} even
+% though \nexteg{a} is not a proper subset of \nexteg{b}.
+% %We can then define a notion of
+% % being a \textit{minimal witness} for a record type as in \nexteg{}.
+% % \begin{ex} 
+% % If $T$ is a record type, $r$ is a \textit{minimal witness} for $T$,
+% % $r:_{\mathrm{min}}T$, iff $r:T$ and there is no $r'<\varphi(r)$ such
+% % that $r':\varphi(T)$. 
+% % \end{ex} 
+% % The use of flattening (represented by $\varphi$, see
+% % Appendix~\ref{app:rectypes}) is to get the minimality to recurse
+% % inside the records.  For example, \nexteg{b} is not a minimal witness
+% % for \nexteg{a} (where the $T_i$ are non-record types) even if $a:T_1$,
+% % $b:T_2$ and $d:T_3$ because of \nexteg{c}.
 % \begin{ex} 
-% If $T$ is a record type, $r$ is a \textit{minimal witness} for $T$,
-% $r:_{\mathrm{min}}T$, iff $r:T$ and there is no $r'<\varphi(r)$ such
-% that $r':\varphi(T)$. 
-% \end{ex} 
-% The use of flattening (represented by $\varphi$, see
-% Appendix~\ref{app:rectypes}) is to get the minimality to recurse
-% inside the records.  For example, \nexteg{b} is not a minimal witness
-% for \nexteg{a} (where the $T_i$ are non-record types) even if $a:T_1$,
-% $b:T_2$ and $d:T_3$ because of \nexteg{c}.
-\begin{ex} 
-\begin{subex} 
+% \begin{subex} 
  
-% \item \record{\tfield{$\ell_1$}{\record{\tfield{$\ell_1$}{$T_1$}\\
-%                                         \tfield{$\ell_2$}{$T_2$}}}\\
-%               \tfield{$\ell_3$}{$T_3$}}
+% % \item \record{\tfield{$\ell_1$}{\record{\tfield{$\ell_1$}{$T_1$}\\
+% %                                         \tfield{$\ell_2$}{$T_2$}}}\\
+% %               \tfield{$\ell_3$}{$T_3$}}
 
-\item \record{\field{$\ell_1$}{\record{\field{$\ell_1$}{$a$}\\
-                                       \field{$\ell_2$}{$b$}
-                                       }}\\
-              \field{$\ell_3$}{$d$}}
+% \item \record{\field{$\ell_1$}{\record{\field{$\ell_1$}{$a$}\\
+%                                        \field{$\ell_2$}{$b$}
+%                                        }}\\
+%               \field{$\ell_3$}{$d$}}
  
-\item \record{\field{$\ell_1$}{\record{\field{$\ell_1$}{$a$}\\
-                                       \field{$\ell_2$}{$b$}\\
-                                       \field{$\ell_3$}{$c$}}}\\
-              \field{$\ell_3$}{$d$}} 
+% \item \record{\field{$\ell_1$}{\record{\field{$\ell_1$}{$a$}\\
+%                                        \field{$\ell_2$}{$b$}\\
+%                                        \field{$\ell_3$}{$c$}}}\\
+%               \field{$\ell_3$}{$d$}} 
 
+% % \item \record{\field{$\ell_1.\ell_1$}{$a$}\\
+% %               \field{$\ell_1.\ell_2$}{$b$}\\
+% %               \field{$\ell_1.\ell_3$}{$c$}\\
+% %               \field{$\ell_3$}{$d$}}
+
+% % is not a minimal record of type
+
+% % \record{\tfield{$\ell_1.\ell_1$}{$T_1$}\\
+% %         \tfield{$\ell_1.\ell_2$}{$T_2$}\\
+% %         \tfield{$\ell_3$}{$T_3$}}
+ 
+% \end{subex} 
+   
+% \end{ex}
+% We achieve this by defining the proper part of relation in terms of
+% the flattening operation on records (represented by $\varphi$, see
+% Appendix~\ref{app:rectypes}).  Thus if we take the flattenings of the
+% records in \preveg{} as in \nexteg{} we see that\nexteg{a} is a proper
+% subset of \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item \record{\field{$\ell_1.\ell_1$}{$a$}\\
+%               \field{$\ell_1.\ell_2$}{$b$}\\
+%               \field{$\ell_3$}{$d$}} 
+ 
 % \item \record{\field{$\ell_1.\ell_1$}{$a$}\\
 %               \field{$\ell_1.\ell_2$}{$b$}\\
 %               \field{$\ell_1.\ell_3$}{$c$}\\
-%               \field{$\ell_3$}{$d$}}
-
-% is not a minimal record of type
-
-% \record{\tfield{$\ell_1.\ell_1$}{$T_1$}\\
-%         \tfield{$\ell_1.\ell_2$}{$T_2$}\\
-%         \tfield{$\ell_3$}{$T_3$}}
+%               \field{$\ell_3$}{$d$}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex}
-We achieve this by defining the proper part of relation in terms of
-the flattening operation on records (represented by $\varphi$, see
-Appendix~\ref{app:rectypes}).  Thus if we take the flattenings of the
-records in \preveg{} as in \nexteg{} we see that\nexteg{a} is a proper
-subset of \nexteg{b}.
+% \end{ex} 
+% We define the proper part of relation in \nexteg{}.
 \begin{ex} 
-\begin{subex} 
+% \begin{subex} 
  
-\item \record{\field{$\ell_1.\ell_1$}{$a$}\\
-              \field{$\ell_1.\ell_2$}{$b$}\\
-              \field{$\ell_3$}{$d$}} 
+% \item
+  $r_1$ \textit{is a proper
+    part of} $r_2$, $r_1<r_2$, just in case
+  \begin{enumerate}
+  \item $r_1$ and $r_2$ are records, 
+  \item
+    $\mathrm{paths}_{\text{rec}}(r_1)\subset\mathrm{paths}_{\text{rec}}(r_2)$
+      and
+    \item for all $\pi\in\mathrm{tpaths}(r_1)$, $r_1.\pi=r_2.\pi$
+    \end{enumerate}
+
+    
+    
  
-\item \record{\field{$\ell_1.\ell_1$}{$a$}\\
-              \field{$\ell_1.\ell_2$}{$b$}\\
-              \field{$\ell_1.\ell_3$}{$c$}\\
-              \field{$\ell_3$}{$d$}} 
+% \item If $o_1$ and $o_2$ are objects of some type and at least one of
+%   them is not of type \textit{Rec}, then $o_1$ is \textit{not} a
+%   proper part of $o_2$, $o_1\not<o_2$ 
  
-\end{subex} 
-   
-\end{ex} 
-We define the proper part of relation in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
- 
-\item If $r_1$ and $r_2$ are records then $r_1$ \textit{is a proper
-    part of} $r_2$, $r_1<r_2$, just in case $\varphi(r_1)\subset\varphi(r_2)$. 
- 
-\item If $o_1$ and $o_2$ are objects of some type and at least one of
-  them is not of type \textit{Rec}, then $o_1$ is \textit{not} a
-  proper part of $o_2$, $o_1\not<o_2$ 
- 
-\end{subex} 
+% \end{subex} 
 \label{ex:properpart}   
-\end{ex} 
+\end{ex}
+\end{shaded}
     
 % We can generalize the notion of minimal witness to types other than
 % record types by adding the clause in \nexteg{}.
@@ -3795,9 +3825,11 @@ We define the proper part of relation in \nexteg{}.
 % If $T$ is a type other than a record type, $a:_{\mathrm{min}}T$ iff $a:T$. 
 % \end{ex} 
 
+
+
 This notion yields a notion of minimal object of a given type which is related to Schubert's
-\citeyear{Schubert2000} notion of characterization discussed in
-Section~\ref{sec:dgqs}.  It is different from Schubert's notion in
+\citeyear{Schubert2000} notion of characterization discussed on 
+p.~\pageref{pg:Schubert-characterize}.  It is different from Schubert's notion in
 that we do not say that there are no other types to which the
 situation belongs but rather that no proper part of the situation is
 of the type.  In this way it is related to the notion of minimal
@@ -3805,34 +3837,89 @@ situation discussed by \cite{Kratzer2014} and elsewhere in earlier
 work. It is also, of course, related to mereological approaches that
 have been used, for example,  in approaches to the analysis of the
 plural as in \cite{Krifka1990} and much other literature.  It is this
-we will exploit in our analysis of the plural cardinality quantifiers.
+we will exploit in our analysis of the plural cardinality
+quantifiers.  We introduce the notion of a \textit{plurality} as a set of
+objects of a given type that does not contain two objects
+where one is a proper part of the other. 
 
-We characterize a notion of plurality types as in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
- 
-\item If $T$ is a type, then $\{\!\mid T\mid\!\}$ is also a type (the
-  type of pluralities such that every element of the plurality is of
-  type $T$)
- 
-\item $A:\{\!\mid T\mid\!\}$ iff
+\begin{shaded}
+We characterize a notion of plurality types as in \nexteg{} (repeated
+in Appendix~\ref{app:settypes}). 
+\begin{ex}
+  A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with set types \textit{has plurality types} if
 \begin{enumerate} 
  
-\item $A : \{T\}$ 
+\item for any $T \in \textbf{Type}$, $\mathrm{plurality}(T) \in \textbf{Type}$ 
  
-%\item $\mid A\mid\ \geq 2$
-
-\item if $a\in A$ then for any $b$ such that $a<b$, $b\not\in A$
+\item for any $T \in \textbf{Type}$, 
+$A:_{\mathbf{TYPE_C}}\mathrm{plurality}(T)$ iff  
+\begin{enumerate} 
+ 
+\item $A :_{\mathbf{TYPE_C}} \mathrm{set}(T)$ 
+ 
+\item if $a\in A$ then for any $b$ such that $a<b$, $b\not\in A$ 
  
 \end{enumerate} 
+  
+   
+ 
+\end{enumerate}
+
+% \begin{subex} 
+ 
+% \item If $T$ is a type, then $\{\!\mid T\mid\!\}$ is also a type (the
+%   type of pluralities such that every element of the plurality is of
+%   type $T$)
+ 
+% \item $A:\{\!\mid T\mid\!\}$ iff
+% \begin{enumerate} 
+ 
+% \item $A : \{T\}$ 
+ 
+% %\item $\mid A\mid\ \geq 2$
+
+% \item if $a\in A$ then for any $b$ such that $a<b$, $b\not\in A$
+ 
+% \end{enumerate} 
+  
+ 
+% \end{subex} 
+   
+\end{ex}
+
+In terms of our informal proof theoretic notation this can be
+expressed as \nexteg{}.
+\begin{ex}
+  For $\Gamma$ a system of complex types with set types,
+\begin{subex} 
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\vdash T\in\textbf{Type}}
+    \infer1{\Gamma\vdash\mathrm{plurality}(T)\in\textbf{Type}}
+  \end{prooftree}
+  
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\vdash A:\mathrm{set}(T)}
+    \hypo{[a\in A, a<b]}
+    \ellipsis{}{b\not\in A}
+    \infer2{\Gamma\vdash A:\mathrm{plurality}(T)}
+  \end{prooftree}
   
  
 \end{subex} 
    
 \end{ex} 
-The definition in \preveg{} requires that a plurality is a set of
-objects of the relevant type but that it does not contain two objects
-where one is a proper part of the other.  It might seem natural to
+  
+\end{shaded}
+
+@@
+
+It might seem natural to
 require that a plurality contains at least two objects.  The choice
 not to place this requirement on a plurality makes this analysis
 number neutral in the sense of \cite{Zweig2008,Zweig2009}.
