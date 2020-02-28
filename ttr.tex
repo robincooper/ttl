@@ -417,22 +417,38 @@ We let $\mathrm{set}(T)$ represent the labelled set
 $\{\langle\mathrm{set},T\rangle\}$ where `set' is a reserved
 label.
 
-We also introduce a special kind of set type known as a plurality
-type.  The idea here is that a plurality is a set that does not contain any two
-objects such that one is a proper part of the other.  The notion of
-proper part is characterized by:
-\begin{enumerate}
-\item If $r_1$ and $r_2$ are records then $r_1$ \textit{is a proper
-    part of} $r_2$, $r_1<r_2$, just in case $\varphi(r_1)\subset\varphi(r_2)$. 
+% We also introduce a special kind of set type known as a plurality
+% type.  The idea here is that a plurality is a set that does not contain any two
+% objects such that one is a proper part of the other.  The notion of
+% proper part is characterized by:
+% \begin{enumerate}
+% \item If $r_1$ and $r_2$ are records then $r_1$ \textit{is a proper
+%     part of} $r_2$, $r_1<r_2$, just in case $\varphi(r_1)\subset\varphi(r_2)$. 
  
-\item If $o_1$ and $o_2$ are objects of some type and at least one of
-  them is not of type \textit{Rec}, then $o_1$ is \textit{not} a
-  proper part of $o_2$, $o_1\not<o_2$ 
-\end{enumerate}
+% \item If $o_1$ and $o_2$ are objects of some type and at least one of
+%   them is not of type \textit{Rec}, then $o_1$ is \textit{not} a
+%   proper part of $o_2$, $o_1\not<o_2$ 
+% \end{enumerate}
+
+In order to define plurality types as subtypes of set types we
+introduce a notion of one record being a proper part of another.
+
+For any objects $r_1$ and $r_2$, $r_1$ \textit{is a proper
+    part of} $r_2$, $r_1<r_2$, (Chapter~\ref{ch:commonnouns},
+  p.~\pageref{ex:properpart}) just in case
+  \begin{enumerate}
+  \item $r_1$ and $r_2$ are records, 
+  \item
+    $\mathrm{paths}_{\text{rec}}(r_1)\subset\mathrm{paths}_{\text{rec}}(r_2)$
+      and
+    \item for all $\pi\in\mathrm{tpaths}(r_1)$, $r_1.\pi=r_2.\pi$
+    \end{enumerate} 
 
 A system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
 $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
-  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with set types \textit{has plurality types} if
+  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ with set types
+\textit{has plurality types} (Chapter~\ref{ch:commonnouns},
+p.~\pageref{ex:plurality-types}) if
 \begin{enumerate} 
  
 \item for any $T \in \textbf{Type}$, $\mathrm{plurality}(T) \in \textbf{Type}$ 
@@ -451,8 +467,8 @@ $A:_{\mathbf{TYPE_C}}\mathrm{plurality}(T)$ iff
  
 \end{enumerate}
 
-We let $\{\!\mid T\mid\!\}$ represent the labelled set
-$\{\langle\mathrm{plurality},T\rangle\}$ where `plurality' is a reserved
+We let $\mathrm{plurality}(T)$ represent the labelled set
+$\{\langle\text{plurality},T\rangle\}$ where `plurality' is a reserved
 label. 
 
 \section{Singleton types}
