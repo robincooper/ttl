@@ -3935,64 +3935,124 @@ an open question.  In particular the work on mass terms by
 \cite{SuttonFilip2017} that we will in any case need an additional
 sum-structure.
 
-@@\todo{Get rid of \textit{PlPpty}.  Define SemCommonNounPl etc.?}
-    
 We propose here a treatment of basic plural
 quantification cases involving cardinality quantification that will
 allow us to say something about the content of \textit{2000 passengers
-  get a hot meal}.  We first distinguish between singular and plural
-properties.  The definition of \textit{Ppty} given in
-(\ref{ex:dog-Ppty}b) and repeated in \nexteg{a} becomes our definition
-of the type of singular properties, \textit{SgPpty}.
+  get a hot meal}.  The reading of the sentence we are treating here
+is distributive, that is, a reading on which each of the passengers
+individually gets a hot meal.  We will first introduce plural
+predicates with distributive interpretations.  For simplicity, we will
+define this just for one-place predicates though it could be easily
+generalized to $n$-place predicates.  If $p$ is a singular predicate then we
+use `$p$\_pl' to represent a plural version of $p$
+in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item \textit{SgPpty} $\equiv$ \record{\tfield{bg}{\textit{Type}}\\
-              \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\rightarrow$\textit{RecType})}}  
+\item If $p$ is a singular predicate (i.e. there is no $p'$ such that
+  $p=p'\_\text{pl}$) with arity $\langle T\rangle$, then
+  $p\_\text{pl}$ is a predicate with arity $\langle\mathrm{plurality}(T)\rangle$ 
  
-\item \textit{PlPpty} $\equiv$ \record{\tfield{bg}{\textit{Type}}\\
-              \tfield{fg}{(\smallrecord{\smalltfield{x}{$\{\!\mid$bg$\mid\!\}$}}$\rightarrow$\textit{RecType})}}
-
-\item  \textit{Ppty} $\equiv$ \textit{SgPpty}$\vee$\textit{PlPpty}
+\item $e:p\_\text{pl}(A)$ if for all $a\in A$, $e:p(a)$ 
  
 \end{subex} 
    
 \end{ex} 
-The type of plural properties, \textit{PlPpty}, given in \preveg{b},
-requires the foreground of the property to be a function which has as
-its domain records whose `x'-field contains a plurality of objects of
-the background type.  We then redefine \textit{Ppty} in \preveg{c} as
-being the type of objects which are either singular or plural
-properties.
+(We use a conditional in \preveg{b} rather than a biconditional
+because ultimately we think that there will be other non-distributive
+witness conditions for types constructed with plural predicates.)
 
-Note that according to \preveg{} there is no constraint on the kinds
-of types which can be the backgrounds of either singular or plural
-properties.  Thus a singular property could have a plurality type as
-its background.  This could be used for nouns like \textit{committee}
-which seems to represent a property of a plurality of people.  Note
-that we can create a plurality type of any type including plurality
-types so we have an infinite hierarchy of plurality types.  This can
-be seen in examples like \textit{league} (of baseball teams) where
-each element in the league, i.e. a team, is itself a plurality of
-baseball players.  These kinds of examples were noted in the earliest
-literature on treating the plural in Montague semantics as problematic
-for Montague's approach since they appeared to involve an infinite
-hierarchy of types which would have to correspond to an infinite
-hierarchy of syntactic categories \citep{Bennett1974}.   Montague's type
-system lacked the option of creating a single type corresponding to
-the infinite hierarchy in the way we are doing here.  Plural
-properties too can have plurality types as their backgrounds and this
-could correspond to plural nouns like \textit{committees} and
-\textit{leagues}.  In terms of the domain of the foreground function
-of properties there is largely an overlap between singular and plural
-properties.  Singular properties allow for both pluralities and
-non-pluralities whereas plural properties allow only for pluralities.
-It may seem strange from a formal point of view not to make a
-non-overlapping division between the two, but this does seem to
-correspond to the way the plural works in natural
-languages.\footnote{It is not currently clear how \textit{pluralia
-    tantum} such as \textit{scissors} and \textit{trousers} fit into
-  this story.}
+We then introduce, in \nexteg{}, resources `PluralCommonNoun' and
+`PluralIntransVerb' to generate plural nouns and verbs.  For this, we
+will assume without definition that we have operations `pluralnoun'
+and `pluralverb' which will map one (singular) phonological type to
+another.  (We will not in this book present a formulation of
+morphology in TTR.)
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+  singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+  is a record type then
+  PluralCommonNoun(Lex$_{\text{CommonNoun}}$($T_{\text{phon}}$,
+  $T_{\text{bg}}$, $p$)) =
+  \begin{quote}
+    Lex$_{\text{CommonNoun}}$(pluralnoun($T_{\text{phon}}$),
+    $T_{\text{bg}}$, $p$\_pl)
+  \end{quote}
+  
+ 
+\item If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+  singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+  is a record type then
+  PluralIntransVerb(Lex$_{\text{IntransVerb}}$($T_{\text{phon}}$,
+  $T_{\text{bg}}$, $p$)) =
+  \begin{quote}
+    Lex$_{\text{IntransVerb}}$(pluralverb($T_{\text{phon}}$),
+    $T_{\text{bg}}$, $p$\_pl)
+  \end{quote} 
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
+
+%We first distinguish between singular and plural
+% properties.  The definition of \textit{Ppty} given in
+% (\ref{ex:dog-Ppty}b) and repeated in \nexteg{a} becomes our definition
+% of the type of singular properties, \textit{SgPpty}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item \textit{SgPpty} $\equiv$ \record{\tfield{bg}{\textit{Type}}\\
+%               \tfield{fg}{(\smallrecord{\smalltfield{x}{bg}}$\rightarrow$\textit{RecType})}}  
+ 
+% \item \textit{PlPpty} $\equiv$ \record{\tfield{bg}{\textit{Type}}\\
+%               \tfield{fg}{(\smallrecord{\smalltfield{x}{$\{\!\mid$bg$\mid\!\}$}}$\rightarrow$\textit{RecType})}}
+
+% \item  \textit{Ppty} $\equiv$ \textit{SgPpty}$\vee$\textit{PlPpty}
+ 
+% \end{subex} 
+   
+% \end{ex} 
+% The type of plural properties, \textit{PlPpty}, given in \preveg{b},
+% requires the foreground of the property to be a function which has as
+% its domain records whose `x'-field contains a plurality of objects of
+% the background type.  We then redefine \textit{Ppty} in \preveg{c} as
+% being the type of objects which are either singular or plural
+% properties.
+
+% Note that according to \preveg{} there is no constraint on the kinds
+% of types which can be the backgrounds of either singular or plural
+% properties.  Thus a singular property could have a plurality type as
+% its background.  This could be used for nouns like \textit{committee}
+% which seems to represent a property of a plurality of people.  Note
+% that we can create a plurality type of any type including plurality
+% types so we have an infinite hierarchy of plurality types.  This can
+% be seen in examples like \textit{league} (of baseball teams) where
+% each element in the league, i.e. a team, is itself a plurality of
+% baseball players.  These kinds of examples were noted in the earliest
+% literature on treating the plural in Montague semantics as problematic
+% for Montague's approach since they appeared to involve an infinite
+% hierarchy of types which would have to correspond to an infinite
+% hierarchy of syntactic categories \citep{Bennett1974}.   Montague's type
+% system lacked the option of creating a single type corresponding to
+% the infinite hierarchy in the way we are doing here.  Plural
+% properties too can have plurality types as their backgrounds and this
+% could correspond to plural nouns like \textit{committees} and
+% \textit{leagues}.  In terms of the domain of the foreground function
+% of properties there is largely an overlap between singular and plural
+% properties.  Singular properties allow for both pluralities and
+% non-pluralities whereas plural properties allow only for pluralities.
+% It may seem strange from a formal point of view not to make a
+% non-overlapping division between the two, but this does seem to
+% correspond to the way the plural works in natural
+% languages.\footnote{It is not currently clear how \textit{pluralia
+%     tantum} such as \textit{scissors} and \textit{trousers} fit into
+%   this story.}
+
+@@
 
 We consider cardinality quantifiers such as \textit{two} and
 \textit{two thousand} to correspond to predicates whose arity is
