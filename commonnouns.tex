@@ -4052,31 +4052,78 @@ morphology in TTR.)
 %     tantum} such as \textit{scissors} and \textit{trousers} fit into
 %   this story.}
 
-@@
+We introduce a type of plural properties, \textit{PlPpty}, considered
+as a property of pluralities. Its
+witness condition is given in \nexteg{}.
+\begin{ex} 
+$P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
+$P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
+\end{ex} 
+  
 
 We consider cardinality quantifiers such as \textit{two} and
 \textit{two thousand} to correspond to predicates whose arity is
-$\langle$\textit{PlPpty}, \textit{PlPpty}$\rangle$.  If $\nu$ is a
-natural number (that is, an object of type \textit{Nat}), let $\nu_{\mathrm{pred}}$ be such a predicate
-corresponding to $\nu$.  We also introduce a predicate `card'
-(``cardinality'') with arities $\langle\{T\},\textit{Card}\rangle$ for
-any type, $T$, where \textit{Card} is the type of cardinal numbers
+$\langle$\textit{PlPpty}, \textit{PlPpty}$\rangle$.  If $n$ is a
+natural number (that is, an object of type \textit{Nat}), let `exactly\_$n$' be such a predicate.  Similarly,
+we introduce predicates `at\_least\_$n$' and
+`at\_most\_$n$'.  In order to give the witness conditions
+for these predicates we use a predicate `card'
+(``cardinality'') with arity $\textit{Card}\rangle$, where \textit{Card} is the type of cardinal numbers
 (the natural numbers together with the transfinite cardinals,
-$\aleph_0, \aleph_1, \ldots$).  
-This predicate obeys the constraint in \nexteg{}.
-\begin{ex} 
-$\down{\mathrm{card}(X,\nu)}\not=\emptyset$ iff $\mid\!X\!\mid\ =\nu$
+$\aleph_0, \aleph_1, \ldots$).  A set, $X$, is of type `card($n$)' if
+its cardinality is $n$. Similarly we introduce predicates
+`card\_at\_least' and `car\_at\_most'
+The relevant witness conditions are spelt out in \nexteg{}.
+\begin{ex}
+  \begin{subex} 
+ 
+\item $X$ : card($n$) iff for some $T$, $X:\mathrm{set}(T)$ and $|X|=n$ 
+ 
+\item $X$ : card\_at\_least($n$) iff for some $T$, $X:\mathrm{set}(T)$
+  and $|X|\geq n$
+
+  
+\item $X$ : card\_at\_most($n$) iff for some $T$, $X:\mathrm{set}(T)$
+  and $|X|\leq n$
+ 
+\end{subex} 
+  
+%$\down{\mathrm{card}(X,\nu)}\not=\emptyset$ iff $\mid\!X\!\mid\ =\nu$
 \end{ex} 
-The cardinality predicates obey the constraint in \nexteg{}.
-\begin{ex} 
-$\down{\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
-\begin{quote}
-$\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\wedge$}\smallrecord{\smalltfield{x}{$\{\!\mid\!
-        P$.bg$\mid\!\}$}\\
-                \smalltfield{c}{card(x, $\nu$)}}}}\not=\emptyset$
-\end{quote}
+We now give the witness conditions for the cardinal quantifier
+predicates in \nexteg{}.
+\begin{ex}
+  \begin{subex} 
+ 
+  \item $s$ : exactly\_$n$($P$, $Q$) iff
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+      \not=\emptyset$
+ 
+\item $s$ : at\_least\_$n$($P$, $Q$) iff
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+      \not=\emptyset$
+
+      
+    \item $s$ : at\_most\_$n$($P$, $Q$) iff
+          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+        \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+      
+ 
+\end{subex} 
+  
+% $\down{\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
+% \begin{quote}
+% $\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\wedge$}\smallrecord{\smalltfield{x}{$\{\!\mid\!
+%         P$.bg$\mid\!\}$}\\
+%                 \smalltfield{c}{card(x, $\nu$)}}}}\not=\emptyset$
+% \end{quote}
 \label{ex:cardconstr} 
-\end{ex} 
+\end{ex}
+
+@@
+
 Let us take this definition through our example \textit{2000
   passengers get a hot meal}.  The relevant type corresponding to the
 content of this sentence is given in \nexteg{}.
