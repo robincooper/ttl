@@ -3828,7 +3828,7 @@ the definition in \nexteg{} (repeated in Appendix~\ref{app:settypes}).  % Recall
 
 
 This notion yields a notion of minimal object of a given type which is related to Schubert's
-\citeyear{Schubert2000} notion of characterization discussed on 
+(\citeyear{Schubert2000}) notion of characterization discussed on 
 p.~\pageref{pg:Schubert-characterize}.  It is different from Schubert's notion in
 that we do not say that there are no other types to which the
 situation belongs but rather that no proper part of the situation is
@@ -4122,37 +4122,35 @@ predicates in \nexteg{}.
 \label{ex:cardconstr} 
 \end{ex}
 
-@@
 
-Let us take this definition through our example \textit{2000
-  passengers get a hot meal}.  The relevant type corresponding to the
+Let us take these definitions through our example \textit{2000
+  passengers get a hot meal}.  One relevant type which could serve as the
 content of this sentence is given in \nexteg{}.
-\begin{ex} 
-2000$_{\mathrm{pred}}$(\smallrecord{\field{bg}{\textit{PassengerFrame}}\\
-                                    \field{fg}{$\lambda
-                                      r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}}
-                                      . \smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}}}, 
-\hspace*{4em}\smallrecord{\field{bg}{\textit{Rec}}\\
-             \field{fg}{$\lambda
-               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{Rec}$\mid\!\}$}} . 
-                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}}}) 
+\begin{ex}
+  \begin{tabbing}
+exactly\_2000(\=$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{PassengerFrame})$}}
+                                      . \smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}$\urcorner$,\\ 
+\>$\ulcorner\lambda
+r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}} . 
+\smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}$\urcorner$)
+\end{tabbing}
 \label{ex:2kpassgahm}
 \end{ex} 
-The first argument to `2000$_{\mathrm{pred}}$' is a pluralized version
+The first argument to `exactly\_2000' is the pluralized version
 of the property in the restriction field in (\ref{ex:conteverypassenger}). The
 second argument is a pluralized version of the property in
-(\ref{ex:contgetahotmealframe}). \preveg{} makes use of a
-pluralization operation, `\_pl' on predicates which can be introduced
-as in \nexteg{}.
-\begin{ex} 
-If $p$ is a predicate with arity $\langle T\rangle$, then $p$\_pl is a
-predicate with arity $\langle\{\!\mid T\mid\!\}\rangle$ 
-\end{ex} 
-The cases we are considering here are distributive plurals, that is,
-the constraint in \nexteg{} holds.
-\begin{ex} 
-$\down{p\mathrm{\_pl}(A)}\not=\emptyset$ iff $a\in A$ implies $\down{p(a)}\not=\emptyset$ 
-\end{ex} 
+(\ref{ex:contgetahotmealframe}). % \preveg{} makes use of a
+% pluralization operation, `\_pl' on predicates which can be introduced
+% as in \nexteg{}.
+% \begin{ex} 
+% If $p$ is a predicate with arity $\langle T\rangle$, then $p$\_pl is a
+% predicate with arity $\langle\{\!\mid T\mid\!\}\rangle$ 
+% \end{ex} 
+% The cases we are considering here are distributive plurals, that is,
+% the constraint in \nexteg{} holds.
+% \begin{ex} 
+% $\down{p\mathrm{\_pl}(A)}\not=\emptyset$ iff $a\in A$ implies $\down{p(a)}\not=\emptyset$ 
+% \end{ex} 
 Let us instantiate (\ref{ex:cardconstr}) bit by bit with
 (\ref{ex:2kpassgahm}).  We first compute the fixed point type of the
 foreground of the first argument.  That is, \nexteg{a} which is
@@ -4161,17 +4159,20 @@ identical to \nexteg{b}.
 \begin{subex} 
  
 \item $\mathcal{F}$($\lambda
-                                      r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}}
+                                      r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{PassengerFrame})$}})
                                       . \\
 \hspace*{5em}\smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}) 
  
 \item
-  \record{\tfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
+  \record{\tfield{x}{$\mathrm{plurality}(\textit{PassengerFrame})$}\\
           \tfield{e}{passenger\_frame\_pl(x)}} 
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+
+@@
+
 Then we compute the result of restricting the second argument to the
 quantifier predicate by \preveg{b}.  This is given in \nexteg{a} which
 is identical to \nexteg{b}.
@@ -4316,7 +4317,12 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 
       \item[\textnormal{\textit{Ppty}} Revised!] ---
         \record{\tfield{bg}{\textit{xType}}\\
-              \tfield{fg}(bg$\rightarrow$\textit{RecType})}
+          \tfield{fg}(bg$\rightarrow$\textit{RecType})}
+        
+      \item[\textnormal{\textit{PlPpty}} New!] --- a basic type
+
+        $P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
+$P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
         
       \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
@@ -4395,6 +4401,12 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
 \item[\textnormal{\textit{Real}} New!] --- a basic type
 
   $n$ : \textit{Real} iff $n$ is a real number
+
+  
+\item[\textnormal{\textit{Card}} New!] --- a basic type
+
+  $n$ : \textit{Card} iff $n$ is a cardinal number (natural numbers
+  with the addition of $\aleph_0, \aleph_1,\ldots$)
  
 
   
@@ -4485,7 +4497,23 @@ r$:\textit{LocRiseEventCntxt} .\\
     \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
         $u$ is the audience of $u$ in $e$
 
-    \end{description}
+      \end{description}
+
+    \item[with arity \textnormal{$\langle\textit{Card}\rangle$}] \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{card} New!] --- $X$ : card($n$) iff for some $T$,
+    $X:\mathrm{set}(T)$ and $|X|=n$
+    
+  \item[\textnormal{card\_at\_least} New!] --- $X$ : card\_at\_least($n$) iff for some $T$, $X:\mathrm{set}(T)$
+    and $|X|\geq n$
+
+    
+  \item[\textnormal{card\_at\_most} New!] --- $X$ : card\_at\_most($n$) iff for some $T$, $X:\mathrm{set}(T)$
+    and $|X|\leq n$
+
+  \end{description}
       
   \item[with arity \textnormal{$\langle$\textit{Ppty}$\rangle$}]
     \mbox{}
@@ -4508,7 +4536,33 @@ r$:\textit{LocRiseEventCntxt} .\\
     $s$ : exist($P$,$Q$) iff
     $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
     
-  \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
+  \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff
+    $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
+
+    
+  \item[\textnormal{exactly\_$n$} New!] --- for $n$ a natural number,
+
+    $s$ : exactly\_$n$($P$, $Q$) iff
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+      \not=\emptyset$
+
+      
+    \item[\textnormal{at\_least\_$n$} New!] --- for $n$ a natural
+      number,
+
+      $s$ : at\_least\_$n$($P$, $Q$) iff
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+      \not=\emptyset$
+
+      
+    \item[\textnormal{at\_most\_$n$} New!] --- for $n$ a natural
+      number,
+
+      $s$ : at\_most\_$n$($P$, $Q$) iff
+          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+        \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
 
   \end{description}
 \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
@@ -4541,6 +4595,7 @@ r$:\textit{LocRiseEventCntxt} .\\
   \item[\textnormal{less-than} New!] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
 
   \end{description}
+
 
   
 
@@ -4959,6 +5014,19 @@ If $T_{\mathrm{Phon}}$ is a phonological type, then
  
 \end{enumerate}
 
+\item[\textnormal{$p$\_pl} New!] \mbox{}
+
+  \begin{enumerate} 
+ 
+\item If $p$ is a singular predicate (i.e. there is no $p'$ such that
+  $p=p'\_\text{pl}$) with arity $\langle T\rangle$, then
+  $p\_\text{pl}$ is a predicate with arity $\langle\mathrm{plurality}(T)\rangle$ 
+ 
+\item $e:p\_\text{pl}(A)$ if for all $a\in A$, $e:p(a)$ 
+ 
+\end{enumerate} 
+  
+
 \item[\textnormal{CommonNounIndToFrame} New!] \mbox{}
 
   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
@@ -4984,7 +5052,52 @@ $\Sigma$
   \mfield{cont}{$\ulcorner\lambda c\!:\!T_{\mathrm{bg}}\ .\
     \ulcorner\text{SemCommonNoun}(T_{\mathrm{bg}},p)(c)\!\mid_{T_{\mathrm{res}}}\urcorner\urcorner$}{\textit{PPpty}}}
 \end{quote}
+
+\item[\textnormal{IntransVerbIndToFrame} New!] \mbox{}
+
+  If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+arity $\langle\textit{Ind}\rangle$ and
+$T_\mathrm{bg}$ is a record type (the ``background type'' or
+``presupposition'') then \\ 
+\mbox{IntransVerbIndToFrame(Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+  $T_\mathrm{bg}$, $p$))} =
+\begin{quote}
+  Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+  $T_\mathrm{bg}$, $p$\_frame)
+\end{quote}
+
+\item[\textnormal{PluralCommonNoun} New!] \mbox{}
+
+  We assume that `pluralnoun' is a function that maps phonological
+  types for singular common nouns to corresponding phonological types
+  for plural common nouns.
+
+  If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+  singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+  is a record type then
+  PluralCommonNoun(Lex$_{\text{CommonNoun}}$($T_{\text{phon}}$,
+  $T_{\text{bg}}$, $p$)) =
+  \begin{quote}
+    Lex$_{\text{CommonNoun}}$(pluralnoun($T_{\text{phon}}$),
+    $T_{\text{bg}}$, $p$\_pl)
+  \end{quote}
+
   
+\item[\textnormal{PluralIntransVerb} New!] \mbox{}
+
+  We assume that `pluralverb' is a function that maps phonological
+  types for singular verbs to corresponding phonological types
+  for plural verbs.
+
+  If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+  singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+  is a record type then
+  PluralIntransVerb(Lex$_{\text{IntransVerb}}$($T_{\text{phon}}$,
+  $T_{\text{bg}}$, $p$)) =
+  \begin{quote}
+    Lex$_{\text{IntransVerb}}$(pluralverb($T_{\text{phon}}$),
+    $T_{\text{bg}}$, $p$\_pl)
+  \end{quote} 
         
 
   
