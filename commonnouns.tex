@@ -4128,7 +4128,7 @@ Let us take these definitions through our example \textit{2000
 content of this sentence is given in \nexteg{}.
 \begin{ex}
   \begin{tabbing}
-exactly\_2000(\=$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{PassengerFrame})$}}
+exactly\_2000(\=$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}}
                                       . \smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}$\urcorner$,\\ 
 \>$\ulcorner\lambda
 r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}} . 
@@ -4152,26 +4152,27 @@ second argument is a pluralized version of the property in
 % $\down{p\mathrm{\_pl}(A)}\not=\emptyset$ iff $a\in A$ implies $\down{p(a)}\not=\emptyset$ 
 % \end{ex} 
 Let us instantiate (\ref{ex:cardconstr}) bit by bit with
-(\ref{ex:2kpassgahm}).  We first compute the fixed point type of the
+(\ref{ex:2kpassgahm}), assuming that the situation we are
+checking is $s$.  We first compute the fixed point type of the
 foreground of the first argument.  That is, \nexteg{a} which is
 identical to \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
 \item $\mathcal{F}$($\lambda
-                                      r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{PassengerFrame})$}})
+                                      r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}})
                                       . \\
-\hspace*{5em}\smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}) 
+\hspace*{5em}\smallrecord{\smallrfield{e}{$s$}{passenger\_frame\_pl($r$.x)}}) 
  
 \item
-  \record{\tfield{x}{$\mathrm{plurality}(\textit{PassengerFrame})$}\\
-          \tfield{e}{passenger\_frame\_pl(x)}} 
+  \record{\tfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \rfield{e}{$s$}{passenger\_frame\_pl(x)}} 
  
 \end{subex} 
    
 \end{ex}
 
-@@
+
 
 Then we compute the result of restricting the second argument to the
 quantifier predicate by \preveg{b}.  This is given in \nexteg{a} which
@@ -4179,15 +4180,16 @@ is identical to \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item  $\lambda
-               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{Rec}$\mid\!\}$}} . 
-                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}$\!\mid_{\text{\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{e}{passenger\_frame\_pl(x)}}}}$
+\item  ($\lambda
+               r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}} . 
+                 \smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}})
+                 $\!\mid_{\text{\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)}}}}$
  
 \item $\lambda
-               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{e}{passenger\_frame\_pl(x)}} . \\
-\hspace*{5em}                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}} 
+               r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)}} . \\
+\hspace*{5em}                 \smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}} 
  
 \end{subex} 
    
@@ -4198,12 +4200,12 @@ We then compute the fixed point type of \preveg{b}, given in
 \begin{subex} 
  
 \item $\mathcal{F}$($\lambda
-               r$:\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{e}{passenger\_frame\_pl(x)}} . \\
-\hspace*{5em}                 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}) 
+               r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)}} . \\
+\hspace*{5em}                 \smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}) 
  
-\item  \smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
+\item  \smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
  
 \end{subex} 
    
@@ -4215,52 +4217,51 @@ with \nexteg{c}.
 \begin{subex} 
  
 \item
-  \record{\tfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \tfield{c}{card(x,2000)}}
+  \record{\tfield{x}{card(2000)}}
  
-\item \smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
+\item
+  \smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
  \d{$\wedge$} 
-\smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{c}{card(x,2000)}}
+\record{\tfield{x}{card(2000)}}
 
-\item \smallrecord{\smalltfield{x}{$\{\!\mid$\textit{PassengerFrame}$\mid\!\}$}\\
-          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}\\
-          \smalltfield{c}{card(x,2000)}} 
- 
+\item 
+ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})\wedge$card(2000)}\\
+          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
 \end{subex} 
    
 \end{ex} 
 It is thus the type \preveg{c} which is required to be non-empty by
 the content of an utterance of \textit{2000 passengers get a hot
   meal}.  This means that it is required that there is a plurality of
-passenger frames where the passenger gets a hot meal and this
-plurality has the cardinality 2000, or slightly more colloquially,
-there are 2000 separate events of a passenger getting a hot meal.
+records with cardinality 2000 where each record in the plurality is a
+passenger frame and the passenger in each frame gets a hot meal, or
+slightly more colloquially, there are 2000 separate events of a
+passenger getting a hot meal.
 
-Requiring that there is a plurality with cardinality 2000 is to say
-that there are at least 2000 objects meeting whatever conditions are
-invoked.  It does not rule out the possibility of there being a larger
-plurality of objects meeting the same conditions.  If we want to
-express \textit{exactly $\nu$} we can use the condition in \nexteg{}.
-\begin{ex} 
- $\down{\mathrm{exactly}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
-\begin{enumerate}
-\item $\down{\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$
-\item $\down{\mathrm{at\_most}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$
-\end{enumerate}
-\end{ex}
-where `at\_most\_$\nu$' obeys the constraint in \nexteg{}. 
-\begin{ex} 
- $\down{\mathrm{at\_most}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
-\begin{quote}
-$\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\wedge$}\smallrecord{\smalltfield{x}{$\{\!\mid\!
-        P$.bg$\mid\!\}$}\\
-                \smalltfield{n}{\textit{Nat}}\\
-                \smalltfield{c$_{\mathrm{n}}$}{n $>\nu$}\\
-                \smalltfield{c}{card(x, n)}}}}=\emptyset$
-\end{quote}
-\end{ex} 
+% Requiring that there is a plurality with cardinality 2000 is to say
+% that there are at least 2000 objects meeting whatever conditions are
+% invoked.  It does not rule out the possibility of there being a larger
+% plurality of objects meeting the same conditions.  If we want to
+% express \textit{exactly $\nu$} we can use the condition in \nexteg{}.
+% \begin{ex} 
+%  $\down{\mathrm{exactly}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
+% \begin{enumerate}
+% \item $\down{\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$
+% \item $\down{\mathrm{at\_most}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$
+% \end{enumerate}
+% \end{ex}
+% where `at\_most\_$\nu$' obeys the constraint in \nexteg{}. 
+% \begin{ex} 
+%  $\down{\mathrm{at\_most}\_\nu_{\mathrm{pred}}(P,Q)}\not=\emptyset$ iff 
+% \begin{quote}
+% $\down{\mathcal{F}(Q.\mathrm{fg}\!\mid_{\mathcal{F}(P.\mathrm{fg})})\text{\d{$\wedge$}\smallrecord{\smalltfield{x}{$\{\!\mid\!
+%         P$.bg$\mid\!\}$}\\
+%                 \smalltfield{n}{\textit{Nat}}\\
+%                 \smalltfield{c$_{\mathrm{n}}$}{n $>\nu$}\\
+%                 \smalltfield{c}{card(x, n)}}}}=\emptyset$
+% \end{quote}
+% \end{ex} 
   
             
               
