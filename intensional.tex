@@ -4,188 +4,6 @@
 
 
 
-\todo{From here to next section moved from Ch.~\ref{percint}.  Not
-  clear where it should go.} A predicate like `believe' which represents that an individual has an
-attitude (of belief) to a certain type should thus have an arity which
-requires its arguments to be an individual and a type.  That is, we
-should be able to construct the type believe($c$, hug($a$,$b$))
-corresponding to \textit{$c$ believes that $a$ hugs $b$}.  We thus
-create \textit{intensional} type systems where types themselves can be treated
-as objects and belong to types.  Care has to be taken in constructing
-such systems in order to avoid paradoxes.  We use a standard
-technique known as stratification \cite{Turner2005}.  We start with a
-basic type system and then add higher order levels of types.  Each
-higher order includes the types of the order immediately below as
-objects.  In each of these higher orders $n$ there will be a type of
-all types of the order $n-1$ but there is no ultimate ``type of all
-types'' -- such a type would have to have itself as an object.  This
-is made precise in Appendix~\ref{app:int}.  For more detailed
-discussion see \cite{Cooperforthcoming}.  
-Figure~\ref{fig:intensionalmodal} represents an intensional modal type
-system where we indicate just the initial
-three orders of an infinite hierarchy of type orders.
-\begin{figure}[h]
-%\includegraphics[width=\textwidth]{intensionalmodal}
-\begin{adjustbox}{max width=\textwidth}
-\begin{tikzpicture}[
-  type/.style={circle, inner sep=0pt, minimum size=6pt, ball color=BTypeCol},
-  firsttype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=FirstTypeCol},
-  secondtype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=SecondTypeCol},
-  objects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ObjectCol},
-  modalobjects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ModalCol}
-  ]
-
-  % basic types:
-  \begin{scope}[
-    % every node/.append style={yslant=0,xslant=1.75},
-    yslant=0,xslant=1.75
-    ]
-    \filldraw [fill=BTypeCol, draw=BorderCol, thick, fill opacity=0.5] (0,0) rectangle (8,2);
-
-    \foreach \x/\y in {0.5/1.3, 1.4/1.6, 1.8/1.3, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.4/0.9, 4.7/1, 5.5/0.3, 5.6/1.1, 5.5/1.7, 6.4/1.2, 6.7/1.6} {
-      \node [type] at (\x,\y) {};
-    }
-
-    \node [coordinate] (btypeleft) at (0,1) {};
-    \node [coordinate] (btyperight) at (8,1) {};
-
-    \node [type, label=above:$T_1$] (t1) at (1.3,0.6) {};
-    \node [type, label=above:$T_2$] (t2) at (4.5,0.5) {};
-  \end{scope}    
-
-
-  % objects:
-  \begin{scope}[
-    % every node/.append style={yslant=0,xslant=1.75},
-    %yslant=0,xslant=1.75,
-    yshift=-100
-    ]
-    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (5,0) ellipse (6 and 1);
-
-    \foreach \a/\b in {5.5/0.7, 6.4/0.2, 6.7/0.6, 7/0, 7.5/0.35, 8/-0.3, 8.1/0.2, 8.7/0, 9/0.2, 10/0.1} {
-      \node [objects] at (\a,\b) {};
-    }
-    % for T1 from BType:
-    \node [objects] (o1) at (0.3,-0.1) {}; 
-    \node [objects] (o2) at (1,0.35) {}; 
-    \node [objects] (o3) at (1.6,-0.2) {};
-    \node [ellipse, fit=(o1) (o2) (o3), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.3] (fitA) {};
-    \draw [BTypeCol, thick] (t1) -- (fitA.east);
-    \draw [BTypeCol, thick] (t1) -- (fitA.west);
-
-    % for T2 from BType:
-    \node [objects] (o4) at (2.6,-0.5) {};
-    \node [objects] (o5) at (3.1,-0.5) {};
-    \node [objects] (o6) at (3.3,-0.1) {};
-    \node [ellipse, fit=(o3) (o4) (o5) (o6), yscale=0.7, xscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitB) {};
-    \draw [BTypeCol, thick] (t2) -- (fitB.east);
-    \draw [BTypeCol, thick] (t2) -- (fitB.west);
-
-    % for T2 from Type1:
-    \node [objects] (o7) at (4,0.4) {};
-    \node [objects] (o8) at (4.4,0) {}; 
-    \node [objects] (o9) at (4.7,0.1) {};
-    \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9), yscale=0.9, xscale=0.8, draw=FirstTypeCol, thick, fill=FirstTypeCol, fill opacity=0.2] (fitC) {};
-
-    % for T2 from Type2:
-    \node [objects] (o10) at (5.5,-0.3) {};
-    \node [objects] (o11) at (5.6,-0.1) {};
-    \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9) (o10) (o11), yscale=0.95, xscale=0.85, draw=SecondTypeCol, thick, fill=SecondTypeCol, fill opacity=0.2] (fitD) {};
-  \end{scope}
-
-
-  % modal types:
-  \begin{scope}[
-    % every node/.append style={yslant=0,xslant=1.75},
-    %yslant=0,xslant=1.75,
-    yshift=-35, 
-    xshift=220
-    ]
-    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (3.5,0) ellipse (4 and 0.75);
-
-    \foreach \a/\b in {0.3/-0.1, 1.5/-0.3, 3.9/0.2, 7/0} {
-      \node [objects] at (\a,\b) {};
-    }
-    \node [objects] at (0.7,0) {};
-    \node [objects] (i1) at (5.7,-0.2) {};
-    \node [objects] (i2) at (6.1,0.3) {};
-    \node [objects] (i3) at (5,0) {};
-    \node [ellipse, fit=(i1) (i2) (i3), yscale=0.7, draw=BTypeCol,
-    thick, fill=BTypeCol, fill opacity=0.2] (fitAA) {};
-\draw [BTypeCol, thick] (t2) -- (fitAA.north);
-    \draw [BTypeCol, thick] (t2) -- (fitAA.south west);
-
-    \node [objects] (i4) at (1.6,0.1) {};
-    \node [objects] (i5) at (2,0.2) {};
-    \node [objects] (i6) at (2.5,-0.3) {};
-    \node [objects] (i7) at (2.7,0.35) {};
-    \node [ellipse, fit=(i4) (i5) (i6) (i7), yscale=0.7, xscale=1.1,
-    draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitBB) {};
-    \draw [BTypeCol, thick] (t1) -- (fitBB.north);
-    \draw [BTypeCol, thick] (t1) -- (fitBB.south west);
-  \end{scope}
-
-
-  % Type1:
-  \begin{scope}[
-    % every node/.append style={yslant=0,xslant=1.75},
-    yslant=0,xslant=1.75,
-    xshift=-100,
-    yshift=80
-    ]
-    \filldraw [fill=FirstTypeCol, draw=BorderCol, thick, fill opacity=0.3] (0,0) rectangle (8,2);
-    \node [coordinate] (firsttypeleft) at (0,1) {};
-    \node [coordinate] (firsttyperight) at (8,1) {};
-
-    \foreach \x/\y in {0.45/1.4, 1.4/1.6, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.7/1, 5.5/0.3, 5.6/1.1,  6.7/1.6} {
-      \node [firsttype] at (\x,\y) {};
-    }
-
-    \node [firsttype, label=above:$T_1$] (ft1) at (1.8,1.1) {};
-    \node [firsttype, label=above:$T_2$] (ft2) at (5.8,0.7) {};
-    \node [firsttype, label=above:$T_3$] (ft3) at (6.4,1.2) {};
-    \node [firsttype, label=above:{\textbf{Type$^1$}}] (ft) at (4,0.4) {};
-
-    \draw [FirstTypeCol, thick] (ft) -- (btypeleft);
-    \draw [FirstTypeCol, thick] (ft) -- (btyperight);
-    
-    \draw [FirstTypeCol, thick] (ft2) -- (fitC.east);
-    \draw [FirstTypeCol, thick] (ft2) -- (fitC.west);
-  \end{scope}    
-
-
-  % Type2:
-  \begin{scope}[
-    % every node/.append style={yslant=0,xslant=1.75},
-    yslant=0,xslant=1.75,
-    xshift=-200,
-    yshift=160
-    ]
-    \filldraw [fill=SecondTypeCol, draw=BorderCol, thick, fill opacity=0.1] (0,0) rectangle (8,2);
-    \foreach \x/\y in {1.4/1.6, 1.9/0.5, 3.2/1.5, 4.7/1, 5.4/1.2, 5.8/0.3, 6/0.3,  6.2/1.6} {
-      \node [secondtype] at (\x,\y) {};
-    }
-
-    \node [secondtype, label=above:$T_1$] (st1) at (1.2,1) {};
-    \node [secondtype, label=above:$T_2$] (st2) at (4.8,0.7) {};
-    \node [secondtype, label=above:$T_3$] (st3) at (6.4,1.2) {};
-    \node [secondtype, label=above:{\textbf{Type$^1$}}] (st4) at
-    (3.4,0.5) {};
-    \node [secondtype, label=above:{\textbf{Type$^2$}}] (st) at
-    (4.0,1.7) {};
-
-    \draw [SecondTypeCol, thick] (st) -- (firsttypeleft);
-    \draw [SecondTypeCol, thick] (st) -- (firsttyperight);
-    
-    \draw [SecondTypeCol, thick] (st2) -- (fitD.east);
-    \draw [SecondTypeCol, thick] (st2) -- (fitD.west);
-  \end{scope}    
-\end{tikzpicture}
-\end{adjustbox}
-
-\caption{Intensional modal type system}
-\label{fig:intensionalmodal}
-\end{figure}
 
 
 \section{Possible worlds, modality and intensionality}
@@ -306,7 +124,7 @@ has no components.  But still a record type is always a finite
 structure and so we are not entering into the complexity of
 manipulating uncountable sets, even though the record type may be
 thought of as a ``representation'' for its set of witnesses which may
-indeed be an uncountable set.  It is here that our approach connects
+indeed be an uncountable set.  Here our approach connects
 with proof theoretic approaches.  In proof theory we manipulate
 expressions in a language which may represent sets of objects.  Our
 types are not expressions in a language but they are objects in our
@@ -316,11 +134,13 @@ learning theory where agents can be acquainted with a type without
 being acquainted with the complete set of its witnesses.  Knowing a
 type whose witnesses are dogs does not mean that you are acquainted
 with the set of all dogs, but rather that you know a dog when you see
-one, that is, you have a reliable dog \textit{classifier}.  An important aspect of human cognitive processing is
+one, that is, you have a reliable dog \textit{classifier}.  (See
+\citealp{Larsson2013} for a discussion of the relationship between types
+and classifiers.) An important aspect of human cognitive processing is
 that it involves reasoning with the types themselves, treating them as
 first class citizens which can be arguments to predicates.  This is
 what gives rise to modality and intensionality.  Possibly this higher
-level reasoning is unique, or at least, most fully developed in
+level reasoning is unique, or, at least, most fully developed, in
 humans.
 
 We think of types like record types as being types of
@@ -345,33 +165,28 @@ always possible to add a new field to it.\footnote{This fact is
   \textit{Every situation, $s$, is a proper part of some other
     situation, $s'$}.}  
 
-\todo[inline]{Leitgeb, H. (2018). HYPE: A system of hyperintensional logic (with an application to
-semantic paradoxes). Journal of Philosophical Logic, 1--101.}
-\todo[inline]{Referential dependencies between conflicting attitudes
-E Maier
-Journal of philosophical logic, 2017}
-\todo[inline]{Attitudes and mental files in discourse representation theory
-E Maier
-Review of philosophy and psychology, 2016
-}
 
-\section{Modal type systems}\todo{Moved from Ch. 1.  Needs integrating}
+
+\section{Modal type systems}%\todo{Moved from Ch. 1.  Needs integrating}
 \label{sec:percint-modal}
 
-Kim continues her walk still thinking about the boy and the dog.  She
+Let us develop further the story about Kim's walk in the park from
+Chapter~\ref{ch:infex}.  Kim continues her walk still thinking about
+the boy and the dog  whom she had seen playing the game of fetch.  She
 thinks,  ``Was
 the boy standing too close to the pond?  Suppose he had fallen in.  If
 he had been my son, I wouldn't have let him play just there.'' An
 important aspect of human cognition is that we are not only able to
 observe things as they are but also to conceive of alternatives which
 go beyond the completion of observed events in the way discussed in
+Chapter~\ref{ch:infex}, 
 Section~\ref{sec:ev-strings}. We can not only observe objects and
 perceive them to be of certain types we can also consider
 possibilities in which they belong to different types and perhaps do
 not belong to the type we have observed.  We have managed to unhook
 type judgements from direct perception.  While the seeds of this
 ability can be seen in the kind of event perception and prediction
-discussed above in that it gives us a way to consider types which have
+discussed in Chapter~\ref{ch:infex} in that it gives us a way to consider types which have
 not yet been realized, it is at least one step further in cognitive
 evolution to be able to consider alternative type assignments which do
 not correspond to completions of events already perceived.
@@ -558,9 +373,38 @@ of type $T_1$ in the first possibility but not in the second
 possibility.  There is an object, $b$, of type $T_1$ in the second
 possibility.  $b$ does not exist at all in the first possibility.
 In the
-figure we just show two possibilities but our general definition in Appendix~\ref{sec:basic}
+figure we just show two possibilities but our general definition in
+Appendix~\ref{app:modal}, introduced in Chapter~\ref{ch:percint}, p.~\pageref{ex:modalsys-complex},
 allows for there to be any number of possibilities, including
 infinitely many.
+
+% \begin{shaded}
+
+% We start by characterizing a modal system of basic types in \nexteg{},
+% repeated in Appendix~\ref{sec:basic}.
+% \begin{ex} 
+ 
+
+% A \textit{modal system of basic types} is a family of
+% pairs:
+% \begin{display}
+% \textbf{TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
+% $A\rangle_{A\in\mathcal{A}}$
+% \end{display}
+% where:
+% \begin{enumerate} 
+ 
+% \item $\mathcal{A}$ is a set of functions with domain \textbf{Type} 
+ 
+% \item for each $A\in\mathcal{A}$, $\langle${\bf Type}, $A\rangle$ is a
+%   system of basic types
+ 
+% \end{enumerate}
+% \label{ex:def-modal-basic-types}
+% \end{ex} 
+  
+% \end{shaded}
+
 
 Given this apparatus we define four simple modal notions:
 \begin{description}
@@ -590,7 +434,96 @@ Given this apparatus we define four simple modal notions:
   extension.
 
 \end{description}
-These notions are made precise in Appendix~\ref{sec:basic}.  Note that
+
+\begin{shaded}
+
+These notions are made precise for modal systems of complex types in
+\nexteg{} and (\ref{ex:inclusive-modal-notions}), repeated in Appendix~\ref{app:modal}.  As a preliminary we
+note that if
+\begin{quote}
+{\bf TYPE$_{\mathit{MC}}$} = $\langle${\bf Type}$_M$, {\bf BType},
+$\langle$\textbf{PType}$_M$, {\bf Pred}, \textbf{ArgIndices}, {\it
+  Arity\/}$\rangle, M\rangle_{M\in\mathcal{M}}$
+\end{quote}
+is a modal system of complex types based
+on $\mathcal{M}$, we shall use the notation {\bf
+  TYPE$_{\mathit{MC}_M}$} (where $M\in\mathcal{M}$) to refer to that
+system of complex types in {\bf TYPE$_{\mathit{MC}}$} whose model is
+$M$.  Let \textbf{Type}$_{\mathit{MC}_{\mathit{restr}}}$ be
+  $\bigcap\limits_{M\in\mathcal{M}}\!\textbf{Type}_M$, the
+  ``restrictive'' set of
+  types which occur in all possibilities,  and \textbf{Type}$_{\mathit{MC}_{\mathit{incl}}}$ be
+  $\bigcup\limits_{M\in\mathcal{M}}\!\textbf{Type}_M$, the
+  ``inclusive'' set of
+  types which occur in at least one possibility. Then we can define
+  modal notions either restrictively or inclusively (indicated by the
+  subscripts $r$ and $i$ respectively).
+
+ \begin{ex} 
+\textbf{restrictive modal notions}  
+\begin{subex} 
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T_1$ \textit{is
+    (necessarily) equivalent$_r$
+    to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\approx_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+  
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T_1$ \textit{is a subtype$_r$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T$ \textit{is necessary$_r$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for all
+  $M\in\mathcal{M}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{restr}}}$, $T$ \textit{is possible$_r$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for some
+  $M\in\mathcal{M}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+ 
+\end{subex}
+\label{ex:inclusive-modal-notions}
+\end{ex}
+
+\begin{ex}
+\textbf{inclusive modal notions}
+\begin{subex} 
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T_1$ \textit{is
+    (necessarily) equivalent$_i$
+    to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\approx_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
+  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+  
+ 
+\item for any $T_1,T_2\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T_1$ \textit{is a subtype$_i$ of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MC}}$},
+  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MC}}}}T_2$,  iff for all
+  $M\in\mathcal{M}$, if $T_1$ and $T_2$ are members of
+  \textbf{Type}$_M$, then $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T_2\}$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T$ \textit{is necessary$_i$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for all
+  $M\in\mathcal{M}$, if $T\in$\textbf{Type}$_M$, then \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+
+\item for any $T\in\textbf{Type}_{\mathit{MC}_{\mathit{incl}}}$, $T$ \textit{is possible$_i$ in} {\bf TYPE$_{\mathit{MC}}$}  iff for some
+  $M\in\mathcal{M}$, if $T\in$\textbf{Type}$_M$, then\\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
+ 
+\end{subex} 
+\end{ex} 
+
+It is easy to see that if any of the restrictive definitions holds for
+given types in a particular system then the corresponding inclusive
+definition will also hold for those types in that system.
+
+@@
+
+
+
+\end{shaded}
+
+\todo{Add
+  proof theoretical notation}
+
+Note that
 all of these notions are relativized to the modal system you are
 considering and the possibilities it offers.  We may think of the
 family of assignments $\mathcal{A}$ as providing a modal base
@@ -1541,6 +1474,200 @@ conventions of Appendix~\ref{app:interpps}).
 \label{sec:intensionality}
 
 \todo[inline]{Paul Égré in 2014\_Book\_Epistemology..., sem034\_PE}
+
+\todo[inline]{Leitgeb, H. (2018). HYPE: A system of hyperintensional logic (with an application to
+semantic paradoxes). Journal of Philosophical Logic, 1--101.}
+\todo[inline]{Referential dependencies between conflicting attitudes
+E Maier
+Journal of philosophical logic, 2017}
+\todo[inline]{Attitudes and mental files in discourse representation theory
+E Maier
+Review of philosophy and psychology, 2016
+}
+
+\todo{From here to ``In Section 6.1'' moved from Ch.~\ref{ch:percint}.  Not
+  clear where it should go.} A predicate like `believe' which represents that an individual has an
+attitude (of belief) to a certain type should thus have an arity which
+requires its arguments to be an individual and a type.  That is, we
+should be able to construct the type believe($c$, hug($a$,$b$))
+corresponding to \textit{$c$ believes that $a$ hugs $b$}.  We thus
+create \textit{intensional} type systems where types themselves can be treated
+as objects and belong to types.  Care has to be taken in constructing
+such systems in order to avoid paradoxes.  We use a standard
+technique known as stratification \cite{Turner2005}.  We start with a
+basic type system and then add higher order levels of types.  Each
+higher order includes the types of the order immediately below as
+objects.  In each of these higher orders $n$ there will be a type of
+all types of the order $n-1$ but there is no ultimate ``type of all
+types'' -- such a type would have to have itself as an object.  This
+is made precise in Appendix~\ref{app:int}.  For more detailed
+discussion see \cite{Cooperforthcoming}.  
+Figure~\ref{fig:intensionalmodal} represents an intensional modal type
+system where we indicate just the initial
+three orders of an infinite hierarchy of type orders.
+\begin{figure}[h]
+%\includegraphics[width=\textwidth]{intensionalmodal}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[
+  type/.style={circle, inner sep=0pt, minimum size=6pt, ball color=BTypeCol},
+  firsttype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=FirstTypeCol},
+  secondtype/.style={circle, inner sep=0pt, minimum size=6pt, ball color=SecondTypeCol},
+  objects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ObjectCol},
+  modalobjects/.style={circle, inner sep=0pt, minimum size=6pt, ball color=ModalCol}
+  ]
+
+  % basic types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75
+    ]
+    \filldraw [fill=BTypeCol, draw=BorderCol, thick, fill opacity=0.5] (0,0) rectangle (8,2);
+
+    \foreach \x/\y in {0.5/1.3, 1.4/1.6, 1.8/1.3, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.4/0.9, 4.7/1, 5.5/0.3, 5.6/1.1, 5.5/1.7, 6.4/1.2, 6.7/1.6} {
+      \node [type] at (\x,\y) {};
+    }
+
+    \node [coordinate] (btypeleft) at (0,1) {};
+    \node [coordinate] (btyperight) at (8,1) {};
+
+    \node [type, label=above:$T_1$] (t1) at (1.3,0.6) {};
+    \node [type, label=above:$T_2$] (t2) at (4.5,0.5) {};
+  \end{scope}    
+
+
+  % objects:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-100
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (5,0) ellipse (6 and 1);
+
+    \foreach \a/\b in {5.5/0.7, 6.4/0.2, 6.7/0.6, 7/0, 7.5/0.35, 8/-0.3, 8.1/0.2, 8.7/0, 9/0.2, 10/0.1} {
+      \node [objects] at (\a,\b) {};
+    }
+    % for T1 from BType:
+    \node [objects] (o1) at (0.3,-0.1) {}; 
+    \node [objects] (o2) at (1,0.35) {}; 
+    \node [objects] (o3) at (1.6,-0.2) {};
+    \node [ellipse, fit=(o1) (o2) (o3), yscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.3] (fitA) {};
+    \draw [BTypeCol, thick] (t1) -- (fitA.east);
+    \draw [BTypeCol, thick] (t1) -- (fitA.west);
+
+    % for T2 from BType:
+    \node [objects] (o4) at (2.6,-0.5) {};
+    \node [objects] (o5) at (3.1,-0.5) {};
+    \node [objects] (o6) at (3.3,-0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6), yscale=0.7, xscale=0.7, draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitB) {};
+    \draw [BTypeCol, thick] (t2) -- (fitB.east);
+    \draw [BTypeCol, thick] (t2) -- (fitB.west);
+
+    % for T2 from Type1:
+    \node [objects] (o7) at (4,0.4) {};
+    \node [objects] (o8) at (4.4,0) {}; 
+    \node [objects] (o9) at (4.7,0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9), yscale=0.9, xscale=0.8, draw=FirstTypeCol, thick, fill=FirstTypeCol, fill opacity=0.2] (fitC) {};
+
+    % for T2 from Type2:
+    \node [objects] (o10) at (5.5,-0.3) {};
+    \node [objects] (o11) at (5.6,-0.1) {};
+    \node [ellipse, fit=(o3) (o4) (o5) (o6) (o7) (o8) (o9) (o10) (o11), yscale=0.95, xscale=0.85, draw=SecondTypeCol, thick, fill=SecondTypeCol, fill opacity=0.2] (fitD) {};
+  \end{scope}
+
+
+  % modal types:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    %yslant=0,xslant=1.75,
+    yshift=-35, 
+    xshift=220
+    ]
+    \filldraw [fill=ObjectCol, opacity=0.4, draw=BorderCol, ultra thick] (3.5,0) ellipse (4 and 0.75);
+
+    \foreach \a/\b in {0.3/-0.1, 1.5/-0.3, 3.9/0.2, 7/0} {
+      \node [objects] at (\a,\b) {};
+    }
+    \node [objects] at (0.7,0) {};
+    \node [objects] (i1) at (5.7,-0.2) {};
+    \node [objects] (i2) at (6.1,0.3) {};
+    \node [objects] (i3) at (5,0) {};
+    \node [ellipse, fit=(i1) (i2) (i3), yscale=0.7, draw=BTypeCol,
+    thick, fill=BTypeCol, fill opacity=0.2] (fitAA) {};
+\draw [BTypeCol, thick] (t2) -- (fitAA.north);
+    \draw [BTypeCol, thick] (t2) -- (fitAA.south west);
+
+    \node [objects] (i4) at (1.6,0.1) {};
+    \node [objects] (i5) at (2,0.2) {};
+    \node [objects] (i6) at (2.5,-0.3) {};
+    \node [objects] (i7) at (2.7,0.35) {};
+    \node [ellipse, fit=(i4) (i5) (i6) (i7), yscale=0.7, xscale=1.1,
+    draw=BTypeCol, thick, fill=BTypeCol, fill opacity=0.2] (fitBB) {};
+    \draw [BTypeCol, thick] (t1) -- (fitBB.north);
+    \draw [BTypeCol, thick] (t1) -- (fitBB.south west);
+  \end{scope}
+
+
+  % Type1:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75,
+    xshift=-100,
+    yshift=80
+    ]
+    \filldraw [fill=FirstTypeCol, draw=BorderCol, thick, fill opacity=0.3] (0,0) rectangle (8,2);
+    \node [coordinate] (firsttypeleft) at (0,1) {};
+    \node [coordinate] (firsttyperight) at (8,1) {};
+
+    \foreach \x/\y in {0.45/1.4, 1.4/1.6, 1.9/0.5, 3.3/1.8, 2.6/1.5, 4.7/1, 5.5/0.3, 5.6/1.1,  6.7/1.6} {
+      \node [firsttype] at (\x,\y) {};
+    }
+
+    \node [firsttype, label=above:$T_1$] (ft1) at (1.8,1.1) {};
+    \node [firsttype, label=above:$T_2$] (ft2) at (5.8,0.7) {};
+    \node [firsttype, label=above:$T_3$] (ft3) at (6.4,1.2) {};
+    \node [firsttype, label=above:{\textbf{Type$^1$}}] (ft) at (4,0.4) {};
+
+    \draw [FirstTypeCol, thick] (ft) -- (btypeleft);
+    \draw [FirstTypeCol, thick] (ft) -- (btyperight);
+    
+    \draw [FirstTypeCol, thick] (ft2) -- (fitC.east);
+    \draw [FirstTypeCol, thick] (ft2) -- (fitC.west);
+  \end{scope}    
+
+
+  % Type2:
+  \begin{scope}[
+    % every node/.append style={yslant=0,xslant=1.75},
+    yslant=0,xslant=1.75,
+    xshift=-200,
+    yshift=160
+    ]
+    \filldraw [fill=SecondTypeCol, draw=BorderCol, thick, fill opacity=0.1] (0,0) rectangle (8,2);
+    \foreach \x/\y in {1.4/1.6, 1.9/0.5, 3.2/1.5, 4.7/1, 5.4/1.2, 5.8/0.3, 6/0.3,  6.2/1.6} {
+      \node [secondtype] at (\x,\y) {};
+    }
+
+    \node [secondtype, label=above:$T_1$] (st1) at (1.2,1) {};
+    \node [secondtype, label=above:$T_2$] (st2) at (4.8,0.7) {};
+    \node [secondtype, label=above:$T_3$] (st3) at (6.4,1.2) {};
+    \node [secondtype, label=above:{\textbf{Type$^1$}}] (st4) at
+    (3.4,0.5) {};
+    \node [secondtype, label=above:{\textbf{Type$^2$}}] (st) at
+    (4.0,1.7) {};
+
+    \draw [SecondTypeCol, thick] (st) -- (firsttypeleft);
+    \draw [SecondTypeCol, thick] (st) -- (firsttyperight);
+    
+    \draw [SecondTypeCol, thick] (st2) -- (fitD.east);
+    \draw [SecondTypeCol, thick] (st2) -- (fitD.west);
+  \end{scope}    
+\end{tikzpicture}
+\end{adjustbox}
+
+\caption{Intensional modal type system}
+\label{fig:intensionalmodal}
+\end{figure}
+
 
 In Section~\ref{sec:possworlds} we discussed problems that have to do
 with individuating and counting possible worlds.  Here we discuss

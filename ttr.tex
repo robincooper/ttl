@@ -79,9 +79,9 @@ $\mathrm{tpaths}(X)$ is the set of paths, $\pi$, such that
 \section{Basic types}
 \label{sec:basic}
 
-\paragraph{System of basic types} (Chapter~\ref{ch:percint}, p.~\pageref{ex:def-basic-types}.)
+\paragraph{System of basic types} \mbox{}
 
-A {\it system of basic types\/} is a pair:
+A {\it system of basic types\/} (Chapter~\ref{ch:percint}, p.~\pageref{ex:def-basic-types}) is a pair:
 \begin{quote}
 {\bf TYPE$_B$} = $\langle${\bf Type}, $A$$\rangle$
 \end{quote}
@@ -100,51 +100,53 @@ where:
 \end{enumerate}
 
 
-A \textit{modal system of basic types}\footnote{This definition was not present in \cite{Cooper2012}.} is a family of
-pairs:
-\begin{display}
-\textbf{TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
-$A\rangle_{A\in\mathcal{A}}$
-\end{display}
-where:
-\begin{enumerate} 
+% A \textit{modal system of basic types}\footnote{This definition was
+%   not present in \cite{Cooper2012}.} (Chapter~\ref{ch:intensional},
+% p.~\pageref{ex:def-modal-basic-types}) is a family of
+% pairs:
+% \begin{display}
+% \textbf{TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
+% $A\rangle_{A\in\mathcal{A}}$
+% \end{display}
+% where:
+% \begin{enumerate} 
  
-\item $\mathcal{A}$ is a set of functions with domain \textbf{Type} 
+% \item $\mathcal{A}$ is a set of functions with domain \textbf{Type} 
  
-\item for each $A\in\mathcal{A}$, $\langle${\bf Type}, $A\rangle$ is a
-  system of basic types
+% \item for each $A\in\mathcal{A}$, $\langle${\bf Type}, $A\rangle$ is a
+%   system of basic types
  
-\end{enumerate} 
+% \end{enumerate} 
 
-This enables us to define some simple modal notions:
+% This enables us to define some simple modal notions:
 
-If {\bf TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
-$A\rangle_{A\in\mathcal{A}}$
-is a modal system of basic types, we shall use the notation {\bf
-  TYPE$_{\mathit{MB}_A}$} (where $A\in\mathcal{A}$) to refer to that
-system of basic types in {\bf TYPE$_{\mathit{MB}}$} whose type assignment is
-$A$.    Then:  
-\begin{enumerate} 
+% If {\bf TYPE$_{\mathit{MB}}$} = $\langle${\bf Type},
+% $A\rangle_{A\in\mathcal{A}}$
+% is a modal system of basic types, we shall use the notation {\bf
+%   TYPE$_{\mathit{MB}_A}$} (where $A\in\mathcal{A}$) to refer to that
+% system of basic types in {\bf TYPE$_{\mathit{MB}}$} whose type assignment is
+% $A$.    Then:  
+% \begin{enumerate} 
  
-\item for any $T_1,T_2\in\textbf{Type}$, $T_1$ \textit{is
-    (necessarily) equivalent
-    to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MB}}$},
-  $T_1\approx_{\mathbf{TYPE_{\mathit{MB}}}}T_2$,  iff for all
-  $A\in\mathcal{A}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_2\}$
+% \item for any $T_1,T_2\in\textbf{Type}$, $T_1$ \textit{is
+%     (necessarily) equivalent
+%     to} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MB}}$},
+%   $T_1\approx_{\mathbf{TYPE_{\mathit{MB}}}}T_2$,  iff for all
+%   $A\in\mathcal{A}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_1\}=\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_2\}$
   
  
-\item for any $T_1,T_2\in\textbf{Type}$, $T_1$ \textit{is a
-    subtype of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MB}}$},
-  $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MB}}}}T_2$,  iff for all
-  $A\in\mathcal{A}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_2\}$
+% \item for any $T_1,T_2\in\textbf{Type}$, $T_1$ \textit{is a
+%     subtype of} $T_2$ \textit{in} {\bf TYPE$_{\mathit{MB}}$},
+%   $T_1\sqsubseteq_{\mathbf{TYPE_{\mathit{MB}}}}T_2$,  iff for all
+%   $A\in\mathcal{A}$, $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_1\}\subseteq\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T_2\}$
 
-\item for any $T\in\textbf{Type}$, $T$ \textit{is necessary in} {\bf TYPE$_{\mathit{MB}}$}  iff for all
-  $A\in\mathcal{A}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T\}\not=\emptyset$
+% \item for any $T\in\textbf{Type}$, $T$ \textit{is necessary in} {\bf TYPE$_{\mathit{MB}}$}  iff for all
+%   $A\in\mathcal{A}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T\}\not=\emptyset$
 
-\item for any $T\in\textbf{Type}$, $T$ \textit{is possible in} {\bf TYPE$_{\mathit{MB}}$}  iff for some
-  $A\in\mathcal{A}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T\}\not=\emptyset$
+% \item for any $T\in\textbf{Type}$, $T$ \textit{is possible in} {\bf TYPE$_{\mathit{MB}}$}  iff for some
+%   $A\in\mathcal{A}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MB}_A}}T\}\not=\emptyset$
  
-\end{enumerate}  
+% \end{enumerate}  
 
 \section{Complex types}
 
