@@ -481,7 +481,7 @@ $M$.  Let \textbf{Type}$_{\mathit{MC}_{\mathit{restr}}}$ be
   $M\in\mathcal{M}$, \\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
  
 \end{subex}
-\label{ex:inclusive-modal-notions}
+
 \end{ex}
 
 \begin{ex}
@@ -508,20 +508,130 @@ $M$.  Let \textbf{Type}$_{\mathit{MC}_{\mathit{restr}}}$ be
   $M\in\mathcal{M}$, if $T\in$\textbf{Type}$_M$, then\\ $\{a\mid a:_{\mathbf{TYPE}_{\mathit{MC}_M}}T\}\not=\emptyset$
  
 \end{subex} 
+\label{ex:inclusive-modal-notions}
 \end{ex} 
 
 It is easy to see that if any of the restrictive definitions holds for
 given types in a particular system then the corresponding inclusive
 definition will also hold for those types in that system.
 
-@@
+This can be recast in terms of our informal proof theoretic notation
+where we use `$T\ \mathrm{true}$' to represent that $T$ has some
+witness, `$T_1\sqsubseteq_rT_2$' (`$T_1\sqsubseteq_iT_2$') to
+represent that $T_1$ is a restrictive (inclusive) subtype of $T_2$,
+`$T_1\approx_rT_2$' (`$T_1\approx_iT_2$') to represent that $T_1$ is
+restrictively (inclusively) equivalent to $T_2$, `$T\ \mathrm{nec}_r$'
+(`$T\ \mathrm{nec}_i$') to represent that $T$ is restrictively
+(inclusively) necessary and `$T\ \mathrm{poss}_r$' (`$T\
+\mathrm{poss}_i$') to represent that $T$ is restrictively
+(inclusively) possible.  We give the restrictive notions in \nexteg{}.
+\begin{ex} 
+  \textbf{restrictive modal notions}
+
+  For $\mathcal{G}$ a modal system of complex types
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{[\Gamma\in\mathcal{G}]}
+      \ellipsis{}{\Gamma\vdash T_1\in\textbf{Type}}
+      \hypo{[\Gamma\in\mathcal{G}]}
+      \ellipsis{}{\Gamma\vdash T_2\in\textbf{Type}}
+      \hypo{[\Gamma\in\mathcal{G},\Gamma\vdash a:T_1]}
+      \ellipsis{}{\Gamma\vdash a:T_2}
+      \infer3{\mathcal{G}\vdash T_1\sqsubseteq_r T_2}
+    \end{prooftree}
+    
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\mathcal{G}\vdash T_1\sqsubseteq_r T_2}
+      \hypo{\mathcal{G}\vdash T_2\sqsubseteq_r T_1}
+      \infer2{\mathcal{G}\vdash T_1\approx_r T_2}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{[\Gamma\in\mathcal{G}]}
+      \ellipsis{}{\Gamma\vdash T\in\textbf{Type}}
+      \hypo{[\Gamma\in\mathcal{G}]}
+      \ellipsis{}{\Gamma\vdash T\ \mathrm{true}}
+      \infer2{\mathcal{G}\vdash T\ \mathrm{nec}_r}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{[\Gamma\in\mathcal{G}]}
+      \ellipsis{}{\Gamma\vdash T\in\textbf{Type}}
+      \hypo{\Gamma'\in\mathcal{G}}
+      \hypo{\Gamma'\vdash a:T}
+      \infer3{\mathcal{G}\vdash T\ \mathrm{poss}_r}
+    \end{prooftree}
+    
+ 
+\end{subex} 
+  
+\end{ex}
+The inclusive notions are given in \nexteg{}.
+\begin{ex} 
+  \textbf{inclusive modal notions}
+
+  For $\mathcal{G}$ a modal system of complex types
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{[\Gamma\in\mathcal{G},\Gamma\vdash
+        T_1\in\textbf{Type},\Gamma\vdash
+        T_2\in\textbf{Type},\Gamma\vdash a:T_1]}
+      \ellipsis{}{\Gamma\vdash a:T_2}
+      \infer1{\mathcal{G}\vdash T_1\sqsubseteq_i T_2}
+    \end{prooftree}
+    
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\mathcal{G}\vdash T_1\sqsubseteq_i T_2}
+      \hypo{\mathcal{G}\vdash T_2\sqsubseteq_i T_2}
+      \infer2{\mathcal{G}\vdash T_1\approx_i T_2}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma'\in\mathcal{G}}
+      \hypo{\Gamma'\vdash T\in\textbf{Type}}
+      \hypo{[\Gamma\in\mathcal{G},\Gamma\vdash T\in\textbf{Type}]}
+      \ellipsis{}{\Gamma\vdash T\ \mathrm{true}}
+      \infer3{\mathcal{G}\vdash T\ \mathrm{nec}_i}
+    \end{prooftree}
+
+    
+  \item
+    \begin{prooftree}
+      \hypo{\Gamma\in\mathcal{G}}
+      \hypo{\Gamma\vdash T\in\textbf{Type}}
+      \hypo{\Gamma\vdash a:T}
+      \infer3{\mathcal{G}\vdash T\ \mathrm{poss}_i}
+    \end{prooftree}
+    
+    
+ 
+\end{subex} 
+  
+\end{ex} 
+  
+  
+
+
 
 
 
 \end{shaded}
 
-\todo{Add
-  proof theoretical notation}
+@@
 
 Note that
 all of these notions are relativized to the modal system you are
