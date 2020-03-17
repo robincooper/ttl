@@ -631,84 +631,84 @@ The inclusive notions are given in \nexteg{}.
 
 \end{shaded}
 
-@@
+
 
 Note that
 all of these notions are relativized to the modal system you are
 considering and the possibilities it offers.  We may think of the
-family of assignments $\mathcal{A}$ as providing a modal base
-(cf. Kratzer) or alternatives (in the sense of ????).  For these kinds
-of applications we may wish to consider very small families of
+family of assignments $\mathcal{A}$ as providing a modal base in the
+sense of \cite{Kratzer2012}.
+We may wish to consider very small families of
 assignments corresponding to the knowledge we have.  Alternatively, we
 may want to consider strong logical variants of these modal notions
 where we consider all the logical possibilities, for example, all
 possible assignments of extensions to types.
 
-So far we have talked about modal systems of basic types.  Modal
-systems of complex types, where we introduce ptypes, create a
-minor complication.  What ptypes that are present in a system depends
-on what objects there are of the types that are used in the arities of
-the predicates.  Thus if we have some predicate $r$ with arity
-$\langle\textit{Ind},\textit{Ind}\rangle$ and a possibility where the
-set assigned to \textit{Ind} is $\{a,b\}$ then according to that
-possibility the ptypes formed with $r$ will be $r(a,a)$, $r(a,b)$,
-$r(b,a)$ and $r(b,b)$.  In a possibility where \textit{Ind} is
-assigned a different set the set of available ptypes will be
-different.  It is an important feature of type theories with types
-constructed from predicates that the collection of such types depends
-on what objects are available as arguments to the predicates.  This
-makes type theory very different from a logical language such as
-predicate calculus where the notion of well-formedness of syntactic
-expressions containing predicates is defined independently of what is
-provided by the model as denotations of arguments to the predicate.
+% So far we have talked about modal systems of basic types.  Modal
+% systems of complex types, where we introduce ptypes, create a
+% minor complication.  What ptypes that are present in a system depends
+% on what objects there are of the types that are used in the arities of
+% the predicates.  Thus if we have some predicate $r$ with arity
+% $\langle\textit{Ind},\textit{Ind}\rangle$ and a possibility where the
+% set assigned to \textit{Ind} is $\{a,b\}$ then according to that
+% possibility the ptypes formed with $r$ will be $r(a,a)$, $r(a,b)$,
+% $r(b,a)$ and $r(b,b)$.  In a possibility where \textit{Ind} is
+% assigned a different set the set of available ptypes will be
+% different.  It is an important feature of type theories with types
+% constructed from predicates that the collection of such types depends
+% on what objects are available as arguments to the predicates.  This
+% makes type theory very different from a logical language such as
+% predicate calculus where the notion of well-formedness of syntactic
+% expressions containing predicates is defined independently of what is
+% provided by the model as denotations of arguments to the predicate.
 
-This leads us (in Appendix~\ref{app:modal}) to define two variants of
-each of our modal notions: \textit{restrictive} variants which are only defined
-for types which exist in all possibilities and \textit{inclusive}
-variants which require that the modal definition holds for all the
-possibilities in which the types exist and disregards those in which
-the types do not exist.  For example, a type is \textit{necessary}$_r$
-(that is, ``restrictively necessary'') just in case the type is
-available in all possibilities and has a non-empty set of witnesses in
-all possibilities.  It is \textit{necessary}$_i$ (``inclusively
-necessary'') just in case in all the possibilities in which the type
-is provided it has a non-empty set of witnesses.  It is clear that if
-a type is necessary$_r$ it will also be necessary$_i$ but there may be
-types which are necessary$_i$ but not necessary$_r$ (if the type is
-not provided in all possibilities).  A similar relationship between
-the restrictive and inclusive notions holds for all the modal notions
-we have discussed.
+% This leads us (in Appendix~\ref{app:modal}) to define two variants of
+% each of our modal notions: \textit{restrictive} variants which are only defined
+% for types which exist in all possibilities and \textit{inclusive}
+% variants which require that the modal definition holds for all the
+% possibilities in which the types exist and disregards those in which
+% the types do not exist.  For example, a type is \textit{necessary}$_r$
+% (that is, ``restrictively necessary'') just in case the type is
+% available in all possibilities and has a non-empty set of witnesses in
+% all possibilities.  It is \textit{necessary}$_i$ (``inclusively
+% necessary'') just in case in all the possibilities in which the type
+% is provided it has a non-empty set of witnesses.  It is clear that if
+% a type is necessary$_r$ it will also be necessary$_i$ but there may be
+% types which are necessary$_i$ but not necessary$_r$ (if the type is
+% not provided in all possibilities).  A similar relationship between
+% the restrictive and inclusive notions holds for all the modal notions
+% we have discussed.
 
-There may be significant classes of modal type systems in which the
-types available in the different possibilities do not vary.  This
-could be achieved by requiring that the types used in the arities of
-predicates always have the same witnesses in all the possibilities.
-This seems feasible if we restrict the types used in predicate arities
-to basic ontological categories such as individual or time point.  It
-seems reasonable to consider modal systems in which an individual in
-one possibility will be an individual in any other possibility, for
-example.  It seems reasonable to say that we wish to consider
-possibilities where, for example, Kim is a man rather than a woman,
-but not possibilities where Kim is a point in time rather than an
-individual.  However, the notion ``basic ontological category'' is a
-slippery one and we do not want to be forced to make commitments about that.
+% There may be significant classes of modal type systems in which the
+% types available in the different possibilities do not vary.  This
+% could be achieved by requiring that the types used in the arities of
+% predicates always have the same witnesses in all the possibilities.
+% This seems feasible if we restrict the types used in predicate arities
+% to basic ontological categories such as individual or time point.  It
+% seems reasonable to consider modal systems in which an individual in
+% one possibility will be an individual in any other possibility, for
+% example.  It seems reasonable to say that we wish to consider
+% possibilities where, for example, Kim is a man rather than a woman,
+% but not possibilities where Kim is a point in time rather than an
+% individual.  However, the notion ``basic ontological category'' is a
+% slippery one and we do not want to be forced to make commitments about that.
 
-In the definition of a system of complex types in
-section~\ref{app:comptypes}  we call the pair of an assignment to
-basic types and assignment to ptypes, $\langle A,F\rangle$, a \textit{model} because of its
-similarity to first order models.\footnote{For a more detailed
-  discussion of the relationship between this and first order models
-  as used in the interpretation of first order logic see
-  \cite{Cooperforthcoming}.} The model provides an interface
-between 
-the type theoretical system and a domain external to the type theory.
-The natural domain to relate to the type theory is that of individuals
-and situations, that is the kind of things we can perceive or at least
-consider as possibilities.  However, we may want to use models which
-relate to our perceptual apparatus, as in \cite{Larsson2011}, rather
-than directly to the world.  This can also be the key for relating the
-type theory to a dynamically changing world where the models
-representing our perceived possibilities are not fixed.  % We will
+% In the definition of a system of complex types in
+% section~\ref{app:comptypes}  we call the pair of an assignment to
+% basic types and assignment to ptypes, $\langle A,F\rangle$, a \textit{model} because of its
+% similarity to first order models.\footnote{For a more detailed
+%   discussion of the relationship between this and first order models
+%   as used in the interpretation of first order logic see
+%   \cite{Cooperforthcoming}.} The model provides an interface
+% between 
+% the type theoretical system and a domain external to the type theory.
+% The natural domain to relate to the type theory is that of individuals
+% and situations, that is the kind of things we can perceive or at least
+% consider as possibilities.  However, we may want to use models which
+% relate to our perceptual apparatus, as in \cite{Larsson2011}, rather
+% than directly to the world.  This can also be the key for relating the
+% type theory to a dynamically changing world where the models
+% representing our perceived possibilities are not fixed.  % We will
 % return to this in Chapter~\ref{ch:coord}.
 
 
@@ -728,7 +728,7 @@ which $\alpha$ is true.\footnote{This simple treatment of modality
   restriction on accessibility between possible worlds
   \citep{HughesCresswel1968,HughesCresswell1996}.}
 
-In Chapter~\ref{ch:percint}, Section~\ref{sec:percint-modal} and
+In Chapter~\ref{ch:percint}, p.~\pageref{pg:modal-systems} and
 Appendix~\ref{app:modal} we introduce modal type systems which are
 families of type systems, which we call \textit{possibilities}, differing in their assignments of
 witnesses to basic types and ptypes.  The important difference between
@@ -738,18 +738,17 @@ introduced in the type system, a well-defined notion, and one which
 varies depending on the particular type system.  Thus we have a way of
 characterizing the dimensions along which the possibilities associated
 with a given type system vary and thus we have a way of representing the
-possibilities whereas we do not have such a way of characterizing
-possible worlds.  We introduced modal notions
-relating to such modal type systems:  essentially a type is necessary
-if it has a non-empty set of witnesses in every possibility and a type
-is possible if there is some possibility in which it has a non-empty
-set of witnesses.  (For precise definitions see
-Appendix~\ref{app:modal}.) Corresponding to the operators in modal
-logic we can introduce type constructors `$\Box$' and `$\Diamond$' as
+possibilities, whereas we do not have such a way of characterizing
+possible worlds.  Building on the modal notions that we introduced in
+Section~\ref{sec:percint-modal} we can introduce type constructors `$\Box$' and `$\Diamond$' corresponding to the operators in modal
+logic as
 in \nexteg{}.
 \begin{ex} 
 If $T$ is a type, then $\Box T$ and $\Diamond T$ are types 
 \end{ex}
+
+@@
+
 These types should obey the constraints in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
