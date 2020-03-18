@@ -744,80 +744,179 @@ Section~\ref{sec:percint-modal} we can introduce type constructors `$\Box$' and 
 logic as
 in \nexteg{}.
 \begin{ex} 
-If $T$ is a type, then $\Box T$ and $\Diamond T$ are types 
+If $T$ is a type, then $\Box_r T$, $\Box_i T$, $\Diamond_r T$ and $\Diamond_i T$ are types 
 \end{ex}
 
-@@
 
-These types should obey the constraints in \nexteg{}.
+
+These types obey the constraints in \nexteg{} which correspond to the
+truth conditions for the corresponding operators in modal logic (S5).
 \begin{ex} 
 \begin{subex} 
  
-\item $\Box T$ is non-empty iff $T$ is necessary (non-empty in all possibilities) 
+\item $\Box_{r/i} T$ is non-empty iff $T$ is restrictively/inclusively
+  necessary (approximately, non-empty in all possibilities) 
  
-\item $\Diamond T$ is non-empty iff $T$ is possible (non-empty in some possibility) 
+\item $\Diamond_{r/i} T$ is non-empty iff $T$ is
+  restrictively/inclusively possible (approximately, non-empty in some possibility) 
  
 \end{subex} 
 \label{ex:modalconds}   
-\end{ex} 
-In order to see how we can meet these constraints we have to first
-note that in a modal type system we cannot talk of an object $a$ being
-of a type $T$ \textit{tout court} as we have done so far.  $a$ may be
-of type $T$ in some possibilities but not others.  This means that we
-have to relativize being of a type to possibilities,
-$p$ which are members of a modal type system, $\mathcal{P}$. Instead of writing $a:T$, we will write $a:_{p,\mathcal{P}} T$ (``$a$ is of
-type $T$ in possibility $p$ within modal type system $\mathcal{P}$'').\footnote{Note that in Appendix~\ref{app:ttr} we have throughout
-  the formal development of TTR always relativized the of-type
-  relation to the type system being considered, and in the case of
-  modal type systems in addition to the possibility (identified by the
-  model associated with the possibility).} We also correspondingly
-relativize our notation for the set of witnesses of a type as in
-\nexteg{}.
-\begin{ex} 
-$\down{T}_{p,\mathcal{P}} = \{a\mid a:_{p,\mathcal{P}}T\}$ 
-\end{ex} 
-We introduce two basic types of types, \textit{Nec} and \textit{Poss},
-the types of necessary and possible propositions respectively.  The
-witness conditions for these types are given in
-\nexteg{}.\footnote{Note that it is important for these types that we
-  have introduced stratified types (Appendix~\ref{app:int}) since
-  \textit{Nec} and \textit{Poss} can themselves be necessary and
-  possible types. For example, instead of \textit{Nec}
-  :$_{p,\mathcal{P}}$ \textit{Nec} we have \mbox{\textit{Nec}$^n$
-  :$_{p,\mathcal{P}}$ \textit{Nec}$^{n+1}$} to avoid the danger of
-  running into a version of Russell's paradox.  As usual we will
-  suppress discussion of stratification in the text in order to
-  simplify the presentation.}
-\begin{ex} 
-\begin{subex} 
- 
-\item $T:_{p,\mathcal{P}}$ \textit{Nec} iff for all
-  $p'\in\mathcal{P}$, $\down{T}_{p',\mathcal{P}}\not=\emptyset$ 
- 
-\item $T:_{p,\mathcal{P}}$ \textit{Poss} iff for some
-  $p'\in\mathcal{P}$, $\down{T}_{p',\mathcal{P}}\not=\emptyset$  
- 
-\end{subex} 
-   
-\end{ex} 
-Now consider that the inclusion of singleton types in our system
-(Appendix~\ref{app:singletontypes}) allows for the types
-\textit{Nec}$_T$ and \textit{Poss}$_T$ for any type, $T$.  These types
-have a single witness, $T$, if $T$ is necessary or possible
-respectively and otherwise have no witnesses. These types thus meet
-the constraints on $\Box T$ and $\Diamond T$ given in
-(\ref{ex:modalconds}).  We propose therefore to make the
-identifications given in \nexteg{}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $\Box T = \textit{Nec}_T$ 
- 
-\item $\Diamond T = \textit{Poss}_T$ 
- 
-\end{subex} 
-   
 \end{ex}
+
+\begin{shaded}
+Making the witness conditions for these types meet the constraints in
+\preveg{} is a little tricky.  We do not have biconditionals, but two
+conditionals which correspond to introduction and elimination rules in
+proof theory.  Suppose that $\mathbb{T}$ is a modal type system and
+that $p\in\mathbb{T}$ is a possibility in $\mathbb{T}$. Then for
+`$\Box_{r\i} T$ we have \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $a:_p\Box_{r/i}T$ then $T$ is necessary$_{r/i}$ in $\mathbb{T}$ 
+ 
+\item If $T$ is necessary$_{r/i}$ in $\mathbb{T}$ then for any
+  $p'\in\mathbb{T}$ there is some $a'$ such that $a':_{p'}\Box_{r/i}T$  
+ 
+\end{subex} 
+\label{ex:witconds-Box}   
+\end{ex} 
+Note that the two clauses in \preveg{} jointly entail \nexteg{}.
+\begin{ex} 
+For any $p'\in\mathbb{T}$ there is some $a'$ such that
+$a':_{p'}\Box_{r/i}T$ (``$\Box_{r/i}T$ is true in $p'$'') iff $T$ is
+necessary$_{r/i}$ in $\mathbb{T}$ 
+\end{ex} 
+For `$\Diamond_{r/i}T$' we have \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $a:_p\Diamond_{r/i}T$ then $T$ is possible$_{r/i}$ in $\mathbb{T}$ 
+ 
+\item If $T$ is possible$_{r/i}$ in $\mathbb{T}$ then for any $p'\in\mathbb{T}$ there is some $a'$ such that $a':_{p'}\Diamond_{r/i}T$ 
+ 
+\end{subex}
+\label{ex:witconds-Diamond}
+   
+\end{ex} 
+The two clauses in \preveg{} jointly entail \nexteg{}.
+\begin{ex} 
+For any $p'\in\mathbb{T}$ there is some $a'$ such that
+$a':_{p'}\Diamond_{r/i}T$ (``$\Diamond_{r/i}T$ is true in $p'$'') iff $T$ is
+possible$_{r/i}$ in $\mathbb{T}$ 
+\end{ex} 
+We can recreate the witness conditions in (\ref{ex:witconds-Box}) and
+(\ref{ex:witconds-Diamond}) in our informal proof theoretic
+representation as in \nexteg{} where we use $\mathcal{G}\vdash T\text{
+  nec/poss}_{r/i}$ to represent $T$ is necessary/possible$_{r/i}$ in $\mathcal{G}$.
+\begin{ex}
+  For $\mathcal{G}$ a modal system of complex types:
+\begin{subex} 
+ 
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\in\mathcal{G}}
+    \hypo{\Gamma\vdash a:\Box_{r/i} T}
+    \infer2{\mathcal{G}\vdash T\text{ nec}_{r/i}}
+  \end{prooftree}
+  
+ 
+\item
+  \begin{prooftree}
+    \hypo{\mathcal{G}\vdash T\text{ nec}_{r/i}}
+    \hypo{\Gamma\in\mathcal{G}}
+    \infer2{\Gamma\vdash\Box_{r/i}T\text{ true}}
+  \end{prooftree}
+
+  
+\item
+  \begin{prooftree}
+    \hypo{\Gamma\in\mathcal{G}}
+    \hypo{\Gamma\vdash a:\Diamond_{r/i} T}
+    \infer2{\mathcal{G}\vdash T\text{ poss}_{r/i}}
+  \end{prooftree}
+
+  
+\item
+  \begin{prooftree}
+    \hypo{\mathcal{G}\vdash T\text{ poss}_{r/i}}
+    \hypo{\Gamma\in\mathcal{G}}
+    \infer2{\Gamma\vdash\Diamond_{r/i}T\text{ true}}
+  \end{prooftree}
+  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+
+
+\end{shaded}
+This shows how we can, if we want to, recreate in TTR the simple S5 modal
+system (that is, where all possibilities are accessible to each other)
+that \cite{Montague1973} uses.
+
+% In order to see how we can meet these constraints we have to first
+% note that in a modal type system we cannot talk of an object $a$ being
+% of a type $T$ \textit{tout court} as we have done so far.  $a$ may be
+% of type $T$ in some possibilities but not others.  This means that we
+% have to relativize being of a type to possibilities,
+% $p$ which are members of a modal type system, $\mathcal{P}$. Instead of writing $a:T$, we will write $a:_{p,\mathcal{P}} T$ (``$a$ is of
+% type $T$ in possibility $p$ within modal type system $\mathcal{P}$'').\footnote{Note that in Appendix~\ref{app:ttr} we have throughout
+%   the formal development of TTR always relativized the of-type
+%   relation to the type system being considered, and in the case of
+%   modal type systems in addition to the possibility (identified by the
+%   model associated with the possibility).} We also correspondingly
+% relativize our notation for the set of witnesses of a type as in
+% \nexteg{}.
+% \begin{ex} 
+% $\down{T}_{p,\mathcal{P}} = \{a\mid a:_{p,\mathcal{P}}T\}$ 
+% \end{ex} 
+% We introduce two basic types of types, \textit{Nec} and \textit{Poss},
+% the types of necessary and possible propositions respectively.  The
+% witness conditions for these types are given in
+% \nexteg{}.\footnote{Note that it is important for these types that we
+%   have introduced stratified types (Appendix~\ref{app:int}) since
+%   \textit{Nec} and \textit{Poss} can themselves be necessary and
+%   possible types. For example, instead of \textit{Nec}
+%   :$_{p,\mathcal{P}}$ \textit{Nec} we have \mbox{\textit{Nec}$^n$
+%   :$_{p,\mathcal{P}}$ \textit{Nec}$^{n+1}$} to avoid the danger of
+%   running into a version of Russell's paradox.  As usual we will
+%   suppress discussion of stratification in the text in order to
+%   simplify the presentation.}
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $T:_{p,\mathcal{P}}$ \textit{Nec} iff for all
+%   $p'\in\mathcal{P}$, $\down{T}_{p',\mathcal{P}}\not=\emptyset$ 
+ 
+% \item $T:_{p,\mathcal{P}}$ \textit{Poss} iff for some
+%   $p'\in\mathcal{P}$, $\down{T}_{p',\mathcal{P}}\not=\emptyset$  
+ 
+% \end{subex} 
+   
+% \end{ex} 
+% Now consider that the inclusion of singleton types in our system
+% (Appendix~\ref{app:singletontypes}) allows for the types
+% \textit{Nec}$_T$ and \textit{Poss}$_T$ for any type, $T$.  These types
+% have a single witness, $T$, if $T$ is necessary or possible
+% respectively and otherwise have no witnesses. These types thus meet
+% the constraints on $\Box T$ and $\Diamond T$ given in
+% (\ref{ex:modalconds}).  We propose therefore to make the
+% identifications given in \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\Box T = \textit{Nec}_T$ 
+ 
+% \item $\Diamond T = \textit{Poss}_T$ 
+ 
+% \end{subex} 
+   
+% \end{ex}
+
+@@\todo[inline]{Rework predicates below relating predicates to witness conditions above}
 
 Note that we could also have defined ptypes corresponding to \preveg{}
 by introducing predicates of `nec' and `poss' with arity
