@@ -916,24 +916,26 @@ that \cite{Montague1973} uses.
    
 % \end{ex}
 
-@@\todo[inline]{Rework predicates below relating predicates to witness conditions above}
-
-Note that we could also have defined ptypes corresponding to \preveg{}
-by introducing predicates of `nec' and `poss' with arity
-$\langle$\textit{Type}$\rangle$ which obey the constraints in
-\nexteg{}.
-\begin{ex} 
-\begin{subex} 
- 
-\item $\down{\text{nec}(T)} \not=\emptyset$ iff $T$ : \textit{Nec} 
- 
-\item $\down{\text{poss}(T)} \not=\emptyset$ iff $T$ : \textit{Poss} 
- 
-\end{subex} 
-   
-\end{ex} 
-The option of using ptypes will become important below where we wish
-to add additional arguments to the predicate.   
+We have used the symbols `$\Box$' and `$\Diamond$' above to suggest
+the relationship between our proposal in terms of types and the
+traditional formulas of modal logic.  We could, however, have achieved
+the same effect as above by introducing predicates `nec$_{r/i}$' and `poss$_{r/i}$'
+with arity
+$\langle$\textit{Type}$\rangle$ and giving ptypes of the form
+`nec$_{r/i}(T)$' and `poss$_{r/i}(T)$' the same witness conditions as
+above. % which obey the constraints in
+% \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
+% 
+% \item $\down{\text{nec}(T)} \not=\emptyset$ iff $T$ : \textit{Nec} 
+% 
+% \item $\down{\text{poss}(T)} \not=\emptyset$ iff $T$ : \textit{Poss} 
+% 
+% \end{subex} 
+%   
+% \end{ex} 
+We will pursue this option below where we will add additional arguments to the predicate.   
    
 How many possibilities are there in a modal type system?  The answer
 to this question is that there can be as many as you choose for the
@@ -1001,6 +1003,8 @@ just in case $p$
 follows from the conjunction of $b$ and $i$.  A proposition, $p$, is
 possible with respect to $b$ and $i$ just in case $p$ is consistent
 with the conjunction of $b$ and $i$.
+
+@@
 
 We shall construe Kratzer's propositions as types and we shall take
 modal bases and ideals to be types as well.  To recreate a Kratzerian
