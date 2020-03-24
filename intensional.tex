@@ -1012,7 +1012,8 @@ and `poss' have arity $\langle$\textit{Type}, \textit{Type},
 for ptypes constructed with `nec' are given in
 \nexteg{}, assuming that $\mathbb{T}$ is a modal type system,
 $p\in\mathbb{T}$ and that $T$, $B$ (``base'') and $I$ (``ideal'') are types.
-\begin{ex} 
+\begin{ex}
+  Witness conditions for `nec' (version 1)
 \begin{subex} 
  
 % \item $\down{\text{nec}(T,B,I)}_{p,\mathcal{P}} \not=\emptyset$ iff
@@ -1022,13 +1023,13 @@ $p\in\mathbb{T}$ and that $T$, $B$ (``base'') and $I$ (``ideal'') are types.
 %   $\down{T}_{p',\mathcal{P}}\not=\emptyset$
 
   
-\item If $s:_p\text{nec}(T,B,I)$, then for any $p'\in\mathbb{T}$ if
+\item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ if
   for some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and for some $a$,
   $a:_{p'}I$ (i.e. $I$ is ``true'') then for some $a$, $a:_{p'}T$
   (i.e. $T$ is ``true'')
 
   
-\item If it is the case that for any $p'\in\mathbb{T}$ if
+\item If it is the case that for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ if
   for some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and for some $a$,
   $a:_{p'}I$ (i.e. $I$ is ``true'') then for some $a$, $a:_{p'}T$
   (i.e. $T$ is ``true''), then
@@ -1043,29 +1044,31 @@ $p\in\mathbb{T}$ and that $T$, $B$ (``base'') and $I$ (``ideal'') are types.
 \label{ex:necTBI1}   
 \end{ex}
 A consequence of \preveg{} is that `$\text{nec}(T,B,I)$' is true in some
-possibility just in case for any possibility, $p$, if $B$ and $I$ are
-true in $p$ then $T$ is true in $p$.
+possibility, $p$. just in case $B$ is true in $p$ and for any possibility, $p'$, if $B$ and $I$ are
+true in $p'$ then $T$ is true in $p'$.
 Building on a basic example from \citealp{Portner2009}, p.~49, suppose
 that $T$ is \textit{Mary-eat-her-broccoli}, $B$ is
 \textit{Mary-has-broccoli-on-her-plate} and $I$ is
 \textit{Mary-eats-everything-on-her-plate}.  Then according to the
 definitions in \preveg{} `$\text{nec}(T,B,I)$' is non-empty (i.e. it's
-necessary that Mary eat her broccoli) just in case
+necessary that Mary eat her broccoli) just in case $B$ is true (Mary
+has broccoli on her plate) and
 for any of the possibilities we are considering if both $B$ and  $I$ are
-non-empty then $T$ is non-empty, that is if there's a situation where
+non-empty then $T$ is non-empty, that is, if there's a situation where
 Mary has broccoli on her plate and there's a situation where Mary eats everything on her plate
 then there's a situation in which Mary eats her broccoli.
 
 We can treat `poss' in a similar way as in \nexteg{}.
-\begin{ex} 
+\begin{ex}
+  Witness conditions for `poss' (version 1)
 \begin{subex} 
  
-\item If $s:_p\text{poss}(T,B,I)$, then for some $p'\in\mathbb{T}$
+\item If $s:_p\text{poss}(T,B,I)$, then for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
   there is some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and there is some $a$,
   $a:_{p'}I$ (i.e. $I$ is ``true'') and there is some $a$, $a:_{p'}T$
   (i.e. $T$ is ``true'') 
  
-\item If for some $p'\in\mathbb{T}$
+\item If for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
   there is some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and there is some $a$,
   $a:_{p'}I$ (i.e. $I$ is ``true'') and there is some $a$, $a:_{p'}T$
   (i.e. $T$ is ``true''), then
@@ -1074,18 +1077,85 @@ We can treat `poss' in a similar way as in \nexteg{}.
   \end{quote}
   
  
-\end{subex} 
+\end{subex}
+\label{ex:possTBI1}
    
 \end{ex} 
   
-@@\todo{Should we require that $B$ is true according to $p$?}
-
-Similarly,
-poss($T$,$B$,$I$) is non-empty just in case there is some possibility
+A consequence of \preveg{} is that
+poss($T$,$B$,$I$) is true in some possibility, $p$,  just in case Mary
+has broccoli on her plate and there is some possibility
 that we are considering where there's a situation in which Mary has
 brocolli on her plate, a situation in which Mary
-eats everything on her plate and a situation in which Mary eats her broccoli.
+eats everything on her plate and a situation in which Mary eats her
+broccoli.
+
+The witness conditions (\ref{ex:necTBI1}) and (\ref{ex:possTBI1})
+allow different witnesses for the types $T$, $B$ and $I$.  An
+alternative is to require the same object to be of these types. This
+alternative for `nec' is presented in \nexteg{}.
+\begin{ex}
+  Witness conditions for `nec' (version 2)
+\begin{subex} 
+
+  
+\item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ and 
+  $a':_{p'}(B\wedge I)$, $a':_{p'}T$
+  
+
+  
+\item If it is the case that for some $a$, $a:_pB$ and for any
+  $p'\in\mathbb{T}$ and 
+  $a':_{p'}(B\wedge I)$, $a':_{p'}T$, then
+  \begin{quote}
+    for some $s$, $s:_p\text{nec}(T,B,I)$ (i.e., $\text{nec}(T,B,I)$
+    is ``true'')
+  \end{quote}
+  
+    
  
+\end{subex} 
+\label{ex:necTBI2}   
+\end{ex}
+For `poss' we have \nexteg{}.
+\begin{ex}
+  Witness conditions for `poss' (version 2)
+\begin{subex} 
+ 
+\item If $s:_p\text{poss}(T,B,I)$, then for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+  there is some $a'$, $a':_{p'}((B\wedge I)\wedge T)$  
+ 
+\item If for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+  there is some $a'$, $a':_{p'}((B\wedge I)\wedge T)$, then
+  \begin{quote}
+    for some $s$, $s:_p\text{poss}(T,B,I)$
+  \end{quote}
+  
+ 
+\end{subex}
+\label{ex:possTBI2}
+   
+\end{ex} 
+ 
+A disadvantage with (\ref{ex:necTBI2}) is that it does not require the
+base, $B$ and the ideal, $I$ to be compatible.  That is, it allows for
+`$\text{nec}(T,B,I)$' to be true even if there is no possibility in
+which there is a witness for $B\wedge I$.  This is in contrast to
+(\ref{ex:possTBI2}) which does require there to be a witness of
+$B\wedge I$ in some possibility.  We could add a compatibility
+condition to (\ref{ex:necTBI2}) but it suggests that we could
+formulate a neater definition in terms of relations between the
+types.  We already have a notion of subtype which corresponds to the
+quantification over $p'$ and $a'$ in (\ref{ex:necTBI2}).  Thus we
+could replace this quantification with $(B\wedge
+I)\sqsubseteq_{\mathbb{T}}T$.  We will use the notation $T_1\top_{\mathbb{T}}T_2$
+to represent that $T_1$ is compatible with $T_2$ in the modal system
+$\mathbb{T}$.  This is defined in \nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+@@  
+
 A more restrictive notion of necessity than is given in \preveg{a}
 would be in terms of subtyping as in \nexteg{}.
 \begin{ex} 
