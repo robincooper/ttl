@@ -1152,48 +1152,92 @@ I)\sqsubseteq_{\mathbb{T}}T$.  We will use the notation $T_1\top_{\mathbb{T}}T_2
 to represent that $T_1$ is compatible with $T_2$ in the modal system
 $\mathbb{T}$.  This is defined in \nexteg{}.
 \begin{ex} 
+$T_1$ \textit{is compatible with} $T_2$ \textit{in modal type system}
+$\mathbb{T}$, $T_1\top_{\mathbb{T}}T_2$, just in case
+\begin{quote}
+there is some
+$p\in\mathbb{T}$ such that for some $a$, $a:_p(T_1\wedge T_2)$
+\end{quote}
+\end{ex} 
+We can now characterize witness conditions associated with `nec' as
+\nexteg{}, as usual assuming some modal system of types, $\mathbb{T}$
+and $p\in\mathbb{T}$.
+\begin{ex}
+  Witness conditions for `nec' (version 3)
+\begin{subex} 
+ 
+\item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$, $B\top_{\mathbb{T}}I$ and
+  $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$ 
+ 
+\item If for some $a$, $a:_pB$, $B\top_{\mathbb{T}}I$ and
+  $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$, then for some $s$, $s:_p\text{nec}(T,B,I)$   
+ 
+\end{subex} 
+   
+\end{ex}
+Similarly, we can define witness conditions for `poss' as in
+\nexteg{}.
+\begin{ex}
+  Witness conditions for `poss' (version 3)
+  \begin{subex} 
+ 
+\item If $s:_p\text{poss}(T,B,I)$ then for some $a$, $a:_pB$ and
+  $(B\wedge I)\top_{\mathbb{T}}T$ 
+ 
+\item If for some $a$, $a:_pB$ and
+  $(B\wedge I)\top_{\mathbb{T}}T$, then for some $s$, $s:_p\text{poss}(T,B,I)$ 
+ 
+\end{subex} 
+  
  
 \end{ex} 
-@@  
 
-A more restrictive notion of necessity than is given in \preveg{a}
-would be in terms of subtyping as in \nexteg{}.
-\begin{ex} 
-$\down{\text{nec}(T,B,I)}_{p,\mathcal{P}} \not=\emptyset$ iff
-$B\not\!\!\bot I$ and $(B\wedge I)
-\sqsubseteq_{\mathcal{P}} T$ 
-\end{ex}
-(Here we are using $\not\!\!\bot$ for ``does not preclude'', that is,
-it is possible for something to be of both types.)
+% A more restrictive notion of necessity than is given in \preveg{a}
+% would be in terms of subtyping as in \nexteg{}.
+% \begin{ex} 
+% $\down{\text{nec}(T,B,I)}_{p,\mathcal{P}} \not=\emptyset$ iff
+% $B\not\!\!\bot I$ and $(B\wedge I)
+% \sqsubseteq_{\mathcal{P}} T$ 
+% \end{ex}
+% (Here we are using $\not\!\!\bot$ for ``does not preclude'', that is,
+% it is possible for something to be of both types.)
  
-\preveg{} requires that anything of type $B\wedge I$ will also be of
-type $T$ (no matter what gets assigned to the basic types and ptypes)
-whereas (\ref{ex:necpossTBI}) only requires that if there is something
-of type $B$ and there is something of type $I$ then there will also be something of type $T$, though
-not necessarily the same thing.  The subtyping variant is interesting
+% \preveg{} requires that anything of type $B\wedge I$ will also be of
+% type $T$ (no matter what gets assigned to the basic types and ptypes)
+% whereas (\ref{ex:necpossTBI}) only requires that if there is something
+% of type $B$ and there is something of type $I$ then there will also be something of type $T$, though
+% not necessarily the same thing.  
+Version 3 of these definitions is interesting
 because if you have a way of (at least approximately) computing
-whether one type is a subtype of another simply by looking at the
+whether one type is a subtype of or compatible with another simply by looking at the
 types, then you will not have to look at the different possibilities.
-Similarly, for possibility we may have a way of computing (at least
-approximately) that a type is instantiable simply by looking at the
-type and doing a consistency check without having to inspect the
-possibilities.  This points towards a more proof theoretic oriented
+This makes it possible, for example, to consider all logical
+possibilities without inspecting all the possibilities  but by
+considering the structure of the types involved.
+% Similarly, for possibility we may have a way of computing (at least
+% approximately) that a type is instantiable simply by looking at the
+% type and doing a consistency check without having to inspect the
+% possibilities.
+This relates to a more proof theoretic oriented
 approach to modality.  Part of the important insight of Kratzer's
 approach to modality is that it involves arguments which can be
 constructed from the modal base and the ideal.
 
-\preveg{} also seems to fit better with the particular brocolli
-example we are discussing.  nec($T$,$B$,$I$) will be non-empty just in
-case Mary having broccoli on her plate does not preclude her eating
+Versions~2 and 3, where we talk of particular situations being
+witnesses for the types involved
+rather than just the ``truth'' of the types, seem to fit better
+intuitively with the particular broccoli
+example we are discussing.  `nec($T$,$B$,$I$)' will be non-empty just in
+case Mary having broccoli on her plate is compatible with her eating
 everything on her plate and in all of the possibilities under
-consideration any situation in which she has brocolli on her plate and
-eats everything on her plate is also a situation in which she eats her brocolli.
+consideration any situation in which she has broccoli on her plate and
+eats everything on her plate is also a situation in which she eats her broccoli.
 
 When Kratzer talks of the conversational background consisting of the
 base and the ideal she often talks about rules that might be encoded
 there (bodies of laws or regulations in the case of deontic
-modality).  This idea of rules being involved actually fits better
-with the brocolli example.  It is not so much that we are considering
+modality).  This idea of rules being involved actually fits even better
+with intuitions about the broccoli example.  It is not so much that we are considering
 possibilities where Mary eats everything on her plate, but rather that
 we are considering possibilities where there is a rule that Mary eats
 whatever is on her plate.
@@ -1203,46 +1247,62 @@ that they always hold true.  For example, a law that cars not park on
 double yellow lines does not entail that cars do not park on double
 yellow lines -- this is only something that holds true in deontically
 ideal worlds.  This suggests that there could be a role for what
-\cite{Breitholtz2014a} calls topoi.  A topos in her terms is a
+\cite{Breitholtz2014a,Breitholtzfthca} calls topoi.  A topos in her terms is a
 dependent type, that is, a function which maps an object of some type
 to a type.  Given a situation of the domain type of the topos, the
-topos will return a new type.  The standard licensing condition
-associated with a topos is similar to the licensing condition we have
-for, for example, sign combination functions in Chapter~\ref{ch:gram}
-(see also Appendix~\ref{app:signcomb}).  This is given in \nexteg{}.
+topos will return a new type.  We will introduce a basic type
+\textit{Topos} which meets the condition in \nexteg{}.
 \begin{ex} 
-If $\tau:(T\rightarrow Type)$ is a topos available to agent $A$, then for
-any $s$, $s :_A T$ licenses $:_A \tau(s)$ 
+If $\tau:\textit{Topos}$, then $\tau$ : \record{\tfield{bg}{\textit{Type}}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{Type})}} 
+\end{ex} 
+  
+A standard action rule
+associated with a topos is given in \nexteg{}.
+\begin{ex}
+  \begin{prooftree}
+    \hypo{\tau:\textit{Topos}}
+    \hypo{\tau \text{ resource}_A}
+    \hypo{s:_A\tau.\text{bg}}
+    \infer[enth]3{:_A\tau.\text{fg}(s)}
+  \end{prooftree}
+  
+% If $\tau:(T\rightarrow Type)$ is a topos available to agent $A$, then for
+% any $s$, $s :_A T$ licenses $:_A \tau(s)$ 
 \label{ex:topos-license}
 \end{ex} 
-That is, if an agent, $A$, judges a situation $s$ to be of the domain type
-of the topos, then $A$ is licensed to judge that there is something 
+That is, if an agent, $A$, judges a situation $s$ to be of the
+background (domain) type
+of a topos, $\tau$, which is available to $A$ as a resource, then $A$
+is licensed (afforded) to judge that there is something 
 of type $\tau(s)$.  
 
-We will use the same trick that we used
-for the polymorphism of properties in Chapter~\ref{ch:commonnouns} in
-characterizing the type \textit{Topos}.  That is, we will define
-\textit{Topos} to be the type in \nexteg{}.
-\begin{ex} 
-\record{\tfield{bg}{\textit{Type}}\\
-        \tfield{fg}{(bg$\rightarrow$\textit{Type})}}
-\end{ex}
+% We will use the same trick that we used
+% for the polymorphism of properties in Chapter~\ref{ch:commonnouns} in
+% characterizing the type \textit{Topos}.  That is, we will define
+% \textit{Topos} to be the type in \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{bg}{\textit{Type}}\\
+%         \tfield{fg}{(bg$\rightarrow$\textit{Type})}}
+% \end{ex}
 
-This means that we can reformulate the licensing condition in
-(\ref{ex:topos-license}) as \nexteg{}.
-\begin{ex} 
-If $\tau$ is a topos available to agent $A$, then for any $s$,
-$s:_A\tau.\mathrm{bg}$, licenses $:_A \tau.\mathrm{fg}(s)$ 
-\end{ex} 
-We will say that topoi associated with this condition are
-\textit{epistemic}.  The condition has to do with increasing our
+% This means that we can reformulate the licensing condition in
+% (\ref{ex:topos-license}) as \nexteg{}.
+% \begin{ex} 
+% If $\tau$ is a topos available to agent $A$, then for any $s$,
+% $s:_A\tau.\mathrm{bg}$, licenses $:_A \tau.\mathrm{fg}(s)$ 
+% \end{ex} 
+We will say that topoi associated with this action rule are used
+\textit{epistemically}.  The condition has to do with increasing our
 knowledge on the basis of a previous judgement.  If we judge
 something, $s$,
 to be of the type which is the background of the topos then we can
 judge that there is something of the type resulting from applying the
 foreground of the topos to $s$.
 
-Topoi can also be \textit{deontic}, that is, they are associated with
+@@\todo{Obligation vs permission}
+
+Topoi can also be used \textit{deontically}, that is, they are associated with
 a condition which involves an obligation to carry out a certain act
 (create something of a given type).  This condition is as in
 \nexteg{}.
