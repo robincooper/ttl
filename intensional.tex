@@ -1300,29 +1300,51 @@ to be of the type which is the background of the topos then we can
 judge that there is something of the type resulting from applying the
 foreground of the topos to $s$.
 
-@@\todo{Obligation vs permission}
-
 Topoi can also be used \textit{deontically}, that is, they are associated with
-a condition which involves an obligation to carry out a certain act
-(create something of a given type).  This condition is as in
-\nexteg{}.
-\begin{ex} 
-If $\tau$ is a topos available to agent $A$, then for any $s$,
-$s:_A\tau.\mathrm{bg}$ obliges $:_A\tau.\mathrm{fg}(s)!$ 
+an action rule which involves creating an event of the type returned
+by the topos.  Such an action rule may represent an affordance as in
+\nexteg{a} or an obligation as in \nexteg{b}, the latter represented by labelling
+the action rule with `oblig'.  
+\begin{ex}
+  \begin{subex} 
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\tau:\textit{Topos}}
+      \hypo{\tau \text{ resource}_A}
+      \hypo{s:_A\tau.\text{bg}}
+      \infer[enth]3{:_A\tau.\text{fg}(s)!}
+    \end{prooftree}
+  
+ 
+  \item
+    \begin{prooftree}
+      \hypo{\tau:\textit{Topos}}
+      \hypo{\tau \text{ resource}_A}
+      \hypo{s:_A\tau.\text{bg}}
+      \infer[enth]3[oblig]{:_A\tau.\text{fg}(s)!}
+    \end{prooftree}
+ 
+\end{subex} 
+  
+  
+  
+% If $\tau$ is a topos available to agent $A$, then for any $s$,
+% $s:_A\tau.\mathrm{bg}$ obliges $:_A\tau.\mathrm{fg}(s)!$ 
 \end{ex} 
 That is, if an agent, $A$, judges a situation, $s$, to be of the
-background type of the topos, then $A$ is obliged to create
+background type of the topos, then $A$ is allowed/obliged to create
 (contribute to the creation of) something which is of the type
 resulting from applying the foreground of the topos to $s$.
 
-Topoi can be associated with either of these conditions and they can
-be associated with both which means that they can be used either
+Topoi can be associated with these and other action rules and one topos can
+be associated with several action rules, that is, the same topos can be used either
 epistemically or deontically.  
     
 We now replace the third ``ideal'' type argument to the predicates `nec' and
 `poss' with a topos argument, giving them the arity $\langle$\textit{Type}, \textit{Type},
 \textit{Topos}$\rangle$.  If we need to recreate the option provided
-by the type rather than the topos we can use a topos whose background
+by an ideal as a type rather than the topos we can use a topos whose background
 type is the type \textit{Rec}.  That is, it does not place any
 constraints on the situations in its domain and thus will return a type for
 any situation.  If such a function is a constant function, that is, it
@@ -1330,35 +1352,57 @@ returns the same type for any situation, then this will give us the
 same effect as we obtained when the argument was a type rather than a
 topos.
 
-We define the witness conditions in \nexteg{} for the new versions of
-`nec' and `poss'.
-\begin{ex} 
+We define the witness conditions in \nexteg{} for the new version of
+`nec', again assuming a modal type system, $\mathbb{T}$ and
+$p\in\mathbb{T}$.
+\begin{ex}
+ Witness conditions for `nec' (version 4) 
 \begin{subex} 
  
-\item If $T$ and $B$ are types and $\tau$ is a topos, then
+\item 
+If $s:_p\mathrm{nec}(T,B,\tau)$, then
 \begin{quote}
-$s:\mathrm{nec}(T,B,\tau)$ iff
+$s:_pB$, 
+$B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+$\tau(s)\sqsubseteq_{\mathbb{T}}T$
+\end{quote}
+
+\item If $s:_pB$, 
+$B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+$\tau(s)\sqsubseteq_{\mathbb{T}}T$, then
 \begin{quote}
-$s:B$, \\
-$B\sqsubseteq\tau.\mathrm{bg}$ and \\
-$\tau.\mathrm{fg}(s)\sqsubseteq T$
+  for some s, $s:_p\mathrm{nec}(T,B,\tau)$
 \end{quote}
-\end{quote}
- 
-\item  If $T$ and $B$ are types and $\tau$ is a topos, then
+
+\end{subex}
+\end{ex}
+Similarly, for `poss' we have the witness conditions in \nexteg{}.
+\begin{ex}
+Witness conditions for `poss' (version 4)
+  \begin{subex}
+ \item  
+If $s:_p\mathrm{poss}(T,B,\tau)$, then
 \begin{quote}
-$s:\mathrm{poss}(T,B,\tau)$ iff
+$s:B$, 
+$B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+$\tau(s)\top_{\mathbb{T}}T$
+\end{quote}
+
+\item If $s:_pB$, 
+$B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+$\tau(s)\top_{\mathbb{T}}T$, then
 \begin{quote}
-$s:B$, \\
-$B\sqsubseteq\tau.\mathrm{bg}$ and \\
-$\tau.\mathrm{fg}(s)\not\!\!\bot T$
+  for some $s$, $s:_p\mathrm{poss}(T,B,\tau)$
 \end{quote}
-\end{quote}
+
  
  
 \end{subex} 
 \label{ex:witness-conds-nec-poss-topos}   
-\end{ex} 
+\end{ex}
+
+@@ \todo{Are these right for deontic interpretations?}
+
 In informal terms, \preveg{} says that a situation, $s$, witnesses that a
 type, $T$, is necessary with respect to a background type, $B$, and a
 topos, $\tau$, just in case $s$ is of the type $B$, $\tau$ is defined
