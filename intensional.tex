@@ -1013,34 +1013,39 @@ for ptypes constructed with `nec' are given in
 \nexteg{}, assuming that $\mathbb{T}$ is a modal type system,
 $p\in\mathbb{T}$ and that $T$, $B$ (``base'') and $I$ (``ideal'') are types.
 \begin{ex}
-  Witness conditions for `nec' (version 1)
-\begin{subex} 
- 
-% \item $\down{\text{nec}(T,B,I)}_{p,\mathcal{P}} \not=\emptyset$ iff
-%   for any $p'\in\mathcal{P}$, if both $\down{B}_{p',\mathcal{P}}\not=\emptyset$ and $\down{I}_{p',\mathcal{P}}\not=\emptyset$ then  $\down{T}_{p',\mathcal{P}}\not=\emptyset$
- 
-% \item $\down{\text{poss}(T,B,I)} \not=\emptyset$ iff for some $p'\in\mathcal{P}$, $\down{B}_{p',\mathcal{P}}\not=\emptyset$, $\down{I}_{p',\mathcal{P}}\not=\emptyset$ and
-%   $\down{T}_{p',\mathcal{P}}\not=\emptyset$
+  Witness condition for `nec' (version 1)
 
-  
-\item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ if
+  $s:_p\text{nec}(T,B,I)$ iff $s:_pB$ and for any $p'\in\mathbb{T}$ if
   for some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and for some $a$,
   $a:_{p'}I$ (i.e. $I$ is ``true'') then for some $a$, $a:_{p'}T$
   (i.e. $T$ is ``true'')
+% \begin{subex} 
+ 
+% % \item $\down{\text{nec}(T,B,I)}_{p,\mathcal{P}} \not=\emptyset$ iff
+% %   for any $p'\in\mathcal{P}$, if both $\down{B}_{p',\mathcal{P}}\not=\emptyset$ and $\down{I}_{p',\mathcal{P}}\not=\emptyset$ then  $\down{T}_{p',\mathcal{P}}\not=\emptyset$
+ 
+% % \item $\down{\text{poss}(T,B,I)} \not=\emptyset$ iff for some $p'\in\mathcal{P}$, $\down{B}_{p',\mathcal{P}}\not=\emptyset$, $\down{I}_{p',\mathcal{P}}\not=\emptyset$ and
+% %   $\down{T}_{p',\mathcal{P}}\not=\emptyset$
 
   
-\item If it is the case that for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ if
-  for some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and for some $a$,
-  $a:_{p'}I$ (i.e. $I$ is ``true'') then for some $a$, $a:_{p'}T$
-  (i.e. $T$ is ``true''), then
-  \begin{quote}
-    for some $s$, $s:_p\text{nec}(T,B,I)$ (i.e., $\text{nec}(T,B,I)$
-    is ``true'')
-  \end{quote}
+% \item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ if
+%   for some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and for some $a$,
+%   $a:_{p'}I$ (i.e. $I$ is ``true'') then for some $a$, $a:_{p'}T$
+%   (i.e. $T$ is ``true'')
+
+  
+% \item If it is the case that for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ if
+%   for some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and for some $a$,
+%   $a:_{p'}I$ (i.e. $I$ is ``true'') then for some $a$, $a:_{p'}T$
+%   (i.e. $T$ is ``true''), then
+%   \begin{quote}
+%     for some $s$, $s:_p\text{nec}(T,B,I)$ (i.e., $\text{nec}(T,B,I)$
+%     is ``true'')
+%   \end{quote}
   
     
  
-\end{subex} 
+% \end{subex} 
 \label{ex:necTBI1}   
 \end{ex}
 A consequence of \preveg{} is that `$\text{nec}(T,B,I)$' is true in some
@@ -1060,24 +1065,29 @@ then there's a situation in which Mary eats her broccoli.
 
 We can treat `poss' in a similar way as in \nexteg{}.
 \begin{ex}
-  Witness conditions for `poss' (version 1)
-\begin{subex} 
- 
-\item If $s:_p\text{poss}(T,B,I)$, then for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+  Witness condition for `poss' (version 1)
+
+  $s:_p\text{poss}(T,B,I)$ iff $s:_pB$ and for some $p'\in\mathbb{T}$
   there is some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and there is some $a$,
   $a:_{p'}I$ (i.e. $I$ is ``true'') and there is some $a$, $a:_{p'}T$
-  (i.e. $T$ is ``true'') 
+  (i.e. $T$ is ``true'')
+% \begin{subex} 
  
-\item If for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
-  there is some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and there is some $a$,
-  $a:_{p'}I$ (i.e. $I$ is ``true'') and there is some $a$, $a:_{p'}T$
-  (i.e. $T$ is ``true''), then
-  \begin{quote}
-    for some $s$, $s:_p\text{poss}(T,B,I)$
-  \end{quote}
+% \item If $s:_p\text{poss}(T,B,I)$, then for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+%   there is some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and there is some $a$,
+%   $a:_{p'}I$ (i.e. $I$ is ``true'') and there is some $a$, $a:_{p'}T$
+%   (i.e. $T$ is ``true'') 
+ 
+% \item If for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+%   there is some $a$, $a:_{p'}B$ (i.e. $B$ is ``true'') and there is some $a$,
+%   $a:_{p'}I$ (i.e. $I$ is ``true'') and there is some $a$, $a:_{p'}T$
+%   (i.e. $T$ is ``true''), then
+%   \begin{quote}
+%     for some $s$, $s:_p\text{poss}(T,B,I)$
+%   \end{quote}
   
  
-\end{subex}
+% \end{subex}
 \label{ex:possTBI1}
    
 \end{ex} 
@@ -1096,43 +1106,49 @@ alternative is to require the same object to be of these types. This
 alternative for `nec' is presented in \nexteg{}.
 \begin{ex}
   Witness conditions for `nec' (version 2)
-\begin{subex} 
+
+  $s:_p\text{nec}(T,B,I)$ iff $s:_pB$ and for any $p'\in\mathbb{T}$ and 
+  $a:_{p'}(B\wedge I)$, $a:_{p'}T$
+% \begin{subex} 
 
   
-\item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ and 
-  $a':_{p'}(B\wedge I)$, $a':_{p'}T$
+% \item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$ and for any $p'\in\mathbb{T}$ and 
+%   $a':_{p'}(B\wedge I)$, $a':_{p'}T$
   
 
   
-\item If it is the case that for some $a$, $a:_pB$ and for any
-  $p'\in\mathbb{T}$ and 
-  $a':_{p'}(B\wedge I)$, $a':_{p'}T$, then
-  \begin{quote}
-    for some $s$, $s:_p\text{nec}(T,B,I)$ (i.e., $\text{nec}(T,B,I)$
-    is ``true'')
-  \end{quote}
+% \item If it is the case that for some $a$, $a:_pB$ and for any
+%   $p'\in\mathbb{T}$ and 
+%   $a':_{p'}(B\wedge I)$, $a':_{p'}T$, then
+%   \begin{quote}
+%     for some $s$, $s:_p\text{nec}(T,B,I)$ (i.e., $\text{nec}(T,B,I)$
+%     is ``true'')
+%   \end{quote}
   
     
  
-\end{subex} 
+% \end{subex} 
 \label{ex:necTBI2}   
 \end{ex}
 For `poss' we have \nexteg{}.
 \begin{ex}
-  Witness conditions for `poss' (version 2)
-\begin{subex} 
+  Witness condition for `poss' (version 2)
+
+  $s:_p\text{poss}(T,B,I)$ iff $s:_pB$ and for some $p'\in\mathbb{T}$
+  there is some $a$, $a:_{p'}((B\wedge I)\wedge T)$ 
+% \begin{subex} 
  
-\item If $s:_p\text{poss}(T,B,I)$, then for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
-  there is some $a'$, $a':_{p'}((B\wedge I)\wedge T)$  
+% \item If $s:_p\text{poss}(T,B,I)$, then for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+%   there is some $a'$, $a':_{p'}((B\wedge I)\wedge T)$  
  
-\item If for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
-  there is some $a'$, $a':_{p'}((B\wedge I)\wedge T)$, then
-  \begin{quote}
-    for some $s$, $s:_p\text{poss}(T,B,I)$
-  \end{quote}
+% \item If for some $a$, $a:_pB$ and for some $p'\in\mathbb{T}$
+%   there is some $a'$, $a':_{p'}((B\wedge I)\wedge T)$, then
+%   \begin{quote}
+%     for some $s$, $s:_p\text{poss}(T,B,I)$
+%   \end{quote}
   
  
-\end{subex}
+% \end{subex}
 \label{ex:possTBI2}
    
 \end{ex} 
@@ -1163,31 +1179,36 @@ We can now characterize witness conditions associated with `nec' as
 \nexteg{}, as usual assuming some modal system of types, $\mathbb{T}$
 and $p\in\mathbb{T}$.
 \begin{ex}
-  Witness conditions for `nec' (version 3)
-\begin{subex} 
+  Witness condition for `nec' (version 3)
+
+  $s:_p\text{nec}(T,B,I)$ iff $s:_pB$, $B\top_{\mathbb{T}}I$ and
+  $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$
+% \begin{subex} 
  
-\item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$, $B\top_{\mathbb{T}}I$ and
-  $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$ 
+% \item If $s:_p\text{nec}(T,B,I)$, then for some $a$, $a:_pB$, $B\top_{\mathbb{T}}I$ and
+%   $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$ 
  
-\item If for some $a$, $a:_pB$, $B\top_{\mathbb{T}}I$ and
-  $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$, then for some $s$, $s:_p\text{nec}(T,B,I)$   
+% \item If for some $a$, $a:_pB$, $B\top_{\mathbb{T}}I$ and
+%   $(B\wedge I)\sqsubseteq_{\mathbb{T}}T$, then for some $s$, $s:_p\text{nec}(T,B,I)$   
  
-\end{subex} 
+% \end{subex} 
    
 \end{ex}
 Similarly, we can define witness conditions for `poss' as in
 \nexteg{}.
 \begin{ex}
-  Witness conditions for `poss' (version 3)
-  \begin{subex} 
+  Witness condition for `poss' (version 3)
+
+  $s:_p\text{poss}(T,B,I)$ iff $s:_pB$ and $(B\wedge I)\top_{\mathbb{T}}T$
+%   \begin{subex} 
  
-\item If $s:_p\text{poss}(T,B,I)$ then for some $a$, $a:_pB$ and
-  $(B\wedge I)\top_{\mathbb{T}}T$ 
+% \item If $s:_p\text{poss}(T,B,I)$ then for some $a$, $a:_pB$ and
+%   $(B\wedge I)\top_{\mathbb{T}}T$ 
  
-\item If for some $a$, $a:_pB$ and
-  $(B\wedge I)\top_{\mathbb{T}}T$, then for some $s$, $s:_p\text{poss}(T,B,I)$ 
+% \item If for some $a$, $a:_pB$ and
+%   $(B\wedge I)\top_{\mathbb{T}}T$, then for some $s$, $s:_p\text{poss}(T,B,I)$ 
  
-\end{subex} 
+% \end{subex} 
   
  
 \end{ex} 
@@ -1356,61 +1377,75 @@ We define the witness conditions in \nexteg{} for the new version of
 `nec', again assuming a modal type system, $\mathbb{T}$ and
 $p\in\mathbb{T}$.
 \begin{ex}
- Witness conditions for `nec' (version 4) 
-\begin{subex} 
- 
-\item 
-If $s:_p\mathrm{nec}(T,B,\tau)$, then
-\begin{quote}
-$s:_pB$, 
+  Witness condition for `nec' (version 4)
+
+  $s:_p\mathrm{nec}(T,B,\tau)$ iff $s:_pB$, 
 $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
 $\tau(s)\sqsubseteq_{\mathbb{T}}T$
-\end{quote}
+  
+% \begin{subex} 
+ 
+% \item 
+% If $s:_p\mathrm{nec}(T,B,\tau)$, then
+% \begin{quote}
+% $s:_pB$, 
+% $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+% $\tau(s)\sqsubseteq_{\mathbb{T}}T$
+% \end{quote}
 
-\item If $s:_pB$, 
-$B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
-$\tau(s)\sqsubseteq_{\mathbb{T}}T$, then
-\begin{quote}
-  for some s, $s:_p\mathrm{nec}(T,B,\tau)$
-\end{quote}
+% \item If $s:_pB$, 
+% $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+% $\tau(s)\sqsubseteq_{\mathbb{T}}T$, then
+% \begin{quote}
+%   for some s, $s:_p\mathrm{nec}(T,B,\tau)$
+% \end{quote}
 
-\end{subex}
+% \end{subex}
+\label{ex:witness-conds-nec-topos}
 \end{ex}
-Similarly, for `poss' we have the witness conditions in \nexteg{}.
+In informal terms, \preveg{} says that a situation, $s$, witnesses that a
+type, $T$, is necessary with respect to a background type, $B$, and a
+topos, $\tau$ just in case $s$ is of the type $B$, $\tau$ is defined
+on situations of type $B$ and the type resulting from the application
+of $\tau$ to $s$ is such that any situation of that type will be of
+type $T$.
+
+Similarly, for `poss' we have the witness condition in \nexteg{}.
 \begin{ex}
-Witness conditions for `poss' (version 4)
-  \begin{subex}
- \item  
-If $s:_p\mathrm{poss}(T,B,\tau)$, then
-\begin{quote}
-$s:B$, 
+  Witness condition for `poss' (version 4)
+
+  $s:_p\mathrm{poss}(T,B,\tau)$ iff $s:_pB$, 
 $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
 $\tau(s)\top_{\mathbb{T}}T$
-\end{quote}
+  
+%   \begin{subex}
+%  \item  
+% If $s:_p\mathrm{poss}(T,B,\tau)$, then
+% \begin{quote}
+% $s:B$, 
+% $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+% $\tau(s)\top_{\mathbb{T}}T$
+% \end{quote}
 
-\item If $s:_pB$, 
-$B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
-$\tau(s)\top_{\mathbb{T}}T$, then
-\begin{quote}
-  for some $s$, $s:_p\mathrm{poss}(T,B,\tau)$
-\end{quote}
+% \item If $s:_pB$, 
+% $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+% $\tau(s)\top_{\mathbb{T}}T$, then
+% \begin{quote}
+%   for some $s$, $s:_p\mathrm{poss}(T,B,\tau)$
+% \end{quote}
 
  
  
-\end{subex} 
+% \end{subex} 
 \label{ex:witness-conds-nec-poss-topos}   
 \end{ex}
 
-@@ \todo{Are these right for deontic interpretations?}
 
-In informal terms, \preveg{} says that a situation, $s$, witnesses that a
-type, $T$, is necessary with respect to a background type, $B$, and a
-topos, $\tau$, just in case $s$ is of the type $B$, $\tau$ is defined
-on situations of type $B$ and the type resulting from the application
-of $\tau$ to $s$ is such that any situation of that type will be of
-type $T$.  It says that $T$ is possible under the same conditions
-except that the third condition is changed to requiring that the type
-resulting from the application of $\tau$ to $s$ does not preclude $T$,
+
+\preveg{} says that a situation, $s$, witnesses that $T$ is
+possible with respect to $B$ and $\tau$ just in case $s:B$, $\tau$ is defined
+on situations of type $B$ and the type
+resulting from the application of $\tau$ to $s$ is consistent with $T$,
 i.e. that it is possible for a situation to be of both types.
 
 Let us see how this might play out in our basic example (taken from
@@ -1428,28 +1463,31 @@ For simplicity we will assume $b$ : \textit{Ind}.  Let $m$ be Mary and
 $p$ her plate.  Then the type, $B$, of the base situation could be
 \nexteg{}.
 \begin{ex} 
-\record{\mfield{x}{$b$}{\textit{Ind}}\\
-        \tfield{c$_1$}{brocolli(x)}\\
-        \mfield{y}{$m$}{\textit{Ind}}\\
-        \tfield{c$_2$}{child(y)}\\
-        \mfield{z}{$p$}{\textit{Ind}}\\
-        \tfield{c$_3$}{plate(z)}\\
-        \tfield{e$_1$}{have(y,z)}\\
-        \tfield{e$_2$}{on(x,z)}}
+  \record{
+    \mfield{x}{$b$}{\textit{Ind}}\\
+    \tfield{c$_1$}{broccoli(x)}\\
+    \mfield{y}{$m$}{\textit{Ind}}\\
+    \tfield{c$_2$}{child(y)}\\
+    \mfield{z}{$p$}{\textit{Ind}}\\
+    \tfield{c$_3$}{plate(z)}\\
+    \tfield{e$_1$}{have(y,z)}\\
+    \tfield{e$_2$}{on(x,z)}\\
+    \tfield{e$_3$}{love(y,x)}
+      }
 \label{ex:brocolli-on-plate}
 \end{ex} 
-Let us in addition assume that brocolli is food, that is, \nexteg{}
+Let us in addition assume that broccoli is food according to the modal
+type system, $\mathbb{T}$, we are considering, that is, \nexteg{}
 holds.
 \begin{ex} 
-For any $a$, brocolli($a$) $\sqsubseteq$ food($a$) 
+For any $a$, brocolli($a$) $\sqsubseteq_{\mathbb{T}}$ food($a$) 
 \label{ex:brocolli-food}
 \end{ex} 
-Now let us introduce two topoi, $\tau_1$ and $\tau_2$.  We represent
-their foregrounds in \nexteg{a and b} respectively.
+Now let us introduce two topoi, $\tau_1$ and $\tau_2$ represented in \nexteg{a and b} respectively.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+\item $\tau_1$ --- $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                \smalltfield{c$_1$}{food(x)}\\
                                \smalltfield{y}{\textit{Ind}}\\
                                \smalltfield{c$_2$}{child(y)}\\
@@ -1457,14 +1495,14 @@ their foregrounds in \nexteg{a and b} respectively.
                                \smalltfield{c$_3$}{plate(z)}\\
                                \smalltfield{e$_1$}{have(y,z)}\\
                                \smalltfield{e$_2$}{on(x,z)}} . 
-\record{\tfield{e}{eat($r$.y, $r$.x)}}
+\record{\tfield{e}{eat($r$.y, $r$.x)}}$\urcorner$
  
-\item $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+\item $\tau_2$ --- $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                \smalltfield{c$_1$}{food(x)}\\
                                \smalltfield{y}{\textit{Ind}}\\
                                \smalltfield{c$_2$}{child(y)}\\
-                               \smalltfield{e}{love(y,x)}} . 
-\record{\tfield{e}{eat($r$.y, $r$.x)}}
+                               \smalltfield{e$_3$}{love(y,x)}} . 
+\record{\tfield{e}{eat($r$.y, $r$.x)}}$\urcorner$
  
 \end{subex} 
 \label{ex:topoi-eat-up-eat-like}   
@@ -1484,7 +1522,7 @@ kind of condition which we have not talked about yet which associates
 types with mental states rather than actions.  We will discuss this
 more in Section~\ref{sec:intensionality}.
 
-The type corresponding to \textit{Mary should eat her brocolli} based
+The type corresponding to \textit{Mary should eat her broccoli} based
 on these resources could be either of the types in \nexteg{}, where
 $T_{\mathrm{broc}}$ is (\ref{ex:brocolli-on-plate}) and $\tau_1$ and
   $\tau_2$ are \preveg{a and b} respectively.
@@ -1501,22 +1539,24 @@ $T_{\mathrm{broc}}$ is (\ref{ex:brocolli-on-plate}) and $\tau_1$ and
 \label{ex:Mary-should-eat-her-brocolli-types}   
 \end{ex} 
 We can now check the witness conditions in
-(\ref{ex:witness-conds-nec-poss-topos}).  Any $s$ which is of the type
+(\ref{ex:witness-conds-nec-topos}) against some modal system,
+$\mathbb{T}$, and possibility, $p\in\mathbb{T}$.  Any $s$ which is of the type
 \preveg{a} has to fulfil the conditions in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item $s:T_{\mathrm{broc}}$ 
+\item $s:_pT_{\mathrm{broc}}$ 
  
-\item $T_{\mathrm{broc}}\sqsubseteq$ \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+\item $T_{\mathrm{broc}}\sqsubseteq_{\mathbb{T}}$ \smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                \smalltfield{c$_1$}{food(x)}\\
                                \smalltfield{y}{\textit{Ind}}\\
                                \smalltfield{c$_2$}{child(y)}\\
                                \smalltfield{z}{\textit{Ind}}\\
+                               \smalltfield{c$_3$}{plate(z)}\\
                                \smalltfield{e$_1$}{have(y,z)}\\
                                \smalltfield{e$_2$}{on(x,z)}}
 
-\item  $\tau_1(s)\sqsubseteq$ \smallrecord{\smalltfield{e}{eat($m$, $b$)}} 
+\item  $\tau_1(s)\sqsubseteq_{\mathbb{T}}$ \smallrecord{\smalltfield{e}{eat($m$, $b$)}} 
  
 \end{subex} 
 \label{ex:Mary-eat-her-brocolli-conditions}   
@@ -1524,12 +1564,14 @@ We can now check the witness conditions in
 Assuming that $s$ meets \preveg{a}, we can check that \preveg{b} holds
 by noting that anything of the first type will also be of the second
 type.  (In this case, the two types are identical except for (i)
-`brocolli' in the first type corresponds to `food' in the second, but
-we know from (\ref{ex:brocolli-food}) that brocolli is food (ii) the
+`broccoli' in the first type corresponds to `food' in the second, but
+we know from (\ref{ex:brocolli-food}) that broccoli is food (ii) the
 manifest fields in the first type correspond to non-manifest fields in
 the second, but we know from the definition of singleton types
 represented by manifest fields that
-they are subtypes of the corresponding non-singleton type.)
+they are subtypes of the corresponding non-singleton type and (iii)
+the additional field labelled `e$_3$', but adding fields to a type
+creates a subtype of that type.)
 We can see that \preveg{c} will hold given our characterization of
 $\tau_1$ in (\ref{ex:topoi-eat-up-eat-like}) since $\tau_1(s)$ will be
 \nexteg{a} and given that $s:T_{\mathrm{broc}}$, $s$.y will be $m$ and
@@ -1550,7 +1592,11 @@ itself and, of course, any type is a subtype of itself.
 
 We can make a similar argument for (\ref{ex:Mary-should-eat-her-brocolli-types}b).
 
-    
+Notice that in this worked example we have carefully chosen the labels
+on our topoi so that they match the types in our example.  In a
+completely explicit treatment we would need to allow for relabelling.
+We will take up relabelling again in our discussion of intensionality
+below.   
    
 
 This is an inferential view of modality in the sense that the topoi,
@@ -1562,11 +1608,13 @@ conditions for `nec' and `poss' that we have a
 definition of modal predicates which does not use the previous notion
 of modality that we had in terms of possibilities defined in varying
 the assignments to basic types and ptypes, this is in fact not the
-case since our definitions of subtyping and preclusion rely on this
+case since our definitions of subtyping and compatibility rely on this
 kind of modality.  Thus these definitions have both an inferential
 flavour (in that they use topoi which are similar to rules of
 inference) and also a Kripke model flavour in that they use sets of
-possibilities. 
+possibilities.
+
+@@
 
 While the use of topoi here gives us something corresponding to
 accessibility relations in Kratzer's treatment of modality in
@@ -1918,6 +1966,7 @@ Journal of philosophical logic, 2017}
 E Maier
 Review of philosophy and psychology, 2016
 }
+
 
 \todo{From here to ``In Section 6.1'' moved from Ch.~\ref{ch:percint}.  Not
   clear where it should go.} A predicate like `believe' which represents that an individual has an
