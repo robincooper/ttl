@@ -1614,8 +1614,6 @@ flavour (in that they use topoi which are similar to rules of
 inference) and also a Kripke model flavour in that they use sets of
 possibilities.
 
-@@
-
 While the use of topoi here gives us something corresponding to
 accessibility relations in Kratzer's treatment of modality in
 \cite{Kratzer1977} (\citealp{Kratzer2012}, Chapter~1), it does not yet
@@ -1640,317 +1638,335 @@ deal with the different degrees of modality expressed in examples like
 While it is not obvious that there is a fixed order of strength in
 \preveg{} it is nevertheless the case that speakers of English will
 perceive differences of strength in the modalities having to do with
-how necessary it is for Mary to eat her brocolli.  For that we need the notion of preference structure as it is discussed
-in Condoravdi and Cooper (????).   
+how necessary it is for Mary to eat her brocolli.  For that we need
+the notion of preference structure \citep{CondoravdiLauer2016} adapted
+to our TTR approach.   We will not undertake this here.
 
-Let us take a look at how these ideas can be exploited in a
-compositional semantics.  In order to do a compositional semantics for
-modal verbs we need to distinguish between tensed and non-tensed
-verbs.  Our strategy for the structure of sentences with modal verbs
-is represented by the informal tree in \nexteg{}.
-\begin{ex} 
-\Tree [.\textit{S} [.\textit{NP} Mary ] [.\textit{VP}\\\mbox{[+tns]}
-[.\textit{V} should ]
-\qroof{eat her brocolli}.\textit{VP}\\\mbox{[-tns]} ] ]
-\end{ex} 
-That is,  we treat the modal \textit{should} as combining with a
-non-tensed verb phrase to form a tensed verb-phrase. 
+Another important aspect of natural language modality that we will not
+take up here is its relationship with tense, in particular the
+future.  Clearly if Mary should eat her broccoli, we are thinking of
+the broccoli as being on her plate before she starts eating it and if
+she eats all her broccoli then, of course, there will not be broccoli
+on her plate.  The possible eating of the broccoli is temporally after
+the speech event which is the utterance of \textit{Mary should eat her
+  broccoli}.  A number of modal constructions are associated with
+future tense and we would need to handle this in terms of types of
+event strings.
 
-For simplicity of discussion let us consider the intransitive verb
-\textit{eat} rather than the complex verb phrase \textit{eat her
-  brocolli}.  The version of the operation `SemIntransVerb' defined in
-Chapter~\ref{ch:commonnouns} (given in
-Appendix~\ref{app:lexuniversal}) yields \nexteg{} when applied to the
-predicate `eat' with arity $\langle$\textit{Ind}$\rangle$ and no
-restrictions introduced on the domain of the content or background
-conditions on the context.  That is, \nexteg{} is SemIntransVerb(eat,
-\textit{Ind}, \textit{Ind}, \textit{Rec}).
-\begin{ex} 
-\record{\field{bg}{\textit{Rec}}\\
-        \field{fg}{$\lambda c$:\textit{Rec} . 
-                       \record{\field{bg}{\textit{Ind}}\\
-                               \field{fg}{$\lambda
-                                 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-                                 . \record{\tfield{e}{eat($r$.x)}}}}}} 
-\label{ex:SemIntransVerbeat}
-\end{ex} 
-This parametric content for an utterance of \textit{eat} requires that
-a sentence such as \textit{Mary eats} has a content which is the event
-type \nexteg{} (assuming $m$ is Mary).
-\begin{ex} 
-\record{\tfield{e}{eat($m$)}} 
-\label{ex:typeMaryeat}
-\end{ex} 
-This type does not require any relationship between the eating event
-and the utterance event.  We therefore conclude that this corresponds
-best to a tenseless  expression.  It says nothing about when an event
-of this type needs to occur.  Note that this is something that is
-natural in a system based on types whereas in a semantics based on the
-kind of tense operators we find in tense logic it is not so
-straightforward to represent that content of a non-tensed utterance.
-How could we modify the type in \preveg{} to represent the
-relationship of the eating event to some particular speech event, $s$?
-In a simple-minded tense system there are basically three
-possibilities. The eating event is either required to be simultaneous
-with $s$, prior to $s$ or after $s$.  We model this by creating event
-types for events which have two components, the speech event, $s$ and
-the eating event.  The types are given in \nexteg{a--c} corresponding
-to \textit{Mary eats}, \textit{Mary ate} and \textit{Mary will eat}, respectively.
-\begin{ex} 
-\begin{subex} 
- 
-\item \record{\mfield{s-event}{$s$}{\textit{SEvent}}\\
-              \tfield{e}{eat($m$)}} 
- 
-\item
-  \record{\tfield{e}{eat($m$)}}$^{\frown}$\record{\mfield{s-event}{$s$}{\textit{SEvent}}}
+While we have no means seen a complete treatment of modality in this
+section, I hope that this is enough to show that there is a way to
+explore the treatment of modality which avoids the use of possible
+worlds and thereby avoids the kinds of problems
+that possible worlds present for modern treatments of modality.
 
-\item \record{\mfield{s-event}{$s$}{\textit{SEvent}}}$^{\frown}$\record{\tfield{e}{eat($m$)}}
+% Let us take a look at how these ideas can be exploited in a
+% compositional semantics.  In order to do a compositional semantics for
+% modal verbs we need to distinguish between tensed and non-tensed
+% verbs.  Our strategy for the structure of sentences with modal verbs
+% is represented by the informal tree in \nexteg{}.
+% \begin{ex} 
+% \Tree [.\textit{S} [.\textit{NP} Mary ] [.\textit{VP}\\\mbox{[+tns]}
+% [.\textit{V} should ]
+% \qroof{eat her brocolli}.\textit{VP}\\\mbox{[-tns]} ] ]
+% \end{ex} 
+% That is,  we treat the modal \textit{should} as combining with a
+% non-tensed verb phrase to form a tensed verb-phrase. 
+
+% For simplicity of discussion let us consider the intransitive verb
+% \textit{eat} rather than the complex verb phrase \textit{eat her
+%   brocolli}.  The version of the operation `SemIntransVerb' defined in
+% Chapter~\ref{ch:commonnouns} (given in
+% Appendix~\ref{app:lexuniversal}) yields \nexteg{} when applied to the
+% predicate `eat' with arity $\langle$\textit{Ind}$\rangle$ and no
+% restrictions introduced on the domain of the content or background
+% conditions on the context.  That is, \nexteg{} is SemIntransVerb(eat,
+% \textit{Ind}, \textit{Ind}, \textit{Rec}).
+% \begin{ex} 
+% \record{\field{bg}{\textit{Rec}}\\
+%         \field{fg}{$\lambda c$:\textit{Rec} . 
+%                        \record{\field{bg}{\textit{Ind}}\\
+%                                \field{fg}{$\lambda
+%                                  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%                                  . \record{\tfield{e}{eat($r$.x)}}}}}} 
+% \label{ex:SemIntransVerbeat}
+% \end{ex} 
+% This parametric content for an utterance of \textit{eat} requires that
+% a sentence such as \textit{Mary eats} has a content which is the event
+% type \nexteg{} (assuming $m$ is Mary).
+% \begin{ex} 
+% \record{\tfield{e}{eat($m$)}} 
+% \label{ex:typeMaryeat}
+% \end{ex} 
+% This type does not require any relationship between the eating event
+% and the utterance event.  We therefore conclude that this corresponds
+% best to a tenseless  expression.  It says nothing about when an event
+% of this type needs to occur.  Note that this is something that is
+% natural in a system based on types whereas in a semantics based on the
+% kind of tense operators we find in tense logic it is not so
+% straightforward to represent that content of a non-tensed utterance.
+% How could we modify the type in \preveg{} to represent the
+% relationship of the eating event to some particular speech event, $s$?
+% In a simple-minded tense system there are basically three
+% possibilities. The eating event is either required to be simultaneous
+% with $s$, prior to $s$ or after $s$.  We model this by creating event
+% types for events which have two components, the speech event, $s$ and
+% the eating event.  The types are given in \nexteg{a--c} corresponding
+% to \textit{Mary eats}, \textit{Mary ate} and \textit{Mary will eat}, respectively.
+% \begin{ex} 
+% \begin{subex} 
  
-\end{subex} 
+% \item \record{\mfield{s-event}{$s$}{\textit{SEvent}}\\
+%               \tfield{e}{eat($m$)}} 
+ 
+% \item
+%   \record{\tfield{e}{eat($m$)}}$^{\frown}$\record{\mfield{s-event}{$s$}{\textit{SEvent}}}
+
+% \item \record{\mfield{s-event}{$s$}{\textit{SEvent}}}$^{\frown}$\record{\tfield{e}{eat($m$)}}
+ 
+% \end{subex} 
    
-\end{ex} 
-Of course, we would expect an actual tense and aspect system for a
-natural language to involve more complex types than this, for example,
-allowing partial overlap between the eating event and the speech
-event.  Our aim here is not to develop a realistic account of tense
-but rather to show how we can distinguish between tensed and tenseless
-contents in the kind of system we are proposing. The types in
-\preveg{} can be derived from (\ref{ex:typeMaryeat}) by tense
-operators which take  a speech event and a type as arguments and return
-a new type.  These operators are defined in \nexteg{}.
-\begin{ex} 
-If $s$ : \textit{SEvent} and $T$ is a type, then
-\begin{enumerate} 
+% \end{ex} 
+% Of course, we would expect an actual tense and aspect system for a
+% natural language to involve more complex types than this, for example,
+% allowing partial overlap between the eating event and the speech
+% event.  Our aim here is not to develop a realistic account of tense
+% but rather to show how we can distinguish between tensed and tenseless
+% contents in the kind of system we are proposing. The types in
+% \preveg{} can be derived from (\ref{ex:typeMaryeat}) by tense
+% operators which take  a speech event and a type as arguments and return
+% a new type.  These operators are defined in \nexteg{}.
+% \begin{ex} 
+% If $s$ : \textit{SEvent} and $T$ is a type, then
+% \begin{enumerate} 
  
-\item pres($s$)($T$) = $T$ \d{$\wedge$} \record{\mfield{s-event}{$s$}{\textit{SEvent}}} 
+% \item pres($s$)($T$) = $T$ \d{$\wedge$} \record{\mfield{s-event}{$s$}{\textit{SEvent}}} 
  
-\item past($s$)($T$) =
-  $T^{\frown}$\record{\mfield{s-event}{$s$}{\textit{SEvent}}}
+% \item past($s$)($T$) =
+%   $T^{\frown}$\record{\mfield{s-event}{$s$}{\textit{SEvent}}}
 
-\item fut($s$)($T$) = \record{\mfield{s-event}{$s$}{\textit{SEvent}}}$^{\frown}T$ 
+% \item fut($s$)($T$) = \record{\mfield{s-event}{$s$}{\textit{SEvent}}}$^{\frown}T$ 
  
-\end{enumerate} 
+% \end{enumerate} 
    
-\end{ex} 
-In a more complete treatment of tense we might want to generalize
-these operators so that they can relate types to other kinds of events
-in addition to speech events in order to be able to deal with embedded
-tenses and phenomena like the historic present (as in \textit{So I was
-  in the pub and this man \textbf{comes} up to me \ldots}).  
+% \end{ex} 
+% In a more complete treatment of tense we might want to generalize
+% these operators so that they can relate types to other kinds of events
+% in addition to speech events in order to be able to deal with embedded
+% tenses and phenomena like the historic present (as in \textit{So I was
+%   in the pub and this man \textbf{comes} up to me \ldots}).  
 
-In addition to non-tensed contents for verbs, as illustrated by the
-result of applying `SemIntransVerb' given in
-(\ref{ex:SemIntransVerbeat}), we will also have tensed contents for
-verbs.  Thus in addition to `SemIntransVerb' we will also have
-`SemIntransVerb$_\alpha$' where $\alpha$ is one of `pres', `past' and
-`fut'.  These functions will return a function from speech events to
-parametric contents as given by the example in \nexteg{}.
-\begin{ex} 
-SemIntransVerb$_\alpha$(eat,
-\textit{Ind}, \textit{Ind}, \textit{Rec}) = 
+% In addition to non-tensed contents for verbs, as illustrated by the
+% result of applying `SemIntransVerb' given in
+% (\ref{ex:SemIntransVerbeat}), we will also have tensed contents for
+% verbs.  Thus in addition to `SemIntransVerb' we will also have
+% `SemIntransVerb$_\alpha$' where $\alpha$ is one of `pres', `past' and
+% `fut'.  These functions will return a function from speech events to
+% parametric contents as given by the example in \nexteg{}.
+% \begin{ex} 
+% SemIntransVerb$_\alpha$(eat,
+% \textit{Ind}, \textit{Ind}, \textit{Rec}) = 
 
-$\lambda s$:\textit{SEvent} . 
-\record{\field{bg}{\textit{Rec}}\\
-        \field{fg}{$\lambda c$:\textit{Rec} . 
-                       \record{\field{bg}{\textit{Ind}}\\
-                               \field{fg}{$\lambda
-                                 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-                                 . $\alpha(s)$(\record{\tfield{e}{eat($r$.x)}})}}}} 
-\end{ex} 
-This indicates that the contents of tensed expressions depend on
-speech event in a way that non-tensed expressions do not.
+% $\lambda s$:\textit{SEvent} . 
+% \record{\field{bg}{\textit{Rec}}\\
+%         \field{fg}{$\lambda c$:\textit{Rec} . 
+%                        \record{\field{bg}{\textit{Ind}}\\
+%                                \field{fg}{$\lambda
+%                                  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%                                  . $\alpha(s)$(\record{\tfield{e}{eat($r$.x)}})}}}} 
+% \end{ex} 
+% This indicates that the contents of tensed expressions depend on
+% speech event in a way that non-tensed expressions do not.
 
-We now turn our attention to how information about tense plays a role
-in sign types.  Recall that in Chapter~\ref{ch:gram} we defined
-\textit{Sign} as a recursive type whose witness condition is as in
-\nexteg{}.  (See also Appendix~\ref{app:gramrulesuniv}.)
-\begin{ex} 
-$\sigma$ : \textit{Sign} iff $\sigma$ :\record{\tfield{s-event}{\textit{SEvent}} \\
-         \tfield{syn}{\textit{Syn}} \\
-        \tfield{cnt}{\textit{Cnt}}}  
-\end{ex} 
-Here the type \textit{Syn} (for ``syntax'') was defined as in
-\nexteg{}.
-\begin{ex} 
-\record{\tfield{cat}{\textit{Cat}} \\
-        \tfield{daughters}{\textit{Sign}$^*$}}  
-\end{ex} 
-Now we are going to add a further field to this type to indicate
-whether a sign is tensed or non-tensed.  The new definition of
-\textit{Syn} is given in \nexteg{}.
-\begin{ex} 
-\record{\tfield{cat}{\textit{Cat}} \\
-        \tfield{tns}{\textit{Bool}} \\
-        \tfield{daughters}{\textit{Sign}$^*$}}  
-\end{ex} 
-The definitions of the category sign types in Chapter~\ref{ch:gram}
-(see Appendix~\ref{app:gramrulesuniv}) for \textit{S}, \textit{V} and
-\textit{VP} can remain the same, since these categories are
-underspecified for tense; they can be either tensed or non-tensed.  We
-will use \nexteg{a} to represent the type \nexteg{b} and \nexteg{c} to
-represent the type \nexteg{d} and we will do similarly for \textit{VP}
-and \textit{S}.
-\begin{ex} 
-\begin{subex} 
+% We now turn our attention to how information about tense plays a role
+% in sign types.  Recall that in Chapter~\ref{ch:gram} we defined
+% \textit{Sign} as a recursive type whose witness condition is as in
+% \nexteg{}.  (See also Appendix~\ref{app:gramrulesuniv}.)
+% \begin{ex} 
+% $\sigma$ : \textit{Sign} iff $\sigma$ :\record{\tfield{s-event}{\textit{SEvent}} \\
+%          \tfield{syn}{\textit{Syn}} \\
+%         \tfield{cnt}{\textit{Cnt}}}  
+% \end{ex} 
+% Here the type \textit{Syn} (for ``syntax'') was defined as in
+% \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{cat}{\textit{Cat}} \\
+%         \tfield{daughters}{\textit{Sign}$^*$}}  
+% \end{ex} 
+% Now we are going to add a further field to this type to indicate
+% whether a sign is tensed or non-tensed.  The new definition of
+% \textit{Syn} is given in \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{cat}{\textit{Cat}} \\
+%         \tfield{tns}{\textit{Bool}} \\
+%         \tfield{daughters}{\textit{Sign}$^*$}}  
+% \end{ex} 
+% The definitions of the category sign types in Chapter~\ref{ch:gram}
+% (see Appendix~\ref{app:gramrulesuniv}) for \textit{S}, \textit{V} and
+% \textit{VP} can remain the same, since these categories are
+% underspecified for tense; they can be either tensed or non-tensed.  We
+% will use \nexteg{a} to represent the type \nexteg{b} and \nexteg{c} to
+% represent the type \nexteg{d} and we will do similarly for \textit{VP}
+% and \textit{S}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\displaystyle\V_{[+\mathrm{tns}]}$ 
+% \item $\displaystyle\V_{[+\mathrm{tns}]}$ 
  
-\item \textit{Sign} \d{$\wedge$} 
-\record{\tfield{syn}{\record{\mfield{cat}{v}{\textit{Cat}}\\
-                             \mfield{tns}{1}{\textit{Bool}}}}}
+% \item \textit{Sign} \d{$\wedge$} 
+% \record{\tfield{syn}{\record{\mfield{cat}{v}{\textit{Cat}}\\
+%                              \mfield{tns}{1}{\textit{Bool}}}}}
          
-\item $\displaystyle\V_{[-\mathrm{tns}]}$ 
+% \item $\displaystyle\V_{[-\mathrm{tns}]}$ 
  
-\item \textit{Sign} \d{$\wedge$} 
-\record{\tfield{syn}{\record{\mfield{cat}{v}{\textit{Cat}}\\
-                             \mfield{tns}{0}{\textit{Bool}}}}} 
-\end{subex} 
+% \item \textit{Sign} \d{$\wedge$} 
+% \record{\tfield{syn}{\record{\mfield{cat}{v}{\textit{Cat}}\\
+%                              \mfield{tns}{0}{\textit{Bool}}}}} 
+% \end{subex} 
    
-\end{ex} 
-We will assume that the categories \textit{NP}, \textit{Det} and
-\textit{N} are universally untensed\footnote{This is something of an
-  open question.  See \cite{Tonhauser2007} for discussion.} and
-therefore take \textit{NP} to be the type \nexteg{} and similarly
-for \textit{Det} and \textit{N}.
-\begin{ex} 
-\textit{Sign} \d{$\wedge$} 
-\record{\tfield{syn}{\record{\mfield{cat}{np}{\textit{Cat}}\\
-                             \mfield{tns}{0}{\textit{Bool}}}}}  
-\end{ex} 
+% \end{ex} 
+% We will assume that the categories \textit{NP}, \textit{Det} and
+% \textit{N} are universally untensed\footnote{This is something of an
+%   open question.  See \cite{Tonhauser2007} for discussion.} and
+% therefore take \textit{NP} to be the type \nexteg{} and similarly
+% for \textit{Det} and \textit{N}.
+% \begin{ex} 
+% \textit{Sign} \d{$\wedge$} 
+% \record{\tfield{syn}{\record{\mfield{cat}{np}{\textit{Cat}}\\
+%                              \mfield{tns}{0}{\textit{Bool}}}}}  
+% \end{ex} 
 
-We now define tensed versions of the universal resource for lexical
-sign type construction, Lex$_{\mathrm{IntransVerb}}$ as defined in
-Chapter~\ref{ch:commonnouns} (also in
-Appendix~\ref{app:lexuniversal}). Letting $\alpha$ stand for `past',
-`pres' or `fut' we characterize Lex$_{\mathrm{IntransVerb}_\alpha}$ as
-in \nexteg{}.
-\begin{ex} 
-Lex$_{\mathrm{IntransVerb}_\alpha}(T_{\mathrm{phon}},p,T_{\mathrm{arg}},T_{\mathrm{restr}},T_{\mathrm{bg}})$,
-where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
-  with arity $\langle T_{\mathrm{arg}}\rangle$,
-  $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
-  $T_{\mathrm{bg}}$ is a record type \\
-is defined as \\
-Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
-\smallrecord{
-\smalltfield{s-event}{\textit{SEvent}}\\
-\smalltfield{syn}{\smallrecord{\smallmfield{tns}{1}{\textit{Bool}}}}\\
-\smallmfield{cnt}{SemIntransVerb$_\alpha$($p$, $T_{\mathrm{arg}}$,
-    $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)(s-event)}{\textit{PPpty}}} 
-\end{ex} 
-We will use `Lex$_{\mathrm{IntransVerb}}$' (without the $\alpha$) to
-construct sign types for non-finite verbs characterized by \nexteg{}.
-\begin{ex} 
-Lex$_{\mathrm{IntransVerb}}(T_{\mathrm{phon}},p,T_{\mathrm{arg}},T_{\mathrm{restr}},T_{\mathrm{bg}})$,
-where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
-  with arity $\langle T_{\mathrm{arg}}\rangle$,
-  $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
-  $T_{\mathrm{bg}}$ is a record type \\
-is defined as \\
-Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
-\smallrecord{
-\smalltfield{syn}{\smallrecord{\smallmfield{tns}{0}{\textit{Bool}}}}\\
-\smallmfield{cnt}{SemIntransVerb$_\alpha$($p$, $T_{\mathrm{arg}}$,
-    $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
-\end{ex}       
+% We now define tensed versions of the universal resource for lexical
+% sign type construction, Lex$_{\mathrm{IntransVerb}}$ as defined in
+% Chapter~\ref{ch:commonnouns} (also in
+% Appendix~\ref{app:lexuniversal}). Letting $\alpha$ stand for `past',
+% `pres' or `fut' we characterize Lex$_{\mathrm{IntransVerb}_\alpha}$ as
+% in \nexteg{}.
+% \begin{ex} 
+% Lex$_{\mathrm{IntransVerb}_\alpha}(T_{\mathrm{phon}},p,T_{\mathrm{arg}},T_{\mathrm{restr}},T_{\mathrm{bg}})$,
+% where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
+%   with arity $\langle T_{\mathrm{arg}}\rangle$,
+%   $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
+%   $T_{\mathrm{bg}}$ is a record type \\
+% is defined as \\
+% Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
+% \smallrecord{
+% \smalltfield{s-event}{\textit{SEvent}}\\
+% \smalltfield{syn}{\smallrecord{\smallmfield{tns}{1}{\textit{Bool}}}}\\
+% \smallmfield{cnt}{SemIntransVerb$_\alpha$($p$, $T_{\mathrm{arg}}$,
+%     $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)(s-event)}{\textit{PPpty}}} 
+% \end{ex} 
+% We will use `Lex$_{\mathrm{IntransVerb}}$' (without the $\alpha$) to
+% construct sign types for non-finite verbs characterized by \nexteg{}.
+% \begin{ex} 
+% Lex$_{\mathrm{IntransVerb}}(T_{\mathrm{phon}},p,T_{\mathrm{arg}},T_{\mathrm{restr}},T_{\mathrm{bg}})$,
+% where $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate
+%   with arity $\langle T_{\mathrm{arg}}\rangle$,
+%   $T_{\mathrm{restr}}\sqsubseteq T_{\mathrm{arg}}$ and
+%   $T_{\mathrm{bg}}$ is a record type \\
+% is defined as \\
+% Lex($T_{\mathrm{phon}}$, \textit{VP}) \d{$\wedge$} 
+% \smallrecord{
+% \smalltfield{syn}{\smallrecord{\smallmfield{tns}{0}{\textit{Bool}}}}\\
+% \smallmfield{cnt}{SemIntransVerb$_\alpha$($p$, $T_{\mathrm{arg}}$,
+%     $T_{\mathrm{restr}}$, $T_{\mathrm{bg}}$)}{\textit{PPpty}}} 
+% \end{ex}       
 
-We now turn our attention to the modal verbs.  The parametric content
-of a modal verb (such as \textit{should}) is a function which requires a background with a modal
-base (a type) and a topos.  Given such a background this function
-returns a function from properties (such as \textit{eat}) to
-properties (such as \textit{should eat}).  We define
-`SemModalVerb$_{\mathrm{nec}}$' and `SemModalVerb$_{\mathrm{poss}}$'
-as \nexteg{a and b} respectively.
-\begin{ex} 
-\begin{subex} 
+% We now turn our attention to the modal verbs.  The parametric content
+% of a modal verb (such as \textit{should}) is a function which requires a background with a modal
+% base (a type) and a topos.  Given such a background this function
+% returns a function from properties (such as \textit{eat}) to
+% properties (such as \textit{should eat}).  We define
+% `SemModalVerb$_{\mathrm{nec}}$' and `SemModalVerb$_{\mathrm{poss}}$'
+% as \nexteg{a and b} respectively.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \record{\field{bg}{\record{\tfield{base}{\textit{Type}}\\
-                                 \tfield{topos}{\textit{Topos}}}}\\
-              \field{fg}{$\lambda c$:\smallrecord{\smalltfield{base}{\textit{Type}}\\
-                                 \smalltfield{topos}{\textit{Topos}}}
-                               . \\
-& & \record{\field{bg}{\textit{Ppty}}\\
-        \field{fg}{$\lambda P$:\textit{Ppty} . \\ 
-& & \record{\field{bg}{\textit{Ind}}\\
-        \field{fg}{$\lambda
-          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
-& & \record{\tfield{e}{nec($P$.fg($r$), $c$.base, $c$.topos)}}}}}}}}
+% \item \record{\field{bg}{\record{\tfield{base}{\textit{Type}}\\
+%                                  \tfield{topos}{\textit{Topos}}}}\\
+%               \field{fg}{$\lambda c$:\smallrecord{\smalltfield{base}{\textit{Type}}\\
+%                                  \smalltfield{topos}{\textit{Topos}}}
+%                                . \\
+% & & \record{\field{bg}{\textit{Ppty}}\\
+%         \field{fg}{$\lambda P$:\textit{Ppty} . \\ 
+% & & \record{\field{bg}{\textit{Ind}}\\
+%         \field{fg}{$\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
+% & & \record{\tfield{e}{nec($P$.fg($r$), $c$.base, $c$.topos)}}}}}}}}
  
-\item \record{\field{bg}{\record{\tfield{base}{\textit{Type}}\\
-                                 \tfield{topos}{\textit{Topos}}}}\\
-              \field{fg}{$\lambda c$:\smallrecord{\smalltfield{base}{\textit{Type}}\\
-                                 \smalltfield{topos}{\textit{Topos}}}
-                               . \\
-& & \record{\field{bg}{\textit{Ppty}}\\
-        \field{fg}{$\lambda P$:\textit{Ppty} . \\
-& & \record{\field{bg}{\textit{Ind}}\\
-        \field{fg}{$\lambda
-          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
-& & \record{\tfield{e}{poss($P$.fg($r$), $c$.base, $c$.topos)}}}}}}}} 
+% \item \record{\field{bg}{\record{\tfield{base}{\textit{Type}}\\
+%                                  \tfield{topos}{\textit{Topos}}}}\\
+%               \field{fg}{$\lambda c$:\smallrecord{\smalltfield{base}{\textit{Type}}\\
+%                                  \smalltfield{topos}{\textit{Topos}}}
+%                                . \\
+% & & \record{\field{bg}{\textit{Ppty}}\\
+%         \field{fg}{$\lambda P$:\textit{Ppty} . \\
+% & & \record{\field{bg}{\textit{Ind}}\\
+%         \field{fg}{$\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \\
+% & & \record{\tfield{e}{poss($P$.fg($r$), $c$.base, $c$.topos)}}}}}}}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
   
 
-The type, \textit{Modal}, of modal parametric contents, that is, a
-type of objects like those in \preveg{}, is given in \nexteg{}.
-\begin{ex} 
-\record{\mfield{bg}{\smallrecord{\smalltfield{base}{\textit{Type}}\\
-                                 \smalltfield{topos}{\textit{Topos}}}}{\textit{Type}}\\
-       \tfield{fg}{(bg$\rightarrow$(\textit{Ppty}$\rightarrow$\textit{Ppty}))}} 
-\end{ex} 
+% The type, \textit{Modal}, of modal parametric contents, that is, a
+% type of objects like those in \preveg{}, is given in \nexteg{}.
+% \begin{ex} 
+% \record{\mfield{bg}{\smallrecord{\smalltfield{base}{\textit{Type}}\\
+%                                  \smalltfield{topos}{\textit{Topos}}}}{\textit{Type}}\\
+%        \tfield{fg}{(bg$\rightarrow$(\textit{Ppty}$\rightarrow$\textit{Ppty}))}} 
+% \end{ex} 
 
-We will introduce a syntactic category for modal verbs, `vm'.  Thus we
-will now characterize the type, \textit{Cat} as in \nexteg{}.
-\begin{ex} 
-s, np, det, n, v, vp, vm : \textit{Cat} 
-\end{ex} 
-We will use the symbol $\displaystyle\V_{[+M]}$ to represent the type
-\nexteg{}.
-\begin{ex} 
-\textit{Sign} \d{$\wedge$} \record{\tfield{syn}{\record{\mfield{cat}{vm}{\textit{Cat}}}}} 
-\end{ex} 
-We can now characterize a universal resource, Lex$_{\mathrm{ModalV}}$,
-for creating lexical sign types for modal verbs.  This is done in
-\nexteg{}.
-\begin{ex} 
-If $T_{\mathrm{phon}}$ is a phonological type and $p$ is either `nec'
-or `poss', then Lex$_{\mathrm{ModalV}}$($T_{\mathrm{phon}}$, $p$)\\
-is defined as\\
-Lex($T_{\mathrm{phon}}$, $\displaystyle\V_{[+M]}$) \d{$\wedge$}\\
-\hspace*{2em}\smallrecord{\smalltfield{s-event}{\textit{SEvent}}\\
-        \smalltfield{syn}{\smallrecord{\smallmfield{tns}{1}{\textit{Bool}}}}\\
-        \smallmfield{cnt}{
-\smallrecord{\field{bg}{\smallrecord{\smalltfield{base}{\textit{Type}}\\
-                                 \smalltfield{topos}{\textit{Topos}}}}\\
-             \field{fg}{$\lambda c$:\smallrecord{\smalltfield{base}{\textit{Type}}\\
-                                 \smalltfield{topos}{\textit{Topos}}}
-                               . 
-pres(s-event)(SemModalVerb$_p$.fg($c$))}}}{\textit{Modal}}}
-\end{ex} 
+% We will introduce a syntactic category for modal verbs, `vm'.  Thus we
+% will now characterize the type, \textit{Cat} as in \nexteg{}.
+% \begin{ex} 
+% s, np, det, n, v, vp, vm : \textit{Cat} 
+% \end{ex} 
+% We will use the symbol $\displaystyle\V_{[+M]}$ to represent the type
+% \nexteg{}.
+% \begin{ex} 
+% \textit{Sign} \d{$\wedge$} \record{\tfield{syn}{\record{\mfield{cat}{vm}{\textit{Cat}}}}} 
+% \end{ex} 
+% We can now characterize a universal resource, Lex$_{\mathrm{ModalV}}$,
+% for creating lexical sign types for modal verbs.  This is done in
+% \nexteg{}.
+% \begin{ex} 
+% If $T_{\mathrm{phon}}$ is a phonological type and $p$ is either `nec'
+% or `poss', then Lex$_{\mathrm{ModalV}}$($T_{\mathrm{phon}}$, $p$)\\
+% is defined as\\
+% Lex($T_{\mathrm{phon}}$, $\displaystyle\V_{[+M]}$) \d{$\wedge$}\\
+% \hspace*{2em}\smallrecord{\smalltfield{s-event}{\textit{SEvent}}\\
+%         \smalltfield{syn}{\smallrecord{\smallmfield{tns}{1}{\textit{Bool}}}}\\
+%         \smallmfield{cnt}{
+% \smallrecord{\field{bg}{\smallrecord{\smalltfield{base}{\textit{Type}}\\
+%                                  \smalltfield{topos}{\textit{Topos}}}}\\
+%              \field{fg}{$\lambda c$:\smallrecord{\smalltfield{base}{\textit{Type}}\\
+%                                  \smalltfield{topos}{\textit{Topos}}}
+%                                . 
+% pres(s-event)(SemModalVerb$_p$.fg($c$))}}}{\textit{Modal}}}
+% \end{ex} 
          
-The lexical resources for English can now tell us that \textit{should}
-is a modal verb of necessity, as in \nexteg{}.
-\begin{ex} 
-Lex$_{\mathrm{ModalV}}$(``should'', nec) 
-\end{ex} 
-Finally, English resources will need to include the tense and modal
-sensitive phrase structure rules in \nexteg{} (using the abbreviatory
-conventions of Appendix~\ref{app:interpps}).
-\begin{ex} 
-\begin{subex} 
+% The lexical resources for English can now tell us that \textit{should}
+% is a modal verb of necessity, as in \nexteg{}.
+% \begin{ex} 
+% Lex$_{\mathrm{ModalV}}$(``should'', nec) 
+% \end{ex} 
+% Finally, English resources will need to include the tense and modal
+% sensitive phrase structure rules in \nexteg{} (using the abbreviatory
+% conventions of Appendix~\ref{app:interpps}).
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\displaystyle\Sent_{[+\mathrm{tns}]}$ $\longrightarrow$ \textit{NP}
-  $\displaystyle\VP_{[+\mathrm{tns}]}$ $\mid$ \textit{NP}$'$@\textit{VP}$'$ 
+% \item $\displaystyle\Sent_{[+\mathrm{tns}]}$ $\longrightarrow$ \textit{NP}
+%   $\displaystyle\VP_{[+\mathrm{tns}]}$ $\mid$ \textit{NP}$'$@\textit{VP}$'$ 
  
-\item $\displaystyle\VP_{[+\mathrm{tns}]}$ $\longrightarrow$
-  $\displaystyle\V_{[+M]}$ $\displaystyle\VP_{[-\mathrm{tns}]}$ $\mid$ \textit{V}$'$@\textit{VP}$'$ 
+% \item $\displaystyle\VP_{[+\mathrm{tns}]}$ $\longrightarrow$
+%   $\displaystyle\V_{[+M]}$ $\displaystyle\VP_{[-\mathrm{tns}]}$ $\mid$ \textit{V}$'$@\textit{VP}$'$ 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
     
 \section{Intensionality without possible worlds}
 \label{sec:intensionality}
