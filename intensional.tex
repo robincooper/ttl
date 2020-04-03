@@ -2447,8 +2447,6 @@ a record type.
 believe($a$, $T$) 
 \end{ex}
 
-@@
-
 What does it mean for this type to be non-empty?  We will say that it
 involves finding a match, in the sense introduced in
 Chapter~\ref{ch:propnames}, for $T$ in $a$'s long term memory. In the
@@ -2462,7 +2460,7 @@ Note that according to the proposal for matching in
 Chapter~\ref{ch:propnames} this involves finding a relabelling for $T$.  The match obtains if there is
 a relabelling, $\eta$, of $T$, such that
 $r$.ltm$\sqsubseteq[T]_{\eta}$, where $[T]_{\eta}$ is the result of
-relabelling $T$ by $\eta$ (see Appendix~\ref{app:relabelling-rectypes}). Let us introduce an
+relabelling $T$ by $\eta$ (see Chapter~\ref{ch:propnames}, p.~\pageref{pg:relabelling-intro}). Let us introduce an
 abbreviatory notation for this as in \nexteg{}.
 \begin{ex} 
 $T_1\sqsubseteq_{\leadsto}T_2$ just in case there is some relabelling,
@@ -2484,15 +2482,14 @@ relabelling is involved in the matching process is important for the
 analysis of belief because
 it means that \nexteg{} holds.
 \begin{ex} 
-If believe($a$, $T$) is non-empty, then for any relabelling, $\eta$,
-of $T$, believe($a$, $[T]_{\eta}$) is non-empty 
+If $s$ : believe($a$, $T$), then for any relabelling, $\eta$,
+of $T$, $s$ : believe($a$, $[T]_{\eta}$) 
 \end{ex} 
 This means that the choice of particular labels in a record type is
 not relevant when we compute whether an agent stands in the belief (or
 other attitude)
 relation to a record type.  Note also that, given the way we have
-defined relabelling in Appendix~\ref{app:relabelling-rectypes} via relabellings
-of a flattened representation of the type, that record
+defined relabelling in terms of paths, that record
 types which are structured differently, as in \nexteg{a,b}, will also
 count as relabellings of each other, in this example in virtue of the relabelling \nexteg{c}.
 \begin{ex} 
@@ -2587,7 +2584,9 @@ A second problem for the structured meaning approach is that it tells
 us nothing about cases where no syntactic structure is involved, for
 example, proper names which have the same referent like
 \textit{Hesperus} and \textit{Phosphorus} or synonymous words like
-\textit{groundhog} and \textit{woodchuck}.  This is pointed out by \cite{DowtyWallPeters1981}.
+\textit{groundhog} and \textit{woodchuck}.  This is pointed out by
+\cite{DowtyWallPeters1981} and also by \cite{Egre2020} who attributes
+the first mention of it to \cite{Mates1952}.
 
    
 
@@ -2598,7 +2597,7 @@ an analysis of intuitive propositions.  In general it seems preferable to
 start from objects that are too fine-grained since we can then set
 about finding ways of collapsing distinctions rather than starting out
 with something (like sets of possible worlds) which are not
-fine-grained enough and try to add things to it to make the finer
+fine-grained enough and trying to add things to it to make the finer
 distinctions.  
 
 Another advantage of this strategy is that it offers possibilities for
@@ -2714,7 +2713,7 @@ similarity metrics involves different kinds of subtyping.  We
 have defined subtyping so that for two types, $T_1$ and $T_2$, $T_1$
 is a subtype of $T_2$ just in case for any $a$, if $a:T_1$ then
 $a:T_2$ and that this holds no matter what assignment is made to basic
-types and ptypes (Appendix~\ref{sec:basic}).  Now consider the two
+types and ptypes.  Now consider the two
 examples of subtyping in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
@@ -2846,7 +2845,7 @@ numbers $i$, $j$, $k$ and $l$.
 
 \end{ex}
 Upon the ancients' learning that Hesperus and Phosphorus are the same
-object \preveg{} would be updated to \nexteg{a} which is identical
+object, \preveg{} would be updated to \nexteg{a} which is identical
 with \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
@@ -2881,20 +2880,27 @@ aware that they were the same object.  The structure of the memory
 associates the different name with certain types of events.  This
 seems intuitively correct.
 
-Recall that SemPropName in defined in Chapter~\ref{ch:propnames},
-example (\ref{ex:SemPropName-chpropnames}), also
-Appendix~\ref{app:lexuniversal}, as \nexteg{}.
-\begin{ex} 
-\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}}} \\
-        \field{fg}{$\lambda r$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                         \smalltfield{e}{named(x, $T$)}} . \\
-& & \hspace*{5em}$\lambda P$:\textit{Ppty} . $P(r)$}} 
+Recall that `SemPropName', which characterizes the meanings of proper
+names, is defined as in \nexteg{}.
+\begin{ex}
+  If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
+  \begin{quote}
+    $\ulcorner\lambda c$: \smallrecord{
+      \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
+    P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
+  \end{quote}
+                 
+% \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                          \smalltfield{e}{named(x, $T$)}}} \\
+%         \field{fg}{$\lambda r$: \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                          \smalltfield{e}{named(x, $T$)}} . \\
+% & & \hspace*{5em}$\lambda P$:\textit{Ppty} . $P(r)$}} 
 \end{ex} 
-According to the account we gave in Chapter~\ref{ch:propnames} (see
-example (\ref{ex:propname-acc-lic})), the
-type in the `bg'-field has to be matched against the gameboard or
-failing that against the long-term memory or failing that added to the gameboard
+According to the account of proper names we gave in Chapter~\ref{ch:propnames}, the
+background type (that is, the domain type of the function, specifying
+the type of the context) has to be matched against the gameboard or
+failing that against the long-term memory or failing that added to the gameboard,
 before the new information can be integrated.  The assumption in that
 discussion was that the relevant long-term memory was that of the
 agent integrating the utterance. Now we are raising the issue of whose
@@ -2944,9 +2950,13 @@ believe.  Consider the type characterizing long-term memory in
                                                                               ``Venus'')}}}}}{\textit{RecType}}\\
         \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}}
 \end{ex}
-\todo{Asudeh, A. and G. Giorgolo (2016). Perspectives. Semantics \&
-  Pragmatics 9(21), 1--53.} Here the type in the `id$_5$.id$_3$'-field in \preveg{} is a
-\textit{point of view} on the type in the `id$_5$.id$_1$'-field.  A
+Here the type in the `id$_5$.id$_3$'-field in \preveg{} is a
+\textit{point of view}\footnote{Notionally our notion of point of view
+  here is related to the notion of perspective discussed by
+  \cite{AsudehGiorgolo2016}.  An important difference, however, is
+  that points of view are structured types whereas perspectives are
+  similar to Montague's possible worlds in being atomic elements with
+  no internal structure which can be used to explain how they relate to each other.}on the type in the `id$_5$.id$_1$'-field.  A
 point of view on a type, $T$, is a type which has labels which overlap
 with those of $T$ and represents an alternative take on the fields
 with corresponding labels.  In \preveg{}, we introduce a predicate `pov' with arity
@@ -3051,6 +3061,7 @@ type of Homer's long-term memory could be \nexteg{}.
              \smalltfield{id$_4$}{pov(id$_3$, id$_1$)}}}}
 \label{ex:HomerPythagmultimanifest}
 \end{ex} 
+\begin{shaded}
 Note that here we have generalized the convenient notation for
 manifest fields.  The manifest field in the type (under `id$_6$.id$_3$')
 \smallrecord{\smallmfield{x}{$\Uparrow^3$id$_1$.x,$\Uparrow^3$id$_3$.x}{\textit{Ind}}}
@@ -3059,6 +3070,7 @@ of the two values in the fields at the top level on the paths
 `id$_1$.x' and `id$_3$.x'.  We use the notation
 \smallrecord{\smallmfield{$\ell$}{$a,b,\ldots$}{$T$}} to represent
 \smallrecord{\smalltfield{$\ell$}{$T_a\wedge T_b\wedge\ldots$}}.
+\end{shaded}
 
 A more complex point of view in place of the type given under `id$_6$.id$_3$'
 is \nexteg{}.
@@ -3078,7 +3090,7 @@ Pythagoras believes that Hesperus rises in the evening and Phosphorus
 rises in the morning (though, of course, he believes they are both
 something called Venus) 
 \end{ex} 
-In case \preveg{} does not seem convincing let us consider a more
+In case \preveg{} does not seem convincing, let us consider a more
 modern story (given in \nexteg{}) where there actually are two
 individuals who are mistakenly considered to be one individual.
 \begin{ex} 
@@ -3104,6 +3116,8 @@ she's had a difficult day.''
 In \preveg{} it seems natural that Matti should use her names for the
 two teachers rather than Sam's name ``Mr Smith'' for both
 of them when reporting Sam's beliefs.
+
+@@
   
 % Note
 % that given the definitions of singleton types
