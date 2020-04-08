@@ -3254,9 +3254,15 @@ $p^{\dagger}$ which has arity $\langle\textit{Ind},\textit{Ind}\rangle$
 % type \textit{Ind}.  The relationship between the two predicates is
 % expressed in \nexteg{}.
 \begin{ex} 
-$e$ : $p(a,Q)$ iff $e : Q(\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
-r.\text{x})$}}$)$
+% $e$ : $p(a,Q)$ iff $e : Q(\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
+% r.\text{x})$}}$)$
+  We restrict attention to modal systems, $\mathbb{T}$, such that
+  \begin{quote}
+  $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\lambda
+ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
+ r.\text{x})$}}$)$
+  \end{quote}
 \label{ex:mp-find} 
 \end{ex} 
 This corresponds more or less exactly to Montague's meaning postulate
@@ -3269,26 +3275,35 @@ in \preveg{} and furthermore, as it is a biconditional any situation
 of the second type with the quantifier ``exported'' will also be of
 the first type with the quantifier as the second argument to `find'.
 
-@@\todo{Add SemTransVerb to summary.}
-
 In addition to this meaning postulate for extensional verbs, Montague
 also had a specific meaning postulate relating \textit{seek} to
 \textit{try to find} (his meaning postulate 9 in
 \citealp{Montague1973}).  We will treat this rather differently in
 terms of what it means for a search to be successful.  The intuitive
 idea is that a search is successful if you find what you are looking
-for.  Our postulate is presented in \nexteg{}.
-\begin{ex} 
-if $e$ : successful($e'$, seek($a$, $Q$)), then $e'$ : find($a$, $Q$) 
+for.  Our postulate is presented in \nexteg{}, which uses the
+predicate `successful' with arity $\langle\textit{Type}\rangle$.
+\begin{ex}
+  We restrict attention to modal systems, $\mathbb{T}$, such that
+  \begin{quote}
+    $\text{successful}(\text{seek}(a,\mathcal{Q}))\sqsubseteq_{\mathbb{T}}
+    \text{find}(a,\mathcal{Q})$
+  \end{quote}
+%if $e$ : successful($e'$, seek($a$, $Q$)), then $e'$ : find($a$, $Q$) 
 \label{ex:mp-seek}
 \end{ex} 
-This says that if any situation, $e$, is of a type which predicates
-success of a situation, $e'$, with respect to the type of situation
-where $a$ seeks $Q$ (that is, $e'$ is a successful seeking of $Q$ by
-$a$) then $e'$ must be of the type where $a$ finds $Q$.  Note that
-this is a conditional but not a biconditional.  It could be that $a$
+This says that any situation is successful as a seeking of
+$\mathcal{Q}$ by $a$ is also a situation in which $a$ finds $\mathcal{Q}$.% , $e$, is of a type which predicates
+% success of a situation, $e'$, with respect to the type of situation
+% where $a$ seeks $Q$ (that is, $e'$ is a successful seeking of $Q$ by
+% $a$) then $e'$ must be of the type where $a$ finds $Q$.
+Note that
+this is a subtyping but not an equivalence.  It could be that $a$
 finds $Q$ without looking for it.  Finding something does not always
-represent a successful search.
+represent a successful search but you cannot have a successful search
+without finding what you are looking for.  An event that witnesses
+your successful search for a unicorn would have to be one in which you
+find a unicorn.
 
 Doing things this way gives us a rather different perspective on the
 relationship between extensional and intensional verbs than Montague's
@@ -3327,12 +3342,14 @@ intensional predicates.
 
 In the PTQ fragment \citep{Montague1973} \textit{worship} was treated
 as an intensional verb.  Early on in the literature on formal
-semantics this was generally regarded as a mistake \citep{Bennett1974}
-????.  It is indeed the case that a sentence like \nexteg{} does not
+semantics this was generally regarded as a mistake \citep{Bennett1974}.  It is indeed the case that a sentence like \nexteg{} does not
 entail the existence of a god.
 \begin{ex} 
 Kim worshipped a god 
-\end{ex} 
+\end{ex}
+
+@@
+
 But on the other hand it seems that there has to be a specific (though
 possibly non-existent) god which Kim worshipped.  This is different to
 the case with a true intensional verb like \textit{seek},
@@ -5055,7 +5072,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         \end{quote}
 
         
-      \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)}] \mbox{}
+      \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)} Revised!] \mbox{}
 
         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
@@ -5065,6 +5082,15 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
           r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
           . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
         \end{quote}
+
+        If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+  predicate with arity $\langle\textit{Ind},\textit{Quant}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+  \begin{quote}
+    $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+    \mathcal{Q}$:\textit{Quant} . $\lambda
+    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$)\urcorner$
+  \end{quote}
         
 \item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
           $T_{\mathrm{bg}}$, $p$)}] \mbox{}
@@ -5673,7 +5699,7 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
   \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
   ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves''
   , ``hugs'', ``dog'', ``nine'',
-  ``ninety''\}
+  ``ninety'', ``find'' \textbf{New!}, ``seek'' \textbf{New!}\}
 
 %\item [Witnesses for basic types] \mbox{}
 
@@ -5693,7 +5719,22 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
     passenger\}
     
   \item[with arity
-    \textnormal{$\langle\textit{Ind},\textit{Ind}\rangle$}] \{hug\}
+    \textnormal{$\langle\textit{Ind},\textit{Quant}\rangle$}] \{hug
+    \textbf{Revised!}, find \textbf{New!}, seek \textbf{New!}\}
+
+    We restrict our attention to modal systems, $\mathbb{T}$, such that
+    if $p\in\{\text{hug},\text{find}\}$ then
+    \begin{quote}
+      $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\lambda
+      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
+          r.\text{x})$}}$)$
+    \end{quote}
+    \textbf{and}
+    \begin{quote}
+    $\text{successful}(\text{seek}(a,\mathcal{Q}))\sqsubseteq_{\mathbb{T}}
+    \text{find}(a,\mathcal{Q})$
+  \end{quote}
+
 
     \item[with arity
   \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise
@@ -5798,83 +5839,82 @@ $e$ : temperature$(r)$ if
 
 \end{description}
 
-\subsubsection{Grammar} (as in Chapter~\ref{ch:commonnouns})
+\subsubsection{Grammar} 
 
-% \begin{description}
+\begin{description}
 
 
 
-% \item[Lexical sign types] \mbox{}
+\item[Lexical sign types] \mbox{}
 
-% \begin{tabbing}
-%     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
-%     \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
-%     \> Lex$_{\mathrm{numeral}}$(``nine'', 9) \textbf{New!}, \\
-%     \> Lex$_{\mathrm{numeral}}$(``ninety'', 90) \textbf{New!}, \\ 
-%     \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
-%     \> Lex$_{\mathrm{Universal}}$(``every'') \textbf{New!}, \\
-% \> Lex$_{\mathrm{DefArt}}$(``the'') \textbf{New!},\\
-% \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer) \textbf{Revised!},\\
-% \> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor) \textbf{Revised!}, \\
-% \> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$)
-% \textbf{New!}, \\
-% \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
-% \textit{DogFrame}) \textbf{New!},\\
-% \> Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) ($=\Sigma_{\text{``passenger''}}$)
-% \textbf{New!}, \\
-% \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
-% \textit{PassengerFrame}) \textbf{New!}, \\
-% \> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
-% temperature) (= $\Sigma_{\text{``temperature''}}$) \textbf{New!}, \\
-% \> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
-% \textit{AmbTempFrame}) \textbf{New!},\\
-% \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``run'', \textit{Rec}, run),
-% \textbf{New!}, \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
-% rise) \textbf{New!}, \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
-% rise) \textbf{New!}, \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
-% rise) \textbf{New!}, \\
-% \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
-% \> Lex$_{\mathrm{be}_{\text{ID}}}$(``is'') \textbf{Revised!}, \\
-% \> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is'') \textbf{Revised!}, \\
-% \> Lex(``ok'', \textit{S}),  \\
-% \> Lex(``aha'', \textit{S})  \}
-% \end{tabbing}
+\begin{tabbing}
+    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
+    \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
+    \> Lex$_{\mathrm{numeral}}$(``nine'', 9), \\
+    \> Lex$_{\mathrm{numeral}}$(``ninety'', 90), \\ 
+    \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+    \> Lex$_{\mathrm{Universal}}$(``every''), \\
+\> Lex$_{\mathrm{DefArt}}$(``the''),\\
+\> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer),\\
+\> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor), \\
+\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$), \\
+\> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
+\textit{DogFrame}),\\
+\> Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) ($=\Sigma_{\text{``passenger''}}$), \\
+\> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
+\textit{PassengerFrame}), \\
+\> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
+temperature) (= $\Sigma_{\text{``temperature''}}$), \\
+\> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
+\textit{AmbTempFrame}),\\
+\> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``run'', \textit{Rec}, run), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
+rise), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
+rise), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
+rise), \\
+\> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
+\> Lex$_{\mathrm{TransVerb}}$(``find'', \textit{Rec}, find)
+\textbf{New!}, \\
+\> Lex$_{\mathrm{TransVerb}}$(``seek'', \textit{Rec}, seek) \textbf{New!}, \\
+\> Lex$_{\mathrm{be}_{\text{ID}}}$(``is''), \\
+\> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is''), \\
+\> Lex(``ok'', \textit{S}),  \\
+\> Lex(``aha'', \textit{S})  \}
+\end{tabbing}
 
-% \item[Constituent structure rule components] \mbox{} 
-%   \begin{description}
+\item[Constituent structure rule components] \mbox{} 
+  \begin{description}
 
-%     \item[\textnormal{CnstrIsA}] \mbox{}
+    \item[\textnormal{CnstrIsA}] \mbox{}
 
-%   $\lambda
-% u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
-%                                                                     \hspace*{5em}$^{\frown}$
-% \textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
-% }}}. \\
-% \hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
+  $\lambda
+u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
+}}}. \\
+\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
 
-%   \end{description}
+  \end{description}
   
 
 
-% \item[Constituent structure rules] \mbox{}
+\item[Constituent structure rules] \mbox{}
   
-%   \begin{tabbing}
-%     \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
-%     \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
-%     \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{Ppty}):\textit{Quant}
-%     \textbf{Revised!},\\
-%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
-%     \d{\d{$\wedge$}} CnstrIsA, \\
-%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
-%     \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
+  \begin{tabbing}
+    \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
+    \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{Ppty}):\textit{Quant},\\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
+    \d{\d{$\wedge$}} CnstrIsA, \\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
+    \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
 
-%   \end{tabbing}
+  \end{tabbing}
 
-% \end{description}
+\end{description}
 
 
 
