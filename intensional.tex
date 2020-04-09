@@ -3020,8 +3020,8 @@ $e$ : believe($a$, $T$) if\\
 \hspace*{2em} and $T'\sqsubseteq_{\leadsto}T$ 
 
 $e$ : believe($a$, $T$) if\\
-\hspace*{2em} $e$ : believe($a$, $T_1$) \\
-\hspace*{2em} $e$ : pov($T_2$, $T_1$) \\
+\hspace*{2em} $e'$ : believe($a$, $T_1$) for some component $e'$ of $e$\\
+\hspace*{2em} $e'$ : pov($T_2$, $T_1$) for some component $e'$ of $e$\\
 \hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
 \end{ex} 
   
@@ -3348,8 +3348,6 @@ entail the existence of a god.
 Kim worshipped a god 
 \end{ex}
 
-@@
-
 But on the other hand it seems that there has to be a specific (though
 possibly non-existent) god which Kim worshipped.  This is different to
 the case with a true intensional verb like \textit{seek},
@@ -3497,12 +3495,12 @@ information states we formulate a postulate for `worship' in \nexteg{}
 which
 shows the intensionality and specificity requirements.
 \begin{ex} 
-$e$ : worship($a$,$Q$) iff for some $T$
+$e$ : worship($a$,$\mathcal{Q}$) iff for some $T$
 \begin{enumerate} 
  
 \item $e$ : rbelieve($a$,$T$) 
  
-\item $T$ $\sqsubseteq_{\leadsto}$ $Q$($\lambda
+\item $T$ $\sqsubseteq_{\leadsto}$ $\mathcal{Q}$($\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . worship$^\dagger$($a$,$r$.x))
  
 \end{enumerate} 
@@ -3516,7 +3514,13 @@ requirement in that it requires the religious belief type to be a
 subtype of a type (possibly relabelled) obtained by ``exporting'' the quantifier $Q$.
 
 Things are, however, a little more complicated than this.  Jupiter is
-the Roman name for the god which in Greek is called Zeus.  Suppose
+the Roman name for the god which in Greek is called Zeus.\footnote{I
+  am assuming for the sake of the example that \textit{Jupiter} and
+  \textit{Zeus} are different names for the very same god and not
+  names for distinct Roman and Greek gods who play similar roles in
+  their respective pantheons.  Ellen Breitholtz has pointed out to me
+  that the presentation in the example may not correspond to standard
+  views of Greek and Roman mythology.}  Suppose
 that Kim is Greek oriented and does not know the name Jupiter.
 Suppose further that the speaker is Roman oriented and reports
 \nexteg{}.
@@ -3686,7 +3690,8 @@ allow two alternative witness conditions for `worship'.  The first, as
 before, checks that the type corresponding to the religious beliefs of
 the subject is a subtype of the type resulting from exporting the
 quantifier.  The second checks that a complete point of view fulfils
-this condition.  The two witness conditions are given in \nexteg{}.
+this condition.  This is parallel to the witness conditions we gave
+for `believe'.  The two witness conditions are given in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
@@ -3704,9 +3709,9 @@ this condition.  The two witness conditions are given in \nexteg{}.
 \item $e$ : worship($a$,$Q$) if for some $T_1$, $T_2$
 \begin{enumerate} 
  
-\item $e$ : rbelieve($a$,$T_1$)
+\item $e'$ : rbelieve($a$,$T_1$) for some component $e'$ of $e$
 
-\item $e$ : pov($T_2$,$T_1$) 
+\item $e'$ : pov($T_2$,$T_1$) for some component $e'$ of $e$
  
 \item $T_1$\fbox{\d{$\wedge$}}$T_2$ $\sqsubseteq_{\leadsto}$ $Q$($\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
@@ -3717,9 +3722,7 @@ this condition.  The two witness conditions are given in \nexteg{}.
 \end{subex}
 \label{ex:witness_cond_worship_pov} 
    
-\end{ex} 
-  
-  
+\end{ex}   
 
 We will allow the background conditions of proper names, for example,
 the type in \nexteg{} to match a complete resource and indeed
@@ -3762,19 +3765,19 @@ the type in \nexteg{} to match a complete resource and indeed
 % \end{ex} 
     
 
-[How to get the matching apparatus from Ch. 4 to achieve a match for
-the proper name in this case.] 
+% [How to get the matching apparatus from Ch. 4 to achieve a match for
+% the proper name in this case.] 
 
 Now consider the case with the indefinite article.  Suppose we have a
 situation of the type (\ref{ex:KimWorshipsZeusType}), where Kim
 worships Zeus, who is, according to Kim's religious beliefs, a god.
 In order to show that Kim workships a god we may
 show, following (\ref{ex:witness_cond_worship_pov}a), that this type
-is a subtype of \nexteg{}\footnote{Where `god$_*$' abbreviates $\lambda
+is a subtype of \nexteg{}\footnote{Where `god$'$' abbreviates $\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 . \smallrecord{\smalltfield{e}{god($r$.x)}}.}.
 \begin{ex} 
-exist(god$_*$, $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+exist(god$'$, $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 . worship$^\dagger$(kim,$r$.x)) 
 \end{ex} 
 In virtue of the witness conditions associated with `exist'
@@ -3883,7 +3886,9 @@ the relabelling given in \nexteg{b}, yielding the relabelled type in \nexteg{c}.
 \end{ex} 
 We can see that any situation of type (\ref{ex:info-state-false-god})
 would also be of type \preveg{c} given the witness conditions
-associated with `worship' and `exist' that we have discussed. 
+associated with `worship' and `exist' that we have discussed.
+
+@@
 
 Let us now consider sentences such as \textit{Kim booked a table}
 where there is no inference to a specific table but nevertheless an
@@ -4759,8 +4764,11 @@ r$:\textit{LocRiseEventCntxt} .\\
 
   \begin{description}
     
-  \item[\textnormal{ltm} New!] -- $e:\text{ltm}(a,T)$ iff $T$ is $a$'s
+  \item[\textnormal{ltm} New!] --- $e:\text{ltm}(a,T)$ iff $T$ is $a$'s
     long term memory in $e$.
+    
+  \item[\textnormal{rbelieve} New!] --- $e:\text{rbelieve}(a,T)$ iff
+    $T$ is $a$'s religious beliefs in $e$.
 
   \end{description}
   
@@ -5699,7 +5707,8 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
   \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
   ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves''
   , ``hugs'', ``dog'', ``nine'',
-  ``ninety'', ``find'' \textbf{New!}, ``seek'' \textbf{New!}\}
+  ``ninety'', ``find'' \textbf{New!}, ``seek'' \textbf{New!},
+  ``worship'' \textbf{New!}\}
 
 %\item [Witnesses for basic types] \mbox{}
 
@@ -5720,7 +5729,8 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
     
   \item[with arity
     \textnormal{$\langle\textit{Ind},\textit{Quant}\rangle$}] \{hug
-    \textbf{Revised!}, find \textbf{New!}, seek \textbf{New!}\}
+    \textbf{Revised!}, find \textbf{New!}, seek \textbf{New!}, worship
+    \textbf{New!}\}
 
     We restrict our attention to modal systems, $\mathbb{T}$, such that
     if $p\in\{\text{hug},\text{find}\}$ then
@@ -5735,10 +5745,31 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
     \text{find}(a,\mathcal{Q})$
   \end{quote}
 
+  $e$ : worship($a$,$\mathcal{Q}$) iff for some $T$
+\begin{enumerate} 
+ 
+\item $e$ : rbelieve($a$,$T$) 
+ 
+\item $T$ $\sqsubseteq_{\leadsto}$ $\mathcal{Q}$($\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . worship$^\dagger$($a$,$r$.x))
+ 
+\end{enumerate}
+\textbf{or} for some $T'$
+\begin{enumerate} 
+ 
+\item $e'$ : rbelieve($a$,$T$) for some component $e'$ of $e$
 
+\item $e'$ : pov($T'$,$T$) for some component $e'$ of $e$ 
+ 
+\item $T$\fbox{\d{$\wedge$}}$T'$ $\sqsubseteq_{\leadsto}$ $Q$($\lambda
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . worship$^\dagger$($a$,$r$.x)) 
+
+\end{enumerate}
     \item[with arity
   \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise
   \}
+  
 
       $e$ : rise$(r,c)$ if
   \begin{quote}
@@ -5797,8 +5828,8 @@ $e$ : temperature$(r)$ if
   \end{quote}
   \textbf{or} if
   \begin{quote}
-    $e$ : believe($a$, $T_1$) \\
-    $e$ : pov($T_2$, $T_1$) \\
+    $e'$ : believe($a$, $T_1$) for some component $e'$ of $e$\\
+    $e'$ : pov($T_2$, $T_1$) for some component $e'$ of $e$\\
     and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
   \end{quote}
  
@@ -5878,7 +5909,9 @@ rise), \\
 \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
 \> Lex$_{\mathrm{TransVerb}}$(``find'', \textit{Rec}, find)
 \textbf{New!}, \\
-\> Lex$_{\mathrm{TransVerb}}$(``seek'', \textit{Rec}, seek) \textbf{New!}, \\
+\> Lex$_{\mathrm{TransVerb}}$(``seek'', \textit{Rec}, seek)
+\textbf{New!}, \\
+\> Lex$_{\mathrm{TransVerb}}$(``worship'', \textit{Rec}, worship) \textbf{New!}, \\
 \> Lex$_{\mathrm{be}_{\text{ID}}}$(``is''), \\
 \> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is''), \\
 \> Lex(``ok'', \textit{S}),  \\
