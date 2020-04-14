@@ -3010,7 +3010,16 @@ type with the point of view.  Thus in this case we can obtain
 
 In order to account for belief when a point of view is involved we
 need to revise the witness conditions for `believe' which were given
-in (\ref{ex:believe-witcond-prelim}).  The revision is given in
+in (\ref{ex:believe-witcond-prelim}).  In order to state this revision
+it will be useful to have a notation for saying that an object, $a$,
+is of a type, $T$, or one of $a$'s components is of type $T$.  We
+shall use $a:_{\underline{\varepsilon}}T$ to represent this.  The characterization of
+this notation is given in \nexteg{}.
+\begin{ex} 
+$a:_{\underline{\varepsilon}}T$ iff either $a:T$ or for some $b\
+\varepsilon\ a$, $b:T$ 
+\end{ex} 
+The revision for the witness condition associated with `believe' is given in
 \nexteg{} and involves replacing the orginal biconditional with a
 conditional and adding an additional conditional to cover the case for
 a point of view:
@@ -3020,8 +3029,8 @@ $e$ : believe($a$, $T$) if\\
 \hspace*{2em} and $T'\sqsubseteq_{\leadsto}T$ 
 
 $e$ : believe($a$, $T$) if\\
-\hspace*{2em} $e'$ : believe($a$, $T_1$) for some component $e'$ of $e$\\
-\hspace*{2em} $e'$ : pov($T_2$, $T_1$) for some component $e'$ of $e$\\
+\hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ believe($a$, $T_1$)\\
+\hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$)\\
 \hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
 \end{ex} 
   
@@ -3709,9 +3718,9 @@ for `believe'.  The two witness conditions are given in \nexteg{}.
 \item $e$ : worship($a$,$Q$) if for some $T_1$, $T_2$
 \begin{enumerate} 
  
-\item $e'$ : rbelieve($a$,$T_1$) for some component $e'$ of $e$
+\item $e$ :$_{\underline{\varepsilon}}$ rbelieve($a$, $T_1$)
 
-\item $e'$ : pov($T_2$,$T_1$) for some component $e'$ of $e$
+\item $e$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$)
  
 \item $T_1$\fbox{\d{$\wedge$}}$T_2$ $\sqsubseteq_{\leadsto}$ $Q$($\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
@@ -3888,29 +3897,24 @@ We can see that any situation of type (\ref{ex:info-state-false-god})
 would also be of type \preveg{c} given the witness conditions
 associated with `worship' and `exist' that we have discussed.
 
-@@
-
 Let us now consider sentences such as \textit{Kim booked a table}
 where there is no inference to a specific table but nevertheless an
 inference to the existence of a table. This can be achieved by
 introducing the postulate in \nexteg{}.
 \begin{ex} 
-If $a$:\textit{Ind} and $Q$ is a monotone increasing quantifier, then
+We restrict our attention to model type systems, $\mathbb{T}$, such
+that if $a$:\textit{Ind} and $Q$ is a monotone increasing quantifier, then
 \begin{quote}
-book($a$,$Q$)
-\end{quote} is non-empty
-implies
-\begin{quote}
+book($a$,$Q$) $\sqsubseteq_{\mathbb{T}}$ 
 $Q$($\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-.  \smallrecord{\smalltfield{e}{be($r$.x)}}
-  ) 
+.  \smallrecord{\smalltfield{e}{be($r$.x)}}) 
 \end{quote}
-is non-empty
+
 \end{ex} 
-Intuively, \preveg{} requires that if there is some situation in which
-$a$ books a table, then there is some table which is a constituent of
+Intuitively, \preveg{} requires that if there is some situation, $s$, in which
+$a$ books a table, then there is some table in $s$ which is a component of
 some situation (following the witness conditions for `be' presented in
-Chapter~\ref{ch:gram}).  Notice that we do not get such an inference
+Chapter~\ref{ch:gram}, p.~\pageref{ex:pred-be}).  Notice that we do not get such an inference
 if the quantifier is monotone decreasing.  Thus \textit{Kim booked no
   table} (to the extent that this is an acceptable sentence of
 English) does not imply that there are no tables and neither does it
@@ -3964,24 +3968,27 @@ examples like,
 respectively, \textit{want to buy a coat} and \textit{want a coat}.
 These two predicates are related to `want$^\dagger$' as shown in
 \nexteg{}.
-\begin{ex} 
+\begin{ex}
+  We restrict our attention to modal systems, $\mathbb{T}$, such that
 \begin{subex} 
  
-\item If $a$ : \textit{Ind} and $P$ : \textit{Ppty}, then 
+\item if $a$ : \textit{Ind} and $P$ : \textit{Ppty}, then 
 \begin{quote}
-$e$ : want$_P$($a$, $P$) iff $e$ : want$^\dagger$($a$, $P$(\smallrecord{\field{x}{$a$}}))
+want$_P$($a$, $P$) $\approx_{\mathbb{T}}$ want$^\dagger$($a$, $P$(\smallrecord{\field{x}{$a$}}))
 \end{quote} 
  
-\item If $a$ : \textit{Ind} and $Q$ : \textit{Quant}, then 
+\item if $a$ : \textit{Ind} and $Q$ : \textit{Quant}, then 
 \begin{quote}
-$e$ : want$_Q$($a$,$Q$) iff \\
-\hspace*{2em}$e$ : want$^\dagger$($a$, $Q$($\lambda
+want$_Q$($a$,$Q$) $\approx_{\mathbb{T}}$
+want$^\dagger$($a$, $Q$($\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)))
 \end{quote} 
 \end{subex} 
 \label{ex:want-witcond} 
    
-\end{ex} 
+\end{ex}
+
+@@
 
 In order to characterize witness conditions for `want$^{\dagger}$' we
 need to assume that an agent's total information state include a
@@ -5730,42 +5737,56 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
   \item[with arity
     \textnormal{$\langle\textit{Ind},\textit{Quant}\rangle$}] \{hug
     \textbf{Revised!}, find \textbf{New!}, seek \textbf{New!}, worship
-    \textbf{New!}\}
+    \textbf{New!}, want$_Q$ \textbf{New!}\}
 
-    We restrict our attention to modal systems, $\mathbb{T}$, such that
-    if $p\in\{\text{hug},\text{find}\}$ then
-    \begin{quote}
-      $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\lambda
-      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
-          r.\text{x})$}}$)$
-    \end{quote}
-    \textbf{and}
-    \begin{quote}
-    $\text{successful}(\text{seek}(a,\mathcal{Q}))\sqsubseteq_{\mathbb{T}}
-    \text{find}(a,\mathcal{Q})$
-  \end{quote}
-
-  $e$ : worship($a$,$\mathcal{Q}$) iff for some $T$
+      $e$ : worship($a$,$\mathcal{Q}$) iff for some $T$
 \begin{enumerate} 
  
-\item $e$ : rbelieve($a$,$T$) 
+\item $e$ : rbelieve($a$, $T$) 
  
 \item $T$ $\sqsubseteq_{\leadsto}$ $\mathcal{Q}$($\lambda
-  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . worship$^\dagger$($a$,$r$.x))
+  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . worship$^\dagger$($a$, $r$.x))
  
 \end{enumerate}
 \textbf{or} for some $T'$
 \begin{enumerate} 
  
-\item $e'$ : rbelieve($a$,$T$) for some component $e'$ of $e$
+\item $e$ :$_{\underline{\varepsilon}}$ rbelieve($a$, $T$)
 
-\item $e'$ : pov($T'$,$T$) for some component $e'$ of $e$ 
+\item $e$ :$_{\underline{\varepsilon}}$ pov($T'$, $T$)
  
 \item $T$\fbox{\d{$\wedge$}}$T'$ $\sqsubseteq_{\leadsto}$ $Q$($\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . worship$^\dagger$($a$,$r$.x)) 
+  . worship$^\dagger$($a$, $r$.x)) 
 
 \end{enumerate}
+
+\bigskip
+
+    We restrict our attention to modal systems, $\mathbb{T}$, such
+    that
+    \begin{enumerate}
+    
+    \item if $p\in\{\text{hug},\text{find}\}$ then
+    \begin{quote}
+      $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\lambda
+      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
+          r.\text{x})$}}$)$
+    \end{quote}
+    
+    
+    
+  \item $\text{successful}(\text{seek}(a,\mathcal{Q}))\sqsubseteq_{\mathbb{T}}
+    \text{find}(a,\mathcal{Q})$
+
+    
+  \item want$_Q$($a$,$Q$) $\approx_{\mathbb{T}}$
+want$^\dagger$($a$, $Q$($\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)))
+\end{enumerate}
+  
+
     \item[with arity
   \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise
   \}
@@ -5819,7 +5840,7 @@ $e$ : temperature$(r)$ if
 
 \item[with arity
   \textnormal{$\langle\textit{Ind},\textit{RecType}\rangle$}]
-  --- \{believe \textbf{New!}\}
+  --- \{believe \textbf{New!}, want$^{\dagger}$ \textbf{New!}\}
 
   $e$ : believe($a$, $T$) if
   \begin{quote}
@@ -5828,8 +5849,8 @@ $e$ : temperature$(r)$ if
   \end{quote}
   \textbf{or} if
   \begin{quote}
-    $e'$ : believe($a$, $T_1$) for some component $e'$ of $e$\\
-    $e'$ : pov($T_2$, $T_1$) for some component $e'$ of $e$\\
+    $e$ :$_{\underline{\varepsilon}}$ believe($a$, $T_1$)\\
+    $e'$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$)\\
     and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
   \end{quote}
  
