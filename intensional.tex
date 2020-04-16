@@ -4002,31 +4002,31 @@ to a subtype of \nexteg{}.
         \tfield{rbel}{\textit{RecType}}\\
         \tfield{des}{\textit{RecType}}} 
     \end{ex}
-
-    @@
     
-We will introduce predicates `desire' and `info\_state' which hold between an
+We will introduce a predicate `des' which holds between an
 individual and a record type (that is, with arity
-$\langle$\textit{Ind},\textit{RecType}$\rangle$).  The witness
-conditions for `desire' are given in \nexteg{}.
-\begin{ex} 
-$e$ : desire($a$, $T$) iff\\
-\hspace*{2em} $e$ : info\_state($a$, $T'$) \\
-\hspace*{2em} and $r:T'$ implies $r$.des = $T$
-\end{ex} 
-If $e$ : info\_state($a$, $T$) then $a$'s information state is of type
-$T$. 
+$\langle$\textit{Ind},\textit{RecType}$\rangle$).  $e:\text{des}(a,T)$
+just in case $T$ is $a$'s desires in $e$.  This should require that if
+$r$ is $a$'s information state then $r.\text{des}=T$.  % The witness
+% conditions for `desire' are given in \nexteg{}.
+% \begin{ex} 
+% $e$ : desire($a$, $T$) iff\\
+% \hspace*{2em} $e$ : info\_state($a$, $T'$) \\
+% \hspace*{2em} and $r:T'$ implies $r$.des = $T$
+% \end{ex} 
+% If $e$ : info\_state($a$, $T$) then $a$'s information state is of type
+% $T$. 
 
 Now we can characterize witness conditions for `want$^{\dagger}$' as
 given in \nexteg{}.
 \begin{ex} 
-$e$ : want$^{\dagger}$($a$, $T$) if\\
-\hspace*{2em} $e$ : desire($a$, $T'$) \\
+$e$ : want$^{\dagger}$($a$, $T$) if for some $T'$\\
+\hspace*{2em} $e$ : des($a$, $T'$) \\
 \hspace*{2em} and $T'\sqsubseteq_{\leadsto}T$
 
-$e$ : want$^{\dagger}$($a$, $T$) if\\
-\hspace*{2em} $e$ : want$^{\dagger}$($a$, $T_1$)\\
-\hspace*{2em} $e$ : pov($T_2$, $T_1$) \\
+$e$ : want$^{\dagger}$($a$, $T$) if for some $T_1$ and $T_2$\\
+\hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ want$^{\dagger}$($a$, $T_1$)\\
+\hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$) \\
 \hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2
 \sqsubseteq_{\leadsto}T$
 \label{ex:wantdagger-witcond}
@@ -4042,7 +4042,7 @@ from the perspective of the speaker.  Schwager\footnote{currently
 For the sake of reporting an attitude, a property that is involved in
 the content of the attitude that is to be reported (the
 \textbf{reported property}) can be replaced by a different property
-(the \textbf{reported property}) as long as the reported property is a
+(the \textbf{reporting property}) as long as the reported property is a
 subset of the reporting property at all relevant worlds. 
 
 \hfill\cite[p. 409]{Schwager2009} 
@@ -4126,20 +4126,26 @@ relevant.  For a suggestion of how predicates of personal taste
 could be treated using TTR and some references to other literature see
 \cite{Cooper2015a}.  What this points to is that the speaker is
 replacing a judgement by the attitude bearer with a judgement of her
-own.  This could be expressed by placing the constraint on judgements in \nexteg{}.
-\begin{ex} 
+own.  This could be expressed by introducing the action rule in \nexteg{}.
+\begin{ex}
+  \begin{prooftree}
+    \hypo{:_A\text{pov}(T_1,T_2)}
+    \hypo{s:_B T_2}
+    \infer[enth]2{s:_A T_2\text{\fbox{\d{$\wedge$}}}T_1}
+  \end{prooftree}
+  
 
-For any agents $A$ and $B$, types $T_1$ and $T_2$ and object
-(situation) $s$, \\
-\hspace*{2em}if :$_A$
-pov($T_1$, $T_2$) and $s:_BT_2$, then $s:_AT_2$\fbox{\d{$\wedge$}}$T_1$
+% For any agents $A$ and $B$, types $T_1$ and $T_2$ and object
+% (situation) $s$, \\
+% \hspace*{2em}if :$_A$
+% pov($T_1$, $T_2$) and $s:_BT_2$, then $s:_AT_2$\fbox{\d{$\wedge$}}$T_1$
 \label{ex:pov-constr} 
 \end{ex} 
 \preveg{} says that if $A$ judges pov($T_1$, $T_2$) to be witnessed
 (that is, $A$ judges that $T_1$ is a point of view of $T_2$) and $B$
-judges $s$ to be of type $T_2$, then $A$ judges $s$ to be of the type
+judges $s$ to be of type $T_2$, then $A$ is licensed (afforded) to judge $s$ to be of the type
 resulting from asymmetrically merging $T_2$ with $T_1$.  Note that
-this is a constraint concerning the judgements that two agents make
+this action rule concerns the judgements that two agents make
 rather than the way things actually are in the world.  It belongs to
 the realm of our theory of action based on type theory rather than to
 the type theory itself.  This means that in principle there is nothing
@@ -4154,10 +4160,10 @@ The proposal here also has aspects in common with the proposal by
 account of how to represent the attitudes of an agent and analyzes 
 the attitude report in terms of this.  Our approach to representing
 the attitudes in TTR has a good deal in common with the DRT approach
-as set forth in \cite{Kamp1990,KampGenabithReyle2011}.\todo[inline]{Attitudes and mental files in discourse representation theory
-E Maier
-Review of philosophy and psychology, 2016 lit/Maier
-}
+as set forth in \cite{Kamp1990,KampGenabithReyle2011} and developed in
+\cite{Maier2016,Maier2017}.
+
+@@
 
 Where our proposal differs from previous proposals in the literature
 is that we are not concerned with trying to identify
@@ -4779,6 +4785,10 @@ r$:\textit{LocRiseEventCntxt} .\\
     
   \item[\textnormal{rbelieve} New!] --- $e:\text{rbelieve}(a,T)$ iff
     $T$ is $a$'s religious beliefs in $e$.
+
+    
+  \item[\textnormal{des} New!] --- $e:\text{des}(a,T)$ iff $T$ is
+    $a$'s desires in $e$.
 
   \end{description}
   
@@ -5856,7 +5866,19 @@ $e$ : temperature$(r)$ if
     $e'$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$)\\
     and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
   \end{quote}
- 
+
+  \bigskip
+
+  $e$ : want$^{\dagger}$($a$, $T$) if for some $T'$\\
+  \hspace*{2em} $e$ : des($a$, $T'$) \\
+  \hspace*{2em} and $T'\sqsubseteq_{\leadsto}T$
+
+  \textbf{or} if for some $T_1$ and $T_2$\\
+  \hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ want$^{\dagger}$($a$, $T_1$)\\
+  \hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$) \\
+  \hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2
+  \sqsubseteq_{\leadsto}T$
+  
 \end{description}
 
 \item[Frame types] \mbox{}
