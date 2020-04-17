@@ -4163,7 +4163,7 @@ the attitudes in TTR has a good deal in common with the DRT approach
 as set forth in \cite{Kamp1990,KampGenabithReyle2011} and developed in
 \cite{Maier2016,Maier2017}.
 
-@@
+
 
 Where our proposal differs from previous proposals in the literature
 is that we are not concerned with trying to identify
@@ -4175,48 +4175,93 @@ analysis.  Let us see how this relates to examples which have been
 discussed in the literature.  
 In order to do this we will first say in a little more detail what the
 content of an utterance of \textit{Charlie wants to buy a coat like
-  Bill's} will be.  Let us first look at the (non-parametric) content of
+  Bill's} will be.  Let us first look at the content of
 \textit{Charlie bought a coat like Bill's} (ignoring issues of tense), given in \nexteg{}.
-\begin{ex} 
-\record{\tfield{e}{buy(charlie, $\lambda P$:\textit{Ppty}
-    . \record{\tfield{e}{exist(coat\_like\_Bill's$'$, $P$)}})}}
+\begin{ex}
+  $\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Charlie'')}}}\\
+        \smalltfield{a}{\textit{Rec}}}}} . 
+\record{\tfield{e}{buy($\mathfrak{c}$.f.x, \textbf{a$^\frown$coat\_like\_Bill's}(c.a))}}
 \label{ex:contCbaclB} 
 \end{ex} 
-Here we use `coat\_like\_Bill's$'$' to represent the property in
-\nexteg{}, which we do not analyze further for present purposes.
-\begin{ex} 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{coat\_like\_Bill's(x)}} 
-\end{ex} 
+Here we use `\textbf{a$^\frown$coat\_like\_Bill's}' to represent the
+  content of an utterance of the noun phrase \textit{a coat like
+    Bill's}.  (For simplicity of presentation we are ignoring the fact
+  that \textit{Bill} makes a similar contribution to the context type
+  as \textit{Charlie} though on the path headed by `a'.)
+% \begin{ex} 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{coat\_like\_Bill's(x)}} 
+% \end{ex}
 Since `buy' is an extensional predicate it will obey the constraint in
 \nexteg{} which relates `buy' to the corresponding predicate with two
 individual arguments, `buy$^\dagger$'.
-\begin{ex} 
-$e$ : buy($a$,$Q$) iff $e$ : $Q$($\lambda
+\begin{ex}
+  We restrict our attention to modal type systems, $\mathbb{T}$, such
+  that
+  \begin{quote}
+buy($a$,$Q$) $\approx_{\mathbb{T}}$ $Q$($\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{buy$^\dagger$($a$, $r$.x)}}) 
+. \record{\tfield{e}{buy$^\dagger$($a$, $r$.x)}})
+\end{quote}
 \end{ex} 
 This means that (\ref{ex:contCbaclB}) is equivalent to \nexteg{}, in
 the sense that any record of the former type will be of the latter
 type and \textit{vice versa}.
-\begin{ex} 
-\record{\tfield{e}{exist(coat\_like\_Bill's$'$, $\lambda
-    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \record{\tfield{e}{buy$^\dagger$(charlie, $r$.x)}})}} 
+\begin{ex}
+  $\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Charlie'')}}}\\
+        \smalltfield{a}{\textit{Rec}}}}} . 
+  \record{
+    \tfield{e}{\textbf{a$^\frown$coat\_like\_Bill's}(c.a)($\lambda
+      r$:\smallrecord{
+        \smalltfield{x}{\textit{Ind}}} . 
+        \record{\tfield{e}{buy($\mathfrak{c}$.f.x, $r$.x)}})}}
+  
+% \record{\tfield{e}{exist(coat\_like\_Bill's$'$, $\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \record{\tfield{e}{buy$^\dagger$(charlie, $r$.x)}})}} 
 \label{ex:cbaclb-cont}
-\end{ex} 
-Suppose $e$ is of the type in \nexteg{}.
-\begin{ex} 
-\record{\tfield{e}{\record{\tfield{x}{\textit{Ind}}\\
-                           \tfield{c}{coat\_like\_Bill's(x)}\\
-                           \tfield{e}{buy$^\dagger$(charlie,x)}}}}
 \end{ex}
-Then, by the witness condition associated with `exist' introduced in
-Chapter~\ref{ch:gram}, example~(\ref{ex:existwitcond}), $e$ will also
-be of the type (\ref{ex:cbaclb-cont}).  Here we may assume that if the
-speaker who is asserting this content is speaking truthfully then she
-judges the coat the Charlie bought to be a coat like Bill's (by Grice's
-maxim of quality).  One may, of course, disagree since the degree of
-similarity between two objects may be a matter of personal taste.
+\preveg{} is \nexteg{} where we have spelled out the contribution of
+the indefinite article.
+\begin{ex} 
+ $\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Charlie'')}}}\\
+        \smalltfield{a}{\textit{Rec}}}}} . 
+  \record{
+    \tfield{e}{\record{
+        \mfield{range}{\textbf{coat\_like\_Bill's}($c$.a)}{\textit{Ppty}}\\
+        \mfield{scope}{$\lambda r$:\smallrecord{
+            \smalltfield{x}{\textit{Ind}}} . \smallrecord{
+            \smalltfield{e}{buy($\mathfrak{c}$.f.x,
+              $r$.x)}}}{\textit{Ppty}}\\
+        \tfield{e}{exist(range, scope)}}}}
+\end{ex} 
+  
+% Suppose $e$ is of the type in \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{e}{\record{\tfield{x}{\textit{Ind}}\\
+%                            \tfield{c}{coat\_like\_Bill's(x)}\\
+%                            \tfield{e}{buy$^\dagger$(charlie,x)}}}}
+% \end{ex}
+% Then, by the witness condition associated with `exist' introduced in
+% Chapter~\ref{ch:gram}, example~(\ref{ex:existwitcond}), $e$ will also
+% be of the type (\ref{ex:cbaclb-cont}).  Here we may assume that if the
+% speaker who is asserting this content is speaking truthfully then she
+% judges the coat the Charlie bought to be a coat like Bill's (by Grice's
+% maxim of quality).  One may, of course, disagree since the degree of
+% similarity between two objects may be a matter of personal taste.
+
+@@
 
 Now let us consider the non-parametric content of \textit{Charlie
   wants to buy a coat like Bill's} given in \nexteg{a} which, by
