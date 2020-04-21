@@ -280,6 +280,20 @@ we are introducing here as shown in \nexteg{}.
 \label{ex:parametricSam}
 \end{ex}
 
+In order to ensure the presence of the label `$\mathfrak{c}$' in
+contexts we will define a type of contexts, \textit{Cntxt}.  We will
+refine the characterization of this type as we progress.  For now it
+is characterized as in \nexteg{}.
+\begin{ex} 
+  \textit{Cntxt} designates
+  \begin{quote}
+    \record{
+      \tfield{$\mathfrak{c}$}{\textit{Rec}}}
+  \end{quote}
+  
+\end{ex} 
+  
+
 This treatment of proper names is closely related to treatments that were proposed earlier in situation semantics
 \citep{GawronPeters1990,Cooper1991,BarwiseCooper1993}.  A more recent
 close relation is Maier's (\citeyear{Maier2009}) proposal for the
@@ -411,9 +425,11 @@ is
   
 
 
-The type of a parametric content of proper names is \nexteg{}.
+The type of a parametric content of proper names is \nexteg{} where we
+use \textit{CntxtType} to be the type of types which are subtypes of
+\textit{Cntxt}, that is $T$:\textit{CntxtType} iff $T\sqsubseteq\textit{Cntxt}$.
 \begin{ex}
-\record{\tfield{bg}{\textit{RecType}} \\
+\record{\tfield{bg}{\textit{CntxtType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
 % $\displaystyle{\bigvee_{T\sqsubseteq
 %     \mathit{Rec}}}(T\rightarrow\textit{Quant})$
@@ -456,7 +472,7 @@ type for parametric properties (\textit{PPpty}) given in \nexteg{b}.
 \item $\ulcorner\lambda c$:\textit{Rec}.$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}.
 \smallrecord{\smalltfield{e}{leave($r$.x)}}$\urcorner$
 
-\item \record{\tfield{bg}{\textit{RecType}}\\
+\item \record{\tfield{bg}{\textit{CntxtType}}\\
               \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
 \end{subex}
 \label{ex:parametricLeave}
@@ -523,10 +539,10 @@ on the context arising from the function and the argument will be
 \nexteg{}, a preliminary version which we will modify in order to
 include the treatment of free pronouns in Section~\ref{sec:unbound}.
 \begin{ex}
-If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
                              T_2$))}} 
-and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
@@ -561,7 +577,7 @@ $r$ is a record, then $[r]_{\pi_1\leadsto\pi_2}$ is defined similarly
 except in the special case where $r$ is of the type \nexteg{}
 \begin{ex} 
 \record{
-  \tfield{bg}{\textit{RecType}}\\
+  \tfield{bg}{\textit{CntxtType}}\\
   \tfield{fg}{(bg$\rightarrow T$)}} 
 \end{ex} 
    for some type $T$ and has
@@ -605,11 +621,11 @@ than straightforward application is given in \nexteg{}.
 \begin{ex} 
 $\lambda T_1$:\textit{Type} $\lambda T_2$:\textit{Type} . \\
 \hspace*{1em}$\lambda
-u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                                                \smalltfield{fg}{(bg$\rightarrow$($T_2\rightarrow T_1$))}}}}$^{\frown}$
-   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                                                \smalltfield{fg}{(bg$\rightarrow T_2$)}}}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                                                                                 \smalltfield{fg}{(bg$\rightarrow
                                                                                   T_1$)}}}}
 \label{ex:ContForwardApp@}                                                                          
@@ -2686,9 +2702,26 @@ current account of singular unbound pronouns we will restrict
 ourselves to the type \textit{Ind}.  Thus \nexteg{} is an example of
 the kind of record type we will use.
 \begin{ex} 
-\record{\tfield{x$_0$}{\textit{Ind}}\\
-              \tfield{x$_1$}{\textit{Ind}}} 
+  \record{
+    \tfield{x$_0$}{\textit{Ind}}\\
+    \tfield{x$_1$}{\textit{Ind}}} 
+\end{ex}
+We will introduce a general type, \textit{Assgnmnt}, of assignments
+of which \preveg{} will be a subtype.
+\begin{shaded}
+This is done in \nexteg{}.
+\begin{ex} 
+\textit{Assgnmnt} is a basic type.  $r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$ and $\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$ 
 \end{ex} 
+If we wish to restrict assignments to be assignments of individuals we
+can give the more specific witness condition in \nexteg{}.
+\begin{ex} 
+$r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$, $\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$ and
+for any $i$ such that $\text{x}_i\in\mathrm{labels}(r)$, $r.\text{x}_i:\textit{Ind}$
+\end{ex} 
+\end{shaded}  
   
 We regard these different kinds of
 context as separate components of the context as they may be treated differently by compositional
@@ -2709,7 +2742,34 @@ We use the label `$\mathfrak{s}$' for the component in the context which
 assigns entities to occurrences of pronouns and the label
 `$\mathfrak{c}$', as before, for the component which corresponds to
 presuppositions.  We leave open the possibility of adding further
-components to the context later.
+components to the context later.  We shall call the component of the
+context labelled `$\mathfrak{c}$' the \textit{propositional context}
+since it places constraints on what must hold true in the context.  It
+will be important that the labels used do not overlap with those of
+the assignment.  For this reason we introduce a type
+\textit{PropCntxt}.
+\begin{shaded}
+  This is done in \nexteg{}.
+\begin{ex} 
+\textit{PropCntxt} is a basic type.  $r:\textit{PropCntxt}$ iff
+$r:\textit{Rec}$ and $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$ 
+\end{ex} 
+\end{shaded}
+
+We will now revise the characterization of \textit{Cntxt} in \nexteg{} to require
+both an assignment and a propositional context.
+\begin{ex} 
+  \textit{Cntxt} designates
+  \begin{quote}
+    \record{
+      \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+      \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
+  \end{quote}
+  
+\end{ex} 
+
+@@
+
 
 The parametric content for
 \textit{he} could be that given in \nexteg{a}, for \textit{left}
