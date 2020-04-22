@@ -4478,6 +4478,22 @@ Chapter~\ref{ch:commonnouns} are marked ``\textbf{Revised!}''.  % We have
         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
       Chapter~\ref{ch:infex})
+
+      \item[\textnormal{\textit{Assgnmnt}}] --- a basic type
+
+      $r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
+
+\item[\textnormal{\textit{PropCntxt}}] --- a basic type
+
+  $r:\textit{PropCntxt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
+
+\item[\textnormal{\textit{Cntxt}}] --- \record{
+      \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+      \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
       
     % \item[\textnormal{\textit{IndPpty}} New!] ---
     %   (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
@@ -4499,13 +4515,13 @@ Chapter~\ref{ch:commonnouns} are marked ``\textbf{Revised!}''.  % We have
         $P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
 $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
         
-      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
+      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{Cntxt}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
         
       \item[\textnormal{\textit{Quant}}] ---
         (\textit{Ppty}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{RecType}} \\
+      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{Cntxt}} \\
           \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
         
       \item[\textnormal{\textit{QuantDet}}] ---
@@ -4513,12 +4529,12 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
         
       \item[\textnormal{\textit{PQuantDet}}] ---
         \record{
-          \tfield{bg}{\textit{RecType}}\\
+          \tfield{bg}{\textit{Cntxt}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
         
       \item[\textnormal{\textit{PRecType}}] ---
         \record{
-          \tfield{bg}{\textit{RecType}}\\
+          \tfield{bg}{\textit{Cntxt}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
@@ -4967,7 +4983,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
-    $\ulcorner\lambda c$: \smallrecord{
+    $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -4986,7 +5002,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
 \item[\textnormal{SemPron} ] \mbox{}
 
-$\ulcorner\lambda c$:\smallrecord{
+$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty}
@@ -5005,7 +5021,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 
   If $n$ is a real number, then SemNumeral($n$) is
   \begin{quote}
-    $\ulcorner\lambda c$:\textit{Rec} . $\lambda P$:\textit{Ppty}
+    $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda P$:\textit{Ppty}
     . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$
   \end{quote}
 
@@ -5032,7 +5048,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \tfield{e}{exist(restr, scope)}}$\urcorner$
 
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
@@ -5055,7 +5071,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
       \item[\textnormal{SemUniversal}] \mbox{}
 
         $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
@@ -5084,7 +5100,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \tfield{e}{the(restr, scope)}}
 
           $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
@@ -5196,7 +5212,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
           
         \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
 
-          $\ulcorner\lambda c$:\smallrecord{
+          $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\

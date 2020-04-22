@@ -21,10 +21,10 @@ associated with the content in \nexteg{a} whose foreground is of type
 \nexteg{b}. 
 \begin{ex} 
 \begin{subex}
-\item $\ulcorner\lambda c$:\textit{Rec} . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+\item $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   . \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$ 
 \item
-  (\textit{Rec}$\rightarrow$(\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType}))
+  (\textit{Cntxt}$\rightarrow$(\smallrecord{\smalltfield{x}{\textit{Ind}}} $\rightarrow$ \textit{RecType}))
 \end{subex}
 \label{ex:dog}
 \end{ex}
@@ -737,7 +737,7 @@ in a temperature rising event.  We can use this predicate in the
 characterization of a parametric content for the verb \textit{rise},
 given in \nexteg{}. 
 \begin{ex} 
-  $\ulcorner\lambda c$:\smallrecord{
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}} .
   $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{
     \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
@@ -798,7 +798,7 @@ associated with `rise'.
 We can construct a parametric content for the verb \textit{rise} which
 exploits this witness condition.  This is given in \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\smallrecord{
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}} .
   $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{
     \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
@@ -891,7 +891,7 @@ in \nexteg{}.
 We can use this predicate to create a parametric content for the
 intransitive verb \textit{rise}, as in \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\smallrecord{
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}} .
   $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{
     \tfield{e}{rise($r$.x, $c.\mathfrak{c}$)}}$\urcorner$
@@ -1578,7 +1578,7 @@ which was defined in Chapter~\ref{ch:gram}, example
 % the functions (i.e. `fg').
 This is given in \nexteg{}.
 \begin{ex}
-  $\ulcorner\lambda c$:\textit{Rec} . \\
+  $\ulcorner\lambda c$:\textit{Cntxt} . \\
 \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
 \hspace*{2em} $\lambda P$:\textit{Ppty}
 . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
@@ -1876,7 +1876,7 @@ in \nexteg{}.
 \begin{subex} 
  
 \item $\ulcorner\lambda
-  c$:\smallrecord{
+  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
@@ -1886,7 +1886,7 @@ in \nexteg{}.
   \tfield{e}{the(restr, scope)}}$\urcorner$ 
  
 \item $\ulcorner\lambda
-  c$:\smallrecord{
+  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
 \record{
@@ -1895,7 +1895,7 @@ in \nexteg{}.
   \tfield{e}{exist(restr, scope)}}$\urcorner$ 
 
 \item $\ulcorner\lambda
-  c$:\smallrecord{
+  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
 \record{
@@ -1971,7 +1971,7 @@ noun) to a parametric content.  The content of \textit{the}, `SemDefArt', is giv
 in \nexteg{}.
 \begin{ex} 
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace{1em}$\ulcorner\lambda c$:\smallrecord{
+  \hspace{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace{2em}$\lambda P$:\textit{Ppty} . \\
@@ -1997,7 +1997,7 @@ following noun.  `SemIndefArt' is defined as \nexteg{}.
 %              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
 %              \smalltfield{e}{exist(restr, scope)}}}}
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
@@ -2012,15 +2012,13 @@ to form the content of the noun-phrase?  Let us refer to \preveg{} as
 associated with \textit{dog} given in \nexteg{}, where `dog$'$'
 represents the property of being a dog as we defined earlier.
 \begin{ex} 
-  $\lambda c$:\smallrecord{
-    \smalltfield{$\mathfrak{c}$}{\textit{Rec}}\\
-    \smalltfield{$\mathfrak{s}$}{\textit{Rec}}} . dog$'$ 
+  $\lambda c$:\textit{Cntxt} . dog$'$ 
 \end{ex} 
 (This assumes that the content for \textit{dog} does not depend on the
 context.)  We can derive a parametric content for \textit{the dog} as
 indicated in \nexteg{}.
 
-
+@@
 
 \begin{ex}
   $\lambda c$:\record{
@@ -4304,6 +4302,22 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
         \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
       Chapter~\ref{ch:infex})
+
+    \item[\textnormal{\textit{Assgnmnt}}] --- a basic type
+
+      $r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
+
+\item[\textnormal{\textit{PropCntxt}}] --- a basic type
+
+  $r:\textit{PropCntxt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
+
+\item[\textnormal{\textit{Cntxt}}] --- \record{
+      \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+      \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
       
     % \item[\textnormal{\textit{IndPpty}} New!] ---
     %   (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
@@ -4325,13 +4339,13 @@ Chapter~\ref{ch:propnames} are marked ``\textbf{Revised!}''.  % We have
         $P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
 $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
         
-      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{RecType}} \\
+      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{Cntxt}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
         
       \item[\textnormal{\textit{Quant}}] ---
         (\textit{Ppty}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{RecType}} \\
+      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{Cntxt}} \\
           \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
         
       \item[\textnormal{\textit{QuantDet}}] ---
@@ -4339,12 +4353,12 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
         
       \item[\textnormal{\textit{PQuantDet}}] ---
         \record{
-          \tfield{bg}{\textit{RecType}}\\
+          \tfield{bg}{\textit{Cntxt}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
         
       \item[\textnormal{\textit{PRecType}}] ---
         \record{
-          \tfield{bg}{\textit{RecType}}\\
+          \tfield{bg}{\textit{Cntxt}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
@@ -4723,7 +4737,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
-    $\ulcorner\lambda c$: \smallrecord{
+    $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -4742,7 +4756,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
 \item[\textnormal{SemPron} ] \mbox{}
 
-$\ulcorner\lambda c$:\smallrecord{
+$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty}
@@ -4761,7 +4775,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 
   If $n$ is a real number, then SemNumeral($n$) is
   \begin{quote}
-    $\ulcorner\lambda c$:\textit{Rec} . $\lambda P$:\textit{Ppty}
+    $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda P$:\textit{Ppty}
     . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$
   \end{quote}
 
@@ -4788,7 +4802,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \tfield{e}{exist(restr, scope)}}$\urcorner$
 
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
@@ -4811,7 +4825,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
       \item[\textnormal{SemUniversal} New!] \mbox{}
 
         $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
@@ -4840,7 +4854,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \tfield{e}{the(restr, scope)}}
 
           $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
@@ -4943,7 +4957,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
           
         \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
 
-          $\ulcorner\lambda c$:\smallrecord{
+          $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\

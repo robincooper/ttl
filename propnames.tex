@@ -2768,7 +2768,7 @@ both an assignment and a propositional context.
   
 \end{ex} 
 
-@@
+
 
 
 The parametric content for
@@ -2779,16 +2779,16 @@ in \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\ulcorner\lambda c$:\smallrecord{
+\item $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . 
         $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
  
-\item $\ulcorner\lambda c$:\textit{Rec} . 
+\item $\ulcorner\lambda c$:\textit{Cntxt} . 
         $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
               \record{\tfield{e}{leave($r$.x)}}$\urcorner$
 
-            \item $\ulcorner\lambda c$:\smallrecord{
+            \item $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
                 \smalltfield{$\mathfrak{s}$}{\smallrecord{
                     \smalltfield{x$_0$}{\textit{Ind}}}}}
   . 
@@ -2799,7 +2799,7 @@ in \nexteg{c}.
 \end{ex}
 We will define `SemPron' to be \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\smallrecord{
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
 \end{ex}
@@ -2809,6 +2809,7 @@ is a phonological type, to be \nexteg{}.
 Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 \smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}} 
 \end{ex}
+
 This means that every instance of a pronoun when viewed in isolation
 as an utterance of a lexical item will involve the label `x$_0$'.
 However, when we combine phrases we will increment the indexes on `x'
@@ -2816,7 +2817,7 @@ in one of the constituents so that no two occurrences of pronouns will
 have the same index.  This will be done in our combination rule based
 on the S-combinator (and would also need to be done in other
 combination rules if they were added).  In order to define this we
-will is the notation $\pi_i$ to represent a path in which the last
+will use the notation $\pi_i$ to represent a path in which the last
 label is indexed with $i$.  If $T$ is a record type we characterize
 the maximum index associated with a path of the form $\pi$ (without
 the index), $\mathrm{max}_\pi(T)$, as \nexteg{}.
@@ -3009,16 +3010,33 @@ introduced in the text.
         \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
       Chapter~\ref{ch:infex})
 
+      
+    \item[\textnormal{\textit{Assgnmnt}} New!] --- a basic type
+
+      $r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
+
+\item[\textnormal{\textit{PropCntxt}} New!] --- a basic type
+
+  $r:\textit{PropCntxt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
+
+\item[\textnormal{\textit{Cntxt}} New!] --- \record{
+      \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+      \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
+
       \item[\textnormal{\textit{Ppty}}] ---
         (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PPpty}} New!] --- \record{\tfield{bg}{\textit{RecType}} \\
+      \item[\textnormal{\textit{PPpty}} New!] --- \record{\tfield{bg}{\textit{Cntxt}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
         
       \item[\textnormal{\textit{Quant}}] ---
         (\textit{Ppty}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PQuant}} New!] --- \record{\tfield{bg}{\textit{RecType}} \\
+      \item[\textnormal{\textit{PQuant}} New!] --- \record{\tfield{bg}{\textit{Cntxt}} \\
           \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
         
       \item[\textnormal{\textit{QuantDet}} New!] ---
@@ -3026,12 +3044,12 @@ introduced in the text.
         
       \item[\textnormal{\textit{PQuantDet}} New!] ---
         \record{
-          \tfield{bg}{\textit{RecType}}\\
+          \tfield{bg}{\textit{Cntxt}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
         
       \item[\textnormal{\textit{PRecType}} New!] ---
         \record{
-          \tfield{bg}{\textit{RecType}}\\
+          \tfield{bg}{\textit{Cntxt}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
@@ -3158,7 +3176,7 @@ Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
 
   If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$, then SemCommonNoun($p$) is
   \begin{quote}
-    $\lambda c$:\textit{Rec} . $\lambda
+    $\lambda c$:\textit{Cntxt} . $\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 . \record{\tfield{e}{$p$($r$.x)}}
 \end{quote}
@@ -3178,7 +3196,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
-    $\ulcorner\lambda c$: \smallrecord{
+    $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -3197,7 +3215,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 
 \item[\textnormal{SemPron} New!] \mbox{}
 
-$\ulcorner\lambda c$:\smallrecord{
+$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty}
@@ -3215,7 +3233,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
   
 \item[\textnormal{SemIndefArt} Revised!] \mbox{}
 
-  $\ulcorner\lambda c$:\textit{Rec} . \\
+  $\ulcorner\lambda c$:\textit{Cntxt} . \\
 \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
 \hspace*{2em} $\lambda P$:\textit{Ppty}
 . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
@@ -3286,7 +3304,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         
       \item[\textnormal{SemBe} Revised!] \mbox{}
 
-        $\lambda c:T_{\text{bg}}$ . \\
+        $\lambda c$:\textit{Cntxt} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
 \hspace*{2em} $\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
 . \\
