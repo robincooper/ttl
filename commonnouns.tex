@@ -2018,23 +2018,21 @@ represents the property of being a dog as we defined earlier.
 context.)  We can derive a parametric content for \textit{the dog} as
 indicated in \nexteg{}.
 
-@@
+
 
 \begin{ex}
   $\lambda c$:\record{
     \tfield{$\mathfrak{c}$}{\record{
         \tfield{s}{\textbf{dog}.bg}\\
         \tfield{f}{\textbf{the}(\textbf{dog}(s)).bg}\\
-        \mfield{a}{s.$\mathfrak{c}$}{\textbf{dog}.bg.$\mathfrak{c}$}}}\\
-    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textbf{dog}.bg.$\mathfrak{s}$}}
+        \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
+    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
   . [\textbf{the}]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$([\textbf{dog}]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$($c$))($c$)
   
   % $\lambda c$:\smallrecord{
   %   \smalltfield{f}{(\textbf{the}(\textbf{dog}(a))).bg}\\
   %   \smalltfield{a}{\textbf{dog}.bg}} . \textbf{the}(\textbf{dog}($c$.a))($c$.f)
 \end{ex}
-
-
 
 In order to achieve this we need a variant of the operation
 `ContForwardApp' defined on p.~\pageref{ex:ContForwardApp@} which
@@ -2067,11 +2065,9 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 
 \end{quote}
 
-\item If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+\item If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_2$)}}) 
-                         and $\beta$ : \smallrecord{\smalltfield{bg}{\smallrecord{
-                               \smalltfield{$\mathfrak{c}$}{\textit{RecType}}\\
-                               \smalltfield{$\mathfrak{s}$}{\textit{RecType}}}}\\
+                         and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
@@ -2080,7 +2076,8 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
       \tfield{$\mathfrak{c}$}{\record{
           \tfield{s}{$\beta$.bg}\\
           \tfield{f}{$\alpha(\beta(s))$.bg}\\
-          \mfield{a}{s.$\mathfrak{c}$}{$\beta$.bg.$\mathfrak{c}$}}}}
+          \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
+    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
       . \\*[\baselineskip]
       \hspace*{10em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))(c)\urcorner$
     \end{quote}
@@ -2091,7 +2088,7 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 \end{ex}
 
   
-  
+@@  
 
 
 
@@ -4318,6 +4315,10 @@ $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
 \item[\textnormal{\textit{Cntxt}}] --- \record{
       \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
       \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
+
+    \item[\textnormal{\textit{CntxtType}}] --- a basic type
+
+    $T:\textit{CntxtType}$ iff $T\sqsubseteq\textit{Cntxt}$
       
     % \item[\textnormal{\textit{IndPpty}} New!] ---
     %   (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
@@ -4339,13 +4340,13 @@ $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
         $P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
 $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
         
-      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{Cntxt}} \\
+      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
         
       \item[\textnormal{\textit{Quant}}] ---
         (\textit{Ppty}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{Cntxt}} \\
+      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
           \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
         
       \item[\textnormal{\textit{QuantDet}}] ---
@@ -4353,12 +4354,12 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
         
       \item[\textnormal{\textit{PQuantDet}}] ---
         \record{
-          \tfield{bg}{\textit{Cntxt}}\\
+          \tfield{bg}{\textit{CntxtType}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
         
       \item[\textnormal{\textit{PRecType}}] ---
         \record{
-          \tfield{bg}{\textit{Cntxt}}\\
+          \tfield{bg}{\textit{CntxtType}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
@@ -5161,19 +5162,22 @@ ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedg
 
 \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
 
-  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
                              T_2$))}} 
-and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-\begin{quote}
-  $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+  \begin{quote}
+    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-      . \\
-      \hspace*{2em}
-$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+  % $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+%       . \\
+%       \hspace*{2em}
+% $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
       
 \end{quote}
 
@@ -5184,11 +5188,46 @@ $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfra
   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
 \begin{quote}
   $\lambda
-u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
-    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
-
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                                                                \smalltfield{fg}{(bg$\rightarrow
+                                                                                  T_{\text{res}}$)}}}}
 \end{quote}
+
+
+% \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+%   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+%                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+%                              T_2$))}} 
+% and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+%                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+%                          then the \textit{combination of $\alpha$ and
+%     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+% \begin{quote}
+%   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+%       . \\
+%       \hspace*{2em}
+% $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      
+% \end{quote}
+
+
+% \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
+
+%   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+%   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+% \begin{quote}
+%   $\lambda
+% u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+%     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+% \end{quote}
 
 \item[\textnormal{$T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
@@ -5213,11 +5252,9 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
   
 \item[\textnormal{$\alpha\text{@\!@}\beta$} New!] \mbox{}
 
-  If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+  If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_2$)}}) 
-                         and $\beta$ : \smallrecord{\smalltfield{bg}{\smallrecord{
-                               \smalltfield{$\mathfrak{c}$}{\textit{RecType}}\\
-                               \smalltfield{$\mathfrak{s}$}{\textit{RecType}}}}\\
+                         and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
@@ -5226,7 +5263,8 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
       \tfield{$\mathfrak{c}$}{\record{
           \tfield{s}{$\beta$.bg}\\
           \tfield{f}{$\alpha(\beta(s))$.bg}\\
-          \mfield{a}{s.$\mathfrak{c}$}{$\beta$.bg.$\mathfrak{c}$}}}}
+          \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
+    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
       . \\*[\baselineskip]
       \hspace*{10em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))(c)\urcorner$
     \end{quote}

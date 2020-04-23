@@ -613,7 +613,7 @@ if $\alpha$.bg and $\beta$.bg should happen to share
 labels.
 
 This new method of combination for parametric contents means that we
-also have to adjust the sign combination operation CntForwardApp
+also have to adjust the sign combination operation ContForwardApp
 (``forward application of contents'') used in the definition of
 interpreted phrase structure rules (see Chapter~\ref{ch:gram},
 example~(\ref{ex:ContForwardApp})).  The new version using `@' rather
@@ -2855,10 +2855,10 @@ We can now modify the combination rule in
 (\ref{ex:s-combination-prelim}) to take account of the incrementation
 of free pronouns. This is given in \nexteg{}.
 \begin{ex}
-If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
                              T_2$))}} 
-and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
@@ -3027,16 +3027,21 @@ $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
       \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
       \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
 
+    
+  \item[\textnormal{\textit{CntxtType}} New!] --- a basic type
+
+    $T:\textit{CntxtType}$ iff $T\sqsubseteq\textit{Cntxt}$
+    
       \item[\textnormal{\textit{Ppty}}] ---
         (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PPpty}} New!] --- \record{\tfield{bg}{\textit{Cntxt}} \\
+      \item[\textnormal{\textit{PPpty}} New!] --- \record{\tfield{bg}{\textit{CntxtType}} \\
         \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
         
       \item[\textnormal{\textit{Quant}}] ---
         (\textit{Ppty}$\rightarrow$\textit{RecType})
         
-      \item[\textnormal{\textit{PQuant}} New!] --- \record{\tfield{bg}{\textit{Cntxt}} \\
+      \item[\textnormal{\textit{PQuant}} New!] --- \record{\tfield{bg}{\textit{CntxtType}} \\
           \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
         
       \item[\textnormal{\textit{QuantDet}} New!] ---
@@ -3044,12 +3049,12 @@ $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
         
       \item[\textnormal{\textit{PQuantDet}} New!] ---
         \record{
-          \tfield{bg}{\textit{Cntxt}}\\
+          \tfield{bg}{\textit{CntxtType}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
         
       \item[\textnormal{\textit{PRecType}} New!] ---
         \record{
-          \tfield{bg}{\textit{Cntxt}}\\
+          \tfield{bg}{\textit{CntxtType}}\\
           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
@@ -3371,10 +3376,10 @@ ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedg
 
 \item[\textnormal{$\alpha\text{@}\beta$} New!] \mbox{}
 
-  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
                              T_2$))}} 
-and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
@@ -3391,17 +3396,29 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 \end{quote}
 
 
-\item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)} Revised!] \mbox{}
+\item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}
+  Revised!] \mbox{}
 
   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
 \begin{quote}
   $\lambda
-u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
-    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
-
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                                                                \smalltfield{fg}{(bg$\rightarrow
+                                                                                  T_{\text{res}}$)}}}}
 \end{quote}
+  
+% \begin{quote}
+%   $\lambda
+% u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+%     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+% \end{quote}
 
 \item[\textnormal{$T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
