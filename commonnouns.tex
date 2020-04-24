@@ -2088,7 +2088,7 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 \end{ex}
 
   
-@@  
+  
 
 
 
@@ -3026,7 +3026,7 @@ allow equality not only between individuals but also objects of other
 types.  We can do this by letting the content of \textit{be} be
 parametric on a type including the label `x' introduced in the context as in \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\smallrecord{
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
@@ -3070,7 +3070,7 @@ Here we need to introduce a scale into the context and make sure that
 the second argument to \textit{be} is a number.  This is given in
 \nexteg{}.
 \begin{ex} 
-$\ulcorner\lambda c$:\smallrecord{
+$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}\\
       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
@@ -3237,7 +3237,7 @@ In $n$ is a (real) number, then SemNumeral($n$) (the content for a
 number expression such as \textit{nine}) is as given in
 \nexteg{}.
 \begin{ex} 
-$\ulcorner\lambda c$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$ 
+$\ulcorner\lambda c$:\textit{Cntxt} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$ 
 \end{ex} 
 Then we can define Lex$_{\mathrm{numeral}}$ as an operation which
 takes a phonological type $T_{\mathrm{phon}}$ and a (real) number $n$
@@ -3510,7 +3510,7 @@ define SemUniversal on the model of SemIndefArt.\footnote{We leave to one side t
 %              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
 %              \smalltfield{e}{every(restr, scope)}}}}
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Rec} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
@@ -3525,7 +3525,7 @@ If we use the content associated with
 content associated with \textit{every passenger} will
 be \nexteg{}.
 \begin{ex}
-$\ulcorner\lambda c$:\textit{Rec} . \\
+$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{1em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{2em}\record{
     \mfield{restr}{$\ulcorner\lambda                                    r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}} . passenger\_frame($r$.x)$\urcorner$}{\textit{Ppty}}\\
@@ -3547,7 +3547,7 @@ $\langle$\textit{Ind}$\rangle$.  It is individuals, not frames
 (situations), that get hot meals.  Thus the content of
 \textit{gets a hot meal} will be \nexteg{}.
 \begin{ex} 
-$\ulcorner\lambda c$:\textit{Rec} . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+$\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
                  \record{\tfield{e}{get\_a\_hot\_meal($r$.x)}}$\urcorner\urcorner$ 
 \label{ex:contgetahotmeal}
 \end{ex} 
@@ -3582,10 +3582,10 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
 % $p$\_frame, \textit{Rec}, \textit{Rec}, $T_\mathrm{bg}$)
 \label{ex:IntransVerbIndToFrame} 
 \end{ex} 
-Thus the new non-parametric content derived for
+Thus the new parametric content derived for
 \textit{get\_a\_hot\_meal} will be \nexteg{}.
 \begin{ex} 
-$\ulcorner\lambda c$:\smallrecord{Rec} . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
+$\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . 
                  \record{\tfield{e}{get\_a\_hot\_meal\_frame($r$.x)}}$\urcorner\urcorner$
 \label{ex:contgetahotmealframe}  
 \end{ex}
@@ -4973,7 +4973,7 @@ r_2$:\smallrecord{
 
 \item[\textnormal{SemBe$_{\text{scalar}}$}] \mbox{}
 
-  $\ulcorner\lambda c$:\smallrecord{
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}\\
       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
