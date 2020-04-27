@@ -4,14 +4,40 @@
 
 
 
-     
+\section{Introduction}
+
+In this chapter we are going to explore how the TTR approach to
+semantics we have developed gives us a novel treatment of quantification and binding in
+natural language.
+
+In Section~\ref{sec:quantification} we are going to propose a revision of witness conditions for
+quantificational ptypes which will constitute what we will call a
+\textit{witness based} account of generalized quantifiers. % which will be inconsistent with some of what
+% we said before in the book about their witness conditions  --
+% eventually we need to go back and revise the previous discussion and
+% also the section on anaphora following this section.
+The motivation
+for this is in part to get a neater treatment of anaphora, and a more
+general treatment along the lines of \cite{LueckingGinzburg2019}.
    
+In Section~\ref{sec:binding-anaph} we will look at how the witness
+based approach to quantification interacts with binding and anaphoric
+phenomena.
+
+Finally, in Section~\ref{sec:qscope-underspec}, we will explore a way
+of treating underspecification in terms of types of content rather
+than the standard view of underspecification in terms of underspecified representations corresponding to sets of contents.
     
-    
 
+\section{Quantification}
+\label{sec:quantification}
 
+\subsection{Conservativity and dynamic generalized quantifiers}
 
-\section{Conservativity and dynamic generalized quantifiers}
+Here we review the treatment of quantifiers that we have presented so
+far and its relation to the notion of \textit{conservativity} which we
+will discuss here.  This property of conservativity facilitates the
+witness-based account of quantifiers that we will undertake below.
 
 In Chapter~\ref{ch:commonnouns}, example (\ref{ex:dynqconstr}), we
 introduced the notion of dynamic generalized quantifier and pointed
@@ -55,18 +81,19 @@ $\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$ is the set of
 individuals which have property $Q|_{\mathcal{F}(P.\mathrm{fg})}$ in
 $e$ and $Q|_{\mathcal{F}(P.\mathrm{fg})}$ is $Q$ with its
 domain restricted by $P$ (example~(\ref{ex:function-restriction}), p.~\pageref{ex:function-restriction}).  We spell this out for the type
-corresponding to \textit{every dog runs} in \nexteg{}.  Here, as
-before, we only represent the foregrounds of the properties which are
-arguments to the predicate `every' in order to make the presentation
-clearer.    
+corresponding to \textit{every dog runs} in \nexteg{}.  % Here, as
+% before, we only represent the foregrounds of the properties which are
+% arguments to the predicate `every' in order to make the presentation
+% clearer.
+
 \begin{ex} 
 \begin{subex} 
  
-\item dog$'$ = $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{dog($r$.x)}} 
+\item dog$'$ = $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{dog($r$.x)}}$\urcorner$ 
 
-run$'$ = $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{run($r$.x)}}
+run$'$ = $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+    . \smallrecord{\smalltfield{e}{run($r$.x)}}$\urcorner$
  
 \item $T$ = every(dog$'$, run$'$)
 
@@ -86,7 +113,7 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}\d{$\wedge$}\smallrecord{\smalltfi
 \> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
      . \smallrecord{\smallrfield{e}{$s$}{run($r$.x)}}
      ]\hspace*{2em}\begin{minipage}{.3\textwidth}(def. of property restriction,
-     Appendix~\ref{app:gramrulesuniv}, p.~\pageref{pg:property-restriction})\end{minipage}\\
+     Chapter~\ref{ch:gram}, p.~\pageref{pg:property-restriction})\end{minipage}\\
 \> iff \=$\{a\mid\exists r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   $\wedge
   r.\text{x}=a\wedge\down{\text{\smallrecord{\smalltfield{e}{dog($r$.x)}}}}\not=\emptyset\}$\\
@@ -110,15 +137,11 @@ s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$ \\
 \label{ex:witnessconds-edr}   
 \end{ex} 
   
-[We are now going to start a new version of witness conditions for
-quantificational ptypes which will be inconsistent with some of what
-we said before in the book about their witness conditions  --
-eventually we need to go back and revise the previous discussion and
-also the section on anaphora following this section.  The motivation
-for this is in part to get neater treatment of anaphora, and a more
-general treatment along the lines of Lücking and Ginzburg.]
+
 
 \subsection{A witness based account of generalized quantifiers}
+
+
 
 The classical view of quantifiers is based on the notion that noun
 phrases represent sets of sets or set of properties and the definition of a
@@ -170,7 +193,8 @@ the witness sets from an auxiliary notion derived from the meaning
 assigned to quantifiers to the central notion which characterizes the
 distinctions between the various quantifier meanings available, just
 as in type theory the notion of meaning is characterized in terms of
-the witness conditions for types.
+the witness conditions for types.  In doing this we will be going at
+least part way to meeting some of the requirements of the proposals by \cite{GinzburgPurver2008,LueckingGinzburg2019}.
 
 In the literature on generalized quantifiers \cite{Benthem1984}
 introduced the perspective that we should think of determiners as
@@ -250,7 +274,7 @@ quantification to a type-based approach where we can estimate the
 probability of a quantificational ptype being witnessed on the basis
 of our previous experience.  
     
-
+@@
 
 \subsection{Relating properties, types and sets}
 
@@ -1904,7 +1928,10 @@ $s$ :
 This, then yields a set up for COMPSET anaphora by providing the set
 in the `X'-field.
 
-\section{Long distance dependencies}\todo{Moved from
+\section{Binding and anaphora}
+\label{sec:binding-anaph}
+
+\subsection{Long distance dependencies}\todo{Moved from
   Ch~\ref{ch:quant}.  Is this the right place to put this?}
 \label{sec:long-distance}
 
@@ -2044,12 +2071,12 @@ r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
         
 
 
-\section{Anaphora}
+\subsection{Anaphora}
 \label{sec:anaph}
 
 
 
-\subsection{\textit{No girl thinks she failed}}
+\paragraph{\textit{No girl thinks she failed}}
 \label{sec:direct-binding}
 
 Given the strategy we suggested in Section~\ref{sec:unbound} for
@@ -2145,7 +2172,7 @@ of applying retrieval to \preveg{} is \nexteg{}.
                               \smalltfield{e}{girl(x$_1$)}} .  \textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_1$}{$r$.x$_1$}})})}$\urcorner$}}
 \end{ex} 
      
-\subsection{\textit{A man walked. He whistled.} }
+\paragraph{\textit{A man walked. He whistled.} }
 \label{sec:discourse-anaph}
 Given our strategy for defining the content of quantified sentences in
 terms of generalized quantifiers the content of \textit{a man walked}
@@ -2350,7 +2377,7 @@ addressed in Section~\ref{sec:struc-cntxt}.
 
   
 
-\subsection{\textit{no dog which chases a cat catches it}}
+\paragraph{\textit{no dog which chases a cat catches it}}
 \label{sec:donkey-anaph}
 [Background on donkey anaphora????]
 Our treatment of donkey anaphora will employ a similar technique to
@@ -2842,7 +2869,7 @@ own a donkey rather than farmer-donkey pairs.
 % and `scope' 
 
      
-\subsection{\textit{Sam likes him/himself}}
+\paragraph{\textit{Sam likes him/himself}}
 
 The parametric content for \textit{him} is given in \nexteg{}.
 
@@ -2955,6 +2982,7 @@ $P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}}
   
 \section{Quantifier scope and underspecification}\todo{Moved from
   beginning of chapter.  Needs rewriting.}
+\label{sec:qscope-underspec}
 
 Given the kind of interpretation rules we have so far we can obtain a
 reading for \nexteg{a} which corresponds to the kind of parametric
@@ -3664,7 +3692,9 @@ same incrementation.
 %[Grammar to be added.]
    
 
-\section{Compositional semantics and incremental processing}
+\section{Summary of resources introduced}
+
+\section{Conclusion}
 
 %%% Local Variables: 
 %%% mode: latex
