@@ -139,7 +139,7 @@ s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$ \\
   
 
 
-\subsection{A witness based account of generalized quantifiers}
+\subsection{Witness sets}
 
 
 
@@ -274,69 +274,67 @@ quantification to a type-based approach where we can estimate the
 probability of a quantificational ptype being witnessed on the basis
 of our previous experience.  
     
-@@
 
 \subsection{Relating properties, types and sets}
 
-[????In this section we revise the definition of properties.  We
-probably need to go back and revise previous definitions for
-consistency.]
+% [????In this section we revise the definition of properties.  We
+% probably need to go back and revise previous definitions for
+% consistency.]
 
-We first define a type of record types whose labels include a certain
-set of labels.  Let $L$ be a set of labels, then \textit{RecType}$_L$
-is a type.  $T$ : \textit{RecType}$_L$ iff $T$ : \textit{RecType} and
-$L\subseteq\text{labels}(T)$.  [????Check whether `labels' defined for
-record types -- it is defined for records.]
+% We first define a type of record types whose labels include a certain
+% set of labels.  Let $L$ be a set of labels, then \textit{RecType}$_L$
+% is a type.  $T$ : \textit{RecType}$_L$ iff $T$ : \textit{RecType} and
+% $L\subseteq\text{labels}(T)$.  [????Check whether `labels' defined for
+% record types -- it is defined for records.]
 
-Now we can define \textit{Ppty} to be the type in \nexteg{}.
-\begin{ex} 
-\record{\tfield{bg}{\textit{RecType}$_{\{x\}}$}\\
-        \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} 
-\end{ex} 
-A witness for this type,  a property, would be something like
-\nexteg{}, ``the property of being a dog''.
-\begin{ex} 
-\record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
-        \field{fg}{$\lambda
-          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}}} 
-\end{ex} 
-This is a cumbersome notation for a property so we abbreviate it as
-\nexteg{}.
-\begin{ex} 
-$\ulcorner\lambda
-          r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-          . \record{\tfield{e}{dog($r$.x)}}$\urcorner$ 
-\label{ex:ppty-dog}
-\end{ex}
-If $P$ is a property we will also use the notation $P(a)$ to represent $P.\text{fg}(a)$.
+% Now we can define \textit{Ppty} to be the type in \nexteg{}.
+% \begin{ex} 
+% \record{\tfield{bg}{\textit{RecType}$_{\{x\}}$}\\
+%         \tfield{fg}{(bg$\rightarrow$\textit{RecType})}} 
+% \end{ex} 
+% A witness for this type,  a property, would be something like
+% \nexteg{}, ``the property of being a dog''.
+% \begin{ex} 
+% \record{\field{bg}{\smallrecord{\smalltfield{x}{\textit{Ind}}}}\\
+%         \field{fg}{$\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}}} 
+% \end{ex} 
+% This is a cumbersome notation for a property so we abbreviate it as
+% \nexteg{}.
+% \begin{ex} 
+% $\ulcorner\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%           . \record{\tfield{e}{dog($r$.x)}}$\urcorner$ 
+% \label{ex:ppty-dog}
+% \end{ex}
+% If $P$ is a property we will also use the notation $P(a)$ to represent $P.\text{fg}(a)$.
  
-\preveg{} is a property of individuals  and we will have a subtype of
-\textit{Ppty}, \textit{Ppty}(\textit{Ind}), to represent this more
-specific type of property. In general we give the definition in
-\nexteg{}.
-\begin{ex} 
-\begin{subex} 
+% \preveg{} is a property of individuals  and we will have a subtype of
+% \textit{Ppty}, \textit{Ppty}(\textit{Ind}), to represent this more
+% specific type of property. In general we give the definition in
+% \nexteg{}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item if $T$ is a type, then
-\textit{Ppty}($T$) is a type 
+% \item if $T$ is a type, then
+% \textit{Ppty}($T$) is a type 
  
-\item $P$ : \textit{Ppty}($T$) iff
-$P$ : \textit{Ppty} and $P$.bg$^{\text{x}}$ is
-\smallrecord{\smalltfield{x}{$T$}} 
+% \item $P$ : \textit{Ppty}($T$) iff
+% $P$ : \textit{Ppty} and $P$.bg$^{\text{x}}$ is
+% \smallrecord{\smalltfield{x}{$T$}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-Here we use $P$.bg$^{\text{x}}$
-to represent the generalization of $P$.bg to its `x'-field as
-characterized in Appendix~\ref{app:gen-rectypes}, that is the type
-whose only field is the `x'-field of $P$.bg. 
+% \end{ex} 
+% Here we use $P$.bg$^{\text{x}}$
+% to represent the generalization of $P$.bg to its `x'-field as
+% characterized in Appendix~\ref{app:gen-rectypes}, that is the type
+% whose only field is the `x'-field of $P$.bg. 
 
-A property, $P$, can be \textit{pure}, as in (\ref{ex:ppty-dog}), that is,
-$P$.bg has exactly one field, the required `x'-field;  or they can be
-restricted by including additional fields in the background.  For
-example, in \nexteg{a} we have the pure property of being an
-individual that barks and in \nexteg{b} we have a restricted property
+A property, $P$, can be \textit{pure}, as in \nexteg{a}, that is,
+$P$.bg has exactly one field, the required `x'-field;  or it can be
+restricted by including additional fields in the background as in
+\nexteg{b}, the restricted property
 of being an individual which is a dog that barks.
 \begin{ex} 
 \begin{subex} 
@@ -352,11 +350,11 @@ of being an individual which is a dog that barks.
 \end{subex} 
    
 \end{ex} 
-Note that \preveg{b} is still of type \textit{Ppty}(\textit{Ind})
-according to our definition above.
+% Note that \preveg{b} is still of type \textit{Ppty}(\textit{Ind})
+% according to our definition above.
 
 
-This ability to restrict properties will be important for analyzing
+The ability to restrict properties will be important for analyzing
 dynamic quantification where information from the first argument of
 the quantifier relation is passed to the second argument of the
 quantifier relation and this is what enables the treatment of donkey
@@ -405,7 +403,39 @@ property of farmers who own a donkey into the property \preveg{b}, a
 property of individuals.  The restriction in \preveg{a} has been
 lowered into the body of the property and labelled with
 `$\mathfrak{c}$', intuitively a local context in the type returned by
-the function.  We denote the purification operation by $\mathfrak{P}$
+the function.
+
+We first define an operation which will generalize a type to the type
+containing one of its non-dependent fields.  This is just one way of
+many to operate on a type to make it more general.  Consider \nexteg{}.
+\begin{ex}
+\record{\tfield{x}{\textit{Ind}}\\
+        \tfield{e}{dog(x)}}
+\end{ex}
+We can pick out the `x'-field which is not dependent, unlike the
+`e'-field. The result is \nexteg{}
+\begin{ex}
+\record{\tfield{x}{\textit{Ind}}}
+\end{ex}
+In general for a record type,  $T$, we will represent the generalization
+of $T$ to its non-dependent $\ell$-field as $T^\ell$.
+\begin{shaded}
+The general
+definition of this is \nexteg{}, repeated in Appendix~\ref{app:gen-rectypes}.
+\begin{ex}
+If $T$ : \textit{RecType}, $\ell\in\text{labels}(T)$ and
+$\langle\ell,T'\rangle\in T$ where $T'$: \textit{Type} (that is,
+$[\ell,T']$ is a non-dependent field in $T$), then \textit{the
+  generalization of $T$ to its $\ell$-field}, $T^\ell$, is
+\begin{quote}
+\record{\tfield{$\ell$}{$T'$}}
+\end{quote}
+\label{ex:gen-to-ell}
+\end{ex}
+\end{shaded}
+
+
+We denote the purification operation on properties by $\mathfrak{P}$
 and define it as in \nexteg{}.
 \begin{ex} 
 If $P$ : \textit{Ppty}, then
@@ -429,11 +459,7 @@ $T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)
 As an example let us apply $\mathfrak{P}$ to (\ref{ex:pure-eg}a).  The
 result will be \nexteg{}
 \begin{ex} 
-$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                               \smalltfield{c$_1$}{farmer(x)}\\
-                               \smalltfield{y}{\textit{Ind}}\\
-                               \smalltfield{c$_2$}{donkey(y)}\\
-                               \smalltfield{e}{own(x, y)}}$^x$ . 
+$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
 \record{\tfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                                \smalltfield{c$_1$}{farmer(x)}\\
                                \smalltfield{y}{\textit{Ind}}\\
@@ -448,25 +474,25 @@ $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                              . \record{\tfield{e}{like($r$.x, $r$.y)}}$\urcorner$($\mathfrak{c}$)}}$\urcorner$
 \label{ex:pure-eg1}
 \end{ex} 
-Following the definition of generalization of a type to a particular
-field in Appendix~\ref{app:gen-rectypes}, \nexteg{a} represents
-\nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% Following the definition of generalization of a type to a particular
+% field in Appendix~\ref{app:gen-rectypes}, \nexteg{a} represents
+% \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item \smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                               \smalltfield{c$_1$}{farmer(x)}\\
-                               \smalltfield{y}{\textit{Ind}}\\
-                               \smalltfield{c$_2$}{donkey(y)}\\
-                               \smalltfield{e}{own(x, y)}}$^x$ 
+% \item \smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                \smalltfield{c$_1$}{farmer(x)}\\
+%                                \smalltfield{y}{\textit{Ind}}\\
+%                                \smalltfield{c$_2$}{donkey(y)}\\
+%                                \smalltfield{e}{own(x, y)}}$^x$ 
  
-\item \smallrecord{\smalltfield{x}{\textit{Ind}}} 
+% \item \smallrecord{\smalltfield{x}{\textit{Ind}}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
 According to the definition of the specification of a record type by a
-record given in Appendix~\ref{app:specrec}, \nexteg{a} represents
+record, \nexteg{a} represents
 \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
@@ -548,7 +574,7 @@ introduce it as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item If $T$ is a type and $X:\{T\}$, then $\mathfrak{T}(X)$ is a type 
+\item If $T$ is a type and $X:\mathrm{set}(T)$, then $\mathfrak{T}(X)$ is a type 
  
 \item $a:\mathfrak{T}(X)$ iff $a\in X$ 
  
@@ -593,7 +619,7 @@ We now have two ways of expressing this as shown in \nexteg{}.
  
 \item $X\subseteq\downP{P}$
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \end{subex} 
    
@@ -619,7 +645,7 @@ The witness condition for `exist$^{\text{w}}$($P$)' is given in
 $X:\text{exist}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|=1$ 
  
@@ -637,7 +663,7 @@ to the quantifier relation `exist$_{\text{pl}}$'.  The witness condition for `ex
 $X:\text{exist}_{\text{pl}}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|\geq 2$ 
  
@@ -650,7 +676,7 @@ Correspondingly we can define the witness condition for `no$^{\text{w}}$($P$)' i
 $X:\text{no}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|=0$ 
  
@@ -668,13 +694,13 @@ The witness condition for `every$^{\text{w}}$($P$)' is given in
 $X:\text{every}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|=|\down{\mathfrak{T}(P)}|$ 
  
 \end{enumerate}  
 \end{ex} 
-Note that \preveg{} requires $X$ to be identical with $\down{\mathfrak{T}{P}}$ and
+Note that \preveg{} requires $X$ to be identical with $\down{\mathfrak{T}(P)}$ and
 we could, of course, express the witness condition more succinctly as
 \nexteg{} if we are not concerned about demonstrating that the witness
 conditions for the types witness sets for all quantifiers follow the
@@ -733,7 +759,7 @@ The witness condition for `most$^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{most}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$ 
  
@@ -756,7 +782,7 @@ condition for `many$_a^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{many}_a^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|\geq\theta_{\text{many}_a}(P)$ 
  
@@ -768,7 +794,7 @@ The witness condition for `many$_p^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{many}_p^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$ 
  
@@ -784,7 +810,7 @@ condition for `few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{few}_a^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|\leq\theta_{\text{few}_a}(P)$ 
  
@@ -796,7 +822,7 @@ The witness condition for `few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{few}_p^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$ 
  
@@ -812,7 +838,7 @@ condition for `a\_few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{a\_few}_a^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|\geq\theta_{\text{few}_a}(P)$ 
  
@@ -824,7 +850,7 @@ The witness condition for `a\_few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{a\_few}_p^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$ 
  
@@ -836,7 +862,7 @@ $X:\text{a\_few}_p^{\text{w}}(P)$ iff
 In general our strategy for relating witness sets to probabilities
 will involve two conditions, the first of which is the same as we had
 in the previous section, that is that the witness set, $X$, is a set
-of objects which have the property, $P$, i.e. $X:\mathfrak{T}(P)$.
+of objects which have the property, $P$, i.e. $X:\mathrm{set}(\mathfrak{T}(P))$.
 The second condition, however, will place a constraint on the value of
 a conditional probability which we will represent as
 $p(\mathfrak{T}(X)\|\mathfrak{T}(P))$, that its, the probability for
@@ -845,7 +871,7 @@ of type $\mathfrak{T}(P)$.\footnote{We contrast this with
   $p(\mathfrak{T}(X)|\mathfrak{T}(P)$, the probability that there is
   something of type $\mathfrak{T}(X)$, given that there is something
   of type $\mathfrak{T}(P)$. See \cite{CooperDobnikLappinLarsson2014a}
-  and ???? for discussion.}  Here we will take a
+  for discussion.}  Here we will take a
 frequentist view of this probability and define it according the
 equation in \nexteg{}.
 \begin{ex} 
@@ -908,7 +934,7 @@ looking around the stadium but not exactly counting the number of
 people in the stadium and the number of those wearing the scarf.  This
 seems to point to the related proposals based on Austinian
 propositions involving Bayesian reasoning about probability which are
-suggested in \cite{CooperDobnikLappinLarsson2014a} and ????.  An
+suggested in \cite{CooperDobnikLappinLarsson2014a}.  An
 important difference between what we are doing here and what we did in
 the earlier work is that here we assume that the Austinian
 propositions in $\mathfrak{J}$ are categorical rather than
@@ -933,7 +959,7 @@ The witness condition for `exist$^{\text{w}}$($P$)' is given in
 $X:\text{exist}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
   $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=\frac{1}{|\down{\mathfrak{T}(P)}|}$
@@ -956,7 +982,7 @@ The witness condition for `exist$_{\text{pl}}^{\text{w}}$($P$)' is given in
 $X:\text{exist}_{\text{pl}}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
   $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{2}{|\down{\mathfrak{T}(P)}|}$
@@ -975,7 +1001,7 @@ The witness condition for `no$^{\text{w}}$($P$)' is given in
 $X:\text{no}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=0$ (corresponds to $|X|=0$) 
  
@@ -992,12 +1018,15 @@ The witness condition for `every$^{\text{w}}$($P$)' is given in
 $X:\text{every}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=1$ (corresponds to $|X|=|\down{\mathfrak{T}(P)}|$) 
  
 \end{enumerate}  
 \end{ex}
+
+@@
+
 Again the probabilistic and non-probabilistic conditions are
 equivalent given the frequentist interpretation of probability.
 However, here there is some point to the probability for semantic

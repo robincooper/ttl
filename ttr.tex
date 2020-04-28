@@ -3268,25 +3268,25 @@ singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
 \section{Generalizing record types}
 \label{app:gen-rectypes}
 
-One way to make a record type more general is to pick out one of its
-non-dependent fields.  Consider 
-\begin{quote}
-\record{\tfield{x}{\textit{Ind}}\\
-        \tfield{e}{dog(x)}}
-\end{quote}
-We can pick out the `x'-field which is not dependent, unlike the
-`e'-field. The result is
-\begin{quote}
-\record{\tfield{x}{\textit{Ind}}}
-\end{quote}
-In general for a record type,  $T$, we will represent the generalization
-of $T$ to its non-dependent $\ell$-field as $T^\ell$.  The general
-definition of this is:
+% One way to make a record type more general is to pick out one of its
+% non-dependent fields.  Consider 
+% \begin{quote}
+% \record{\tfield{x}{\textit{Ind}}\\
+%         \tfield{e}{dog(x)}}
+% \end{quote}
+% We can pick out the `x'-field which is not dependent, unlike the
+% `e'-field. The result is
+% \begin{quote}
+% \record{\tfield{x}{\textit{Ind}}}
+% \end{quote}
+% In general for a record type,  $T$, we will represent the generalization
+% of $T$ to its non-dependent $\ell$-field as $T^\ell$.  The general
+% definition of this is:
 \begin{quote}
 If $T$ : \textit{RecType}, $\ell\in\text{labels}(T)$ and
 $\langle\ell,T'\rangle\in T$ where $T'$: \textit{Type} (that is,
 $[\ell,T']$ is a non-dependent field in $T$), then \textit{the
-  generalization of $T$ to its $\ell$-field}, $T^\ell$, is
+  generalization of $T$ to its $\ell$-field} (Chapter~\ref{ch:quant}, p.~\pageref{ex:gen-to-ell}, $T^\ell$, is
 \begin{quote}
 \record{\tfield{$\ell$}{$T'$}}
 \end{quote}
