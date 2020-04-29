@@ -1025,7 +1025,7 @@ $X:\text{every}^{\text{w}}(P)$ iff
 \end{enumerate}  
 \end{ex}
 
-@@
+
 
 Again the probabilistic and non-probabilistic conditions are
 equivalent given the frequentist interpretation of probability.
@@ -1043,7 +1043,7 @@ An utterance of \preveg{} is naturally interpreted to be quantifying
 over dogs in general, or at least those which are physically capable
 of barking.  I have no practical way of determining the truth or
 falsity of this
-sentence, though I can make an estimate on the basis my observations
+sentence, though I can make an estimate on the basis of my observations
 of dogs in pre-walk situations.  If all relevant observations of dogs
 involved the dog barking, then I can estimate that the sentence is
 true.  Of course, if I have only observed
@@ -1127,7 +1127,7 @@ A similar discussion holds for \textit{most}. The witness condition for `most$^{
 $X:\text{most}^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{most}}(P)$ (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$) 
  
@@ -1151,7 +1151,7 @@ $\frac{|\down{\mathfrak{T}(X)\wedge\mathfrak{T}(P)}|}{|\down{\mathfrak{T}(P)}|}=
 \item
   $|\down{\mathfrak{T}(X)\wedge\mathfrak{T}(P)}|=|\down{\mathfrak{T}(X)}|$
     since $\down{\mathfrak{T}(X)}\subseteq\down{\mathfrak{T}(P)}$
-    (since $X:\{\mathfrak{T}(P)\}$)
+    (since $X:\mathrm{set}(\mathfrak{T}(P))$)
  
 \end{subex} 
    
@@ -1167,7 +1167,7 @@ condition for `many$_a^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{many}_a^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P)$ 
  
 \item
 $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{many}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
@@ -1184,7 +1184,7 @@ The witness condition for `many$_p^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{many}_p^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
   $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq\theta_{\text{many}_p}(P)$ (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$) 
@@ -1203,7 +1203,7 @@ condition for `few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{few}_a^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
   $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
@@ -1218,7 +1218,7 @@ The witness condition for `few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{few}_p^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\leq\theta_{\text{few}_p}(P)$
   (corresponds to $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$) 
@@ -1232,7 +1232,7 @@ condition for `a\_few$_a^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{a\_few}_a^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
   (corresponds to $|X|\geq\theta_{\text{few}_a}(P)$) 
@@ -1246,7 +1246,7 @@ The witness condition for `a\_few$_p^{\text{w}}$($P$)' is given in \nexteg{}.
 $X:\text{a\_few}_p^{\text{w}}(P)$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq\theta_{\text{few}_p}(P)$
   (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$) 
@@ -1416,8 +1416,9 @@ relationship between the two corresponds to the equivalence between
    
 \end{ex} 
 In order to do this we will use the notion of negation given  in
-\cite{CooperGinzburg2011,CooperGinzburg2012}.  [We should probably
-introduce negation somewhere else independently! ????] First we say that two
+\cite{CooperGinzburg2011,CooperGinzburg2012}.  % [We should probably
+% introduce negation somewhere else independently! ????]
+First we say that two
 types, $T_1$ and $T_2$ \textit{preclude each other}, $T_1\bot T_2$, just in case there is no
 possibility in which $\down{T_1}$ and $\down{T_2}$ overlap.  That is,
 nothing can be of both types.  We then introduce negated types as in
@@ -1450,9 +1451,11 @@ No dog barked.  They were all busy gnawing on a bone.
 Clearly, \textit{they} does not refer to the witness set of type
 `no$^w$(dog$'$)', which would have to be the empty set, but rather to
 a witness set of type `every$^w$(dog$'$)', the set of all dogs.  This
-is an instance of \textit{complement set anaphora}, first discussed by
+is an instance of \textit{complement set anaphora}, first discussed in
+the psychology literature by
 \cite{MoxeySanford1987,SanfordMoxey1993} and discussed in the
-semantics literature by [Nouwen, Kibble,...????].
+semantics literature by
+\cite{Kibble1997,Nouwen2003,LueckingGinzburg2019} among others.
 
 The general witness condition for `every($P$,$Q$)' is given in
 \nexteg{}.
@@ -1493,9 +1496,8 @@ field which introduces the property `dog' in the sign corresponding to
 \textit{most dogs} in the manner suggested in
 Chapter~\ref{ch:gram}. Alternatively, it might be considered as
 motivation for an additional field corresponding to $P$ in the witness
-for `most($P$,$Q$)'.  We will leave this issue unresolved at this
-point. [????]  It seems clear, though, as has been pointed out in the
-literature (Nouwen [????]), that COMPSET anaphora is not possible with
+for `most($P$,$Q$)'.  We will leave this issue unresolved.   It seems clear, though, as has been pointed out in the
+literature \citep{Nouwen2003}, that COMPSET anaphora is not possible with
 \textit{most}.  That is, \textit{they} in \nexteg{} cannot refer to
 dogs which do not bark when somebody unknown comes into their
 territory.
@@ -1725,7 +1727,7 @@ where \textit{they} cannot refer to the dogs that did not bark.
 \#A few dogs barked.  They hadn't heard the intruder 
 \end{ex} 
      
-             
+@@            
 
 \subsection{Some examples}
 
