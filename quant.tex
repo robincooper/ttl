@@ -1727,7 +1727,7 @@ where \textit{they} cannot refer to the dogs that did not bark.
 \#A few dogs barked.  They hadn't heard the intruder 
 \end{ex} 
      
-@@            
+            
 
 \subsection{Some examples}
 
@@ -1736,21 +1736,49 @@ used to express content for English utterances, ignoring for the
 moment the parametric properties using in Chapter~\ref{ch:commonnouns}
 and expressing the content of a quantified declarative sentence as a
 quantificational ptype rather than a record type containing a
-quantificational ptype as in Chapter~\ref{ch:gram} and subsequent chapters.
+quantificational ptype as in Chapter~\ref{ch:gram} and subsequent
+chapters.
+
+@@
+
+\todo{Move restrictions on second argument of quantifiers from witness
+  conditions to semantics in previous treatments so that it works as
+  in the following.  Otherwise donkey binding is difficult...}
 
 \paragraph{\textit{A dog barks}}
 The content of the indefinite article, \textit{a(n)}, is given in
-\nexteg{}.
+\nexteg{}. This is `SemIndefArt'
 \begin{ex} 
-$\lambda Q$:\textit{Ppty} . $\lambda P$:\textit{Ppty} . exist($Q$,$P|_{\mathcal{F}(Q)}$) 
+% $\lambda Q$:\textit{Ppty} . $\lambda P$:\textit{Ppty}
+% . exist($Q$,$P|_{\mathcal{F}(Q)}$)
+$\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$  
+
 \end{ex} 
 The content of \textit{a dog} would then be as in \nexteg{}.
 \begin{ex} 
-$\lambda P$:\textit{Ppty}. exist(dog$'$,$P|_{\mathcal{F}(\text{dog}')}$) 
+%$\lambda
+%P$:\textit{Ppty}. exist(dog$'$,$P|_{\mathcal{F}(\text{dog}')}$)
+$\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{1em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{2em}\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$  
 \end{ex} 
 Finally, the content of \textit{a dog barks} would be as in \nexteg{}.
 \begin{ex} 
-exist(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+  % exist(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$)
+  $\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$
 \end{ex} 
 Following the particular witness condition for `exist($P$,$Q$)' in
 (\ref{ex:existPQ-part}) we can infer \nexteg{}.
