@@ -2252,8 +2252,8 @@ that is,
    
 \end{ex} 
   
-We can then define dynamic versions of the constraints on
-the quantifier predicates and their witness conditions as in \nexteg{}.  % Note that in \preveg{} if
+We can then define dynamic versions of the contents of quantifier
+determiners as in \nexteg{}.  % Note that in \preveg{} if
 % a label $\ell$ is in $T$ then it will also be a label in $P|_T$.bg.
 % Thus in \nexteg{b,d} we only need to choose a label in the background
 % of the first argument to the quantifier.
@@ -2278,19 +2278,58 @@ the quantifier predicates and their witness conditions as in \nexteg{}.  % Note 
 % % \hspace*{1em}$\down{\mathrm{every}(P,Q)}\not=\emptyset$ if
 % %   $\downPl{P}{\ell}\subseteq\downPl{Q|_{\mathcal{F}(P.\mathrm{fg})}}{\ell}$ 
 
-\item If $P,Q$:\textit{Ppty} then
+% \item If $P,Q$:\textit{Ppty} then
 
-\hspace*{1em} $s$ : exist($P$,$Q$) iff
-$\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+% \hspace*{1em} $s$ : exist($P$,$Q$) iff
+% $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
 
-\item If $P,Q$:\textit{Ppty} then
+% \item If $P,Q$:\textit{Ppty} then
 
-\hspace*{1em} $s$ : every($P$,$Q$) iff $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
-\label{subex:dynqconstr-every}  
+% \hspace*{1em} $s$ : every($P$,$Q$) iff $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
+% \label{subex:dynqconstr-every}
+
+  
+\item SemIndefArt ---
+
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\test{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$
+
+  
+\item SemUniversal ---
+
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$
+
+  
+\item SemDefArt ---
+
+  $\lambda Q$:\textit{Ppty} . \\
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{e}{unique($Q$)}}}} . \\
+  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  \hspace*{3em}\record{
+    \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}$\urcorner$
+
  
 \end{subex} 
 \label{ex:dynqconstr}   
-\end{ex} 
+\end{ex}
+
+@@
+
 The original motivation for treating generalized quantifiers
 dynamically was to be able to treat the kind of ``donkey-anaphora''
 binding that occurs in sentences like \textit{every farmer who owns a
@@ -4807,7 +4846,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
 
         
@@ -4830,7 +4869,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$
 
   
@@ -4861,7 +4900,7 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$
 
         
