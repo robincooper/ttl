@@ -2296,19 +2296,11 @@ determiners as in \nexteg{}.  % Note that in \preveg{} if
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P|_{\mathfrak{F}(\test{restr})}$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
 
   
-\item SemUniversal ---
 
-  $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
-  \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
-  \hspace*{3em}\record{
-    \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
-    \tfield{e}{every(restr, scope)}}$\urcorner$
 
   
 \item SemDefArt ---
@@ -2328,7 +2320,7 @@ determiners as in \nexteg{}.  % Note that in \preveg{} if
 \label{ex:dynqconstr}   
 \end{ex}
 
-@@
+
 
 The original motivation for treating generalized quantifiers
 dynamically was to be able to treat the kind of ``donkey-anaphora''
@@ -3548,12 +3540,20 @@ define SemUniversal on the model of SemIndefArt.\footnote{We leave to one side t
 % \smallrecord{\smallmfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
 %              \smallmfield{scope}{$P$}{\textit{Ppty}}\\
 %              \smalltfield{e}{every(restr, scope)}}}}
+  % $\lambda Q$:\textit{Ppty} . \\
+  % \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+  % \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+  % \hspace*{3em}\record{
+  %   \mfield{restr}{$Q$}{\textit{Ppty}}\\
+  %   \mfield{scope}{$P$}{\textit{Ppty}}\\
+  %   \tfield{e}{every(restr, scope)}}$\urcorner$
+
   $\lambda Q$:\textit{Ppty} . \\
   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$
 \end{ex} 
    
@@ -3568,7 +3568,7 @@ $\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{1em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{2em}\record{
     \mfield{restr}{$\ulcorner\lambda                                    r$:\smallrecord{\smalltfield{x}{\textit{PassengerFrame}}} . passenger\_frame($r$.x)$\urcorner$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$  
 % $\lambda P$:\textit{Ppty} . 
 % \smallrecord{\smallmfield{restr}{\smallrecord{\field{bg}{\textit{PassengerFrame}}\\
@@ -4106,7 +4106,7 @@ for these predicates we use a predicate `card'
 (the natural numbers together with the transfinite cardinals,
 $\aleph_0, \aleph_1, \ldots$).  A set, $X$, is of type `card($n$)' if
 its cardinality is $n$. Similarly we introduce predicates
-`card\_at\_least' and `car\_at\_most'
+`card\_at\_least' and `card\_at\_most'
 The relevant witness conditions are spelt out in \nexteg{}.
 \begin{ex}
   \begin{subex} 
@@ -4129,10 +4129,10 @@ predicates in \nexteg{}.
 \begin{ex}
   \begin{subex} 
  
-  \item $s$ : exactly\_$n$($P$, $Q$) iff
-          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
-        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
-      \not=\emptyset$
+  \item $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
+          % $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+      % \not=\emptyset$
  
 \item $s$ : at\_least\_$n$($P$, $Q$) iff
           $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
@@ -4162,18 +4162,21 @@ Let us take these definitions through our example \textit{2000
 content of this sentence is given in \nexteg{}.
 \begin{ex}
   \begin{tabbing}
-exactly\_2000(\=$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}}
+at\_least\_2000(\=$\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}}
                                       . \smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}$\urcorner$,\\ 
 \>$\ulcorner\lambda
-r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}} . 
+r$:\smallrecord{
+  \smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+\smalltfield{e}{passenger\_frame\_pl(x)}} . 
 \smallrecord{\smalltfield{e}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}$\urcorner$)
 \end{tabbing}
 \label{ex:2kpassgahm}
 \end{ex} 
-The first argument to `exactly\_2000' is the pluralized version
-of the property in the restriction field in (\ref{ex:conteverypassenger}). The
-second argument is a pluralized version of the property in
-(\ref{ex:contgetahotmealframe}). % \preveg{} makes use of a
+% The first argument to `at\_least\_2000' is the pluralized version
+% of the property in the restriction field in (\ref{ex:conteverypassenger}). The
+% second argument is a pluralized version of the property in
+% (\ref{ex:contgetahotmealframe}).
+% \preveg{} makes use of a
 % pluralization operation, `\_pl' on predicates which can be introduced
 % as in \nexteg{}.
 % \begin{ex} 
@@ -4189,7 +4192,11 @@ Let us instantiate (\ref{ex:cardconstr}) bit by bit with
 (\ref{ex:2kpassgahm}), assuming that the situation we are
 checking is $s$.  We first compute the fixed point type of the
 foreground of the first argument.  That is, \nexteg{a} which is
-identical to \nexteg{b}.
+identical to \nexteg{b}.\todo{Should there be a restriction to $s$ in
+  the first argument here?}
+
+@@
+
 \begin{ex} 
 \begin{subex} 
  
