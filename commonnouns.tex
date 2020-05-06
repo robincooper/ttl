@@ -1958,7 +1958,14 @@ chose the option corresponding to (\ref{ex:threethes}c), which offers
 some vague hope of being able to draw a parallel with plural
 definites.  Note that choosing (\ref{ex:threethes}b) or
 (\ref{ex:threethes}c) eliminates the need for the predicate `the'.
-Here we will choose \preveg{c}.
+Here we will choose \preveg{c}.  This assumes that we have a predicate
+`every' with arity $\langle\textit{Ppty},\textit{Ppty}\rangle$ with
+the witness condition \nexteg{}.
+\begin{ex} 
+ $s$ : every($P$,$Q$) iff
+    $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
+\end{ex} 
+  
 
 From the perspective of compositional semantics it is important that
 the common noun \textit{dog} in these examples plays a role twice in
@@ -4135,13 +4142,13 @@ predicates in \nexteg{}.
       % \not=\emptyset$
  
 \item $s$ : at\_least\_$n$($P$, $Q$) iff
-          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
         \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
       \not=\emptyset$
 
       
     \item $s$ : at\_most\_$n$($P$, $Q$) iff
-          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
         \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
       
  
@@ -4188,14 +4195,11 @@ r$:\smallrecord{
 % \begin{ex} 
 % $\down{p\mathrm{\_pl}(A)}\not=\emptyset$ iff $a\in A$ implies $\down{p(a)}\not=\emptyset$ 
 % \end{ex} 
-Let us instantiate (\ref{ex:cardconstr}) bit by bit with
+Let us instantiate (\ref{ex:cardconstr}b) bit by bit with
 (\ref{ex:2kpassgahm}), assuming that the situation we are
 checking is $s$.  We first compute the fixed point type of the
 foreground of the first argument.  That is, \nexteg{a} which is
-identical to \nexteg{b}.\todo{Should there be a restriction to $s$ in
-  the first argument here?}
-
-@@
+identical to \nexteg{b}.
 
 \begin{ex} 
 \begin{subex} 
@@ -4203,11 +4207,11 @@ identical to \nexteg{b}.\todo{Should there be a restriction to $s$ in
 \item $\mathcal{F}$($\lambda
                                       r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}})
                                       . \\
-\hspace*{5em}\smallrecord{\smallrfield{e}{$s$}{passenger\_frame\_pl($r$.x)}}) 
+\hspace*{5em}\smallrecord{\smalltfield{e}{passenger\_frame\_pl($r$.x)}}) 
  
 \item
   \record{\tfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
-          \rfield{e}{$s$}{passenger\_frame\_pl(x)}} 
+          \tfield{e}{passenger\_frame\_pl(x)}} 
  
 \end{subex} 
    
@@ -4215,42 +4219,52 @@ identical to \nexteg{b}.\todo{Should there be a restriction to $s$ in
 
 
 
-Then we compute the result of restricting the second argument to the
-quantifier predicate by \preveg{b}.  This is given in \nexteg{a} which
-is identical to \nexteg{b}.
+Then we compute the result of restricting the second argument to $s$,
+that is,  $Q\!\restriction\!s$.  This is given in \nexteg{}.
 \begin{ex} 
-\begin{subex} 
- 
-\item  ($\lambda
-               r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}} . 
-                 \smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}})
-                 $\!\mid_{\text{\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
-          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)}}}}$
- 
-\item $\lambda
+$\lambda
                r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
-          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)}} . \\
+          \smalltfield{e}{passenger\_frame\_pl(x)}} . \\
 \hspace*{5em}                 \smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}} 
- 
-\end{subex} 
    
 \end{ex} 
-We then compute the fixed point type of \preveg{b}, given in
-\nexteg{a} which is identical with \nexteg{b}.
+We then compute the fixed point type of \preveg{}, given in
+\nexteg{a} which is identical with \nexteg{b} and equivalent to \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
 \item $\mathcal{F}$($\lambda
                r$:\smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
-          \smallrfield{e}{$s$}{passenger\_frame\_pl(x)}} . \\
-\hspace*{5em}                 \smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}}) 
+          \smalltfield{e}{passenger\_frame\_pl(x)}} . \\
+\hspace*{5em}
+\smallrecord{\smallrfield{e}{$s$}{get\_a\_hot\_meal\_frame\_pl($r$.x)}})
+
+\item \smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
+          \smalltfield{e}{passenger\_frame\_pl(x)$\wedge$(get\_a\_hot\_meal\_frame\_pl(x)$\!\restriction\!s$)}}
  
 \item  \smallrecord{\smalltfield{x}{$\mathrm{plurality}(\textit{Rec})$}\\
           \smallrfield{e}{$s$}{passenger\_frame\_pl(x)$\wedge$get\_a\_hot\_meal\_frame\_pl(x)}}
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+\begin{shaded}
+  In order to understand why \preveg{b} and \preveg{c} are equivalent
+  we need to consider that the equivalences in \nexteg{} hold for any
+  type system, $\mathbb{T}$.
+  \begin{ex} 
+$T_1\wedge(T_2\!\restriction\!s)\approx_{\mathbb{T}}(T_1\wedge
+T_2)\!\restriction\!s\approx_{\mathbb{T}}(T_1\!\restriction\!s)\wedge T_2$ 
+\end{ex}
+In addition we have the distribution equivalence of restriction as in
+\nexteg{}.
+\begin{ex} 
+$(T_1\wedge T_2)\!\restriction\!s\approx_{\mathbb{T}}(T_1\!\restriction\!s)\wedge(T_2\!\restriction\!s)$ 
+\end{ex}
+These equivalences follow trivially from the witness condition for
+restricted types.
+\end{shaded}  
+  
 The final step specified in (\ref{ex:cardconstr}) involves merging
 \preveg{b} with \nexteg{a}, that is, \nexteg{b} which is identical
 with \nexteg{c}.
@@ -4593,38 +4607,56 @@ r$:\textit{LocRiseEventCntxt} .\\
 
   \begin{description}
     
-  \item[\textnormal{exist} Revised!] --- % $e$ : exist($P$,$Q$) iff
-    % $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
-    $s$ : exist($P$,$Q$) iff
-    $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+  \item[\textnormal{exist}] ---  $s$ : exist($P$,$Q$) iff
+     $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
+    % $s$ : exist($P$,$Q$) iff
+    % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
     
   \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff
-    $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
+    $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
 
+  \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{PlPpty},\textit{PlPpty}\rangle$}] \mbox{}
+  
+\begin{description}
     
-  \item[\textnormal{exactly\_$n$} New!] --- for $n$ a natural number,
+\item[\textnormal{exactly\_$n$} New!] --- for $n$ a natural number,
 
-    $s$ : exactly\_$n$($P$, $Q$) iff
-          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
-        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
-      \not=\emptyset$
+  $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
+
+    % $s$ : exactly\_$n$($P$, $Q$) iff
+    %       $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+    %     \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+    %   \not=\emptyset$
 
       
     \item[\textnormal{at\_least\_$n$} New!] --- for $n$ a natural
       number,
 
       $s$ : at\_least\_$n$($P$, $Q$) iff
-          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
         \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
       \not=\emptyset$
+
+      % $s$ : at\_least\_$n$($P$, $Q$) iff
+      %     $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+      % \not=\emptyset$
 
       
     \item[\textnormal{at\_most\_$n$} New!] --- for $n$ a natural
       number,
 
       $s$ : at\_most\_$n$($P$, $Q$) iff
-          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
         \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+      % $s$ : at\_most\_$n$($P$, $Q$) iff
+      %     $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
 
   \end{description}
 \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
