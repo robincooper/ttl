@@ -2,9 +2,6 @@
 \label{ch:intensional}
 \setcounter{equation}{0}
 
-@@
-\todo{Need to update summary with changes from Ch. 5}
-
 
 \section{Possible worlds, modality and intensionality}
 \label{sec:possworlds}
@@ -4454,7 +4451,7 @@ Chapter~\ref{ch:commonnouns} are marked ``\textbf{Revised!}''.  % We have
 % included some items for completeness which were not explicitly
 % introduced in the text.
 
-\subsection{Universal grammar resources} (as in Chapter~\ref{ch:commonnouns})
+\subsection{Universal grammar resources} 
 
 \subsubsection{Types} 
 
@@ -4725,47 +4722,65 @@ r$:\textit{LocRiseEventCntxt} .\\
       $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$
 
     \end{description}
-    
 
-  
-\item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+    \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
 
   \begin{description}
     
-  \item[\textnormal{exist}] --- % $e$ : exist($P$,$Q$) iff
-    % $\downP{P}\cap\downP{Q\!\restriction\! e}\not=\emptyset$
-    $s$ : exist($P$,$Q$) iff
-    $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+  \item[\textnormal{exist}] ---  $s$ : exist($P$,$Q$) iff
+     $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
+    % $s$ : exist($P$,$Q$) iff
+    % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
     
-  \item[\textnormal{every}] --- $s$ : every($P$,$Q$) iff
-    $\downP{P\!\restriction\!s}\subseteq\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}$
+  \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff
+    $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
 
+  \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{PlPpty},\textit{PlPpty}\rangle$}] \mbox{}
+  
+\begin{description}
     
-  \item[\textnormal{exactly\_$n$}] --- for $n$ a natural number,
+\item[\textnormal{exactly\_$n$} New!] --- for $n$ a natural number,
 
-    $s$ : exactly\_$n$($P$, $Q$) iff
-          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
-        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
-      \not=\emptyset$
+  $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
+
+    % $s$ : exactly\_$n$($P$, $Q$) iff
+    %       $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+    %     \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+    %   \not=\emptyset$
 
       
-    \item[\textnormal{at\_least\_$n$}] --- for $n$ a natural
+    \item[\textnormal{at\_least\_$n$} New!] --- for $n$ a natural
       number,
 
       $s$ : at\_least\_$n$($P$, $Q$) iff
-          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
         \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
       \not=\emptyset$
 
+      % $s$ : at\_least\_$n$($P$, $Q$) iff
+      %     $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+      % \not=\emptyset$
+
       
-    \item[\textnormal{at\_most\_$n$}] --- for $n$ a natural
+    \item[\textnormal{at\_most\_$n$} New!] --- for $n$ a natural
       number,
 
       $s$ : at\_most\_$n$($P$, $Q$) iff
-          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
         \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
 
-  \end{description}
+      % $s$ : at\_most\_$n$($P$, $Q$) iff
+      %     $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+\end{description}    
+
+  
 \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
   \mbox{}
 
@@ -4780,7 +4795,7 @@ r$:\textit{LocRiseEventCntxt} .\\
   \textnormal{$\langle\textit{Loc},\textit{Real}\rangle$}] \mbox{}
   \begin{description}
     
-  \item[\textnormal{temp} New!] --- $e:\text{temp}(l,n)$ iff $n$ is
+  \item[\textnormal{temp}] --- $e:\text{temp}(l,n)$ iff $n$ is
     the temperature at $l$ in $e$.
 
     
@@ -5050,17 +5065,20 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \mfield{scope}{$P$}{\textit{Ppty}} \\
 %           \tfield{e}{exist(restr, scope)}}$\urcorner$
 
-  $\lambda Q$:\textit{Ppty} . \\
+$\lambda Q$:\textit{Ppty} . \\
   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
 
+
+
+ 
+
         
-      \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}
-        Revised!]
+      \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
         \mbox{}
 
         If $T_{\mathrm{Phon}}$ is a phonological type, then
@@ -5073,17 +5091,18 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         
       \item[\textnormal{SemUniversal}] \mbox{}
 
-        $\lambda Q$:\textit{Ppty} . \\
+               $\lambda Q$:\textit{Ppty} . \\
   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$
 
+ 
+
   
-\item[\textnormal{Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$)}
-        New!]
+\item[\textnormal{Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$)}]
         \mbox{}
 
         If $T_{\mathrm{Phon}}$ is a phonological type, then
@@ -5102,18 +5121,19 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \mfield{scope}{$P$}{\textit{Ppty}} \\
 %           \tfield{e}{the(restr, scope)}}
 
-          $\lambda Q$:\textit{Ppty} . \\
+                    $\lambda Q$:\textit{Ppty} . \\
   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{every(restr, scope)}}$\urcorner$
 
+
         
-      \item[\textnormal{Lex$_{\mathrm{DefArt}}$($T_{\mathrm{Phon}}$)} New!]
+      \item[\textnormal{Lex$_{\mathrm{DefArt}}$($T_{\mathrm{Phon}}$)}]
         \mbox{}
 
         If $T_{\mathrm{Phon}}$ is a phonological type, then

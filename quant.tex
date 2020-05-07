@@ -63,24 +63,24 @@ Most, if not all, natural language quantifiers have this
 property.\footnote{For discussion, see \cite{PetersWesterstahl2006},
   p. 138f.}
 
-Now consider the definition of dynamic generalized quantifiers given
-in Chapter~\ref{ch:commonnouns}, Section~\ref{sec:dgqs}.  There in
+Now consider the discussion of dynamic generalized quantification in Chapter~\ref{ch:commonnouns}, Section~\ref{sec:dgqs}.  There in
 example~(\ref{ex:dynqconstr}) we gave dynamic versions of generalized
-quantifiers.  We can give a general characterization of the witness
-conditions for dynamic generalized quantifiers as in \nexteg{}, where
-$q$ is a predicate corresponding to a quantifier and $q^*$ is the
-relation between sets corresponding to $q$ in classical generalized
-quantifier theory.
-\begin{ex} 
-$e:q(P,Q)$ iff $q^*$ holds between $\downP{P}$ and
-$\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$
-\label{ex:witness-cond-GQ}
-\end{ex} 
-According to the definitions given in Chapter~\ref{ch:commonnouns},
-$\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$ is the set of
-individuals which have property $Q|_{\mathcal{F}(P.\mathrm{fg})}$ in
-$e$ and $Q|_{\mathcal{F}(P.\mathrm{fg})}$ is $Q$ with its
-domain restricted by $P$ (example~(\ref{ex:function-restriction}), p.~\pageref{ex:function-restriction}).  We spell this out for the type
+quantifier interpretations of noun-phrases.  % We can give a general characterization of the witness
+% conditions for dynamic generalized quantifiers as in \nexteg{}, where
+% $q$ is a predicate corresponding to a quantifier and $q^*$ is the
+% relation between sets corresponding to $q$ in classical generalized
+% quantifier theory.
+% \begin{ex} 
+% $e:q(P,Q)$ iff $q^*$ holds between $\downP{P}$ and
+% $\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$
+% \label{ex:witness-cond-GQ}
+% \end{ex} 
+% According to the definitions given in Chapter~\ref{ch:commonnouns},
+% $\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\restriction e}$ is the set of
+% individuals which have property $Q|_{\mathcal{F}(P.\mathrm{fg})}$ in
+% $e$ and $Q|_{\mathcal{F}(P.\mathrm{fg})}$ is $Q$ with its
+% domain restricted by $P$ (example~(\ref{ex:function-restriction}), p.~\pageref{ex:function-restriction}).
+We spell out the witness condition for the quantificational ptype, \nexteg{b},
 corresponding to \textit{every dog runs} in \nexteg{}.  % Here, as
 % before, we only represent the foregrounds of the properties which are
 % arguments to the predicate `every' in order to make the presentation
@@ -95,43 +95,43 @@ corresponding to \textit{every dog runs} in \nexteg{}.  % Here, as
 run$'$ = $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\urcorner$
  
-\item $T$ = every(dog$'$, run$'$)
+\item $T$ = every(dog$'$, run$'\mid_{\mathfrak{F}(\text{dog}')}$)
 
 \item \begin{tabbing}
 $s:T$ \=iff
 $\downP{\text{dog}'}\subseteq\downP{\text{run}'|_{\mathcal{F}(\text{dog}')}\restriction
-s}  $ \hspace*{2em}(\ref{ex:witness-cond-GQ})\\
+s}  $ \hspace*{2em}(witness condition for `every', p.~\pageref{ex:witcond-every})\\
 \> iff  $\downP{\text{dog}'}\subseteq\downP{\text{run}'|_{\text{\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}}}\restriction
-s}  $ \hspace*{2em}(def. of fixed point types p.~\pageref{pg:fixedpointtype}f)\\
+s}  $ \hspace*{2em}(fixed point types, p.~\pageref{ex:fixedpointtype})\\
 \> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}\d{$\wedge$}\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
-     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ] \hspace*{2em} (Ch.~\ref{ch:commonnouns},
-(\ref{ex:function-restriction}), p.~\pageref{ex:function-restriction})\\
+     . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ]
+     \hspace*{2em} (function restriction, p.~\pageref{ex:function-restriction})\\
 \> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
      . \smallrecord{\smalltfield{e}{run($r$.x)}}$\restriction s$ ]
-     \hspace*{2em}\begin{minipage}{.3\textwidth}(def. of merge, Appendix~\ref{app:merge})\end{minipage}\\
+     \hspace*{2em}\begin{minipage}{.3\textwidth}(merge, p.~\pageref{pg:merge})\end{minipage}\\
 \> iff $\downP{\text{dog}'}\subseteq$ [$\downarrow\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
      . \smallrecord{\smallrfield{e}{$s$}{run($r$.x)}}
-     ]\hspace*{2em}\begin{minipage}{.3\textwidth}(def. of property restriction,
-     Chapter~\ref{ch:gram}, p.~\pageref{pg:property-restriction})\end{minipage}\\
+     ]\hspace*{2em}\begin{minipage}{.3\textwidth}(property restriction,
+      p.~\pageref{pg:property-restriction})\end{minipage}\\
 \> iff \=$\{a\mid\exists r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   $\wedge
   r.\text{x}=a\wedge\down{\text{\smallrecord{\smalltfield{e}{dog($r$.x)}}}}\not=\emptyset\}$\\
 \>\>$\subseteq\{a\mid\exists r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\\smalltfield{e}{dog(x)}}
   $\wedge
   r.\text{x}=a\wedge\down{\text{\smallrecord{\smallrfield{e}{$s$}{run($r$.x)}}}}\not=\emptyset\}$
-  \hspace*{2em}(def. of $\downarrow$, p.~\pageref{pg:property-extension-rev})
+  \hspace*{2em}($\downarrow$, p.~\pageref{pg:property-extension-rev})
   \\
 \> iff
 $\{a\mid\down{\text{dog}(a)}\not=\emptyset\}\subseteq\{a\mid\down{\text{dog}(a)}\not=\emptyset\wedge\exists
 s'[s'\underline{\varepsilon}s\wedge
 s':\text{run}(a)]\}$\\
 \>\`\begin{minipage}{.3\textwidth}(Arity of `dog', `run' and set
-extension of records, Appendix~\ref{app:rec}, \textit{cf.} p.~\pageref{pg:set-reduction-gq}ff)\end{minipage}\\ 
+extension of records,  p.~\pageref{pg:set-reduction-gq}ff)\end{minipage}\\ 
 \> iff $\{a\mid\exists s'[s':\text{dog}(a)]\}\subseteq\{a\mid\exists
 s'[s':\text{dog}(a)]\wedge\exists
 s'[s'\underline{\varepsilon}s\wedge s':\text{run}(a)]\}$ \\
-\>\`\begin{minipage}{.3\textwidth}(def. of $\down{T}$, p.~\pageref{pg:type-extension})\end{minipage}
+\>\`\begin{minipage}{.3\textwidth}($\down{T}$, p.~\pageref{pg:type-extension})\end{minipage}
 \end{tabbing} 
 \end{subex} 
 \label{ex:witnessconds-edr}   
@@ -1739,11 +1739,6 @@ quantificational ptype rather than a record type containing a
 quantificational ptype as in Chapter~\ref{ch:gram} and subsequent
 chapters.
 
-@@
-
-\todo{Move restrictions on second argument of quantifiers from witness
-  conditions to semantics in previous treatments so that it works as
-  in the following.  Otherwise donkey binding is difficult...}
 
 \paragraph{\textit{A dog barks}}
 The content of the indefinite article, \textit{a(n)}, is given in
@@ -1756,7 +1751,7 @@ $\lambda Q$:\textit{Ppty} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{3em}\record{
     \mfield{restr}{$Q$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P\mid_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$  
 
 \end{ex} 
@@ -1768,7 +1763,7 @@ $\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{1em}$\lambda P$:\textit{Ppty} . \\
   \hspace*{2em}\record{
     \mfield{restr}{dog$'$}{\textit{Ppty}}\\
-    \mfield{scope}{$P$}{\textit{Ppty}}\\
+    \mfield{scope}{$P\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$  
 \end{ex} 
 Finally, the content of \textit{a dog barks} would be as in \nexteg{}.
@@ -1777,7 +1772,7 @@ Finally, the content of \textit{a dog barks} would be as in \nexteg{}.
   $\ulcorner\lambda c$:\textit{Cntxt} . \\
   \hspace*{1em}\record{
     \mfield{restr}{dog$'$}{\textit{Ppty}}\\
-    \mfield{scope}{bark$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
 \end{ex} 
 Following the particular witness condition for `exist($P$,$Q$)' in
@@ -1833,26 +1828,30 @@ case there is a witness for the other type.
               \tfield{e}{bark(x)}}
 \end{subex}
 \end{ex} 
-The additional structure in (\ref{ex:adb-witcond-spelledout})
+The additional structure in (\ref{ex:adb-witcond-spelledout}) is
 unnecessary for this example but it will help us when we come to
 donkey anaphora.
 
-We have ignored the additional structure associated with quantifiers
-in Chapter~\ref{ch:gram} and the introduction of context dependence
-using parametric properties and contents as discussed in
-Chapter~\ref{ch:commonnouns} for the sake of readability but this
-additional structure can be added.  For example, the content of the indefinite
-article  could be \nexteg{}, following Chapter~\ref{ch:commonnouns}.
-\begin{ex} 
-$\lambda Q$:\textit{PPpty} . $\ulcorner\lambda
-r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
-                \smalltfield{a}{$Q$.bg}} . $\lambda P$:\textit{Ppty}
-              . \record{\mfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
-                        \mfield{scope}{$P|_{\mathfrak{F}(Q)}$}{\textit{Ppty}}\\
-                        \tfield{e}{exist(restr,scope)}}$\urcorner$
-\end{ex} 
-[???? This might change after we have reconsidered the presentation of
-quantifiers in Ch. 5 in the light of this section.] Note that adding
+% We have ignored the additional structure associated with quantifiers
+% in Chapter~\ref{ch:gram} and the introduction of context dependence
+% using parametric properties and contents as discussed in
+% Chapter~\ref{ch:commonnouns} for the sake of readability but this
+% additional structure can be added.  For example, the content of the indefinite
+% article  could be \nexteg{}, following Chapter~\ref{ch:commonnouns}.
+% \begin{ex} 
+% $\lambda Q$:\textit{PPpty} . $\ulcorner\lambda
+% r$:\smallrecord{\smalltfield{f}{\textit{Rec}}\\
+%                 \smalltfield{a}{$Q$.bg}} . $\lambda P$:\textit{Ppty}
+%               . \record{\mfield{restr}{$Q$.fg($r$.a)}{\textit{Ppty}}\\
+%                         \mfield{scope}{$P|_{\mathfrak{F}(Q)}$}{\textit{Ppty}}\\
+%                         \tfield{e}{exist(restr,scope)}}$\urcorner$
+% \end{ex} 
+% [???? This might change after we have reconsidered the presentation of
+% quantifiers in Ch. 5 in the light of this section.]
+
+@@
+
+Note that adding
 this additional structure would potentially make the restriction
 (corresponding to MAXSET) and the scope available for anaphora in
 addition to whatever set is supplied by the witness for
