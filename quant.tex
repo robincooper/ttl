@@ -1774,6 +1774,7 @@ Finally, the content of \textit{a dog barks} would be as in \nexteg{}.
     \mfield{restr}{dog$'$}{\textit{Ppty}}\\
     \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
+\label{ex:cont-a-dog-barks}
 \end{ex} 
 Following the particular witness condition for `exist($P$,$Q$)' in
 (\ref{ex:existPQ-part}) we can infer \nexteg{}.
@@ -1811,7 +1812,8 @@ $s$ : exist(dog$'$,bark$'|_{\mathcal{F}(dog')}$) iff
 $s$ : \record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
               \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
                                         \tfield{e}{dog(x)}}}\\
-        \tfield{e}{bark($\mathfrak{c}$.x)}} }}
+                                    \tfield{e}{bark($\mathfrak{c}$.x)}} }}
+\label{ex:witcond-exist-dog-bark}
 \end{quote}
 \label{ex:adb-witcond-spelledout} 
 \end{ex} 
@@ -1849,41 +1851,64 @@ donkey anaphora.
 % [???? This might change after we have reconsidered the presentation of
 % quantifiers in Ch. 5 in the light of this section.]
 
-@@
+The witness condition in (\ref{ex:witcond-exist-dog-bark}) means that
+anything of the type resulting from applying
+(\ref{ex:cont-a-dog-barks}) to a context will also be of the type
+\nexteg{}.
+\begin{ex} 
+\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(dog$'$)}\\
+              \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+                                    \tfield{e}{bark($\mathfrak{c}$.x)}} }}}} 
+\end{ex} 
+  
 
-Note that adding
-this additional structure would potentially make the restriction
-(corresponding to MAXSET) and the scope available for anaphora in
-addition to whatever set is supplied by the witness for
-`exist(restr,scope)'.  Thus potentially we could have all of the
+Assuming a theory of anaphora where anaphoric references must relate
+to paths in a witness, $s$, for the content,  we could potentially have all of the
 examples of anaphora in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item A dog barked.  They (dogs in general) do when they notice an
+\item A dog barked.  They (dogs in general, $s$.restr, MAXSET) do when they notice an
   intruder.
 
-\item A dog barked.  They (the dogs which barked) made such a racket.
+\item A dog barked.  They (dogs in general which bark, $s$.scope) make such
+  a racket.
 
-\item A dog barked.  It (the dog which barked) heard an intruder. 
+  
+\item A dog barked.  That (an event of a dog barking, $s$.e, event
+  anaphora) frightened off an intruder.
+
+\item A dog barked.  It (the dog which barked, $s$.e.x, individual,
+   REFSET, anaphora) heard an intruder. 
  
 \end{subex} 
    
 \end{ex} 
-Of these, \preveg{b} seems very doubtful as a reasonable case of
-anaphora.  However, if we make the pronominal reference generic as
-might be appropriate if we are deriving the anaphoric interpretation
-from a property then the anaphora seems more plausible.
-\begin{ex} 
-A dog barked.  They (dogs in general which barked) frightened me when
-I was a child, but now I remained calm. 
-\end{ex} 
+% Of these, \preveg{b} seems very doubtful as a reasonable case of
+% anaphora.  However, if we make the pronominal reference generic as
+% might be appropriate if we are deriving the anaphoric interpretation
+% from a property then the anaphora seems more plausible.
+% \begin{ex} 
+% A dog barked.  They (dogs in general which barked) frightened me when
+% I was a child, but now I remained calm. 
+% \end{ex}
 
-\paragraph{\textit{No dog barks}} The simplified content for
+
+\paragraph{\textit{No dog barks}} The content for
 \textit{no dog barks} would be derived in an exactly similar way as
 that for \textit{a dog barks}.  We obtain \nexteg{}.
 \begin{ex} 
-no(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+  % no(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$)
+  $\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}}$\urcorner$
+  \label{ex:cont-no-dog-barks}
 \end{ex} 
 Following the particular witness condition in (\ref{ex:noPQ-part}), we
 can infer \nexteg{}.
@@ -1908,23 +1933,70 @@ $s$ :
                                         \tfield{e}{dog(x)}}}\\
         \tfield{e}{bark($\mathfrak{c}$.x)}} $)$}} 
 \end{quote}
-\end{ex} 
-That no dog barks just in case every dog is such that it is not a dog
-that barks.  This can be made to take account of the additional
-structure used in Chapter~\ref{ch:commonnouns} in the same way that we
-did for \textit{a dog barks}.
+\end{ex}
 
-\paragraph{few dogs bark}  The simplified content for an utterance of
+Anything of the type resulting from applying
+(\ref{ex:cont-no-dog-barks}) to a context will also be of the type
+\nexteg{}.
+\begin{ex} 
+ \record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{\tfield{X}{$\text{every}^w(\text{dog}')$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg$
+           \record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}} $)$}}}}
+\end{ex} 
+This suggests that we could potentially have the anaphora in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item No dog barked.  They (dogs in general, $s$.restr, MAXSET)
+  normally do when they notice an
+  intruder.
+
+\item No dog barked.  They (dogs in general which bark, $s$.scope)
+  normally make such
+  a racket.
+
+  
+\item No dog barked.  That (an event of no dog barking, $s$.e, event
+  anaphora) made it easy for the intruder.
+
+\item No dog barked.  They (the dogs which didn't bark, $s$.e.X, 
+   COMPSET anaphora) did not hear the intruder. 
+ 
+\end{subex} 
+   
+\end{ex} 
+% That no dog barks just in case every dog is such that it is not a dog
+% that barks.  This can be made to take account of the additional
+% structure used in Chapter~\ref{ch:commonnouns} in the same way that we
+% did for \textit{a dog barks}.
+
+\paragraph{few dogs bark}  The content for an utterance of
 \textit{few dogs bark} is either \nexteg{a} or \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item few$_a$(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+\item % few$_a$(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$)
+  $\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{few$_a$(restr, scope)}}$\urcorner$
  
-\item few$_p$(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$) 
+\item % few$_p$(dog$'$,bark$'|_{\mathcal{F}(\text{dog}')}$)
+  $\ulcorner\lambda c$:\textit{Cntxt} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{few$_p$(restr, scope)}}$\urcorner$
  
 \end{subex} 
-   
+\label{ex:cont-few-dogs-bark}    
 \end{ex} 
 Following the particular witness conditions in
 (\ref{ex:fewaPQwitcond-part}) and \ref{ex:fewpPQwitcond-part}, we
@@ -1981,27 +2053,80 @@ $s$ :
 \end{quote}
  
 \end{subex} 
+  
+\end{ex}
+Anything of the type resulting from applying the functions in
+(\ref{ex:cont-few-dogs-bark}) to a context will also be of the types
+in 
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{\tfield{X}{$\overline{\text{few}_a^w(\text{dog}')}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg$\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}}$)$}} }} 
+ 
+\item \record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{bark$'\mid_{\mathfrak{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{\tfield{X}{$\overline{\text{few}_p^w(\text{dog}')}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg$\record{\tfield{$\mathfrak{c}$}{\record{\mfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+                                        \tfield{e}{dog(x)}}}\\
+        \tfield{e}{bark($\mathfrak{c}$.x)}}$)$}}}} 
+ 
+\end{subex} 
    
-\end{ex}     
-This, then yields a set up for COMPSET anaphora by providing the set
-in the `X'-field.
+\end{ex} 
+This suggests that we could potentially have the anaphora in
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Few dogs barked.  They (dogs in general, $s$.restr, MAXSET)
+  normally do when they notice an
+  intruder.
+
+\item Few dogs barked.  They (dogs in general which bark, $s$.scope)
+  normally make such
+  a racket.
+
+  
+\item Few dogs barked.  That (an event of few dogs barking, $s$.e, event
+  anaphora) made it easier for the intruder.
+
+\item Few dogs barked.  They (the dogs which didn't bark, $s$.e.X, 
+   COMPSET anaphora) did not hear the intruder. 
+ 
+\end{subex} 
+   
+\end{ex}   
+
+% This, then yields a set up for COMPSET anaphora by providing the set
+% in the `X'-field.
 
 \section{Binding and anaphora}
 \label{sec:binding-anaph}
 
-\subsection{Long distance dependencies}\todo{Moved from
-  Ch~\ref{ch:quant}.  Is this the right place to put this?}
+\subsection{Long distance dependencies}
 \label{sec:long-distance}
 
 Let us consider how to derive the content of \textit{who Sam hugged}
 as a relative clause.  We use \textbf{hug}$_V$ to represent the
 foreground of the content of \textit{hug} as a transitive verb,
 characterized as in \nexteg{}.
+
+@@\todo{Fix corner quotes on SemTransVerb in chs. 6, 5?... Also in
+  text and in next example.}
+
 \begin{ex} 
-\textbf{hug}$_V$ = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} . $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}} 
+\textbf{hug}$_V$ = $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+\mathcal{Q}$:\textit{Quant} . $\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+. \smallrecord{\smalltfield{e}{hug($r$.x, $\mathcal{Q}$)}}$\urcorner$ 
 \end{ex} 
 Our theory of syntax in terms of event types means that what have been
 called ``gaps'' or ``traces'' in other theories of syntax would
@@ -2016,7 +2141,10 @@ content.  We will represent the foreground of this content as
 \textbf{hug}$_V$ as in \nexteg{a} which is identical with \nexteg{b}.
 \begin{ex} 
 \begin{subex}
-\item \textbf{hug}$_{\mathit{VP}}$ = $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+\item \textbf{hug}$_{\mathit{VP}}$ = $\lambda
+  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{wh$_0$}{\textit{Ind}}}}}
 . \textbf{hug}$_V$($\mathfrak{s}$)($\lambda P$:\textit{Ppty}
 . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}})) 
 
