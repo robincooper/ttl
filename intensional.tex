@@ -3207,9 +3207,9 @@ We have so far characterized the semantics of transitive verbs as in
         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-          \mathcal{Q}$:\textit{Quant} . $\lambda
-          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
+          \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\ulcorner\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$\urcorner)\urcorner\urcorner$
         \end{quote} 
 \end{ex} 
 To this we can add a case for predicates with arity
@@ -3219,8 +3219,8 @@ $\langle\textit{Ind},\textit{Quant}\rangle$ given in \nexteg{}.
   predicate with arity $\langle\textit{Ind},\textit{Quant}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
   \begin{quote}
     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-    \mathcal{Q}$:\textit{Quant} . $\lambda
-    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$)\urcorner$
+    \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$\urcorner)\urcorner$
   \end{quote}  
 \end{ex}
 One way to use this is to treat extensional verbs like \textit{find}
@@ -3265,9 +3265,9 @@ $p^{\dagger}$ which has arity $\langle\textit{Ind},\textit{Ind}\rangle$
 % r.\text{x})$}}$)$
   We restrict attention to modal systems, $\mathbb{T}$, such that
   \begin{quote}
-  $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\lambda
+  $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\ulcorner\lambda
  r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
- r.\text{x})$}}$)$
+ r.\text{x})$}}$\urcorner)$
   \end{quote}
 \label{ex:mp-find} 
 \end{ex} 
@@ -3977,8 +3977,8 @@ want$_P$($a$, $P$) $\approx_{\mathbb{T}}$ want$^\dagger$($a$, $P$(\smallrecord{\
 \item if $a$ : \textit{Ind} and $Q$ : \textit{Quant}, then 
 \begin{quote}
 want$_Q$($a$,$Q$) $\approx_{\mathbb{T}}$
-want$^\dagger$($a$, $Q$($\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)))
+want$^\dagger$($a$, $Q$($\ulcorner\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)$\urcorner$))
 \end{quote} 
 \end{subex} 
 \label{ex:want-witcond} 
@@ -5191,18 +5191,18 @@ $\lambda Q$:\textit{Ppty} . \\
         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-          \mathcal{Q}$:\textit{Quant} . $\lambda
-          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
+          \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\ulcorner\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$\urcorner)\urcorner\urcorner$
         \end{quote}
 
         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
   predicate with arity $\langle\textit{Ind},\textit{Quant}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
   \begin{quote}
     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-    \mathcal{Q}$:\textit{Quant} . $\lambda
+    \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$)\urcorner$
+    . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$\urcorner)\urcorner$
   \end{quote}
         
 \item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
@@ -5906,9 +5906,9 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
     
     \item if $p\in\{\text{hug},\text{find}\}$ then
     \begin{quote}
-      $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\lambda
+      $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\ulcorner\lambda
       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
-          r.\text{x})$}}$)$
+          r.\text{x})$}}$\urcorner)$
     \end{quote}
     
     
@@ -5918,8 +5918,8 @@ $T_\mathrm{bg}$ is a record type (the ``background type'' or
 
     
   \item want$_Q$($a$,$Q$) $\approx_{\mathbb{T}}$
-want$^\dagger$($a$, $Q$($\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)))
+want$^\dagger$($a$, $Q$($\ulcorner\lambda
+r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)$\urcorner$))
 \end{enumerate}
   
 

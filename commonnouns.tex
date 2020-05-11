@@ -4996,15 +4996,15 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
         \end{quote}
 
         
-      \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)}] \mbox{}
+      \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)} Revised!] \mbox{}
 
         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
         \begin{quote}
           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
-          \mathcal{Q}$:\textit{Quant} . $\lambda
-          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$)\urcorner$
+          \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+          r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\ulcorner\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+          . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$\urcorner)\urcorner\urcorner$
         \end{quote}
         
 \item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,

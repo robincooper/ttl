@@ -2119,14 +2119,11 @@ as a relative clause.  We use \textbf{hug}$_V$ to represent the
 foreground of the content of \textit{hug} as a transitive verb,
 characterized as in \nexteg{}.
 
-@@\todo{Fix corner quotes on SemTransVerb in chs. 6, 5?... Also in
-  text and in next example.}
-
 \begin{ex} 
 \textbf{hug}$_V$ = $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
-\mathcal{Q}$:\textit{Quant} . $\lambda
+\mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
 r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \smallrecord{\smalltfield{e}{hug($r$.x, $\mathcal{Q}$)}}$\urcorner$ 
+. \smallrecord{\smalltfield{e}{hug($r$.x, $\mathcal{Q}$)}}$\urcorner\urcorner$ 
 \end{ex} 
 Our theory of syntax in terms of event types means that what have been
 called ``gaps'' or ``traces'' in other theories of syntax would
@@ -2136,55 +2133,92 @@ not exist.  Instead we will take a strategy similar to that pursued,
 for example, in combinatory categorial grammar (see, for example,
 \citealp{Steedman2012}) where \textit{hug} can also be interpreted as
 a verb phrase whose content is ``looking for'' a \textit{wh}-phrase
-content.  We will represent the foreground of this content as
+content.  We will add a third component to our contexts will label
+`$\mathfrak{w}$' for assignments associated with
+\textit{wh}-constructions.  Thus we will redefine the type
+\textit{Cntxt} as \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex}   
+We will represent this content as
 \textbf{hug}$_{\mathit{VP}}$ and characterize it in terms of
 \textbf{hug}$_V$ as in \nexteg{a} which is identical with \nexteg{b}.
 \begin{ex} 
 \begin{subex}
-\item \textbf{hug}$_{\mathit{VP}}$ = $\lambda
+\item \textbf{hug}$_{\mathit{VP}}$ = $\ulcorner\lambda
   c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
-    \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{wh$_0$}{\textit{Ind}}}}}
-. \textbf{hug}$_V$($\mathfrak{s}$)($\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}})) 
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}}
+. \textbf{hug}$_V$($c$)($\lambda P$:\textit{Ppty}
+. $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))$\urcorner$ 
 
 \item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . $\lambda r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug($r_1$.x, $\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}}
+  . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+  . \smallrecord{\smalltfield{e}{hug($r$.x, $\lambda P$:\textit{Ppty}
+. $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))}}$\urcorner\urcorner$
 \end{subex}
 \end{ex}
 
-Let us now consider the content of \textit{Sam hugged}.  In order to
-avoid the additional complexity of combining different kinds of
-context which we will undertake in Section~\ref{sec:struc-cntxt} we
-will go back to the treatment of proper names in Chapter~\ref{ch:gram}
-rather than the treatment in Chapter~\ref{ch:propnames} where proper
-names introduce a constraint on the context. Thus we will consider the
-foreground of the parametric content of \textit{Sam}, which we will
-represent as \textbf{Sam}, to be \nexteg{}
-where `sam' is a particular individual named Sam.
+Let us now consider the content of \textit{Sam hugged}.  % In order to
+% avoid the additional complexity of combining different kinds of
+% context which we will undertake in Section~\ref{sec:struc-cntxt} we
+% will go back to the treatment of proper names in Chapter~\ref{ch:gram}
+% rather than the treatment in Chapter~\ref{ch:propnames} where proper
+% names introduce a constraint on the context. Thus we will consider the
+% foreground of
+The parametric content of \textit{Sam}, which we will
+represent as \textbf{Sam}, is \nexteg{}
+% where `sam' is a particular individual named Sam
+.
 \begin{ex} 
-\textbf{Sam} = $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{sam}}) 
+  \textbf{Sam} = $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+      \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+          \smalltfield{e}{named(x, ``Sam'')}}}} . $\lambda
+    P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
+
+  % $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{sam}})
+
 \end{ex}
-The foreground of the content of \textit{Sam hugged}, which we will
+The content of \textit{Sam hugged}, which we will
 represent as \textbf{Sam$^\frown$hugged}, is \nexteg{a} which is
 identical with \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item \textbf{Sam$^\frown$hugged} =
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . \textbf{Sam}($\mathfrak{s}$)(\textbf{hug}$_{\mathit{VP}}$($\mathfrak{s}$)) 
+\item \textbf{Sam$^\frown$hugged} = \\
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}}}}
+  . \textbf{Sam}$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$($c$)(\textbf{hug}$_{\mathit{VP},\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$($c$))$\urcorner$ 
  
 \item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh$_0$}}))}}
+  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}}}}
+  .
+  \smallrecord{\smalltfield{e}{hug($c$.f.x, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))}}$\urcorner$
  
 \end{subex} 
    
 \end{ex}
+
+@@\todo{Do we need to adjust the definition of @-combination to take
+  account of $\mathfrak{w}$?}
+
 The foreground of the content of \textit{who}, which we will represent
 as \textbf{who}, is given in \nexteg{}.
 \begin{ex} 
