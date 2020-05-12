@@ -2185,9 +2185,57 @@ represent as \textbf{Sam}, is \nexteg{}
   % $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{sam}})
 
 \end{ex}
+In order to combine \textbf{Sam} with \textbf{hug}$_{\mathit{VP}}$ we
+will need to adjust the combination of parametric contents based on
+functional application so that it takes account of incrementation of
+the context path $\mathfrak{w}.\text{x}$ in addition to
+$\mathfrak{s}.\text{x}$ to allow for more than one
+\textit{wh}-dependency. This uses the operation `$\mathrm{incr}$' defined in
+Chapter~\ref{ch:propnames}, p.~\pageref{pg:incr}.  We will use
+\nexteg{a} to represent \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\mathrm{incr}_{\pi_1,\ldots,\pi_n}(\varphi, T)$ 
+ 
+\item
+  $\mathrm{incr}_{\pi_1}(\ldots\mathrm{incr}_{\pi_n}(\varphi,T),\ldots, T)$ 
+ 
+\end{subex} 
+   
+\end{ex}
+We now modify the definition of the combination of $\alpha$ and
+$\beta$, $\alpha\text{@}\beta$, given in Chapter~\ref{ch:propnames},
+p.~\pageref{ex:s-combination} to \nexteg{}.
+\begin{ex}
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+  \begin{quote}
+   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+
+      
+\end{quote}
+
+ 
+\end{ex}
+
+  
+
 The content of \textit{Sam hugged}, which we will
-represent as \textbf{Sam$^\frown$hugged}, is \nexteg{a} which is
+represent as \textbf{Sam$^\frown$hugged}, is
+\textbf{Sam}@\textbf{hug}$_{\mathit{VP}}$, that is \nexteg{a} which is
 identical with \nexteg{b}.
+
+@@\todo{revise context notation}
+
 \begin{ex} 
 \begin{subex} 
  
@@ -2206,7 +2254,7 @@ identical with \nexteg{b}.
     \smalltfield{$\mathfrak{w}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
-        \smalltfield{f}{\smallrecord{
+        \smalltfield{f}{\smallrecord{\footnotesize{\textit{PropCntxt}}\\
             \smalltfield{x}{\textit{Ind}}\\
             \smalltfield{e}{named(x, ``Sam'')}}}}}}
   .
@@ -2216,8 +2264,7 @@ identical with \nexteg{b}.
    
 \end{ex}
 
-@@\todo{Do we need to adjust the definition of @-combination to take
-  account of $\mathfrak{w}$?}
+
 
 The foreground of the content of \textit{who}, which we will represent
 as \textbf{who}, is given in \nexteg{}.

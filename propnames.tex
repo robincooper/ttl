@@ -2795,8 +2795,50 @@ in \nexteg{c}.
          \record{\tfield{e}{leave($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
  
 \end{subex} 
-   
+\label{ex:he-leave}   
 \end{ex}
+For the sake of saving space and for readability it will be useful to
+introduce the notational convention in \nexteg{}.
+\begin{ex} 
+  \record{
+    \footnotesize{$T$}\\
+    \tfield{$\ell_1$}{$T_1$}\\
+    \vdots \\
+    \tfield{$\ell_n$}{$T_n$}}
+
+  represents
+
+  $T$\d{$\wedge$}\record{
+    \tfield{$\ell_1$}{$T_1$}\\
+    \vdots \\
+    \tfield{$\ell_n$}{$T_n$}}
+\end{ex}
+This means, for example, that we can represent (\ref{ex:he-leave}) as
+\nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . 
+        $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
+ 
+\item $\ulcorner\lambda c$:\textit{Cntxt} . 
+        $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . 
+              \record{\tfield{e}{leave($r$.x)}}$\urcorner$
+
+            \item $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+                \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                    \smalltfield{x$_0$}{\textit{Ind}}}}}
+  . 
+         \record{\tfield{e}{leave($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+ 
+\end{subex} 
+
+\end{ex}
+
+@@
+  
 We will define `SemPron' to be \nexteg{}.
 \begin{ex} 
   $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
@@ -2832,20 +2874,20 @@ result of relabelling each path in $T$ of the form $\pi_i$ where $i$
 is a natural number with $\pi_{f(i)}$ where $f$ is a function from
 natural numbers to natural numbers.  We characterize the incrementation of the $\pi$-indexes in a record
 type $T_1$ with respect to another record type $T_2$,
-$\mathrm{incr}_\pi(T_1,T_2)$, is \nexteg{}.
+$\mathrm{incr}_\pi(T_1,T_2)$, is \nexteg{}.\label{pg:incr}
 \begin{ex} 
 $[T_1]_{\pi_i\leadsto\pi_{i+max_\pi(T_2)+1}}$
 \end{ex}
-Similarly, we characterize the incrementation of the $\pi$-indexes of a function, $\lambda
-v\!:\!T_1\ .\ T_2\dep{v}$, where $T_1$ and $T_2\dep{v}$ are record
-types, with respect to a record type, $T_3$, that is, \nexteg{a},
+Similarly, we characterize the incrementation of the $\pi$-indexes of
+a dependent type, $\lambda
+v\!:\!T\ .\ \varphi\dep{v}$ with respect to a record type, $T'$, that is, \nexteg{a},
 as \nexteg{b}.
 \begin{ex}
   \begin{subex}
     \item $\mathrm{incr}_\pi(\lambda
-v\!:\!T_1\ .\ T_2\dep{v}, T_3)$
-\item $\lambda v\!:\!\mathrm{incr}_\pi(T_1,T_3)\ .\
-  [T_2\dep{v}]_{v.\pi_i\leadsto v.\pi_{i+max_{\pi}(T_3)+1}}$
+v\!:\!T\ .\ \varphi\dep{v}, T')$
+\item $\lambda v\!:\!\mathrm{incr}_\pi(T,T')\ .\
+  \mathrm{incr}_{\pi}(\varphi\dep{v}, T')$
 \end{subex}
 
 \end{ex} 
@@ -2900,7 +2942,7 @@ content for \nexteg{a} will be \nexteg{b}.
  
 \item he hugged it 
  
-\item $\ulcorner\lambda c$:\smallrecord{
+\item $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}\\
         \smalltfield{x$_1$}{\textit{Ind}}}}}
