@@ -2149,14 +2149,16 @@ We will represent this content as
 \begin{ex} 
 \begin{subex}
 \item \textbf{hug}$_{\mathit{VP}}$ = $\ulcorner\lambda
-  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  c$:\smallrecord{
+\footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{w}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}}
 . \textbf{hug}$_V$($c$)($\lambda P$:\textit{Ppty}
 . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))$\urcorner$ 
 
 \item
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+\footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{w}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}}
   . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
@@ -2177,7 +2179,8 @@ represent as \textbf{Sam}, is \nexteg{}
 % where `sam' is a particular individual named Sam
 .
 \begin{ex} 
-  \textbf{Sam} = $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  \textbf{Sam} = $\ulcorner\lambda c$:\smallrecord{
+\footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
           \smalltfield{e}{named(x, ``Sam'')}}}} . $\lambda
     P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -2234,29 +2237,35 @@ represent as \textbf{Sam$^\frown$hugged}, is
 \textbf{Sam}@\textbf{hug}$_{\mathit{VP}}$, that is \nexteg{a} which is
 identical with \nexteg{b}.
 
-@@\todo{revise context notation}
+
 
 \begin{ex} 
 \begin{subex} 
  
 \item \textbf{Sam$^\frown$hugged} = \\
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{w}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
             \smalltfield{x}{\textit{Ind}}\\
-            \smalltfield{e}{named(x, ``Sam'')}}}}}}
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+      \smalltfield{a}{\textit{PropCntxt}}}}}
   . \textbf{Sam}$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$($c$)(\textbf{hug}$_{\mathit{VP},\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$($c$))$\urcorner$ 
  
 \item
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{w}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
-        \smalltfield{f}{\smallrecord{\footnotesize{\textit{PropCntxt}}\\
+        \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
             \smalltfield{x}{\textit{Ind}}\\
-            \smalltfield{e}{named(x, ``Sam'')}}}}}}
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+      \smalltfield{a}{\textit{PropCntxt}}}}}
   .
   \smallrecord{\smalltfield{e}{hug($c$.f.x, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))}}$\urcorner$
  
@@ -2264,7 +2273,7 @@ identical with \nexteg{b}.
    
 \end{ex}
 
-
+@@
 
 The foreground of the content of \textit{who}, which we will represent
 as \textbf{who}, is given in \nexteg{}.

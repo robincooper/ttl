@@ -2883,6 +2883,7 @@ names, is defined as in \nexteg{}.
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
     $\ulcorner\lambda c$: \smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
           \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
     P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -4176,11 +4177,13 @@ content of an utterance of \textit{Charlie wants to buy a coat like
 \textit{Charlie bought a coat like Bill's} (ignoring issues of tense), given in \nexteg{}.
 \begin{ex}
   $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
             \smalltfield{x}{\textit{Ind}}\\
             \smalltfield{e}{named(x, ``Charlie'')}}}\\
-        \smalltfield{a}{\textit{Rec}}}}} . 
+        \smalltfield{a}{\textit{PropCntxt}}}}} . 
 \record{\tfield{e}{buy($\mathfrak{c}$.f.x, \textbf{a$^\frown$coat\_like\_Bill's}(c.a))}}
 \label{ex:contCbaclB} 
 \end{ex} 
@@ -4211,11 +4214,13 @@ the sense that any record of the former type will be of the latter
 type and \textit{vice versa}.
 \begin{ex}
   $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
             \smalltfield{x}{\textit{Ind}}\\
             \smalltfield{e}{named(x, ``Charlie'')}}}\\
-        \smalltfield{a}{\textit{Rec}}}}} . 
+        \smalltfield{a}{\textit{PropCntxt}}}}} . 
   \record{
     \tfield{e}{\textbf{a$^\frown$coat\_like\_Bill's}(c.a)($\lambda
       r$:\smallrecord{
@@ -4230,12 +4235,14 @@ type and \textit{vice versa}.
 \preveg{} is \nexteg{} where we have spelled out the contribution of
 the indefinite article.
 \begin{ex} 
- $\lambda c$:\smallrecord{
+  $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
             \smalltfield{x}{\textit{Ind}}\\
             \smalltfield{e}{named(x, ``Charlie'')}}}\\
-        \smalltfield{a}{\textit{Rec}}}}} . 
+        \smalltfield{a}{\textit{PropCntxt}}}}} . 
   \record{
     \tfield{e}{\record{
         \mfield{range}{\textbf{coat\_like\_Bill's}($c$.a)}{\textit{Ppty}}\\
@@ -5001,7 +5008,8 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
-    $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    $\ulcorner\lambda c$:\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -5020,7 +5028,8 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
 \item[\textnormal{SemPron} ] \mbox{}
 
-$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty}
@@ -5122,7 +5131,8 @@ $\lambda Q$:\textit{Ppty} . \\
 %           \tfield{e}{the(restr, scope)}}
 
                     $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+                    \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+                      \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
@@ -5235,7 +5245,8 @@ $\lambda Q$:\textit{Ppty} . \\
           
         \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
 
-          $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+          $\ulcorner\lambda c$:\smallrecord{
+            \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
@@ -5250,7 +5261,8 @@ r_2$:\smallrecord{
 
 \item[\textnormal{SemBe$_{\text{scalar}}$}] \mbox{}
 
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}\\
       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\

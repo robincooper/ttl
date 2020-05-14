@@ -737,7 +737,8 @@ in a temperature rising event.  We can use this predicate in the
 characterization of a parametric content for the verb \textit{rise},
 given in \nexteg{}. 
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}} .
   $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{
     \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
@@ -798,7 +799,8 @@ associated with `rise'.
 We can construct a parametric content for the verb \textit{rise} which
 exploits this witness condition.  This is given in \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}} .
   $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{
     \tfield{e}{rise($r$, $c.\mathfrak{c}$)}}$\urcorner$
@@ -891,7 +893,8 @@ in \nexteg{}.
 We can use this predicate to create a parametric content for the
 intransitive verb \textit{rise}, as in \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}} .
   $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{
     \tfield{e}{rise($r$.x, $c.\mathfrak{c}$)}}$\urcorner$
@@ -1876,7 +1879,8 @@ in \nexteg{}.
 \begin{subex} 
  
 \item $\ulcorner\lambda
-  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
@@ -1886,8 +1890,8 @@ in \nexteg{}.
   \tfield{e}{the(restr, scope)}}$\urcorner$ 
  
 \item $\ulcorner\lambda
-  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
-    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
+  c$:\smallrecord{
+  \footnotesize{\textit{Cntxt}}\\  \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
 \record{
   \mfield{restr}{dog$'$$\restriction$$c.\mathfrak{c}$.e}{\textit{Ppty}}\\
@@ -1895,8 +1899,8 @@ in \nexteg{}.
   \tfield{e}{exist(restr, scope)}}$\urcorner$ 
 
 \item $\ulcorner\lambda
-  c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
-    \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
+  c$:\smallrecord{
+   \footnotesize{\textit{Cntxt}}\\ \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{e}{unique(dog$'$)}}}} . \\
 \hspace*{2em}$\lambda P$:\textit{Ppty} .
 \record{
   \mfield{restr}{dog$'$$\restriction$$c.\mathfrak{c}$.e}{\textit{Ppty}}\\
@@ -1979,7 +1983,8 @@ noun) to a parametric content.  The content of \textit{the}, `SemDefArt', is giv
 in \nexteg{}.
 \begin{ex} 
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  \hspace{1em}$\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace{2em}$\lambda P$:\textit{Ppty} . \\
@@ -2030,6 +2035,7 @@ indicated in \nexteg{}.
 
 \begin{ex}
   $\lambda c$:\record{
+            \footnotesize{\textit{Cntxt}}\\
     \tfield{$\mathfrak{c}$}{\record{
         \tfield{s}{\textbf{dog}.bg}\\
         \tfield{f}{\textbf{the}(\textbf{dog}(s)).bg}\\
@@ -2081,6 +2087,7 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
     $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
   \begin{quote}
     $\ulcorner\lambda c$:\record{
+      \footnotesize{\textit{Cntxt}}\\
       \tfield{$\mathfrak{c}$}{\record{
           \tfield{s}{$\beta$.bg}\\
           \tfield{f}{$\alpha(\beta(s))$.bg}\\
@@ -2314,7 +2321,8 @@ determiners as in \nexteg{}.  % Note that in \preveg{} if
 \item SemDefArt ---
 
   $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
@@ -2613,10 +2621,10 @@ contents.  Thus in addition to \nexteg{a} we have \nexteg{b}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\ulcorner\lambda c$:\textit{Rec} . $\ulcorner\lambda
+\item $\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}}$\urcorner\urcorner$  
  
-\item  $\ulcorner\lambda c$:\textit{Rec} . $\ulcorner\lambda
+\item  $\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
   r$:\smallrecord{\smalltfield{x}{\textit{Rec}}} . \record{\tfield{e}{dog\_frame($r$.x)}}$\urcorner\urcorner$ 
  
 \end{subex} 
@@ -3065,7 +3073,8 @@ allow equality not only between individuals but also objects of other
 types.  We can do this by letting the content of \textit{be} be
 parametric on a type including the label `x' introduced in the context as in \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
@@ -3109,7 +3118,8 @@ Here we need to introduce a scale into the context and make sure that
 the second argument to \textit{be} is a number.  This is given in
 \nexteg{}.
 \begin{ex} 
-$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}\\
       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
@@ -4817,7 +4827,8 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
   \begin{quote}
-    $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+    $\ulcorner\lambda c$:\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
@@ -4836,7 +4847,8 @@ r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
 
 \item[\textnormal{SemPron} ] \mbox{}
 
-$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty}
@@ -4934,7 +4946,8 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
 %           \tfield{e}{the(restr, scope)}}
 
           $\lambda Q$:\textit{Ppty} . \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+          \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+            \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{e}{unique($Q$)}}}} . \\
   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
@@ -5037,7 +5050,8 @@ Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
           
         \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
 
-          $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+          $\ulcorner\lambda c$:\smallrecord{
+            \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}}}} . \\
         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
@@ -5052,7 +5066,8 @@ r_2$:\smallrecord{
 
 \item[\textnormal{SemBe$_{\text{scalar}}$}] \mbox{}
 
-  $\ulcorner\lambda c$:\textit{Cntxt}\d{$\wedge$}\smallrecord{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{ty}{\textit{Type}}\\
       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
@@ -5339,6 +5354,7 @@ u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtTy
     $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
   \begin{quote}
     $\ulcorner\lambda c$:\record{
+      \footnotesize{\textit{Cntxt}}\\
       \tfield{$\mathfrak{c}$}{\record{
           \tfield{s}{$\beta$.bg}\\
           \tfield{f}{$\alpha(\beta(s))$.bg}\\
