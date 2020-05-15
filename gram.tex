@@ -286,20 +286,29 @@ sign type as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
 
-\item \textit{S} represents (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
+\item \textit{S} represents  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}}
  
-\item \textit{NP} represents  (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}}) 
+\item \textit{NP} represents  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}} 
  
-\item \textit{Det} represents
-   (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
+\item \textit{Det} represents \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
 
-\item \textit{N} represents
-   (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}}) 
+\item \textit{N} represents \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}} 
 
-\item \textit{V} represents
-   (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
+\item \textit{V} represents \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}}
 
-\item \textit{VP} represents  (\textit{Sign} \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
+\item \textit{VP} represents \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
  
 \end{subex}
 \label{ex:catsigntypes}   
@@ -384,8 +393,10 @@ type in \nexteg{c}.
 
 \item  Lex(``Dudamel'', \textit{NP})
  
-\item ((\textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel''}}}})
+\item (
+  \smallrecord{
+    \footnotesize{\textit{NP}}\\
+    \smalltfield{s-event}{\smallrecord{\smalltfield{e}{``Dudamel''}}}}
       \d{$\wedge$} \textit{NoDaughters}) 
  
 \item \record{\tfield{s-event}{\record{\tfield{e-loc}{\textit{Loc}} \\
@@ -495,8 +506,9 @@ model as the function in \nexteg{a} which we will represent as \nexteg{b}.
 \begin{ex}
 \begin{subex} 
 \item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} . \\
-\hspace*{1em}\textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+\hspace*{1em}
+\smallrecord{
+\footnotesize{\textit{NP}}\\  \smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
 
 \item RuleDaughters(\textit{NP}, \textit{Det}$^{\frown}$\textit{N})
 \end{subex}
@@ -586,12 +598,11 @@ notation for phrase structure rules could be represented as
   different contexts in which they occur will help to distinguish them.}
 \begin{ex} 
 \begin{subex}
-\item  $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ . \\
-\hspace*{1em}\textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
-\\
-\hspace*{2.5em}\d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+\item  $\lambda u$ : (\textit{Det}$^{\frown}$\textit{N} \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$) . \\
+\hspace*{1em}
+\smallrecord{
+\footnotesize{\textit{NP}}\\  \smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}\\
+\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
 
 \item \textit{NP} $\longrightarrow$ \textit{Det} \textit{N}
 \end{subex}
@@ -909,7 +920,7 @@ string $s$ see Appendix~\ref{app:strings}.)  We can use
 `ContForwardApp' to add constraints on content to a phrase structure
 rule as in the example in \nexteg{}.
 \begin{ex} 
-\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}} ContForwardApp(\textit{Ppty},\textit{Quant}) 
+(\textit{NP} $\longrightarrow$ \textit{Det} \textit{N} \d{\d{$\wedge$}} ContForwardApp(\textit{Ppty},\textit{Quant})) 
 \end{ex} 
 Recall from (\ref{eg:NPDetN}a) that  \textit{NP} $\longrightarrow$
 \textit{Det} \textit{N} is the function
@@ -918,31 +929,30 @@ function \nexteg{b}.  Merging these two functions yields \nexteg{c}.
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ . \\
-\hspace*{1em}\textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+\item $\lambda u$ :( \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$} \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$) . \\
+\hspace*{1em}
+\smallrecord{
+\footnotesize{\textit{NP}}\\  \smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}
 \\
-\hspace*{2.5em}\d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}} 
+\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}} 
  
 \item $\lambda
 u$:\smallrecord{\smalltfield{cont}{$(\mathit{Ppty}\rightarrow
     \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{\textit{Ppty}}} . \\
 \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{\textit{Quant}}} 
 
-\item $\lambda u$ : \textit{Det}$^{\frown}$\textit{N} \d{$\wedge$}
-  \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$ \\
+\item $\lambda u$ : (\textit{Det}$^{\frown}$\textit{N} \d{$\wedge$}
+  \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$) \\
 \hspace*{4.9em}  \d{$\wedge$} \smallrecord{\smalltfield{cont}{$(\mathit{Ppty}\rightarrow
     \mathit{Quant})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{\textit{Ppty}}}
 . \\
-\hspace*{1em}\textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}}
+\hspace*{1em}
+\smallrecord{
+\footnotesize{\textit{NP}}\\  \smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{\textit{Det}$^{\frown}$\textit{N}}}}
 \\
-\hspace*{2.5em}\d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+\smalltfield{s-event}{\smallrecord{\smallmfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}
 \\
-\hspace*{2.5em}\d{$\wedge$}
-\smallrecord{\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{\textit{Quant}}}
+\smallmfield{cont}{$u$[0].cont($u$[1].cont)}{\textit{Quant}}}
  
 \end{subex} 
    
@@ -972,8 +982,9 @@ tree notation which is common in linguistics as in
 \begin{ex} 
 \begin{subex} 
  
-\item \hspace*{1em}\textit{NP} \d{$\wedge$}
-\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{syn.daughters[0].s-event.e$^{\frown}$syn.daughters[0].s-event.e}{\textit{Phon}}}}\\
+\item \hspace*{1em}
+  \smallrecord{
+\footnotesize{\textit{NP}}\\    \smalltfield{s-event}{\smallrecord{\smallmfield{e}{syn.daughters[0].s-event.e$^{\frown}$syn.daughters[0].s-event.e}{\textit{Phon}}}}\\
 \smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}$^{\frown}$\textit{N}}}}
 \\
 \smallmfield{cont}{syn.daughters[0].cont(syn.daughters[1].cont)}{\textit{Quant}}}
@@ -1824,11 +1835,21 @@ approaches to Construction Grammar
 \preveg{} by introducing the update function \nexteg{}.
 \begin{ex} 
 $\lambda
-u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
-                                                                    \hspace*{5em}$^{\frown}$
-\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
-}}}. \\
-\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
+u$:\smallrecord{
+\footnotesize{\textit{V}}\\
+\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\smallrecord{
+\footnotesize{\textit{NP}}\\
+\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\smallrecord{
+        \footnotesize{\textit{Det}}\\
+        \smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} 
+$^{\frown}$
+\smallrecord{
+  \footnotesize{\textit{N}}\\
+  \smalltfield{cont}{\textit{Ppty}}}}
+}}} . \\
+\hspace*{4em} \smallrecord{
+  \footnotesize{\textit{VP}}\\
+  \smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
 \end{ex} 
 We can call this function CnstrIsA (``is-a construction'') and merge
 it with \textit{VP} $\longrightarrow$ \textit{V} \textit{NP}.   Thus
@@ -3409,24 +3430,31 @@ introduced in Section~\ref{sec:chart}.
   Chapter~\ref{ch:infex})
 
   
-\item[\textnormal{\textit{S}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
+\item[\textnormal{\textit{S}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{NP}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}})
+\item[\textnormal{\textit{NP}}] --- \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}}
 
   
-\item[\textnormal{\textit{Det}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
+\item[\textnormal{\textit{Det}}] --- \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{N}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}})
+\item[\textnormal{\textit{N}}] --- \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{V}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
+\item[\textnormal{\textit{V}}] --- \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
   
-\item[\textnormal{\textit{VP}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
+\item[\textnormal{\textit{VP}}] --- \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
 
   
 \item[\textnormal{\textit{NoDaughters}}] ---

@@ -4085,6 +4085,26 @@ by `c$_1$' and `c$_2$' address non-existent paths.
 
 \end{shaded}
 
+For the sake of saving space and for readability it will be useful to
+introduce the notational convention in \nexteg{} inspired by a similar
+notation in Head Driven Phrase Structure Grammar \citep{Sag:Wasow:ea:03}.
+\begin{ex} 
+  \record{
+    \footnotesize{$T$}\\
+    \tfield{$\ell_1$}{$T_1$}\\
+    \vdots \\
+    \tfield{$\ell_n$}{$T_n$}}
+
+  represents
+
+  ($T$\d{$\wedge$}\record{
+    \tfield{$\ell_1$}{$T_1$}\\
+    \vdots \\
+    \tfield{$\ell_n$}{$T_n$}})
+\label{ex:merge-abbrev}
+\end{ex}
+
+
 Armed with this technology we can define an update function,
 f$_{\textsc{PlanAckAss}}$,  and action
 rule which plan an acknowledgement to an assertion as in \nexteg{}.
@@ -4100,7 +4120,8 @@ rule which plan an acknowledgement to an assertion as in \nexteg{}.
     \smalltfield{private}{\smallrecord{
         \smalltfield{agenda}{\smallrecord{
             \smalltfield{fst}{\smallrecord{
-                \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+                \smalltfield{s-event}{\smallrecord{
+                    \footnotesize{\textit{SEvent}}\\
                     \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
                     \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
                 \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
@@ -4758,8 +4779,10 @@ rules are given in \nexteg{}.
 \item \textsc{ExecTopAgenda}
 
   \begin{prooftree}
-    \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
-        \smallrecord{\smalltfield{private}{\smallrecord{
+    \hypo{s_{i,A}:_A\text{
+      \smallrecord{
+        \footnotesize{\textit{InfoState}}\\
+\smalltfield{private}{\smallrecord{
               \smalltfield{agenda}{\smallrecord{
                   \smalltfield{fst}{\textit{RecType}}\\
                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
@@ -5008,25 +5031,28 @@ shown in \nexteg{}.
 \smallrecord{
     \smalltfield{private}{\smallrecord{
         \smalltfield{agenda}{\smallrecord{
-        \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
-        \smallrecord{
+        \smallmfield{fst}{
+          \smallrecord{
+            \footnotesize{\textit{Assertion}}\\
           \smalltfield{s-event}{\smallrecord{
               \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
           \smallmfield{cont}{\smallrecord{
-              \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+              \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}{\textit{RecType}}\\
       \smalltfield{rst}{\smallrecord{
-          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
-        \smallrecord{
+          \smallmfield{fst}{
+            \smallrecord{
+              \footnotesize{\textit{Assertion}}\\
           \smalltfield{s-event}{\smallrecord{
               \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
           \smallmfield{cont}{\smallrecord{
-              \smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+              \smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}}}{\textit{RecType}}\\
       \smalltfield{rst}{\smallrecord{
-          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+          \smallmfield{fst}{\smallrecord{
+              \footnotesize{\textit{Assertion}}\\
               \smalltfield{s-event}{\smallrecord{
                   \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
               \smallmfield{cont}{\smallrecord{
-              \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+              \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}}}{\textit{RecType}}\\
       \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}}}\\
 \smalltfield{shared}{\smallrecord{
     \smalltfield{latest-utterance}{\textit{ERec}}\\
@@ -5055,18 +5081,20 @@ information state for $A$ which is of the type \nexteg{}.
  \smallrecord{
    \smalltfield{private}{\smallrecord{
        \smalltfield{agenda}{\smallrecord{
-          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
-        \smallrecord{
+          \smallmfield{fst}{
+            \smallrecord{
+              \footnotesize{\textit{Assertion}}\\
           \smalltfield{s-event}{\smallrecord{
               \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
           \smallmfield{cont}{\smallrecord{
-              \smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+              \smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}}}{\textit{RecType}}\\
       \smalltfield{rst}{\smallrecord{
-          \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+          \smallmfield{fst}{\smallrecord{
+              \footnotesize{\textit{Assertion}}\\
               \smalltfield{s-event}{\smallrecord{
                   \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
               \smallmfield{cont}{\smallrecord{
-              \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+              \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}}}{\textit{RecType}}\\
       \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}\\
 \smalltfield{shared}{\smallrecord{
     \smalltfield{latest-utterance}{\textit{ERec}}\\
@@ -5086,28 +5114,31 @@ after $u_0$, will be of the type \nexteg{}.
   \smallrecord{
     \smalltfield{private}{\smallrecord{
         \smalltfield{agenda}{\smallrecord{
-            \smallmfield{fst}{(\textit{Acknowledgement} \d{$\wedge$}
+            \smallmfield{fst}{
               \smallrecord{
+                \footnotesize{\textit{Acknowledgement}}\\
                 \smalltfield{s-event}{\smallrecord{
                     \smallmfield{sp}{$B$}{\textit{Ind}}\\
                     \smallmfield{au}{$A$}{\textit{Ind}}}}\\
-                \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}})}{\textit{RecType}}\\
+                \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}}}{\textit{RecType}}\\
             \smalltfield{rst}{\smallrecord{
-                \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+                \smallmfield{fst}{
                   \smallrecord{
+                    \footnotesize{\textit{Assertion}}\\
                     \smalltfield{s-event}{\smallrecord{
                         \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
-                    \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                    \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}}}{\textit{RecType}}\\
                 \smalltfield{rst}{\smallrecord{
-                    \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+                    \smallmfield{fst}{\smallrecord{
+                        \footnotesize{\textit{Assertion}}\\
                         \smalltfield{s-event}{\smallrecord{
                             \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
                         \smallmfield{cont}{\smallrecord{
-                            \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                            \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}}}{\textit{RecType}}\\
                     \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}}}\\
     \smalltfield{shared}{\smallrecord{
-        \smallmfield{latest-utterance}{$u_1$}{(\textit{Assertion}
-          \d{$\wedge$} \smallrecord{
+        \smallmfield{latest-utterance}{$u_1$}{\smallrecord{
+            \footnotesize{\textit{Assertion}}\\
             \smalltfield{s-event}{\smallrecord{
                 \smallmfield{sp}{$A$}{\textit{Ind}}\\
                 \smallmfield{au}{$B$}{\textit{Ind}}}}\\
@@ -5119,13 +5150,13 @@ This assumes that $A$ has judged $u_1$ to be of the type in \nexteg{}
 (corresponding to $T_{\mathrm{utt}}$ in \textsc{PlanAckAss}),
 as represented in the `shared.latest-utterance'-field in \preveg{}.
 \begin{ex} 
- (\textit{Assertion}
-          \d{$\wedge$} \smallrecord{
+  \smallrecord{
+    \footnotesize{\textit{Assertion}}\\
             \smalltfield{s-event}{\smallrecord{
                 \smallmfield{sp}{$A$}{\textit{Ind}}\\
                 \smallmfield{au}{$B$}{\textit{Ind}}}}\\
             \smallmfield{cont}{\smallrecord{
-                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}
 \end{ex} 
   
 
@@ -5360,21 +5391,22 @@ witness of the type \preveg{}.  This type is given in \nexteg{}.
 \smallrecord{
     \smalltfield{private}{\smallrecord{
         \smalltfield{agenda}{\smallrecord{
-            \smallmfield{fst}{(\textit{Acknowledgement} \d{$\wedge$}
+            \smallmfield{fst}{
               \smallrecord{
+                \footnotesize{\textit{Acknowledgement}}\\
                 \smalltfield{s-event}{\smallrecord{
                     \smallmfield{sp}{$B$}{\textit{Ind}}\\
                     \smallmfield{au}{$A$}{\textit{Ind}}}}\\
-                \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}})}{\textit{RecType}}\\
+                \smallmfield{cont}{$u_1$.cont}{\textit{RecType}}}}{\textit{RecType}}\\
             \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}\\
     \smalltfield{shared}{\smallrecord{
-        \smallmfield{latest-utterance}{$u_1$}{(\textit{Assertion}
-          \d{$\wedge$} \smallrecord{
+        \smallmfield{latest-utterance}{$u_1$}{\smallrecord{
+            \footnotesize{\textit{Assertion}}\\
             \smalltfield{s-event}{\smallrecord{
                 \smallmfield{sp}{$A$}{\textit{Ind}}\\
                 \smallmfield{au}{$B$}{\textit{Ind}}}}\\
             \smallmfield{cont}{\smallrecord{
-                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}\\
         \smallmfield{commitments}{\textit{Rec}}{\textit{RecType}}}}} 
 \end{ex} 
   
@@ -5575,26 +5607,28 @@ gameboards are given in \nexteg{}.
 \item $a_2$ : \smallrecord{
     \smalltfield{private}{\smallrecord{
         \smalltfield{agenda}{\smallrecord{
-                \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$}
+                \smallmfield{fst}{
                   \smallrecord{
+                    \footnotesize{\textit{Assertion}}\\
                     \smalltfield{s-event}{\smallrecord{
                         \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
-                    \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                    \smallmfield{cont}{\smallrecord{\smalltfield{e}{composer(beethoven)}}}{\textit{RecType}}}}{\textit{RecType}}\\
                 \smalltfield{rst}{\smallrecord{
-                    \smallmfield{fst}{(\textit{Assertion} \d{$\wedge$} \smallrecord{
+                    \smallmfield{fst}{\smallrecord{
+                        \footnotesize{\textit{Assertion}}\\
                         \smalltfield{s-event}{\smallrecord{
                             \smallmfield{sp}{$A$}{\textit{Ind}}}}\\
                         \smallmfield{cont}{\smallrecord{
-                            \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}})}{\textit{RecType}}\\
+                            \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}}}{\textit{RecType}}\\
                     \smallmfield{rst}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}}}}}\\
     \smalltfield{shared}{\smallrecord{
-        \smallmfield{latest-utterance}{$u_2$}{(\textit{Acknowledgement}
-          \d{$\wedge$} \smallrecord{
+        \smallmfield{latest-utterance}{$u_2$}{\smallrecord{
+            \footnotesize{\textit{Acknowledgement}}\\
             \smalltfield{s-event}{\smallrecord{
                 \smallmfield{sp}{$B$}{\textit{Ind}}\\
                 \smallmfield{au}{$A$}{\textit{Ind}}}}\\
             \smallmfield{cont}{\smallrecord{
-                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}\\
         \smallmfield{commitments}{\smallrecord{
             \smalltfield{prev}{\textit{Rec}}\\
             \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}}
@@ -5604,13 +5638,13 @@ gameboards are given in \nexteg{}.
     \smalltfield{private}{\smallrecord{
         \smallmfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}}\\
     \smalltfield{shared}{\smallrecord{
-        \smallmfield{latest-utterance}{$u_2$}{(\textit{Acknowledgement}
-          \d{$\wedge$} \smallrecord{
+        \smallmfield{latest-utterance}{$u_2$}{\smallrecord{
+            \footnotesize{\textit{Acknowledgement}}\\
             \smalltfield{s-event}{\smallrecord{
                 \smallmfield{sp}{$B$}{\textit{Ind}}\\
                 \smallmfield{au}{$A$}{\textit{Ind}}}}\\
             \smallmfield{cont}{\smallrecord{
-                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}})}\\
+                \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}\\
         \smallmfield{commitments}{\smallrecord{
             \smalltfield{prev}{\textit{Rec}}\\
             \smalltfield{e}{conductor(dudamel)}}}{\textit{RecType}}}}} 
@@ -5696,15 +5730,14 @@ given in \nexteg{}.  Thus $A$ and $B$ are aligned at the end of this dialogue.
     \smalltfield{private}{\smallrecord{
         \smallmfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
     \smalltfield{shared}{\smallrecord{
-        \smallmfield{latest-utterance}{$u_6$}{(\textit{Acknowledgement}
-            \d{$\wedge$}
-            \smallrecord{
+        \smallmfield{latest-utterance}{$u_6$}{\smallrecord{
+            \footnotesize{\textit{Acknowledgement}}\\
               \smalltfield{s-event}{\smallrecord{
                   \smallmfield{sp}{$B$}{\textit{Ind}}\\
                   \smallmfield{au}{$A$}{\textit{Ind}}}} \\
               \smallmfield{cont}{\smallrecord{
                   \smalltfield{e}{pianist(uchida)}}}{\textit{RecType}}
-                                })} \\
+                                }} \\
                               \smallmfield{commitments}{\smallrecord{
                                 \smalltfield{prev}{\smallrecord{
                                     \smalltfield{prev}{\smallrecord{
@@ -5890,7 +5923,8 @@ dialogical approach to these concerns.
     \smalltfield{private}{\smallrecord{
         \smalltfield{agenda}{\smallrecord{
             \smalltfield{fst}{\smallrecord{
-                \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+                \smalltfield{s-event}{\smallrecord{
+                    \footnotesize{\textit{SEvent}}\\
                     \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
                     \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
                 \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
@@ -5936,8 +5970,10 @@ dialogical approach to these concerns.
  
 \item[\textnormal{\textsc{ExecTopAgenda}}]
   \begin{prooftree}
-    \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
-        \smallrecord{\smalltfield{private}{\smallrecord{
+    \hypo{s_{i,A}:_A\text{
+        \smallrecord{
+          \footnotesize{\textit{InfoState}}\\
+          \smalltfield{private}{\smallrecord{
               \smalltfield{agenda}{\smallrecord{
                   \smalltfield{fst}{\textit{RecType}}\\
                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
