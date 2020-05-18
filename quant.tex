@@ -2133,14 +2133,14 @@ not exist.  Instead we will take a strategy similar to that pursued,
 for example, in combinatory categorial grammar (see, for example,
 \citealp{Steedman2012}) where \textit{hug} can also be interpreted as
 a verb phrase whose content is ``looking for'' a \textit{wh}-phrase
-content.  We will add a third component to our contexts will label
-`$\mathfrak{w}$' for assignments associated with
-\textit{wh}-constructions.  Thus we will redefine the type
+content.  We will add a third component to our contexts with label
+`$\mathfrak{g}$' for assignments associated with
+gaps.  Thus we will redefine the type
 \textit{Cntxt} as \nexteg{}.
 \begin{ex} 
   \record{
     \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
-    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
 \end{ex}   
 We will represent this content as
@@ -2151,19 +2151,19 @@ We will represent this content as
 \item \textbf{hug}$_{\mathit{VP}}$ = $\ulcorner\lambda
   c$:\smallrecord{
 \footnotesize{\textit{Cntxt}}\\
-    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}}
 . \textbf{hug}$_V$($c$)($\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))$\urcorner$ 
+. $P$(\smallrecord{\field{x}{$c.\mathfrak{g}$.x$_0$}}))$\urcorner$ 
 
 \item
   $\ulcorner\lambda c$:\smallrecord{
 \footnotesize{\textit{Cntxt}}\\
-    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}}
   . $\ulcorner\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   . \smallrecord{\smalltfield{e}{hug($r$.x, $\lambda P$:\textit{Ppty}
-. $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))}}$\urcorner\urcorner$
+. $P$(\smallrecord{\field{x}{$c.\mathfrak{g}$.x$_0$}}))}}$\urcorner\urcorner$
 \end{subex}
 \end{ex}
 
@@ -2220,9 +2220,9 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
   \begin{quote}
    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
       . \\
-      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
       
 \end{quote}
@@ -2245,7 +2245,7 @@ identical with \nexteg{b}.
 \item \textbf{Sam$^\frown$hugged} = \\
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
-    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\smallrecord{
@@ -2258,7 +2258,7 @@ identical with \nexteg{b}.
 \item
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
-    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\smallrecord{
@@ -2267,21 +2267,60 @@ identical with \nexteg{b}.
             \smalltfield{e}{named(x, ``Sam'')}}}\\
       \smalltfield{a}{\textit{PropCntxt}}}}}
   .
-  \smallrecord{\smalltfield{e}{hug($c$.f.x, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}$.x$_0$}}))}}$\urcorner$
+  \smallrecord{\smalltfield{e}{hug($c$.f.x, $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{g}$.x$_0$}}))}}$\urcorner$
  
 \end{subex} 
    
 \end{ex}
 
-@@
+In order to treat \textit{wh}-phrases we will add a fourth component
+to contexts labelled with `$\mathfrak{w}$' for an assignment.  Thus we
+revise \textit{Cntxt} to \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex}
+We also modify the definition of combination to increment the
+$\mathfrak{w}$-assignment as in \nexteg{}.
+\begin{ex}
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+  \begin{quote}
+   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
-The foreground of the content of \textit{who}, which we will represent
+      
+\end{quote}
+
+ 
+\end{ex}
+
+
+
+The content of \textit{who}, which we will represent
 as \textbf{who}, is given in \nexteg{}.
 \begin{ex} 
 \textbf{who} =
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
-. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$\mathfrak{s}$.wh}}) 
-\end{ex} 
+$\lambda c$:\smallrecord{
+  \footnotesize{\textit{Cntxt}}\\
+  \smalltfield{$\mathfrak{w}$}{\smallrecord{
+      \smalltfield{x$_0$}{\textit{Ind}}}}}
+. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}.\text{x}_0$}}) 
+\end{ex}
+
+@@\todo{Incorporate notes on record assignment modification
+  ($r[\pi=v]$)}
+
 In order to be able to characterize the kind of binding involved in
 combining \textit{who} with \textit{Sam hugged} we will define an
 operation, $\oplus$, which adds a field to a record or, if the label
