@@ -2311,36 +2311,94 @@ The content of \textit{who}, which we will represent
 as \textbf{who}, is given in \nexteg{}.
 \begin{ex} 
 \textbf{who} =
-$\lambda c$:\smallrecord{
+$\ulcorner\lambda c$:\smallrecord{
   \footnotesize{\textit{Cntxt}}\\
   \smalltfield{$\mathfrak{w}$}{\smallrecord{
       \smalltfield{x$_0$}{\textit{Ind}}}}}
-. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}.\text{x}_0$}}) 
+. $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}.\text{x}_0$}})$\urcorner$ 
 \end{ex}
 
-@@\todo{Incorporate notes on record assignment modification
-  ($r[\pi=v]$)}
+
+
+% In order to be able to characterize the kind of binding involved in
+% combining \textit{who} with \textit{Sam hugged} we will define an
+% operation, $\oplus$, which adds a field to a record or, if the label
+% of the field being added
+% is already present in the record, will replace that field with the new
+% field.  This operation is characterized in \nexteg{}.
+% \begin{ex} 
+% If $r$ is a record, $\ell$ is a label and $v$ is some TTR object, then
+% \\
+% \hspace*{1em} $r\oplus[\ell=v]$ is \\
+% \hspace*{2em} $r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$
+% such that $\langle\ell,v'\rangle\in r$\\
+% \hspace*{2em}
+% $(r-\{\langle\ell,r.\ell\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
+% \end{ex} 
+% We are using records here to do the work of partial variable
+% assignments in logic and the $\oplus$-operation carries out the kind
+% of modification which is performed on variable assignments when
+% defining binding in the logical treatment.
 
 In order to be able to characterize the kind of binding involved in
-combining \textit{who} with \textit{Sam hugged} we will define an
-operation, $\oplus$, which adds a field to a record or, if the label
-of the field being added
-is already present in the record, will replace that field with the new
-field.  This operation is characterized in \nexteg{}.
+combining \textit{who} with \textit{Sam hugged} we will use the
+notation $r[\pi=v]$ for a record, $r$, path, $\pi$, and value $v$.
+This notation is characterized in \nexteg{}.
 \begin{ex} 
-If $r$ is a record, $\ell$ is a label and $v$ is some TTR object, then
-\\
-\hspace*{1em} $r\oplus[\ell=v]$ is \\
-\hspace*{2em} $r\cup\{\langle\ell,v\rangle\}$, if there is no $v'$
-such that $\langle\ell,v'\rangle\in r$\\
-\hspace*{2em}
-$(r-\{\langle\ell,r.\ell\rangle\})\cup\{\langle\ell,v\rangle\}$, otherwise 
-\end{ex} 
-We are using records here to do the work of partial variable
-assignments in logic and the $\oplus$-operation carries out the kind
-of modification which is performed on variable assignments when
-defining binding in the logical treatment.  This now gives us what we
-need to characterize the foreground of the content of the relative
+If $r$ is a record, $\pi$ is $\ell_0.\ell_1.\ldots.\ell_n$ where
+$\ell_0,\ell_1,\ldots,\ell_n$ are labels and $v$ is an object of some
+type, then
+\begin{quote}
+  $r[\pi=v]$ is the record, $r'$, exactly like $r$ except for the
+  possible difference that $r'.\pi=v$.
+\end{quote}
+
+\end{ex}
+\begin{shaded}
+  We can make \preveg{} more explicit as in \nexteg{}.
+  \begin{ex} 
+    If $r$ is a record, $\pi$ is $\ell_0.\ell_1.\ldots.\ell_n$ where
+    $\ell_0,\ell_1,\ldots,\ell_n$ are labels and $v$ is an object of some
+    type, then
+    \begin{quote}
+      if $\pi\not\in\mathrm{paths}(r)$, then $r[\pi=v]$ is the
+      smallest record, $r'$, such that
+      \begin{enumerate} 
+        
+      \item $\pi\in\mathrm{paths}(r')$ 
+        
+      \item $r'.\pi=v$
+        
+      \item for any $\pi'\in\mathrm{paths}(r)$,
+        $\pi'\in\mathrm{paths}(r')$ and $r'.\pi'=r.\pi'$
+        
+      \end{enumerate} 
+
+      if $\pi\in\mathrm{paths}(r)$, then $r[\pi=v]$ is the
+      smallest record, $r'$, such that
+      \begin{enumerate} 
+        
+      \item  $\pi\in\mathrm{paths}(r')$ and $r'.\pi=v$
+        
+      \item  for any $\pi'\in(\mathrm{paths}(r)-\{\pi''\mid
+        \pi''\leq\pi\})$, $\pi'\in\mathrm{paths}(r')$ and $r'.\pi'=r.\pi'$
+        
+      \end{enumerate}
+    \end{quote}
+    
+  
+
+  \end{ex} 
+  
+Recall that $\pi_1\leq\pi_2$ as used in \preveg{} means that $\pi_1$
+is an initial subpath of $\pi_2$ (see Chapter~\ref{ch:propnames}, p.~\pageref{ex:subpath}).
+
+\end{shaded}
+
+  
+
+This now gives us what we
+need to characterize the content of the relative
 clause \textit{who Sam hugged}, which we will represent as
 \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged}, as in
 \nexteg{a} which is identical with \nexteg{b}.  \nexteg{b} is in turn
@@ -2351,26 +2409,31 @@ on p.~\pageref{ex:mp-find}.
 \begin{subex} 
  
 \item \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged} = \\
-  \hspace*{1em}$\lambda\mathfrak{s}$:\textit{Rec} . \\
-\hspace*{2em}$\lambda
+  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+\hspace*{2em}$\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   . \\
-\hspace*{3em}\textbf{who}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}]$)
-($\lambda
-  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$)) 
+\hspace*{3em}\textbf{who}($c[\mathfrak{w}.\text{x}_0=r_1.\text{x}]$)
+($\ulcorner\lambda
+  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}($c[\mathfrak{g}.\text{x}_0=r_2.\text{x}]$)$\urcorner$)$\urcorner\urcorner$ 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+\item $\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty}
-      . $P$(\smallrecord{\field{x}{$r_1$.x}}))}}
+      . $P$(\smallrecord{\field{x}{$r_1$.x}}))}}$\urcorner\urcorner$
 
-\item $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+\item $\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug$^\dagger$(sam, $r_1$.x))}} 
+  . \smallrecord{\smalltfield{e}{hug$^\dagger$(sam, $r_1$.x))}}$\urcorner\urcorner$ 
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+
+@@\todo[inline]{Pronouns seem to be missing from resource summaries.  Need to
+  make \textit{who} be NP, COMP and work out combination for COMP and
+  sentence with a gap.}
+
 To form the content of a noun modified by a relative clause such as
 \textit{child who Sam hugged} we use a record type which requires of
 an individual that it has both the property of being a child and being
