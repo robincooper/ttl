@@ -2409,22 +2409,50 @@ on p.~\pageref{ex:mp-find}.
 \begin{subex} 
  
 \item \textbf{who}$^\frown$\textbf{Sam}$^\frown$\textbf{hugged} = \\
-  \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
-\hspace*{2em}$\ulcorner\lambda
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+      \smalltfield{a}{\textit{PropCntxt}}}}}}} . \\
+\hspace*{1em}$\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
   . \\
-\hspace*{3em}\textbf{who}($c[\mathfrak{w}.\text{x}_0=r_1.\text{x}]$)
+\hspace*{2em}\textbf{who}$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$($c[\mathfrak{w}.\text{x}_0=r_1.\text{x}]$)
 ($\ulcorner\lambda
-  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}($c[\mathfrak{g}.\text{x}_0=r_2.\text{x}]$)$\urcorner$)$\urcorner\urcorner$ 
+  r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{Sam}$^\frown$\textbf{hugged}$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$($c[\mathfrak{g}.\text{x}_0=r_2.\text{x}]$)$\urcorner$)$\urcorner\urcorner$ 
  
-\item $\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}} . \\
+\hspace*{1em}$\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug(sam, $\lambda P$:\textit{Ppty}
+  . \smallrecord{\smalltfield{e}{hug($c.\mathfrak{c}.$a.f.x, $\lambda P$:\textit{Ppty}
       . $P$(\smallrecord{\field{x}{$r_1$.x}}))}}$\urcorner\urcorner$
 
-\item $\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+      \smalltfield{a}{\textit{PropCntxt}}}}}}} . $\ulcorner\lambda
   r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \smallrecord{\smalltfield{e}{hug$^\dagger$(sam, $r_1$.x))}}$\urcorner\urcorner$ 
+  . \smallrecord{\smalltfield{e}{hug$^\dagger$($c.\mathfrak{c}.$a.f.x, $r_1$.x))}}$\urcorner\urcorner$ 
  
 \end{subex} 
    
@@ -2432,7 +2460,7 @@ on p.~\pageref{ex:mp-find}.
 
 @@\todo[inline]{Pronouns seem to be missing from resource summaries.  Need to
   make \textit{who} be NP, COMP and work out combination for COMP and
-  sentence with a gap.}
+  sentence with a gap (see notes for this).}
 
 To form the content of a noun modified by a relative clause such as
 \textit{child who Sam hugged} we use a record type which requires of
