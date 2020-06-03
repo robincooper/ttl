@@ -2395,6 +2395,15 @@ is an initial subpath of $\pi_2$ (see Chapter~\ref{ch:propnames}, p.~\pageref{ex
 
 \end{shaded}
 
+We generalize this notation so that we can use a record to modify
+another record.  This is characterized in \nexteg{}, where
+$\mathrm{tpaths}(r)$ represents the set of total paths in $r$ (Chapter~\ref{ch:percint},p.~\pageref{pg:record-paths}).
+\begin{ex} 
+If $r_1$ is a record and $r_2$ is a record such
+$\mathrm{tpaths}(r_2)=\{\pi_1,\ldots,\pi_n\}$, then $r_1[r_2]$ is
+$r_1[\pi_1=r_2.\pi_1]\ldots[\pi_n=r_2.\pi_n]$ 
+\end{ex} 
+  
   
 
 This now gives us what we
@@ -2468,13 +2477,20 @@ associated with the paths `$\mathfrak{w}.\text{x}_i$' (for the
 `$\mathfrak{g}.\text{x}_j$' (for the gap being bound).  The
 discharging of the requirements associated with these two paths will
 involve subtracting them from the types which are passed up to the
-context type for the combined phrase.  As record types are labelled
+context type for the combined phrase.
+
+As record types are labelled
 sets (Chapter~\ref{ch:percint}, p.~\pageref{ex:ndrectypes}ff.), this
 subtraction is based on set-theoretic subtraction.  We will limit what
 can be subtracted to total paths (Chapter~\ref{ch:percint},
-p.~\pageref{ex:paths-rectype}).\todo{Perhaps we should be looking at
-  total paths of the labelled set rather than of the record type
-  (i.e. not going into meets...)}
+p.~\pageref{ex:paths-rectype}).  In \nexteg{} we give a preliminary
+characterization of what it means to subtract a total path, $\pi$,
+from a record type, $T$ which we represent as $T\ominus\pi$.
+\begin{ex} 
+(preliminary) If $T$ is a record type and $\pi\in\mathrm{tpaths}(T)$, then
+$T\ominus\pi$ is the type $T'$ exactly like $T$ except that $\mathrm{tpaths}(T')=\mathrm{tpaths}(T)-\{\pi\}$. 
+\end{ex} 
+This is a preliminary definition because  
 
 @@\todo[inline]{Pronouns seem to be missing from resource summaries.  Need to
   make \textit{who} be NP, COMP and work out combination for COMP and

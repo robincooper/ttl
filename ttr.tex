@@ -953,7 +953,29 @@ $v_n$ ] ]
 \end{quote}
 
 We will sometime says that the occurrences $\ell_1,\ldots,\ell_n$ are
-\textit{sisters} in the record.\label{pg:sisters} 
+\textit{sisters} in the record.\label{pg:sisters}
+
+Records, as labelled sets, will have paths  as defined for labelled
+sets.  However, we will want in addition a more restricted notion of
+path for records which excludes those paths which include the
+distinguished labels used in non-record structures which may be values
+in a record (Chapter~\ref{ch:percint},p.~\pageref{pg:record-paths}).
+
+If $r$ is a record, then
+\begin{enumerate} 
+ 
+\item if $\ell\in\mathrm{labels}(r)$, then $\ell\in\mathrm{paths}_{\text{rec}}(r)$ 
+ 
+\item if $\ell\in\mathrm{labels}(r)$, $r.\ell$ is a record and
+  $\pi\in\mathrm{paths}_{\text{rec}}(r.\ell)$, then $\ell.\pi\in\mathrm{paths}_{\text{rec}}(r)$
+\end{enumerate}  
+
+Similarly, $\mathrm{tpaths}_{\text{rec}}(r)$ is the set of paths,
+$\pi$, such that $\pi\in\mathrm{paths}_{\text{rec}}(r)$ and $r.\pi$ is
+not a record.
+
+We sometimes use `$\mathrm{paths}$' and `$\mathrm{tpaths}$' without the subscript for these
+more restricted notions when there is no risk for confusion.
 
 A value may itself be a record and paths may extend into embedded
 records.  A record which contains records as values is called a {\it
