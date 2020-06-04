@@ -2490,7 +2490,20 @@ from a record type, $T$ which we represent as $T\ominus\pi$.
 (preliminary) If $T$ is a record type and $\pi\in\mathrm{tpaths}(T)$, then
 $T\ominus\pi$ is the type $T'$ exactly like $T$ except that $\mathrm{tpaths}(T')=\mathrm{tpaths}(T)-\{\pi\}$. 
 \end{ex} 
-This is a preliminary definition because  
+This is a preliminary definition because it does not take account of
+what happens if the path that is being removed has dependent fields
+associated with.  Suppose, for example, that the context type
+associated with \textit{who} were \nexteg{} where we represent the
+presupposition that what is associated \textit{who} is a person.
+\begin{ex} 
+  \record{
+    \footnotesize{\textit{Cntxt}}\\
+    \tfield{$\mathfrak{w}$}{\record{
+        \tfield{x$_0$}{\textit{Ind}}}}\\
+    \tfield{$\mathfrak{c}$}{\record{
+        \tfield{e}{person($\Uparrow$$\mathfrak{w}$.x$_0$)}}}}
+\end{ex} 
+  
 
 @@\todo[inline]{Pronouns seem to be missing from resource summaries.  Need to
   make \textit{who} be NP, COMP and work out combination for COMP and
