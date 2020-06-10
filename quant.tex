@@ -2481,15 +2481,44 @@ context type for the combined phrase.
 
 As record types are labelled
 sets (Chapter~\ref{ch:percint}, p.~\pageref{ex:ndrectypes}ff.), this
-subtraction is based on set-theoretic subtraction.  We will limit what
-can be subtracted to total paths (Chapter~\ref{ch:percint},
-p.~\pageref{ex:paths-rectype}).  In \nexteg{} we give a preliminary
-characterization of what it means to subtract a total path, $\pi$,
-from a record type, $T$ which we represent as $T\ominus\pi$.
+subtraction is based on set-theoretic subtraction.  % We will limit what
+% can be subtracted to total paths (Chapter~\ref{ch:percint},
+% p.~\pageref{ex:paths-rectype}).  In \nexteg{} we give a preliminary
+% characterization of what it means to subtract a total path, $\pi$,
+% from a record type, $T$ which we represent as $T\ominus\pi$.
+% \begin{ex} 
+% (preliminary) If $T$ is a record type and $\pi\in\mathrm{tpaths}(T)$, then
+% $T\ominus\pi$ is the type $T'$ exactly like $T$ except that $\mathrm{tpaths}(T')=\mathrm{tpaths}(T)-\{\pi\}$. 
+% \end{ex}
+
+We first define what it means to subtract the field labelled $\ell$
+from an assignment type, $T$, in \nexteg{}.
 \begin{ex} 
-(preliminary) If $T$ is a record type and $\pi\in\mathrm{tpaths}(T)$, then
-$T\ominus\pi$ is the type $T'$ exactly like $T$ except that $\mathrm{tpaths}(T')=\mathrm{tpaths}(T)-\{\pi\}$. 
+  If $T$ is $\textit{Assgnmnt}\wedge T'$ and
+  $\ell\in\mathrm{labels}(T')$, then
+  \begin{enumerate} 
+    
+  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
+    
+  \item otherwise, $T\ominus\ell=\textit{Assgnmnt}\wedge (T'-\{\langle\ell,T'.\ell\rangle\})$ 
+    
+  \end{enumerate} 
+    
 \end{ex} 
+Based on \preveg{} we can define the subtraction of a path to an
+assignment in a context type given in \nexteg{}.
+\begin{ex} (preliminary)
+  
+  If $T\sqsubseteq$ \smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\ell_1$}{\smallrecord{
+        \footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{$\ell_2$}{\textit{Ind}}}}}, then
+  $T\ominus\ell_1.\ell_2$ is $T$\fbox{\d{$\wedge$}}\smallrecord{
+    \smalltfield{$\ell_1$}{$(T.\ell_1\ominus\ell_2)$}}
+\end{ex} 
+  
+
 This is a preliminary definition because it does not take account of
 what happens if the path that is being removed has dependent fields
 associated with.  Suppose, for example, that the context type
@@ -2502,10 +2531,45 @@ presupposition that what is associated \textit{who} is a person.
         \tfield{x$_0$}{\textit{Ind}}}}\\
     \tfield{$\mathfrak{c}$}{\record{
         \tfield{e}{person($\Uparrow$$\mathfrak{w}$.x$_0$)}}}}
+\end{ex}
+Suppose that $T$ is \preveg{}. Then $T\ominus\mathfrak{w}.\text{x}_0$
+according to our present definition would be \nexteg{} which is not a
+record type since there is a dependence on `$\mathfrak{w}.\text{x}_0$'
+but there is no such path.
+\begin{ex} 
+ \record{
+    \footnotesize{\textit{Cntxt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\record{
+        \tfield{e}{person($\Uparrow$$\mathfrak{w}$.x$_0$)}}}}
 \end{ex} 
+The solution to this is to extend the definition of subtraction so
+that it removes not only the path referred to but also those paths
+that depend on it.  Thus the result of
+$T\ominus\mathfrak{w}.\text{x}_0$ should rather be \nexteg{}.
+\begin{ex} 
+\record{
+    \footnotesize{\textit{Cntxt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex} 
+In this particular case, the resulting type, \preveg{}, is actually
+identical with \textit{Cntxt}.
+
+\begin{shaded}
+Actually, things are more complicated that this.  For any path we
+remove by this method we must recursively remove all the dependencies
+on that path.  Thus if something had depended on
+`$\mathfrak{c}.\text{e}$' in the above example we would have had to
+remove that and so on. @@
+\end{shaded}
+
   
 
-@@\todo[inline]{Pronouns seem to be missing from resource summaries.  Need to
+@@\todo[inline]{Pronouns seem to be missing from resource summaries.
+  Also new notation for \textit{Sign}\d{$\wedge$}\ldots in summaries
+  ch 6 and elsewhere?  Add qud to \textit{(Init)InfoState} at some
+  point? Need to
   make \textit{who} be NP, COMP and work out combination for COMP and
   sentence with a gap (see notes for this).}
 
