@@ -2542,6 +2542,7 @@ but there is no such path.
     \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\record{
         \tfield{e}{person($\Uparrow$$\mathfrak{w}$.x$_0$)}}}}
+\label{ex:who-person}
 \end{ex} 
 The solution to this is to extend the definition of subtraction so
 that it removes not only the path referred to but also those paths
@@ -2561,7 +2562,64 @@ Actually, things are more complicated that this.  For any path we
 remove by this method we must recursively remove all the dependencies
 on that path.  Thus if something had depended on
 `$\mathfrak{c}.\text{e}$' in the above example we would have had to
-remove that and so on. @@
+remove that and so on. In our context types, as defined here, all the
+dependencies on assignments will occur under the label
+`$\mathfrak{c}$', that is, in the propositional context.  It is
+perhaps most straightforward to use the unique identifier notation
+introduced in Chapter~\ref{ch:infex},
+p.~\pageref{pg:unique-identifier-notation}, in order to identify paths
+which depend on another path.  Consider again
+(\ref{ex:who-person}). In unique identifier notation this is
+\nexteg{}.
+\begin{ex}
+  \record{
+    \footnotesize{\textit{Cntxt}}\\
+    \tfield{$\mathfrak{w}$}{\record{
+        \tfield{x$_{0_\text{\fbox{0}}}$}{\textit{Ind}}}}\\
+    \tfield{$\mathfrak{c}$}{\record{
+        \tfield{e}{person(\fbox{0})}}}}
+\end{ex}
+In \preveg{}, the path `$\mathfrak{c}$.e' depends on
+`$\mathfrak{w}$.x$_0$'  because the representation of the type at the
+former contains the unique identifier which indexes the latter.  We
+give a general characterization of dependency between paths in a
+record type in \nexteg{}.
+\begin{ex} 
+If $T$ is a record type, $\pi_1\in\mathrm{paths}(T)$ and
+$\pi_2\in\mathrm{tpaths}(T)$, then $\pi_2$ \textit{depends on} $\pi_1$
+iff, in unique identifier notation, $\pi_1$ is indexed with \fbox{$i$}
+and the representation of $T.\pi_2$ contains \fbox{$i$}, for some
+natural number $i$.
+\end{ex} 
+Given this notion of dependency it is then possible to define the set
+of paths in a record type, $T$, which constitute a dependency family on some
+particular path, $\pi$, which we will represent as
+$\mathrm{paths}_{\pi}(T)$.  This is given in \nexteg{}.
+\begin{ex} 
+If $T$ is a record type and $\pi\in\mathrm{paths}(T)$ then \textit{the
+  dependenvy family of $\pi$ in $T$},
+$\mathrm{paths}_\pi(T)$, is that subset, $\Pi$, of $\mathrm{paths}(T)$
+such that
+\begin{enumerate} 
+ 
+\item $\pi\in\Pi$ 
+ 
+\item for any $\pi'\in\Pi$ and $\pi''\in\mathrm{tpaths}(T)$, if
+  $\pi''$ depends on $\pi'$, then $\pi''\in\Pi$
+
+\item for and $\pi'\in\Pi$ and $\pi''\in\mathrm{paths}(T)$, if $\pi'$
+  depends on $\pi''$, then $\pi''\in\Pi$
+ 
+\end{enumerate} 
+  
+\end{ex}
+That is, the dependency family of $\pi$ includes $\pi$ itself,
+anything that depends on anything in the dependency family and
+anything on which something in the dependency family depends.  This
+dependency family gives rise to a generalization of the original type,
+$T$, which we will call \textit{$T$ generalized to $\pi$}, $T^\pi$.
+  
+  
 \end{shaded}
 
   
