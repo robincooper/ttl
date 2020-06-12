@@ -2518,7 +2518,8 @@ assignment in a context type given in \nexteg{}.
     \smalltfield{$\ell_1$}{$(T.\ell_1\ominus\ell_2)$}}
 \end{ex} 
   
-
+\begin{shaded}
+  
 This is a preliminary definition because it does not take account of
 what happens if the path that is being removed has dependent fields
 associated with.  Suppose, for example, that the context type
@@ -2557,7 +2558,7 @@ $T\ominus\mathfrak{w}.\text{x}_0$ should rather be \nexteg{}.
 In this particular case, the resulting type, \preveg{}, is actually
 identical with \textit{Cntxt}.
 
-\begin{shaded}
+
 Actually, things are more complicated that this.  For any path we
 remove by this method we must recursively remove all the dependencies
 on that path.  Thus if something had depended on
@@ -2618,6 +2619,72 @@ anything that depends on anything in the dependency family and
 anything on which something in the dependency family depends.  This
 dependency family gives rise to a generalization of the original type,
 $T$, which we will call \textit{$T$ generalized to $\pi$}, $T^\pi$.
+We define this in \nexteg{}.
+\begin{ex} 
+If $T$ is a record type and $\pi\in\mathrm{paths}(T)$, then $T$
+\textit{generalized to} $\pi$, $T^\pi$, is the smallest labelled set $T'$ such
+that $\mathrm{paths}_\pi(T)\subseteq\mathrm{paths}(T')$ and for all
+$\pi'\in\mathrm{tpaths}(T')$, $T'.\pi=T.\pi$ 
+\end{ex} 
+This notion of generalization is important if we wish to associate
+presuppositions with \textit{wh}-phrases and extract them from the
+context type for local accommodation at the point at which the
+\textit{wh}-phrase binds a gap.
+
+We can now generalize the subtraction operation, $\ominus$, as in
+\nexteg{}.
+\begin{ex} 
+\begin{enumerate} 
+ 
+\item If $T$ is a record type, $\pi\in\mathrm{paths}(T)$ and
+  $\mathrm{paths}_\pi(T)=\{\pi_1,\pi_n\}$, then
+  \begin{quote}
+    $T\ominus\mathrm{paths}_\pi(T)$ is
+    $T\ominus\pi\ominus\pi_1\ldots\ominus\pi_n$
+  \end{quote}
+  
+ 
+\item If $T$ is $\textit{Assgnmnt}\wedge T'$ and
+  $\ell\in\mathrm{labels}(T')$, then
+  \begin{enumerate} 
+    
+  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
+    
+  \item otherwise, $T\ominus\ell=\textit{Assgnmnt}\wedge (T'-\{\langle\ell,T'.\ell\rangle\})$ 
+    
+  \end{enumerate}
+  
+\item If $T$ is $\textit{PropCntxt}\wedge T'$ and
+  $\ell\in\mathrm{labels}(T')$, then
+  \begin{enumerate} 
+    
+  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\ell=\textit{PropCntxt}\wedge(T'-\{\langle\ell,T'.\ell\rangle\})$ 
+    
+  \end{enumerate} 
+
+\item If $T$ is $\textit{PropCntxt}\wedge T'$ and
+  $\ell.\pi\in\mathrm{tpaths}(T')$ then
+  \begin{quote}
+    $T\ominus\ell.\pi=\textit{PropCntxt}\wedge T'$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\ell$}{$T'.\ell\ominus\pi$}}
+  \end{quote}
+
+\item Otherwise, if $T$ is a labelled set, then
+  \begin{enumerate}
+  \item if $\ell.\pi\in\mathrm{tpaths}(T)$, $T\ominus\ell.\pi=T'$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\ell$}{$T.\ell\ominus\pi$}}
+  \item otherwise, $T\ominus\pi$ is $T$
+  \end{enumerate}
+
+  
+ 
+\end{enumerate} 
+   
+\end{ex} 
+  
+
   
   
 \end{shaded}
