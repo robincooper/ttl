@@ -2522,9 +2522,9 @@ assignment in a context type given in \nexteg{}.
   
 This is a preliminary definition because it does not take account of
 what happens if the path that is being removed has dependent fields
-associated with.  Suppose, for example, that the context type
+associated with it.  Suppose, for example, that the context type
 associated with \textit{who} were \nexteg{} where we represent the
-presupposition that what is associated \textit{who} is a person.
+presupposition that what is associated with \textit{who} is a person.
 \begin{ex} 
   \record{
     \footnotesize{\textit{Cntxt}}\\
@@ -2689,7 +2689,53 @@ We can now generalize the subtraction operation, $\ominus$, as in
   
 \end{shaded}
 
-  
+We can now create a preliminary definition of combination based on
+functional application for \textit{wh}-phrases and sentences with
+gaps, `@$_{\mathrm{wh}}$', characterized in \nexteg{}.
+\begin{ex} 
+  (preliminary)
+
+  If $\alpha$ : \smallrecord{
+    \smalltfield{bg}{\textit{CntxtType}}\\
+    \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
+  $\beta$ : \smallrecord{
+    \smalltfield{bg}{\textit{CntxtType}}\\
+    \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
+  $\alpha$.bg $\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
+  $i$, and
+  $\beta$.bg $\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
+  $j$, then \textit{the \textit{wh}-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}}\beta$, is
+    \begin{quote}
+      $\ulcorner\lambda
+      c$:([$\alpha$.bg$\ominus\mathfrak{w}.\text{x}_i$]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathfrak{g}.\text{x}_j]_{\mathfrak{c}\leadsto\mathfrak{c}.a})$)
+      .
+      \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:\smallrecord{
+        \smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{$\mathfrak{w}$}{\smallrecord{
+            \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
+      \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c[r_1])$
+      ($\mathfrak{P}(\ulcorner\lambda r_2$:\smallrecord{
+        \smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{$\mathfrak{g}$}{\smallrecord{
+            \smallmfield{x$_j$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
+      \hspace*{13em}$\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+    \end{quote}
+    
+\end{ex} 
+\begin{shaded}
+We can adjust \preveg{} to take account of any presuppositions
+introduced by the \textit{wh} and gap interpretations as in \nexteg{}.
+\begin{ex} 
+ 
+\end{ex} 
+Island constraints  
+\end{shaded}
+
 
 @@\todo[inline]{Pronouns seem to be missing from resource summaries.
   Also new notation for \textit{Sign}\d{$\wedge$}\ldots in summaries
