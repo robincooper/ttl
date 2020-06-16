@@ -2695,45 +2695,94 @@ gaps, `@$_{\mathrm{wh}}$', characterized in \nexteg{}.
 \begin{ex} 
   (preliminary)
 
-  If $\alpha$ : \smallrecord{
-    \smalltfield{bg}{\textit{CntxtType}}\\
-    \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
-  $\beta$ : \smallrecord{
-    \smalltfield{bg}{\textit{CntxtType}}\\
-    \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
-  $\alpha$.bg $\sqsubseteq$ \smallrecord{
-    \smalltfield{$\mathfrak{w}$}{\smallrecord{
-        \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
-  $i$, and
-  $\beta$.bg $\sqsubseteq$ \smallrecord{
-    \smalltfield{$\mathfrak{g}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
-  $j$, then \textit{the \textit{wh}-combination of $\alpha$ and
-    $\beta$}, $\alpha\text{@}_{\mathrm{wh}}\beta$, is
-    \begin{quote}
-      $\ulcorner\lambda
-      c$:([$\alpha$.bg$\ominus\mathfrak{w}.\text{x}_i$]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathfrak{g}.\text{x}_j]_{\mathfrak{c}\leadsto\mathfrak{c}.a})$)
-      .
-      \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:\smallrecord{
-        \smalltfield{x}{\textit{Ind}}\\
-        \smalltfield{$\mathfrak{w}$}{\smallrecord{
-            \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
-      \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c[r_1])$
-      ($\mathfrak{P}(\ulcorner\lambda r_2$:\smallrecord{
-        \smalltfield{x}{\textit{Ind}}\\
-        \smalltfield{$\mathfrak{g}$}{\smallrecord{
-            \smallmfield{x$_j$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
-      \hspace*{13em}$\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c[r_2])\urcorner)$)$\urcorner)\urcorner$
-    \end{quote}
+  If
+  \begin{enumerate}
+  \item $\alpha$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
     
-\end{ex} 
+  \item $\beta$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
+    
+  \item $\alpha$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{w}$}{\smallrecord{
+          \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
+    $i$, and
+    
+  \item $\beta$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{g}$}{\smallrecord{
+          \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
+    $j$,
+  \end{enumerate}
+  then \textit{the \textit{wh}-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda
+    c$:([$\alpha$.bg$\ominus\mathfrak{w}.\text{x}_i$]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathfrak{g}.\text{x}_j]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    .
+    \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:\smallrecord{
+      \smalltfield{x}{\textit{Ind}}\\
+      \smalltfield{$\mathfrak{w}$}{\smallrecord{
+          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
+    \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c[r_1])$
+    ($\mathfrak{P}(\ulcorner\lambda r_2$:\smallrecord{
+      \smalltfield{x}{\textit{Ind}}\\
+      \smalltfield{$\mathfrak{g}$}{\smallrecord{
+          \smallmfield{x$_j$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
+    \hspace*{13em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+  \end{quote}
+  
+\end{ex}
+Recall that $\mathfrak{P}(P)$ represents the purification of the
+property $P$ defined in (\ref{ex:purification}) on p.~\pageref{ex:purification}.
+ 
 \begin{shaded}
 We can adjust \preveg{} to take account of any presuppositions
 introduced by the \textit{wh} and gap interpretations as in \nexteg{}.
 \begin{ex} 
- 
-\end{ex} 
-Island constraints  
+  If
+  \begin{enumerate}
+  \item $\alpha$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
+    
+  \item $\beta$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
+    
+  \item $\alpha$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{w}$}{\smallrecord{
+          \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
+    $i$, and
+    
+  \item $\beta$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{g}$}{\smallrecord{
+          \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
+    $j$,
+  \end{enumerate}
+  then \textit{the \textit{wh}-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda
+    c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
+    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    . \\
+    \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
+    \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
+    ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
+    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+  \end{quote} 
+\end{ex}
+The effect of the property purification here will be to locally
+accommodate whatever presuppositions are associated
+`$\mathfrak{w}.\text{x}_i$' or `$\mathfrak{g}.\text{x}_j$' at the
+level at which the \textit{wh}-binding takes place.
+  
+We leave the treatment of contraints on long distance dependencies
+like \textit{wh}-constructions (such as \textit{island constraints})
+to future work.  The strategy for handling these would be to elaborate
+on the conditions 1.--4. in \preveg{}.
 \end{shaded}
 
 
