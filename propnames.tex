@@ -572,9 +572,27 @@ been replaced by the path $\pi_2$.
 
 \begin{shaded}
 If $T$ is a record type, the notation $[T]_{\pi_1\leadsto\pi_2}$ refers to the type
-like $T$ except that the path $\pi_1$ has been replaced by $\pi_2$. If
-$r$ is a record, then $[r]_{\pi_1\leadsto\pi_2}$ is defined similarly
-except in the special case where $r$ is of the type \nexteg{}
+like $T$ except that the path $\pi_1$ has been replaced by
+$\pi_2$ provided that $\pi_1\leadsto\pi_2$ represents an appropriate
+relabelling for $T$ as characterized below on
+pp.~\pageref{pg:relabelling-intro}\textit{ff}.  Otherwise
+$[T]_{\pi_1\leadsto\pi_2}$ is $T$.
+
+If $f$ is a function of the form $\lambda v\!:\!T\
+.\ \varphi\dep{v}$ then we use $[f]_{\pi_1\leadsto\pi_2}$ to
+represent \nexteg{}.
+\begin{ex}
+$\lambda v\!:\![T]_{\pi_1\leadsto\pi_2}\
+.\ [\varphi\dep{v}]_{v.\pi_1/v\pi_2}$
+\end{ex}
+where $[\varphi\dep{v}]_{v.\pi_1/v.\pi_2}$ is exactly like
+$\varphi\dep{v}$ except that any instance of $v.\pi_1$ is replaced by
+$v.\pi_2$.
+
+If
+$r$ is a record % , then $[r]_{\pi_1\leadsto\pi_2}$ is defined similarly
+% except in the special case where $r$ is 
+of the type \nexteg{}
 \begin{ex} 
 \record{
   \tfield{bg}{\textit{CntxtType}}\\
@@ -588,13 +606,9 @@ $[r]_{\pi_1\leadsto\pi_2}$ to represent the record in \nexteg{}
   \field{bg}{$[r.\text{bg}]_{\pi_1\leadsto\pi_2}$}\\
   \field{fg}{$[r.\text{fg}]_{\pi_1\leadsto\pi_2}$}}
 \end{ex}
-If $f$ is a function of the form $\lambda v\!:\!T\
-.\ \varphi\dep{v}$ then we use $[f]_{\pi_1\leadsto\pi_2}$ to
-represent \nexteg{}.
-\begin{ex}
-$\lambda v\!:\![T]_{\pi_1\leadsto\pi_2}\
-.\ [\varphi]_{\pi_1\leadsto\pi_2}\dep{v}$
-\end{ex}
+
+
+
 Otherwise $[o]_{\pi_1\leadsto\pi_2}$ refers to $o$.
 \end{shaded}
 
@@ -1040,7 +1054,8 @@ in $\mathcal{L}^\pi$ such that
 
   
 \item if $\pi\in\mathrm{paths}(T)-\mathrm{dom}(\eta)$, then it is not
-  the case for any $\pi'\in\mathrm{dom}(\eta)$ that $\eta(\pi')=\pi$
+  the case for any $\pi'\in\mathrm{dom}(\eta)$ that $\eta(\pi')=\pi$,
+  unless $\pi'<\eta(\pi')$
  
 \end{enumerate} 
   
