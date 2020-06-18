@@ -2317,7 +2317,43 @@ $\ulcorner\lambda c$:\smallrecord{
       \smalltfield{x$_0$}{\textit{Ind}}}}}
 . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}.\text{x}_0$}})$\urcorner$ 
 \end{ex}
+This content is identical with the universal resource `SemWhPron' and
+is exactly parallel to `SemPron' but using the context label
+`$\mathfrak{w}$' rather than `$\mathfrak{s}$'.  There will also be a
+universal lexical resource `LexWhPron' parallel to `LexPron',
+characterized in \nexteg{}.
+\begin{ex} 
+If $T_{\text{phon}}$ is a phonological type, then
+LexWhPron($T_{\text{phon}}$) is
+\begin{quote}
+Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+\smallrecord{\smallmfield{cont}{SemWhPron}{\textit{PQuant}}}
+\end{quote} 
+\end{ex} 
+\preveg{} makes a \textit{wh}-word such as \textit{who} into a noun
+phrase and this is important, for instance, if it occurs in a noun
+phrase position such as the subject or object of a sentence.  However,
+these phrases also have a role as complementizers as \textit{who} does
+in relative clauses, that is in a fronted position in the sentence and
+not in a argument position to a verb or preposition.  It is important
+in this case to recognize that this is a \textit{wh}-NP, that is, an
+NP with a \textit{wh}-content.  For this we have the type in \nexteg{}
+which we can abbreviate as \textit{WhNP}.
+\begin{ex} 
+  \record{
+    \footnotesize{\textit{NP}}\\
+    \mfield{cont}{SemWhPron}{\textit{PQuant}}}
+\end{ex} 
+A more general way of characterizing the type \textit{WhNP} is to
+treat it as a basic type with the witness condition in \nexteg{}.
+\begin{ex} 
+$u$ : \textit{WhNP} iff $u$ : \textit{NP}, $u$.cont is $\mathcal{Q}$ and
+$\mathcal{Q}.\text{bg}\sqsubseteq$\smallrecord{
+  \smalltfield{$\mathfrak{w}$}{\smallrecord{
+      \smalltfield{x$_i$}{\textit{Ind}}}}}, for some natural number $i$.
 
+\end{ex} 
+  
 
 
 % In order to be able to characterize the kind of binding involved in
@@ -2782,11 +2818,13 @@ level at which the \textit{wh}-binding takes place.
 We leave the treatment of contraints on long distance dependencies
 like \textit{wh}-constructions (such as \textit{island constraints})
 to future work.  The strategy for handling these would be to elaborate
-on the conditions 1.--4. in \preveg{}.
+on the conditions 1.--4. in \preveg{} or as conditions associated with
+constituent structure rules.
 \end{shaded}
+\todo{Introduce slash categories for hug etc. before doing phrase
+  structure of wh+S/NP}
 
-
-@@\todo[inline]{Pronouns seem to be missing from resource summaries.
+@@\todo[inline]{In LexPron we seem to have cnt instead of cont.  Pronouns seem to be missing from resource summaries.
   Also new notation for \textit{Sign}\d{$\wedge$}\ldots in summaries
   ch 6 and elsewhere?  Add qud to \textit{(Init)InfoState} at some
   point? Need to
