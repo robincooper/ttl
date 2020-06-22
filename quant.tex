@@ -2751,8 +2751,8 @@ gaps, `@$_{\mathrm{wh}}$', characterized in \nexteg{}.
           \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
     $j$,
   \end{enumerate}
-  then \textit{the \textit{wh}-combination of $\alpha$ and
-    $\beta$}, $\alpha\text{@}_{\mathrm{wh}}\beta$, is
+  then \textit{the \textit{wh}$_{i,j}$-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
   \begin{quote}
     $\ulcorner\lambda
     c$:([$\alpha$.bg$\ominus\mathfrak{w}.\text{x}_i$]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathfrak{g}.\text{x}_j]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
@@ -2797,8 +2797,8 @@ introduced by the \textit{wh} and gap interpretations as in \nexteg{}.
           \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
     $j$,
   \end{enumerate}
-  then \textit{the \textit{wh}-combination of $\alpha$ and
-    $\beta$}, $\alpha\text{@}_{\mathrm{wh}}\beta$, is
+  then \textit{the \textit{wh}$_{i,j}$-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
   \begin{quote}
     $\ulcorner\lambda
     c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
@@ -2821,8 +2821,26 @@ to future work.  The strategy for handling these would be to elaborate
 on the conditions 1.--4. in \preveg{} or as conditions associated with
 constituent structure rules.
 \end{shaded}
-\todo{Introduce slash categories for hug etc. before doing phrase
-  structure of wh+S/NP}
+We can then define a version of `ContForwardApp' (forward application
+of contents) based on wh$_{i,j}$-combination as given in \nexteg{}.
+\begin{ex} 
+If $T_{\text{fun}}$, $T_{\text{arg}}$ and $T_{\text{res}}$ are types
+such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
+$\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
+$T_{\text{res}}$, then
+\begin{quote}
+  ContForwardApp$_{\text{@}_{wh_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u$:\smallrecord{
+    \smalltfield{cont}{$T_{\text{fun}}$}}$^\frown$\smallrecord{
+    \smalltfield{cont}{$T_{\text{arg}}$}} . \smallrecord{
+    \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
+\end{quote}
+  
+\end{ex} 
+  
 
 @@\todo[inline]{In LexPron we seem to have cnt instead of cont.  Pronouns seem to be missing from resource summaries.
   Also new notation for \textit{Sign}\d{$\wedge$}\ldots in summaries
