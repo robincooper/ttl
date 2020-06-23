@@ -2839,10 +2839,71 @@ is
     \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
 \end{quote}
   
+\end{ex}
+We can then characterize a notation for phrase structure rules which
+use `ContForwardApp$_{\text{@}_{wh_{i,j}}}$' as in \nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign
+  types, $T_{\text{daughter}_1}\sqsubseteq$\smallrecord{
+    \smallmfield{cont}{$c_1$}{\textit{Cont}}} where
+  $c_1.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}, $T_{\text{daughter}_2}\sqsubseteq$\smallrecord{
+    \smallmfield{cont}{$c_2$}{\textit{Cont}}} where
+  $c_2.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+T_{\text{daughter}_1}'(_{\text{@}_{wh_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@}_{wh_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote}  
+ 
+\end{ex} 
+We introduce a sign type \textit{Rel} which
+requires the category to be `rel' for relative clause  and types
+\textit{NP}$_{\text{wh}_i}$ and \textit{S}/$j$ whose witness
+conditions are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\alpha:\textit{NP}_{\text{wh}_i}$ iff $\alpha:\textit{NP}$ and
+  $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}
+ 
+\item $\alpha:\textit{S}/j$ iff $\alpha:\textit{S}$ and $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+The slash notation `$\textit{S}/j$' is derived from the use of slash
+categories to represent constituents containing gaps in Generalized
+Phrase Structure Grammar \citep{GazdarKleinPullumSag1985}  and Head
+Driven Phrase Structure Grammar \citep{Sag:Wasow:ea:03}.
+
+We can now add the rule in \nexteg{} to the language specific
+resources for English.
+\begin{ex} 
+\textit{Rel} $\longrightarrow$ \textit{NP}$_{\text{wh}_i}$
+\textit{S}/$j$ $\mid$
+   \textit{NP}$_{\text{wh}_i}'$($_{\text{@}_{\text{wh}_{i,j}}}$\textit{S}/$j'$:\textit{PRecType}):\textit{PPpty} 
 \end{ex} 
   
+  
 
-@@\todo[inline]{In LexPron we seem to have cnt instead of cont.  Pronouns seem to be missing from resource summaries.
+@@\todo[inline]{Should the types in rules be parametric?  Does
+  \textit{PRecType} exist? -- Yes!  In LexPron we seem to have cnt instead of cont.  Pronouns seem to be missing from resource summaries.
   Also new notation for \textit{Sign}\d{$\wedge$}\ldots in summaries
   ch 6 and elsewhere?  Add qud to \textit{(Init)InfoState} at some
   point? Need to
