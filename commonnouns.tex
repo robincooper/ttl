@@ -4461,24 +4461,31 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
   $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ 
 
   
-\item[\textnormal{\textit{S}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
+\item[\textnormal{\textit{S}}] ---  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{NP}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}})
+\item[\textnormal{\textit{NP}}] ---  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}}
 
   
-\item[\textnormal{\textit{Det}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}})
+\item[\textnormal{\textit{Det}}] ---  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{N}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}})
+\item[\textnormal{\textit{N}}] ---  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{V}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}})
+\item[\textnormal{\textit{V}}] ---  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}}
   
-\item[\textnormal{\textit{VP}}] --- (\textit{Sign} \d{$\wedge$}
-  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}})
+\item[\textnormal{\textit{VP}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
 
   
 \item[\textnormal{\textit{NoDaughters}}] ---
@@ -4860,7 +4867,7 @@ If $T_{\text{phon}}$ is a phonological type, then
 LexPron($T_{\text{phon}}$) is
 \begin{quote}
 Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
-\smallrecord{\smallmfield{cnt}{SemPron}{\textit{PQuant}}}
+\smallrecord{\smallmfield{cont}{SemPron}{\textit{PQuant}}}
 \end{quote}
 
 \item[\textnormal{SemNumeral($n$)} New!] \mbox{}
@@ -5751,6 +5758,7 @@ $e$ : temperature$(r)$ if
 \begin{tabbing}
     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
     \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
+    \> Lex$_{\mathrm{Pron}}$(``he''), \\
     \> Lex$_{\mathrm{numeral}}$(``nine'', 9) \textbf{New!}, \\
     \> Lex$_{\mathrm{numeral}}$(``ninety'', 90) \textbf{New!}, \\ 
     \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
@@ -5807,7 +5815,7 @@ u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallt
   \begin{tabbing}
     \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
     \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
-    \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{Ppty}):\textit{Quant}
+    \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{PPpty}):\textit{PQuant}
     \textbf{Revised!},\\
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
     \d{\d{$\wedge$}} CnstrIsA, \\
