@@ -1573,7 +1573,7 @@ is given in \nexteg{}.
 \item $X:\overline{\text{few}_a^w(P)}$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|\geq|\down{\mathfrak{T}(P)}|-\theta_{\text{few}_a}(P)$ 
  
@@ -1592,7 +1592,7 @@ The proportional case is given in \nexteg{}.
 \item $X:\overline{\text{few}_p^w(P)}$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $\frac{|X|}{|\down{\mathfrak{T}(P)}|}\geq 1-\theta_{\text{few}_p}(P)$ 
  
@@ -1612,7 +1612,7 @@ for $\overline{\text{few}_a^w(P)}$ is given in \nexteg{}.
 $X:\overline{\text{few}_a^w(P)}$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
 $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$
@@ -1626,7 +1626,7 @@ The witness condition for $\overline{\text{few}_p^w(P)}$ is given in
 $X:\overline{\text{few}_p^w(P)}$ iff
 \begin{enumerate} 
  
-\item $X:\{\mathfrak{T}(P)\}$ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
   $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq1-\theta_{\text{few}_p}(P)$  
@@ -2926,9 +2926,57 @@ hugged by Sam as given in \nexteg{}.
   . \\
   \hspace*{2em}\record{
     \tfield{e$_1$}{child$'$\{$r$.x\}}\\
-    \tfield{e$_2$}{\textbf{who$^\frown$Sam$^\frown$hugged}($c$)\{$r$.x\}}}$\urcorner\urcorner$  
+    \tfield{e$_2$}{\textbf{who$^\frown$Sam$^\frown$hugged$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}$}($c$)\{$r$.x\}}}$\urcorner\urcorner$  
+\end{ex}
+
+In order to achieve this we will first introduce an operation of
+property conjunction in \nexteg{}.
+\begin{ex} 
+If $P_1:\textit{Ppty}$ and $P_2:\textit{Ppty}$ such that
+$P_1.\text{bg}=P_2.\text{bg}=$ \smallrecord{
+  \smalltfield{x}{$T$}} for some type $T$, then \textit{the conjunction of $P_1$ and
+  $P_2$}, $P_1\&P_2$, is
+\begin{quote}
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{$T$}} .
+  \record{
+    \tfield{e$_1$}{$P_1\{r.\text{x}\}$}\\
+    \tfield{e$_2$}{$P_2\{r.\text{x}\}$}}$\urcorner$
+\end{quote}
+
+\end{ex}
+We can now characterize a combination operation, @$_{\&}$, in
+\nexteg{}.
+\begin{ex}
+  \begin{tabbing}
+  If \=$\alpha$ : \smallrecord{
+    \smalltfield{bg}{\textit{CntxtType}}\\
+    \smalltfield{fg}{(bg$\rightarrow$\textit{Ppty})}},\\
+  \>$\beta$ :
+  \smallrecord{
+    \smalltfield{bg}{\textit{CntxtType}}\\
+    \smalltfield{fg}{(bg$\rightarrow$\textit{Ppty})}} and \\
+  \>for \=some
+  type, $T$, \\
+  \>\>for any $c$, $c:\alpha.\text{bg}$ implies $\alpha(c).\text{bg}$ =
+  \smallrecord{
+    \smalltfield{x}{$T$}} and \\
+  \>\>for any $c$, $c:\beta.\text{bg}$ implies
+  $\beta(c).\text{bg}$ = \smallrecord{
+    \smalltfield{x}{$T$}},\\
+  then \textit{the property conjunction
+    combination} of $\alpha$ and $\beta$, $\alpha\text{@}_{\&}\beta$,
+  is
+  \end{tabbing}
+\begin{quote}
+  $\lambda
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+\end{quote}
 \end{ex} 
-@@\todo{[Has the $P\{x\}$ notation already been introduced?]}
+  
+  
+@@
   
         
 
