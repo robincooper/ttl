@@ -2930,11 +2930,32 @@ hugged by Sam as given in \nexteg{}.
 \end{ex}
 
 In order to achieve this we will first introduce an operation of
-property conjunction in \nexteg{}.
+property conjunction in \nexteg{}.  As a preliminary, we introduce
+types for properties and parametric properties of particular types of
+objects.  This is done in \nexteg{}.
 \begin{ex} 
-If $P_1:\textit{Ppty}$ and $P_2:\textit{Ppty}$ such that
-$P_1.\text{bg}=P_2.\text{bg}=$ \smallrecord{
-  \smalltfield{x}{$T$}} for some type $T$, then \textit{the conjunction of $P_1$ and
+\begin{subex} 
+ 
+\item If $T$ is a type, then $^T\textit{Ppty}$ is a type -- ``the type
+  of properties of objects of type $T$'' 
+ 
+\item $P:{^T\textit{Ppty}}$ iff $P:\textit{Ppty}$ and
+  $P.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{x}{$T$}}
+  
+\item If $T$ is a type, then $^T\textit{PPpty}$ is a type -- ``the type
+  of parametric properties of objects of type $T$''
+  
+\item $\mathcal{P}:{^T\textit{PPpty}}$ iff
+  $\mathcal{P}:\textit{PPpty}$ and for any $c:\mathcal{P}.\text{bg}$, $\mathcal{P}(c):{^T\textit{Ppty}}$
+ 
+\end{subex} 
+   
+\end{ex}
+We can now characterize property conjunction as in \nexteg{}.
+\begin{ex} 
+If $T$ is a type, $P_1:{^T\textit{Ppty}}$ and $P_2:{^T\textit{Ppty}}$,
+then \textit{the conjunction of $P_1$ and
   $P_2$}, $P_1\&P_2$, is
 \begin{quote}
   $\ulcorner\lambda r$:\smallrecord{
@@ -2948,32 +2969,54 @@ $P_1.\text{bg}=P_2.\text{bg}=$ \smallrecord{
 We can now characterize a combination operation, @$_{\&}$, in
 \nexteg{}.
 \begin{ex}
-  \begin{tabbing}
-  If \=$\alpha$ : \smallrecord{
-    \smalltfield{bg}{\textit{CntxtType}}\\
-    \smalltfield{fg}{(bg$\rightarrow$\textit{Ppty})}},\\
-  \>$\beta$ :
-  \smallrecord{
-    \smalltfield{bg}{\textit{CntxtType}}\\
-    \smalltfield{fg}{(bg$\rightarrow$\textit{Ppty})}} and \\
-  \>for \=some
-  type, $T$, \\
-  \>\>for any $c$, $c:\alpha.\text{bg}$ implies $\alpha(c).\text{bg}$ =
-  \smallrecord{
-    \smalltfield{x}{$T$}} and \\
-  \>\>for any $c$, $c:\beta.\text{bg}$ implies
-  $\beta(c).\text{bg}$ = \smallrecord{
-    \smalltfield{x}{$T$}},\\
+  
+  If $T$ is a type, $\alpha:{^T\textit{PPpty}}$ and
+  $\beta:{^T\textit{PPpty}}$ 
   then \textit{the property conjunction
-    combination} of $\alpha$ and $\beta$, $\alpha\text{@}_{\&}\beta$,
+    combination of $\alpha$ and $\beta$}, $\alpha\text{@}_{\&}\beta$,
   is
-  \end{tabbing}
 \begin{quote}
   $\lambda
   c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
         . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
 \end{quote}
+\end{ex}
+
+We introduce a version of `ContForwardApp' for `@$_{\text{\&}}$' in
+\nexteg{}.
+\begin{ex} 
+  If $T$ is a type, then ContForwardApp$_{\text{@}_{\&}}$($T$) is
+  \begin{quote}
+    $\lambda u$:\record{
+      \tfield{cont}{${^T\textit{PPpty}}$}}$^\frown$\record{
+      \tfield{cont}{${^T\textit{PPpty}}$}} .\\
+    \hspace*{1em}\record{
+      \mfield{cont}{$u[0].\text{cont}\text{@}_{\&}u[1].\text{cont}$}{${^T\textit{PPpty}}$}}
+  \end{quote}
+  
 \end{ex} 
+We can then introduce a notation of constituent structure rules which
+use `ContForwardApp$_{\text{@}_{\&}}$' in \nexteg{}.
+\begin{ex} 
+If $T$ is a type, $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+$T_{\text{daughter}_2}$ are sign types,
+$T_{\text{daughter}_1}\sqsubseteq$ \record{
+  \tfield{cont}{$^T\textit{PPpty}$}} and $T_{\text{daughter}_2}\sqsubseteq$ \record{
+  \tfield{cont}{$^T\textit{PPpty}$}}, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
+  \end{quote}
+  is
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@}_{\&}}$($T$)
+  \end{quote}
+  
+\end{ex} 
+Finally, we introduce the English rule(s).  
   
   
 @@
