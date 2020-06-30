@@ -579,7 +579,7 @@ introduce it as in \nexteg{}.
 \item $a:\mathfrak{T}(X)$ iff $a\in X$ 
  
 \end{subex} 
-   
+\label{ex:mathfrakT}   
 \end{ex} 
 Given this, it is straightforward to see that \nexteg{} holds.
 \begin{ex} 
@@ -3065,7 +3065,7 @@ parametric content of \textit{every dog}.
   $\ulcorner\lambda c$:\textit{Cntxt} .
   \record{
     \mfield{restr}{boy$'$}{\textit{Ppty}}\\
-    \mfield{scope}{\textbf{hug}($c$)(\textbf{every}$^\frown$\textbf{dog}($c$))$_{\mid\mathcal{F}(\text{boy}')}$}{\textit{Ppty}}\\
+    \mfield{scope}{\textbf{hug}($c$)(\textbf{every}$^\frown$\textbf{dog}($c$))$\mid_{\mathcal{F}(\text{boy}')}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
  
 \end{subex} 
@@ -3084,22 +3084,35 @@ is written as \textit{it$^*$} with the kind of pronoun interpretations
 given in Chapter~\ref{ch:propnames}, Section~\ref{sec:unbound}.  Then the content for \nexteg{a} could be
 \nexteg{b}.
 
-@@\todo{See notes for next example}
+
 
 \begin{ex} 
 \begin{subex} 
  
 \item a boy hugged it$^*$
  
-\item $\lambda \mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{hug($r$.x, $\mathfrak{s}$.x$_0$)}})}} 
+\item % $\lambda \mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+% \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \smallrecord{\smalltfield{e}{hug($r$.x,
+%     $\mathfrak{s}$.x$_0$)}})}}
+  $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{boy$'$}{\textit{Ppty}}\\
+    \mfield{scope}{\textbf{hug}($c$)($\lambda P$:\textit{Ppty}
+      . $P\{c.\mathfrak{s}.\text{x}_0\}$)$\mid_{\mathcal{F}(\text{boy}')}$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}
  
 \end{subex} 
    
 \end{ex}
-Let us further imagine, contrary to fact, that English represented the fact
+We will refer to \preveg{b} as
+`\textbf{a}$^\frown$\textbf{boy}$^\frown$\textbf{hugged}$^\frown$\textbf{it$^*$}'.
+Let
+us further imagine, contrary to fact, that English represented the fact
 that a noun phrase has wide scope over a sentence by placing it at the
 beginning of a sentence as in \nexteg{a} and giving it an
 interpretation where the interpretation of \textit{it$^*$} gets bound
@@ -3109,12 +3122,21 @@ as in \nexteg{b}.
  
 \item every dog, a boy hugged it$^*$ 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} . 
-\smallrecord{\smalltfield{e}{every(dog$'$,
-$\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
-\smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-    r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x$_0$)}})}})}} 
+\item % $\lambda\mathfrak{s}$:\textit{Rec} . 
+% \smallrecord{\smalltfield{e}{every(dog$'$,
+% $\lambda r_1$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . 
+% \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
+%     r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x$_0$)}})}})}}
+  $\lambda c$:\textit{Cntxt} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{dog$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$\lambda r$:\smallrecord{
+        \smalltfield{x}{\textit{Ind}}}
+      . \textbf{a}$^\frown$\textbf{boy}$^\frown$\textbf{hugged}$^\frown$\textbf{it$^*$}
+      ($c[\mathfrak{s}.\text{x}_0=r.\text{x}]$)$\mid_{\mathcal{F}(\text{dog}')}$}{\textit{Ppty}}\\
+    \tfield{e}{every(restr, scope)}}
+
  
 \end{subex} 
 \label{ex:edabhi}   
@@ -3157,57 +3179,51 @@ the type in \nexteg{}.
 \end{ex} 
 The type in \preveg{} is completely underspecified.  Any sign will be
 of this type.  We could specify it with respect to content by making
-the `cont'-field be a manifest field as in \nexteg{b}, where $c$ is as
-given in \nexteg{a}.
+the `cont'-field be a manifest field as in \nexteg{}, where $\varphi$
+is a particular content.
 \begin{ex} 
-\begin{subex} 
- 
-\item $c$ = \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-        . \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
-            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-              . \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
- 
-\item  \record{\tfield{s-event}{\textit{SEvent}} \\
+\record{\tfield{s-event}{\textit{SEvent}} \\
          \tfield{syn}{\textit{Syn}} \\
-        \mfield{cont}{$c$}{\textit{Cont}}}  
+        \mfield{cont}{$\varphi$}{\textit{Cont}}}  
  
-\end{subex} 
-   
 \end{ex} 
 Now recall that the manifest field
-\smallrecord{\smallmfield{cont}{$c$}{\textit{Cont}}} is just a
+\smallrecord{\smallmfield{cont}{$\varphi$}{\textit{Cont}}} is just a
 convenient way of writing
-\smallrecord{\smalltfield{cont}{\textit{Cont}$_c$}} where
-\textit{Cont}$_c$ is a singleton type whose only witness is $c$.  It
-is in this sense that the content has been specified to be $c$.
+\smallrecord{\smalltfield{cont}{\textit{Cont}$_\varphi$}} where
+\textit{Cont}$_\varphi$ is a singleton type whose only witness is $\varphi$.  It
+is in this sense that the content has been specified to be $\varphi$.
 Suppose now that we do not have enough information to fully specify
 the content, that is, tie it down to be one particular content, but we
-know that it has to be one of either $c$ or $c'$ (as characterized in
-\nexteg{a}).  This could be represented by using a join type of two
-singleton types, \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, as in
-\nexteg{b}.
+know that it has to be one of either $\varphi$ or $\psi$.  This could be represented by using a join type of two
+singleton types, \textit{Cont}$_\varphi$$\vee$\textit{Cont}$_\psi$, as in
+\nexteg{}.
 \begin{ex} 
-\begin{subex} 
- 
-\item $c'$ =  \smallrecord{\smalltfield{e}{every(dog$'$, $\lambda
-      r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-        . \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
-            r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-              . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x)}})}})}}
- 
-\item  \record{\tfield{s-event}{\textit{SEvent}} \\
+\record{\tfield{s-event}{\textit{SEvent}} \\
          \tfield{syn}{\textit{Syn}} \\
-        \tfield{cont}{\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$}}  
+        \tfield{cont}{\textit{Cont}$_\varphi$$\vee$\textit{Cont}$_\psi$}}  
  
-\end{subex} 
+
    
 \end{ex} 
-\preveg{} is the type of signs whose contents are either $c$ or $c'$.
+\preveg{} is the type of signs whose contents are either $\varphi$ or $\psi$.
 This is, then, a single type, which corresponds to an ``underspecified
 content''.  Of course, the set of witnesses of the join type,
-$\{c,c'\}$, corresponds to the set of contents that could be generated
-by a storage algorithm.  Our strategy, then, is to devise a way of
+$\{\varphi,\psi\}$, corresponds to the set of contents that could be generated
+by a storage algorithm.  Another way to achieve this is to use the
+operator, $\mathfrak{T}$, introduced in (\ref{ex:mathfrakT}) on
+p.~\pageref{ex:mathfrakT} which takes a set and returns a type whose
+witnesses are exactly the members of the set.  We could thus use
+\nexteg{} instead of \preveg{} with the same effect.
+\begin{ex} 
+\record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{$\mathfrak{T}(\{\varphi,\psi\})$}} 
+\end{ex} 
+
+@@
+
+Our strategy, then, is to devise a way of
 computing such types on the basis of compositional interpretation.     
 Notice that saying that the content is of type
 \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, that is, that it is
