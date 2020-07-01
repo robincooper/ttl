@@ -3203,7 +3203,7 @@ singleton types, \textit{Cont}$_\varphi$$\vee$\textit{Cont}$_\psi$, as in
          \tfield{syn}{\textit{Syn}} \\
         \tfield{cont}{\textit{Cont}$_\varphi$$\vee$\textit{Cont}$_\psi$}}  
  
-
+\label{ex:underspec-join}
    
 \end{ex} 
 \preveg{} is the type of signs whose contents are either $\varphi$ or $\psi$.
@@ -3221,34 +3221,37 @@ witnesses are exactly the members of the set.  We could thus use
         \tfield{cont}{$\mathfrak{T}(\{\varphi,\psi\})$}} 
 \end{ex} 
 
+Our strategy is to devise a way of
+computing such types on the basis of compositional interpretation
+without having to enumerate the members of the set of contents in the
+way that we did in (\ref{ex:underspec-join}) and \preveg{}.
+ 
+% Notice that saying that the content is of type
+% \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, that is, that it is
+% either $c$ or $c'$ is distinct from saying that the content is the
+% disjunction of $c$ and $c'$, that is, if $c$ and $c'$ are types, the
+% type $c\vee c'$.  The witnesses for $c\vee c'$ will be situations $s$
+% such that either $s:c$ or $s:c'$ whereas the witness for
+% \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ will be the contents $c$
+% and $c'$.  This will make an important different in compositional
+% interpretation.  For example, if a sentence $S$ has a content of type     
+% \textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ we would want to say that
+% the sentence \textit{Sam believes $S$} has a content of type
+% \textit{Cont}$_{believe(sam,c)}$$\vee$\textit{Cont}$_{believe(sam,c')}$
+% rather than that it has the content `believe(sam,$c\vee c'$)'.
+
+% In order to make the relationship between sets of contents and join
+% types smoother we will use generalized join types
+% (Appendix~\ref{app:jointypes}).  Suppose we have computed a set of
+% possible contents, $\{c_1,\ldots,c_n\}$, for a phrase, then the type
+% of the content for that phrase is
+% $\bigvee\{\textit{Cont}_{c_1},\ldots,\textit{Cont}_{c_n}\}$.  If
+% $\mathbb{C}$ represents the set of contents we have computed, we can
+% use the more convenient notation
+% $\displaystyle{\bigvee_{c\in\mathbb{C}}}\textit{Cont}_c$ to mean
+% $\bigvee\{\textit{Cont}_c\mid c\in\mathbb{C}\}$.
+
 @@
-
-Our strategy, then, is to devise a way of
-computing such types on the basis of compositional interpretation.     
-Notice that saying that the content is of type
-\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$, that is, that it is
-either $c$ or $c'$ is distinct from saying that the content is the
-disjunction of $c$ and $c'$, that is, if $c$ and $c'$ are types, the
-type $c\vee c'$.  The witnesses for $c\vee c'$ will be situations $s$
-such that either $s:c$ or $s:c'$ whereas the witness for
-\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ will be the contents $c$
-and $c'$.  This will make an important different in compositional
-interpretation.  For example, if a sentence $S$ has a content of type     
-\textit{Cont}$_c$$\vee$\textit{Cont}$_{c'}$ we would want to say that
-the sentence \textit{Sam believes $S$} has a content of type
-\textit{Cont}$_{believe(sam,c)}$$\vee$\textit{Cont}$_{believe(sam,c')}$
-rather than that it has the content `believe(sam,$c\vee c'$)'.
-
-In order to make the relationship between sets of contents and join
-types smoother we will use generalized join types
-(Appendix~\ref{app:jointypes}).  Suppose we have computed a set of
-possible contents, $\{c_1,\ldots,c_n\}$, for a phrase, then the type
-of the content for that phrase is
-$\bigvee\{\textit{Cont}_{c_1},\ldots,\textit{Cont}_{c_n}\}$.  If
-$\mathbb{C}$ represents the set of contents we have computed, we can
-use the more convenient notation
-$\displaystyle{\bigvee_{c\in\mathbb{C}}}\textit{Cont}_c$ to mean
-$\bigvee\{\textit{Cont}_c\mid c\in\mathbb{C}\}$.
 
 We will take content now to be divided into two fields labelled
 `unplugged' and `plugged'.  This terminology goes back to
