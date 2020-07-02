@@ -3251,7 +3251,74 @@ way that we did in (\ref{ex:underspec-join}) and \preveg{}.
 % $\displaystyle{\bigvee_{c\in\mathbb{C}}}\textit{Cont}_c$ to mean
 % $\bigvee\{\textit{Cont}_c\mid c\in\mathbb{C}\}$.
 
+We will exploit our treatment of context to include a store of
+parametric quantifiers that are to be given a wide scope
+interpretation.  Thus our characterization of the type \textit{Cntxt}
+will be extended to \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
+\end{ex} 
+\textit{QStore} is the type of assignments all of whose values are
+parametric quantifiers, that is, as characterized in \nexteg{}.
+\begin{ex} 
+\textit{QStore} is a basic type.  $r:\textit{QStore}$ iff $r:Assgnmnt$
+and for any $\text{x}_i\in\mathrm{labels}(r)$, $r.\text{x}_i:\textit{PQuant}$ 
+\end{ex} 
+An example of a witness for \textit{QStore} would thus be \nexteg{}
+where we have stored the basic parametric content of \textit{every
+  dog} under the label `x$_0$'.
+\begin{ex} 
+  \record{
+    \field{x$_0$}{$\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+      P$:\textit{Ppty} . \smallrecord{
+      \smallmfield{restr}{dog$'$}{\textit{Ppty}}\\
+      \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+      \smalltfield{e}{every(restr, scope)}}$\urcorner$}}
+        
+\end{ex} 
+The record in \preveg{} is, among other types, of the type in
+\nexteg{}, which will be the kind of type we will be using in our
+content types which will be underspecified for quantifier scope.
+\begin{ex} 
+  \record{
+    \footnotesize{\textit{QStore}}\\
+    \mfield{x$_0$}{$\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+      P$:\textit{Ppty} . \smallrecord{
+      \smallmfield{restr}{dog$'$}{\textit{Ppty}}\\
+      \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+      \smalltfield{e}{every(restr, scope)}}$\urcorner$}{\textit{PQuant}}}
+        
+\end{ex}
+Suppose that the basic parametric content associated with a
+noun-phrase is $\mathcal{Q}$, that is, the type of the content as we
+have been expressing it so far (using a manifest field) will be
+\textit{Cont}$_{\mathcal{Q}}$.  Now we want to generalize this type so
+that not only $\mathcal{Q}$ will be a witness for the type but also a
+parametric content where $\mathcal{Q}$ is required in the qstore of
+the context.  This parametric quantifier will be \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{$\mathcal{Q}$}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+        
+\end{ex} 
+Note that \preveg{} is exactly like the pronoun content introduced in
+?? , except that we have a parametric quantifier required in the
+qstore labelled with the same label `x$_0$' as is used in the pronoun
+content.  Thus this corresponds to the content of \textit{it}$^*$ in
+??.  We can derive \preveg{} from $\mathcal{Q}$
+
 @@
+
 
 We will take content now to be divided into two fields labelled
 `unplugged' and `plugged'.  This terminology goes back to
