@@ -19,3 +19,6 @@ where the name is in the reporter's resources?]
 
 [Jonathan's comments on ch 1 - reply?,  believe vs. legal,
 matching vs relabelling, believe vs know (Austinian propositions)]
+
+Need to fix definition of T^+ so that it uses concatenation like a
+real Kleene-+ (already fixed in pyttr).
