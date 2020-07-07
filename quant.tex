@@ -3895,45 +3895,118 @@ characterization of `$\ominus$' in (\ref{ex:ominus}) to include
 
 \end{shaded}
 
-@@
+We now characterize retrieval in a version corresponding to
+quantification with scope over sentences.  In a more complete
+treatment we would at least add quantification with scope over verb phrases
+and common nouns corresponding to Montague's (\citeyear{Montague1973})
+treatment.  In \nexteg{}, we characterize an operation
+`$\mathrm{retrieve}$' which maps a parametric record type with a
+quantifier in store to one where the quantifier is removed from the
+store and given scope over the non-parametric content.
 
-We now characterize retrieval (in a version corresponding to
-quantification with scope over sentences, as opposed to verb phrases
-or common nouns) in \nexteg{}, where again $\sigma$ is an arbitrary
-sign.
 \begin{ex} 
-\textbf{Retrieval (S)} 
+% \textbf{Retrieval (S)} 
 
-If $\alpha\in\sigma$.cont.unplugged, for some $i$,
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-. $Q$ $\in$ $\alpha$.quants and $\alpha$.core : ($T$ $\rightarrow$
-\textit{Type}), where $T$ $\sqsubseteq$
-\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, then \\
+% If $\alpha\in\sigma$.cont.unplugged, for some $i$,
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+% . $Q$ $\in$ $\alpha$.quants and $\alpha$.core : ($T$ $\rightarrow$
+% \textit{Type}), where $T$ $\sqsubseteq$
+% \smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, then \\
 
-\hspace*{1em}\record{\field{quants}{$\alpha$.quants $-$
-    $\{\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-    . $Q\}$} \\
-        \field{core}{$\lambda\mathfrak{s}$:$T-$\{\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}\}
-          . $Q$($\lambda
-          r$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
-          . $\alpha$.core($\mathfrak{s}\oplus$\smallrecord{\field{x$_i$}{$r$.x$_i$}}))}}
+% \hspace*{1em}\record{\field{quants}{$\alpha$.quants $-$
+%     $\{\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+%     . $Q\}$} \\
+%         \field{core}{$\lambda\mathfrak{s}$:$T-$\{\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}\}
+%           . $Q$($\lambda
+%           r$:\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}
+%           . $\alpha$.core($\mathfrak{s}\oplus$\smallrecord{\field{x$_i$}{$r$.x$_i$}}))}}
 
-\hspace*{4em}$\in$ $\sigma$.cont.unplugged
+%           \hspace*{4em}$\in$ $\sigma$.cont.unplugged
+
+  If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ and
+  $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \tfield{$\mathfrak{q}${\smallrecord{
+          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}}, then
+  $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
+  \begin{quote}
+    $\lambda
+    c$:$([\mathcal{Q}.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\alpha.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\mathcal{Q}.\text{bg}))$
+    . \\ \hspace*{2em}$\mathcal{Q}(\mathfrak{P}(\ulcorner\lambda
+    r$:\smallrecord{
+      \smalltfield{x}{\textit{Ind}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha.\text{bg}^{\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i}$
+    . $\alpha(c[r])\urcorner))$
+  \end{quote}
+  
 \end{ex} 
-\preveg{} says that if any of the unplugged interpretations in a sign
-contains a quantifier indexed by $i$, that is, it is a parametric
-quantifier whose domain type is
-\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, and the core of this
-unplugged interpretation is a function from contexts to a type, that
-is, it corresponds to a (declarative) sentence interpretation, where
-the context is required to provide a value for `x$_i$', that is, the
-domain type is a subtype of
-\smallrecord{\smalltfield{x$_i$}{\textit{Ind}}},\footnote{Note that
-  this requirement will prevent the kind of vacuous binding that
-  Keller storage \citep{Keller1988} avoided.} then the quantifier is
-removed from the store and given scope over the sentence
-interpretation in the core binding `x$_i$'.  The dependence on `x$_i$'
-in the context is removed from the core interpretation. 
+% \preveg{} says that if any of the unplugged interpretations in a sign
+% contains a quantifier indexed by $i$, that is, it is a parametric
+% quantifier whose domain type is
+% \smallrecord{\smalltfield{x$_i$}{\textit{Ind}}}, and the core of this
+% unplugged interpretation is a function from contexts to a type, that
+% is, it corresponds to a (declarative) sentence interpretation, where
+% the context is required to provide a value for `x$_i$', that is, the
+% domain type is a subtype of
+% \smallrecord{\smalltfield{x$_i$}{\textit{Ind}}},\footnote{Note that
+%   this requirement will prevent the kind of vacuous binding that
+%   Keller storage \citep{Keller1988} avoided.} then the quantifier is
+% removed from the store and given scope over the sentence
+% interpretation in the core binding `x$_i$'.  The dependence on `x$_i$'
+% in the context is removed from the core interpretation.
+
+`$\mathrm{retrieve}$' applies to a label, `x$_i$' and a parametric
+record type, $\alpha$, which contains a parametric quantifier,
+$\mathcal{Q}$, in its qstore labelled by `x$_i$'.  It returns a
+parametric record type where the context type is an appropriate
+combination of the context types (labelled `bg') associated with
+$\mathcal{Q}$ and $\alpha$ including path adjustment and
+incrementation but with fields labelled `$\mathfrak{q}.\text{x}_i$'
+and `$\mathfrak{s}.\text{x}_i$' removed together with any fields
+depending on them.  The fields that are removed are added to the
+domain type of the property to which $\mathcal{Q}$ is applied and
+purification ($\mathfrak{P}$) is applied to the property so that the
+additional fields are ``moved down'' into $\alpha$ giving the effect
+of what in Discourse Representation Theory would be called local
+accommodation of any presuppositions \citep{VanderSandt1992}.  This
+means that any presuppositions associated with the quantifier will
+apply at the level at which it is quantified in.
+
+Now we have two ways, storage and retrieval, in which we can derive parametric contents from
+other parametric contents.  How can we, then, characterize the type of
+parametric contents associated with some particular phrase? Suppose
+that $T$ is a type of parametric contents, that is,
+$T\sqsubseteq\textit{Cont}$.  Then we define a new type
+$\mathfrak{S}(T)$ whose witnesses are the closure of the set of
+witnesses of $T$ under `$\mathrm{store}$' and `$\mathrm{retrieve}$'.
+We give a precise characterization of this in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T\sqsubseteq\textit{Cont}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+@@
 
 Finally, we show one way in which stored quantifiers can be
 ``percolated'' to higher constituents by showing in \nexteg{} how to
