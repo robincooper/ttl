@@ -3974,16 +3974,27 @@ apply at the level at which it is quantified in.
 
 Now we have two ways, storage and retrieval, in which we can derive parametric contents from
 other parametric contents.  How can we, then, characterize the type of
-parametric contents associated with some particular phrase? Suppose
-that $T$ is a type of parametric contents, that is,
-$T\sqsubseteq\textit{Cont}$.  Then we define a new type
+parametric contents associated with some particular phrase?  We will introduce a type \textit{ContType}
+characterized in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textit{ContType}, ``the type of types of contents'', is a basic type 
+ 
+\item $T:\textit{ContType}$ iff $T\sqsubseteq\textit{Cont}$ 
+ 
+\end{subex} 
+   
+\end{ex}
+Suppose
+that $T:\textit{ContType}$.  Then we define a new type
 $\mathfrak{S}(T)$ whose witnesses are the closure of the set of
 witnesses of $T$ under `$\mathrm{store}$' and `$\mathrm{retrieve}$'.
 We give a precise characterization of this in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item If $T\sqsubseteq\textit{Cont}$, then $\mathfrak{S}(T)$ is a type 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
  
 \item The witnesses of $\mathfrak{S}(T)$ are characterized by
   \begin{enumerate} 
@@ -4004,7 +4015,58 @@ We give a precise characterization of this in \nexteg{}.
  
 \end{subex} 
    
+\end{ex}
+
+If $\varphi$ is a parametric content, that is,
+$\varphi:\textit{Cont}$, we use the notation $\varphi^{\mathfrak{S}}$
+to represent $\mathfrak{S}(\textit{Cont}_{\varphi})$, that is, the type
+whose witnesses are the closure of $\{\varphi\}$ under
+`$\mathrm{store}$' and `$\mathrm{retrieve}$'.
+
+How should such types of parametric contents be combined in
+compositional semantics? First, the value in the `cont'-field in a
+sign will now not be a parametric content as previously but a type of
+parametric contents, that is, it will be of type \textit{ContType}.
+Thus we redefine the type \textit{Sign} as in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item \textit{Sign}, ``the type of signs'', is a basic type 
+ 
+\item $\sigma$ : \textit{Sign} iff $\sigma$ :
+      \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{ContType}}}  
+ 
+\end{subex} 
+   
 \end{ex} 
+  
+  
+Suppose that $T_1$ and
+$T_2$ are of type \textit{ContType} and that $@$ is a combination
+operation such as @, @@, @$_{\text{wh}_{i,j}}$, then we say $T_1@^{\mathfrak{S}}T_2$
+is also a type with the witness condition in \nexteg{}.
+\begin{ex} 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha@\beta$ is defined,
+then $\alpha@\beta:T_1@^{\mathfrak{S}}T_2$.
+Nothing else is a witness for $T_1@^{\mathfrak{S}}T_2$. 
+\end{ex} 
+What we need then for the type of parametric contents for the combined
+constituents is
+$\mathfrak{S}(T_1@^{\mathfrak{S}}T_2)$, that
+is, the type of the closure of the set of all combinations under
+`$\mathrm{store}$' and `$\mathrm{retrieve}$'.  Note that \preveg{} has
+the consequence that if `$\alpha@\beta$' is undefined for all
+witnesses, $\alpha$ and $\beta$ of $T_1$ and $T_2$ respectively we
+will still obtain a result for $T_1@^{\mathfrak{S}}T_2$, allbeit a
+type which has no witnesses.  This will mean that we do not have to be
+as careful in keeping track of typing when interpreting syntactic
+constructions, though with the consequence that some phrases will not
+have any content.
+
+We can now introduce versions of `ContForwardApp' operations which
+apply at the content type level.
   
 @@
 
