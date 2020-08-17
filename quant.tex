@@ -2842,7 +2842,7 @@ such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
 $\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
 $T_{\text{res}}$, then
 \begin{quote}
-  ContForwardApp$_{\text{@}_{wh_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
+  ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
 \end{quote}
 is
 \begin{quote}
@@ -2854,7 +2854,7 @@ is
   
 \end{ex}
 We can then characterize a notation for phrase structure rules which
-use `ContForwardApp$_{\text{@}_{wh_{i,j}}}$' as in \nexteg{}.
+use `ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$' as in \nexteg{}.
 \begin{ex} 
 If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
   $T_{\text{daughter}_2}$ are sign
@@ -2871,13 +2871,13 @@ If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
   \begin{quote}
     $T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-T_{\text{daughter}_1}'(_{\text{@}_{wh_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
   \end{quote}
   is
   \begin{quote}
   $T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp$_{\text{@}_{wh_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+    ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
   \end{quote}  
  
 \end{ex} 
@@ -4044,75 +4044,111 @@ Thus we redefine the type \textit{Sign} as in \nexteg{}.
   
   
 Suppose that $T_1$ and
-$T_2$ are of type \textit{ContType} and that $@$ is a combination
-operation such as @, @@, @$_{\text{wh}_{i,j}}$, then we say $T_1@^{\mathfrak{S}}T_2$
+$T_2$ are of type \textit{ContType} and that $\mathcal{O}$ is a combination
+operation such as @, @@, @$_{\text{wh}_{i,j}}$, then we say $T_1\mathcal{O}^{\mathfrak{S}}T_2$
 is also a type with the witness condition in \nexteg{}.
 \begin{ex} 
-If $\alpha:T_1$, $\beta:T_2$ and $\alpha@\beta$ is defined,
-then $\alpha@\beta:T_1@^{\mathfrak{S}}T_2$.
-Nothing else is a witness for $T_1@^{\mathfrak{S}}T_2$. 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
+then $\alpha\mathcal{O}\beta:T_1\mathcal{O}^{\mathfrak{S}}T_2$.
+Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S}}T_2$. 
 \end{ex} 
 What we need then for the type of parametric contents for the combined
 constituents is
-$\mathfrak{S}(T_1@^{\mathfrak{S}}T_2)$, that
+$\mathfrak{S}(T_1\mathcal{O}^{\mathfrak{S}}T_2)$, that
 is, the type of the closure of the set of all combinations under
 `$\mathrm{store}$' and `$\mathrm{retrieve}$'.  Note that \preveg{} has
-the consequence that if `$\alpha@\beta$' is undefined for all
+the consequence that if `$\alpha\mathcal{O}\beta$' is undefined for all
 witnesses, $\alpha$ and $\beta$ of $T_1$ and $T_2$ respectively we
-will still obtain a result for $T_1@^{\mathfrak{S}}T_2$, allbeit a
+will still obtain a result for $T_1\mathcal{O}^{\mathfrak{S}}T_2$, albeit a
 type which has no witnesses.  This will mean that we do not have to be
 as careful in keeping track of typing when interpreting syntactic
 constructions, though with the consequence that some phrases will not
 have any content.
 
-We can now introduce versions of `ContForwardApp' operations which
+In \nexteg{} we introduce versions of `ContForwardApp' operations which
 apply at the content type level.
-  
-@@
-
-Finally, we show one way in which stored quantifiers can be
-``percolated'' to higher constituents by showing in \nexteg{} how to
-construct an unplugged content from two constituent unplugged contents
-when the basic semantic composition involves function application.  To
-facilitate this we first define the `x'-incrementation of an object
-(such as a set or a function) with respect to a set of records $R$.
-
 \begin{ex} 
-The `x'\textit{-incrementation of an object $O$ with respect
-  to a set of records $R$}, $[O]_{\mathrm{incr}_x(R)}$, is the result of
-replacing each instance of x$_i$ in $O$, for any natural number $i$,
-with x$_{\mathrm{incr}_x(R)+i}$.  
-\end{ex} 
-Now application for unplugged contents (that is, objects of type
-\textit{UInterp}) can be characterized as in \nexteg{}.
-
-\begin{ex} 
-\textbf{Application}
-
-If $\alpha$ and $\beta$ are of type \textit{UInterp} and $\beta$.core
-is in the domain of $\alpha$.core, then the \textit{application of
-  $\alpha$ to $\beta$}, $\alpha @@\beta$, is
+If $\mathcal{O}$ is one of @, @@, @$_{\text{wh}_{i,j}}$ (for some
+natural numbers $i$ and $j$) or @$_{\&}$, then
+ContForwardApp$_{\mathfrak{S},\mathcal{O}}$ is
 \begin{quote}
-
-\record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}\\
-        \field{core}{$\alpha$.core@[$\beta$.core]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}}
+  $\lambda u$:\smallrecord{
+    \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+    \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+    \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S}}u[1].\text{cont})$}}
 \end{quote}
+
 \end{ex} 
-\preveg{} says that the application of an unplugged content, $\alpha$,
-to another unplugged content, $\beta$, involves first changing the
-quantifier indices in $\beta$ so that they increment the quantifier
-indices in $\alpha$ in the way that is illustrated in the examples
-discussed above.  For example, if both $\alpha$ and $\beta$ contain
-the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
-`x$_0$' will be changed to `x$_1$' in $\beta$.  Now the result of
-application is an unplugged content whose `quants' are the union of
-$\alpha$'s `quants' and the incremented `quants' of $\beta$.  The core
-is the result of applying $\alpha$'s core to $\beta$'s core using the
-same incrementation. 
+Note that we now no longer have to keep track of the arguments to
+ContForwardApp that we had in some of the variants since the
+combination of the types will always return a result, though if the
+types of contents do not match for the particular combination
+operation the combined type will have no witnesses.  This means that
+we can simplify our notation for constituent structure rules as in
+\nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}')$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O}}$ 
+\end{ex} 
+  
+  
+% @@
+
+% Finally, we show one way in which stored quantifiers can be
+% ``percolated'' to higher constituents by showing in \nexteg{} how to
+% construct an unplugged content from two constituent unplugged contents
+% when the basic semantic composition involves function application.  To
+% facilitate this we first define the `x'-incrementation of an object
+% (such as a set or a function) with respect to a set of records $R$.
+
+% \begin{ex} 
+% The `x'\textit{-incrementation of an object $O$ with respect
+%   to a set of records $R$}, $[O]_{\mathrm{incr}_x(R)}$, is the result of
+% replacing each instance of x$_i$ in $O$, for any natural number $i$,
+% with x$_{\mathrm{incr}_x(R)+i}$.  
+% \end{ex} 
+% Now application for unplugged contents (that is, objects of type
+% \textit{UInterp}) can be characterized as in \nexteg{}.
+
+% \begin{ex} 
+% \textbf{Application}
+
+% If $\alpha$ and $\beta$ are of type \textit{UInterp} and $\beta$.core
+% is in the domain of $\alpha$.core, then the \textit{application of
+%   $\alpha$ to $\beta$}, $\alpha @@\beta$, is
+% \begin{quote}
+
+% \record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}\\
+%         \field{core}{$\alpha$.core@[$\beta$.core]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}}
+% \end{quote}
+% \end{ex} 
+% \preveg{} says that the application of an unplugged content, $\alpha$,
+% to another unplugged content, $\beta$, involves first changing the
+% quantifier indices in $\beta$ so that they increment the quantifier
+% indices in $\alpha$ in the way that is illustrated in the examples
+% discussed above.  For example, if both $\alpha$ and $\beta$ contain
+% the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
+% `x$_0$' will be changed to `x$_1$' in $\beta$.  Now the result of
+% application is an unplugged content whose `quants' are the union of
+% $\alpha$'s `quants' and the incremented `quants' of $\beta$.  The core
+% is the result of applying $\alpha$'s core to $\beta$'s core using the
+% same incrementation. 
   
 \section{Anaphora}
 \label{sec:anaph}
 
+@@
 
 
 \paragraph{\textit{No girl thinks she failed}}
