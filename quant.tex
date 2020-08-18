@@ -3925,8 +3925,8 @@ store and given scope over the non-parametric content.
 
   If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ and
   $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
-    \tfield{$\mathfrak{q}${\smallrecord{
-          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}}, then
+    \tfield{$\mathfrak{q}$}{\smallrecord{
+          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, then
   $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
   \begin{quote}
     $\lambda
@@ -4099,7 +4099,9 @@ If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
   \begin{quote}
   $T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp$_{\mathfrak{S},\mathcal{O}}$ 
+    ContForwardApp$_{\mathfrak{S},\mathcal{O}}$
+  \end{quote}
+  
 \end{ex} 
   
   
@@ -4147,6 +4149,51 @@ If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
   
 \section{Anaphora}
 \label{sec:anaph}
+
+We will treat anaphora by adding to the storage mechanism we have just
+introduced.  In informal terms the idea is that if the content type of
+an utterance has something corresponding to \nexteg{a} as a witness
+then it will also have something corresponding to \nexteg{b} as a
+witness where $x_1$ has been anaphorically related to $x_0$.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $x_0$ thinks that $x_1$ has succeeded 
+ 
+\item $x_0$ thinks that $x_0$ has succeeded 
+ 
+\end{subex} 
+   
+\end{ex} 
+Thus in general the content type yielded by the grammatical resources
+will be underspecified as to whether there is anaphora or not but will
+nevertheless delimit what the anaphoric possibilities are.  Anaphora
+will be accounted for at the point of combination.  This is
+illustrated schematically in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $x_o$ + thinks that $x_1$ has succeeded = $x_0$ thinks that
+  $x_1$ has succeeded 
+ 
+\item If `$x_o$ + thinks that $x_1$ has succeeded' is an
+  interpretation, then `$x_o$ + (thinks that $x_1$ has
+  succeeded)[$x_1\leadsto x_0$]' is an interpretation
+ 
+\end{subex} 
+   
+\end{ex} 
+We will, of course, not be implementing this in terms of replacing
+variables as in \preveg{} but rather in adjusting the contexts of
+interpretation associated with pronoun utterances.  For example, we
+will define a variant of the combination operation `@', `@$_{i,j}$' which
+anaphorically relates a pronoun associated with the context path
+`$\mathfrak{s}.j$' to one associated with the context path
+`$\mathfrak{s}.i$'.  This is given in \nexteg{}.\todo{see notes}
+\begin{ex} 
+ 
+\end{ex} 
+  
 
 @@
 
