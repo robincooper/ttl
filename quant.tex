@@ -4014,7 +4014,7 @@ We give a precise characterization of this in \nexteg{}.
   
  
 \end{subex} 
-   
+\label{ex:storage-type}   
 \end{ex}
 
 If $\varphi$ is a parametric content, that is,
@@ -4189,11 +4189,72 @@ interpretation associated with pronoun utterances.  For example, we
 will define a variant of the combination operation `@', `@$_{i,j}$' which
 anaphorically relates a pronoun associated with the context path
 `$\mathfrak{s}.j$' to one associated with the context path
-`$\mathfrak{s}.i$'.  This is given in \nexteg{}.\todo{see notes}
+`$\mathfrak{s}.i$'.  This is given in \nexteg{}, which is the same as
+the characterization of `@' except for the addition of the boxed material.
 \begin{ex} 
- 
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+  \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+\fbox{and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} and
+  $\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}}},
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application \fbox{and anaphoric
+      relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c\boxed{[\mathfrak{s}.\text{x}_j=\mathfrak{s}.\text{x}_i]}))\urcorner$
+\end{quote}
+
+
 \end{ex} 
+We can define similar modifications, $\mathcal{O}_{i,j}$ for the other combination
+operators, $\mathcal{O}$.  We can now add contents with anaphora to
+our characterization of $\mathfrak{S}(T)$ given in
+(\ref{ex:storage-type}) as in \nexteg{} where we again use boxing to
+indicate the new material.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+
+    
+  \item \fbox{\begin{minipage}[t]{.85\linewidth}if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$\end{minipage}}
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
   
+ 
+\end{subex} 
+\label{ex:storage-anaph-type}   
+\end{ex}
+\todo{This doesn't allow for more than one anaphoric relation
+  introduced with some combination.  Problem with some interpretation
+  just happening to be identical with $\alpha\mathcal{O}\beta$
+  although obtained differently.}
 
 @@
 
