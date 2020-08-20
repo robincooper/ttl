@@ -4209,14 +4209,20 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
       relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
   \begin{quote}
     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})\boxed{\ominus\mathfrak{s}.\text{x}_j}$
       . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c\boxed{[\mathfrak{s}.\text{x}_j=\mathfrak{s}.\text{x}_i]}))\urcorner$
 \end{quote}
 
 
 \end{ex} 
 We can define similar modifications, $\mathcal{O}_{i,j}$ for the other combination
-operators, $\mathcal{O}$.  We can now add contents with anaphora to
+operators, $\mathcal{O}$.  Note that these additional combination
+operations as currently formulated will only allow one anaphoric
+relation to be introduced with each combination.  A more complete
+treatment will probably need a generalized formulation in which there
+are several pairs, $\langle i,j\rangle$, which are related simultaneously.
+
+We can now add contents with anaphora to
 our characterization of $\mathfrak{S}(T)$ given in
 (\ref{ex:storage-type}) as in \nexteg{} where we again use boxing to
 indicate the new material.
@@ -4251,12 +4257,14 @@ indicate the new material.
 \end{subex} 
 \label{ex:storage-anaph-type}   
 \end{ex}
-\todo{This doesn't allow for more than one anaphoric relation
-  introduced with some combination.  Problem with some interpretation
-  just happening to be identical with $\alpha\mathcal{O}\beta$
-  although obtained differently.}
+% \todo{This doesn't allow for more than one anaphoric relation
+%   introduced with some combination.  Problem with some interpretation
+%   just happening to be identical with $\alpha\mathcal{O}\beta$
+%   although obtained differently.}
 
-@@
+We will now take some examples of key anaphoric phenomena and discuss
+how we could use these tools to account for them.
+
 
 
 \paragraph{\textit{No girl thinks she failed}}
@@ -4264,66 +4272,84 @@ indicate the new material.
 
 Given the strategy we suggested in Section~\ref{sec:unbound} for
 interpreting unbound pronouns  the foreground of a content for
-\textit{she failed} would be \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{fail($\mathfrak{s}$.x$_0$)}} 
+\textit{she failed} would be parallel to example
+(\ref{ex:he-leave-abbrev}c) as in \nexteg{}, where we in addition
+express this as the content type obtained by $\mathfrak{S}$.
+\begin{ex}
+  
+
+$\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+                \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                    \smalltfield{x$_0$}{\textit{Ind}}}}}
+  . 
+         \record{\tfield{e}{fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner^{\mathfrak{S}}$
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{fail($\mathfrak{s}$.x$_0$)}}
+
 \end{ex} 
-Call this \textbf{she$^\frown$failed}.  Then the foreground of the
-content for \textit{thinks she failed} is \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-  . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-    . \record{\tfield{e}{think($r$.x,
-        \textbf{she$^\frown$failed}($\mathfrak{s}$))}}
+Call this \textbf{she$^\frown$failed}.  Then the 
+content type for \textit{thinks she failed} is \nexteg{}.
+\begin{ex}
+  $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+                \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                    \smalltfield{x$_0$}{\textit{Ind}}}}}
+              . $\lambda r$:\smallrecord{
+                \smalltfield{x}{\textit{Ind}}} . 
+         \record{\tfield{e}{think($r$.x, fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner^{\mathfrak{S}}$
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+%   . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \record{\tfield{e}{think($r$.x,
+%         \textbf{she$^\frown$failed}($\mathfrak{s}$))}}
 \label{ex:thinks-she-failed-x0} 
 \end{ex} 
-Call this \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}. Here
+Call this \textbf{thinks$^\frown$she$^\frown$failed}. Here
 \textit{she} is still a free occurrence of a pronoun dependent on the
-context for resolution.  An alternative interpretation is \nexteg{},
-where the pronoun has become bound as the subject of the property.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{think($r$.x, \textbf{she$^\frown$failed}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$r$.x}}))}} 
-\end{ex} 
-We will call this a logophoric interpretation of the verb phrase,
-\textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}. These two
-readings for the verb-phrase yields two alternatives for the complete
-sentence, one where the pronoun remains unbound as in \nexteg{a} and
-one where it is bound as in \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+context for resolution.  % An alternative interpretation is \nexteg{},
+% where the pronoun has become bound as the subject of the property.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{think($r$.x, \textbf{she$^\frown$failed}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$r$.x}}))}} 
+% \end{ex} 
+% We will call this a logophoric interpretation of the verb phrase,
+% \textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}. These two
+% readings for the verb-phrase yields two alternatives for the complete
+% sentence, one where the pronoun remains unbound as in \nexteg{a} and
+% one where it is bound as in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item
-  $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-    . \record{\tfield{e}{no(girl$'$, \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}($\mathfrak{s}$))}} 
+% \item
+%   $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+%     . \record{\tfield{e}{no(girl$'$, \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}($\mathfrak{s}$))}} 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec}
-  . \record{\tfield{e}{no(girl$'$, \textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}($\mathfrak{s}$))}} 
+% \item $\lambda\mathfrak{s}$:\textit{Rec}
+%   . \record{\tfield{e}{no(girl$'$, \textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}($\mathfrak{s}$))}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
 
-Let us now consider an option where we store the interpretation of
-\textit{no girl}.  For this we ill use the abbreviatory notation
-\nexteg{b} for \nexteg{a}
-\begin{ex} 
-\begin{subex} 
+% Let us now consider an option where we store the interpretation of
+% \textit{no girl}.  For this we ill use the abbreviatory notation
+% \nexteg{b} for \nexteg{a}
+% \begin{ex} 
+% \begin{subex} 
  
-\item \record{\field{bg}{$T_1$}\\
-              \field{fg}{$\lambda\mathfrak{v}$:$T_1$ . $T_2(\mathfrak{v})$}} 
+% \item \record{\field{bg}{$T_1$}\\
+%               \field{fg}{$\lambda\mathfrak{v}$:$T_1$ . $T_2(\mathfrak{v})$}} 
  
-\item $\ulcorner\lambda\mathfrak{v}$:$T_1$ . $T_2(\mathfrak{v})\urcorner$
+% \item $\ulcorner\lambda\mathfrak{v}$:$T_1$ . $T_2(\mathfrak{v})\urcorner$
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
-[????We should introduce this notation from the beginning, starting
-p. 121 ``Parametric contents as we have presented them so far are
-problematic...''] If $\frec{f}$ is a record as
-characterized in \preveg{} then we use the notation $\frec{f}(a)$ to
-represent $\frec{f}.\text{fg}(a)$, that is, $f(a)$. 
+% \end{ex} 
+% [????We should introduce this notation from the beginning, starting
+% p. 121 ``Parametric contents as we have presented them so far are
+% problematic...''] If $\frec{f}$ is a record as
+% characterized in \preveg{} then we use the notation $\frec{f}(a)$ to
+% represent $\frec{f}.\text{fg}(a)$, that is, $f(a)$. 
+
+@@
 
 Interpreting \textit{no girl} with storage yields \nexteg{}.
 \begin{ex} 
