@@ -4421,13 +4421,20 @@ Given our strategy for defining the content of quantified sentences in
 terms of generalized quantifiers a witness for the content type of \textit{a man walked}
 will be \nexteg{}.
 \begin{ex} 
-$\lambda c$:\textit{Cntxt} . \record{\tfield{e}{exist(man$'$, walk$'|_{\mathcal{F}(\text{man}')}$)}} 
+  $\ulcorner\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{man$'$}{\textit{Ppty}}\\
+    \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$ 
 \end{ex}
 We know from our treatment of the witness conditions associated with
 `exist' that \preveg{} is equivalent to \nexteg{}.
 \begin{ex} 
-$\lambda c$:\textit{Cntxt} . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
-              \tfield{e}{$\mathfrak{P}$(walk$'|_{\mathcal{F}(\text{man}')}$)\{x\}}}}} 
+  $\ulcorner\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{man$'$}{\textit{Ppty}}\\
+    \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{
+        \tfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \tfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}$\urcorner$ 
 \end{ex} 
 Using our previous treatment for free pronouns, \textit{he whistled}
 will have as its content \nexteg{}.
