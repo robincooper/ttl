@@ -2147,6 +2147,82 @@ We call (\ref{ex:dog-fptype}) a \textit{fixed point type} for `dog$'$'
 because for any record $r$ of this type, $r$ : dog$'$($r$).  We use
 `$\mathcal{F}$(dog$'$)' to designate (\ref{ex:dog-fptype}).
 \begin{shaded}
+  There are some complications which need to be noted concerning fixed
+  point types.  Not all functions which return record types
+  will have fixed points.  For example, if the domain type of some
+  function, $\mathcal{T}$ requires a non-record, and $\mathcal{T}$
+  returns a record type, then there cannot be any $a$ such that
+  $a:\mathcal{T}(a)$.
+
+  Even if $\mathcal{T}$ maps records to record types, it will not
+  always be the case that $\mathcal{T}$ has fixed points.  Consider
+  \nexteg{}.
+  \begin{ex}
+    $\lambda r$:\smallrecord{
+      \smalltfield{x}{\textit{Rec}}} . \record{
+      \tfield{x}{\textit{Ind}}\\
+      \tfield{c}{$p(\text{x})$}\\
+      \tfield{e}{$q(r.\text{x})$}}
+    
+  \end{ex} 
+We could compute a fixed point type for this given in \nexteg{} but,
+assuming that individuals are not records, this type will be
+necessarily empty.
+\begin{ex} 
+  \record{
+    \tfield{x}{(\textit{Rec}$\wedge$\textit{Ind})}\\
+    \tfield{c}{$p(\text{x})$}\\
+    \tfield{e}{$q(\text{x})$}}
+\end{ex} 
+The problem here is that we have the label `x' occurring both in the
+domain type and in the returned type and in the fixed point type it is
+required to label the same object.  In general, if we want to
+construct fixed point types from functions we should avoid cases where
+the paths in the domain type overlap those in the returned type.
+
+Even if the domain type is a record type and the returned type is a
+record type and there is no label clash between the two it will not
+always be possible to construct a fixed point type.  Consider the two
+functions in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{$p(r.\text{x})$}}
+ 
+\item $\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{$p(r)$}} 
+ 
+\end{subex} 
+   
+\end{ex} 
+In the case of \preveg{a} we can construct the fixed point type in
+\nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{$p(\text{x})$}}
+\end{ex} 
+Suppose that \nexteg{} holds.
+\begin{ex} 
+  $r$ = \record{
+    \field{x}{$a$}\\
+    \field{e}{$s$}}
+
+\begin{tabbing}
+  where \=$a:\textit{Ind}$\\
+  \>$s:p(a)$
+\end{tabbing}
+
+\end{ex} 
+
+@@
+
+  
+
+  
   Defining $\mathcal{F}$ precisely is a little tricky.  If $T$ is a
   record type and $r$ is a record of any type, we will use
   $T_{r.\pi\leadsto\pi}$ to designate the type like $T$ except that
