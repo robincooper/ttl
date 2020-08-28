@@ -2146,7 +2146,7 @@ so that `$r$.x' is replaced by `x', that is, \nexteg{}.
 We call (\ref{ex:dog-fptype}) a \textit{fixed point type} for `dog$'$'
 because for any record $r$ of this type, $r$ : dog$'$($r$).  We use
 `$\mathcal{F}$(dog$'$)' to designate (\ref{ex:dog-fptype}).
-\begin{shaded}
+\begin{shaded}\label{pg:fixedpointtype-discussion}
   There are some complications which need to be noted concerning fixed
   point types.  Not all functions which return record types
   will have fixed points.  For example, if the domain type of some
@@ -2196,7 +2196,7 @@ functions in \nexteg{}.
     \tfield{e}{$p(r)$}} 
  
 \end{subex} 
-   
+\label{ex:path-dependent-non-path-dependent}   
 \end{ex} 
 In the case of \preveg{a} we can construct the fixed point type in
 \nexteg{}.
@@ -2217,13 +2217,98 @@ Suppose that \nexteg{} holds.
 \end{tabbing}
 
 \end{ex} 
+Suppose that $\mathcal{T}$ is
+(\ref{ex:path-dependent-non-path-dependent}a).  Then
+$r:\mathcal{T}(r)$, that is, $r$ :
+\smallrecord{\smalltfield{e}{$p(a)$}}.  Now consider
+(\ref{ex:path-dependent-non-path-dependent}b).  A candidate for a
+fixed point would be \nexteg{}.
+\begin{ex} 
+  $r'$ = \record{
+    \field{x}{$a$}\\
+    \field{e}{$s$}}
+
+\begin{tabbing}
+  where \=$a:\textit{Ind}$\\
+  \>$s:p(r')$
+\end{tabbing}
+
+\end{ex}
+However, the conditions expressed in \preveg{} do not correspond to
+any type as illustrated in \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{$p(?)$}}
+\end{ex}
+In TTR we do not allow for types that are reentrant or
+non-well-founded where the `?' in \preveg{} could be replaced by
+something which refers to the whole record which is of the type in
+\preveg{}.  This means that there is no way of characterizing a fixed
+point type for (\ref{ex:path-dependent-non-path-dependent}b) in TTR.
+The difference between (\ref{ex:path-dependent-non-path-dependent}a)
+and (\ref{ex:path-dependent-non-path-dependent}b) is that
+(\ref{ex:path-dependent-non-path-dependent}a) depends only on paths in
+$r$ but not on $r$ as a whole, whereas
+(\ref{ex:path-dependent-non-path-dependent}b) depends on $r$ as an
+object.  We say that (\ref{ex:path-dependent-non-path-dependent}a) is
+\textit{path-dependent} on $r$
+whereas(\ref{ex:path-dependent-non-path-dependent}b) is not.  Path
+dependence is characterized in \nexteg{}, repeated in the
+Appendix on p.~\pageref{pg:fixedpointtype}.
+\begin{ex} 
+A dependent type, $\mathcal{T}$, is \textit{path-dependent on $r$},
+$\mathcal{T}\dep{r}_{\text{path}}$, just in case $\mathcal{T}$ depends
+on paths in $r$ but not on the whole object $r$. 
+\end{ex}
+
+For cases like (\ref{ex:path-dependent-non-path-dependent}b) where
+path dependence does not obtain there is a related notion of
+\textit{quasi-fixed point}.  Consider the record in \nexteg{a} which
+is of the type \nexteg{b}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $r$ = \record{
+    \field{$\mathfrak{c}^*$}{\record{
+        \field{x}{$a$}}}\\
+    \field{e}{$s$}}
+
+  \begin{tabbing}
+    where: \=$a:\textit{Ind}$\\
+    \>$s:p(\text{\smallrecord{
+        \field{x}{$a$}}})$
+  \end{tabbing}
+  
+ 
+\item \record{
+    \tfield{$\mathfrak{c}^*$}{\record{
+        \tfield{x}{\textit{Ind}}}}\\
+    \tfield{e}{$p(\mathfrak{c}^*)$}}
+ 
+\end{subex} 
+   
+\end{ex} 
+Supposing that $\mathcal{T}$ is
+(\ref{ex:path-dependent-non-path-dependent}b), we now have
+$r:\mathcal{T}(r.\mathfrak{c}^*)$, that is, $r$ :
+\smallrecord{\field{e}{$p(\text{\smallrecord{\field{x}{$a$}}})$}}.  We
+say that $r$ is a quasi-fixed point for $\mathcal{T}$ and that
+\preveg{b} is a quasi-fixed point type for $\mathcal{T}$ as
+characterized in \nexteg{}, repeated in the
+Appendix on p.~\pageref{pg:fixedpointtype}.
+\begin{ex} 
+$T$ \textit{is a quasi-fixed point type for dependent type}
+$\mathcal{T}$ iff $r:T$ implies that there is a component
+$a\varepsilon r$ such that $r:\mathcal{T}(a)$ 
+\end{ex} 
+If we use the distinguished label `$\mathfrak{c}^*$' only used in the
+construction of quasi-fixed point types, this will also guard against
+unwanted label clash. 
 
 @@
 
-  
-
-  
-  Defining $\mathcal{F}$ precisely is a little tricky.  If $T$ is a
+If $T$ is a
   record type and $r$ is a record of any type, we will use
   $T_{r.\pi\leadsto\pi}$ to designate the type like $T$ except that
   for any $\pi\in\mathrm{paths}(T)$ any occurrence of $r.\pi$ is
