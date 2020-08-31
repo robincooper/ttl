@@ -2306,20 +2306,33 @@ If we use the distinguished label `$\mathfrak{c}^*$' only used in the
 construction of quasi-fixed point types, this will also guard against
 unwanted label clash. 
 
-@@
-
 If $T$ is a
-  record type and $r$ is a record of any type, we will use
-  $T_{r.\pi\leadsto\pi}$ to designate the type like $T$ except that
-  for any $\pi\in\mathrm{paths}(T)$ any occurrence of $r.\pi$ is
-  replaced by $\pi$.  For example, suppose $T$ is \nexteg{} (using
-  official notation for dependent fields to be absolutely clear).
-  \begin{ex} 
-    \record{
-      \tfield{x}{\textit{Ind}}\\
-      \tfield{e}{$\langle\lambda v$:\textit{Ind} . dog($v$), $\langle r.\text{x}\rangle\rangle$}}
-  \end{ex}
-  Then $T_{r.\pi\leadsto\pi}$ will be \nexteg{}.
+record type and $r$ is a record of any type, we will use
+$T_{r.\pi\leadsto\pi}$ to designate the type like $T$ except that
+for any $\pi\in\mathrm{paths}(T)$ any occurrence of $r.\pi$ is
+replaced by $\pi$.  For example, suppose $T\dep{r}$ is \nexteg{} (using
+abbreviatory notation for dependent fields).
+\begin{ex} 
+  \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{dog($r$.x)}}
+\end{ex}
+Then $T\dep{r}_{r.\pi\leadsto\pi}$ will be \nexteg{}. 
+\begin{ex} 
+ \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{e}{dog(x)}}
+\end{ex} 
+\preveg{} is now no longer dependent on $r$.  Note that using the abbreviatory notation here conveniently hides some
+additional processing that is going on in this conversion, namely,
+that a non-dependent field is being converted to a dependent field. In
+official notation \preveg{} is represented as \nexteg{}. 
+  % \begin{ex} 
+  %   \record{
+  %     \tfield{x}{\textit{Ind}}\\
+  %     \tfield{e}{$\langle\lambda v$:\textit{Ind} . dog($v$), $\langle r.\text{x}\rangle\rangle$}}
+  % \end{ex}
+  % Then $T_{r.\pi\leadsto\pi}$ will be \nexteg{}.
   \begin{ex} 
     \record{
       \tfield{x}{\textit{Ind}}\\
@@ -2329,7 +2342,7 @@ We then characterize $\mathcal{F}$ as in \nexteg{}, repeated in the
 Appendix on p.~\pageref{pg:fixedpointtype}.
 \begin{ex} 
 If $\mathcal{T}$ is a dependent record type of the form $\lambda
-r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type and for any
+r\!:\!T_1\ .\ T_2\dep{r}_{\text{path}}$ where $T_1$ is a record type and for any
 $r$,
 $\mathrm{paths}(T_1)\cap\mathrm{paths}(\mathcal{T}(r))=\emptyset$,
 then
@@ -2341,7 +2354,7 @@ then
 \label{ex:fixedpointtype}
 \end{ex}
 We illustrate this with an example.  Suppose that $\lambda
-r\!:\!T_1\ .\ T_2\dep{r}$ is
+r\!:\!T_1\ .\ T_2\dep{r}_{\text{path}}$ is
 `dog$'$', that is, \nexteg{}.
 \begin{ex} 
 $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{dog($r$.x)}} 
@@ -2394,6 +2407,25 @@ If we feel that we need to construct a fixed point type for a
 dependent type where there are shared paths, then we can achieve the
 effect we need by first relabelling the dependent type so that there
 are no shared paths.
+
+We do not need to be careful to prevent clashing of paths in
+constructing a quasi-fixed point type.  Here we replace any path
+$r.\pi$ with $\mathfrak{c}^*.\pi$.  We define the operation
+constructing a quasi-fixed point type, $\mathcal{F}_{\text{quasi}}$ in
+\nexteg{}  repeated in the
+Appendix on p.~\pageref{pg:fixedpointtype}.
+\begin{ex} 
+If $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type,
+then
+\begin{quote}
+  $\mathcal{F}_{\text{quasi}}(\mathcal{T})$ is that type $T$ such that for any
+  $r^*:T_1$, $\lambda r\!:\!T_1\ .\
+  (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}}T_2)_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
+\end{quote}
+\label{ex:quasifixedpointtype}
+\end{ex}
+
 
 \end{shaded}
 

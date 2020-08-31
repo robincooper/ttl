@@ -2103,7 +2103,7 @@ $\mathcal{T}\dep{r}_{\text{path}}$, just in case $\mathcal{T}$ depends
 on paths in $r$ but not on the whole object $r$. 
 
   If $\mathcal{T}$ is a dependent record type of the form $\lambda
-r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type and for any
+r\!:\!T_1\ .\ T_2\dep{r}_{\text{path}}$ where $T_1$ is a record type and for any
 $r$,
 $\mathrm{paths}(T_1)\cap\mathrm{paths}(\mathcal{T}(r))=\emptyset$,
 then
@@ -2111,6 +2111,15 @@ then
   $\mathcal{F}(\mathcal{T})$ is that type $T$ such that for any
   $r^*:T_1$, $\lambda r\!:\!T_1\ .\
   (T_1\text{\d{$\wedge$}}T_2)_{r.\pi\leadsto\pi}(r^*)=T$
+\end{quote}
+
+If $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type,
+then
+\begin{quote}
+  $\mathcal{F}_{\text{quasi}}(\mathcal{T})$ is that type $T$ such that for any
+  $r^*:T_1$, $\lambda r\!:\!T_1\ .\
+  (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}}T_2)_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
 \end{quote}
 % Strictly speaking this definition is not quite correct since $T'$ may
 % not be a type because there may be a path occurring as an argument to
