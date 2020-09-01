@@ -4434,7 +4434,8 @@ We know from our treatment of the witness conditions associated with
     \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{\record{
         \tfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
-              \tfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}$\urcorner$ 
+        \tfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}$\urcorner$
+  \label{ex:a-man-walked-derived}
 \end{ex} 
 Using our previous treatment for free pronouns, \textit{he whistled}
 will have \nexteg{} as a witness of its content type.
@@ -4444,12 +4445,79 @@ will have \nexteg{} as a witness of its content type.
                     \smalltfield{x$_0$}{\textit{Ind}}}}}
   . 
          \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
-% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{whistle($\mathfrak{s}$.x$_0$)}} 
+         % $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{whistle($\mathfrak{s}$.x$_0$)}}
+
+\label{ex:he-whistled-parametric}
 \end{ex} 
 We will represent \preveg{} as \textbf{he$^{\frown}$whistled}.
 
 The utterance of \textit{He whistled} is to be interpreted in the
-context of the previous utterance of \textit{a man walked}.  
+context of the previous utterance of \textit{a man walked}.
+We will achieve this by merging the quasi-fixed point type (see
+Chapter~\ref{ch:commonnouns}, p.~\pageref{ex:quasifixedpointtype}) of
+the foreground of the parametric content of the previous utterance with the context type
+of the current utterance.  The quasi-fixed point type for the
+foreground of 
+(\ref{ex:a-man-walked-derived}) is \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+    \mfield{restr}{man$'$}{\textit{Ppty}}\\
+    \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{
+        \tfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+        \tfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}} 
+\end{ex} 
+We will merge this under the label `$\mathfrak{p}$' (``previous'')
+into the context type in (\ref{ex:he-whistled-parametric}) yielding \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smallrecord{
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}
+    . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex} 
+\preveg{} makes the content of the previous utterance be part of the
+context for content of the current utterance.  It does not, however,
+express the anaphoric relation between \textit{he} and \textit{a man}.
+In order to do this we need to require that $\mathfrak{s}.\text{x}_0$
+in the context is identical with $\mathfrak{p}.\text{e}.\text{s}$.
+This can be done by introducing a manifest field under the
+`$\mathfrak{s}$'-label as in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smallrecord{
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smallmfield{x$_0$}{$\Uparrow\!\!\mathfrak{p}$.e.x}{\textit{Ind}}}}}}
+  . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex}
+
+\begin{shaded}
+Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
+paths in $T$.  Then we use $T_{\pi_1=\pi_2}$ to represent the type
+exactly like $T$ except that $T_{\pi_1=\pi_2}.\pi_1=
+T.{\pi_1}_{\pi_2}$.
+
+\end{shaded}
+\todo{Is this right?}
+  
+  
 
 @@
 
