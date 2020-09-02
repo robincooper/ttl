@@ -2119,7 +2119,36 @@ then
 \begin{quote}
   $\mathcal{F}_{\text{quasi}}(\mathcal{T})$ is that type $T$ such that for any
   $r^*:T_1$, $\lambda r\!:\!T_1\ .\
-  (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}}T_2)_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
+  (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}\smallrecord{
+      \smalltfield{$\mathfrak{r}^*$}{$T_2$}}})_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
+\end{quote}
+
+% If $\mathcal{T}$ is a dependent record type of the form $\lambda
+% r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type,
+% then
+% \begin{quote}
+%   $\mathcal{F}_{\text{quasi}}(\mathcal{T})$ is that type $T$ such that for any
+%   $r^*:T_1$, $\lambda r\!:\!T_1\ .\
+%   (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}}T_2)_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
+% \end{quote}
+
+If $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type and for any $r$
+in its domain $\mathcal{T}(r)$ is a record type, then
+\begin{quote}
+  $\mathcal{F}_{\text{quasi}^*}(\mathcal{T}) =
+  \mathcal{F}_{\text{quasi}}(\mathcal(T))$
+\end{quote}
+else if $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ \mathcal{T}'\dep{r}$  where  $T_1$ is a record type and
+for any $r$ in its domain $\mathcal{T}(r)$ is a dependent record type,
+then
+\begin{quote}
+  $\mathcal{F}_{\text{quasi}^*}(\mathcal{T})$ is that type $T$ such
+  that for any $r^*:T_1$, $T = \lambda r\!:\!T_1\ .\
+  (\text{\smallrecord{
+      \smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}\smallrecord{
+      \smalltfield{$\mathfrak{r}^*$}{$\mathcal{F}_{\text{quasi}^*}(\mathcal{T}')$}}})_{r.\pi\leadsto\mathfrak{c}^*.\pi}$
 \end{quote}
 % Strictly speaking this definition is not quite correct since $T'$ may
 % not be a type because there may be a path occurring as an argument to

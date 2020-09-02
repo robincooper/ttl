@@ -285,7 +285,7 @@ from \nexteg{a,b}
 \end{subex} 
    
 \end{ex} 
-\cite{Lasersohn2005a} gives the example in \nexteg{} based on Löbner's
+\cite{Lasersohn2005a} gives the example in \nexteg{} based on LÃ¶bner's
 example.
 \begin{ex} 
 \begin{subex} 
@@ -372,7 +372,7 @@ formal semantics as Montague was proposing it: namely, the use of possible world
 with respect to a finite set of indices some of which are in the
 domain of intensions and some of which are contextual parameters.
 
-Löbner's early work on this topic \citep{Lobner1979,Lobner1981}
+LÃ¶bner's early work on this topic \citep{Lobner1979,Lobner1981}
 treated this problem by removing what he called \textit{functional
   concepts} (\textit{Funktionalbegriffe}) from the general notion of
 intension and allowing them to have different numbers and 
@@ -388,7 +388,7 @@ situation semantics such as \cite{BarwisePerry1983} and frame
 semantics of the kind suggested in \cite{Fillmore1982,Fillmore1985}
 and taken as a foundation for FrameNet
 \citep[][\url{https://framenet.icsi.berkeley.edu}]{RuppenhoferEllsworthPetruckJohnsonScheffczyk2006}.
-In Löbner's case, the inspiration for frames comes from the
+In LÃ¶bner's case, the inspiration for frames comes from the
 psychological work of \cite{Barsalou1992,Barsalou1992a,Barsalou1999}.
 
 \section{Frames as records}
@@ -1354,7 +1354,7 @@ $\wedge\ r.\mathrm{x}=a\wedge\down{P(r)}\not=\emptyset]\}$
 % temperature.  Another advantage of this is that an agent which has a
 % collection of such constraints as resources can focus on some subset
 % of those constraints or one particular constraint in a given context.
-% Thus in Montague's example \textit{The temperature is 90°} we
+% Thus in Montague's example \textit{The temperature is 90Â°} we
 % know that the temperature that is being referred to is ambient
 % temperature.  
 
@@ -2412,7 +2412,8 @@ We do not need to be careful to prevent clashing of paths in
 constructing a quasi-fixed point type.  Here we replace any path
 $r.\pi$ with $\mathfrak{c}^*.\pi$.  We define the operation
 constructing a quasi-fixed point type, $\mathcal{F}_{\text{quasi}}$ in
-\nexteg{}  repeated in the
+\nexteg{}  where we make use of an additional distinguished label
+`$\mathfrak{r}^*$'.  This is repeated in the
 Appendix on p.~\pageref{pg:fixedpointtype}.
 \begin{ex} 
 If $\mathcal{T}$ is a dependent record type of the form $\lambda
@@ -2421,11 +2422,37 @@ then
 \begin{quote}
   $\mathcal{F}_{\text{quasi}}(\mathcal{T})$ is that type $T$ such that for any
   $r^*:T_1$, $\lambda r\!:\!T_1\ .\
-  (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}}T_2)_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
+  (\text{\smallrecord{\smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}\smallrecord{
+      \smalltfield{$\mathfrak{r}^*$}{$T_2$}}})_{r.\pi\leadsto\mathfrak{c}^*.\pi}(r^*)=T$
 \end{quote}
 \label{ex:quasifixedpointtype}
 \end{ex}
+For dependent types which require more than one argument we can define
+a recursive version of $\mathcal{F}_{\text{quasi}}$,
+$\mathcal{F}_{\text{quasi}^*}$, in \nexteg{}, repeated in the
+Appendix on p.~\pageref{pg:fixedpointtype}.
+\begin{ex} 
+If $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ T_2\dep{r}$ where $T_1$ is a record type and for any $r$
+in its domain $\mathcal{T}(r)$ is a record type, then
+\begin{quote}
+  $\mathcal{F}_{\text{quasi}^*}(\mathcal{T}) =
+  \mathcal{F}_{\text{quasi}}(\mathcal(T))$
+\end{quote}
+else if $\mathcal{T}$ is a dependent record type of the form $\lambda
+r\!:\!T_1\ .\ \mathcal{T}'\dep{r}$  where  $T_1$ is a record type and
+for any $r$ in its domain $\mathcal{T}(r)$ is a dependent record type,
+then
+\begin{quote}
+  $\mathcal{F}_{\text{quasi}^*}(\mathcal{T})$ is that type $T$ such
+  that for any $r^*:T_1$, $T = \lambda r\!:\!T_1\ .\
+  (\text{\smallrecord{
+      \smalltfield{$\mathfrak{c}^*$}{$T_1$}}\d{$\wedge$}\smallrecord{
+      \smalltfield{$\mathfrak{r}^*$}{$\mathcal{F}_{\text{quasi}^*}(\mathcal{T}')$}}})_{r.\pi\leadsto\mathfrak{c}^*.\pi}$
+\end{quote}
 
+\end{ex} 
+  
 
 \end{shaded}
 
@@ -6055,7 +6082,7 @@ constituting a frame as: ``(1) predicates, (2) attribute-value
 bindings, (3) constraints, and (4) recursion'' seem to have a strong
 family resemblance with our record types.  Our proposal for
 incorporating frames into natural language semantics is, however,
-different from Löbner's in that he sees the introduction of a
+different from LÃ¶bner's in that he sees the introduction of a
 psychological approach based on frames as a reason to abandon a formal
 semantic approach whereas we see type theory as a way of combining the
 insights we have gained from model theoretic semantics with a

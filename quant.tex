@@ -4512,10 +4512,23 @@ This can be done by introducing a manifest field under the
 Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
 paths in $T$.  Then we use $T_{\pi_1=\pi_2}$ to represent the type
 exactly like $T$ except that $T_{\pi_1=\pi_2}.\pi_1=
-T.{\pi_1}_{\pi_2}$.
+(T.\pi_1)_{\pi_2}$, that is, whatever type, $T'$, is at the end of the path
+$\pi_1$, is replaced by the singleton type $T'_{\pi_2}$, or if
+$T.\pi_1$ is
+\begin{quote}
+$\langle\lambda v_1\!:\!T_1\ldots \lambda v_n\!:\!T_n\
+.\ T'\dep{v_1,\ldots,v_n}, \Pi\rangle$
+\end{quote}
+then it is replaced by
+\begin{quote}
+$\langle\lambda v_1\!:\!T_1\ldots \lambda v_n\!:\!T_n\ 
+.\ (T'\dep{v_1,\ldots,v_n})_{\pi_2}, \Pi\rangle$
+\end{quote}
+
+
 
 \end{shaded}
-\todo{Is this right?}
+
   
   
 
