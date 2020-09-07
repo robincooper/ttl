@@ -4525,111 +4525,168 @@ $\langle\lambda v_1\!:\!T_1\ldots \lambda v_n\!:\!T_n\
 .\ (T'\dep{v_1,\ldots,v_n})_{\pi_2}, \Pi\rangle$
 \end{quote}
 
+Suppose that $\varphi_1$ and $\varphi_2$ and parametric contents,
+$\pi_1\in\mathrm{paths}(\varphi_1.\text{bg})$ and \\
+$\pi_2\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$,
+then the \textit{content $\varphi_1$ given $\varphi_2$ with
+  alignment of $\pi_1$ and $\pi_2$},
+$\varphi_1|_{\pi_1,\pi_2}\varphi_2$, is
+\begin{quote}
+  \record{
+    \field{bg}{($\varphi_1$.bg \d{$\wedge$} \smallrecord{
+        \smalltfield{$\mathfrak{p}$}{$\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$}})$_{\pi_1=\mathfrak{p.\pi_2}}$}\\
+    \field{fg}{$\lambda c$:bg . $\varphi_1(c)$}}
+\end{quote}
 
-
+This gives us a way of combining two parametric contents.  Now we need
+a way of combining the kinds of parametric content types that we are
+using for underspecified interpretation.  If $T_1$ and $T_2$ are types
+of parametric contents, then there is a combined type,
+$\mathfrak{C}(T_1,T_2)$, whose witnesses include witnesses for $T_1$
+given a witness for $T_2$ with some possible alignment between the
+two.  The witnesses of $\mathfrak{C}(T_1,T_2)$ are characterized
+recursively by:
+\begin{enumerate} 
+ 
+\item if $\varphi:T_1$, then $\varphi:\mathfrak{C}(T_1,T_2)$ 
+ 
+\item if $\varphi_1:\mathfrak{C}(T_1,T_2)$,
+  $\pi_1\in\mathrm{paths}(\varphi_1.\text{bg})$, $\varphi_2:T_2$ and
+  $\pi_2\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg}))$,
+  then
+  \begin{quote}
+    $\varphi_1|_{\pi_1,\pi_2}\varphi_2:\mathfrak{C}(T_1,T_2)$
+  \end{quote}
+  
+ 
+\end{enumerate} 
+What we need then for the content type of the utterance is
+$\mathfrak{S}(\mathfrak{C}(T_1,T_2))$.  We can express this by means
+of the action rule in \nexteg{}.
 \end{shaded}
+\begin{sidewaysfigure}
+\begin{ex}
+  
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{\smallrecord{
+                  \smalltfield{cont}{\textit{ContType}}}}}}}}}
+    \hypo{u^*:_A\text{\smallrecord{
+          \smalltfield{cont}{\textit{ContType}}}}}
+    \infer[enth]2{s_{i+1,A}:_A\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{\smallrecord{
+                  \smallmfield{cont}{$\mathfrak{S}(\mathfrak{C}(u^*.\text{cont},s_{i,A}.\text{shared}.\text{latest-utterance}.\text{cont}))$}{\textit{ContType}}}}}}}}}
+  \end{prooftree}
+  
+\end{ex} 
+\end{sidewaysfigure}  
+  
+
+
 
   
-  
+
 
 @@
 
-In
-order to obtain the content of the whole discourse, we will embed the
-content of the first sentence below the label `prev' (meaning
-``previous'') and embed \textbf{he$^{\frown}$whistled} under `e'.
-This is the same technique we used to encode order (and salience) and
-to avoid unwanted label clash in our representation of attitudinal
-states in Chapter~\ref{ch:intensional}.  At the same time we need to
-ensure that the resulting content (on the anaphoric reading of the
-pronoun) does not depend on the context and that the `x$_0$' in
-\textbf{he$^{\frown}$whistled} gets bound to the path `e.x' in the
-content of the first sentence.  The result we obtain is \nexteg{a}
-which, spelling out the function application in the `e'-field, is
-identical with \nexteg{b}.
-\begin{ex}
-\begin{subex} 
+% In
+% order to obtain the content of the whole discourse, we will embed the
+% content of the first sentence below the label `prev' (meaning
+% ``previous'') and embed \textbf{he$^{\frown}$whistled} under `e'.
+% This is the same technique we used to encode order (and salience) and
+% to avoid unwanted label clash in our representation of attitudinal
+% states in Chapter~\ref{ch:intensional}.  At the same time we need to
+% ensure that the resulting content (on the anaphoric reading of the
+% pronoun) does not depend on the context and that the `x$_0$' in
+% \textbf{he$^{\frown}$whistled} gets bound to the path `e.x' in the
+% content of the first sentence.  The result we obtain is \nexteg{a}
+% which, spelling out the function application in the `e'-field, is
+% identical with \nexteg{b}.
+% \begin{ex}
+% \begin{subex} 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} . 
-\record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
-                                                 \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
-         \tfield{e}{\textbf{he$^{\frown}$whistled}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\Uparrow$prev.e.x}})}}   
+% \item $\lambda\mathfrak{s}$:\textit{Rec} . 
+% \record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+%                                                  \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
+%          \tfield{e}{\textbf{he$^{\frown}$whistled}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\Uparrow$prev.e.x}})}}   
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} . 
-\record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
-                                                 \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
-         \tfield{e}{\record{\tfield{e}{whistle($\Uparrow$prev.e.x)}}}} 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} . 
+% \record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+%                                                  \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
+%          \tfield{e}{\record{\tfield{e}{whistle($\Uparrow$prev.e.x)}}}} 
  
-\end{subex} 
+% \end{subex} 
    
  
-\end{ex} 
+% \end{ex} 
 
-Now we must consider how we would construct general rules that would
-combine the parametric content of the discourse so far with the
-parametric content of a new declarative sentence added to the
-discourse.  We will first consider the simple case where no anaphora
-occurs (for example, an interpretation of \textit{A man walked.  He
-  whistled} here \textit{he} is refers deictically and is not
-anaphorically related to \textit{a man}).  We will use
-$\mathcal{T}_{\text{curr}}$ to refer to the current parametric
-content of the discourse so far.  (We are making the simplifying
-assumption that the discourse consists of a string of declarative
-sentence utterances.) We will use $\mathcal{T}_{\text{new}}$ to refer
-to the paramtric content of the new (declarative) sentence with which
-we are updating the content of the discourse.  We will use
-$\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ to represent the
-result of updating $\mathcal{T}_{\text{curr}}$ with
-$\mathcal{T}_{\text{new}}$.  The non-anaphoric update is then defined
-as in \nexteg{}.
-\begin{ex} 
-If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$ and
-$\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, then
-$\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ is
-\begin{quote}
-$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})$
-. \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
-          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s})$}}
-\end{quote}
-\end{ex} 
-This method of combination is similar to the S-combinator in
-combinatory logic, in that it applies both parametric contents to a
-context, $\mathfrak{s}$.  It abstracts over $\mathfrak{s}$ and makes
-sure that it is of an appropriate type to be an argument to both
-parametric contents.  Rather than applying the first result of
-application to $\mathfrak{s}$ to the second it
-creates a record type involving both the contents.  In addition it
-increments the `x'-labels in the second content so that there will no
-be unintended label clash between the two.
+% Now we must consider how we would construct general rules that would
+% combine the parametric content of the discourse so far with the
+% parametric content of a new declarative sentence added to the
+% discourse.  We will first consider the simple case where no anaphora
+% occurs (for example, an interpretation of \textit{A man walked.  He
+%   whistled} here \textit{he} is refers deictically and is not
+% anaphorically related to \textit{a man}).  We will use
+% $\mathcal{T}_{\text{curr}}$ to refer to the current parametric
+% content of the discourse so far.  (We are making the simplifying
+% assumption that the discourse consists of a string of declarative
+% sentence utterances.) We will use $\mathcal{T}_{\text{new}}$ to refer
+% to the paramtric content of the new (declarative) sentence with which
+% we are updating the content of the discourse.  We will use
+% $\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ to represent the
+% result of updating $\mathcal{T}_{\text{curr}}$ with
+% $\mathcal{T}_{\text{new}}$.  The non-anaphoric update is then defined
+% as in \nexteg{}.
+% \begin{ex} 
+% If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$ and
+% $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, then
+% $\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ is
+% \begin{quote}
+% $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})$
+% . \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+%           \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s})$}}
+% \end{quote}
+% \end{ex} 
+% This method of combination is similar to the S-combinator in
+% combinatory logic, in that it applies both parametric contents to a
+% context, $\mathfrak{s}$.  It abstracts over $\mathfrak{s}$ and makes
+% sure that it is of an appropriate type to be an argument to both
+% parametric contents.  Rather than applying the first result of
+% application to $\mathfrak{s}$ to the second it
+% creates a record type involving both the contents.  In addition it
+% increments the `x'-labels in the second content so that there will no
+% be unintended label clash between the two.
 
-In the case of making a discourse anaphoric connection two additional things
-have to happen.  The pronoun content within $\mathcal{T}_{\text{new}}$
-has to be connected to some path in $\mathcal{T}_{\text{curr}}$ and
-the updated parametric content
-$\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ must be made not
-to depend on the context to determine the pronoun content.  We first
-give a definition which will allow one discourse anaphoric connection
-and we will then generalize this to a set of anaphoric connections.
-The definition given in \preveg{} will be a specific case of this
-general definition, where the set of anaphoric connections is empty.
-The case of a single anaphoric connection is given in \nexteg{}.
-\begin{ex} 
-If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
-$\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, for any
-$s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))$ and
-$[\ell:v]\in[T_2]_{\text{incr}_x(T_1)}$, then
-$\mathcal{T}_{\text{curr}}+_{\pi,\ell}\mathcal{T}_{\text{new}}$ is
-\begin{quote}
-$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)}\ominus[\ell,v])$
-. \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
-          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus[\ell=\text{prev}.\pi])$}}
-\end{quote} 
-\end{ex} 
-Here the dependence of $\mathcal{T}_{\text{new}}$ on $\ell$ is
-discharged locally by requiring that the $\ell$-field contains the
-same as the $\pi$-field from $\mathcal{T}_{\text{curr}}$.  The
-dependence on $\ell$ is thus removed from the domain of the function
-representing the parametric content for the whole discourse.
+% In the case of making a discourse anaphoric connection two additional things
+% have to happen.  The pronoun content within $\mathcal{T}_{\text{new}}$
+% has to be connected to some path in $\mathcal{T}_{\text{curr}}$ and
+% the updated parametric content
+% $\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ must be made not
+% to depend on the context to determine the pronoun content.  We first
+% give a definition which will allow one discourse anaphoric connection
+% and we will then generalize this to a set of anaphoric connections.
+% The definition given in \preveg{} will be a specific case of this
+% general definition, where the set of anaphoric connections is empty.
+% The case of a single anaphoric connection is given in \nexteg{}.
+% \begin{ex} 
+% If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
+% $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, for any
+% $s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))$ and
+% $[\ell:v]\in[T_2]_{\text{incr}_x(T_1)}$, then
+% $\mathcal{T}_{\text{curr}}+_{\pi,\ell}\mathcal{T}_{\text{new}}$ is
+% \begin{quote}
+% $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)}\ominus[\ell,v])$
+% . \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+%           \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus[\ell=\text{prev}.\pi])$}}
+% \end{quote} 
+% \end{ex} 
+% Here the dependence of $\mathcal{T}_{\text{new}}$ on $\ell$ is
+% discharged locally by requiring that the $\ell$-field contains the
+% same as the $\pi$-field from $\mathcal{T}_{\text{curr}}$.  The
+% dependence on $\ell$ is thus removed from the domain of the function
+% representing the parametric content for the whole discourse.
 
 Now let us consider how we can upgrade \preveg{} to allow for more
 than one pronoun resolution at a time as in an example like \textit{A
