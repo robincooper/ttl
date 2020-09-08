@@ -4524,17 +4524,19 @@ then it is replaced by
 $\langle\lambda v_1\!:\!T_1\ldots \lambda v_n\!:\!T_n\ 
 .\ (T'\dep{v_1,\ldots,v_n})_{\pi_2}, \Pi\rangle$
 \end{quote}
+We use $T_{\pi_{11}=\pi_{21},\ldots,\pi_{1n}=\pi_{2n}}$ to
+represent $(\ldots(T_{\pi_{11}=\pi_{21}})\ldots)_{\pi_{1n}=\pi_{2n}}$.
 
 Suppose that $\varphi_1$ and $\varphi_2$ and parametric contents,
-$\pi_1\in\mathrm{paths}(\varphi_1.\text{bg})$ and \\
-$\pi_2\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$,
+$\pi_{11}\ldots\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$ and \\
+$\pi_{21}\ldots\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$,
 then the \textit{content $\varphi_1$ given $\varphi_2$ with
-  alignment of $\pi_1$ and $\pi_2$},
-$\varphi_1|_{\pi_1,\pi_2}\varphi_2$, is
+  alignment of $\pi_{11}$ and $\pi_{21}$;\ldots;$\pi_{1n}$ and $\pi_{2n}$},
+$\varphi_1|_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\varphi_2$, is
 \begin{quote}
   \record{
     \field{bg}{($\varphi_1$.bg \d{$\wedge$} \smallrecord{
-        \smalltfield{$\mathfrak{p}$}{$\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$}})$_{\pi_1=\mathfrak{p.\pi_2}}$}\\
+        \smalltfield{$\mathfrak{p}$}{$\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$}})$_{\pi_{11}=\mathfrak{p}.\pi_{21},\ldots,\pi_{1n}=\mathfrak{p}.\pi_{2n}}$}\\
     \field{fg}{$\lambda c$:bg . $\varphi_1(c)$}}
 \end{quote}
 
@@ -4550,12 +4552,14 @@ recursively by:
  
 \item if $\varphi:T_1$, then $\varphi:\mathfrak{C}(T_1,T_2)$ 
  
-\item if $\varphi_1:\mathfrak{C}(T_1,T_2)$,
-  $\pi_1\in\mathrm{paths}(\varphi_1.\text{bg})$, $\varphi_2:T_2$ and
-  $\pi_2\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg}))$,
+\item \begin{tabbing}
+    if \=$\varphi_1:\mathfrak{C}(T_1,T_2)$,\\
+  \>$\pi_{11},\ldots,\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$,\\ \>$\varphi_2:T_2$ and\\
+\>$\pi_{21},\ldots,\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg}))$,
+  \end{tabbing}
   then
   \begin{quote}
-    $\varphi_1|_{\pi_1,\pi_2}\varphi_2:\mathfrak{C}(T_1,T_2)$
+    $\varphi_1|_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\varphi_2:\mathfrak{C}(T_1,T_2)$
   \end{quote}
   
  
@@ -4589,7 +4593,7 @@ of the action rule in \nexteg{}.
   
 
 
-@@
+
 
 % In
 % order to obtain the content of the whole discourse, we will embed the
@@ -4688,40 +4692,40 @@ of the action rule in \nexteg{}.
 % dependence on $\ell$ is thus removed from the domain of the function
 % representing the parametric content for the whole discourse.
 
-Now let us consider how we can upgrade \preveg{} to allow for more
-than one pronoun resolution at a time as in an example like \textit{A
-  dog chased a cat.  She didn't catch him.} In order to facilitate
-this we introduce two new operators, $\ominus_{\text{set}}$ and
-$\oplus_{\text{set}}$, which perform $\ominus$ and $\oplus$
-respectively for each member of a set in their second arguments.  Thus
-$\ominus_{\text{set}}$ will subtract a set of fields from a record
-type and $\oplus_{\text{set}}$ will add a set of fields to a record.
-We present the upgraded version of \preveg{} in \nexteg{} where if
-$\pi$ is an ordered pair we use $\pi_1$ and $\pi_2$ to represent the
-first and second members of $\pi$ respectively and if $f$ is a field
-then we use label($f$) to represent the label in the field, that is
-the first member of the ordered pair which is the field.
-\begin{ex} 
-If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
-$\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$ and\\
-\hspace*{2em}$\vec{\Pi}\subseteq[T_2]_{\text{incr}_x(T_1)}\times\{\pi\mid$ for any
-$s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}$ such
-that $\vec{\Pi}$ is the graph of a one-one function,\\ then
-$\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ is
-\begin{quote}
-$\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})\ominus_{\text{set}}\vec{\Pi}_1$
-.\\ \hspace*{2em} \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
-          \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=\text{prev}.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$}}
-\end{quote} 
-\end{ex} 
-If $\vec{\Pi}$ is
-$\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
-then for convenience we represent
-$\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ as $\mathcal{T}_{\text{curr}}+_{\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}\mathcal{T}_{\text{new}}$.
+% Now let us consider how we can upgrade \preveg{} to allow for more
+% than one pronoun resolution at a time as in an example like \textit{A
+%   dog chased a cat.  She didn't catch him.} In order to facilitate
+% this we introduce two new operators, $\ominus_{\text{set}}$ and
+% $\oplus_{\text{set}}$, which perform $\ominus$ and $\oplus$
+% respectively for each member of a set in their second arguments.  Thus
+% $\ominus_{\text{set}}$ will subtract a set of fields from a record
+% type and $\oplus_{\text{set}}$ will add a set of fields to a record.
+% We present the upgraded version of \preveg{} in \nexteg{} where if
+% $\pi$ is an ordered pair we use $\pi_1$ and $\pi_2$ to represent the
+% first and second members of $\pi$ respectively and if $f$ is a field
+% then we use label($f$) to represent the label in the field, that is
+% the first member of the ordered pair which is the field.
+% \begin{ex} 
+% If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
+% $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$ and\\
+% \hspace*{2em}$\vec{\Pi}\subseteq[T_2]_{\text{incr}_x(T_1)}\times\{\pi\mid$ for any
+% $s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}$ such
+% that $\vec{\Pi}$ is the graph of a one-one function,\\ then
+% $\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ is
+% \begin{quote}
+% $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})\ominus_{\text{set}}\vec{\Pi}_1$
+% .\\ \hspace*{2em} \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+%           \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=\text{prev}.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$}}
+% \end{quote} 
+% \end{ex} 
+% If $\vec{\Pi}$ is
+% $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+% then for convenience we represent
+% $\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ as $\mathcal{T}_{\text{curr}}+_{\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}\mathcal{T}_{\text{new}}$.
 
 This does not express any of the linguistic constraints concerning
-what anaphors can be related to what antecedents.  This will be
-addressed in Section~\ref{sec:struc-cntxt}.
+what anaphors can be related to what antecedents.  % This will be
+% addressed in Section~\ref{sec:struc-cntxt}.
   
   
 % This does not give us a field which \textit{he} could pick up on to
@@ -4779,13 +4783,15 @@ addressed in Section~\ref{sec:struc-cntxt}.
 
 \paragraph{\textit{no dog which chases a cat catches it}}
 \label{sec:donkey-anaph}
-[Background on donkey anaphora????]
-Our treatment of donkey anaphora will employ a similar technique to
-that in \preveg{}.  This means that the anaphoric resolution of
-\textit{it} in \nexteg{a} will be more like the kind of discourse
-anaphora discussed in Section~\ref{sec:discourse-anaph} rather than
-direct binding of a pronoun by a quantifier as in
-Section~\ref{sec:direct-binding}.  Some evidence for this can be taken
+This example is an instance of what is known in the literature as
+\textit{donkey anaphora}.  For a brief overview with references to a
+large linguistic literature see \cite{KingLewis2018}.  
+Our treatment of donkey anaphora will treat 
+\textit{it} in \nexteg{a}  more like the kind of discourse
+anaphora discussed in the previous example rather than
+direct binding of a pronoun by a quantifier.  In this way it follows
+the classic linguistic treatment of donkey anaphora in DRT, first
+formulated in \cite{Kamp1981}.  Some evidence for this can be taken
 from \nexteg{b}, where it is difficult to relate the singular pronoun
 \textit{it} to \textit{every cat}, and \nexteg{c} where the plural
 pronoun \textit{them} can be related \textit{every cat}.  This follows
@@ -4806,7 +4812,9 @@ the pattern of discourse anaphora illustrated in \nexteg{d} and
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+
+@@
 
 The basic content related to \textit{no} is given in \nexteg{}.
 \begin{ex} 
