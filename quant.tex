@@ -4814,6 +4814,100 @@ the pattern of discourse anaphora illustrated in \nexteg{d} and
    
 \end{ex}
 
+The key to the treatment of donkey anaphora is a process of local
+accommodation of context in a parametric property.  Consider a
+parametric content for the verb-phrase \textit{catches it} given in
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $c.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
+\end{ex} 
+Local accommodation involves ``moving'' the type of the context into
+the domain type of the property under the label `$\mathfrak{c}$' as in
+\nexteg{}, adjusting any paths in $c$ addressed in the resulting
+function to paths in $r$ beginning with `$\mathfrak{c}$'.
+\begin{ex} 
+ $\ulcorner\lambda c$:\textit{Cntxt} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}}}} .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
+\label{ex:catch-it-localized}
+\end{ex}
+In general we define a localization operation, $\mathcal{L}$, on
+parametric properties characterized in \nexteg{}.
+\begin{ex} 
+  If $\mathcal{P}$ is a parametric property of the form
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T_1\ . \ulcorner\lambda r\!:\!T_2\ .\
+    \varphi\urcorner\urcorner$
+  \end{quote}
+  then the \textit{localization of $\mathcal{P}$},
+  $\mathcal{L}(\mathcal{P})$, is
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!\textit{Cntxt}\ .\ \ulcorner\lambda
+    r\!:\!T_2\text{\d{$\wedge$}\smallrecord{
+        \smalltfield{$\mathfrak{c}$}{$T_1$}}}\ .\ 
+    \varphi_{c.\pi\leadsto r.\mathfrak{c}.\pi}\urcorner\urcorner$
+  \end{quote}
+  
+\end{ex} 
+  
+If we use the localized content (\ref{ex:catch-it-localized}) as the
+content of the verb phrase, then, after combination with \textit{no
+  dog which chases a cat}, the scope of the quantifier will become
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            \footnotesize{\textit{Assgnmnt}}\\
+            \smalltfield{x$_0$}{\textit{Ind}}}}}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($r$.x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex} 
+We can paraphrase this as ``the property of being a dog which chases a
+cat and there is something which it catches''.  In order to obtain the
+anaphora we need to align the following two paths in the domain type
+of this function: `$\mathfrak{c}.\mathfrak{s}.\text{x}_0$' and
+`e$_2$.x'.  This we do in \nexteg{} by creating a manifest field on
+the former path.
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            \footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($r$.x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex} 
+
 @@
 
 The basic content related to \textit{no} is given in \nexteg{}.
