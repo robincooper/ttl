@@ -4509,7 +4509,7 @@ This can be done by introducing a manifest field under the
 \end{ex}
 
 \begin{shaded}
-Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
+\label{pg:path-alignment-types}Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
 paths in $T$.  Then we use $T_{\pi_1=\pi_2}$ to represent the type
 exactly like $T$ except that $T_{\pi_1=\pi_2}.\pi_1=
 (T.\pi_1)_{\pi_2}$, that is, whatever type, $T'$, is at the end of the path
@@ -4906,7 +4906,24 @@ the former path.
    .
   \record{
     \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+We can paraphrase this as ``the property of being a dog which chases a
+cat and catches that cat''.
+
+In order to include such properties with aligned paths as the scope of
+quantifiers in our interpretations, we will first generalize the
+characterization of alignment of paths given on
+p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
+\begin{ex} 
+  If $\varphi=\ulcorner\lambda r\!:\!T\ .\ \psi\urcorner$ and
+  $\pi_1,\pi_2\in\mathrm{paths}(T)$, then
+  \begin{quote}
+    $\varphi_{\pi_1=\pi_2}=\ulcorner\lambda r\!:\!T_{\pi_1=\pi_2}\ .\
+    \psi\urcorner$
+  \end{quote}
 \end{ex} 
+We then add two further clauses to the characterization of witnesses
+for $\mathfrak{S}(T)$ for content types, $T$. 
 
 @@
 
