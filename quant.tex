@@ -4923,198 +4923,245 @@ p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
   \end{quote}
 \end{ex} 
 We then add two further clauses to the characterization of witnesses
-for $\mathfrak{S}(T)$ for content types, $T$. 
+for $\mathfrak{S}(T)$ for content types, $T$, in \nexteg{} with the
+new additions boxed.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item \fbox{if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+      then $\mathcal{L}(\varphi):\mathfrak{S}(T)$}
+    
+  \item \fbox{\begin{minipage}[t]{.9\linewidth}if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}}
+
+    
+  \item if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-donkey-type}   
+\end{ex}
+
+Overall we can get a parametric content for \textit{no dog which
+  chases a cat catches it} which looks like \nexteg{} \todo{see notes}
+\begin{ex} 
+ 
+\end{ex} 
+  
 
 @@
 
-The basic content related to \textit{no} is given in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
-P$:\textit{Ppty} . \record{\tfield{e}{no($Q$,$P|_{\mathcal{F}(Q)}$)}} 
-\end{ex} 
-As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
-relative pronoun \textit{which} has the content specified for
-\textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
-by not accounting for the gender distinction between the two.)  We
-repeat this in \nexteg{} and will refer to it here as \textbf{which}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
-  . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
-\end{ex} 
-The basic content of an utterance of \textit{chase} is given in
-\nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \record{\tfield{e}{chase($r_1$.x, $r_2$.x)}} 
-\end{ex} 
-The indefinite article $a$ will have the content in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
-P$:\textit{Ppty} . \record{\tfield{e}{exist($Q$, $P|_{\mathcal{F}(Q)}$)}} 
-\end{ex} 
-Thus the phrase \textit{a cat} will have the content in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
-. \record{\tfield{e}{exist(cat$'$, $P|_{\mathcal{F}(\text{cat}')}$)}} 
-\end{ex} 
-We will refer to \preveg{} as \textbf{a$^\frown$cat}.  Given this the
-content of \textit{chase a cat} will be \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{chase($r_1$.x,
-    \textbf{a$^\frown$cat}($\mathfrak{s}$))}}
-\label{ex:chaseacat-noexport} 
-\end{ex} 
-Given that \textit{chase} is an extensional verb it will obey a
-constraint like (\ref{ex:mp-find}) on p.~\pageref{ex:mp-find}, as
-given in \nexteg{}.
-\begin{ex} 
-$e$ : chase($a$, $Q$) iff $e$ : $Q$($\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{chase$^{\dagger}$($a$,
-$r$.x)}}) 
-\end{ex} 
-This means that we can construe the content to be a function which
-returns an equivalent type to that returned in
-(\ref{ex:chaseacat-noexport}).  This new content is given in
-\nexteg{}.
-\begin{ex} 
-$\lambda s$:\textit{Rec} $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \record{\tfield{e}{\textbf{a$^\frown$cat}($\mathfrak{s}$)($\lambda
-      r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-      . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
-\end{ex} 
-\preveg{} is equivalent to \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{exist(cat$'$, $\lambda
-    r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                    \smalltfield{e}{cat(x)}}
-                  . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
-\end{ex} 
-In turn, \preveg{} is equivalent to \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-  . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
-                               \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                   \smalltfield{e}{cat(x)}}}\\
-                   \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x,
-                         $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}
-\label{ex:chase-a-cat} 
-\end{ex} 
-We represent \preveg{} as \textbf{chase$^\frown$a$^\frown$cat}.  From
-this we can form a ``sentence with a gap'' interpretation,
-\textbf{chase$^\frown$a$^\frown$cat$_S$}, in the manner described in
-Section~\ref{sec:long-distance}.  This is given in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}} . $\lambda
-P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh$_0$\}(\textbf{chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)) 
-\end{ex} 
-Unpacking \preveg{} we obtain \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
-. \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
-                               \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                   \smalltfield{e}{cat(x)}}}\\
-                   \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\mathfrak{s}$.wh$_0$, $\Uparrow\!\mathfrak{c}$.x)}}}}}}}} 
-\end{ex} 
-Again following the analysis of long-distance dependencies developed
-in Section~\ref{sec:long-distance}, the content of \textit{which
-  chased a cat} is given in \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} . \\
-\hspace*{1em} $\lambda
-r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \textbf{which}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}$)($\lambda
-r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{chase$^\frown$a$^\frown$cat$_S$}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$) 
-\end{ex} 
-Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
-\textit{which chased a cat} is identical with the content of
-\textit{chased a cat}.  For clarity we will represent this content
-also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
-Again following the proposal in Section~\ref{sec:long-distance} the
-content for \textit{dog which chases a cat} will be
-\nexteg{}. 
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} $\lambda
-r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e$_1$}{dog$'$\{$r$.x\}}\\
-          \tfield{e$_2$}{\textbf{which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)\{$r$.x\}}} 
-\end{ex} 
-We call this
-\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}. Now
-\textit{no dog which chases a cat} will correspond to \nexteg{a} which
-is equivalent to \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% The basic content related to \textit{no} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{no($Q$,$P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
+% relative pronoun \textit{which} has the content specified for
+% \textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
+% by not accounting for the gender distinction between the two.)  We
+% repeat this in \nexteg{} and will refer to it here as \textbf{which}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
+%   . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
+% \end{ex} 
+% The basic content of an utterance of \textit{chase} is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{chase($r_1$.x, $r_2$.x)}} 
+% \end{ex} 
+% The indefinite article $a$ will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{exist($Q$, $P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% Thus the phrase \textit{a cat} will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+% . \record{\tfield{e}{exist(cat$'$, $P|_{\mathcal{F}(\text{cat}')}$)}} 
+% \end{ex} 
+% We will refer to \preveg{} as \textbf{a$^\frown$cat}.  Given this the
+% content of \textit{chase a cat} will be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{chase($r_1$.x,
+%     \textbf{a$^\frown$cat}($\mathfrak{s}$))}}
+% \label{ex:chaseacat-noexport} 
+% \end{ex} 
+% Given that \textit{chase} is an extensional verb it will obey a
+% constraint like (\ref{ex:mp-find}) on p.~\pageref{ex:mp-find}, as
+% given in \nexteg{}.
+% \begin{ex} 
+% $e$ : chase($a$, $Q$) iff $e$ : $Q$($\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{chase$^{\dagger}$($a$,
+% $r$.x)}}) 
+% \end{ex} 
+% This means that we can construe the content to be a function which
+% returns an equivalent type to that returned in
+% (\ref{ex:chaseacat-noexport}).  This new content is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda s$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\textbf{a$^\frown$cat}($\mathfrak{s}$)($\lambda
+%       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%       . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{exist(cat$'$, $\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                     \smalltfield{e}{cat(x)}}
+%                   . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% In turn, \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x,
+%                          $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}
+% \label{ex:chase-a-cat} 
+% \end{ex} 
+% We represent \preveg{} as \textbf{chase$^\frown$a$^\frown$cat}.  From
+% this we can form a ``sentence with a gap'' interpretation,
+% \textbf{chase$^\frown$a$^\frown$cat$_S$}, in the manner described in
+% Section~\ref{sec:long-distance}.  This is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}} . $\lambda
+% P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh$_0$\}(\textbf{chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)) 
+% \end{ex} 
+% Unpacking \preveg{} we obtain \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+% . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\mathfrak{s}$.wh$_0$, $\Uparrow\!\mathfrak{c}$.x)}}}}}}}} 
+% \end{ex} 
+% Again following the analysis of long-distance dependencies developed
+% in Section~\ref{sec:long-distance}, the content of \textit{which
+%   chased a cat} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} . \\
+% \hspace*{1em} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \textbf{which}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}$)($\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{chase$^\frown$a$^\frown$cat$_S$}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$) 
+% \end{ex} 
+% Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
+% \textit{which chased a cat} is identical with the content of
+% \textit{chased a cat}.  For clarity we will represent this content
+% also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
+% Again following the proposal in Section~\ref{sec:long-distance} the
+% content for \textit{dog which chases a cat} will be
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e$_1$}{dog$'$\{$r$.x\}}\\
+%           \tfield{e$_2$}{\textbf{which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)\{$r$.x\}}} 
+% \end{ex} 
+% We call this
+% \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}. Now
+% \textit{no dog which chases a cat} will correspond to \nexteg{a} which
+% is equivalent to \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
-  . \record{\tfield{e}{no(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$),
-      $P|_{\mathcal{F}(\textbf{dog}^\frown\textbf{which}^\frown\textbf{chase}^\frown
-          \textbf{a}^\frown\textbf{cat}(\mathfrak{s}))}$)}} 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{no(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$),
+%       $P|_{\mathcal{F}(\textbf{dog}^\frown\textbf{which}^\frown\textbf{chase}^\frown
+%           \textbf{a}^\frown\textbf{cat}(\mathfrak{s}))}$)}} 
  
-\item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
-  . \record{\tfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}(P|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}(P|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
  
-\end{subex} 
-\label{ex:no-dog-which-chases-a-cat}   
-\end{ex} 
-Call this
-\textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.
-This is to combine with the content of \textit{catches it}, given in
-\nexteg{}. 
-\begin{ex} 
-$\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
-\end{ex}
-We will represent this as \textbf{catch$^\frown$it}. 
-Using the S-combinator strategy to
-(\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
-\nexteg{b}, which represents a reading of the sentence where
-\textit{it} is not captured and refers to a particular object provided
-by the context.
-\begin{ex}
-\begin{subex} 
+% \end{subex} 
+% \label{ex:no-dog-which-chases-a-cat}   
+% \end{ex} 
+% Call this
+% \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.
+% This is to combine with the content of \textit{catches it}, given in
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
+% \end{ex}
+% We will represent this as \textbf{catch$^\frown$it}. 
+% Using the S-combinator strategy to
+% (\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
+% \nexteg{b}, which represents a reading of the sentence where
+% \textit{it} is not captured and refers to a particular object provided
+% by the context.
+% \begin{ex}
+% \begin{subex} 
  
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&$\neg\mathfrak{P}(\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
-. \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}}$|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}(\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}}$|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
  
-\item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
-                                                               \smalltfield{e$_1$}{dog$'$\{x\}}\\
-                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
-                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                                                                                                                                       \smalltfield{e}{cat(x)}}}\\
-                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
-                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
-               \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{s}$.x$_0$)}}
-)}}}} 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{s}$.x$_0$)}}
+% )}}}} 
  
-\end{subex} 
+% \end{subex} 
    
  
-\end{ex} 
-In terms of the notation in \preveg{b}, it is simple enough to see
-what needs to be done in order to change it to a case of donkey
-anaphora.  The second argument to `catch$^\dagger$',
-`$\mathfrak{s}$.x$_0$', has to be changed so that it presents a path
-to the cat, that is, `$\mathfrak{c}$.e$_2$.e.x'.  Also the dependence
-of this parametric content on `x$_0$' has to be removed.  Thus the
-domain type for the $\lambda$-abstraction, currently
-`\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
-by `\textit{Rec}'.  The result would be \nexteg{}.
+% \end{ex} 
+% In terms of the notation in \preveg{b}, it is simple enough to see
+% what needs to be done in order to change it to a case of donkey
+% anaphora.  The second argument to `catch$^\dagger$',
+% `$\mathfrak{s}$.x$_0$', has to be changed so that it presents a path
+% to the cat, that is, `$\mathfrak{c}$.e$_2$.e.x'.  Also the dependence
+% of this parametric content on `x$_0$' has to be removed.  Thus the
+% domain type for the $\lambda$-abstraction, currently
+% `\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
+% by `\textit{Rec}'.  The result would be \nexteg{}.
 \begin{ex} 
  $\lambda\mathfrak{s}$:\textit{Rec} 
   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
@@ -5130,47 +5177,47 @@ by `\textit{Rec}'.  The result would be \nexteg{}.
 )}}}}
 \label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
 \end{ex} 
-We will achieve this by introducing a notion of restriction on a
-parametric property in which we will allow anaphora to take place.
-Let us first consider a case without anaphora.  Suppose that
-$\mathcal{P}$ is a parametric property of type
-$(T_1\rightarrow(T_2\rightarrow \textit{Type}))$ and that $T$ is a
-type then we define the restriction of $\mathcal{P}$ by $T$,
-$\mathcal{P}|^p_T$, to be \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:$T_1$ $\lambda r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s})(r)$ 
-\end{ex} 
-Now suppose that $[\ell,v]$ is a field in $T_1$ and $\pi$ is a path in
-$T_2$ and we want to make an anaphoric association between $\ell$ and
-$\pi$.  We define such a restriction,
-$\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
-r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
-\end{ex}
-To enable the capture of several pronouns, we let $\vec\Pi\subseteq
-T_1\times\text{paths}(T)$ such that $\vec\Pi$ is the graph of a one-one
-function (whose domain is included in the fields of $T_1$ and whose
-range is included in the paths of $T$).  We then define
-$\mathcal{P}|^p_{T,\vec{\Pi}}$ to be \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:$T_1\ominus_{\text{set}}\vec{\Pi}_1$ $\lambda
-r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=r.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$ 
-\end{ex} 
-If $\vec{\Pi}$ is
-$\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
-then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as
-$\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$. Using
-this notation,  the content of \textit{no dog which chases a cat catches
-  it} where the pronoun is captured is \nexteg{}.
-\begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec}
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&$\neg\mathfrak{P}$(\textbf{catch$^\frown$it}$|^p_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s})),\text{x}_0\leadsto\text{e}_2.\text{e}.\text{x}}(\mathfrak{s})$)\{x\})}}}} 
-\end{ex} 
-Unpacking \preveg{} yields
-(\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
+% We will achieve this by introducing a notion of restriction on a
+% parametric property in which we will allow anaphora to take place.
+% Let us first consider a case without anaphora.  Suppose that
+% $\mathcal{P}$ is a parametric property of type
+% $(T_1\rightarrow(T_2\rightarrow \textit{Type}))$ and that $T$ is a
+% type then we define the restriction of $\mathcal{P}$ by $T$,
+% $\mathcal{P}|^p_T$, to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1$ $\lambda r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s})(r)$ 
+% \end{ex} 
+% Now suppose that $[\ell,v]$ is a field in $T_1$ and $\pi$ is a path in
+% $T_2$ and we want to make an anaphoric association between $\ell$ and
+% $\pi$.  We define such a restriction,
+% $\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
+% \end{ex}
+% To enable the capture of several pronouns, we let $\vec\Pi\subseteq
+% T_1\times\text{paths}(T)$ such that $\vec\Pi$ is the graph of a one-one
+% function (whose domain is included in the fields of $T_1$ and whose
+% range is included in the paths of $T$).  We then define
+% $\mathcal{P}|^p_{T,\vec{\Pi}}$ to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus_{\text{set}}\vec{\Pi}_1$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=r.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$ 
+% \end{ex} 
+% If $\vec{\Pi}$ is
+% $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+% then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as
+% $\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$. Using
+% this notation,  the content of \textit{no dog which chases a cat catches
+%   it} where the pronoun is captured is \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec}
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}$(\textbf{catch$^\frown$it}$|^p_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s})),\text{x}_0\leadsto\text{e}_2.\text{e}.\text{x}}(\mathfrak{s})$)\{x\})}}}} 
+% \end{ex} 
+% Unpacking \preveg{} yields
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
 
 Notice that (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured})
 forces what is known in the literature as a \textit{strong} reading
