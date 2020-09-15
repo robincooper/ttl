@@ -4965,14 +4965,35 @@ new additions boxed.
 \label{ex:storage-donkey-type}   
 \end{ex}
 
-Overall we can get a parametric content for \textit{no dog which
-  chases a cat catches it} which looks like \nexteg{} \todo{see notes}
-\begin{ex} 
- 
-\end{ex} 
-  
 
-@@
+
+Overall we can get a parametric content for \textit{no dog which
+  chases a cat catches it} which looks like \nexteg{} where
+\savebox{\boxone}{\textbf{dog}$^\frown$\textbf{which}$^\frown$\textbf{chases}$^\frown$\textbf{a}$^\frown$\textbf{cat}} \usebox{\boxone}
+and \savebox{\boxtwo}{\textbf{catches}$^\frown$\textbf{it}}\usebox{\boxtwo} represent parametric contents
+which have not undergone operations introduced by $\mathfrak{S}$.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{no(restr, scope)}}
+\end{ex} 
+Given the semantics we have specified for the determiner \textit{no},
+\preveg{} is \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex} 
+We can paraphrase this content as ``for every dog which chases a cat
+it's not the case that it's a dog which chases a cat$_i$ and catches
+it$_i$'' where the subscript on \textit{cat} and \textit{it} indicates
+that \textit{it} is anaphorically related to \textit{a cat}.
+
 
 % The basic content related to \textit{no} is given in \nexteg{}.
 % \begin{ex} 
@@ -5162,21 +5183,21 @@ Overall we can get a parametric content for \textit{no dog which
 % domain type for the $\lambda$-abstraction, currently
 % `\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
 % by `\textit{Rec}'.  The result would be \nexteg{}.
-\begin{ex} 
- $\lambda\mathfrak{s}$:\textit{Rec} 
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
-                                                               \smalltfield{e$_1$}{dog$'$\{x\}}\\
-                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
-                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                                                                                                                                       \smalltfield{e}{cat(x)}}}\\
-                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
-                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
-               \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
-)}}}}
-\label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
-\end{ex} 
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}}
+% \label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
+% \end{ex} 
 % We will achieve this by introducing a notion of restriction on a
 % parametric property in which we will allow anaphora to take place.
 % Let us first consider a case without anaphora.  Suppose that
@@ -5219,7 +5240,9 @@ Overall we can get a parametric content for \textit{no dog which
 % Unpacking \preveg{} yields
 % (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
 
-Notice that (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured})
+@@
+
+Notice that \preveg{}
 forces what is known in the literature as a \textit{strong} reading
 for the donkey anaphora.  That is, none of the dogs which chase a cat
 catch \textit{any} of the cats which they chase.  That monotone
