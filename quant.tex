@@ -456,6 +456,38 @@ $\mathfrak{P}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
 (Recall that $T\!\!\parallel\!\! r$ is the result of specifying or anchoring
 $T$ with the record $r$ as defined in Appendix~\ref{app:specrec}.)
 
+\preveg{} represents one of two options for purifying a property.  It
+yields the property of being something such that the background
+conditions $P$.bg are met \textit{and} the body of the property is met
+under those conditions.  The alternative is to say that the property
+yielded is the property of being something such that \textit{if} the
+background conditions $P$.bg are met, \textit{then} the body of the
+property is met under those conditions.  This alternative, which has
+the effect of universal quantification over situations which meet the
+background conditions, will we represented by the operator
+`$\mathfrak{P}^\forall$' characterized in \nexteg{}.
+\begin{ex} 
+If $P$ : \textit{Ppty}, then
+\begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P^\forall}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
+$\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
+. ($(r'\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+\record{
+          \tfield{e}{$P(r')$}})$\urcorner$
+\end{quote}
+\end{quote}
+\label{ex:purification-universal} 
+\end{ex} 
+The option presented by `$\mathfrak{P}^\forall$' will become relevant
+in our discussion of donkey anaphora on
+p.~\pageref{pg:donkey-purification-universal}. For now, we will
+continue the discussion with the existential variant, `$\mathfrak{P}$'. 
+
 As an example let us apply $\mathfrak{P}$ to (\ref{ex:pure-eg}a).  The
 result will be \nexteg{}
 \begin{ex} 
@@ -5269,7 +5301,7 @@ reading is important for the examples in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item Every person who has a dime should put it in the parking
+\item Every person who had a dime put it in the parking
   meter. \citep{PelletierSchubert1989} 
  
 \item Every man who has a daughter thinks she is the most beautiful
@@ -5278,88 +5310,121 @@ reading is important for the examples in \nexteg{}.
 \end{subex} 
    
 \end{ex} 
-\preveg{a} does not seem to suggest that anybody who has several dimes
-should put them all in the meter and \preveg{b} does not seem to
+\preveg{a} does not seem to suggest that anybody who had several dimes
+put them all in the meter and \preveg{b} does not seem to
 commit a man who has two daughters to believe the contradictory
 proposition that they are both the one and only most beautiful girl in
 the world.
-
-@@
-
-Let us consider the content for \textit{every person who
-  had a dime put it in the parking meter} given in \nexteg{}.
-\begin{ex} 
- $\lambda\mathfrak{s}$:\textit{Rec} 
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{person$^\frown$who$^\frown$have$^\frown$a$^\frown$dime}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
-                                                               \smalltfield{e$_1$}{person$'$\{x\}}\\
-                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(dime$'$)}\\
-                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                                                                                                                                       \smalltfield{e}{dime(x)}}}\\
-                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
-                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
-               \smalltfield{e}{put\_in\_the\_meter$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
-)}}}} 
-\end{ex} 
-\preveg{} is exactly similar to
-(\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}) modulo the
-properties and predicates involved except that there is no negation in
-\preveg{}.  \preveg{} requires then that every person who had a dime
-is a person who had a dime and put it in the meter, that is, a weak
-reading which requires only that each relevant person put some dime in
-the meter, not all of their dimes.  What then do we say about the
+%
+% @@
+%
+% Let us consider the content for \textit{every person who
+%   had a dime put it in the parking meter} given in \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{person$^\frown$who$^\frown$have$^\frown$a$^\frown$dime}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{person$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(dime$'$)}\\
+%                                                                               %                  \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                               %                                                                                         \smalltfield{e}{dime(x)}}}\\
+%                                                                               %                       \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{put\_in\_the\_meter$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \end{ex} 
+% \preveg{} is exactly similar to
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}) modulo the
+% properties and predicates involved except that there is no negation in
+% \preveg{}.  \preveg{} requires then that every person who had a dime
+% is a person who had a dime and put it in the meter, that is, a weak
+% reading which requires only that each relevant person put some dime in
+% the meter, not all of their dimes. 
+What then do we say about the
 original donkey sentences like \textit{every farmer who owns a donkey
   likes it} which were analyzed by Geach and the classical analyses in
 DRT and type theory as having a strong reading in which every farmer
 who owns a donkey likes any donkey that he owns?  One option is to say
-that we only need the weak reading for such sentences as given in
-\nexteg{}.
-\begin{ex} 
- $\lambda\mathfrak{s}$:\textit{Rec} 
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
-                                                               \smalltfield{e$_1$}{farmer$'$\{x\}}\\
-                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
-                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                                                                                                                                       \smalltfield{e}{donkey(x)}}}\\
-                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
-                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
-               \smalltfield{e}{like$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
-)}}}} 
-\label{ex:donkey-weak} 
-\end{ex} 
+that we only need the weak reading for such sentences as it is
+consistent with the stronger reading.  Many speakers feel that it
+unclear what the sentence means if some man owns more than one donkey.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{donkey(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{like$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \label{ex:donkey-weak} 
+% \end{ex} 
 That is,
 \textit{every farmer who owns a donkey likes it} requires that for
 every donkey owning farmer there is at least one donkey the farmer
 owns such that she likes it.  This allows for the farmers to like all
-their donkeys but does not require it.
+their donkeys but does not require it. (See \citealp{Kanazawa1994} for
+a discussion of this.)  In the case of \textit{every dog which chases
+  a cat catches it} I have the following intuition:
+\begin{quote}
+  if there is a dog under consideration which is involved in two
+  distinct cat-chasing events (with a single cat) and only succeeds in catching the cat in
+  one of the two events, then this seems to make the sentence false;
 
-Another option is to recreate the original Geach reading by
-introducing a variant of the purification operation in
-(\ref{ex:purification}) which introduces a function on local contexts
-as in \nexteg{}. 
+  if there is a dog under consideration which is involved in a single
+  event of chasing two cats and only succeeds in catching one of the
+  cats in that event, then it seems that the sentence could still be
+  true.
+\end{quote}
+This suggests an analysis which requires that every relevant
+cat-chasing event must involve the catching of at least one of the
+cats chased in that event.  Firm judgements concerning such intuitions
+are notoriously hard to come by.  \cite{Chierchia1995} argues that the
+strong $\forall$-reading is necessary because of examples like
+\nexteg{}.
 \begin{ex} 
-If $P$ : \textit{Ppty}, then
-\begin{quote}
-if $P$.bg$^x$ = $P$.bg, then
-\begin{quote}
-$\mathfrak{P}(P)=P$
-\end{quote}
-otherwise:
-\begin{quote}
-$\mathfrak{P}(P)$ is $\ulcorner\lambda r_1$:$P$.bg$^{\text{x}}$
-. ($(r_2\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
-\record{
-          \tfield{e}{$P(r_2)$}})$\urcorner$
-\end{quote}
-\end{quote}
-%\label{ex:purification-classic}
-\end{ex}
-Using \preveg{} instead of (\ref{ex:purification}) will have the
+Every man who owned a slave owned his offspring 
+\end{ex} 
+\preveg{} is a modification of an example in \cite{Heim1990} which is
+used to make a different argument.  It seems like a single instance of
+somebody owning a slave but not the slave's offspring would be
+sufficient to falsify \preveg{}.  Though again, in the case of a slave
+who has several offspring one of which is owned by somebody else, it
+seems to me that it is unclear whether that is sufficient to falsify
+the sentence.
+
+\label{pg:donkey-purification-universal}
+One option is to recreate the original Geach reading by
+using the variant of the purification operation, `$\mathfrak{P}^\forall$', in
+(\ref{ex:purification-universal}), p.~\pageref{ex:purification-universal} which introduces a function on local contexts.
+% \begin{ex} 
+% If $P$ : \textit{Ppty}, then
+% \begin{quote}
+% if $P$.bg$^x$ = $P$.bg, then
+% \begin{quote}
+% $\mathfrak{P}(P)=P$
+% \end{quote}
+% otherwise:
+% \begin{quote}
+% $\mathfrak{P}(P)$ is $\ulcorner\lambda r_1$:$P$.bg$^{\text{x}}$
+% . ($(r_2\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+% \record{
+%           \tfield{e}{$P(r_2)$}})$\urcorner$
+% \end{quote}
+% \end{quote}
+% %\label{ex:purification-classic}
+% \end{ex}
+Using `$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' will have the
 consequence that the content of \textit{every farmer who owns a donkey
-  likes it} will be \nexteg{} rather than (\ref{ex:donkey-weak}).
+  likes it} will be \nexteg{}.
+
+@@
+
 \begin{ex} 
 $\lambda\mathfrak{s}$:\textit{Rec} 
   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
