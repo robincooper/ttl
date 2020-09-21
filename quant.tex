@@ -5422,6 +5422,59 @@ using the variant of the purification operation, `$\mathfrak{P}^\forall$', in
 Using `$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' will have the
 consequence that the content of \textit{every farmer who owns a donkey
   likes it} will be \nexteg{}.
+\savebox{\boxone}{\textbf{farmer}$^\frown$\textbf{who}$^\frown$\textbf{owns}$^\frown$\textbf{a}$^\frown$\textbf{donkey}}
+\savebox{\boxtwo}{\textbf{likes}$^\frown$\textbf{it}}
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{every(restr, scope)}}
+\end{ex} 
+
+Given the general witness condition associated with `every', \preveg{} is
+equivalent to \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+If we use a variant of this witness condition which uses
+`$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' we have
+\nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}^\forall(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+Let us check that \preveg{} does in fact give us the strong
+$\forall$-reading.  We will do this by showing that the value
+associated with the label `scope' will be paraphrasable as ``the
+property of being an individual such that if it's a farmer who owns a
+donkey, she likes that donkey'', that is, likes every donkey she
+owns. We can show this by unpacking the expression representing the
+scope in \preveg{}.  `\textbf{likes}$^\frown$\textbf{it}', according to
+our treatment of free pronouns and extensional verbs, will be
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{Cntxt}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \footnotesize{Assgnmnt}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $c.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex} 
+  
+
 
 @@
 
