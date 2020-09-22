@@ -2947,7 +2947,13 @@ content for \nexteg{a} will be \nexteg{b}.
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}\\
-        \smalltfield{x$_1$}{\textit{Ind}}}}}
+        \smalltfield{x$_1$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}}}
+  }
                                  . 
 \record{\tfield{e}{hug($c.\mathfrak{s}$.x$_0$, $c.\mathfrak{s}$.x$_1$)}}$\urcorner$ 
  
@@ -2996,8 +3002,14 @@ be \nexteg{}.
         \smalltfield{x$_0$}{\textit{Ind}}\\
         \smalltfield{x$_1$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
-          \smalltfield{c$_0$}{male($\Uparrow\!\!\mathfrak{s}$.x$_0$)}\\
-          \smalltfield{c$_1$}{neuter($\Uparrow\!\!\mathfrak{s}$.x$_1$)}}}
+        \smalltfield{f}{\smallrecord{
+            \footnotesize{\textit{PropCntxt}}\\
+            \smalltfield{e}{male($\Uparrow^2\!\!\mathfrak{s}$.x$_0$)}}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \footnotesize{\textit{PropCntxt}}\\
+                \smalltfield{e}{neuter($\Uparrow^3\!\!\mathfrak{s}$.x$_1$)}}}}}}}
 }
                                  . 
 \record{\tfield{e}{hug($c.\mathfrak{s}$.x$_0$, $c.\mathfrak{s}$.x$_1$)}}$\urcorner$ 
