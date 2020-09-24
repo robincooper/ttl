@@ -3114,7 +3114,7 @@ $\textit{N}\longrightarrow{^T\textit{N}}\ {^T\textit{Rel}}\ \mid\ {^T\textit{N}}
   
         
 
-@@
+
 
   
 \section{Quantifier scope and underspecification}
@@ -3138,8 +3138,19 @@ parametric content of \textit{every dog}.
 % \smallrecord{\smalltfield{e}{every(dog$'$, 
 % $\lambda r_2$: \smallrecord{\smalltfield{x}{\textit{Ind}}} . 
 % \smallrecord{\smalltfield{e}{hug($r_1$.x, $r_2$.x)}})}})}}
-  $\ulcorner\lambda c$:\textit{Cntxt} .
-  \record{
+  \needspace{9\baselineskip}
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\textit{PropCntxt}}}}}}}}} . \\
+  \hspace*{2em}\record{
     \mfield{restr}{boy$'$}{\textit{Ppty}}\\
     \mfield{scope}{\textbf{hug}($c$)(\textbf{every}$^\frown$\textbf{dog}($c$))$\mid_{\mathcal{F}(\text{boy}')}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$
@@ -3175,7 +3186,14 @@ given in Chapter~\ref{ch:propnames}, Section~\ref{sec:unbound}.  Then the conten
   $\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_0$}{\textit{Ind}}}}} . \\
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}}}} . \\
   \hspace*{1em}\record{
     \mfield{restr}{boy$'$}{\textit{Ppty}}\\
     \mfield{scope}{\textbf{hug}($c$)($\lambda P$:\textit{Ppty}
@@ -3204,7 +3222,19 @@ as in \nexteg{b}.
 % \smallrecord{\smalltfield{e}{exist(boy$'$, $\lambda
 %     r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 %     . \smallrecord{\smalltfield{e}{hug($r_2$.x, $r_1$.x$_0$)}})}})}}
-  $\lambda c$:\textit{Cntxt} . \\
+  $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\textit{PropCntxt}}}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\textit{PropCntxt}}}}}}}}} . \\
   \hspace*{1em}\record{
     \mfield{restr}{dog$'$}{\textit{Ppty}}\\
     \mfield{scope}{$\lambda r$:\smallrecord{
@@ -3350,7 +3380,11 @@ where we have stored the basic parametric content of \textit{every
   dog} under the label `x$_0$'.
 \begin{ex} 
   \record{
-    \field{x$_0$}{$\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+    \field{x$_0$}{$\ulcorner\lambda c$:\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
       P$:\textit{Ppty} . \smallrecord{
       \smallmfield{restr}{dog$'$}{\textit{Ppty}}\\
       \smallmfield{scope}{$P$}{\textit{Ppty}}\\
@@ -3363,7 +3397,11 @@ content types which will be underspecified for quantifier scope.
 \begin{ex} 
   \record{
     \footnotesize{\textit{QStore}}\\
-    \mfield{x$_0$}{$\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+    \mfield{x$_0$}{$\ulcorner\lambda c$:\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
       P$:\textit{Ppty} . \smallrecord{
       \smallmfield{restr}{dog$'$}{\textit{Ppty}}\\
       \smallmfield{scope}{$P$}{\textit{Ppty}}\\
@@ -3396,7 +3434,11 @@ type \textit{PQuant}.  It is distinguished from a parametric
 quantifier like \nexteg{}, however, in that it requires the qstore in
 the context to be non-empty.
 \begin{ex} 
-$\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+$\ulcorner\lambda c$:\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
       P$:\textit{Ppty} . \smallrecord{
       \smallmfield{restr}{dog$'$}{\textit{Ppty}}\\
       \smallmfield{scope}{$P$}{\textit{Ppty}}\\
@@ -4002,7 +4044,8 @@ store and given scope over the non-parametric content.
     . $\alpha(c[r])\urcorner))$
   \end{quote}
   
-\end{ex} 
+\end{ex}
+\todo{Retrieval seems wrong}
 % \preveg{} says that if any of the unplugged interpretations in a sign
 % contains a quantifier indexed by $i$, that is, it is a parametric
 % quantifier whose domain type is
@@ -4343,7 +4386,11 @@ express this as the content type obtained by $\mathfrak{S}$.
 
 $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
                 \smalltfield{$\mathfrak{s}$}{\smallrecord{
-                    \smalltfield{x$_0$}{\textit{Ind}}}}}
+                    \smalltfield{x$_0$}{\textit{Ind}}}}\\
+                \smalltfield{$\mathfrak{c}$}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}
+              }
   . 
          \record{\tfield{e}{fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner^{\mathfrak{S}}$
 % $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{fail($\mathfrak{s}$.x$_0$)}}
@@ -4354,7 +4401,13 @@ content type for \textit{thinks she failed} is \nexteg{}.
 \begin{ex}
   $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
                 \smalltfield{$\mathfrak{s}$}{\smallrecord{
-                    \smalltfield{x$_0$}{\textit{Ind}}}}}
+                    \smalltfield{x$_0$}{\textit{Ind}}}}\\
+                \smalltfield{$\mathfrak{c}$}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\smallrecord{
+                        \smalltfield{f}{\textit{PropCntxt}}\\
+                        \smalltfield{a}{\textit{PropCntxt}}}}}}
+              }
               . $\lambda r$:\smallrecord{
                 \smalltfield{x}{\textit{Ind}}} . 
          \record{\tfield{e}{think($r$.x, fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner^{\mathfrak{S}}$
@@ -4414,7 +4467,11 @@ context for resolution.  % An alternative interpretation is \nexteg{},
 
 The content type associated with \textit{no girl} will be \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
   P$:\textit{Ppty} . \smallrecord{
     \smallmfield{restr}{girl$'$}{\textit{Ppty}}\\
     \smallmfield{scope}{$P$}{\textit{Ppty}}\\
@@ -4424,7 +4481,11 @@ The content type associated with \textit{no girl} will be \nexteg{}.
 Let us represent the \textit{generator} of this type, that is,
 \nexteg{}, by `no$'$(girl$'$)'.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
   P$:\textit{Ppty} . \smallrecord{
     \smallmfield{restr}{girl$'$}{\textit{Ppty}}\\
     \smallmfield{scope}{$P$}{\textit{Ppty}}\\
@@ -4444,7 +4505,8 @@ $\ulcorner\lambda c$:\smallrecord{
 Note that the context type for this parametric content has the path
 `$\mathfrak{s}$.x$_0$' which means that it is available for anaphoric
 version of combination operations, thus enabling \textit{she} in
-\textit{thinks she failed} to be related to `$\mathfrak{s}$.x$_0$'.
+\textit{thinks she failed} to be related to
+`$\mathfrak{s}$.x$_0$'. \todo{Steps missing here.}
 Application of `retrieve' to this content will obtain a content where
 \textit{she} is bound by \textit{no girl}.   
 
