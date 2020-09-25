@@ -4028,24 +4028,27 @@ store and given scope over the non-parametric content.
 
 %           \hspace*{4em}$\in$ $\sigma$.cont.unplugged
 
-  If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ and
+  If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ 
   $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
     \tfield{$\mathfrak{q}$}{\smallrecord{
-          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, then
+          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
+$[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and
+$\alpha'$ is
+$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
   $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
   \begin{quote}
     $\lambda
-    c$:$([\mathcal{Q}.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\alpha.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\mathcal{Q}.\text{bg}))$
-    . \\ \hspace*{2em}$\mathcal{Q}(\mathfrak{P}(\ulcorner\lambda
+    c$:$(\mathcal{Q}'.\text{bg}$\d{$\wedge$}$\alpha'.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i)$
+    . \\ \hspace*{2em}$\mathcal{Q'}(c)(\mathfrak{P}(\ulcorner\lambda
     r$:\smallrecord{
       \smalltfield{x}{\textit{Ind}}\\
       \smalltfield{$\mathfrak{s}$}{\smallrecord{
-          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha.\text{bg}^{\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i}$
+          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i}$
     . $\alpha(c[r])\urcorner))$
   \end{quote}
   
 \end{ex}
-\todo{Retrieval seems wrong}
+
 % \preveg{} says that if any of the unplugged interpretations in a sign
 % contains a quantifier indexed by $i$, that is, it is a parametric
 % quantifier whose domain type is
@@ -5566,7 +5569,8 @@ our treatment of free pronouns and extensional verbs, will be
     \smalltfield{x}{\textit{Ind}}} . \record{
     \tfield{e}{like$^\dagger$($r$.x, $c.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
 \end{ex} 
-  
+
+
 
 
 @@
