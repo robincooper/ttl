@@ -4043,8 +4043,8 @@ $[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{
     r$:\smallrecord{
       \smalltfield{x}{\textit{Ind}}\\
       \smalltfield{$\mathfrak{s}$}{\smallrecord{
-          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i}$
-    . $\alpha(c[r])\urcorner))$
+          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{s}.\text{x}_i}$
+    . $\alpha'(c[r][\mathfrak{q}.\text{x}_i=\mathcal{Q}])\urcorner))$
   \end{quote}
   
 \end{ex}
@@ -4072,10 +4072,14 @@ combination of the context types (labelled `bg') associated with
 $\mathcal{Q}$ and $\alpha$ including path adjustment and
 incrementation but with fields labelled `$\mathfrak{q}.\text{x}_i$'
 and `$\mathfrak{s}.\text{x}_i$' removed together with any fields
-depending on them.  The fields that are removed are added to the
-domain type of the property to which $\mathcal{Q}$ is applied and
-purification ($\mathfrak{P}$) is applied to the property so that the
-additional fields are ``moved down'' into $\alpha$ giving the effect
+depending on them.  The field labelled `$\mathfrak{s}$.x$_i$' and
+fields dependent on it are added to the
+domain type of the property to which $\mathcal{Q}$ is applied  and a
+`$\mathfrak{q}$.x$_i$'-field is added to the context argument for
+$\alpha'$ to make the context an appropriate argument,
+though this field will not appear in the result.  
+Purification ($\mathfrak{P}$) is applied to the property so that the
+additional fields from the domain type are ``moved down'' into $\alpha$ giving the effect
 of what in Discourse Representation Theory would be called local
 accommodation of any presuppositions \citep{VanderSandt1992}.  This
 means that any presuppositions associated with the quantifier will
