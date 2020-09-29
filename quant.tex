@@ -4322,8 +4322,8 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
       relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
   \begin{quote}
     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})\boxed{\ominus\mathfrak{s}.\text{x}_j}$
-      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c\boxed{[\mathfrak{s}.\text{x}_j=\mathfrak{s}.\text{x}_i]}))\urcorner$
+      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
 \end{quote}
 
 
@@ -4605,17 +4605,16 @@ into the context type in (\ref{ex:he-whistled-parametric}) yielding \nexteg{}.
 \begin{ex} 
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
-    \smallrecord{
-      \smalltfield{$\mathfrak{p}$}{\smallrecord{
-          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
-          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
-          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
-          \smalltfield{e}{\smallrecord{
-              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
-              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
-      \smalltfield{$\mathfrak{s}$}{\smallrecord{
-          \smalltfield{x$_0$}{\textit{Ind}}}}}}
-    . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+    \smalltfield{$\mathfrak{p}$}{\smallrecord{
+        \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+        \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+        \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+        \smalltfield{e}{\smallrecord{
+            \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+            \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}}
+  . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
 \end{ex} 
 \preveg{} makes the content of the previous utterance be part of the
 context for content of the current utterance.  It does not, however,
@@ -4627,7 +4626,6 @@ This can be done by introducing a manifest field under the
 \begin{ex} 
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
-    \smallrecord{
       \smalltfield{$\mathfrak{p}$}{\smallrecord{
           \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
           \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
@@ -4636,8 +4634,47 @@ This can be done by introducing a manifest field under the
               \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
               \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
       \smalltfield{$\mathfrak{s}$}{\smallrecord{
-          \smallmfield{x$_0$}{$\Uparrow\!\!\mathfrak{p}$.e.x}{\textit{Ind}}}}}}
+          \smallmfield{x$_0$}{$\Uparrow\!\!\mathfrak{p}$.e.x}{\textit{Ind}}}}}
   . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex}
+On the basis of \preveg{}, we can create a new function with the same
+effect which will have the same domain and return the same results for
+each element in the domain but in which any dependency on
+`$c.\mathfrak{s}.\text{x}_0$' is replaced by a dependency on
+`$c.\mathfrak{p}.\text{e}.\text{x}$' as in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smallmfield{x$_0$}{$\Uparrow\!\!\mathfrak{p}$.e.x}{\textit{Ind}}}}}
+  . \record{\tfield{e}{whistle($c.\mathfrak{p}$.e.x)}}$\urcorner$ 
+\end{ex} 
+Since nothing now depends on the path `$\mathfrak{s}.\text{x}_0$' in
+the context and $\mathfrak{T}(\text{man}')$', that is, the type
+restriction on the path `$\mathfrak{p}$.e.x', is a subtype of
+`\textit{Ind}', the type from which the singleton type on the path
+`$\mathfrak{s}.\text{x}_0$' is derived, we can remove the path `$\mathfrak{s}.\text{x}_0$'
+without changing the extension of any records that are witnesses for the
+context type.  Thus we obtain \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}
+      }
+  . \record{\tfield{e}{whistle($c.\mathfrak{p}$.e.x)}}$\urcorner$ 
 \end{ex}
 
 \begin{shaded}
