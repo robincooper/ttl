@@ -4326,6 +4326,7 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
       . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
 \end{quote}
 
+\label{ex:combine-align}
 
 \end{ex} 
 We can define similar modifications, $\mathcal{O}_{i,j}$ for the other combination
@@ -4513,9 +4514,116 @@ Note that the context type for this parametric content has the path
 `$\mathfrak{s}$.x$_0$' which means that it is available for anaphoric
 version of combination operations, thus enabling \textit{she} in
 \textit{thinks she failed} to be related to
-`$\mathfrak{s}$.x$_0$'. \todo{Steps missing here.}
-Application of `retrieve' to this content will obtain a content where
-\textit{she} is bound by \textit{no girl}.   
+`$\mathfrak{s}$.x$_0$'. This can be achieved by the combination of
+parametric contents expressed in \nexteg{a} which is identical with
+\nexteg{b}.  This uses `@$_{0,1}$' as characterized in
+(\ref{ex:combine-align}).
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{no$'$(girl$'$)}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+  
+  @$_{0,1}$
+
+  $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}}}
+  }
+  . $\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . 
+  \record{\tfield{e}{think($r$.x, fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+  
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{no$'$(girl$'$)}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\textit{PropCntxt}}}}}}}}} . \record{
+    \tfield{e}{think($c.\mathfrak{s}.\text{x}_0$, fail($c.\mathfrak{s}.\text{x}_0$))}}$\urcorner$
+           
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+Application of `$\mathrm{retrieve}$' to the content \preveg{} will obtain a content where
+the scope of the quantifier is the property of ``being a girl who
+thinks she (the girl) failed''.   The whole content is given in
+\nexteg{} where \nexteg{a--c} are identical.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}}}}}}}} . \\
+  \hspace*{1em}($\lambda P$:\textit{Ppty} . \record{
+    \mfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathcal{F}(\text{girl}')}$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}} \\
+  \hspace*{2em}($\mathfrak{P}$($\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smallmfield{x$_0$}{$\Uparrow$x}{\textit{Ind}}}}} . \record{
+    \tfield{e}{think($r.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($r.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$)))
+ 
+\item  $\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}}}}}}}} . \\
+  \hspace*{1em}($\lambda P$:\textit{Ppty} . \record{
+    \mfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathcal{F}(\text{girl}')}$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}} \\
+  \hspace*{2em}($\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{$\mathfrak{c}$}{\record{
+        \tfield{$\mathfrak{s}$}{\record{
+            \mfield{x$_0$}{$r$.x}{\textit{Ind}}}}}}\\
+    \tfield{e}{think($r.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($r.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$))
+  \hfill (purification)
+
+  
+\item \hfill ($\beta$-reduction, property restriction)
+ 
+\end{subex} 
+   
+\end{ex} 
+  
 
 % Interpreting \textit{no girl} with storage yields \nexteg{}.
 % \begin{ex} 
