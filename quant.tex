@@ -4416,9 +4416,10 @@ content type for \textit{thinks she failed} is \nexteg{}.
                         \smalltfield{f}{\textit{PropCntxt}}\\
                         \smalltfield{a}{\textit{PropCntxt}}}}}}
               }
-              . $\lambda r$:\smallrecord{
+              . $\ulcorner\lambda r$:\smallrecord{
                 \smalltfield{x}{\textit{Ind}}} . 
-         \record{\tfield{e}{think($r$.x, fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner^{\mathfrak{S}}$
+              \record{\tfield{e}{think($r$.x, \smallrecord{
+                    \smalltfield{e}{fail($c.\mathfrak{s}$.x$_0$)}})}}$\urcorner\urcorner^{\mathfrak{S}}$
 % $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
 %   . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
 %     . \record{\tfield{e}{think($r$.x,
@@ -4540,9 +4541,10 @@ parametric contents expressed in \nexteg{a} which is identical with
             \smalltfield{f}{\textit{PropCntxt}}\\
             \smalltfield{a}{\textit{PropCntxt}}}}}}
   }
-  . $\lambda r$:\smallrecord{
+  . $\ulcorner\lambda r$:\smallrecord{
     \smalltfield{x}{\textit{Ind}}} . 
-  \record{\tfield{e}{think($r$.x, fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+  \record{\tfield{e}{think($r$.x, \smallrecord{
+        \smalltfield{e}{fail($c.\mathfrak{s}$.x$_0$)}})}}$\urcorner\urcorner$
   
 \item $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
@@ -4557,7 +4559,8 @@ parametric contents expressed in \nexteg{a} which is identical with
             \smalltfield{a}{\smallrecord{
                 \smalltfield{f}{\textit{PropCntxt}}\\
                 \smalltfield{a}{\textit{PropCntxt}}}}}}}}} . \record{
-    \tfield{e}{think($c.\mathfrak{s}.\text{x}_0$, fail($c.\mathfrak{s}.\text{x}_0$))}}$\urcorner$
+    \tfield{e}{think($c.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($c.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$
            
  
 \end{subex} 
@@ -4571,7 +4574,7 @@ thinks she (the girl) failed''.   The whole content is given in
 \begin{ex} 
 \begin{subex} 
  
-\item $\lambda c$:\smallrecord{
+\item $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\textit{PropCntxt}}\\
@@ -4591,9 +4594,9 @@ thinks she (the girl) failed''.   The whole content is given in
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smallmfield{x$_0$}{$\Uparrow$x}{\textit{Ind}}}}} . \record{
     \tfield{e}{think($r.\mathfrak{s}.\text{x}_0$, \smallrecord{
-        \smalltfield{e}{fail($r.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$)))
+        \smalltfield{e}{fail($r.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$)))$\urcorner$
  
-\item  $\lambda c$:\smallrecord{
+\item  $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{c}$}{\smallrecord{
         \smalltfield{f}{\textit{PropCntxt}}\\
@@ -4609,22 +4612,44 @@ thinks she (the girl) failed''.   The whole content is given in
     \mfield{scope}{$P|_{\mathcal{F}(\text{girl}')}$}{\textit{Ppty}}\\
     \tfield{e}{no(restr, scope)}} \\
   \hspace*{2em}($\ulcorner\lambda r$:\smallrecord{
-    \smalltfield{x}{\textit{Ind}}} . \record{
-    \tfield{$\mathfrak{c}$}{\record{
-        \tfield{$\mathfrak{s}$}{\record{
-            \mfield{x$_0$}{$r$.x}{\textit{Ind}}}}}}\\
-    \tfield{e}{think($r.\mathfrak{s}.\text{x}_0$, \smallrecord{
-        \smalltfield{e}{fail($r.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$))
+    \smalltfield{x}{\textit{Ind}}} . \smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            \smallmfield{x$_0$}{$r$.x}{\textit{Ind}}}}}}\\
+    \smalltfield{e}{think($\mathfrak{c}.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$))$\urcorner$
   \hfill (purification)
 
   
-\item \hfill ($\beta$-reduction, property restriction)
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}}}}}}}} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$\ulcorner\lambda r$:\smallrecord{
+        \smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{e}{girl(x)}} . \smallrecord{
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                \smallmfield{x$_0$}{$r$.x}{\textit{Ind}}}}}}\\
+        \smalltfield{e}{think($\mathfrak{c}.\mathfrak{s}.\text{x}_0$, \smallrecord{
+            \smalltfield{e}{fail($\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}}$\urcorner$\\
+  \hfill ($\beta$-reduction, property restriction)
  
 \end{subex} 
    
 \end{ex} 
 
-\todo{Fix c.  Fix 'she failed' as argument record type}
+
 
 % Interpreting \textit{no girl} with storage yields \nexteg{}.
 % \begin{ex} 
@@ -4662,7 +4687,13 @@ Given our strategy for defining the content of quantified sentences in
 terms of generalized quantifiers a witness for the content type of \textit{a man walked}
 will be \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt} . \record{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . \record{
     \mfield{restr}{man$'$}{\textit{Ppty}}\\
     \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{exist(restr, scope)}}$\urcorner$ 
@@ -4670,7 +4701,14 @@ will be \nexteg{}.
 We know from our treatment of the witness conditions associated with
 `exist' that \preveg{} is equivalent to \nexteg{}.
 \begin{ex} 
-  $\ulcorner\lambda c$:\textit{Cntxt} . \record{
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . \\
+  \hspace*{4em}\record{
     \mfield{restr}{man$'$}{\textit{Ppty}}\\
     \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{\record{
@@ -4681,14 +4719,18 @@ We know from our treatment of the witness conditions associated with
 Using our previous treatment for free pronouns, \textit{he whistled}
 will have \nexteg{} as a witness of its content type.
 \begin{ex}
-  $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
-                \smalltfield{$\mathfrak{s}$}{\smallrecord{
-                    \smalltfield{x$_0$}{\textit{Ind}}}}}
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}
   . 
-         \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
-         % $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{whistle($\mathfrak{s}$.x$_0$)}}
+  \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+  % $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{whistle($\mathfrak{s}$.x$_0$)}}
 
-\label{ex:he-whistled-parametric}
+  \label{ex:he-whistled-parametric}
 \end{ex} 
 We will represent \preveg{} as \textbf{he$^{\frown}$whistled}.
 
@@ -4702,7 +4744,13 @@ foreground of
 (\ref{ex:a-man-walked-derived}) is \nexteg{}.
 \begin{ex} 
   \record{
-    \tfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+    \tfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
     \mfield{restr}{man$'$}{\textit{Ppty}}\\
     \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
     \tfield{e}{\record{
@@ -4715,7 +4763,13 @@ into the context type in (\ref{ex:he-whistled-parametric}) yielding \nexteg{}.
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{p}$}{\smallrecord{
-        \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
         \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
         \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
         \smalltfield{e}{\smallrecord{
@@ -4736,7 +4790,13 @@ This can be done by introducing a manifest field under the
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{p}$}{\smallrecord{
-          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
           \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
           \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
           \smalltfield{e}{\smallrecord{
@@ -4755,7 +4815,13 @@ each element in the domain but in which any dependency on
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{p}$}{\smallrecord{
-          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
           \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
           \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
           \smalltfield{e}{\smallrecord{
@@ -4776,7 +4842,13 @@ context type.  Thus we obtain \nexteg{}.
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
       \smalltfield{$\mathfrak{p}$}{\smallrecord{
-          \smalltfield{$\mathfrak{c}^*$}{\textit{Cntxt}}\\
+          \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
           \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
           \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
           \smalltfield{e}{\smallrecord{
@@ -5103,7 +5175,11 @@ parametric content for the verb-phrase \textit{catches it} given in
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \footnotesize{\textit{Assgnmnt}}\\
-        \smalltfield{x$_0$}{\textit{Ind}}}}} .
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}
+} .
   $\ulcorner\lambda r$:\smallrecord{
     \smalltfield{x}{\textit{Ind}}} .
   \record{
@@ -5121,7 +5197,11 @@ function to paths in $r$ beginning with `$\mathfrak{c}$'.
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \footnotesize{\textit{Assgnmnt}}\\
-        \smalltfield{x$_0$}{\textit{Ind}}}}}}} .
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}
+}}} .
   \record{
     \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
 \label{ex:catch-it-localized}
@@ -5156,15 +5236,22 @@ content of the verb phrase, then, after combination with \textit{no
         \footnotesize{\textit{Cntxt}}\\
         \smalltfield{$\mathfrak{s}$}{\smallrecord{
             \footnotesize{\textit{Assgnmnt}}\\
-            \smalltfield{x$_0$}{\textit{Ind}}}}}}\\
+            \smalltfield{x$_0$}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
     \smalltfield{e$_1$}{dog(x)}\\
     \smalltfield{e$_2$}{\smallrecord{
         \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
-        \smalltfield{e}{chase$^\dagger$($r$.x, x)}}}}
+        \smalltfield{e}{chase$^\dagger$($\Uparrow$x, x)}}}}
    .
   \record{
     \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
-\end{ex} 
+\end{ex}
+
+@@
+
 We can paraphrase this as ``the property of being a dog which chases a
 cat and there is something which it catches''.  In order to obtain the
 anaphora we need to align the following two paths in the domain type
@@ -5720,7 +5807,7 @@ our treatment of free pronouns and extensional verbs, will be
     \tfield{e}{like$^\dagger$($r$.x, $c.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
 \end{ex} 
 
-
+\todo{Assgnmnt needs adding to $\mathfrak{s}$-fields}
 
 
 @@
