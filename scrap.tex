@@ -69,3 +69,1221 @@ anatomy,  TTR seems quite modest in the number of different kinds of
 objects it proposes and the interrelationships between them.  It is
 probably going to get more complicated as the research progresses in
 the future\ldots
+
+
+We can paraphrase this as ``the property of being a dog which chases a
+cat and there is something which it catches''.  In order to obtain the
+anaphora we need to align the following two paths in the domain type
+of this function: `$\mathfrak{c}.\mathfrak{s}.\text{x}_0$' and
+`e$_2$.x'.  This we do in \nexteg{} by creating a manifest field on
+the former path.
+
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($r$.x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+We can paraphrase this as ``the property of being a dog which chases a
+cat and catches that cat''.
+
+In order to include such properties with aligned paths as the scope of
+quantifiers in our interpretations, we will first generalize the
+characterization of alignment of paths given on
+p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
+\begin{ex} 
+  If $\varphi=\ulcorner\lambda r\!:\!T\ .\ \psi\urcorner$ and
+  $\pi_1,\pi_2\in\mathrm{paths}(T)$, then
+  \begin{quote}
+    $\varphi_{\pi_1=\pi_2}=\ulcorner\lambda r\!:\!T_{\pi_1=\pi_2}\ .\
+    \psi\urcorner$
+  \end{quote}
+\end{ex} 
+We then add two further clauses to the characterization of witnesses
+for $\mathfrak{S}(T)$ for content types, $T$, in \nexteg{} with the
+new additions boxed.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item \fbox{if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+      then $\mathcal{L}(\varphi):\mathfrak{S}(T)$}
+    
+  \item \fbox{\begin{minipage}[t]{.9\linewidth}if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}}
+
+    
+  \item if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-donkey-type}   
+\end{ex}
+
+
+
+Overall we can get a parametric content for \textit{no dog which
+  chases a cat catches it} which looks like \nexteg{} where
+\savebox{\boxone}{\textbf{dog}$^\frown$\textbf{which}$^\frown$\textbf{chases}$^\frown$\textbf{a}$^\frown$\textbf{cat}} \usebox{\boxone}
+and \savebox{\boxtwo}{\textbf{catches}$^\frown$\textbf{it}}\usebox{\boxtwo} represent parametric contents
+which have not undergone operations introduced by $\mathfrak{S}$.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{no(restr, scope)}}
+\end{ex} 
+Given the semantics we have specified for the determiner \textit{no},
+\preveg{} is \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex} 
+We can paraphrase this content as ``for every dog which chases a cat
+it's not the case that it's a dog which chases a cat$_i$ and catches
+it$_i$'' where the subscript on \textit{cat} and \textit{it} indicates
+that \textit{it} is anaphorically related to \textit{a cat}.
+
+
+% The basic content related to \textit{no} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{no($Q$,$P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
+% relative pronoun \textit{which} has the content specified for
+% \textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
+% by not accounting for the gender distinction between the two.)  We
+% repeat this in \nexteg{} and will refer to it here as \textbf{which}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
+%   . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
+% \end{ex} 
+% The basic content of an utterance of \textit{chase} is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{chase($r_1$.x, $r_2$.x)}} 
+% \end{ex} 
+% The indefinite article $a$ will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{exist($Q$, $P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% Thus the phrase \textit{a cat} will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+% . \record{\tfield{e}{exist(cat$'$, $P|_{\mathcal{F}(\text{cat}')}$)}} 
+% \end{ex} 
+% We will refer to \preveg{} as \textbf{a$^\frown$cat}.  Given this the
+% content of \textit{chase a cat} will be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{chase($r_1$.x,
+%     \textbf{a$^\frown$cat}($\mathfrak{s}$))}}
+% \label{ex:chaseacat-noexport} 
+% \end{ex} 
+% Given that \textit{chase} is an extensional verb it will obey a
+% constraint like (\ref{ex:mp-find}) on p.~\pageref{ex:mp-find}, as
+% given in \nexteg{}.
+% \begin{ex} 
+% $e$ : chase($a$, $Q$) iff $e$ : $Q$($\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{chase$^{\dagger}$($a$,
+% $r$.x)}}) 
+% \end{ex} 
+% This means that we can construe the content to be a function which
+% returns an equivalent type to that returned in
+% (\ref{ex:chaseacat-noexport}).  This new content is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda s$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\textbf{a$^\frown$cat}($\mathfrak{s}$)($\lambda
+%       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%       . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{exist(cat$'$, $\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                     \smalltfield{e}{cat(x)}}
+%                   . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% In turn, \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x,
+%                          $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}
+% \label{ex:chase-a-cat} 
+% \end{ex} 
+% We represent \preveg{} as \textbf{chase$^\frown$a$^\frown$cat}.  From
+% this we can form a ``sentence with a gap'' interpretation,
+% \textbf{chase$^\frown$a$^\frown$cat$_S$}, in the manner described in
+% Section~\ref{sec:long-distance}.  This is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}} . $\lambda
+% P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh$_0$\}(\textbf{chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)) 
+% \end{ex} 
+% Unpacking \preveg{} we obtain \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+% . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\mathfrak{s}$.wh$_0$, $\Uparrow\!\mathfrak{c}$.x)}}}}}}}} 
+% \end{ex} 
+% Again following the analysis of long-distance dependencies developed
+% in Section~\ref{sec:long-distance}, the content of \textit{which
+%   chased a cat} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} . \\
+% \hspace*{1em} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \textbf{which}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}$)($\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{chase$^\frown$a$^\frown$cat$_S$}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$) 
+% \end{ex} 
+% Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
+% \textit{which chased a cat} is identical with the content of
+% \textit{chased a cat}.  For clarity we will represent this content
+% also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
+% Again following the proposal in Section~\ref{sec:long-distance} the
+% content for \textit{dog which chases a cat} will be
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e$_1$}{dog$'$\{$r$.x\}}\\
+%           \tfield{e$_2$}{\textbf{which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)\{$r$.x\}}} 
+% \end{ex} 
+% We call this
+% \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}. Now
+% \textit{no dog which chases a cat} will correspond to \nexteg{a} which
+% is equivalent to \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{no(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$),
+%       $P|_{\mathcal{F}(\textbf{dog}^\frown\textbf{which}^\frown\textbf{chase}^\frown
+%           \textbf{a}^\frown\textbf{cat}(\mathfrak{s}))}$)}} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}(P|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+% \end{subex} 
+% \label{ex:no-dog-which-chases-a-cat}   
+% \end{ex} 
+% Call this
+% \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.
+% This is to combine with the content of \textit{catches it}, given in
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
+% \end{ex}
+% We will represent this as \textbf{catch$^\frown$it}. 
+% Using the S-combinator strategy to
+% (\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
+% \nexteg{b}, which represents a reading of the sentence where
+% \textit{it} is not captured and refers to a particular object provided
+% by the context.
+% \begin{ex}
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}(\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}}$|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{s}$.x$_0$)}}
+% )}}}} 
+ 
+% \end{subex} 
+   
+ 
+% \end{ex} 
+% In terms of the notation in \preveg{b}, it is simple enough to see
+% what needs to be done in order to change it to a case of donkey
+% anaphora.  The second argument to `catch$^\dagger$',
+% `$\mathfrak{s}$.x$_0$', has to be changed so that it presents a path
+% to the cat, that is, `$\mathfrak{c}$.e$_2$.e.x'.  Also the dependence
+% of this parametric content on `x$_0$' has to be removed.  Thus the
+% domain type for the $\lambda$-abstraction, currently
+% `\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
+% by `\textit{Rec}'.  The result would be \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}}
+% \label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
+% \end{ex} 
+% We will achieve this by introducing a notion of restriction on a
+% parametric property in which we will allow anaphora to take place.
+% Let us first consider a case without anaphora.  Suppose that
+% $\mathcal{P}$ is a parametric property of type
+% $(T_1\rightarrow(T_2\rightarrow \textit{Type}))$ and that $T$ is a
+% type then we define the restriction of $\mathcal{P}$ by $T$,
+% $\mathcal{P}|^p_T$, to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1$ $\lambda r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s})(r)$ 
+% \end{ex} 
+% Now suppose that $[\ell,v]$ is a field in $T_1$ and $\pi$ is a path in
+% $T_2$ and we want to make an anaphoric association between $\ell$ and
+% $\pi$.  We define such a restriction,
+% $\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
+% \end{ex}
+% To enable the capture of several pronouns, we let $\vec\Pi\subseteq
+% T_1\times\text{paths}(T)$ such that $\vec\Pi$ is the graph of a one-one
+% function (whose domain is included in the fields of $T_1$ and whose
+% range is included in the paths of $T$).  We then define
+% $\mathcal{P}|^p_{T,\vec{\Pi}}$ to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus_{\text{set}}\vec{\Pi}_1$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=r.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$ 
+% \end{ex} 
+% If $\vec{\Pi}$ is
+% $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+% then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as
+% $\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$. Using
+% this notation,  the content of \textit{no dog which chases a cat catches
+%   it} where the pronoun is captured is \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec}
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}$(\textbf{catch$^\frown$it}$|^p_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s})),\text{x}_0\leadsto\text{e}_2.\text{e}.\text{x}}(\mathfrak{s})$)\{x\})}}}} 
+% \end{ex} 
+% Unpacking \preveg{} yields
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
+
+This treatment of donkey anaphora is essentially similar to that of
+\cite{Chierchia1995} in that it associates an existential reading the
+pronoun it, that is, it is not the case that there is a cat which the
+dog chases that it also catches.  The dog does not catch any of the
+cats it chases.  If we use \textit{every} instead of \textit{no} we
+get a reading which is paraphrased as ``every dog which chases a cat
+is a dog which chases a cat and catches it''.  This is what is known
+in the literature as a \textit{weak reading} or a
+\textit{$\exists$-reading}. It says that every dog which chases a cat
+catches \textit{some} cat that it chases (but not necessarily all).
+This reading may intuitively not be appropriate for \textit{every dog
+  that chases a cat catches it} which for many speakers would suggest
+that the dogs catch all the cats they chase.  However, the weak
+reading is important for the examples in \nexteg{}.
+
+% Notice that \preveg{}
+% forces what is known in the literature as a \textit{strong} reading
+% for the donkey anaphora.  That is, none of the dogs which chase a cat
+% catch \textit{any} of the cats which they chase.  That monotone
+% decreasing quantifiers force such strong readings was noted, for
+% example, by [Chierchia???? Pelletier????].  Monotone increasing
+% quantifiers, however, allow \textit{weak} readings.  Examples of
+% donkey sentences mentioned in the literature that have naturally weak
+% readings are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Every person who had a dime put it in the parking
+  meter. \citep{PelletierSchubert1989} 
+ 
+\item Every man who has a daughter thinks she is the most beautiful
+  girl in the world \citep{Cooper1979} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} does not seem to suggest that anybody who had several dimes
+put them all in the meter and \preveg{b} does not seem to
+commit a man who has two daughters to believe the contradictory
+proposition that they are both the one and only most beautiful girl in
+the world.
+%
+% @@
+%
+% Let us consider the content for \textit{every person who
+%   had a dime put it in the parking meter} given in \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{person$^\frown$who$^\frown$have$^\frown$a$^\frown$dime}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{person$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(dime$'$)}\\
+%                                                                               %                  \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                               %                                                                                         \smalltfield{e}{dime(x)}}}\\
+%                                                                               %                       \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{put\_in\_the\_meter$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \end{ex} 
+% \preveg{} is exactly similar to
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}) modulo the
+% properties and predicates involved except that there is no negation in
+% \preveg{}.  \preveg{} requires then that every person who had a dime
+% is a person who had a dime and put it in the meter, that is, a weak
+% reading which requires only that each relevant person put some dime in
+% the meter, not all of their dimes. 
+What then do we say about the
+original donkey sentences like \textit{every farmer who owns a donkey
+  likes it} which were analyzed by Geach and the classical analyses in
+DRT and type theory as having a strong reading in which every farmer
+who owns a donkey likes any donkey that he owns?  One option is to say
+that we only need the weak reading for such sentences as it is
+consistent with the stronger reading.  Many speakers feel that it
+unclear what the sentence means if some man owns more than one donkey.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{donkey(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{like$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \label{ex:donkey-weak} 
+% \end{ex} 
+That is,
+\textit{every farmer who owns a donkey likes it} requires that for
+every donkey owning farmer there is at least one donkey the farmer
+owns such that she likes it.  This allows for the farmers to like all
+their donkeys but does not require it. (See \citealp{Kanazawa1994} for
+a discussion of this.)  In the case of \textit{every dog which chases
+  a cat catches it} I have the following intuition:
+\begin{quote}
+  if there is a dog under consideration which is involved in two
+  distinct cat-chasing events (with a single cat) and only succeeds in catching the cat in
+  one of the two events, then this seems to make the sentence false;
+
+  if there is a dog under consideration which is involved in a single
+  event of chasing two cats and only succeeds in catching one of the
+  cats in that event, then it seems that the sentence could still be
+  true.
+\end{quote}
+This suggests an analysis which requires that every relevant
+cat-chasing event must involve the catching of at least one of the
+cats chased in that event.  Firm judgements concerning such intuitions
+are notoriously hard to come by.  \cite{Chierchia1995} argues that the
+strong $\forall$-reading is necessary because of examples like
+\nexteg{}.
+\begin{ex} 
+Every man who owned a slave owned his offspring 
+\end{ex} 
+\preveg{} is a modification of an example in \cite{Heim1990} which is
+used to make a different argument.  It seems like a single instance of
+somebody owning a slave but not the slave's offspring would be
+sufficient to falsify \preveg{}.  Though again, in the case of a slave
+who has several offspring one of which is owned by somebody else, it
+seems to me that it is unclear whether that is sufficient to falsify
+the sentence.
+
+\label{pg:donkey-purification-universal}
+One option is to recreate the original Geach reading by
+using the variant of the purification operation, `$\mathfrak{P}^\forall$', in
+(\ref{ex:purification-universal}), p.~\pageref{ex:purification-universal} which introduces a function on local contexts.
+% \begin{ex} 
+% If $P$ : \textit{Ppty}, then
+% \begin{quote}
+% if $P$.bg$^x$ = $P$.bg, then
+% \begin{quote}
+% $\mathfrak{P}(P)=P$
+% \end{quote}
+% otherwise:
+% \begin{quote}
+% $\mathfrak{P}(P)$ is $\ulcorner\lambda r_1$:$P$.bg$^{\text{x}}$
+% . ($(r_2\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+% \record{
+%           \tfield{e}{$P(r_2)$}})$\urcorner$
+% \end{quote}
+% \end{quote}
+% %\label{ex:purification-classic}
+% \end{ex}
+Using `$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' will have the
+consequence that the content of \textit{every farmer who owns a donkey
+  likes it} will be \nexteg{}.
+\savebox{\boxone}{\textbf{farmer}$^\frown$\textbf{who}$^\frown$\textbf{owns}$^\frown$\textbf{a}$^\frown$\textbf{donkey}}
+\savebox{\boxtwo}{\textbf{likes}$^\frown$\textbf{it}}
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{every(restr, scope)}}
+\end{ex} 
+
+Given the general witness condition associated with `every', \preveg{} is
+equivalent to \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+If we use a variant of this witness condition which uses
+`$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' we have
+\nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}^\forall(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+Let us check that \preveg{} does in fact give us the strong
+$\forall$-reading.  We will do this by showing that the value
+associated with the label `scope' will be paraphrasable as ``the
+property of being an individual such that if it's a farmer who owns a
+donkey, she likes that donkey'', that is, likes every donkey she
+owns. We can show this by unpacking the expression representing the
+scope in \preveg{}.  `\textbf{likes}$^\frown$\textbf{it}', according to
+our treatment of free pronouns and extensional verbs, will be
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{Cntxt}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{Assgnmnt}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $c.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex}
+Using the definition of the localization operation, $\mathcal{L}$, in
+(\ref{ex:localization}), we can see that
+`$\mathcal{L}(\textbf{likes}^\frown\textbf{it})$' is \nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
+r$:\smallrecord{
+  \smalltfield{x}{\textit{Ind}}\\
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $r.\mathfrak{c}.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex} 
+Applying \preveg{} to any context, $c$, will obtain \nexteg{}.
+\begin{ex} 
+ $\ulcorner\lambda
+r$:\smallrecord{
+  \smalltfield{x}{\textit{Ind}}\\
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $r.\mathfrak{c}.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex} 
+Restricting \preveg{} by
+`$\mathcal{F}(\textbf{farmer}^\frown\textbf{who}^\frown\textbf{owns}^\frown\textbf{a}^\frown\textbf{donkey})$',
+yields \nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smalltfield{x$_0$}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($\Uparrow$x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+
+
+
+We can paraphrase this as ``the property of being a dog which chases a
+cat and there is something which it catches''.  In order to obtain the
+anaphora we need to align the following two paths in the domain type
+of this function: `$\mathfrak{c}.\mathfrak{s}.\text{x}_0$' and
+`e$_2$.x'.  This we do in \nexteg{} by creating a manifest field on
+the former path.
+
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($r$.x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+We can paraphrase this as ``the property of being a dog which chases a
+cat and catches that cat''.
+
+In order to include such properties with aligned paths as the scope of
+quantifiers in our interpretations, we will first generalize the
+characterization of alignment of paths given on
+p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
+\begin{ex} 
+  If $\varphi=\ulcorner\lambda r\!:\!T\ .\ \psi\urcorner$ and
+  $\pi_1,\pi_2\in\mathrm{paths}(T)$, then
+  \begin{quote}
+    $\varphi_{\pi_1=\pi_2}=\ulcorner\lambda r\!:\!T_{\pi_1=\pi_2}\ .\
+    \psi\urcorner$
+  \end{quote}
+\end{ex} 
+We then add two further clauses to the characterization of witnesses
+for $\mathfrak{S}(T)$ for content types, $T$, in \nexteg{} with the
+new additions boxed.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item \fbox{if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+      then $\mathcal{L}(\varphi):\mathfrak{S}(T)$}
+    
+  \item \fbox{\begin{minipage}[t]{.9\linewidth}if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}}
+
+    
+  \item if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-donkey-type}   
+\end{ex}
+
+
+
+Overall we can get a parametric content for \textit{no dog which
+  chases a cat catches it} which looks like \nexteg{} where
+\savebox{\boxone}{\textbf{dog}$^\frown$\textbf{which}$^\frown$\textbf{chases}$^\frown$\textbf{a}$^\frown$\textbf{cat}} \usebox{\boxone}
+and \savebox{\boxtwo}{\textbf{catches}$^\frown$\textbf{it}}\usebox{\boxtwo} represent parametric contents
+which have not undergone operations introduced by $\mathfrak{S}$.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{no(restr, scope)}}
+\end{ex} 
+Given the semantics we have specified for the determiner \textit{no},
+\preveg{} is \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex} 
+We can paraphrase this content as ``for every dog which chases a cat
+it's not the case that it's a dog which chases a cat$_i$ and catches
+it$_i$'' where the subscript on \textit{cat} and \textit{it} indicates
+that \textit{it} is anaphorically related to \textit{a cat}.
+
+
+% The basic content related to \textit{no} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{no($Q$,$P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
+% relative pronoun \textit{which} has the content specified for
+% \textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
+% by not accounting for the gender distinction between the two.)  We
+% repeat this in \nexteg{} and will refer to it here as \textbf{which}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
+%   . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
+% \end{ex} 
+% The basic content of an utterance of \textit{chase} is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{chase($r_1$.x, $r_2$.x)}} 
+% \end{ex} 
+% The indefinite article $a$ will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{exist($Q$, $P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% Thus the phrase \textit{a cat} will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+% . \record{\tfield{e}{exist(cat$'$, $P|_{\mathcal{F}(\text{cat}')}$)}} 
+% \end{ex} 
+% We will refer to \preveg{} as \textbf{a$^\frown$cat}.  Given this the
+% content of \textit{chase a cat} will be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{chase($r_1$.x,
+%     \textbf{a$^\frown$cat}($\mathfrak{s}$))}}
+% \label{ex:chaseacat-noexport} 
+% \end{ex} 
+% Given that \textit{chase} is an extensional verb it will obey a
+% constraint like (\ref{ex:mp-find}) on p.~\pageref{ex:mp-find}, as
+% given in \nexteg{}.
+% \begin{ex} 
+% $e$ : chase($a$, $Q$) iff $e$ : $Q$($\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{chase$^{\dagger}$($a$,
+% $r$.x)}}) 
+% \end{ex} 
+% This means that we can construe the content to be a function which
+% returns an equivalent type to that returned in
+% (\ref{ex:chaseacat-noexport}).  This new content is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda s$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\textbf{a$^\frown$cat}($\mathfrak{s}$)($\lambda
+%       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%       . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{exist(cat$'$, $\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                     \smalltfield{e}{cat(x)}}
+%                   . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% In turn, \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x,
+%                          $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}
+% \label{ex:chase-a-cat} 
+% \end{ex} 
+% We represent \preveg{} as \textbf{chase$^\frown$a$^\frown$cat}.  From
+% this we can form a ``sentence with a gap'' interpretation,
+% \textbf{chase$^\frown$a$^\frown$cat$_S$}, in the manner described in
+% Section~\ref{sec:long-distance}.  This is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}} . $\lambda
+% P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh$_0$\}(\textbf{chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)) 
+% \end{ex} 
+% Unpacking \preveg{} we obtain \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+% . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\mathfrak{s}$.wh$_0$, $\Uparrow\!\mathfrak{c}$.x)}}}}}}}} 
+% \end{ex} 
+% Again following the analysis of long-distance dependencies developed
+% in Section~\ref{sec:long-distance}, the content of \textit{which
+%   chased a cat} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} . \\
+% \hspace*{1em} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \textbf{which}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}$)($\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{chase$^\frown$a$^\frown$cat$_S$}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$) 
+% \end{ex} 
+% Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
+% \textit{which chased a cat} is identical with the content of
+% \textit{chased a cat}.  For clarity we will represent this content
+% also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
+% Again following the proposal in Section~\ref{sec:long-distance} the
+% content for \textit{dog which chases a cat} will be
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e$_1$}{dog$'$\{$r$.x\}}\\
+%           \tfield{e$_2$}{\textbf{which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)\{$r$.x\}}} 
+% \end{ex} 
+% We call this
+% \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}. Now
+% \textit{no dog which chases a cat} will correspond to \nexteg{a} which
+% is equivalent to \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{no(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$),
+%       $P|_{\mathcal{F}(\textbf{dog}^\frown\textbf{which}^\frown\textbf{chase}^\frown
+%           \textbf{a}^\frown\textbf{cat}(\mathfrak{s}))}$)}} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}(P|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+% \end{subex} 
+% \label{ex:no-dog-which-chases-a-cat}   
+% \end{ex} 
+% Call this
+% \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.
+% This is to combine with the content of \textit{catches it}, given in
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
+% \end{ex}
+% We will represent this as \textbf{catch$^\frown$it}. 
+% Using the S-combinator strategy to
+% (\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
+% \nexteg{b}, which represents a reading of the sentence where
+% \textit{it} is not captured and refers to a particular object provided
+% by the context.
+% \begin{ex}
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}(\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}}$|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{s}$.x$_0$)}}
+% )}}}} 
+ 
+% \end{subex} 
+   
+ 
+% \end{ex} 
+% In terms of the notation in \preveg{b}, it is simple enough to see
+% what needs to be done in order to change it to a case of donkey
+% anaphora.  The second argument to `catch$^\dagger$',
+% `$\mathfrak{s}$.x$_0$', has to be changed so that it presents a path
+% to the cat, that is, `$\mathfrak{c}$.e$_2$.e.x'.  Also the dependence
+% of this parametric content on `x$_0$' has to be removed.  Thus the
+% domain type for the $\lambda$-abstraction, currently
+% `\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
+% by `\textit{Rec}'.  The result would be \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}}
+% \label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
+% \end{ex} 
+% We will achieve this by introducing a notion of restriction on a
+% parametric property in which we will allow anaphora to take place.
+% Let us first consider a case without anaphora.  Suppose that
+% $\mathcal{P}$ is a parametric property of type
+% $(T_1\rightarrow(T_2\rightarrow \textit{Type}))$ and that $T$ is a
+% type then we define the restriction of $\mathcal{P}$ by $T$,
+% $\mathcal{P}|^p_T$, to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1$ $\lambda r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s})(r)$ 
+% \end{ex} 
+% Now suppose that $[\ell,v]$ is a field in $T_1$ and $\pi$ is a path in
+% $T_2$ and we want to make an anaphoric association between $\ell$ and
+% $\pi$.  We define such a restriction,
+% $\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
+% \end{ex}
+% To enable the capture of several pronouns, we let $\vec\Pi\subseteq
+% T_1\times\text{paths}(T)$ such that $\vec\Pi$ is the graph of a one-one
+% function (whose domain is included in the fields of $T_1$ and whose
+% range is included in the paths of $T$).  We then define
+% $\mathcal{P}|^p_{T,\vec{\Pi}}$ to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus_{\text{set}}\vec{\Pi}_1$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=r.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$ 
+% \end{ex} 
+% If $\vec{\Pi}$ is
+% $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+% then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as
+% $\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$. Using
+% this notation,  the content of \textit{no dog which chases a cat catches
+%   it} where the pronoun is captured is \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec}
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}$(\textbf{catch$^\frown$it}$|^p_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s})),\text{x}_0\leadsto\text{e}_2.\text{e}.\text{x}}(\mathfrak{s})$)\{x\})}}}} 
+% \end{ex} 
+% Unpacking \preveg{} yields
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
+
+This treatment of donkey anaphora is essentially similar to that of
+\cite{Chierchia1995} in that it associates an existential reading the
+pronoun it, that is, it is not the case that there is a cat which the
+dog chases that it also catches.  The dog does not catch any of the
+cats it chases.  If we use \textit{every} instead of \textit{no} we
+get a reading which is paraphrased as ``every dog which chases a cat
+is a dog which chases a cat and catches it''.  This is what is known
+in the literature as a \textit{weak reading} or a
+\textit{$\exists$-reading}. It says that every dog which chases a cat
+catches \textit{some} cat that it chases (but not necessarily all).
+This reading may intuitively not be appropriate for \textit{every dog
+  that chases a cat catches it} which for many speakers would suggest
+that the dogs catch all the cats they chase.  However, the weak
+reading is important for the examples in \nexteg{}.
+
+% Notice that \preveg{}
+% forces what is known in the literature as a \textit{strong} reading
+% for the donkey anaphora.  That is, none of the dogs which chase a cat
+% catch \textit{any} of the cats which they chase.  That monotone
+% decreasing quantifiers force such strong readings was noted, for
+% example, by [Chierchia???? Pelletier????].  Monotone increasing
+% quantifiers, however, allow \textit{weak} readings.  Examples of
+% donkey sentences mentioned in the literature that have naturally weak
+% readings are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Every person who had a dime put it in the parking
+  meter. \citep{PelletierSchubert1989} 
+ 
+\item Every man who has a daughter thinks she is the most beautiful
+  girl in the world \citep{Cooper1979} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} does not seem to suggest that anybody who had several dimes
+put them all in the meter and \preveg{b} does not seem to
+commit a man who has two daughters to believe the contradictory
+proposition that they are both the one and only most beautiful girl in
+the world.
+%
+% @@
+%
+% Let us consider the content for \textit{every person who
+%   had a dime put it in the parking meter} given in \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{person$^\frown$who$^\frown$have$^\frown$a$^\frown$dime}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{person$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(dime$'$)}\\
+%                                                                               %                  \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                               %                                                                                         \smalltfield{e}{dime(x)}}}\\
+%                                                                               %                       \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{put\_in\_the\_meter$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \end{ex} 
+% \preveg{} is exactly similar to
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}) modulo the
+% properties and predicates involved except that there is no negation in
+% \preveg{}.  \preveg{} requires then that every person who had a dime
+% is a person who had a dime and put it in the meter, that is, a weak
+% reading which requires only that each relevant person put some dime in
+% the meter, not all of their dimes. 
+What then do we say about the
+original donkey sentences like \textit{every farmer who owns a donkey
+  likes it} which were analyzed by Geach and the classical analyses in
+DRT and type theory as having a strong reading in which every farmer
+who owns a donkey likes any donkey that he owns?  One option is to say
+that we only need the weak reading for such sentences as it is
+consistent with the stronger reading.  Many speakers feel that it
+unclear what the sentence means if some man owns more than one donkey.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{donkey(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{like$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \label{ex:donkey-weak} 
+% \end{ex} 
+That is,
+\textit{every farmer who owns a donkey likes it} requires that for
+every donkey owning farmer there is at least one donkey the farmer
+owns such that she likes it.  This allows for the farmers to like all
+their donkeys but does not require it. (See \citealp{Kanazawa1994} for
+a discussion of this.)  In the case of \textit{every dog which chases
+  a cat catches it} I have the following intuition:
+\begin{quote}
+  if there is a dog under consideration which is involved in two
+  distinct cat-chasing events (with a single cat) and only succeeds in catching the cat in
+  one of the two events, then this seems to make the sentence false;
+
+  if there is a dog under consideration which is involved in a single
+  event of chasing two cats and only succeeds in catching one of the
+  cats in that event, then it seems that the sentence could still be
+  true.
+\end{quote}
+This suggests an analysis which requires that every relevant
+cat-chasing event must involve the catching of at least one of the
+cats chased in that event.  Firm judgements concerning such intuitions
+are notoriously hard to come by.  \cite{Chierchia1995} argues that the
+strong $\forall$-reading is necessary because of examples like
+\nexteg{}.
+\begin{ex} 
+Every man who owned a slave owned his offspring 
+\end{ex} 
+\preveg{} is a modification of an example in \cite{Heim1990} which is
+used to make a different argument.  It seems like a single instance of
+somebody owning a slave but not the slave's offspring would be
+sufficient to falsify \preveg{}.  Though again, in the case of a slave
+who has several offspring one of which is owned by somebody else, it
+seems to me that it is unclear whether that is sufficient to falsify
+the sentence.
+
+\label{pg:donkey-purification-universal}
+One option is to recreate the original Geach reading by
+using the variant of the purification operation, `$\mathfrak{P}^\forall$', in
+(\ref{ex:purification-universal}), p.~\pageref{ex:purification-universal} which introduces a function on local contexts.
+% \begin{ex} 
+% If $P$ : \textit{Ppty}, then
+% \begin{quote}
+% if $P$.bg$^x$ = $P$.bg, then
+% \begin{quote}
+% $\mathfrak{P}(P)=P$
+% \end{quote}
+% otherwise:
+% \begin{quote}
+% $\mathfrak{P}(P)$ is $\ulcorner\lambda r_1$:$P$.bg$^{\text{x}}$
+% . ($(r_2\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+% \record{
+%           \tfield{e}{$P(r_2)$}})$\urcorner$
+% \end{quote}
+% \end{quote}
+% %\label{ex:purification-classic}
+% \end{ex}
+Using `$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' will have the
+consequence that the content of \textit{every farmer who owns a donkey
+  likes it} will be \nexteg{}.
+\savebox{\boxone}{\textbf{farmer}$^\frown$\textbf{who}$^\frown$\textbf{owns}$^\frown$\textbf{a}$^\frown$\textbf{donkey}}
+\savebox{\boxtwo}{\textbf{likes}$^\frown$\textbf{it}}
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{every(restr, scope)}}
+\end{ex} 
+
+Given the general witness condition associated with `every', \preveg{} is
+equivalent to \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+If we use a variant of this witness condition which uses
+`$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' we have
+\nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}^\forall(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+Let us check that \preveg{} does in fact give us the strong
+$\forall$-reading.  We will do this by showing that the value
+associated with the label `scope' will be paraphrasable as ``the
+property of being an individual such that if it's a farmer who owns a
+donkey, she likes that donkey'', that is, likes every donkey she
+owns. We can show this by unpacking the expression representing the
+scope in \preveg{}.  `\textbf{likes}$^\frown$\textbf{it}', according to
+our treatment of free pronouns and extensional verbs, will be
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{Cntxt}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{Assgnmnt}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $c.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex}
+Using the definition of the localization operation, $\mathcal{L}$, in
+(\ref{ex:localization}), we can see that
+`$\mathcal{L}(\textbf{likes}^\frown\textbf{it})$' is \nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
+r$:\smallrecord{
+  \smalltfield{x}{\textit{Ind}}\\
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $r.\mathfrak{c}.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex} 
+Applying \preveg{} to any context, $c$, will obtain \nexteg{}.
+\begin{ex} 
+ $\ulcorner\lambda
+r$:\smallrecord{
+  \smalltfield{x}{\textit{Ind}}\\
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $r.\mathfrak{c}.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex} 
+Restricting \preveg{} by
+`$\mathcal{F}(\textbf{farmer}^\frown\textbf{who}^\frown\textbf{owns}^\frown\textbf{a}^\frown\textbf{donkey})$',
+yields \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{farmer(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+        \smalltfield{e}{own$^\dagger$($r$.x, x)}}}}
+   .
+  \record{
+    \tfield{e}{like$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex} 
+  
