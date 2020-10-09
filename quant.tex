@@ -5742,6 +5742,17 @@ who has several offspring one of which is owned by somebody else, it
 seems to me that it is unclear whether that is sufficient to falsify
 the sentence.
 
+% One might also
+% argue that the strong reading is necessary for interpreting sentences
+% such as \nexteg{}.
+% \begin{ex} 
+% It is not true that every farmer who owns a donkey likes it 
+% \end{ex} 
+% If there is a reading of \preveg{} on which it is true even if every
+% farmer likes at least one of her donkeys, but at least one farmer 
+% does not like all of them, then we need to analyze this a strong reading. [????Check
+% for discussion of this.] 
+
 \label{pg:donkey-purification-universal}
 One option is to recreate the original Geach reading by
 using the variant of the purification operation, `$\mathfrak{P}^\forall$', in
@@ -5797,6 +5808,7 @@ If we use a variant of this witness condition which uses
         \tfield{X}{every$^w$(restr)}\\
         \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}^\forall(\text{scope})\{x\})$}
       }}}
+  \label{ex:efwoadli-classic}
 \end{ex}
 Let us check that \preveg{} does in fact give us the strong
 $\forall$-reading.  We will do this by showing that the value
@@ -5864,50 +5876,84 @@ $\ulcorner\lambda r$:\smallrecord{
   \record{
     \tfield{e}{like$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
 \end{ex}
-
-
-
-
-
-@@
-
+Aligning the paths `$\mathfrak{c}.\mathfrak{s}.\text{x}_0$' and
+`e$_2$.x' in \preveg{} yields \nexteg{}.
 \begin{ex} 
-$\lambda\mathfrak{s}$:\textit{Rec} 
-  . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
-                           \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
-&&\hspace*{2em}(($r$:\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
-                                                               \smalltfield{e$_1$}{farmer$'$\{x\}}\\
-                                                               \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
-                                                                                                \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
-                                                                                                                                                                       \smalltfield{e}{donkey(x)}}}\\
-                                                                                                     \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
-                                                                                                           $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}})
-                                                                                       $\rightarrow$\\
-               &&\hspace*{5em}\smallrecord{\smalltfield{e}{like$^\dagger$($x$, $r$.e$_2$.e.x)}}
-))}}}}  
+$\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{farmer(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+        \smalltfield{e}{own$^\dagger$($\Uparrow$x, x)}}}}
+   .
+  \record{
+    \tfield{e}{like$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$ 
 \end{ex} 
-\preveg{} requires that the function labelled `f' maps any farmer who
-owns a donkey to a function which maps any situation in which that
-farmer owns a donkey to a situation in which the farmer likes the
-donkey.  Since for any donkey the farmer owns there will be a
-situation in which the farmer owns that donkey, this has the effect of
-universal quantification over the farmer's donkeys.  The difference
-between strong and weak readings is, however, cashed out in terms of
-whether we map farmers to functions from ``donkey owning'' situations
-to ``liking'' situations or to situations where there is ``donkey
-owning'' and ``liking''.
-
-It is not entirely obvious that strong readings are necessary since
-weak readings are consistent with the strong readings.  One might
-argue that the strong reading is necessary for interpreting sentences
-such as \nexteg{}.
+Finally, in the `e.f'-field in (\ref{ex:efwoadli-classic})
+`$\mathfrak{P}^\forall$' is applied to the scope, that is, \preveg{}.
+Thus `$\mathfrak{P}^\forall(\text{scope})$' represents \nexteg{}.
 \begin{ex} 
-It is not true that every farmer who owns a donkey likes it 
+ $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . (($r'$:\smallrecord{
+    \smallmfield{x}{$r$.x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{farmer(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+        \smalltfield{e}{own$^\dagger$($\Uparrow$x, x)}}}})$\rightarrow$
+  \record{
+    \tfield{e}{like$^{\dagger}$($r'$.x, $r'.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$)\urcorner$
 \end{ex} 
-If there is a reading of \preveg{} on which it is true even if every
-farmer likes at least one of her donkeys, but at least one farmer 
-does not like all of them, then we need to analyze this a strong reading. [????Check
-for discussion of this.]  
+\preveg{} can be paraphrased as ``the property of being an individual,
+$x$, if $x$ is a farmer and owns a donkey, $y$, then $x$ likes $y$''
+thus requiring that every farmer likes all of the donkeys she owns.
+The whole sentence says that every farmer who owns a donkey has this property.  
+
+
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}(($r$:\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{donkey(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}})
+%                                                                                        $\rightarrow$\\
+%                &&\hspace*{5em}\smallrecord{\smalltfield{e}{like$^\dagger$($x$, $r$.e$_2$.e.x)}}
+% ))}}}}  
+% \end{ex} 
+% \preveg{} requires that the function labelled `f' maps any farmer who
+% owns a donkey to a function which maps any situation in which that
+% farmer owns a donkey to a situation in which the farmer likes the
+% donkey.  Since for any donkey the farmer owns there will be a
+% situation in which the farmer owns that donkey, this has the effect of
+% universal quantification over the farmer's donkeys.  The difference
+% between strong and weak readings is, however, cashed out in terms of
+% whether we map farmers to functions from ``donkey owning'' situations
+% to ``liking'' situations or to situations where there is ``donkey
+% owning'' and ``liking''.
+
+ 
 
 The domain of the function introduced is farmers who own a donkey in
 our analysis of both the weak and the strong readings.  This is in
@@ -5987,6 +6033,7 @@ own a donkey rather than farmer-donkey pairs.
 % arguments to the quantifier relation accessible via the labels `restr'
 % and `scope' 
 
+@@
      
 \paragraph{\textit{Sam likes him/himself}}
 
