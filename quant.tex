@@ -4314,16 +4314,19 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
 \fbox{and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_i$}{\textit{Ind}}}}} and
-  $\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+  $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
   \smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{Ind}}}}}},
+        \smalltfield{x$_j$}{\textit{Ind}}}}}} \fbox{but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}}},
                          then the \textit{combination of $\alpha$ and
     $\beta$  based on functional application \fbox{and anaphoric
       relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
   \begin{quote}
     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
+      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
       . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
 \end{quote}
 
@@ -6057,7 +6060,81 @@ described by \preveg{}.  % An similar example well-known in the
 % \begin{ex} 
 % I dreamt that I was Brigitte Bardot and that I kissed me 
 % \end{ex}
-
+The basic technique that we employ for making this distinction is
+illustrated by the types in \nexteg{}.
+\begin{ex} 
+  \begin{subex} 
+ 
+\item \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{named(x, ``Sam'')}\\
+    \tfield{y}{\textit{Ind}}\\
+    \tfield{e}{like(x, y)}} 
+ 
+\item \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{named(x, ``Sam'')}\\
+    \mfield{y}{x}{\textit{Ind}}\\
+    \tfield{e}{like(x, y)}}
+  
+\item \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{named(x, ``Sam'')}\\
+    \tfield{e}{like(x, x)}} 
+ 
+\end{subex} 
+  
+  
+\end{ex} 
+In \preveg{a} we have two fields for individuals labelled by `x' and
+`y' respectively.  There is nothing to prevent these fields from being
+filled by the same individual in some of the witnesses for the type.
+In \preveg{b}, however, the fields will be filled by the same
+individual in any witness for the type.  A further possibility is to
+have just one field for an individual as in \preveg{c}. Let us see how
+these options play out in actual parametric contents for \textit{Sam
+  likes him} resulting currently in a content where \textit{him} is
+anaphorically related to \textit{Sam}.  A parametric content for
+\textit{likes him} is \nexteg{}, parallel to contents for similar verb
+phrases we have seen previously.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . $\ulcorner\lambda
+  r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x,
+      $c.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
+  \label{ex:likes-him}
+\end{ex} 
+Using the lexical rule for proper nouns we obtain the parametric
+content \nexteg{} for \textit{Sam}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{e}{named(x, ``Sam'')}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{c}.\text{x}\}\urcorner$
+\end{ex} 
+Let us represent \preveg{} as \textbf{Sam}.  Using
+`$\mathrm{storage}$' we obtain an additioinal parametric content given
+in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{\textbf{Sam}}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{ex} 
+We can now obtain a parametric content for \textit{Sam likes him} by
+using \preveg{} and (\ref{ex:likes-him}) combined with `@$_{0,1}$'.  
 
 @@ 
 
