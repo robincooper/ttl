@@ -6134,7 +6134,52 @@ in \nexteg{}.
   P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
 \end{ex} 
 We can now obtain a parametric content for \textit{Sam likes him} by
-using \preveg{} and (\ref{ex:likes-him}) combined with `@$_{0,1}$'.  
+using \preveg{} and (\ref{ex:likes-him}) combined with `@$_{0,1}$'.
+This is given in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{\textbf{Sam}}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . \record{
+    \tfield{e}{like$^\dagger$($c.\mathfrak{s}.\text{x}_0,c.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex} 
+We can now apply `$\mathrm{retrieve}$' to `x$_0$' and \preveg{} to
+obtain \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($c.\mathfrak{c}$.f.x, $c.\mathfrak{c}$.f.x)}}$\urcorner$
+\end{ex} 
+\preveg{} is not an appropriate content for \textit{Sam likes him}
+although it would be appropriate for \textit{Sam likes himself}.
+Simplifying a good deal,  pronouns which are not reflexive (like
+\textit{himself}) cannot be anaphorically related to an antecedent
+within the same clause.  This is Principle B of Chomsky's binding
+theory \citep{Chomsky1981}.  We shall treat this by adding a field
+labelled `$\mathfrak{l}$' in the context requiring an assignment which keeps track of pronouns
+which are local. We adjust the definition of \textit{Cntxt} to be
+\nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{l}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex} 
+  
 
 @@ 
 
