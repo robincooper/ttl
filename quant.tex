@@ -4327,7 +4327,7 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
   \begin{quote}
     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
       \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
-      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.x}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
 \end{quote}
 
 \label{ex:combine-align}
@@ -6178,7 +6178,91 @@ which are local. We adjust the definition of \textit{Cntxt} to be
     \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex}
+The generating parametric content for\textit{he} is \nexteg{} where we
+mark `x$_0$' in the $\mathfrak{l}$-field.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_o$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{l}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
 \end{ex} 
+We adjust (\ref{ex:combine-align}) to include reference to paths
+`$\mathfrak{l}$.x$_i$' by adding the boxed material as in \nexteg{}.
+\begin{ex} 
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+  \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} and
+  $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}} \fbox{and $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{l}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}}},
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application and anaphoric
+      relation of $j$ to $i$}, $\alpha\text{@}_{i,j}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}(c))\urcorner$
+\end{quote}
+
+\label{ex:combine-align-local}
+
+\end{ex} 
+The information about locality represented by the
+`$\mathfrak{l}$'-field will now percolate up as a constraint on the
+context as we combine consituents.  However, once we reach a sentence
+we no longer want the pronoun to count as local since pronouns can be
+anaphorically related to antecedents outside the clause in which they
+occur as in \textit{Sam$_i$ thinks that she$_i$ is lucky}. We define
+an operation $B$ on parametric contents (think of Principle ``B'' or
+``Boundary'') which uses asymmetric merge to remove the locality
+constraint.  $B$ is defined in \nexteg{}.
+\begin{ex} 
+  If $\alpha$ is a parametric content,
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T\ .\ \varphi\dep{c}\urcorner$
+  \end{quote}
+  then $B(\alpha)$ is
+  \begin{quote}
+    $\ulcorner\lambda c$:$T$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\mathfrak{l}$}{\textit{Assgnmnt}}}
+    . $\varphi\dep{c}\urcorner$\footnote{This assumes that paremtric
+      contents are defined in such as way that $\varphi$ will not
+      depend on $c.\mathfrak{l}.\pi$ for any $\pi$.  Otherwise
+      $B(\alpha)$ would need to be
+      \begin{quote}
+        $\ulcorner\lambda c$:$T$\fbox{\d{$\wedge$}}\smallrecord{
+          \smalltfield{$\mathfrak{l}$}{\textit{Assgnmnt}}}
+        . $[\varphi\dep{c}]_{c.\mathfrak{l}.\pi\leadsto c.\mathfrak{s}.\pi}\urcorner$
+      \end{quote}}
+      
+    
+  \end{quote}
+  
+\end{ex} 
+Any rule that forms a boundary for locality will make reference to
+$B$.  Thus for example we can formulate the constituent rule that says
+that a sentence can consist of a noun phrase followed by a verb phrase
+as \nexteg{}.\todo{See (179) on p. 401}
+\begin{ex} 
+% \textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ $B$(\textit{NP}$'$(\textit{VP}$'$:\textit{Ppty})):\textit{RecType} 
+\end{ex} 
+  
   
 
 @@ 
