@@ -6179,13 +6179,13 @@ which are local. We adjust the definition of \textit{Cntxt} to be
     \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
 \end{ex}
-The generating parametric content for\textit{he} is \nexteg{} where we
+The generating parametric content for \textit{he} is \nexteg{} where we
 mark `x$_0$' in the $\mathfrak{l}$-field.
 \begin{ex} 
   $\ulcorner\lambda c$:\smallrecord{
     \footnotesize{\textit{Cntxt}}\\
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_o$}{\textit{Ind}}}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
     \smalltfield{$\mathfrak{l}$}{\smallrecord{
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
@@ -6254,16 +6254,86 @@ constraint.  $B$ is defined in \nexteg{}.
     
   \end{quote}
   
-\end{ex} 
-Any rule that forms a boundary for locality will make reference to
-$B$.  Thus for example we can formulate the constituent rule that says
-that a sentence can consist of a noun phrase followed by a verb phrase
-as \nexteg{}.\todo{See (179) on p. 401}
+\end{ex}
+Suppose that $T_1$ and $T_2$ are of type \textit{ContType} and that
+$\mathcal{O}$ is a combination operation such as @ etc., then we say
+that $T_1\mathcal{O}^{\mathfrak{S},B}T_2$ is also a type with the
+witness condition in \nexteg{}.
 \begin{ex} 
-% \textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ $B$(\textit{NP}$'$(\textit{VP}$'$:\textit{Ppty})):\textit{RecType} 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
+then $B(\alpha\mathcal{O}\beta):T_1\mathcal{O}^{\mathfrak{S},B}T_2$.
+Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S},B}T_2$. 
+\end{ex} 
+In \nexteg{} we introduce versions of `ContForwardApp' operations
+which involve $B$.
+\begin{ex} 
+  If $\mathcal{O}$ is a combination operator, then
+  ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$ is
+  \begin{quote}
+    $\lambda u$:\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+      \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S},B}u[1].\text{cont})$}}
+  \end{quote}
+  \end{ex} 
+We then introduce a notation for constituent structure rules involving
+locality boundaries as in \nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    B(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$
+  \end{quote}
+  
+\end{ex} 
+Thus for example we can formulate the constituent rule that says
+that a sentence can consist of a noun phrase followed by a verb phrase
+as \nexteg{}.
+\begin{ex} 
+  \textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ $B$(\textit{NP}$'$($_{\text{@}}$\textit{VP}$'$))
 \end{ex} 
   
-  
+Reflexive pronouns, like \textit{himself}, obey an almost
+complementary principle to non-reflexive pronouns -- they must be
+anaphorically related to a local antecedent and cannot be related to a
+non-local antecedent.  In addition, they must be related to some
+antecedent.  They cannot simply refer to something in the context as
+ordinary pronouns can.  In Chomsky's binding theory such pronouns are
+called ``anaphors'' and include both reflexive pronouns and
+reciprocals such as \textit{each other}.  In order to handle such
+requirements on local anaphora we will add another component to the
+context type under the label $\mathfrak{r}$ (``reflexive''). Thus the
+type \textit{Cntxt} will  now be defined as in \nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{l}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{r}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex}
+The generating parametric content for \textit{himself} is \nexteg{}
+where we mark `x$_0$' in the $\mathfrak{r}$-field.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{r}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{ex}
 
 @@ 
 
