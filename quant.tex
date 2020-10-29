@@ -6334,6 +6334,55 @@ where we mark `x$_0$' in the $\mathfrak{r}$-field.
         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
   P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
 \end{ex}
+The reflexive marking in the context will percolate up to contexts
+associated with higher phrases.  We provide a mechanism for removing
+the marking in properties and simultaneously binding the reflexive
+pronoun.  This is given in \nexteg{}.
+\begin{ex} 
+  If $\mathcal{P}$ is a parametric property of the form
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T_1\ .\ \ulcorner\lambda
+    r\!:\!T_2\dep{T_1}\ .\ \varphi\dep{T_1,T_2}\urcorner\urcorner$
+  \end{quote}
+  where for some natural number $i$, $T_1\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{r}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}, then \textit{the reflexivization
+  of} $\mathcal{P}$, $\mathfrak{R}(\mathcal{P})$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:($T_1$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\mathfrak{r}$}{\textit{Assgnmnt}}})$\ominus\mathfrak{s}.\text{x}_i$
+    . $\ulcorner\lambda r$:$T_2$
+    . $[\varphi]_{c.\mathfrak{s}.\text{x}_i\leadsto
+      r.\text{x}}\urcorner\urcorner$
+  \end{quote}
+  
+\end{ex} 
+This operation removes the reflexive marking in the
+$\mathfrak{r}$-field of the context using asymmetric merge and also
+removes the corresponding path `$\mathfrak{s}.\text{x}_i$' from the
+context type so there is no dependence on an individual labelled
+`x$_i$' in the context.  Any dependence on `$\mathfrak{s}$.x$_i$' in
+the body of the property represented by $\varphi$ is replaced by a
+dependence on `x' in the domain of the property --- note that the
+domain type of the property, $T_2$, is guaranteed to be a record type
+with `x' among its labels by the requirement that $\mathcal{P}$ is a
+parametric property.
+
+The operation, $\mathfrak{R}$, gives us a way of binding reflexive
+pronouns with verb phrases by the subject of the sentence.  It does
+not, however, allow us to have a reflexive bound within a verb-phrase
+as in examples like \textit{The guru revealed Kim$_i$ to
+  himself$_i$}.  Nor does it correctly require that both occurrences
+of \textit{himself} have to be anaphorically related to \textit{the
+  guru} in \textit{The guru revealed himself to himself}.\footnote{In
+  other languages such as German and Scandinavian languages, these
+  examples involve a different reflexive construction.  (See, for
+  example, \citealp{Hellan1986}.)}  We shall not deal with such cases
+here.
+
+We will, however, introduce a mechanism for requiring that the
+reflexive pronoun must be anaphorically related to something.  It
+cannot be left as free and dependent on the context like a regular pronoun.
 
 @@ 
 
