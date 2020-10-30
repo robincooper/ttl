@@ -6382,114 +6382,192 @@ here.
 
 We will, however, introduce a mechanism for requiring that the
 reflexive pronoun must be anaphorically related to something.  It
-cannot be left as free and dependent on the context like a regular pronoun.
-
-@@ 
-
-The parametric content for \textit{him} is given in \nexteg{}.
-
+cannot be left as free and dependent on the context like a regular
+pronoun.  Our strategy for doing this involves mapping a parametric
+content type to a subtype which excludes witnesses which have a
+reflexive marking involving the label $\mathfrak{r}$ in the context
+type.  For any parametric content type, $T$, we characterize a
+subtype, $\mathfrak{A}(T)$, which excludes parametric contents with
+free reflexives as indicated by the $\mathfrak{r}$-field
+($\mathfrak{A}$ for ``Principle A'').  This is characterized in \nexteg{}.
 \begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+If $T$ is a parametric content type, then $\mathfrak{A}(T)$ is also a
+parametric content type.
+
+$\varphi:\mathfrak{A}(T)$ iff $\varphi:T$ and $\varphi$.bg
+$\not\sqsubseteq$ \smallrecord{
+  \smalltfield{$\mathfrak{r}$}{\smallrecord{
+      \smalltfield{x$_i$}{\textit{Ind}}}}}, for any natural number $i$.
 \end{ex} 
-
-The parametric content of the reflexive pronoun \textit{himself} is
-the same as \preveg{} except that the values associated with the
-labels `local' and `refl' are switched, as shown in \nexteg{}.
-
+In \nexteg{} we introduce versions of `ContForwardApp' operations
+which involve $\mathfrak{A}$.
 \begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}}
- . 
-$\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+  If $\mathcal{O}$ is a combination operator, then
+  ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$ is
+  \begin{quote}
+    $\lambda u$:\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+      \smalltfield{cont}{$\mathfrak{S}(\mathfrak{A}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S}}u[1].\text{cont}))$}}
+  \end{quote}
+  \end{ex} 
+We then introduce a notation for constituent structure rules involving
+locality boundaries as in \nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    \mathfrak{A}(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$
+  \end{quote}
+  
 \end{ex} 
-We will refer to \preveg{} as \textbf{himself}.  The idea is that the `local'-field in the context must be passed up to
-the VP unchanged, whereas the `refl'-field must be emptied
-(discharged) at the VP-level.  Thus \textit{likes him} has the
-parametric content in \nexteg{a} whereas \textit{likes himself} has
-the parametric content in \nexteg{b}.
+Thus for example we can formulate the constituent rule that says
+that a sentence can consist of a noun phrase followed by a verb phrase
+as \nexteg{}.
 \begin{ex} 
-\begin{subex} 
+  \textit{VP} $\longrightarrow$ \textit{V NP} $\mid$ $\mathfrak{A}$(\textit{V}$'$($_{\text{@}}$\textit{NP}$'$))
+\end{ex} 
+Introducing the $\mathfrak{A}$-locality boundary at the VP-level as in
+\preveg{} will ensure that all reflexives will be anaphorically
+related within a clause.
+
+@@
+
+In order to include reflexives we need to extend our characterization
+of $\mathfrak{S}$.
+
+This is only the beginning of a theory of
+reflexives in English.  For example, it will not on its own prevent reflexives
+occuring in subject position as in \textit{$^*$Himself saw Sam} or
+\textit{$^*$Kim feels that herself is welcome}. Perhaps this is simply
+a matter of case, which we have not treated here.  There is just no
+nominative version of the reflexive which can be used as the subject
+of a tensed sentence.  This is perhaps suggested by the acceptability
+of \textit{Kim feels herself to be welcome} which seems to express the
+same content.
+A further example, well-known from the literature, concerns what are
+known as picture noun-phrases.  While this treatment will allow for a correct
+interpretation of \textit{Kim found a picture of herself} where
+\textit{Kim} is the antecedent of \textit{herself} it will not
+correctly account for \textit{Kim found Sam's picture of herself}
+where the only possible antecedent for \textit{herself} is
+\textit{Sam}.  We will leave a more complete treatment of reflexives for future exploration.
+
+
+
+% The parametric content for \textit{him} is given in \nexteg{}.
+
+% \begin{ex} 
+% $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                 \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+% $\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+% \end{ex} 
+
+% The parametric content of the reflexive pronoun \textit{himself} is
+% the same as \preveg{} except that the values associated with the
+% labels `local' and `refl' are switched, as shown in \nexteg{}.
+
+% \begin{ex} 
+% $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                 \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}}
+%  . 
+% $\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+% \end{ex} 
+% We will refer to \preveg{} as \textbf{himself}.  The idea is that the `local'-field in the context must be passed up to
+% the VP unchanged, whereas the `refl'-field must be emptied
+% (discharged) at the VP-level.  Thus \textit{likes him} has the
+% parametric content in \nexteg{a} whereas \textit{likes himself} has
+% the parametric content in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
-$\lambda P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}} 
+% \item $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                 \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
+% $\lambda P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}} 
  
-\item $\lambda
-c$:\smallrecord{\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-  \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
-$\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
-  \textbf{himself}(\smallrecord{\field{$\mathfrak{s}$}{\smallrecord{\field{x$_0$}{$r$.x}}}\\
-                                \field{local}{$\mathfrak{T}$($\emptyset$)}\\
-                                \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))}}
+% \item $\lambda
+% c$:\smallrecord{\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+%   \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
+%   \textbf{himself}(\smallrecord{\field{$\mathfrak{s}$}{\smallrecord{\field{x$_0$}{$r$.x}}}\\
+%                                 \field{local}{$\mathfrak{T}$($\emptyset$)}\\
+%                                 \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))}}
  
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex}
-The idea is that context parameters represented by `$\mathfrak{s}$'
-are open for binding unless object supplying that parameter are
-required to be of type `$c$.local'.  Reflexive parameters are, however,
-required to be of type `$c$.refl' and these must be bound within the VP.
-Note that since the reflexive is bound by `$r$.x' in \preveg{b} it is
-not represented in `$c$.refl' in the context for the VP.  Thus
-\textit{himself} on its own requires an individual to be supplied by
-the context to give it a referent.  However, for the content of
-\textit{likes himself} no such individual is required from the context
-since the property which is the content of the VP is that of ``being
-an $x$ such that $x$ likes $x$''.  [Better way to talk about this?].
+% \end{ex}
+% The idea is that context parameters represented by `$\mathfrak{s}$'
+% are open for binding unless object supplying that parameter are
+% required to be of type `$c$.local'.  Reflexive parameters are, however,
+% required to be of type `$c$.refl' and these must be bound within the VP.
+% Note that since the reflexive is bound by `$r$.x' in \preveg{b} it is
+% not represented in `$c$.refl' in the context for the VP.  Thus
+% \textit{himself} on its own requires an individual to be supplied by
+% the context to give it a referent.  However, for the content of
+% \textit{likes himself} no such individual is required from the context
+% since the property which is the content of the VP is that of ``being
+% an $x$ such that $x$ likes $x$''.  [Better way to talk about this?].
 
-[Possible revision of treatment of proper names:]
-The content of an utterance of \textit{Sam} is given in \nexteg{}.
-\begin{ex} 
-$\lambda
-c$:\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                                           \smalltfield{e}{named(x,
-                                                                                             ``Sam'')}}}}}}
-                                                                                 . $\lambda
-                                                                                 P$:\textit{Ppty}
-                                                                                 . $P$($c$.$\mathfrak{c}$.id$_0$) 
-\end{ex} 
-The content of \textit{Sam likes him} is given in \nexteg{a} and
-\textit{Sam likes himself} in \nexteg{b}.
-\begin{ex} 
-\begin{subex} 
+% [Possible revision of treatment of proper names:]
+% The content of an utterance of \textit{Sam} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                                            \smalltfield{e}{named(x,
+%                                                                                              ``Sam'')}}}}}}
+%                                                                                  . $\lambda
+%                                                                                  P$:\textit{Ppty}
+%                                                                                  . $P$($c$.$\mathfrak{c}$.id$_0$) 
+% \end{ex} 
+% The content of \textit{Sam likes him} is given in \nexteg{a} and
+% \textit{Sam likes himself} in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
  
-\item $\lambda
-  c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
-                  \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(x,
-                                                                              ``Sam'')}}}}}}
-                                                                  . 
-\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
-    P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
+% \item $\lambda
+%   c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                   \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                             \smalltfield{e}{named(x,
+%                                                                               ``Sam'')}}}}}}
+%                                                                   . 
+% \record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
+%     P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
  
-\item $\lambda
-  c$:\smallrecord{
-\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
-\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
-                                                                            \smalltfield{e}{named(x,
-                                                                              ``Sam'')}}}}}}
-                                                                  . \\
-\hspace*{3em}                                                                   
-\record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
-    P$:\textit{Ppty} . 
-$P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}} 
+% \item $\lambda
+%   c$:\smallrecord{
+% \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                             \smalltfield{e}{named(x,
+%                                                                               ``Sam'')}}}}}}
+%                                                                   . \\
+% \hspace*{3em}                                                                   
+% \record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
+%     P$:\textit{Ppty} . 
+% $P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}} 
  
-\end{subex} 
+% \end{subex} 
    
-\end{ex} 
+% \end{ex} 
                
       
 
