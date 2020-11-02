@@ -592,13 +592,16 @@ $\mathfrak{T}(P)$. We introduce this type as in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
  
-\item If $P$ : \textit{Ppty}, then $\mathfrak{T}(P)$ : \textit{Type}. 
+\item If $P$ : \textit{Ppty} and $P$ is pure, then $\mathfrak{T}(P)$ : \textit{Type}. 
  
 \item $a:\mathfrak{T}(P)$ iff $\mathfrak{P}(P)\{a\}$ is witnessed. 
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+
+@@
+
 There is a different route to a type with the same witnesses as
 $\mathfrak{T}(P)$.  We have previously defined $\downP{P}$ as the
 set of objects which have the property $P$, as in
@@ -6440,10 +6443,52 @@ Introducing the $\mathfrak{A}$-locality boundary at the VP-level as in
 \preveg{} will ensure that all reflexives will be anaphorically
 related within a clause.
 
-@@
-
 In order to include reflexives we need to extend our characterization
-of $\mathfrak{S}$.
+of $\mathfrak{S}$ to include reflexive parametric contents as
+indicated by the boxed text in \nexteg{}.
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+    then $\mathcal{L}(\varphi):\mathfrak{S}(T)$
+    
+  \item \fbox{if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+    then $\mathfrak{R}(\varphi):\mathfrak{S}(T)$}
+    
+  \item \begin{minipage}[t]{.9\linewidth}if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}
+
+    
+  \item if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-reflexive}   
+\end{ex}
 
 This is only the beginning of a theory of
 reflexives in English.  For example, it will not on its own prevent reflexives
@@ -6576,6 +6621,1765 @@ where the only possible antecedent for \textit{herself} is
    
 
 \section{Summary of resources introduced}
+\label{sec:summresch7}
+
+% This summary does not include the resources for chart processing
+% introduced in Section~\ref{sec:chart}.
+
+Items that are new since Chapter~\ref{ch:intensional} are marked
+``\textbf{New!}'' and items that have been revised since
+Chapter~\ref{ch:intensional} are marked ``\textbf{Revised!}''.  % We have
+% included some items for completeness which were not explicitly
+% introduced in the text.
+
+\subsection{Universal grammar resources} 
+
+\subsubsection{Types} 
+
+\begin{description}
+
+  \item[\textnormal{\textit{Loc}}] --- \record{\tfield{x-coord}{\textit{Real}}\\
+        \tfield{y-coord}{\textit{Real}}\\
+        \tfield{z-coord}{\textit{Real}}}
+
+  
+\item[\textnormal{\textit{Phon}}] --- a basic type
+
+  $e$ : \textit{Phon} iff $e$ is a phonological event
+  
+\item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{\textit{Phon}} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
+      Chapter~\ref{ch:infex})
+
+      \item[\textnormal{\textit{Assgnmnt}}] --- a basic type
+
+      $r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
+
+\item[\textnormal{\textit{PropCntxt}}] --- a basic type
+
+  $r:\textit{PropCntxt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
+
+\item[\textnormal{\textit{Cntxt}}] --- \record{
+      \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+      \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
+
+        \item[\textnormal{\textit{CntxtType}}] --- a basic type
+
+    $T:\textit{CntxtType}$ iff $T\sqsubseteq\textit{Cntxt}$
+      
+    % \item[\textnormal{\textit{IndPpty}} New!] ---
+    %   (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+
+      
+    % \item[\textnormal{\textit{FramePpty}} New!] ---
+    %   (\smallrecord{\smalltfield{x}{\textit{Rec}}}$\rightarrow$\textit{RecType})
+      
+    \item[\textnormal{\textit{xType}}] --- a basic type
+
+      $T$ : \textit{xType} iff $T$ : \textit{RecType} and $\text{x}\in\mathrm{labels}(T)$
+
+      \item[\textnormal{\textit{Ppty}}] ---
+        \record{\tfield{bg}{\textit{xType}}\\
+          \tfield{fg}(bg$\rightarrow$\textit{RecType})}
+
+        \begin{description}
+        
+      \item[purification of properties, \textnormal{$\mathcal{P}(P)$}
+          New!]\mbox{}
+
+        If $P$ : \textit{Ppty}, then
+\begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
+$\mathfrak{P}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
+. \record{\tfield{$\mathfrak{c}$}{$P.\text{bg}\parallel$ \smallrecord{\field{x}{$r$.x}}}\\
+          \tfield{e}{$P(\mathfrak{c})$}}$\urcorner$
+\end{quote}
+\end{quote}
+\item[purification$^\forall$ of properties, \textnormal{$\mathcal{P}^\forall(P)$}
+  New!]\mbox{}
+
+  If $P$ : \textit{Ppty}, then
+\begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P^\forall}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
+$\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
+. ($(r'\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+\record{
+          \tfield{e}{$P(r')$}})$\urcorner$
+\end{quote}
+\end{quote}
+\item[\textnormal{$P\{a\}$} New!] \mbox{}
+
+  If $P$ is a pure property, $P\{a\}$
+  represents the type $P$(\smallrecord{\field{x}{$a$}})
+
+\item[\textnormal{$\mathfrak{T}(P)$} New!] \mbox{}
+
+  If $P$ : \textit{Ppty} and $P$ is pure, then $\mathfrak{T}(P)$ : \textit{Type}.
+
+  $a:\mathfrak{T}(P)$ iff $\mathfrak{P}(P)\{a\}$ is witnessed.
+  
+\end{description}
+        
+      \item[\textnormal{\textit{PlPpty}}] --- a basic type
+
+        $P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
+$P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
+        
+      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
+        \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
+        
+      \item[\textnormal{\textit{Quant}}] ---
+        (\textit{Ppty}$\rightarrow$\textit{RecType})
+        
+      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
+          \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
+        
+      \item[\textnormal{\textit{QuantDet}}] ---
+        (\textit{Ppty}$\rightarrow$\textit{Quant})
+        
+      \item[\textnormal{\textit{PQuantDet}}] ---
+        \record{
+          \tfield{bg}{\textit{CntxtType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
+        
+      \item[\textnormal{\textit{PRecType}}] ---
+        \record{
+          \tfield{bg}{\textit{CntxtType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+          
+
+    \item[\textnormal{\textit{Cont}}] --- \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
+
+      
+    \item[\textnormal{\textit{Cat}}] --- a basic type
+
+      s, np, det, n, v, vp : \textit{Cat}
+
+    
+    \item[\textnormal{\textit{Syn}}] ---  \record{\tfield{cat}{\textit{Cat}} \\
+        \tfield{daughters}{\textit{Sign}$^*$}} 
+ 
+
+
+  
+    \item[\textnormal{\textit{Sign}}] ---  a basic type
+
+      $\sigma$ : \textit{Sign} iff $\sigma$ :
+      \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{Cont}}} 
+
+  
+\item[\textnormal{\textit{SignType}}] --- a basic type
+
+  $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ 
+
+  
+\item[\textnormal{\textit{S}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
+  
+  
+\item[\textnormal{\textit{NP}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}}
+
+  
+\item[\textnormal{\textit{Det}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
+  
+\item[\textnormal{\textit{N}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}}
+  
+\item[\textnormal{\textit{V}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}}
+  
+  
+\item[\textnormal{\textit{VP}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
+
+  
+\item[\textnormal{\textit{NoDaughters}}] ---
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+
+  
+\item[\textnormal{\textit{Real}}] --- a basic type
+
+  $n$ : \textit{Real} iff $n$ is a real number
+
+  
+\item[\textnormal{\textit{Card}}] --- a basic type
+
+  $n$ : \textit{Card} iff $n$ is a cardinal number (natural numbers
+  with the addition of $\aleph_0, \aleph_1,\ldots$)
+ 
+
+  
+
+\item[\textnormal{\textit{AmbTempFrame}}] --- \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{temp(loc, x)}}
+
+      
+    \item[\textnormal{\textit{TempRiseEventCntxt}}] ---
+      \record{
+        \tfield{fix}{\record{
+            \tfield{loc}{\textit{Loc}}}}\\
+        \tfield{scale}{(\textit{AmbTempFrame}
+          $\rightarrow$ \textit{Real})}}
+      
+    \item[\textnormal{\textit{TempRiseEvent}}] ---
+      
+      $\lambda r$:\textit{TempRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+      
+    \item[\textnormal{\textit{PriceFrame}}] --- \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{commodity}{\textit{Ind}} \\
+        \tfield{e}{price(commodity, loc, x)}}
+      
+    \item[\textnormal{\textit{PriceRiseEventCntxt}}] --- \record{
+        \tfield{fix}{\record{
+            \tfield{loc}{\textit{Loc}}\\
+            \tfield{commodity}{\textit{Ind}}}}\\
+        \tfield{scale}{(\textit{PriceFrame}
+                             $\rightarrow$ \textit{Real})}}
+ 
+  \item[\textnormal{\textit{PriceRiseEvent}}] --- \mbox{}
+
+   $\lambda
+r$:\textit{TempRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{PriceFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+      
+    \item[\textnormal{\textit{LocFrame}}] --- \record{\tfield{x}{\textit{Ind}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{at(x, loc)}}
+      
+    \item[\textnormal{\textit{LocRiseEventCntxt}}] ---
+      \record{\tfield{fix}{\record{\tfield{x}{\textit{Ind}}
+                                               }}\\
+                         \tfield{scale}{(\textit{LocFrame}
+                           $\rightarrow$ \textit{Real})}}
+                       
+ \item[\textnormal{\textit{LocRiseEvent}}] ---
+
+   $\lambda
+r$:\textit{LocRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{LocFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+
+      
+    \item[\textnormal{\textit{Topos}}] --- a basic type
+
+      If $\tau:\textit{Topos}$, then $\tau$ : \record{\tfield{bg}{\textit{Type}}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{Type})}} 
+
+                       
+
+
+\end{description}
+
+   \subsubsection{Predicates} (as in Chapter~\ref{ch:intensional})
+
+% \begin{description}
+
+%  \item[with arity \textnormal{$\langle$\textit{Phon},
+%     \textit{Loc}$\rangle$}] \mbox{}
+  
+%     \begin{description}
+
+%     \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
+%       at $l$ in $e$
+
+%     \end{description}
+    
+%   \item[with arity \textnormal{$\langle$\textit{Phon},
+%       \textit{Ind}$\rangle$}] \mbox{}
+
+%     \begin{description}
+
+%     \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
+%         is the speaker of $u$ in $e$
+
+%     \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
+%         $u$ is the audience of $u$ in $e$
+
+%       \end{description}
+
+%     \item[with arity \textnormal{$\langle\textit{Card}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{card}] --- $X$ : card($n$) iff for some $T$,
+%     $X:\mathrm{set}(T)$ and $|X|=n$
+    
+%   \item[\textnormal{card\_at\_least}] --- $X$ : card\_at\_least($n$) iff for some $T$, $X:\mathrm{set}(T)$
+%     and $|X|\geq n$
+
+    
+%   \item[\textnormal{card\_at\_most}] --- $X$ : card\_at\_most($n$) iff for some $T$, $X:\mathrm{set}(T)$
+%     and $|X|\leq n$
+
+%   \end{description}
+      
+%   \item[with arity \textnormal{$\langle$\textit{Ppty}$\rangle$}]
+%     \mbox{}
+
+%     \begin{description}
+      
+%     \item[\textnormal{unique}] --- $s:\textrm{unique}(P)$ iff
+%       $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$
+
+%     \end{description}
+
+%     \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{exist}] ---  $s$ : exist($P$,$Q$) iff
+%      $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
+%     % $s$ : exist($P$,$Q$) iff
+%     % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+    
+%   \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff
+%     $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{PlPpty},\textit{PlPpty}\rangle$}] \mbox{}
+  
+% \begin{description}
+    
+% \item[\textnormal{exactly\_$n$} New!] --- for $n$ a natural number,
+
+%   $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
+
+%     % $s$ : exactly\_$n$($P$, $Q$) iff
+%     %       $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+%     %     \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+%     %   \not=\emptyset$
+
+      
+%     \item[\textnormal{at\_least\_$n$} New!] --- for $n$ a natural
+%       number,
+
+%       $s$ : at\_least\_$n$($P$, $Q$) iff
+%           $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
+%         \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+%       \not=\emptyset$
+
+%       % $s$ : at\_least\_$n$($P$, $Q$) iff
+%       %     $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+%       %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+%       % \not=\emptyset$
+
+      
+%     \item[\textnormal{at\_most\_$n$} New!] --- for $n$ a natural
+%       number,
+
+%       $s$ : at\_most\_$n$($P$, $Q$) iff
+%           $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
+%         \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+%       % $s$ : at\_most\_$n$($P$, $Q$) iff
+%       %     $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+%       %   \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+% \end{description}    
+
+  
+% \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
+%   \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Loc},\textit{Real}\rangle$}] \mbox{}
+%   \begin{description}
+    
+%   \item[\textnormal{temp}] --- $e:\text{temp}(l,n)$ iff $n$ is
+%     the temperature at $l$ in $e$.
+
+    
+  
+
+%   \end{description}
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Real},\textit{Real}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{less-than}] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
+
+%   \end{description}
+
+% \item[with arity
+%   \textnormal{$\langle\textit{Type},\textit{Type},\textit{Topos}\rangle$}]
+%   \mbox{}
+
+%   \begin{description}
+
+    
+%   \item[\textnormal{nec} New!] ---
+
+%     If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
+%     \begin{quote}
+%       $s:_p\mathrm{nec}(T,B,\tau)$ iff $s:_pB$, 
+%       $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+%       $\tau(s)\sqsubseteq_{\mathbb{T}}T$
+%     \end{quote}
+
+    
+%   \item[\textnormal{poss} New!] ---
+
+%     If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
+%     \begin{quote}
+%       $s:_p\mathrm{poss}(T,B,\tau)$ iff $s:_pB$, 
+%       $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+%       $\tau(s)\top_{\mathbb{T}}T$
+%     \end{quote}
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{RecType},\textit{RecType}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{pov} New!] --- $e:\text{pov}(T_1,T_2)$ iff $T_2$
+%     is a point of view on $T_1$ in $e$.
+
+%     $e:\text{pov}(T_1,T_2)$ implies
+%     $\mathrm{labels}(T_2)\subseteq\mathrm{labels(T_1)}$
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Ind},\textit{RecType}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{ltm} New!] --- $e:\text{ltm}(a,T)$ iff $T$ is $a$'s
+%     long term memory in $e$.
+    
+%   \item[\textnormal{rbelieve} New!] --- $e:\text{rbelieve}(a,T)$ iff
+%     $T$ is $a$'s religious beliefs in $e$.
+
+    
+%   \item[\textnormal{des} New!] --- $e:\text{des}(a,T)$ iff $T$ is
+%     $a$'s desires in $e$.
+
+%   \end{description}
+  
+  
+
+  
+  
+  
+
+
+% \end{description}
+
+\subsubsection{Scales} (as in Chapter~\ref{ch:commonnouns})
+
+% % \begin{description}
+  
+% % \item[\textnormal{$\zeta_{\text{temp}}$} New!] ---
+% %   $\lambda r$:\textit{AmbTempFrame} . $r$.x : (\textit{AmbTempFrame}
+% %   $\rightarrow$ \textit{Real})
+
+  
+% % \item[\textnormal{$\zeta_{\mathrm{height}}$} New!] ---
+% %   $\lambda r$:\textit{LocFrame} . $r$.loc.z-coord : (\textit{LocFrame}
+% %   $\rightarrow$ \textit{Real})
+
+  
+% % \item[\textnormal{$\zeta_{\text{age}}$} New!] ---  
+% % $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+% %                          \smalltfield{age}{\textit{Real}}\\
+% %                          \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+% %                        . $r$.age : (\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+% %                          \smalltfield{age}{\textit{Real}}\\
+% %                          \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+% %                        $\rightarrow$ \textit{Real})
+
+% % \end{description}
+
+
+
+\subsubsection{Lexicon} (as in Chapter~\ref{ch:intensional})
+% \begin{description}
+% \item[\textnormal{Lex}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type (that is,
+% $T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+% is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
+% Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
+% \begin{quote}
+% (($T_{\mathrm{sign}}$ \d{$\wedge$}
+% \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+% \d{$\wedge$} \textit{NoDaughters})
+% \end{quote}
+
+% % \item[\textnormal{SemCommonNoun($p$)}] \mbox{}
+
+% %   If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$, then SemCommonNoun($p$) is
+% %   \begin{quote}
+% %     $\lambda c$:\textit{Rec} . $\lambda
+% % r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% % . \record{\tfield{e}{$p$($r$.x)}}
+% % \end{quote}
+
+% % \item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+% %     $p$)}] \mbox{}
+
+% %   If $T_{\mathrm{phon}}$ is a phonological type and $p$ is a
+% %   predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+% %   $p$) is
+% %   \begin{quote}
+% %     Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+% %     \smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{PPpty}}}
+% %   \end{quote}
+
+% \item[\textnormal{SemCommonNoun($T_{\mathrm{bg}}$, $p$)}]
+%   \mbox{}
+
+%     If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$ and
+%     $T_{\mathrm{bg}}$ is a type (of context), then
+%     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
+% \end{quote}
+
+% If $p$ is a predicate with arity $\langle\textit{Rec}\rangle$ and $T_{\mathrm{bg}}$ is a type (of context), then
+%     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+% . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
+% \end{quote}
+  
+% %     \todo{Not sure this is used}If $p$ is a predicate with arity $\langle\textit{Rec},
+% %     \textit{Rec}\rangle$ and $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
+% %     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+% %   \begin{quote}
+% %     $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+% % r$:\textit{Rec}
+% % . \record{\tfield{e}{$p$($r$, $c.\mathfrak{c}$)}}
+% % \end{quote}
+
+% \item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+%     $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+%     % If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+%   % predicate with arity $\langle\textit{Ind}\rangle$ and
+%   % $T_{\mathrm{bg}}$ is a type (of context), then
+%   % Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+%   % $p$) is
+%   % \begin{quote}
+%   %   Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+%   %   \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+%   %       $p$)}{\textit{PPpty}}}
+%   % \end{quote}
+
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+%   predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}\rangle$ and
+%   $T_{\mathrm{bg}}$ is a type (of context), then
+%   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+%   $p$) is
+%   \begin{quote}
+%     Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+%     \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+%         $p$)}{\textit{PPpty}}}
+%   \end{quote}
+  
+% \item[\textnormal{SemPropName($T_{\text{phon}}$)}] \mbox{}
+
+%   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:\smallrecord{
+%       \footnotesize{\textit{Cntxt}}\\
+%       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
+%                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
+%   \end{quote}
+  
+% \item[\textnormal{Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$
+%     )}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type,
+
+%   then Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$) is
+%   \begin{quote}
+%     Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{phon}}$)}{\textit{PQuant}}}
+% \end{quote}
+
+% \item[\textnormal{SemPron} ] \mbox{}
+
+%   $\ulcorner\lambda c$:\smallrecord{
+%     \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{s}$}{\smallrecord{
+%         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+%   P$:\textit{Ppty}
+%   . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
+
+% \item[\textnormal{LexPron($T_{\text{phon}}$)}] \mbox{}
+
+% If $T_{\text{phon}}$ is a phonological type, then
+% LexPron($T_{\text{phon}}$) is
+% \begin{quote}
+% Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemPron}{\textit{PQuant}}}
+% \end{quote}
+
+% \item[\textnormal{SemNumeral($n$)}] \mbox{}
+
+%   If $n$ is a real number, then SemNumeral($n$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda P$:\textit{Ppty}
+%     . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$
+%   \end{quote}
+
+  
+% \item[\textnormal{Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$)}
+%     New!] \mbox{}
+
+%     If $T_{\mathrm{phon}}$ is a phonological type and $n$ is a real
+%     number, then Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$) is
+%     \begin{quote}
+%       Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+%       \smallrecord{\smallmfield{cnt}{SemNumeral($n$)}{\textit{PQuant}}}
+%     \end{quote}
+    
+
+  
+% \item[\textnormal{SemIndefArt}] \mbox{}
+
+%   % $\ulcorner\lambda c$:\textit{Rec} . \\
+% % \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+% % \hspace*{2em} $\lambda P$:\textit{Ppty}
+% % . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+% %           \mfield{scope}{$P$}{\textit{Ppty}} \\
+% %           \tfield{e}{exist(restr, scope)}}$\urcorner$
+
+% $\lambda Q$:\textit{Ppty} . \\
+%   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+%   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+%   \hspace*{3em}\record{
+%     \mfield{restr}{$Q$}{\textit{Ppty}}\\
+%     \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+%     \tfield{e}{exist(restr, scope)}}$\urcorner$
+
+
+
+ 
+
+        
+%       \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
+%         \mbox{}
+
+%         If $T_{\mathrm{Phon}}$ is a phonological type, then
+%         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+%         \end{quote}
+
+        
+%       \item[\textnormal{SemUniversal}] \mbox{}
+
+%                $\lambda Q$:\textit{Ppty} . \\
+%   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+%   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+%   \hspace*{3em}\record{
+%     \mfield{restr}{$Q$}{\textit{Ppty}}\\
+%     \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+%     \tfield{e}{every(restr, scope)}}$\urcorner$
+
+ 
+
+  
+% \item[\textnormal{Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$)}]
+%         \mbox{}
+
+%         If $T_{\mathrm{Phon}}$ is a phonological type, then
+%         Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cont}{SemUniversal}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+%         \end{quote}
+
+%         \item[\textnormal{SemDefArt}] \mbox{}
+
+%  %  $\lambda c$:\textit{Rec} . \\
+% % \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+% % \hspace*{2em} $\lambda P$:\textit{Ppty}
+% % . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+% %           \mfield{scope}{$P$}{\textit{Ppty}} \\
+% %           \tfield{e}{the(restr, scope)}}
+
+%                     $\lambda Q$:\textit{Ppty} . \\
+%                     \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+%                       \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{c}$}{\smallrecord{
+%         \smalltfield{e}{unique($Q$)}}}} . \\
+%   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+%   \hspace*{3em}\record{
+%     \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+%     \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+%     \tfield{e}{every(restr, scope)}}$\urcorner$
+
+
+        
+%       \item[\textnormal{Lex$_{\mathrm{DefArt}}$($T_{\mathrm{Phon}}$)}]
+%         \mbox{}
+
+%         If $T_{\mathrm{Phon}}$ is a phonological type, then
+%         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cont}{SemDefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+%         \end{quote}
+
+%       \item[\textnormal{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}]
+%         \mbox{}
+
+%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%           . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
+%         \end{quote}
+
+%         If $T_{\text{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+%           . \record{\tfield{e}{$p$($r$.x, $c.\mathfrak{c}$)}}$\urcorner\urcorner$
+%         \end{quote}
+
+        
+%       \item[\textnormal{Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%           $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+%         % If $T_{\mathrm{phon}}$ is a phonological type,
+%         % $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+%         % predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%         % $T_{\mathrm{bg}}$, $p$) is
+%         % \begin{quote}
+%         %   Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+%         %   \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+%         % \end{quote}
+
+%         If $T_{\mathrm{phon}}$ is a phonological type,
+%         $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}, \textit{Rec}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%         $T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+%         \end{quote}
+
+        
+%       \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)} Revised!] \mbox{}
+
+%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+%           \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+%           r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\ulcorner\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%           . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$\urcorner)\urcorner\urcorner$
+%         \end{quote}
+
+%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+%   predicate with arity $\langle\textit{Ind},\textit{Quant}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+%     \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$\urcorner)\urcorner$
+%   \end{quote}
+        
+% \item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+%           $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+%         If $T_{\mathrm{phon}}$ is a phonological type,
+%         $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+%         $T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{phon}}$, \textit{V$_t$}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cnt}{SemTransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+%         \end{quote}
+
+        
+
+        
+%       \item[\textnormal{SemBe}] \mbox{}
+
+%         % $\lambda c:T_{\text{bg}}$ . \\
+% %         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% % \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+% % . \\
+% % \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% % r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+% % . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
+% % \tfield{e}{be(x)}}$\urcorner$)$\urcorner$
+
+%         \begin{description}
+          
+%         \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
+
+%           $\ulcorner\lambda c$:\smallrecord{
+%             \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{c}$}{\smallrecord{
+%         \smalltfield{ty}{\textit{Type}}}}} . \\
+%         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+%         \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+%           \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+% . \\
+% \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% r_2$:\smallrecord{
+%   \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+% . \record{\mfield{x}{$r_1$.x, $r_2$.x}{$c.\mathfrak{c}$.ty}\\
+%   \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$
+
+% \item[\textnormal{SemBe$_{\text{scalar}}$}] \mbox{}
+
+%   $\ulcorner\lambda c$:\smallrecord{
+%     \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{c}$}{\smallrecord{
+%         \smalltfield{ty}{\textit{Type}}\\
+%       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
+%         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+%         \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+%           \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+% . \\
+% \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% r_2$:\smallrecord{
+%   \smalltfield{x}{\textit{Real}}}
+% . \record{\mfield{x}{$c.\mathfrak{c}$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+%   \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$
+
+% \end{description}
+
+
+% \item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
+
+%   If $T_{\mathrm{Phon}}$ is a phonological type, then
+%   Lex$_{\mathrm{be}_{\text{ID}}}$($T_{\mathrm{Phon}}$) is
+% \begin{quote}
+%   Lex($T_{\mathrm{Phon}}$,
+% \textit{V}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemBe$_{\text{ID}}$}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+% \end{quote}
+
+% If $T_{\mathrm{Phon}}$ is a phonological type, then
+%   Lex$_{\mathrm{be}_{\text{scalar}}}$($T_{\mathrm{Phon}}$) is
+% \begin{quote}
+%   Lex($T_{\mathrm{Phon}}$,
+% \textit{V}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemBe$_{\text{scalar}}$}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+% \end{quote}
+
+% \item[\textnormal{$\mathrm{FrameType}(p)$}] \mbox{}
+
+%   $\mathrm{FrameType}$ is a partial function on predicates, $p$, with
+%   arity $\langle\textit{Ind}\rangle$ which can be defined for
+%   particular agents and particular times, which obeys the constraint:
+%   \begin{quote}
+%     $\mathrm{FrameType}(p)\sqsubseteq$ \record{
+%     \tfield{x}{\textit{Ind}}\\
+%     \tfield{e}{$p$(x)}}
+% \end{quote}
+
+% \item[\textnormal{$p$\_frame} New!] \mbox{}
+
+%   \begin{enumerate} 
+ 
+% \item If $p$ is a predicate in the domain of $\mathrm{FrameType}$,
+%   then $p$\_frame is a predicate with arity $\langle\textit{Rec}\rangle$. 
+ 
+% \item $e:p\_\text{frame}(r)$ iff $r:\mathrm{FrameType}(p)$ and $e=r$ 
+ 
+% \end{enumerate}
+
+% \item[\textnormal{$p$\_pl}] \mbox{}
+
+%   \begin{enumerate} 
+ 
+% \item If $p$ is a singular predicate (i.e. there is no $p'$ such that
+%   $p=p'\_\text{pl}$) with arity $\langle T\rangle$, then
+%   $p\_\text{pl}$ is a predicate with arity $\langle\mathrm{plurality}(T)\rangle$ 
+ 
+% \item $e:p\_\text{pl}(A)$ if for all $a\in A$, $e:p(a)$ 
+ 
+% \end{enumerate} 
+  
+
+% \item[\textnormal{CommonNounIndToFrame}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+% arity $\langle\textit{Ind}\rangle$ and
+% $T_\mathrm{bg}$ is a record type (the ``background type'' or
+% ``presupposition'') then \\ 
+% \mbox{CommonNounIndToFrame(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$))} =
+% \begin{quote}
+%   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$\_frame)
+% \end{quote}
+
+% \item[\textnormal{RestrictCommonNoun}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate,
+% $T_{\mathrm{bg}}$ and $T_{\mathrm{res}}$ are record types and $\Sigma$
+% is Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+% $p$), then RestrictCommonNoun($\Sigma$, $T_{\mathrm{res}}$) is
+% \begin{quote}
+% $\Sigma$
+% \fbox{\d{$\wedge$}} \record{
+%   \mfield{cont}{$\ulcorner\lambda c\!:\!T_{\mathrm{bg}}\ .\
+%     \ulcorner\text{SemCommonNoun}(T_{\mathrm{bg}},p)(c)\!\mid_{T_{\mathrm{res}}}\urcorner\urcorner$}{\textit{PPpty}}}
+% \end{quote}
+
+% \item[\textnormal{IntransVerbIndToFrame}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+% arity $\langle\textit{Ind}\rangle$ and
+% $T_\mathrm{bg}$ is a record type (the ``background type'' or
+% ``presupposition'') then \\ 
+% \mbox{IntransVerbIndToFrame(Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$))} =
+% \begin{quote}
+%   Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$\_frame)
+% \end{quote}
+
+% \item[\textnormal{PluralCommonNoun}] \mbox{}
+
+%   We assume that `pluralnoun' is a function that maps phonological
+%   types for singular common nouns to corresponding phonological types
+%   for plural common nouns.
+
+%   If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+%   singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+%   is a record type then
+%   PluralCommonNoun(Lex$_{\text{CommonNoun}}$($T_{\text{phon}}$,
+%   $T_{\text{bg}}$, $p$)) =
+%   \begin{quote}
+%     Lex$_{\text{CommonNoun}}$(pluralnoun($T_{\text{phon}}$),
+%     $T_{\text{bg}}$, $p$\_pl)
+%   \end{quote}
+
+  
+% \item[\textnormal{PluralIntransVerb}] \mbox{}
+
+%   We assume that `pluralverb' is a function that maps phonological
+%   types for singular verbs to corresponding phonological types
+%   for plural verbs.
+
+%   If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+%   singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+%   is a record type then
+%   PluralIntransVerb(Lex$_{\text{IntransVerb}}$($T_{\text{phon}}$,
+%   $T_{\text{bg}}$, $p$)) =
+%   \begin{quote}
+%     Lex$_{\text{IntransVerb}}$(pluralverb($T_{\text{phon}}$),
+%     $T_{\text{bg}}$, $p$\_pl)
+%   \end{quote} 
+        
+
+  
+  
+% \end{description}
+
+
+\subsubsection{Constituent structure} (as in Chapter~\ref{ch:commonnouns})
+% % \begin{description}
+% % \item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
+% % $T_{\text{mother}}$)}] \mbox{}
+
+% % If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
+% % type of strings of signs then
+% % \begin{quote}
+% % RuleDaughters($T_{\text{daughters}}$,
+% % $T_{\text{mother}}$)
+% % \end{quote}
+% % is
+% % \begin{quote}
+% %   $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
+% % \end{quote}
+
+% % \item[\textnormal{ConcatPhon}] \mbox{}
+
+% %   $\lambda
+% % u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
+% % . \\
+% % \hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+
+% % \item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+% %     T_{\text{daughter}_n}$}] \mbox{}
+
+% %   If $T_{\text{mother}}$ is a sign type and
+% %   $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
+% %   then
+% %   \begin{quote}
+% %     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
+% %     T_{\text{daughter}_n}$
+% %   \end{quote}
+% %   represents
+% %   \begin{quote}
+% % RuleDaughters($T_{\text{mother}}$,
+% % ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
+% % \end{quote}
+
+% % \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+% %   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+% %                              T_2$))}} 
+% % and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+% %                          then the \textit{combination of $\alpha$ and
+% %     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+% %   \begin{quote}
+% %     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+% %       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+% %       . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+% %   % $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+% % %       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+% % %       . \\
+% % %       \hspace*{2em}
+% % % $\alpha.\text{fg}(c.\mathfrak{c}.\text{f})(\mathrm{incr}_{\mathfrak{s}.\text{x}}(\beta.\text{fg},\alpha.\text{bg})(c.\mathfrak{c}.\text{a}))\urcorner$
+      
+% % \end{quote}
+
+
+% % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
+
+% %   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+% %   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+% % \begin{quote}
+% %   $\lambda
+% % u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                                                \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
+% %    \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                                                \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
+% % \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                                                                                 \smalltfield{fg}{(bg$\rightarrow
+% %                                                                                   T_{\text{res}}$)}}}}
+% % \end{quote}
+
+
+
+% % % \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+% % %   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+% % %                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+% % %                              T_2$))}} 
+% % % and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+% % %                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+% % %                          then the \textit{combination of $\alpha$ and
+% % %     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+% % % \begin{quote}
+% % %   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+% % %       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+% % %       . \\
+% % %       \hspace*{2em}
+% % % $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      
+% % % \end{quote}
+
+
+% % % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
+
+% % %   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+% % %   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+% % % \begin{quote}
+% % %   $\lambda
+% % % u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+% % %     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+% % % \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+% % % \end{quote}
+
+% % % \item[\textnormal{$T_{\text{mother}}\longrightarrow
+% % %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+% % %     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+% % %   \mbox{}
+
+% % %   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+% % %   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+% % %   $T_{\text{res}}$ are content types, then
+% % %   \begin{quote}
+% % %     $T_{\text{mother}}\longrightarrow
+% % %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+% % %     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+% % %   \end{quote}
+% % %   is
+% % %   \begin{quote}
+% % %   $T_{\text{mother}}\longrightarrow
+% % %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+% % %     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
+% % %   \end{quote}
+
+  
+% % \item[\textnormal{$\alpha\text{@\!@}\beta$} New!] \mbox{}
+
+% %   If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                            \smalltfield{fg}{(bg$\rightarrow T_2$)}}) 
+% %                          and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% %                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+% %                          then the \textit{combination of $\alpha$ and
+% %     $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
+% %   \begin{quote}
+% %     $\ulcorner\lambda c$:\record{
+% %       \tfield{$\mathfrak{c}$}{\record{
+% %           \tfield{s}{$\beta$.bg}\\
+% %           \tfield{f}{$\alpha(\beta(s))$.bg}\\
+% %           \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
+% %     \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
+% %       . \\*[\baselineskip]
+% %       \hspace*{10em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))(c)\urcorner$
+% %     \end{quote}
+    
+% % \item[\textnormal{ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$,
+% %     $T_{\text{res}}$)} New!] \mbox{}
+
+% %   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+% %   ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$) is
+% % \begin{quote}
+% %   $\lambda
+% % u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+% %     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+% % \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@\!@$u$[1].cont}{$T_{\text{res}}$}}
+
+% % \end{quote}
+  
+% % \item[\textnormal{$T_{\text{mother}}\longrightarrow
+% %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+% %     T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}
+% %   New!]
+% %   \mbox{}
+
+% %   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+% %   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+% %   $T_{\text{res}}$ are content types, then
+% %   \begin{quote}
+% %     $T_{\text{mother}}\longrightarrow
+% %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+% %     T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+% %   \end{quote}
+% %   is
+% %   \begin{quote}
+% %   $T_{\text{mother}}\longrightarrow
+% %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+% %     ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+% %   \end{quote}  
+
+% % \end{description}
+
+
+\subsubsection{Action rules} (as in Chapter~\ref{ch:intensional})
+
+% \begin{description}
+
+  
+
+
+
+
+% \item[\textnormal{\textsc{LexRes}}] \mbox{}
+
+%   \begin{prooftree}
+%     \hypo{\text{Lex}(T,C) \text{ resource}_A}
+%     \hypo{u:_A T}
+%     \infer[enth]2{:_A(\text{Lex}(T,C)\text{\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallmfield{e}{$u$}{$T$}}}}})}
+%   \end{prooftree}
+
+  
+% \item[\textnormal{\textsc{ToposConclude}} New!] \mbox{}
+
+%   \begin{prooftree}
+%     \hypo{\tau:\textit{Topos}}
+%     \hypo{\tau \text{ resource}_A}
+%     \hypo{s:_A\tau.\text{bg}}
+%     \infer[enth]3{:_A\tau(s)}
+%   \end{prooftree}
+
+  
+% \item[\textnormal{\textsc{ToposPermit}} New!] \mbox{}
+
+%   \begin{prooftree}
+%     \hypo{\tau:\textit{Topos}}
+%     \hypo{\tau \text{ resource}_A}
+%     \hypo{s:_A\tau.\text{bg}}
+%     \infer[enth]3{:_A\tau(s)!}
+%   \end{prooftree}
+
+    
+% \item[\textnormal{\textsc{ToposOblige}} New!] \mbox{}
+
+%   \begin{prooftree}
+%       \hypo{\tau:\textit{Topos}}
+%       \hypo{\tau \text{ resource}_A}
+%       \hypo{s:_A\tau.\text{bg}}
+%       \infer[enth]3[oblig]{:_A\tau(s)!}
+%     \end{prooftree}
+
+    
+  
+
+
+%   \end{description}
+
+
+
+\subsection{Universal speech act resources} (as in Chapter~\ref{ch:infex})
+
+% \subsubsection{Types}
+
+% \begin{description}
+  
+% \item[\textnormal{\textit{Assertion}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{RecType}}\\
+%   \tfield{illoc}{assert(s-event, cont)}
+% }
+% \item[\textnormal{\textit{Query}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{Question}}\\
+%   \tfield{illoc}{query(s-event, cont)}
+% }
+
+% \item[\textnormal{\textit{Command}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{RecType}}\\
+%   \tfield{illoc}{command(s-event, cont)}
+% }
+
+% \item[\textnormal{\textit{Acknowledgement}}] --- \record{
+%   \tfield{s-event}{\textit{SEvent}}\\
+%   \tfield{cont}{\textit{RecType}}\\
+%   \tfield{illoc}{acknowledge(s-event, cont)}
+% }
+
+% \item[\textnormal{\textit{AssertionType}}] --- a basic type
+
+%   $T:\textit{AssertionType}$ iff $T\sqsubseteq \textit{Assertion}$
+
+  
+% \item[\textnormal{\textit{QueryType}}] --- a basic type
+
+%   $T:\textit{QueryType}$ iff $T\sqsubseteq \textit{Query}$
+
+  
+% \item[\textnormal{\textit{CommandType}}] --- a basic type
+
+%   $T:\textit{CommandType}$ iff $T\sqsubseteq \textit{Command}$
+
+
+ 
+% \item[\textnormal{\textit{AcknowledgementType}}] --- a basic type
+
+%   $T:\textit{AcknowledgementType}$ iff $T\sqsubseteq \textit{Acknowledgement}$
+
+% \end{description}
+
+\subsection{Universal dialogue resources} (as in Chapter~\ref{ch:propnames})
+
+% \subsubsection{Types}
+
+% \begin{description}
+% \item[\textnormal{\textit{InfoState}}] --- \record{
+%     \tfield{private}{
+%       \record{
+%         \tfield{agenda}{$\mathrm{list}(\textit{RecType})$}}} \\
+%     \tfield{shared}{
+%       \record{
+%         \tfield{latest-utterance}{\textit{Sign}$^*$}\\
+%         \tfield{commitments}{\textit{RecType}}}}}
+  
+% \item[\textnormal{\textit{InitInfoState}}] --- \record{
+%     \tfield{private}{
+%       \record{
+%         \mfield{agenda}{[ ]}{$\mathrm{list}(\textit{RecType})$}}} \\
+%     \tfield{shared}{
+%       \record{
+%         \mfield{latest-utterance}{$\varepsilon$}{\textit{Sign}$^*$}\\
+%         \mfield{commitments}{\textit{Rec}}{\textit{RecType}}}}}  
+
+  
+% \item[\textnormal{\textit{GameBoard}} New!] --- a basic type
+
+%   $T$ : \textit{GameBoard} iff $T\sqsubseteq$ \textit{InfoState}
+  
+% \item[\textnormal{\textit{TotalInfoState}} New!] --- \record{\tfield{ltm}{\textit{RecType}} \\
+%         \tfield{gb}{(ltm$\rightarrow$\textit{GameBoard})}}
+
+
+% \end{description}
+
+% \subsubsection{Update functions and action rules}
+
+% %(as in Chapter~\ref{ch:infex})
+
+% \begin{description}
+% \item[\textnormal{f$_{\textsc{PlanAckAss}}$}] $\lambda r$:\textit{InfoState} . \\
+%   \hspace*{4em}$\lambda u$:\textit{Assertion} . \\
+%   \hspace*{6em}
+%   \smallrecord{
+%     \smalltfield{private}{\smallrecord{
+%         \smalltfield{agenda}{\smallrecord{
+%             \smalltfield{fst}{\smallrecord{
+%                 \smalltfield{s-event}{\textit{SEvent} \d{$\wedge$} \smallrecord{
+%                     \smallmfield{sp}{$u$.s-event.au}{\textit{Ind}}\\
+%                     \smallmfield{au}{$u$.s-event.sp}{\textit{Ind}}}}\\
+%                 \smallmfield{cont}{$u$.cont}{\textit{Cont}}\\
+%                 \smalltfield{illoc}{acknowledge(s-event, cont)}}}\\
+%             \smallmfield{rst}{$r$.private.agenda}{$\mathrm{list}(\textit{RecType})$}}}}}\\
+%     \smalltfield{shared}{\smallrecord{
+%         \smallmfield{latest-utterance}{$u$}{\textit{Assertion}}}}}
+  
+% \item[\textnormal{\textsc{PlanAckAss}}]
+%   \begin{prooftree}
+%     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+%     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\textsc{PlanAckAss}})}
+%     \hypo{u^*:_A T_{\mathrm{utt}}}
+%     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Assertion}}
+%     \infer[enth]4{s_{i+1,A}:_A
+%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{PlanAccAss}}(s_{i,A})(u^*)\text{\d{$\wedge$}}\text{\smallrecord{\smalltfield{shared}{\smallrecord{
+%               \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})}
+%   \end{prooftree}
+
+  
+% \item[\textnormal{f$_{\textsc{IntegAck}}$}]
+%   $\lambda r$:\textit{InfoState} . \\
+%   \hspace*{2em}$\lambda u$:\textit{Acknowledgement} . \\
+%   \hspace*{4em}\smallrecord{
+%     \smalltfield{shared}{\smallrecord{
+%         \smallmfield{commitments}{\smallrecord{
+%             \smalltfield{prev}{$r$.shared.commitments}}\d{$\wedge$}$u$.cont}{\textit{RecType}}\\
+%         \smallmfield{latest-utterance}{$u$}{\textit{Acknowledgement}}}}}
+
+  
+% \item[\textnormal{\textsc{IntegAck}}]
+%    \begin{prooftree}
+%     \hypo{s_{i,a}:_A T_{\mathrm{curr}}}
+%     \hypo{T_{\mathrm{curr}}\sqsubseteq\mathrm{domtype}(\text{f}_{\mathrm{IntegAck}})}
+%     \hypo{u^*:_A T_{\mathrm{utt}}}
+%     \hypo{T_{\mathrm{utt}}\sqsubseteq\textit{Acknowledgement}}
+%     \infer[enth]4{s_{i+1,A}:_A
+%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}}(\text{f}_{\textsc{IntegAck}}(s_{i,A})(u^*)\text{
+%         \d{$\wedge$} \smallrecord{\smalltfield{shared}{\smallrecord{
+%              \smalltfield{latest-utterance}{$T_{\mathrm{utt}}$}}}}})} 
+%  \end{prooftree}
+
+ 
+% \item[\textnormal{\textsc{ExecTopAgenda}}]
+%   \begin{prooftree}
+%     \hypo{s_{i,A}:_A\textit{InfoState}\text{\d{$\wedge$}
+%         \smallrecord{\smalltfield{private}{\smallrecord{
+%               \smalltfield{agenda}{\smallrecord{
+%                   \smalltfield{fst}{\textit{RecType}}\\
+%                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+%     \infer[enth]1{:_A
+%       s_{i,A}.\text{private}.\text{agenda}.\text{fst}!}
+%   \end{prooftree}
+
+  
+% \item[\textnormal{\textsc{DowndateAgenda}}]
+%   \mbox{}
+
+%   \hspace*{-2.5em}
+%   \begin{prooftree}
+%     \hypo{s_{i,A}:_A T_{\mathrm{curr}}}
+%     \hypo{T_{\mathrm{curr}}\sqsubseteq\text{
+%         \smallrecord{
+%           \smalltfield{private}{\smallrecord{
+%               \smalltfield{agenda}{\smallrecord{
+%                   \smalltfield{fst}{\textit{RecType}}\\
+%                   \smalltfield{rst}{$\mathrm{list}(\textit{RecType})$}}}}}}}}
+%     \hypo{u^*:_A s_{i,A}.\text{private}.\text{agenda}.\text{fst}}
+%     \infer[enth]3{s_{i+1,A}:_A
+%       T_{\mathrm{curr}}\text{\fbox{\d{$\wedge$}}
+%         \smallrecord{
+%           \smalltfield{private}{\smallrecord{
+%               \smallmfield{agenda}{$s_{i,A}$.private.agenda.rst}{$\mathrm{list}(\textit{RecType})$}}}}}}
+%   \end{prooftree}
+  
+% \item[\textnormal{\textsc{AccGB}} New!] See p.~\pageref{ex:AccGBfinal}.
+
+  
+% \item[\textnormal{\textsc{AccLTM}} New!] See p.~\pageref{ex:AccLTM}.
+  
+% \item[\textnormal{\textsc{AccNM}} New!] See p.~\pageref{ex:AccNM}.
+  
+% \item[Control regime for accommodation New!] \mbox{}
+
+%   \begin{subex} 
+ 
+% \item if there is a labelling, $\eta$, such that
+% $s_{i,A}^{\text{tot}}.\text{gb}(s_{i,A}^{\text{tot}}).\text{ltm}.\text{shared}.\text{commitments}\sqsubseteq[u^*.\text{cont}.\text{bg}]_\eta$,
+%   then use \text{AccGB} with $\eta$ 
+ 
+% \item else if there is a labelling, $\eta$, such that
+%   $s_{i,A}^{\text{tot}}.\text{ltm}\sqsubseteq[u^*.\text{cont}.\text{bg}]_\eta$
+%   then use \text{AccLTM} with $\eta$
+
+  
+% \item else use \textsc{AccNM}
+ 
+% \end{subex} 
+
+% \end{description}
+
+\subsection{English resources} (as in Chapter~\ref{ch:intensional})
+
+% \subsubsection{Types and predicates} 
+
+% \begin{description}
+
+  
+% \item[Basic phonological  types for words] \mbox{}
+
+%   \{``Dudamel'', ``is'', ``a'', ``conductor'', ``Beethoven'',
+%   ``composer'', ``Uchida'', ``pianist'', ``aha'', ``ok'', ``leaves''
+%   , ``hugs'', ``dog'', ``nine'',
+%   ``ninety'', ``find'' \textbf{New!}, ``seek'' \textbf{New!},
+%   ``worship'' \textbf{New!}\}
+
+% %\item [Witnesses for basic types] \mbox{}
+
+% %  \begin{description}
+% % \item[\textnormal{\textit{Ind}}] --- dudamel, beethoven, uchida :
+% %   \textit{Ind} \textbf{No longer necessary for interpretation of
+% %     proper names!}
+% %   \end{description}
+
+  
+% \item[Predicates] \mbox{}
+  
+%   \begin{description}
+  
+%   \item[with arity \textnormal{$\langle\textit{Ind}\rangle$}]
+%     \{conductor, composer, pianist, leave,  dog,
+%     passenger\}
+    
+%   \item[with arity
+%     \textnormal{$\langle\textit{Ind},\textit{Quant}\rangle$}] \{hug
+%     \textbf{Revised!}, find \textbf{New!}, seek \textbf{New!}, worship
+%     \textbf{New!}, want$_Q$ \textbf{New!}\}
+
+%       $e$ : worship($a$,$\mathcal{Q}$) iff for some $T$
+% \begin{enumerate} 
+ 
+% \item $e$ : rbelieve($a$, $T$) 
+ 
+% \item $T$ $\sqsubseteq_{\leadsto}$ $\mathcal{Q}$($\lambda
+%   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . worship$^\dagger$($a$, $r$.x))
+ 
+% \end{enumerate}
+% \textbf{or} for some $T'$
+% \begin{enumerate} 
+ 
+% \item $e$ :$_{\underline{\varepsilon}}$ rbelieve($a$, $T$)
+
+% \item $e$ :$_{\underline{\varepsilon}}$ pov($T'$, $T$)
+ 
+% \item $T$\fbox{\d{$\wedge$}}$T'$ $\sqsubseteq_{\leadsto}$ $Q$($\lambda
+%   r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . worship$^\dagger$($a$, $r$.x)) 
+
+% \end{enumerate}
+
+% \bigskip
+
+%     We restrict our attention to modal systems, $\mathbb{T}$, such
+%     that
+%     \begin{enumerate}
+    
+%     \item if $p\in\{\text{hug},\text{find}\}$ then
+%     \begin{quote}
+%       $p(a,\mathcal{Q})\approx_{\mathbb{T}}\mathcal{Q}(\ulcorner\lambda
+%       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{$p^{\dagger}(a,
+%           r.\text{x})$}}$\urcorner)$
+%     \end{quote}
+    
+    
+    
+%   \item $\text{successful}(\text{seek}(a,\mathcal{Q}))\sqsubseteq_{\mathbb{T}}
+%     \text{find}(a,\mathcal{Q})$
+
+    
+%   \item want$_Q$($a$,$Q$) $\approx_{\mathbb{T}}$
+% want$^\dagger$($a$, $Q$($\ulcorner\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . have($a$, $r$.x)$\urcorner$))
+% \end{enumerate}
+  
+
+%     \item[with arity
+%   \textnormal{$\langle\textit{Rec},\textit{Rec}\rangle$}] --- \{rise
+%   \}
+  
+
+%       $e$ : rise$(r,c)$ if
+%   \begin{quote}
+%     $r$ : \textit{AmbTempFrame},\\
+%     $c$ : \textit{TempRiseEventCntxt} and \\
+%     $e$ : \textit{TempRiseEvent}$(c)$ \d{$\wedge$}
+%     \smallrecord{
+%       \smalltfield{e}{\smallrecord{
+%           \smallmfield{t$_0$}{$r$}{\textit{AmbTempFrame}}}}}
+%   \end{quote}
+%   \textbf{or} if
+%   \begin{quote}
+%     $r$ : \textit{PriceFrame},\\
+%     $c$ : \textit{PriceRiseEventCntxt} and \\
+%     $e$ : \textit{PriceRiseEvent}$(c)$ \d{$\wedge$}
+%     \smallrecord{
+%       \smalltfield{e}{\smallrecord{
+%           \smallmfield{t$_0$}{$r$}{\textit{PriceFrame}}}}}
+%   \end{quote}
+%   \textbf{or} if
+%   \begin{quote}
+%     $r$ : \textit{LocFrame},\\
+%     $c$ : \textit{LocRiseEventCntxt} and \\
+%     $e$ : \textit{LocRiseEvent}$(c)$ \d{$\wedge$}
+%     \smallrecord{
+%       \smalltfield{e}{\smallrecord{
+%           \smallmfield{t$_0$}{$r$}{\textit{LocFrame}}}}}
+%   \end{quote}
+
+  
+
+  
+% \item[with arity \textnormal{$\langle\textit{Rec}\rangle$}] ---
+%   \{temperature\}
+  
+% $e$ : temperature$(r)$ if 
+%   \begin{quote}
+%     $r$ : \textit{AmbTempFrame} and $e=r$
+%   \end{quote}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Ind},\textit{TravelFrame}\rangle$}] ---
+%   \{take\_journey\}
+
+%   $s$ : take\_journey($a$, $e$) iff $s=e$ and $e$.traveller = $a$
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Ind},\textit{Ppty}\rangle$}] ---
+%   \{want$_P$\}
+
+%  We restrict our attention to modal systems, $\mathbb{T}$, such
+%  that
+%  \begin{quote}
+%    want$_P$($a$, $P$) $\approx_{\mathbb{T}}$ want$^\dagger$($a$,
+%    $P$(\smallrecord{\field{x}{$a$}}))
+%  \end{quote}
+  
+
+% \item[with arity
+%   \textnormal{$\langle\textit{Ind},\textit{RecType}\rangle$}]
+%   --- \{believe \textbf{New!}, want$^{\dagger}$ \textbf{New!}\}
+
+%   $e$ : believe($a$, $T$) if
+%   \begin{quote}
+%     $e$ : ltm($a$, $T'$) \\
+%     and $T'\sqsubseteq_{\leadsto}T$
+%   \end{quote}
+%   \textbf{or} if
+%   \begin{quote}
+%     $e$ :$_{\underline{\varepsilon}}$ believe($a$, $T_1$)\\
+%     $e'$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$)\\
+%     and $T_1$\fbox{\d{$\wedge$}}$T_2 \sqsubseteq_{\leadsto}T$
+%   \end{quote}
+
+%   \bigskip
+
+%   $e$ : want$^{\dagger}$($a$, $T$) if for some $T'$\\
+%   \hspace*{2em} $e$ : des($a$, $T'$) \\
+%   \hspace*{2em} and $T'\sqsubseteq_{\leadsto}T$
+
+%   \textbf{or} if for some $T_1$ and $T_2$\\
+%   \hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ want$^{\dagger}$($a$, $T_1$)\\
+%   \hspace*{2em} $e$ :$_{\underline{\varepsilon}}$ pov($T_2$, $T_1$) \\
+%   \hspace*{2em} and $T_1$\fbox{\d{$\wedge$}}$T_2
+%   \sqsubseteq_{\leadsto}T$
+  
+% \end{description}
+
+% \item[Frame types] \mbox{}
+
+%   \begin{description}
+
+    
+%   \item[\textnormal{\textit{DogFrame}}] ---
+%     \record{
+%       \tfield{x}{\textit{Ind}}\\
+%       \tfield{e}{dog(x)}\\
+%       \tfield{age}{\textit{Real}}\\
+%       \tfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+                    
+%   \item[\textnormal{\textit{TravelFrame}}] ---
+%     \record{
+%       \tfield{traveller}{\textit{Ind}}\\
+%       \tfield{source}{\textit{Loc}}\\
+%       \tfield{goal}{\textit{Loc}}}
+
+    
+%   \item[\textnormal{\textit{PassengerFrame}}] ---
+%     \record{\tfield{x}{\textit{Ind}}\\
+%               \tfield{e}{passenger(x)}\\
+%               \tfield{journey}{\textit{TravelFrame}}\\
+%               \tfield{c$_{\mathrm{travel}}$}{take\_journey(x, journey)}}
+
+
+%           \end{description}
+
+          
+        
+  
+  
+
+% \end{description}
+
+% \subsubsection{Grammar} 
+
+% \begin{description}
+
+
+
+% \item[Lexical sign types] \mbox{}
+
+% \begin{tabbing}
+%     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
+%     \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
+%     \> Lex$_{\mathrm{Pron}}$(``he''), \\
+%     \> Lex$_{\mathrm{numeral}}$(``nine'', 9), \\
+%     \> Lex$_{\mathrm{numeral}}$(``ninety'', 90), \\ 
+%     \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+%     \> Lex$_{\mathrm{Universal}}$(``every''), \\
+% \> Lex$_{\mathrm{DefArt}}$(``the''),\\
+% \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer),\\
+% \> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor), \\
+% \> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$), \\
+% \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
+% \textit{DogFrame}),\\
+% \> Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) ($=\Sigma_{\text{``passenger''}}$), \\
+% \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
+% \textit{PassengerFrame}), \\
+% \> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
+% temperature) (= $\Sigma_{\text{``temperature''}}$), \\
+% \> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
+% \textit{AmbTempFrame}),\\
+% \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
+% \> Lex$_{\mathrm{IntransVerb}}$(``run'', \textit{Rec}, run), \\
+% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
+% rise), \\
+% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
+% rise), \\
+% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
+% rise), \\
+% \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
+% \> Lex$_{\mathrm{TransVerb}}$(``find'', \textit{Rec}, find)
+% \textbf{New!}, \\
+% \> Lex$_{\mathrm{TransVerb}}$(``seek'', \textit{Rec}, seek)
+% \textbf{New!}, \\
+% \> Lex$_{\mathrm{TransVerb}}$(``worship'', \textit{Rec}, worship) \textbf{New!}, \\
+% \> Lex$_{\mathrm{be}_{\text{ID}}}$(``is''), \\
+% \> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is''), \\
+% \> Lex(``ok'', \textit{S}),  \\
+% \> Lex(``aha'', \textit{S})  \}
+% \end{tabbing}
+
+% \item[Constituent structure rule components] \mbox{} 
+%   \begin{description}
+
+%     \item[\textnormal{CnstrIsA}] \mbox{}
+
+%   $\lambda
+% u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+%                                                                     \hspace*{5em}$^{\frown}$
+% \textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
+% }}}. \\
+% \hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
+
+%   \end{description}
+  
+
+
+% \item[Constituent structure rules] \mbox{}
+  
+%   \begin{tabbing}
+%     \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
+%     \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+%     \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{PPpty}):\textit{PQuant},\\
+%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
+%     \d{\d{$\wedge$}} CnstrIsA, \\
+%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
+%     \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
+
+%   \end{tabbing}
+
+% \end{description}
+
 
 \section{Conclusion}
 
