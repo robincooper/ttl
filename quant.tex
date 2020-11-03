@@ -600,15 +600,13 @@ $\mathfrak{T}(P)$. We introduce this type as in \nexteg{}.
    
 \end{ex}
 
-@@
-
 There is a different route to a type with the same witnesses as
 $\mathfrak{T}(P)$.  We have previously defined $\downP{P}$ as the
 set of objects which have the property $P$, as in
 Chapter~\ref{ch:commonnouns}, p.~\pageref{pg:property-extension-rev}.  For
 any set, $X$, we can define a type whose witnesses are exactly the
 members of $X$.  We will represent this type as $\mathfrak{T}(X)$ and
-introduce it as in \nexteg{}.
+introduce it as in \nexteg{} (repeated in Appendix~\ref{app:settypes}.
 \begin{ex} 
 \begin{subex} 
  
@@ -866,6 +864,9 @@ $X:\text{few}_p^{\text{w}}(P)$ iff
  
 \end{enumerate}  
 \end{ex}
+
+@@
+
 The quantifier relations corresponding to \textit{a few} use the same
 thresholds as those corresponding to \textit{few} but in the case of
 \textit{a few} the size of the witness set and the proportion of the
@@ -6736,6 +6737,140 @@ $\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
   If $P$ : \textit{Ppty} and $P$ is pure, then $\mathfrak{T}(P)$ : \textit{Type}.
 
   $a:\mathfrak{T}(P)$ iff $\mathfrak{P}(P)\{a\}$ is witnessed.
+  
+\item[\textnormal{exist$^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then exist$^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{exist}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|=1$ 
+ 
+\end{enumerate}
+
+\item[\textnormal{exist$_{\text{pl}}^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then exist$_{\text{pl}}^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{exist}_{\text{pl}}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\geq 2$ 
+ 
+\end{enumerate}
+
+\item[\textnormal{no$^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then no$^{\text{w}}$($P$) : \textit{Type}.
+
+  $X:\text{no}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|=0$
+\end{enumerate}
+equivalently,
+\begin{quote}
+  $X:\text{no}^{\text{w}}(P)$ iff $X=\emptyset$
+\end{quote}
+
+\item[\textnormal{every$^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then every$^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{every}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|=|\down{\mathfrak{T}(P)}|$ 
+ 
+\end{enumerate}
+equivalently,
+\begin{quote}
+  $X:\text{every}^{\text{w}}(P)$ iff $X=\down{\mathfrak{T}(P)}$
+\end{quote}
+\item[\textnormal{most$^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then most$^{\text{w}}$($P$) : \textit{Type}.
+
+  $X:\text{most}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$, where $.5<\theta_{\text{most}}(P)<1$ 
+ 
+\end{enumerate}
+
+\item[\textnormal{many$_a^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then many$_a^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{many}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\geq\theta_{\text{many}_a}(P)$, where
+  $\theta_{\text{many}_a}(P)$ is a natural number, $i$, such that $i>2$.
+ 
+\end{enumerate}
+
+\item[\textnormal{many$_p^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then many$_p^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{many}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$, where $0<\theta_{\text{many}_p}(P)<1$ 
+ 
+\end{enumerate}
+
+\item[\textnormal{few$_a^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then few$_a^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\leq\theta_{\text{few}_a}(P)$, where
+  $\theta_{\text{few}_a}(P)$ is a natural number, $i$, such that $i>2$
+ 
+\end{enumerate}
+
+\item[\textnormal{few$_p^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then few$_p^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$, where  $0<\theta_{\text{few}_p}(P)<1$
+ 
+\end{enumerate}  
+
+
   
 \end{description}
         
