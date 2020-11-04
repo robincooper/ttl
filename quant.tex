@@ -865,8 +865,6 @@ $X:\text{few}_p^{\text{w}}(P)$ iff
 \end{enumerate}  
 \end{ex}
 
-@@
-
 The quantifier relations corresponding to \textit{a few} use the same
 thresholds as those corresponding to \textit{few} but in the case of
 \textit{a few} the size of the witness set and the proportion of the
@@ -962,7 +960,7 @@ reliability($p_{\mathfrak{J}}(T_1\|T_2)$) = ln min($|\down{T_1}_{\mathfrak{J}}|,
 \end{ex} 
 This could still involve an agent in a serious amount of counting
 which might be unintuitive from a psychological point of view. From a
-computational point of view it would be straghtforward enough to keep
+computational point of view it would be straightforward enough to keep
 track of how many objects of each type have already been judged and to
 increment these numbers when a new object of the type is encountered.
 However, we do not seem to be aware of how many objects of a given
@@ -1227,7 +1225,7 @@ $X:\text{many}_p^{\text{w}}(P)$ iff
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item
-  $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq\theta_{\text{many}_p}(P)$ (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$) 
+  $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{many}_p}(P)$ (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$) 
  
 \end{enumerate}  
 \end{ex}     
@@ -1260,7 +1258,7 @@ $X:\text{few}_p^{\text{w}}(P)$ iff
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\leq\theta_{\text{few}_p}(P)$
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\theta_{\text{few}_p}(P)$
   (corresponds to $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$) 
  
 \end{enumerate}  
@@ -1288,7 +1286,7 @@ $X:\text{a\_few}_p^{\text{w}}(P)$ iff
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P)\geq\theta_{\text{few}_p}(P)$
+\item $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{few}_p}(P)$
   (corresponds to $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$) 
  
 \end{enumerate}  
@@ -1393,7 +1391,10 @@ $s:\text{exist}(P,Q)$ iff $s$ :
   \record{\tfield{x}{$\mathfrak{T}(P)$}\\
         \tfield{e}{$\mathfrak{P}(Q)$\{x\}}}
 \label{ex:existPQ-part}
-\end{ex} 
+\end{ex}
+
+@@
+
 Apart from its intuitive simplicity and correspondence to the
 classical DRT treatment of indefinites as well as to the use of
 $\Sigma$-types to interpret indefinites in type theory the particular
@@ -6748,7 +6749,9 @@ $\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $|X|=1$ 
+\item $|X|=1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=\frac{1}{|\down{\mathfrak{T}(P)}|}$)
  
 \end{enumerate}
 
@@ -6762,7 +6765,9 @@ $\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $|X|\geq 2$ 
+\item $|X|\geq 2$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{2}{|\down{\mathfrak{T}(P)}|}$)
  
 \end{enumerate}
 
@@ -6776,8 +6781,11 @@ $\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|=0$
+
+
+(equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=0$)
 \end{enumerate}
-equivalently,
+  equivalently,
 \begin{quote}
   $X:\text{no}^{\text{w}}(P)$ iff $X=\emptyset$
 \end{quote}
@@ -6792,13 +6800,17 @@ equivalently,
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $|X|=|\down{\mathfrak{T}(P)}|$ 
+\item $|X|=|\down{\mathfrak{T}(P)}|$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=1$)
  
 \end{enumerate}
 equivalently,
 \begin{quote}
   $X:\text{every}^{\text{w}}(P)$ iff $X=\down{\mathfrak{T}(P)}$
 \end{quote}
+
+
 \item[\textnormal{most$^{\text{w}}$($P$)} New!] \mbox{}
 
   If $P$ : \textit{Ppty}, then most$^{\text{w}}$($P$) : \textit{Type}.
@@ -6808,7 +6820,10 @@ equivalently,
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$, where $.5<\theta_{\text{most}}(P)<1$ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$, where
+  $.5<\theta_{\text{most}}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{most}}(P)$)
  
 \end{enumerate}
 
@@ -6823,7 +6838,10 @@ equivalently,
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
 \item $|X|\geq\theta_{\text{many}_a}(P)$, where
-  $\theta_{\text{many}_a}(P)$ is a natural number, $i$, such that $i>2$.
+  $\theta_{\text{many}_a}(P)$ is a natural number, $i$, such that
+  $i>2$.
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{many}_a}(P)}{[\down{\mathfrak{T}(P)}]}$)
  
 \end{enumerate}
 
@@ -6837,7 +6855,10 @@ equivalently,
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$, where $0<\theta_{\text{many}_p}(P)<1$ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$, where
+  $0<\theta_{\text{many}_p}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{many}_p}(P)$)
  
 \end{enumerate}
 
@@ -6853,6 +6874,8 @@ equivalently,
  
 \item $|X|\leq\theta_{\text{few}_a}(P)$, where
   $\theta_{\text{few}_a}(P)$ is a natural number, $i$, such that $i>2$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$)
  
 \end{enumerate}
 
@@ -6866,10 +6889,46 @@ equivalently,
  
 \item $X:\mathrm{set}(\mathfrak{T}(P))$ 
  
-\item $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$, where  $0<\theta_{\text{few}_p}(P)<1$
+\item $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$, where
+  $0<\theta_{\text{few}_p}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\theta_{\text{few}_p}(P)$)
  
 \end{enumerate}  
 
+\item[\textnormal{a\_few$_a^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then a\_few$_a^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{a\_few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\geq\theta_{\text{few}_a}(P)$, where
+  $\theta_{\text{few}_a}(P)$ is a natural number, $i$, such that $i>2$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$)
+ 
+\end{enumerate}
+
+\item[\textnormal{a\_few$_p^{\text{w}}$($P$)} New!] \mbox{}
+
+  If $P$ : \textit{Ppty}, then a\_few$_p^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{a\_few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$, where
+  $0<\theta_{\text{few}_p}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{few}_p}(P)$)
+ 
+\end{enumerate}  
 
   
 \end{description}
@@ -7048,207 +7107,226 @@ r$:\textit{LocRiseEventCntxt} .\\
 
 \end{description}
 
-   \subsubsection{Predicates} (as in Chapter~\ref{ch:intensional})
+   \subsubsection{Predicates} 
 
-% \begin{description}
+\begin{description}
 
-%  \item[with arity \textnormal{$\langle$\textit{Phon},
-%     \textit{Loc}$\rangle$}] \mbox{}
+ \item[with arity \textnormal{$\langle$\textit{Phon},
+    \textit{Loc}$\rangle$}] \mbox{}
   
-%     \begin{description}
+    \begin{description}
 
-%     \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
-%       at $l$ in $e$
+    \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
+      at $l$ in $e$
 
-%     \end{description}
+    \end{description}
     
-%   \item[with arity \textnormal{$\langle$\textit{Phon},
-%       \textit{Ind}$\rangle$}] \mbox{}
+  \item[with arity \textnormal{$\langle$\textit{Phon},
+      \textit{Ind}$\rangle$}] \mbox{}
 
-%     \begin{description}
+    \begin{description}
 
-%     \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
-%         is the speaker of $u$ in $e$
+    \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
+        is the speaker of $u$ in $e$
 
-%     \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
-%         $u$ is the audience of $u$ in $e$
+    \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
+        $u$ is the audience of $u$ in $e$
 
-%       \end{description}
+      \end{description}
 
-%     \item[with arity \textnormal{$\langle\textit{Card}\rangle$}] \mbox{}
+    \item[with arity \textnormal{$\langle\textit{Card}\rangle$}] \mbox{}
 
-%   \begin{description}
+  \begin{description}
     
-%   \item[\textnormal{card}] --- $X$ : card($n$) iff for some $T$,
-%     $X:\mathrm{set}(T)$ and $|X|=n$
+  \item[\textnormal{card}] --- $X$ : card($n$) iff for some $T$,
+    $X:\mathrm{set}(T)$ and $|X|=n$
     
-%   \item[\textnormal{card\_at\_least}] --- $X$ : card\_at\_least($n$) iff for some $T$, $X:\mathrm{set}(T)$
-%     and $|X|\geq n$
+  \item[\textnormal{card\_at\_least}] --- $X$ : card\_at\_least($n$) iff for some $T$, $X:\mathrm{set}(T)$
+    and $|X|\geq n$
 
     
-%   \item[\textnormal{card\_at\_most}] --- $X$ : card\_at\_most($n$) iff for some $T$, $X:\mathrm{set}(T)$
-%     and $|X|\leq n$
+  \item[\textnormal{card\_at\_most}] --- $X$ : card\_at\_most($n$) iff for some $T$, $X:\mathrm{set}(T)$
+    and $|X|\leq n$
 
-%   \end{description}
+  \end{description}
       
-%   \item[with arity \textnormal{$\langle$\textit{Ppty}$\rangle$}]
-%     \mbox{}
+  \item[with arity \textnormal{$\langle$\textit{Ppty}$\rangle$}]
+    \mbox{}
 
-%     \begin{description}
+    \begin{description}
       
-%     \item[\textnormal{unique}] --- $s:\textrm{unique}(P)$ iff
-%       $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$
+    \item[\textnormal{unique}] --- $s:\textrm{unique}(P)$ iff
+      $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$
 
-%     \end{description}
+    \end{description}
 
-%     \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+    \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
 
-%   \begin{description}
+  \begin{description}
     
-%   \item[\textnormal{exist}] ---  $s$ : exist($P$,$Q$) iff
-%      $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
-%     % $s$ : exist($P$,$Q$) iff
-%     % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
-    
-%   \item[\textnormal{every} New!] --- $s$ : every($P$,$Q$) iff
-%     $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
+  \item[\textnormal{exist} Revised!] \mbox{}
+    \begin{description}
+      
+    \item[general witness condition] \mbox{}
 
-%   \end{description}
-
-  
-% \item[with arity
-%   \textnormal{$\langle\textit{PlPpty},\textit{PlPpty}\rangle$}] \mbox{}
-  
-% \begin{description}
-    
-% \item[\textnormal{exactly\_$n$} New!] --- for $n$ a natural number,
-
-%   $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
-
-%     % $s$ : exactly\_$n$($P$, $Q$) iff
-%     %       $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
-%     %     \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
-%     %   \not=\emptyset$
+      $s:\text{exist}(P,Q)$ iff $s$ :
+      \record{\tfield{X}{exist$^w(P)$}\\
+        \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
 
       
-%     \item[\textnormal{at\_least\_$n$} New!] --- for $n$ a natural
-%       number,
+    \item[particular witness condition] \mbox{}
 
-%       $s$ : at\_least\_$n$($P$, $Q$) iff
-%           $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
-%         \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
-%       \not=\emptyset$
+      $s:\text{exist}(P,Q)$ iff $s$ :
+  \record{\tfield{x}{$\mathfrak{T}(P)$}\\
+        \tfield{e}{$\mathfrak{P}(Q)$\{x\}}}
 
-%       % $s$ : at\_least\_$n$($P$, $Q$) iff
-%       %     $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
-%       %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
-%       % \not=\emptyset$
+    \end{description}
+
+    % $s$ : exist($P$,$Q$) iff
+     % $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
+    % $s$ : exist($P$,$Q$) iff
+    % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+    
+  \item[\textnormal{every}] --- $s$ : every($P$,$Q$) iff
+    $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
+
+  \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{PlPpty},\textit{PlPpty}\rangle$}] \mbox{}
+  
+\begin{description}
+    
+\item[\textnormal{exactly\_$n$}] --- for $n$ a natural number,
+
+  $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
+
+    % $s$ : exactly\_$n$($P$, $Q$) iff
+    %       $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+    %     \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+    %   \not=\emptyset$
 
       
-%     \item[\textnormal{at\_most\_$n$} New!] --- for $n$ a natural
-%       number,
+    \item[\textnormal{at\_least\_$n$}] --- for $n$ a natural
+      number,
 
-%       $s$ : at\_most\_$n$($P$, $Q$) iff
-%           $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
-%         \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+      $s$ : at\_least\_$n$($P$, $Q$) iff
+          $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
+        \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+      \not=\emptyset$
 
-%       % $s$ : at\_most\_$n$($P$, $Q$) iff
-%       %     $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
-%       %   \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+      % $s$ : at\_least\_$n$($P$, $Q$) iff
+      %     $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+      % \not=\emptyset$
 
-% \end{description}    
+      
+    \item[\textnormal{at\_most\_$n$}] --- for $n$ a natural
+      number,
+
+      $s$ : at\_most\_$n$($P$, $Q$) iff
+          $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
+        \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+      % $s$ : at\_most\_$n$($P$, $Q$) iff
+      %     $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+      %   \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+\end{description}    
 
   
-% \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
-%   \mbox{}
+\item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
+  \mbox{}
 
-%   \begin{description}
+  \begin{description}
     
-%   \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
+  \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
 
-%   \end{description}
+  \end{description}
 
   
-% \item[with arity
-%   \textnormal{$\langle\textit{Loc},\textit{Real}\rangle$}] \mbox{}
-%   \begin{description}
+\item[with arity
+  \textnormal{$\langle\textit{Loc},\textit{Real}\rangle$}] \mbox{}
+  \begin{description}
     
-%   \item[\textnormal{temp}] --- $e:\text{temp}(l,n)$ iff $n$ is
-%     the temperature at $l$ in $e$.
-
-    
-  
-
-%   \end{description}
-  
-% \item[with arity
-%   \textnormal{$\langle\textit{Real},\textit{Real}\rangle$}] \mbox{}
-
-%   \begin{description}
-    
-%   \item[\textnormal{less-than}] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
-
-%   \end{description}
-
-% \item[with arity
-%   \textnormal{$\langle\textit{Type},\textit{Type},\textit{Topos}\rangle$}]
-%   \mbox{}
-
-%   \begin{description}
+  \item[\textnormal{temp}] --- $e:\text{temp}(l,n)$ iff $n$ is
+    the temperature at $l$ in $e$.
 
     
-%   \item[\textnormal{nec} New!] ---
+  
 
-%     If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
-%     \begin{quote}
-%       $s:_p\mathrm{nec}(T,B,\tau)$ iff $s:_pB$, 
-%       $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
-%       $\tau(s)\sqsubseteq_{\mathbb{T}}T$
-%     \end{quote}
+  \end{description}
+  
+\item[with arity
+  \textnormal{$\langle\textit{Real},\textit{Real}\rangle$}] \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{less-than}] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
+
+  \end{description}
+
+\item[with arity
+  \textnormal{$\langle\textit{Type},\textit{Type},\textit{Topos}\rangle$}]
+  \mbox{}
+
+  \begin{description}
 
     
-%   \item[\textnormal{poss} New!] ---
+  \item[\textnormal{nec}] ---
 
-%     If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
-%     \begin{quote}
-%       $s:_p\mathrm{poss}(T,B,\tau)$ iff $s:_pB$, 
-%       $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
-%       $\tau(s)\top_{\mathbb{T}}T$
-%     \end{quote}
-
-%   \end{description}
-
-  
-% \item[with arity
-%   \textnormal{$\langle\textit{RecType},\textit{RecType}\rangle$}] \mbox{}
-
-%   \begin{description}
-    
-%   \item[\textnormal{pov} New!] --- $e:\text{pov}(T_1,T_2)$ iff $T_2$
-%     is a point of view on $T_1$ in $e$.
-
-%     $e:\text{pov}(T_1,T_2)$ implies
-%     $\mathrm{labels}(T_2)\subseteq\mathrm{labels(T_1)}$
-
-%   \end{description}
-
-  
-% \item[with arity
-%   \textnormal{$\langle\textit{Ind},\textit{RecType}\rangle$}] \mbox{}
-
-%   \begin{description}
-    
-%   \item[\textnormal{ltm} New!] --- $e:\text{ltm}(a,T)$ iff $T$ is $a$'s
-%     long term memory in $e$.
-    
-%   \item[\textnormal{rbelieve} New!] --- $e:\text{rbelieve}(a,T)$ iff
-%     $T$ is $a$'s religious beliefs in $e$.
+    If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
+    \begin{quote}
+      $s:_p\mathrm{nec}(T,B,\tau)$ iff $s:_pB$, 
+      $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+      $\tau(s)\sqsubseteq_{\mathbb{T}}T$
+    \end{quote}
 
     
-%   \item[\textnormal{des} New!] --- $e:\text{des}(a,T)$ iff $T$ is
-%     $a$'s desires in $e$.
+  \item[\textnormal{poss}] ---
 
-%   \end{description}
+    If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
+    \begin{quote}
+      $s:_p\mathrm{poss}(T,B,\tau)$ iff $s:_pB$, 
+      $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+      $\tau(s)\top_{\mathbb{T}}T$
+    \end{quote}
+
+  \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{RecType},\textit{RecType}\rangle$}] \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{pov}
+    ] --- $e:\text{pov}(T_1,T_2)$ iff $T_2$
+    is a point of view on $T_1$ in $e$.
+
+    $e:\text{pov}(T_1,T_2)$ implies
+    $\mathrm{labels}(T_2)\subseteq\mathrm{labels(T_1)}$
+
+  \end{description}
+
+  
+\item[with arity
+  \textnormal{$\langle\textit{Ind},\textit{RecType}\rangle$}] \mbox{}
+
+  \begin{description}
+    
+  \item[\textnormal{ltm}] --- $e:\text{ltm}(a,T)$ iff $T$ is $a$'s
+    long term memory in $e$.
+    
+  \item[\textnormal{rbelieve}] --- $e:\text{rbelieve}(a,T)$ iff
+    $T$ is $a$'s religious beliefs in $e$.
+
+    
+  \item[\textnormal{des}] --- $e:\text{des}(a,T)$ iff $T$ is
+    $a$'s desires in $e$.
+
+  \end{description}
   
   
 
@@ -7257,7 +7335,7 @@ r$:\textit{LocRiseEventCntxt} .\\
   
 
 
-% \end{description}
+\end{description}
 
 \subsubsection{Scales} (as in Chapter~\ref{ch:commonnouns})
 
