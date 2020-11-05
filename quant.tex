@@ -1393,8 +1393,6 @@ $s:\text{exist}(P,Q)$ iff $s$ :
 \label{ex:existPQ-part}
 \end{ex}
 
-@@
-
 Apart from its intuitive simplicity and correspondence to the
 classical DRT treatment of indefinites as well as to the use of
 $\Sigma$-types to interpret indefinites in type theory the particular
@@ -2184,8 +2182,7 @@ This suggests that we could potentially have the anaphora in
 \label{sec:long-distance}
 
 Let us consider how to derive the content of \textit{who Sam hugged}
-as a relative clause.  We use \textbf{hug}$_V$ to represent the
-foreground of the content of \textit{hug} as a transitive verb,
+as a relative clause.  We use \textbf{hug}$_V$ to represent the content of \textit{hug} as a transitive verb,
 characterized as in \nexteg{}.
 
 \begin{ex} 
@@ -2211,7 +2208,10 @@ gaps.  Thus we will redefine the type
     \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
-\end{ex}   
+\end{ex}
+
+@@
+
 We will represent this content as
 \textbf{hug}$_{\mathit{VP}}$ and characterize it in terms of
 \textbf{hug}$_V$ as in \nexteg{a} which is identical with \nexteg{b}.
@@ -6670,8 +6670,9 @@ $\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
 $r:\textit{Rec}$ and
 $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
 
-\item[\textnormal{\textit{Cntxt}}] --- \record{
-      \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+\item[\textnormal{\textit{Cntxt}} Revised!] --- \record{
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
       \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
 
         \item[\textnormal{\textit{CntxtType}}] --- a basic type
@@ -7186,10 +7187,164 @@ r$:\textit{LocRiseEventCntxt} .\\
      % $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
     % $s$ : exist($P$,$Q$) iff
     % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
-    
-  \item[\textnormal{every}] --- $s$ : every($P$,$Q$) iff
-    $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
 
+    
+  \item[\textnormal{exist$_\text{pl}$} New!] \mbox{}
+
+    \begin{description}
+      
+    \item[general witness condition] \mbox{}
+
+      $s:\text{exist}_{\text{pl}}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{exist$_{\text{pl}}^w(P)$}\\
+    \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+\end{description}
+
+\item[\textnormal{no} New!] \mbox{}
+
+  \begin{description}
+    
+  \item[general witness condition] \mbox{}
+
+    $s:\text{no}(P,Q)$ iff $s$ :
+    \record{\tfield{X}{$\text{no}^w(P)$}\\
+      \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+        \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+    
+  \item[particular witness condition] \mbox{}
+
+    $s:\text{no}(P,Q)$ iff $s$ :
+    \record{\tfield{X}{$\text{every}^w(P)$}\\
+      \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}}
+
+  \end{description}
+
+        
+    
+\item[\textnormal{every} Revised!] \mbox{}
+  % $s$ : every($P$,$Q$) iff
+  % $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
+
+  \begin{description}
+
+    
+  \item[general witness condition] \mbox{}
+
+    $s:\text{every}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{every}^w(P)$}\\
+          \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+      \end{description}
+
+      
+    \item[\textnormal{most} New!] \mbox{}
+
+      \begin{description}
+        
+      \item[general witness condition] \mbox{}
+
+        $s:\text{most}(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{most}^w(P)$}\\
+    \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+\end{description}
+
+\item[\textnormal{many$_a$} New!] \mbox{}
+
+  \begin{description}
+    
+  \item[general witness condition] \mbox{}
+
+    $s:\text{many}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{many}_a^w(P)$}\\
+    \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+\end{description}
+
+\item[\textnormal{many$_p$} New!] \mbox{}
+
+  \begin{description}
+
+    
+  \item[general witness condition] \mbox{}
+
+    $s:\text{many}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{many}_p^w(P)$}\\
+    \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+\end{description}
+
+\item[\textnormal{few$_a$} New!] \mbox{}
+
+  \begin{description}
+
+    
+  \item[general witness condition] \mbox{}
+
+    $s:\text{few}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{few}_a^w(P)$}\\
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+            \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+        
+      \item[particular witness condition] \mbox{}
+
+        $s:\text{few}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\overline{\text{few}_a^w(P)}$}\\
+    \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}}
+  
+      \end{description}
+
+      
+    \item[\textnormal{few$_p$} New!] \mbox{}
+
+      \begin{description}
+        
+      \item[general witness condition] \mbox{}
+
+        $s:\text{few}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{few}_p^w(P)$}\\
+          \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+            \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+
+        
+      \item[particular witness condition] \mbox{}
+
+        $s:\text{few}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\overline{\text{few}_p^w(P)}$}\\
+          \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}}
+
+      \end{description}
+
+      
+    \item[\textnormal{a\_few$_a$} New!] \mbox{}
+
+      \begin{description}
+
+
+       
+      \item[general witness condition] \mbox{}
+
+        $s:\text{a\_few}_a(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{a\_few}_a^w(P)$}\\
+    \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+\end{description}
+
+\item[\textnormal{a\_few$_p$} New!] \mbox{}
+
+  \begin{description}
+    
+  \item[general witness condition] \mbox{}
+
+    $s:\text{a\_few}_p(P,Q)$ iff $s$ :
+  \record{\tfield{X}{$\text{a\_few}_p^w(P)$}\\
+    \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+\end{description}
+
+
+      
   \end{description}
 
   
