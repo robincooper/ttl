@@ -22,3 +22,5 @@ matching vs relabelling, believe vs know (Austinian propositions)]
 
 Need to fix definition of T^+ so that it uses concatenation like a
 real Kleene-+ (already fixed in pyttr).
+
+Chap 4--7 in resource summaries Change all ``record type (for context)'' to ``context type''?
