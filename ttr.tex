@@ -422,7 +422,7 @@ label.
 If $T$ is a type and $X:\mathrm{set}(T)$, then $\mathfrak{T}(X)$ is a
 type.  $a:\mathfrak{T}(X)$ iff $a\in X$. (Chapter~\ref{ch:quant},
 p.~\pageref{ex:mathfrakT})\todo{Need to expand this to a system of
-  comples types with set types and membership types}
+  complex types with set types and membership types}
 
 % We also introduce a special kind of set type known as a plurality
 % type.  The idea here is that a plurality is a set that does not contain any two
@@ -1428,6 +1428,43 @@ performed by $\eta$.  This state of affairs will be prevented by
 requiring that $\eta$ is limited to $r$, for example by removing `x
 $\leadsto$ z' from $\eta$.  Only paths changed by $\eta$ will be
 changed back by $\eta^-$ and our claim will hold true.
+
+\paragraph{Using records as assignments}\mbox{}
+
+From Chapter~\ref{ch:quant}, p.~\pageref{ex:vary-assgnmnt}:
+
+If $r$ is a record, $\pi$ is $\ell_0.\ell_1.\ldots.\ell_n$ where
+    $\ell_0,\ell_1,\ldots,\ell_n$ are labels and $v$ is an object of some
+    type, then
+    \begin{quote}
+      if $\pi\not\in\mathrm{paths}(r)$, then $r[\pi=v]$ is the
+      smallest record, $r'$, such that
+      \begin{enumerate} 
+        
+      \item $\pi\in\mathrm{paths}(r')$ 
+        
+      \item $r'.\pi=v$
+        
+      \item for any $\pi'\in\mathrm{paths}(r)$,
+        $\pi'\in\mathrm{paths}(r')$ and $r'.\pi'=r.\pi'$
+        
+      \end{enumerate} 
+
+      if $\pi\in\mathrm{paths}(r)$, then $r[\pi=v]$ is the
+      smallest record, $r'$, such that
+      \begin{enumerate} 
+        
+      \item  $\pi\in\mathrm{paths}(r')$ and $r'.\pi=v$
+        
+      \item  for any $\pi'\in(\mathrm{paths}(r)-\{\pi''\mid
+        \pi''\leq\pi\})$, $\pi'\in\mathrm{paths}(r')$ and $r'.\pi'=r.\pi'$
+        
+      \end{enumerate}
+    \end{quote}
+
+    If $r_1$ is a record and $r_2$ is a record such
+$\mathrm{tpaths}(r_2)=\{\pi_1,\ldots,\pi_n\}$, then $r_1[r_2]$ is
+$r_1[\pi_1=r_2.\pi_1]\ldots[\pi_n=r_2.\pi_n]$
 
 
 \subsection{Record types}
@@ -3158,7 +3195,101 @@ then
 % If fields $f_1$ and $f_2$ have the same label, that is
 % $f_1=\langle\ell, T_1\rangle$ and $f_2=\langle\ell, T_2\rangle$ for
 % some $\ell$, $T_1$ and $T_2$, then the result of \textit{merging} the two
-% \textit{fields} is $\langle\ell,T_1$\d{$\wedge$}$T_2\rangle$. 
+% \textit{fields} is $\langle\ell,T_1$\d{$\wedge$}$T_2\rangle$.
+
+\section{Unique identifier notation for record types}
+\label{app:unique-id}
+
+The unique identifier notation for a type, $T$, can be obtained from the official
+notation for $T$ by carrying out in order the following manipulations
+(Chapter~\ref{ch:infex}, p.~\pageref{ex:official-to-unique-id}):
+\begin{enumerate} 
+ 
+\item Add a unique identifier \fbox{$i$} (where $i$ is a natural
+  number) to the last label occurrence in any path, $\pi$, which is referenced
+  in a dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, somewhere in $T$. 
+
+\item Replace $\pi$ in any dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, with the unique identifier
+  associated with the final label occurrence in $\pi$.
+ 
+\item Replace any pair in a dependent field of the form 
+\begin{quote}
+$\langle\lambda v_1:T_1\ldots\lambda v_n:T_n\
+.\ \varphi\dep{v_1,\ldots,v_n}, \langle \text{\fbox{$i_1$}},\ldots,\text{\fbox{$i_n$}}\rangle\rangle$
+\end{quote}
+with
+\begin{quote}
+$\varphi\dep{\text{\fbox{$i_1$}}:T_1,\ldots,\text{\fbox{$i_n$}}:T_n}$
+\end{quote}
+ 
+\end{enumerate}
+
+We also show how to convert back from unique identifier
+notation for a type, $T$, to official notation.   We can do this by
+carrying out the following manipulations (Chapter~\ref{ch:infex},
+p.~\pageref{ex:unique-id-to-official}):
+\begin{enumerate} 
+ 
+\item For each occurrence of \fbox{$i$} in a dependent field labelled
+  $\ell_d$ (the label for the dependent field) for some
+  natural number, $i$, locate the smallest record structure, $\Delta$, in $T$
+  which contains a path, $\pi_d$, to $\ell_d$ and a path $\pi_a$ to a
+  label $\ell_{\text{\fbox{i}}}$ (the label for the addressed field)
+ 
+\item Let $\ell$ be the first label on $\pi_d$. If $\Delta.\ell$ is an
+  ordered pair $\langle \lambda v_j\!:\!T_j\ .\ \varphi\dep{\text{\fbox{$i$}}\!:\!T_i},
+  \langle\pi_1,\ldots,\pi_n\rangle\rangle$, then replace $\Delta.\ell$
+  with $\langle \lambda v_i\!:\!T_i\ .\ \lambda v_j\!:\!T_j\ .\
+  \varphi[\text{\fbox{$i$}}\!:\!T_i\leadsto v_i],
+  \langle\pi_1,\ldots,\pi_n,\pi_a\rangle\rangle$.  Otherwise, if
+  $\Delta.\ell$ is $\varphi\dep{\text{\fbox{$i$}}\!:\!T_i}$, replace
+  $\Delta.\ell$ with $\langle \lambda v_i\!:\!T_i\ .\
+  \varphi[\text{\fbox{$i$}}\!:\!T_i\leadsto v_i],
+  \langle\pi_a\rangle\rangle$
+
+\item For any number $i$, remove the subscript \fbox{$i$} on any label
+  on which it occurs.
+ 
+\end{enumerate}
+
+\section{Dependency in record types and record type generalization}
+\label{app:dep-rectype}
+
+If $T$ is a record type, $\pi_1\in\mathrm{paths}(T)$ and
+$\pi_2\in\mathrm{tpaths}(T)$, then $\pi_2$ \textit{depends on} $\pi_1$
+(Chapter~\ref{ch:quant}, p.~\pageref{ex:path-dep})
+iff, in unique identifier notation, $\pi_1$ is indexed with \fbox{$i$}
+and the representation of $T.\pi_2$ contains \fbox{$i$}, for some
+natural number $i$.
+
+If $T$ is a record type and $\pi\in\mathrm{paths}(T)$ then \textit{the
+  dependency family of $\pi$ in $T$} (Chapter~\ref{ch:quant}, p.~\pageref{ex:path-dep-fam}),
+$\mathrm{paths}_\pi(T)$, is that subset, $\Pi$, of $\mathrm{paths}(T)$
+such that
+\begin{enumerate} 
+ 
+\item $\pi\in\Pi$ 
+ 
+\item for any $\pi'\in\Pi$ and $\pi''\in\mathrm{tpaths}(T)$, if
+  $\pi''$ depends on $\pi'$, then $\pi''\in\Pi$
+
+\item for and $\pi'\in\Pi$ and $\pi''\in\mathrm{paths}(T)$, if $\pi'$
+  depends on $\pi''$, then $\pi''\in\Pi$
+ 
+\end{enumerate}
+
+If $T$ is a record type and $\pi\in\mathrm{paths}(T)$, then $T$
+\textit{generalized to} $\pi$ (Chapter~\ref{ch:quant}, p.~\pageref{ex:rectype-gen}), $T^\pi$, is the smallest labelled set $T'$ such
+that $\mathrm{paths}_\pi(T)\subseteq\mathrm{paths}(T')$ and for all
+$\pi'\in\mathrm{tpaths}(T')$, $T'.\pi=T.\pi$.
+
+If $T$ is a record type and $\{\pi_1,\ldots,\pi_n\}\subset\mathrm{paths}(T)$, then $T$
+\textit{generalized to} $\pi_1,\ldots,\pi_n$, $T^{\pi_1,\ldots,\pi_n}$
+(Chapter~\ref{ch:quant}, p.~\pageref{ex:rectype-gen-gen}), is the smallest labelled set $T'$ such
+that for all $\pi_i\in\{\pi_1,\ldots,\pi_n\}$, $\mathrm{paths}_{\pi_i}(T)\subseteq\mathrm{paths}(T')$ and for all
+$\pi'\in\mathrm{tpaths}(T')$, $T'.\pi=T.\pi$.
+
+
 
 \section{Using records to restrict % and specify
   record types}

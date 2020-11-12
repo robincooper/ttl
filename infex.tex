@@ -2760,18 +2760,19 @@ We will call this last notation \textit{unique identifier
 notation with some rigour because it will be useful later when we
 introduce relabelling of record types in Chapter~\ref{ch:propnames}.
 The unique identifier notation for a type, $T$, can be obtained from the official
-notation for $T$ by carrying out in order the manipulations characterized in \nexteg{}
+notation for $T$ by carrying out in order the manipulations
+characterized in \nexteg{}, repeated in Appendix~\ref{app:unique-id}.
 \begin{ex}
 \begin{enumerate} 
  
-\item adding a unique identifier \fbox{$i$} (where $i$ is a natural
-  number) to the last label occurrence in any path,$\pi$, which is referenced
+\item Add a unique identifier \fbox{$i$} (where $i$ is a natural
+  number) to the last label occurrence in any path, $\pi$, which is referenced
   in a dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, somewhere in $T$. 
 
-\item replacing $\pi$ in any dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, with the unique identifier
+\item Replace $\pi$ in any dependent field, $\langle f,\langle\ldots,\pi,\ldots\rangle\rangle$, with the unique identifier
   associated with the final label occurrence in $\pi$.
  
-\item replacing any pair in a dependent field of the form 
+\item Replace any pair in a dependent field of the form 
 \begin{quote}
 $\langle\lambda v_1:T_1\ldots\lambda v_n:T_n\
 .\ \varphi\dep{v_1,\ldots,v_n}, \langle \text{\fbox{$i_1$}},\ldots,\text{\fbox{$i_n$}}\rangle\rangle$
@@ -2782,6 +2783,7 @@ $\varphi\dep{\text{\fbox{$i_1$}}:T_1,\ldots,\text{\fbox{$i_n$}}:T_n}$
 \end{quote}
  
 \end{enumerate}
+\label{ex:official-to-unique-id}
 \end{ex}
 The final step involves a variant of $\beta$-conversion.  It is
 important to represent the type restriction associated with the unique
@@ -2799,7 +2801,10 @@ the examples we discuss). This is illustrated in (\ref{ex:unique-diac}).
 
 We also show how to convert back from unique identifier
 notation for a type, $T$, to official notation.   We can do this by
-carrying out the following in order:
+carrying out the manipulations characterized in \nexteg{} in order
+(repeated in Appendix~\ref{app:unique-id})
+
+\begin{ex}
 
 \begin{enumerate} 
  
@@ -2823,7 +2828,11 @@ carrying out the following in order:
 \item For any number $i$, remove the subscript \fbox{$i$} on any label
   on which it occurs.
  
-\end{enumerate} 
+\end{enumerate}
+
+\label{ex:unique-id-to-official}
+
+\end{ex}
   
 % \begin{enumerate} 
  
