@@ -59,6 +59,48 @@ If $X$ is a labelled set, then
 The set of \textit{total paths} in a labelled set, $X$,
 $\mathrm{tpaths}(X)$ is the set of paths, $\pi$, such that
 \mbox{$\pi\in\mathrm{paths}(X)$} and $X.\pi$ is not a labelled set.
+
+$\pi_1$ is an \textit{initial subpath} (Chapter~\ref{ch:propnames}, p.~\pageref{ex:subpath}) of $\pi_2$,
+    $\pi_1\leq\pi_2$, just in case either $\pi_1=\pi_2$ or there is
+    some $\pi$ such that $\pi_2=\pi_1.\pi$.
+
+$\pi_1$ is a \textit{proper initial subpath}
+(Chapter~\ref{ch:propnames}, p.~\pageref{ex:subpath}) of $\pi_2$,
+    $\pi_1<\pi_2$, just in case there is
+    some $\pi$ such that $\pi_2=\pi_1.\pi$.
+
+We characterize \textit{the subtraction of a path, $\pi$, from a
+  labelled set $X$}, $X\ominus\pi$,  (Chapter~\ref{ch:quant},
+  p.~\pageref{ex:subtraction-labelled-sets}) as follows: 
+
+\begin{enumerate}
+
+\item If $X$ is a labelled set, $\ell\in\mathrm{labels}(X)$ and
+  $\langle\ell,\varphi\rangle\in X$, then $X\ominus\ell$  is
+  \begin{quote}
+    $X-\{\langle\ell,\varphi\rangle\}$
+  \end{quote}
+
+\item If $X$ is a labelled set, $\langle\ell,\varphi\rangle\in X$ and
+  $\ell.\pi\in\mathrm{tpaths}(X)$, then
+  \begin{quote}
+    if $\ell.\pi$ is branching in $X$, then $X\ominus\ell.\pi$ is
+    \begin{quote}
+      $(X-\{\langle\ell,\varphi\rangle\})\cup\{\langle\ell,\varphi\ominus\pi\rangle\}$
+    \end{quote}
+    otherwise $X\ominus\ell.\pi$ is
+    \begin{quote}
+      $X-\{\langle\ell,\varphi\rangle\}$
+    \end{quote}
+  \end{quote}
+
+\end{enumerate}
+
+
+If $X$ is a labelled set and
+$\pi_1,\ldots,\pi_n\in\mathrm{tpaths}(X)$, then we write
+$X\ominus\pi_1,\ldots,\pi_n$ for $X\ominus\pi_1\ominus\ldots\ominus\pi_n$.
+
  
   
 % When we introduced complex

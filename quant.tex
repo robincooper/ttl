@@ -2753,10 +2753,70 @@ presuppositions with \textit{wh}-phrases and extract them from the
 context type for local accommodation at the point at which the
 \textit{wh}-phrase binds a gap.
 
+We can now generalize the subtraction operation, $\ominus$.  First we
+will characterize branching paths in a labelled set,  as in
+\nexteg{}.
+\begin{ex} 
+If $X$ is a labelled set and $\pi\in\mathrm{tpaths}(X)$ then $\pi$
+\textit{is branching in} $X$ iff
+\begin{enumerate} 
+ 
+\item there is some $\pi'\in\mathrm{tpaths}(X)$ such that $\pi'\not=\pi$ 
+ 
+\item there is some $\pi''$ such that $\pi''<\pi'$ and $\pi''<\pi$ 
+ 
+\end{enumerate} 
+  
+\end{ex} 
+(Recall that $\pi_1<\pi_2$ means that $\pi_1$ is a proper initial
+subpath of $\pi_2$, Chapter~\ref{ch:propnames},
+p.~\pageref{ex:subpath}.)
+
+We characterize subtraction in general for labelled sets as \nexteg{}
+(repeated in Appendix~\ref{app:sets}).
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $X$ is a labelled set, $\ell\in\mathrm{labels}(X)$ and
+  $\langle\ell,\varphi\rangle\in X$, then
+  \begin{quote}
+    $X\ominus\ell=X-\{\langle\ell,\varphi\rangle\}$
+  \end{quote}
+  
+ 
+\item If $X$ is a labelled set, $\langle\ell,\varphi\rangle\in X$ and
+  $\ell.\pi\in\mathrm{tpaths}(X)$, then
+  \begin{quote}
+    if $\ell.\pi$ is branching in $X$, then
+    \begin{quote}
+      $X\ominus\ell.\pi=(X-\{\langle\ell,\varphi\rangle\})\cup\{\langle\ell,\varphi\ominus\pi\rangle\}$
+    \end{quote}
+    otherwise
+    \begin{quote}
+      $X\ominus\ell.\pi=X-\{\langle\ell,\varphi\rangle\}$
+    \end{quote}
+  \end{quote}
+  
+ 
+\end{subex} 
+\label{ex:subtraction-labelled-sets}   
+\end{ex}
+If $X$ is a labelled set and
+$\pi_1,\ldots,\pi_n\in\mathrm{tpaths}(X)$, then we write \nexteg{a}
+for \nexteg{b}
+\begin{ex}
+  \begin{subex}
+  
+  \item $X\ominus\pi_1,\ldots,\pi_n$
+
+  
+  \item $X\ominus\pi_1\ominus\ldots\ominus\pi_n$
+  \end{subex}
+  
+\end{ex}
+
 @@
 
-We can now generalize the subtraction operation, $\ominus$, as in
-\nexteg{}.
 \begin{ex} 
   \begin{enumerate}
     
@@ -2772,37 +2832,41 @@ If $T$ is a record type, $\pi\in\mathrm{paths}(T)$ and
   \end{quote}
   
  
-\item If $T$ is $\textit{Assgnmnt}\wedge T'$ and
-  $\ell\in\mathrm{labels}(T')$, then
+\item If $T\sqsubseteq\textit{Assgnmnt}$ and
+  $\ell\in\mathrm{labels}(T)$, then
   \begin{enumerate} 
     
-  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
+  \item if $\mathrm{labels}(T)=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
     
-  \item otherwise, $T\ominus\ell=\textit{Assgnmnt}\wedge (T'-\{\langle\ell,T'.\ell\rangle\})$ 
+  \item otherwise, $T\ominus\ell= T-\{\langle\ell,\varphi\rangle\}$,
+    where $\langle\ell,\varphi\rangle\in T$ 
     
   \end{enumerate}
   
-\item If $T$ is $\textit{PropCntxt}\wedge T'$ and
-  $\ell\in\mathrm{labels}(T')$, then
+\item If $T\subseteq\textit{PropCntxt}$ and
+  $\ell\in\mathrm{labels}(T)$, then
   \begin{enumerate} 
     
-  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{PropCntxt}$
+  \item if $\mathrm{labels}(T)=\{\ell\}$, $T\ominus\ell=\textit{PropCntxt}$
     
-  \item otherwise, $T\ominus\ell=\textit{PropCntxt}\wedge(T'-\{\langle\ell,T'.\ell\rangle\})$ 
+  \item otherwise, $T\ominus\ell=T-\{\langle\ell,\varphi\rangle\})$,
+    where $\langle\ell,\varphi\in T$ 
     
   \end{enumerate} 
 
-\item If $T$ is $\textit{PropCntxt}\wedge T'$ and
+\item If $T\sqsubseteq\textit{PropCntxt}$ and
   $\ell.\pi\in\mathrm{tpaths}(T')$ then
   \begin{quote}
-    $T\ominus\ell.\pi=\textit{PropCntxt}\wedge T'$\fbox{\d{$\wedge$}}\smallrecord{
-      \smalltfield{$\ell$}{$T'.\ell\ominus\pi$}}
+    $T\ominus\ell.\pi= T$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\ell$}{$\varphi\ominus\pi$}}, where
+    $\langle\ell,\varphi\rangle\in T$
   \end{quote}
 
 \item Otherwise, if $T$ is a labelled set, then
   \begin{enumerate}
-  \item if $\ell.\pi\in\mathrm{tpaths}(T)$, $T\ominus\ell.\pi=T'$\fbox{\d{$\wedge$}}\smallrecord{
-      \smalltfield{$\ell$}{$T.\ell\ominus\pi$}}
+  \item if $\ell.\pi\in\mathrm{tpaths}(T)$ and
+    $\langle\ell,\varphi\rangle\in T$, then
+    $T\ominus\ell.\pi=(T-\{\langle\ell,\varphi\rangle\})\cup\{\langle\ell,\varphi\ominus\pi\rangle\}$
   \item otherwise, $T\ominus\pi$ is $T$
   \end{enumerate}
 
