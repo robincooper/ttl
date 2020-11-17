@@ -2655,7 +2655,7 @@ but there is no such path.
         \tfield{e}{person($\Uparrow$$\mathfrak{w}$.x$_0$)}}}}
 \label{ex:who-person}
 \end{ex} 
-The solution to this is to extend the definition of subtraction so
+The solution to this is to extend subtraction so
 that it removes not only the path referred to but also those paths
 that depend on it.  Thus the result of
 $T\ominus\mathfrak{w}.\text{x}_0$ should rather be \nexteg{}.
@@ -2722,7 +2722,9 @@ such that
 \item for and $\pi'\in\Pi$ and $\pi''\in\mathrm{paths}(T)$, if $\pi'$
   depends on $\pi''$, then $\pi''\in\Pi$
  
-\end{enumerate} 
+\end{enumerate}
+
+We use $\pi/T$ as an shorter alternative notation for $\mathrm{paths}_{\pi}(T)$.
 \label{ex:path-dep-fam}
 \end{ex}
 That is, the dependency family of $\pi$ includes $\pi$ itself,
@@ -2815,60 +2817,55 @@ for \nexteg{b}
   
 \end{ex}
 
-@@
-
-\begin{ex} 
-  \begin{enumerate}
-    
-  \item If $T$ is a record type and
-    $\{\pi_1,\ldots,\pi_n\}\subset\mathrm{paths}(T)$, then
-    $T\ominus\pi_1,\ldots,\pi_n$ is $T\ominus\pi_1\ldots\ominus\pi_n$
- 
 If $T$ is a record type, $\pi\in\mathrm{paths}(T)$ and
   $\mathrm{paths}_\pi(T)=\{\pi,\pi_1,\ldots,\pi_n\}$, then
-  \begin{quote}
-    we normally write $T\ominus\pi$ for
-    $T\ominus\pi,\pi_1,\ldots,\pi_n$
-  \end{quote}
+     we normally write $T\ominus\pi/T$ for
+    $T\ominus\pi,\pi_1,\ldots,\pi_n$.
+ 
+We now extend subtraction to include some cases where it would
+otherwise be undefined.
+
+\begin{ex} 
+  \begin{enumerate} 
+
   
  
-\item If $T\sqsubseteq\textit{Assgnmnt}$ and
-  $\ell\in\mathrm{labels}(T)$, then
+\item If $T$ is \textit{Assgnmnt}$\wedge T'$, $T'$ is a record type and
+  $\ell\in\mathrm{labels}(T')$, then
   \begin{enumerate} 
     
-  \item if $\mathrm{labels}(T)=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
+  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
     
-  \item otherwise, $T\ominus\ell= T-\{\langle\ell,\varphi\rangle\}$,
-    where $\langle\ell,\varphi\rangle\in T$ 
+  \item otherwise, $T\ominus\ell= \textit{Assgnmnt}\wedge (T'\ominus\ell/T)$
     
   \end{enumerate}
   
-\item If $T\subseteq\textit{PropCntxt}$ and
-  $\ell\in\mathrm{labels}(T)$, then
-  \begin{enumerate} 
+% \item If $T$ is \textit{PropCntxt}$\wedge T'$, $T'$ is a record type and
+%   $\ell\in\mathrm{labels}(T')$, then
+%   \begin{enumerate} 
     
-  \item if $\mathrm{labels}(T)=\{\ell\}$, $T\ominus\ell=\textit{PropCntxt}$
+%   \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{PropCntxt}$
     
-  \item otherwise, $T\ominus\ell=T-\{\langle\ell,\varphi\rangle\})$,
-    where $\langle\ell,\varphi\in T$ 
+%   \item otherwise, $T\ominus\ell=\textit{PropCntxt}\wedge (T'\ominus\ell/T)$
     
-  \end{enumerate} 
+%   \end{enumerate} 
 
-\item If $T\sqsubseteq\textit{PropCntxt}$ and
-  $\ell.\pi\in\mathrm{tpaths}(T')$ then
-  \begin{quote}
-    $T\ominus\ell.\pi= T$\fbox{\d{$\wedge$}}\smallrecord{
-      \smalltfield{$\ell$}{$\varphi\ominus\pi$}}, where
-    $\langle\ell,\varphi\rangle\in T$
-  \end{quote}
-
-\item Otherwise, if $T$ is a labelled set, then
+\item If $T$ is \textit{PropCntxt}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
   \begin{enumerate}
-  \item if $\ell.\pi\in\mathrm{tpaths}(T)$ and
-    $\langle\ell,\varphi\rangle\in T$, then
-    $T\ominus\ell.\pi=(T-\{\langle\ell,\varphi\rangle\})\cup\{\langle\ell,\varphi\ominus\pi\rangle\}$
-  \item otherwise, $T\ominus\pi$ is $T$
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{PropCntxt}\wedge(T'\ominus \pi/T')$
   \end{enumerate}
+
+% \item Otherwise, if $T$ is a labelled set, then
+%   \begin{enumerate}
+%   \item if $\ell.\pi\in\mathrm{tpaths}(T)$ and
+%     $\langle\ell,\varphi\rangle\in T$, then
+%     $T\ominus\ell.\pi=(T-\{\langle\ell,\varphi\rangle\})\cup\{\langle\ell,\varphi\ominus\pi\rangle\}$
+%   \item otherwise, $T\ominus\pi$ is $T$
+%  \end{enumerate}
 
   
  
@@ -2996,6 +2993,9 @@ is
 \end{quote}
   
 \end{ex}
+
+@@
+
 We can then characterize a notation for phrase structure rules which
 use `ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$' as in \nexteg{}.
 \begin{ex} 
@@ -6738,25 +6738,40 @@ Chapter~\ref{ch:intensional} are marked ``\textbf{Revised!}''.  % We have
 $r:\textit{Rec}$ and
 $\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
 
-If $T\sqsubseteq\textit{Assgnmnt}$ and
-  $\ell\in\mathrm{labels}(T)$, then
+\bigskip
+
+If $T$ is \textit{Assgnmnt}$\wedge T'$, $T'$ is a record type and
+  $\ell\in\mathrm{labels}(T')$, then
   \begin{enumerate} 
     
-  \item if $\mathrm{labels}(T)=\{\ell\}$, then $T\ominus\ell=\textit{Assgnmnt}$ 
+  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
     
-  \item otherwise, $T\ominus\ell=T-\{\langle\ell,\varphi\rangle\}$,
-    where $\langle\ell,\varphi\rangle\in T$.
-    
+  \item otherwise, $T\ominus\ell= \textit{Assgnmnt}\wedge (T'\ominus\ell/T)$
     
   \end{enumerate}
 
+    
+    
+  %\end{enumerate}
+
   
 
-\item[\textnormal{\textit{PropCntxt}}] --- a basic type
+\item[\textnormal{\textit{PropCntxt}} Revised!] --- a basic type
 
   $r:\textit{PropCntxt}$ iff
 $r:\textit{Rec}$ and
 $\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
+
+\bigskip
+
+If $T$ is \textit{PropCntxt}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
+  \begin{enumerate}
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{PropCntxt}\wedge(T'\ominus \pi/T')$
+  \end{enumerate}
 
 \item[\textnormal{\textit{Cntxt}} Revised!] --- \record{
     \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
@@ -8205,11 +8220,9 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
       \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
       
-\end{quote}
+    \end{quote}
 
-
-
-
+    
 
 
 \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
@@ -8279,6 +8292,64 @@ u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtTy
 %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
 %     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
 %   \end{quote}
+
+  \item[\textnormal{$\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$} New!]
+    \mbox{}
+
+      If
+  \begin{enumerate}
+  \item $\alpha$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
+    
+  \item $\beta$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
+    
+  \item $\alpha$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{w}$}{\smallrecord{
+          \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
+    $i$, and
+    
+  \item $\beta$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{g}$}{\smallrecord{
+          \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
+    $j$,
+  \end{enumerate}
+  then \textit{the \textit{wh}$_{i,j}$-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda
+    c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
+    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    . \\
+    \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
+    \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
+    ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
+    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+  \end{quote} 
+
+\item[\textnormal{ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)}
+  New!] \mbox{}
+
+  If $T_{\text{fun}}$, $T_{\text{arg}}$ and $T_{\text{res}}$ are types
+such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
+$\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
+$T_{\text{res}}$, then
+\begin{quote}
+  ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u$:\smallrecord{
+    \smalltfield{cont}{$T_{\text{fun}}$}}$^\frown$\smallrecord{
+    \smalltfield{cont}{$T_{\text{arg}}$}} . \smallrecord{
+    \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
+\end{quote}
+
+
+
+
 
   
 \item[\textnormal{$\alpha\text{@\!@}\beta$}] \mbox{}
