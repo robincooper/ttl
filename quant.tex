@@ -2994,8 +2994,6 @@ is
   
 \end{ex}
 
-@@
-
 We can then characterize a notation for phrase structure rules which
 use `ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$' as in \nexteg{}.
 \begin{ex} 
@@ -3026,7 +3024,7 @@ T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\t
 \end{ex} 
 We introduce a sign type \textit{Rel} which
 requires the category to be `rel' for relative clause  and types
-\textit{NP}$_{\text{wh}_i}$ and \textit{S}/$j$ whose witness
+\textit{NP}$_{\text{wh}_i}$ and \textit{S}/$i$ whose witness
 conditions are given in \nexteg{}.
 \begin{ex} 
 \begin{subex} 
@@ -3036,14 +3034,14 @@ conditions are given in \nexteg{}.
     \smalltfield{$\mathfrak{w}$}{\smallrecord{
         \smalltfield{x$_i$}{\textit{Ind}}}}}
  
-\item $\alpha:\textit{S}/j$ iff $\alpha:\textit{S}$ and $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+\item $\alpha:\textit{S}/i$ iff $\alpha:\textit{S}$ and $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
     \smalltfield{$\mathfrak{g}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{Ind}}}}} 
+        \smalltfield{x$_i$}{\textit{Ind}}}}} 
  
 \end{subex} 
    
 \end{ex} 
-The slash notation `$\textit{S}/j$' is derived from the use of slash
+The slash notation `$\textit{S}/i$' is derived from the use of slash
 categories to represent constituents containing gaps in Generalized
 Phrase Structure Grammar \citep{GazdarKleinPullumSag1985}  and Head
 Driven Phrase Structure Grammar \citep{Sag:Wasow:ea:03}.
@@ -3053,12 +3051,8 @@ resources for English.
 \begin{ex} 
 \textit{Rel} $\longrightarrow$ \textit{NP}$_{\text{wh}_i}$
 \textit{S}/$j$ $\mid$
-   \textit{NP}$_{\text{wh}_i}'$($_{\text{@}_{\text{wh}_{i,j}}}$\textit{S}/$j'$:\textit{PRecType}):\textit{PPpty} 
+\textit{NP}$_{\text{wh}_i}'$($_{\text{@}_{\text{wh}_{i,j}}}$\textit{S}/$j'$:\textit{PRecType}):\textit{PPpty} 
 \end{ex} 
-  
-  
-
-
 
 To form the content of a noun modified by a relative clause such as
 \textit{child who Sam hugged} we use a record type which requires of
@@ -3171,7 +3165,10 @@ $T_{\text{daughter}_1}\sqsubseteq$ \record{
     ContForwardApp$_{\text{@}_{\&}}$($T$)
   \end{quote}
   
-\end{ex} 
+\end{ex}
+
+@@
+
 Finally, we introduce the English rules for combining common nouns
 with relative clauses. First we introduce types $^T\textit{N}$ and
 $^T\textit{Rel}$ in \nexteg{}.
@@ -7037,6 +7034,13 @@ equivalently,
 
   
 \end{description}
+
+\item[\textnormal{$^T\textit{Ppty}$} New!] --- if $T$ is a type, then
+  $^T\textit{Ppty}$ is a type
+
+  $P:{^T\textit{Ppty}}$ iff $P:\textit{Ppty}$ and
+  $P.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{x}{$T$}}
         
       \item[\textnormal{\textit{PlPpty}}] --- a basic type
 
@@ -7044,7 +7048,14 @@ equivalently,
 $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
         
       \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
-        \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
+          \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
+
+        
+      \item[\textnormal{$^T\textit{PPpty}$} New!] --- if $T$ is a
+        type, then $^T\textit{PPpty}$ is a type
+
+        $\mathcal{P}:{^T\textit{PPpty}}$ iff
+  $\mathcal{P}:\textit{PPpty}$ and for any $c:\mathcal{P}.\text{bg}$, $\mathcal{P}(c):{^T\textit{Ppty}}$
         
       \item[\textnormal{\textit{Quant}}] ---
         (\textit{Ppty}$\rightarrow$\textit{RecType})
@@ -7098,6 +7109,13 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
     \footnotesize{\textit{Sign}}\\
     \smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
   
+\item[\textnormal{\textit{S}/$i$} New!] --- if $i$ is a natural
+  number, then \textit{S}/$i$ is a type
+
+  $\alpha:\textit{S}/i$ iff $\alpha:\textit{S}$ and $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} 
+  
   
 \item[\textnormal{\textit{NP}}] --- 
   \smallrecord{
@@ -7109,7 +7127,16 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
   $\sigma$ : \textit{WhNP} iff $\sigma$ : \textit{NP}, $\sigma$.cont is $\mathcal{Q}$ and
 $\mathcal{Q}.\text{bg}\sqsubseteq$\smallrecord{
   \smalltfield{$\mathfrak{w}$}{\smallrecord{
-      \smalltfield{x$_i$}{\textit{Ind}}}}}, for some natural number $i$.
+      \smalltfield{x$_i$}{\textit{Ind}}}}}, for some natural number
+$i$.
+
+\item[\textnormal{\textit{NP}$_{\text{wh}_i}$} New!] --- if $i$ is a
+  natural number, then \textit{NP}$_{\text{wh}_i}$ is a type
+
+  $\alpha:\textit{NP}_{\text{wh}_i}$ iff $\alpha:\textit{NP}$ and
+  $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}
 
   
 \item[\textnormal{\textit{Det}}] --- 
@@ -7133,6 +7160,10 @@ $\mathcal{Q}.\text{bg}\sqsubseteq$\smallrecord{
     \footnotesize{\textit{Sign}}\\
     \smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
 
+\item[\textnormal{\textit{Rel}} New!] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{rel}{\textit{Cat}}}}}
   
 \item[\textnormal{\textit{NoDaughters}}] ---
   \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
@@ -7600,6 +7631,25 @@ r$:\textit{LocRiseEventCntxt} .\\
   
   
 
+
+\end{description}
+
+\subsubsection{Properties}
+
+\begin{description}
+  
+\item[\textnormal{$P_1\&P_2$} New!] \mbox{}
+
+  If $T$ is a type, $P_1:{^T\textit{Ppty}}$ and $P_2:{^T\textit{Ppty}}$,
+then \textit{the conjunction of $P_1$ and
+  $P_2$}, $P_1\&P_2$, is
+\begin{quote}
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{$T$}} .
+  \record{
+    \tfield{e$_1$}{$P_1\{r.\text{x}\}$}\\
+    \tfield{e$_2$}{$P_2\{r.\text{x}\}$}}$\urcorner$
+\end{quote}
 
 \end{description}
 
@@ -8273,25 +8323,25 @@ u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtTy
 
 % \end{quote}
 
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
-%   \mbox{}
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+  \mbox{}
 
-%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-%   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
-%   $T_{\text{res}}$ are content types, then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-%   \end{quote}
-%   is
-%   \begin{quote}
-%   $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-%     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
-%   \end{quote}
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote}
 
   \item[\textnormal{$\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$} New!]
     \mbox{}
@@ -8347,7 +8397,34 @@ is
     \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
 \end{quote}
 
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}
+  New!] \mbox{}
 
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign
+  types, $T_{\text{daughter}_1}\sqsubseteq$\smallrecord{
+    \smallmfield{cont}{$c_1$}{\textit{Cont}}} where
+  $c_1.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}, $T_{\text{daughter}_2}\sqsubseteq$\smallrecord{
+    \smallmfield{cont}{$c_2$}{\textit{Cont}}} where
+  $c_2.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote} 
 
 
 
@@ -8402,7 +8479,57 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
   $T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
     ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
-  \end{quote}  
+  \end{quote}
+
+  
+\item[\textnormal{$\alpha\text{@}_{\&}\beta$} New!] \mbox{}
+
+  If $T$ is a type, $\alpha:{^T\textit{PPpty}}$ and
+  $\beta:{^T\textit{PPpty}}$ 
+  then \textit{the property conjunction
+    combination of $\alpha$ and $\beta$}, $\alpha\text{@}_{\&}\beta$,
+  is
+\begin{quote}
+  $\lambda
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+      \end{quote}
+
+      
+    \item[\textnormal{ContForwardApp$_{\text{@}_{\&}}$($T$)} New!]
+      \mbox{}
+
+      If $T$ is a type, then ContForwardApp$_{\text{@}_{\&}}$($T$) is
+  \begin{quote}
+    $\lambda u$:\record{
+      \tfield{cont}{${^T\textit{PPpty}}$}}$^\frown$\record{
+      \tfield{cont}{${^T\textit{PPpty}}$}} .\\
+    \hspace*{1em}\record{
+      \mfield{cont}{$u[0].\text{cont}\text{@}_{\&}u[1].\text{cont}$}{${^T\textit{PPpty}}$}}
+  \end{quote}
+
+  
+\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$}
+  New!] \mbox{}
+
+  If $T$ is a type, $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+$T_{\text{daughter}_2}$ are sign types,
+$T_{\text{daughter}_1}\sqsubseteq$ \record{
+  \tfield{cont}{$^T\textit{PPpty}$}} and $T_{\text{daughter}_2}\sqsubseteq$ \record{
+  \tfield{cont}{$^T\textit{PPpty}$}}, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
+  \end{quote}
+  is
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@}_{\&}}$($T$)
+  \end{quote}
 
 \end{description}
 
@@ -8960,7 +9087,10 @@ u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smallt
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
     \d{\d{$\wedge$}} CnstrIsA, \\
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
-    \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
+    \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty},\\
+    \>\textit{Rel} $\longrightarrow$ \textit{NP}$_{\text{wh}_i}$
+\textit{S}/$j$ $\mid$
+\textit{NP}$_{\text{wh}_i}'$($_{\text{@}_{\text{wh}_{i,j}}}$\textit{S}/$j'$:\textit{PRecType}):\textit{PPpty}\} 
 
   \end{tabbing}
 
