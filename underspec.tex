@@ -267,8 +267,6 @@ will be extended to \nexteg{}.
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
 \end{ex}
 
-@@
-
 \textit{QStore} is the type of assignments all of whose values are
 parametric quantifiers, that is, as characterized in \nexteg{}.
 \begin{ex} 
@@ -830,71 +828,45 @@ storage.
 
 \begin{shaded}
 In order to do this we need to generalize our
-characterization of `$\ominus$' in (\ref{ex:ominus}) to include
+characterization of `$\ominus$' in Chapter~\ref{ch:quant}, example (\ref{ex:ominus}) to include
 \textit{QStore} as a special case exactly similar to
 \textit{Assgnmnt}.  This is done in \nexteg{}.
-\begin{ex} 
-  \begin{enumerate}
-    
-  \item If $T$ is a record type and
-    $\{\pi_1,\ldots,\pi_n\}\subset\mathrm{paths}(T)$, then
-    $T\ominus\pi_1,\ldots,\pi_n$ is $T\ominus\pi_1\ldots\ominus\pi_n$
- 
-\item If $T$ is a record type, $\pi\in\mathrm{paths}(T)$ and
-  $\mathrm{paths}_\pi(T)=\{\pi,\pi_1,\ldots,\pi_n\}$, then
-  \begin{quote}
-    we normally write $T\ominus\pi$ for
-    $T\ominus\pi,\pi_1,\ldots,\pi_n$
-  \end{quote}
+\begin{ex}
+
+  \begin{enumerate} 
+
   
  
-\item If $T$ is $\textit{Assgnmnt}\wedge T'$ and
+\item If $T$ is \textit{Assgnmnt}$\wedge T'$, $T'$ is a record type and
   $\ell\in\mathrm{labels}(T')$, then
   \begin{enumerate} 
     
   \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
     
-  \item otherwise, $T\ominus\ell=\textit{Assgnmnt}\wedge (T'-\{\langle\ell,T'.\ell\rangle\})$ 
-    
-  \end{enumerate}
-
-\item If $T$ is $\textit{QStore}\wedge T'$ and
-  $\ell\in\mathrm{labels}(T')$, then
-  \begin{enumerate} 
-    
-  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{QStore}$ 
-    
-  \item otherwise, $T\ominus\ell=\textit{QStore}\wedge (T'-\{\langle\ell,T'.\ell\rangle\})$ 
+  \item otherwise, $T\ominus\ell= \textit{Assgnmnt}\wedge (T'\ominus\ell/T)$
     
   \end{enumerate}
   
-\item If $T$ is $\textit{PropCntxt}\wedge T'$ and
-  $\ell\in\mathrm{labels}(T')$, then
-  \begin{enumerate} 
-    
-  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{PropCntxt}$
-    
-  \item otherwise, $T\ominus\ell=\textit{PropCntxt}\wedge(T'-\{\langle\ell,T'.\ell\rangle\})$ 
-    
-  \end{enumerate} 
-
-\item If $T$ is $\textit{PropCntxt}\wedge T'$ and
-  $\ell.\pi\in\mathrm{tpaths}(T')$ then
-  \begin{quote}
-    $T\ominus\ell.\pi=\textit{PropCntxt}\wedge T'$\fbox{\d{$\wedge$}}\smallrecord{
-      \smalltfield{$\ell$}{$T'.\ell\ominus\pi$}}
-  \end{quote}
-
-\item Otherwise, if $T$ is a labelled set, then
+\item If $T$ is \textit{PropCntxt}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
   \begin{enumerate}
-  \item if $\ell.\pi\in\mathrm{tpaths}(T)$, $T\ominus\ell.\pi=T'$\fbox{\d{$\wedge$}}\smallrecord{
-      \smalltfield{$\ell$}{$T.\ell\ominus\pi$}}
-  \item otherwise, $T\ominus\pi$ is $T$
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{PropCntxt}\wedge(T'\ominus \pi/T')$
   \end{enumerate}
 
   
- 
-\end{enumerate} 
+\item If $T$ is \textit{QStore}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
+  \begin{enumerate}
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{QStore}\wedge(T'\ominus \pi/T')$
+  \end{enumerate}
+\end{enumerate}
+
 \label{ex:ominus-with-qstore}   
 \end{ex}
 
@@ -948,6 +920,8 @@ $[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{
   \end{quote}
   
 \end{ex}
+
+@@
 
 % \preveg{} says that if any of the unplugged interpretations in a sign
 % contains a quantifier indexed by $i$, that is, it is a parametric
@@ -3900,7 +3874,25 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
           \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
           
 
-    \item[\textnormal{\textit{Cont}}] --- \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
+    \item[\textnormal{\textit{Cont}}] ---
+      \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
+
+      
+    \item[\textnormal{\textit{QStore}} New!] --- a basic type
+
+      $r:\textit{QStore}$ iff $r:Assgnmnt$
+and for any $\text{x}_i\in\mathrm{labels}(r)$,
+$r.\text{x}_i:\textit{PQuant}$
+
+If $T$ is \textit{QStore}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
+  \begin{enumerate}
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{QStore}\wedge(T'\ominus \pi/T')$
+  \end{enumerate}
+  
 
       
     \item[\textnormal{\textit{Cat}}] --- a basic type
@@ -5368,6 +5360,55 @@ r$:\textit{LocRiseEventCntxt} .\\
 %   \end{quote}
 
 % \end{description}
+
+\subsubsection{Parametric content types}
+\begin{description}
+\item[unplugged New!] --- definition
+
+  A parametric content, $\alpha$, is \textit{unplugged} iff $c:\alpha$.bg implies $c.\mathfrak{q}\not=\emptyset$
+(that is, $c.\mathfrak{q}$ is not the empty record).  Otherwise $\alpha$
+is \textit{plugged}.
+
+\item[\textnormal{$\mathrm{store}(\mathcal{Q})$} New!] \mbox{}
+
+  If $\mathcal{Q}:\textit{PQuant}$ and $\mathcal{Q}$ is plugged, then
+$\mathrm{store}(\mathcal{Q})$ is
+\begin{quote}
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{$\mathcal{Q}$}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{quote}
+
+\item[\textnormal{$\mathrm{retrieve}(\text{x}_i,\alpha)$} New!]
+  \mbox{}
+
+    If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ 
+  $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \tfield{$\mathfrak{q}$}{\smallrecord{
+          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
+$[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and\\
+$\alpha'$ is
+$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
+  $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
+  \begin{quote}
+    $\lambda
+    c$:$(\mathcal{Q}'.\text{bg}$\d{$\wedge$}$\alpha'.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i)$
+    . \\ \hspace*{2em}$\mathcal{Q'}(c)(\mathfrak{P}(\ulcorner\lambda
+    r$:\smallrecord{
+      \smalltfield{x}{\textit{Ind}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+\footnotesize{\textit{Assgnmnt}}\\          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{s}.\text{x}_i}$
+    . $\alpha'(c[r][\mathfrak{q}.\text{x}_i=\mathcal{Q}])\urcorner))$
+  \end{quote}
+
+
+
+\end{description}
+
 
 
 \subsubsection{Action rules} (as in Chapter~\ref{ch:intensional})
