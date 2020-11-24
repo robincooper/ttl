@@ -921,8 +921,6 @@ $[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{
   
 \end{ex}
 
-@@
-
 % \preveg{} says that if any of the unplugged interpretations in a sign
 % contains a quantifier indexed by $i$, that is, it is a parametric
 % quantifier whose domain type is
@@ -988,8 +986,8 @@ We give a precise characterization of this in \nexteg{}.
  
   \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
  
-  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
-    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{store}$', then
+    $\mathrm{store}(\varphi):\mathfrak{S}(T)$
 
   \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
     arguments to `$\mathrm{retrieve}$', then
@@ -1027,7 +1025,9 @@ Thus we redefine the type \textit{Sign} as in \nexteg{}.
  
 \end{subex} 
    
-\end{ex} 
+\end{ex}
+
+@@
   
   
 Suppose that $T_1$ and
@@ -3878,6 +3878,11 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
       \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
 
       
+    \item[\textnormal{ContType} New!] ---  a basic type
+
+      $T : \textit{ContType}$ iff $T\sqsubseteq\textit{Cont}$
+
+      
     \item[\textnormal{\textit{QStore}} New!] --- a basic type
 
       $r:\textit{QStore}$ iff $r:Assgnmnt$
@@ -3892,6 +3897,74 @@ If $T$ is \textit{QStore}$\wedge T'$ and
     
   \item otherwise, $T\ominus\pi= \textit{QStore}\wedge(T'\ominus \pi/T')$
   \end{enumerate}
+
+  \begin{description}
+\item[unplugged New!] --- definition
+
+  A parametric content, $\alpha$, is \textit{unplugged} iff $c:\alpha$.bg implies $c.\mathfrak{q}\not=\emptyset$
+(that is, $c.\mathfrak{q}$ is not the empty record).  Otherwise $\alpha$
+is \textit{plugged}.
+
+\item[\textnormal{$\mathrm{store}(\mathcal{Q})$} New!] \mbox{}
+
+  If $\mathcal{Q}:\textit{PQuant}$ and $\mathcal{Q}$ is plugged, then
+$\mathrm{store}(\mathcal{Q})$ is
+\begin{quote}
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{$\mathcal{Q}$}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{quote}
+
+\item[\textnormal{$\mathrm{retrieve}(\text{x}_i,\alpha)$} New!]
+  \mbox{}
+
+    If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ 
+  $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \tfield{$\mathfrak{q}$}{\smallrecord{
+          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
+$[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and\\
+$\alpha'$ is
+$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
+  $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
+  \begin{quote}
+    $\lambda
+    c$:$(\mathcal{Q}'.\text{bg}$\d{$\wedge$}$\alpha'.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i)$
+    . \\ \hspace*{2em}$\mathcal{Q'}(c)(\mathfrak{P}(\ulcorner\lambda
+    r$:\smallrecord{
+      \smalltfield{x}{\textit{Ind}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+\footnotesize{\textit{Assgnmnt}}\\          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{s}.\text{x}_i}$
+    . $\alpha'(c[r][\mathfrak{q}.\text{x}_i=\mathcal{Q}])\urcorner))$
+  \end{quote}
+
+
+
+\end{description}
+
+\item[\textnormal{$\mathfrak{S}(T)$} New!] --- if
+  $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type
+
+  The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{store}$', then
+    $\mathrm{store}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate}
+
+  
   
 
       
@@ -3906,12 +3979,12 @@ If $T$ is \textit{QStore}$\wedge T'$ and
 
 
   
-    \item[\textnormal{\textit{Sign}}] ---  a basic type
+    \item[\textnormal{\textit{Sign}} Revised!] ---  a basic type
 
       $\sigma$ : \textit{Sign} iff $\sigma$ :
       \record{\tfield{s-event}{\textit{SEvent}} \\
          \tfield{syn}{\textit{Syn}} \\
-        \tfield{cont}{\textit{Cont}}} 
+        \tfield{cont}{\textit{ContType}}} 
 
   
 \item[\textnormal{\textit{SignType}}] --- a basic type
@@ -5043,64 +5116,175 @@ r$:\textit{LocRiseEventCntxt} .\\
 
 
 
-\subsubsection{Constituent structure} (as in Chapter~\ref{ch:quant})
-% \begin{description}
-% \item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
-% $T_{\text{mother}}$)}] \mbox{}
+\subsubsection{Constituent structure} 
+\begin{description}
+  
+\item[Uninterpreted phrase structure]
+  
+\item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)}] \mbox{}
 
-% If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
-% type of strings of signs then
-% \begin{quote}
-% RuleDaughters($T_{\text{daughters}}$,
-% $T_{\text{mother}}$)
-% \end{quote}
-% is
-% \begin{quote}
-%   $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
-% \end{quote}
+If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
+type of strings of signs then
+\begin{quote}
+RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
+\end{quote}
 
-% \item[\textnormal{ConcatPhon}] \mbox{}
+\item[\textnormal{ConcatPhon}] \mbox{}
 
-%   $\lambda
-% u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
-% . \\
-% \hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+  $\lambda
+u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
+. \\
+\hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
 
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
-%     T_{\text{daughter}_n}$}] \mbox{}
+\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+    T_{\text{daughter}_n}$}] \mbox{}
 
-%   If $T_{\text{mother}}$ is a sign type and
-%   $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
-%   then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
-%     T_{\text{daughter}_n}$
-%   \end{quote}
-%   represents
-%   \begin{quote}
-% RuleDaughters($T_{\text{mother}}$,
-% ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
-% \end{quote}
+  If $T_{\text{mother}}$ is a sign type and
+  $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
+  then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
+    T_{\text{daughter}_n}$
+  \end{quote}
+  represents
+  \begin{quote}
+RuleDaughters($T_{\text{mother}}$,
+${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
+\end{quote}
 
-% \item[\textnormal{$\alpha\text{@}\beta$} Revised!] \mbox{}
+\item[Content combination operations] 
 
-%   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+\item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+  \begin{quote}
+   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+
+      
+    \end{quote}
+
+      \item[\textnormal{$\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$}]
+    \mbox{}
+
+      If
+  \begin{enumerate}
+  \item $\alpha$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
+    
+  \item $\beta$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
+    
+  \item $\alpha$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{w}$}{\smallrecord{
+          \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
+    $i$, and
+    
+  \item $\beta$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{g}$}{\smallrecord{
+          \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
+    $j$,
+  \end{enumerate}
+  then \textit{the \textit{wh}$_{i,j}$-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda
+    c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
+    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    . \\
+    \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
+    \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
+    ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
+    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+  \end{quote} 
+
+  \item[\textnormal{$\alpha\text{@\!@}\beta$}] \mbox{}
+
+  If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_2$)}}) 
+                         and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:\record{
+      \tfield{$\mathfrak{c}$}{\record{
+          \tfield{s}{$\beta$.bg}\\
+          \tfield{f}{$\alpha(\beta(s))$.bg}\\
+          \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
+    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
+      . \\*[\baselineskip]
+      \hspace*{10em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))(c)\urcorner$
+    \end{quote}
+
+    \item[\textnormal{$\alpha\text{@}_{\&}\beta$}] \mbox{}
+
+  If $T$ is a type, $\alpha:{^T\textit{PPpty}}$ and
+  $\beta:{^T\textit{PPpty}}$ 
+  then \textit{the property conjunction
+    combination of $\alpha$ and $\beta$}, $\alpha\text{@}_{\&}\beta$,
+  is
+\begin{quote}
+  $\lambda
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+      \end{quote}
+
+    
+    \item[Forward application] 
+    
+
+
+\item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
+
+  If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+  ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+\begin{quote}
+  $\lambda
+u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
+   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                               \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                                                                                \smalltfield{fg}{(bg$\rightarrow
+                                                                                  T_{\text{res}}$)}}}}
+\end{quote}
+
+
+
+% \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+%   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 %                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
 %                              T_2$))}} 
-% and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+% and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
 %                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
 %                          then the \textit{combination of $\alpha$ and
 %     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-%   \begin{quote}
-%    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+% \begin{quote}
+%   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
 %       . \\
-%       \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
-
+%       \hspace*{2em}
+% $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
       
-%     \end{quote}
-
-    
+% \end{quote}
 
 
 % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
@@ -5109,303 +5293,157 @@ r$:\textit{LocRiseEventCntxt} .\\
 %   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
 % \begin{quote}
 %   $\lambda
-% u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-%                                                \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
-%    \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-%                                                \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
-% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-%                                                                                 \smalltfield{fg}{(bg$\rightarrow
-%                                                                                   T_{\text{res}}$)}}}}
-% \end{quote}
-
-
-
-% % \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
-
-% %   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-% %                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
-% %                              T_2$))}} 
-% % and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-% %                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
-% %                          then the \textit{combination of $\alpha$ and
-% %     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-% % \begin{quote}
-% %   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-% %       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-% %       . \\
-% %       \hspace*{2em}
-% % $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
-      
-% % \end{quote}
-
-
-% % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
-
-% %   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
-% %   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
-% % \begin{quote}
-% %   $\lambda
-% % u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
-% %     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-% % \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
-
-% % \end{quote}
-
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
-%   \mbox{}
-
-%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-%   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
-%   $T_{\text{res}}$ are content types, then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-%   \end{quote}
-%   is
-%   \begin{quote}
-%   $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-%     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
-%   \end{quote}
-
-%   \item[\textnormal{$\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$} New!]
-%     \mbox{}
-
-%       If
-%   \begin{enumerate}
-%   \item $\alpha$ : \smallrecord{
-%       \smalltfield{bg}{\textit{CntxtType}}\\
-%       \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
-    
-%   \item $\beta$ : \smallrecord{
-%       \smalltfield{bg}{\textit{CntxtType}}\\
-%       \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
-    
-%   \item $\alpha$.bg $\sqsubseteq$ \smallrecord{
-%       \smalltfield{$\mathfrak{w}$}{\smallrecord{
-%           \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
-%     $i$, and
-    
-%   \item $\beta$.bg $\sqsubseteq$ \smallrecord{
-%       \smalltfield{$\mathfrak{g}$}{\smallrecord{
-%           \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
-%     $j$,
-%   \end{enumerate}
-%   then \textit{the \textit{wh}$_{i,j}$-combination of $\alpha$ and
-%     $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
-%   \begin{quote}
-%     $\ulcorner\lambda
-%     c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
-%     \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
-%     . \\
-%     \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
-%     \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
-%     ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
-%     \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
-%   \end{quote} 
-
-% \item[\textnormal{ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)}
-%   New!] \mbox{}
-
-%   If $T_{\text{fun}}$, $T_{\text{arg}}$ and $T_{\text{res}}$ are types
-% such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
-% $\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
-% $T_{\text{res}}$, then
-% \begin{quote}
-%   ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
-% \end{quote}
-% is
-% \begin{quote}
-%   $\lambda u$:\smallrecord{
-%     \smalltfield{cont}{$T_{\text{fun}}$}}$^\frown$\smallrecord{
-%     \smalltfield{cont}{$T_{\text{arg}}$}} . \smallrecord{
-%     \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
-% \end{quote}
-
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}
-%   New!] \mbox{}
-
-%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-%   $T_{\text{daughter}_2}$ are sign
-%   types, $T_{\text{daughter}_1}\sqsubseteq$\smallrecord{
-%     \smallmfield{cont}{$c_1$}{\textit{Cont}}} where
-%   $c_1.\text{bg}\sqsubseteq$\smallrecord{
-%     \smalltfield{$\mathfrak{w}$}{\smallrecord{
-%         \smalltfield{x$_i$}{\textit{Ind}}}}}, $T_{\text{daughter}_2}\sqsubseteq$\smallrecord{
-%     \smallmfield{cont}{$c_2$}{\textit{Cont}}} where
-%   $c_2.\text{bg}\sqsubseteq$\smallrecord{
-%     \smalltfield{$\mathfrak{g}$}{\smallrecord{
-%         \smalltfield{x$_j$}{\textit{Ind}}}}} and $T_{\text{arg}}$ and
-%   $T_{\text{res}}$ are content types, then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-% T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-%   \end{quote}
-%   is
-%   \begin{quote}
-%   $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-%     ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
-%   \end{quote} 
-
-
-
-  
-% \item[\textnormal{$\alpha\text{@\!@}\beta$}] \mbox{}
-
-%   If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-%                            \smalltfield{fg}{(bg$\rightarrow T_2$)}}) 
-%                          and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-%                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
-%                          then the \textit{combination of $\alpha$ and
-%     $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
-%   \begin{quote}
-%     $\ulcorner\lambda c$:\record{
-%       \tfield{$\mathfrak{c}$}{\record{
-%           \tfield{s}{$\beta$.bg}\\
-%           \tfield{f}{$\alpha(\beta(s))$.bg}\\
-%           \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
-%     \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
-%       . \\*[\baselineskip]
-%       \hspace*{10em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))(c)\urcorner$
-%     \end{quote}
-    
-% \item[\textnormal{ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$,
-%     $T_{\text{res}}$)}] \mbox{}
-
-%   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
-%   ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$) is
-% \begin{quote}
-%   $\lambda
 % u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 %     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@\!@$u$[1].cont}{$T_{\text{res}}$}}
+% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
 
 % \end{quote}
-  
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
-%   \mbox{}
 
-%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-%   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
-%   $T_{\text{res}}$ are content types, then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-%   \end{quote}
-%   is
-%   \begin{quote}
-%   $T_{\text{mother}}\longrightarrow
-%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-%     ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
-%   \end{quote}
+\item[\textnormal{ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)}] \mbox{}
 
-  
-% \item[\textnormal{$\alpha\text{@}_{\&}\beta$} New!] \mbox{}
-
-%   If $T$ is a type, $\alpha:{^T\textit{PPpty}}$ and
-%   $\beta:{^T\textit{PPpty}}$ 
-%   then \textit{the property conjunction
-%     combination of $\alpha$ and $\beta$}, $\alpha\text{@}_{\&}\beta$,
-%   is
-% \begin{quote}
-%   $\lambda
-%   c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-%         . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
-%       \end{quote}
-
-      
-%     \item[\textnormal{ContForwardApp$_{\text{@}_{\&}}$($T$)} New!]
-%       \mbox{}
-
-%       If $T$ is a type, then ContForwardApp$_{\text{@}_{\&}}$($T$) is
-%   \begin{quote}
-%     $\lambda u$:\record{
-%       \tfield{cont}{${^T\textit{PPpty}}$}}$^\frown$\record{
-%       \tfield{cont}{${^T\textit{PPpty}}$}} .\\
-%     \hspace*{1em}\record{
-%       \mfield{cont}{$u[0].\text{cont}\text{@}_{\&}u[1].\text{cont}$}{${^T\textit{PPpty}}$}}
-%   \end{quote}
-
-  
-% \item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
-%     T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$}
-%   New!] \mbox{}
-
-%   If $T$ is a type, $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-% $T_{\text{daughter}_2}$ are sign types,
-% $T_{\text{daughter}_1}\sqsubseteq$ \record{
-%   \tfield{cont}{$^T\textit{PPpty}$}} and $T_{\text{daughter}_2}\sqsubseteq$ \record{
-%   \tfield{cont}{$^T\textit{PPpty}$}}, then
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
-%     T_{\text{daughter}_2}\ \mid\
-%     T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
-%   \end{quote}
-%   is
-%   \begin{quote}
-%     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
-%     T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-%     ContForwardApp$_{\text{@}_{\&}}$($T$)
-%   \end{quote}
-
-% \end{description}
-
-\subsubsection{Parametric content types}
-\begin{description}
-\item[unplugged New!] --- definition
-
-  A parametric content, $\alpha$, is \textit{unplugged} iff $c:\alpha$.bg implies $c.\mathfrak{q}\not=\emptyset$
-(that is, $c.\mathfrak{q}$ is not the empty record).  Otherwise $\alpha$
-is \textit{plugged}.
-
-\item[\textnormal{$\mathrm{store}(\mathcal{Q})$} New!] \mbox{}
-
-  If $\mathcal{Q}:\textit{PQuant}$ and $\mathcal{Q}$ is plugged, then
-$\mathrm{store}(\mathcal{Q})$ is
+  If $T_{\text{fun}}$, $T_{\text{arg}}$ and $T_{\text{res}}$ are types
+such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
+$\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
+$T_{\text{res}}$, then
 \begin{quote}
-  $\ulcorner\lambda c$:\smallrecord{
-    \footnotesize{\textit{Cntxt}}\\
-    \smalltfield{$\mathfrak{q}$}{\smallrecord{
-        \smallmfield{x$_0$}{$\mathcal{Q}$}{\textit{PQuant}}}}\\
-    \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
-  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+  ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u$:\smallrecord{
+    \smalltfield{cont}{$T_{\text{fun}}$}}$^\frown$\smallrecord{
+    \smalltfield{cont}{$T_{\text{arg}}$}} . \smallrecord{
+    \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
 \end{quote}
 
-\item[\textnormal{$\mathrm{retrieve}(\text{x}_i,\alpha)$} New!]
+\item[\textnormal{ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$,
+    $T_{\text{res}}$)}] \mbox{}
+
+  If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+  ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$) is
+\begin{quote}
+  $\lambda
+u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@\!@$u$[1].cont}{$T_{\text{res}}$}}
+
+\end{quote}
+
+    \item[\textnormal{ContForwardApp$_{\text{@}_{\&}}$($T$)}]
+      \mbox{}
+
+      If $T$ is a type, then ContForwardApp$_{\text{@}_{\&}}$($T$) is
+  \begin{quote}
+    $\lambda u$:\record{
+      \tfield{cont}{${^T\textit{PPpty}}$}}$^\frown$\record{
+      \tfield{cont}{${^T\textit{PPpty}}$}} .\\
+    \hspace*{1em}\record{
+      \mfield{cont}{$u[0].\text{cont}\text{@}_{\&}u[1].\text{cont}$}{${^T\textit{PPpty}}$}}
+  \end{quote}
+
+  
+\item[Interpreted phrase structure] 
+
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
   \mbox{}
 
-    If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ 
-  $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
-    \tfield{$\mathfrak{q}$}{\smallrecord{
-          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
-$[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and\\
-$\alpha'$ is
-$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
-  $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
   \begin{quote}
-    $\lambda
-    c$:$(\mathcal{Q}'.\text{bg}$\d{$\wedge$}$\alpha'.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i)$
-    . \\ \hspace*{2em}$\mathcal{Q'}(c)(\mathfrak{P}(\ulcorner\lambda
-    r$:\smallrecord{
-      \smalltfield{x}{\textit{Ind}}\\
-      \smalltfield{$\mathfrak{s}$}{\smallrecord{
-\footnotesize{\textit{Assgnmnt}}\\          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{s}.\text{x}_i}$
-    . $\alpha'(c[r][\mathfrak{q}.\text{x}_i=\mathcal{Q}])\urcorner))$
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
   \end{quote}
 
 
+
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}] \mbox{}
+
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign
+  types, $T_{\text{daughter}_1}\sqsubseteq$\smallrecord{
+    \smallmfield{cont}{$c_1$}{\textit{Cont}}} where
+  $c_1.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}, $T_{\text{daughter}_2}\sqsubseteq$\smallrecord{
+    \smallmfield{cont}{$c_2$}{\textit{Cont}}} where
+  $c_2.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote} 
+
+
+
+  
+    
+  
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+  \mbox{}
+
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+  $T_{\text{res}}$ are content types, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+  \end{quote}
+
+  
+
+      
+
+  
+\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$}] \mbox{}
+
+  If $T$ is a type, $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+$T_{\text{daughter}_2}$ are sign types,
+$T_{\text{daughter}_1}\sqsubseteq$ \record{
+  \tfield{cont}{$^T\textit{PPpty}$}} and $T_{\text{daughter}_2}\sqsubseteq$ \record{
+  \tfield{cont}{$^T\textit{PPpty}$}}, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
+  \end{quote}
+  is
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+    T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\text{@}_{\&}}$($T$)
+  \end{quote}
 
 \end{description}
 
