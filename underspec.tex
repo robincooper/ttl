@@ -1026,8 +1026,6 @@ Thus we redefine the type \textit{Sign} as in \nexteg{}.
 \end{subex} 
    
 \end{ex}
-
-@@
   
   
 Suppose that $T_1$ and
@@ -1177,7 +1175,14 @@ will define a variant of the combination operation `@', `@$_{i,j}$' which
 anaphorically relates a pronoun associated with the context path
 `$\mathfrak{s}.j$' to one associated with the context path
 `$\mathfrak{s}.i$'.  This is given in \nexteg{}, which is the same as
-the characterization of `@' except for the addition of the boxed material.
+the characterization of `@' except for the addition of the boxed
+material.
+
+\todo{See notes for generalizing and simplifying. Text
+  around will need changing.}
+
+@@
+
 \begin{ex} 
 If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
@@ -3488,7 +3493,76 @@ where the only possible antecedent for \textit{herself} is
 
 
 %[Grammar to be added.]
-   
+%\end{ex} 
+Note that we now no longer have to keep track of the arguments to
+ContForwardApp that we had in some of the variants since the
+combination of the types will always return a result, though if the
+types of contents do not match for the particular combination
+operation the combined type will have no witnesses.  This means that
+we can simplify our notation for constituent structure rules as in
+\nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}')$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O}}$
+  \end{quote}
+  
+\end{ex} 
+  
+  
+% @@
+
+% Finally, we show one way in which stored quantifiers can be
+% ``percolated'' to higher constituents by showing in \nexteg{} how to
+% construct an unplugged content from two constituent unplugged contents
+% when the basic semantic composition involves function application.  To
+% facilitate this we first define the `x'-incrementation of an object
+% (such as a set or a function) with respect to a set of records $R$.
+
+% \begin{ex} 
+% The `x'\textit{-incrementation of an object $O$ with respect
+%   to a set of records $R$}, $[O]_{\mathrm{incr}_x(R)}$, is the result of
+% replacing each instance of x$_i$ in $O$, for any natural number $i$,
+% with x$_{\mathrm{incr}_x(R)+i}$.  
+% \end{ex} 
+% Now application for unplugged contents (that is, objects of type
+% \textit{UInterp}) can be characterized as in \nexteg{}.
+
+% \begin{ex} 
+% \textbf{Application}
+
+% If $\alpha$ and $\beta$ are of type \textit{UInterp} and $\beta$.core
+% is in the domain of $\alpha$.core, then the \textit{application of
+%   $\alpha$ to $\beta$}, $\alpha @@\beta$, is
+% \begin{quote}
+
+% \record{\field{quants}{$\alpha$.quants$\cup$[$\beta$.quants]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}\\
+%         \field{core}{$\alpha$.core@[$\beta$.core]$_{\mathrm{incr}(\alpha\mathrm{.quants})}$}}
+% \end{quote}
+% \end{ex} 
+% \preveg{} says that the application of an unplugged content, $\alpha$,
+% to another unplugged content, $\beta$, involves first changing the
+% quantifier indices in $\beta$ so that they increment the quantifier
+% indices in $\alpha$ in the way that is illustrated in the examples
+% discussed above.  For example, if both $\alpha$ and $\beta$ contain
+% the quantifier index `x$_0$' and this is the maximum in $\alpha$, then
+% `x$_0$' will be changed to `x$_1$' in $\beta$.  Now the result of
+% application is an unplugged content whose `quants' are the union of
+% $\alpha$'s `quants' and the incremented `quants' of $\beta$.  The core
+% is the result of applying $\alpha$'s core to $\beta$'s core using the
+% same incrementation. 
+  
+
 \section{Summary of resources introduced}
 \label{sec:sumresch8}
 
@@ -5119,7 +5193,7 @@ r$:\textit{LocRiseEventCntxt} .\\
 \subsubsection{Constituent structure} 
 \begin{description}
   
-\item[Uninterpreted phrase structure]
+%\item[Uninterpreted phrase structure]
   
 \item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
 $T_{\text{mother}}$)}] \mbox{}
@@ -5158,7 +5232,7 @@ RuleDaughters($T_{\text{mother}}$,
 ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
 \end{quote}
 
-\item[Content combination operations] 
+%\item[Content combination operations] 
 
 \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
 
@@ -5246,46 +5320,38 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
         . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
       \end{quote}
 
+      
+    \item[\textnormal{$T_1\mathcal{O}^{\mathfrak{S}}T_2$} New!]
+      \mbox{}
+
+      Suppose that $T_1$ and
+$T_2$ are of type \textit{ContType} and that $\mathcal{O}$ is a combination
+operation such as @,\ldots as characterized above, then we say $T_1\mathcal{O}^{\mathfrak{S}}T_2$
+is also a type with the witness condition:
+\begin{quote} 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
+then $\alpha\mathcal{O}\beta:T_1\mathcal{O}^{\mathfrak{S}}T_2$.
+Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S}}T_2$. 
+\end{quote} 
+
+
     
-    \item[Forward application] 
+%    \item[Forward application] 
     
+\item[\textnormal{ContForwardApp$_{\mathfrak{S},\mathcal{O}}$} New!]
+  \mbox{}
 
-
-\item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
-
-  If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
-  ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+  If $\mathcal{O}$ is one of @,\ldots as defined above, then
+ContForwardApp$_{\mathfrak{S},\mathcal{O}}$ is
 \begin{quote}
-  $\lambda
-u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-                                               \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
-   \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-                                               \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-                                                                                \smalltfield{fg}{(bg$\rightarrow
-                                                                                  T_{\text{res}}$)}}}}
+  $\lambda u$:\smallrecord{
+    \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+    \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+    \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S}}u[1].\text{cont})$}}
 \end{quote}
 
-
-
-% \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
-
-%   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-%                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
-%                              T_2$))}} 
-% and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
-%                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
-%                          then the \textit{combination of $\alpha$ and
-%     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-% \begin{quote}
-%   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-%       . \\
-%       \hspace*{2em}
-% $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
-      
-% \end{quote}
-
+\paragraph{Note:}  This single characterization of ContForwardApp
+replaces all the previous variants that were defined in previous chapters.
 
 % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
 
@@ -5293,157 +5359,216 @@ u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtTy
 %   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
 % \begin{quote}
 %   $\lambda
+% u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%                                                \smalltfield{fg}{(bg$\rightarrow$($T_{\text{arg}}\rightarrow T_{\text{res}}$))}}}}$^{\frown}$
+%    \smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%                                                \smalltfield{fg}{(bg$\rightarrow T_{\text{arg}}$)}}}} . \\
+% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%                                                                                 \smalltfield{fg}{(bg$\rightarrow
+%                                                                                   T_{\text{res}}$)}}}}
+% \end{quote}
+
+
+
+% % \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+% %   If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+% %                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+% %                              T_2$))}} 
+% % and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{RecType}}\\
+% %                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+% %                          then the \textit{combination of $\alpha$ and
+% %     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+% % \begin{quote}
+% %   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+% %       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+% %       . \\
+% %       \hspace*{2em}
+% % $[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      
+% % \end{quote}
+
+
+% % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
+
+% %   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+% %   ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$) is
+% % \begin{quote}
+% %   $\lambda
+% % u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
+% %     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
+% % \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+
+% % \end{quote}
+
+% \item[\textnormal{ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)}] \mbox{}
+
+%   If $T_{\text{fun}}$, $T_{\text{arg}}$ and $T_{\text{res}}$ are types
+% such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
+% $\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
+% $T_{\text{res}}$, then
+% \begin{quote}
+%   ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
+% \end{quote}
+% is
+% \begin{quote}
+%   $\lambda u$:\smallrecord{
+%     \smalltfield{cont}{$T_{\text{fun}}$}}$^\frown$\smallrecord{
+%     \smalltfield{cont}{$T_{\text{arg}}$}} . \smallrecord{
+%     \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
+% \end{quote}
+
+% \item[\textnormal{ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$,
+%     $T_{\text{res}}$)}] \mbox{}
+
+%   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
+%   ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$) is
+% \begin{quote}
+%   $\lambda
 % u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
 %     T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@$u$[1].cont}{$T_{\text{res}}$}}
+% \hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@\!@$u$[1].cont}{$T_{\text{res}}$}}
 
 % \end{quote}
 
-\item[\textnormal{ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)}] \mbox{}
+%     \item[\textnormal{ContForwardApp$_{\text{@}_{\&}}$($T$)}]
+%       \mbox{}
 
-  If $T_{\text{fun}}$, $T_{\text{arg}}$ and $T_{\text{res}}$ are types
-such that if $\alpha:T_{\text{fun}}$ and $\beta:T_{\text{arg}}$, then
-$\alpha\text{@}_{\text{wh}_{i,j}}\beta$ is defined and of type
-$T_{\text{res}}$, then
-\begin{quote}
-  ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)
-\end{quote}
-is
-\begin{quote}
-  $\lambda u$:\smallrecord{
-    \smalltfield{cont}{$T_{\text{fun}}$}}$^\frown$\smallrecord{
-    \smalltfield{cont}{$T_{\text{arg}}$}} . \smallrecord{
-    \smallmfield{cont}{$u[0]$.cont@$_{\text{wh}_{i,j}}u[1]$.cont}{$T_{\text{res}}$}}
-\end{quote}
-
-\item[\textnormal{ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$,
-    $T_{\text{res}}$)}] \mbox{}
-
-  If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
-  ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$) is
-\begin{quote}
-  $\lambda
-u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
-    T_{\text{res}})$}}$^{\frown}$\smallrecord{\smalltfield{cont}{$T_{\text{arg}}$}} . \\
-\hspace*{2em}\smallrecord{\smallmfield{cont}{$u$[0].cont@\!@$u$[1].cont}{$T_{\text{res}}$}}
-
-\end{quote}
-
-    \item[\textnormal{ContForwardApp$_{\text{@}_{\&}}$($T$)}]
-      \mbox{}
-
-      If $T$ is a type, then ContForwardApp$_{\text{@}_{\&}}$($T$) is
-  \begin{quote}
-    $\lambda u$:\record{
-      \tfield{cont}{${^T\textit{PPpty}}$}}$^\frown$\record{
-      \tfield{cont}{${^T\textit{PPpty}}$}} .\\
-    \hspace*{1em}\record{
-      \mfield{cont}{$u[0].\text{cont}\text{@}_{\&}u[1].\text{cont}$}{${^T\textit{PPpty}}$}}
-  \end{quote}
+%       If $T$ is a type, then ContForwardApp$_{\text{@}_{\&}}$($T$) is
+%   \begin{quote}
+%     $\lambda u$:\record{
+%       \tfield{cont}{${^T\textit{PPpty}}$}}$^\frown$\record{
+%       \tfield{cont}{${^T\textit{PPpty}}$}} .\\
+%     \hspace*{1em}\record{
+%       \mfield{cont}{$u[0].\text{cont}\text{@}_{\&}u[1].\text{cont}$}{${^T\textit{PPpty}}$}}
+%   \end{quote}
 
   
-\item[Interpreted phrase structure] 
+% \item[Interpreted phrase structure]
 
 \item[\textnormal{$T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
-  \mbox{}
+    T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}')$}
+  New!] \mbox{}
 
   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
-  $T_{\text{res}}$ are content types, then
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
   \begin{quote}
     $T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+    T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}')$
   \end{quote}
   is
   \begin{quote}
   $T_{\text{mother}}\longrightarrow
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
+    ContForwardApp$_{\mathfrak{S},\mathcal{O}}$
   \end{quote}
 
+  \paragraph{Note:} This covers all the variant notations introduced
+  in previous chapters.
+
+% \item[\textnormal{$T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+%   \mbox{}
+
+%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+%   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+%   $T_{\text{res}}$ are content types, then
+%   \begin{quote}
+%     $T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+%   \end{quote}
+%   is
+%   \begin{quote}
+%   $T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+%     ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)
+%   \end{quote}
 
 
-\item[\textnormal{$T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}] \mbox{}
 
-  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-  $T_{\text{daughter}_2}$ are sign
-  types, $T_{\text{daughter}_1}\sqsubseteq$\smallrecord{
-    \smallmfield{cont}{$c_1$}{\textit{Cont}}} where
-  $c_1.\text{bg}\sqsubseteq$\smallrecord{
-    \smalltfield{$\mathfrak{w}$}{\smallrecord{
-        \smalltfield{x$_i$}{\textit{Ind}}}}}, $T_{\text{daughter}_2}\sqsubseteq$\smallrecord{
-    \smallmfield{cont}{$c_2$}{\textit{Cont}}} where
-  $c_2.\text{bg}\sqsubseteq$\smallrecord{
-    \smalltfield{$\mathfrak{g}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{Ind}}}}} and $T_{\text{arg}}$ and
-  $T_{\text{res}}$ are content types, then
-  \begin{quote}
-    $T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-  \end{quote}
-  is
-  \begin{quote}
-  $T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
-  \end{quote} 
+% \item[\textnormal{$T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}] \mbox{}
+
+%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+%   $T_{\text{daughter}_2}$ are sign
+%   types, $T_{\text{daughter}_1}\sqsubseteq$\smallrecord{
+%     \smallmfield{cont}{$c_1$}{\textit{Cont}}} where
+%   $c_1.\text{bg}\sqsubseteq$\smallrecord{
+%     \smalltfield{$\mathfrak{w}$}{\smallrecord{
+%         \smalltfield{x$_i$}{\textit{Ind}}}}}, $T_{\text{daughter}_2}\sqsubseteq$\smallrecord{
+%     \smallmfield{cont}{$c_2$}{\textit{Cont}}} where
+%   $c_2.\text{bg}\sqsubseteq$\smallrecord{
+%     \smalltfield{$\mathfrak{g}$}{\smallrecord{
+%         \smalltfield{x$_j$}{\textit{Ind}}}}} and $T_{\text{arg}}$ and
+%   $T_{\text{res}}$ are content types, then
+%   \begin{quote}
+%     $T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+% T_{\text{daughter}_1}'(_{\text{@}_{\text{wh}_{i,j}}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+%   \end{quote}
+%   is
+%   \begin{quote}
+%   $T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+%     ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+%   \end{quote} 
 
 
 
   
     
   
-\item[\textnormal{$T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
-  \mbox{}
+% \item[\textnormal{$T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$}]
+%   \mbox{}
 
-  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-  $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
-  $T_{\text{res}}$ are content types, then
-  \begin{quote}
-    $T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
-  \end{quote}
-  is
-  \begin{quote}
-  $T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
-  \end{quote}
+%   If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+%   $T_{\text{daughter}_2}$ are sign types and $T_{\text{arg}}$ and
+%   $T_{\text{res}}$ are content types, then
+%   \begin{quote}
+%     $T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(_{\text{@\!@}}T_{\text{daughter}_2}':T_{\text{arg}}):T_{\text{res}}$
+%   \end{quote}
+%   is
+%   \begin{quote}
+%   $T_{\text{mother}}\longrightarrow
+%     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+%     ContForwardApp$_{\text{@\!@}}$($T_{\text{arg}}$, $T_{\text{res}}$)
+%   \end{quote}
 
   
 
       
 
   
-\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
-    T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$}] \mbox{}
+% \item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+%     T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$}] \mbox{}
 
-  If $T$ is a type, $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-$T_{\text{daughter}_2}$ are sign types,
-$T_{\text{daughter}_1}\sqsubseteq$ \record{
-  \tfield{cont}{$^T\textit{PPpty}$}} and $T_{\text{daughter}_2}\sqsubseteq$ \record{
-  \tfield{cont}{$^T\textit{PPpty}$}}, then
-  \begin{quote}
-    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
-    T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
-  \end{quote}
-  is
-  \begin{quote}
-    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
-    T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp$_{\text{@}_{\&}}$($T$)
-  \end{quote}
+%   If $T$ is a type, $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+% $T_{\text{daughter}_2}$ are sign types,
+% $T_{\text{daughter}_1}\sqsubseteq$ \record{
+%   \tfield{cont}{$^T\textit{PPpty}$}} and $T_{\text{daughter}_2}\sqsubseteq$ \record{
+%   \tfield{cont}{$^T\textit{PPpty}$}}, then
+%   \begin{quote}
+%     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+%     T_{\text{daughter}_2}\ \mid\
+%     T_{\text{daughter}_1}'(_{\text{@}_{\&}}T_{\text{daughter}_2}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
+%   \end{quote}
+%   is
+%   \begin{quote}
+%     $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\
+%     T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+%     ContForwardApp$_{\text{@}_{\&}}$($T$)
+%   \end{quote}
 
 \end{description}
 

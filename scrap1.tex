@@ -1,0 +1,4149 @@
+\section{Anaphora} 
+\label{sec:anaph}
+
+We will treat anaphora by adding to the storage mechanism we have just
+introduced.  In informal terms the idea is that if the content type of
+an utterance has something corresponding to \nexteg{a} as a witness
+then it will also have something corresponding to \nexteg{b} as a
+witness where $x_1$ has been anaphorically related to $x_0$.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $x_0$ thinks that $x_1$ has succeeded 
+ 
+\item $x_0$ thinks that $x_0$ has succeeded 
+ 
+\end{subex} 
+   
+\end{ex} 
+Thus in general the content type yielded by the grammatical resources
+will be underspecified as to whether there is anaphora or not but will
+nevertheless delimit what the anaphoric possibilities are.  Anaphora
+will be accounted for at the point of combination.  This is
+illustrated schematically in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $x_o$ + thinks that $x_1$ has succeeded = $x_0$ thinks that
+  $x_1$ has succeeded 
+ 
+\item If `$x_o$ + thinks that $x_1$ has succeeded' is an
+  interpretation, then `$x_o$ + (thinks that $x_1$ has
+  succeeded)[$x_1\leadsto x_0$]' is an interpretation
+ 
+\end{subex} 
+   
+\end{ex} 
+We will, of course, not be implementing this in terms of replacing
+variables as in \preveg{} but rather in adjusting the contexts of
+interpretation associated with pronoun utterances.  For example, we
+will define a variant of the combination operation `@', `@$_{i,j}$' which
+anaphorically relates a pronoun associated with the context path
+`$\mathfrak{s}.j$' to one associated with the context path
+`$\mathfrak{s}.i$'.  This is given in \nexteg{}, which is the same as
+the characterization of `@' except for the addition of the boxed material.
+\begin{ex} 
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+  \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+\fbox{and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} and
+  $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}}} \fbox{but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}}},
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application \fbox{and anaphoric
+      relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.x}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
+\end{quote}
+
+\label{ex:combine-align}
+
+\end{ex} 
+We can define similar modifications, $\mathcal{O}_{i,j}$ for the other combination
+operators, $\mathcal{O}$.  Note that these additional combination
+operations as currently formulated will only allow one anaphoric
+relation to be introduced with each combination.  A more complete
+treatment will probably need a generalized formulation in which there
+are several pairs, $\langle i,j\rangle$, which are related simultaneously.
+
+We can now add contents with anaphora to
+our characterization of $\mathfrak{S}(T)$ given in
+(\ref{ex:storage-type}) as in \nexteg{} where we again use boxing to
+indicate the new material.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+
+    
+  \item \fbox{\begin{minipage}[t]{.85\linewidth}if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$\end{minipage}}
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-anaph-type}   
+\end{ex}
+% \todo{This doesn't allow for more than one anaphoric relation
+%   introduced with some combination.  Problem with some interpretation
+%   just happening to be identical with $\alpha\mathcal{O}\beta$
+%   although obtained differently.}
+
+We will now take some examples of key anaphoric phenomena and discuss
+how we could use these tools to account for them.
+
+
+
+\paragraph{\textit{No girl thinks she failed}}
+\label{sec:direct-binding}
+
+Given the strategy we suggested in Section~\ref{sec:unbound} for
+interpreting unbound pronouns  the foreground of a content for
+\textit{she failed} would be parallel to example
+(\ref{ex:he-leave-abbrev}c) as in \nexteg{}, where we in addition
+express this as the content type obtained by $\mathfrak{S}$.
+\begin{ex}
+  
+
+$\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+                \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                    \smalltfield{x$_0$}{\textit{Ind}}}}\\
+                \smalltfield{$\mathfrak{c}$}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}
+              }
+  . 
+         \record{\tfield{e}{fail($c.\mathfrak{s}$.x$_0$)}}$\urcorner^{\mathfrak{S}}$
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{fail($\mathfrak{s}$.x$_0$)}}
+
+\end{ex} 
+Call this \textbf{she$^\frown$failed}.  Then the 
+content type for \textit{thinks she failed} is \nexteg{}.
+\begin{ex}
+  $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+                \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                    \smalltfield{x$_0$}{\textit{Ind}}}}\\
+                \smalltfield{$\mathfrak{c}$}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\smallrecord{
+                        \smalltfield{f}{\textit{PropCntxt}}\\
+                        \smalltfield{a}{\textit{PropCntxt}}}}}}
+              }
+              . $\ulcorner\lambda r$:\smallrecord{
+                \smalltfield{x}{\textit{Ind}}} . 
+              \record{\tfield{e}{think($r$.x, \smallrecord{
+                    \smalltfield{e}{fail($c.\mathfrak{s}$.x$_0$)}})}}$\urcorner\urcorner^{\mathfrak{S}}$
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+%   . $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \record{\tfield{e}{think($r$.x,
+%         \textbf{she$^\frown$failed}($\mathfrak{s}$))}}
+\label{ex:thinks-she-failed-x0} 
+\end{ex} 
+Call this \textbf{thinks$^\frown$she$^\frown$failed}. Here
+\textit{she} is still a free occurrence of a pronoun dependent on the
+context for resolution.  % An alternative interpretation is \nexteg{},
+% where the pronoun has become bound as the subject of the property.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} . $\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{think($r$.x, \textbf{she$^\frown$failed}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$r$.x}}))}} 
+% \end{ex} 
+% We will call this a logophoric interpretation of the verb phrase,
+% \textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}. These two
+% readings for the verb-phrase yields two alternatives for the complete
+% sentence, one where the pronoun remains unbound as in \nexteg{a} and
+% one where it is bound as in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item
+%   $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+%     . \record{\tfield{e}{no(girl$'$, \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}($\mathfrak{s}$))}} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec}
+%   . \record{\tfield{e}{no(girl$'$, \textbf{thinks$^\frown$she$^\frown$failed$_{\mathrm{lg}}$}($\mathfrak{s}$))}} 
+ 
+% \end{subex} 
+   
+% \end{ex} 
+
+% Let us now consider an option where we store the interpretation of
+% \textit{no girl}.  For this we ill use the abbreviatory notation
+% \nexteg{b} for \nexteg{a}
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item \record{\field{bg}{$T_1$}\\
+%               \field{fg}{$\lambda\mathfrak{v}$:$T_1$ . $T_2(\mathfrak{v})$}} 
+ 
+% \item $\ulcorner\lambda\mathfrak{v}$:$T_1$ . $T_2(\mathfrak{v})\urcorner$
+ 
+% \end{subex} 
+   
+% \end{ex} 
+% [????We should introduce this notation from the beginning, starting
+% p. 121 ``Parametric contents as we have presented them so far are
+% problematic...''] If $\frec{f}$ is a record as
+% characterized in \preveg{} then we use the notation $\frec{f}(a)$ to
+% represent $\frec{f}.\text{fg}(a)$, that is, $f(a)$.
+
+The content type associated with \textit{no girl} will be \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
+  P$:\textit{Ppty} . \smallrecord{
+    \smallmfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+    \smalltfield{e}{no(restr, scope)}}$\urcorner^{\mathfrak{S}}$
+  \label{ex:no-girl-cont-type}
+\end{ex}
+Let us represent the \textit{generator} of this type, that is,
+\nexteg{}, by `no$'$(girl$'$)'.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . $\lambda
+  P$:\textit{Ppty} . \smallrecord{
+    \smallmfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \smallmfield{scope}{$P$}{\textit{Ppty}}\\
+    \smalltfield{e}{no(restr, scope)}}$\urcorner$ 
+\end{ex}
+This means that one witness for the type (\ref{ex:no-girl-cont-type})
+is \nexteg{} where `no$'$(girl$'$)' has been stored.
+\begin{ex} 
+$\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{no$'$(girl$'$)}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$ 
+\end{ex} 
+Note that the context type for this parametric content has the path
+`$\mathfrak{s}$.x$_0$' which means that it is available for anaphoric
+version of combination operations, thus enabling \textit{she} in
+\textit{thinks she failed} to be related to
+`$\mathfrak{s}$.x$_0$'. This can be achieved by the combination of
+parametric contents expressed in \nexteg{a} which is identical with
+\nexteg{b}.  This uses `@$_{0,1}$' as characterized in
+(\ref{ex:combine-align}).
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{no$'$(girl$'$)}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+  
+  @$_{0,1}$
+
+  $\ulcorner\lambda c$:\smallrecord{\footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}}}
+  }
+  . $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . 
+  \record{\tfield{e}{think($r$.x, \smallrecord{
+        \smalltfield{e}{fail($c.\mathfrak{s}$.x$_0$)}})}}$\urcorner\urcorner$
+  
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{no$'$(girl$'$)}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\textit{PropCntxt}}}}}}}}} . \record{
+    \tfield{e}{think($c.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($c.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$
+           
+ 
+\end{subex} 
+   
+\end{ex} 
+  
+Application of `$\mathrm{retrieve}$' to the content \preveg{} will obtain a content where
+the scope of the quantifier is the property of ``being a girl who
+thinks she (the girl) failed''.   The whole content is given in
+\nexteg{} where \nexteg{a--c} are identical.
+\begin{ex} 
+\begin{subex} 
+ 
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}}}}}}}} . \\
+  \hspace*{1em}($\lambda P$:\textit{Ppty} . \record{
+    \mfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathcal{F}(\text{girl}')}$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}} \\
+  \hspace*{2em}($\mathfrak{P}$($\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \footnotesize{\textit{Assgnmnt}}\\
+        \smallmfield{x$_0$}{$\Uparrow$x}{\textit{Ind}}}}} . \record{
+    \tfield{e}{think($r.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($r.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$)))$\urcorner$
+ 
+\item  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}}}}}}}} . \\
+  \hspace*{1em}($\lambda P$:\textit{Ppty} . \record{
+    \mfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$P|_{\mathcal{F}(\text{girl}')}$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}} \\
+  \hspace*{2em}($\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            \footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$r$.x}{\textit{Ind}}}}}}\\
+    \smalltfield{e}{think($\mathfrak{c}.\mathfrak{s}.\text{x}_0$, \smallrecord{
+        \smalltfield{e}{fail($\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$))$\urcorner$
+  \hfill (purification)
+
+  
+\item $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\smallrecord{
+                \smalltfield{f}{\textit{PropCntxt}}\\
+                \smalltfield{a}{\smallrecord{
+                    \smalltfield{f}{\textit{PropCntxt}}\\
+                    \smalltfield{a}{\textit{PropCntxt}}}}}}}}}}} . \\
+  \hspace*{1em}\record{
+    \mfield{restr}{girl$'$}{\textit{Ppty}}\\
+    \mfield{scope}{$\ulcorner\lambda r$:\smallrecord{
+        \smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{e}{girl(x)}} . \smallrecord{
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{$\mathfrak{s}$}{\smallrecord{
+                \footnotesize{\textit{Assgnmnt}}\\
+                \smallmfield{x$_0$}{$r$.x}{\textit{Ind}}}}}}\\
+        \smalltfield{e}{think($\mathfrak{c}.\mathfrak{s}.\text{x}_0$, \smallrecord{
+            \smalltfield{e}{fail($\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}})}}$\urcorner$}{\textit{Ppty}}\\
+    \tfield{e}{no(restr, scope)}}$\urcorner$\\
+  \hfill ($\beta$-reduction, property restriction)
+ 
+\end{subex} 
+   
+\end{ex} 
+
+
+% Interpreting \textit{no girl} with storage yields \nexteg{}.
+% \begin{ex} 
+% \record{\field{quants}{\{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+%       . $\lambda P$:\textit{Ppty} . \record{\tfield{e}{no(girl$'$,
+%           $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_1$}}))}}$\urcorner$\}}\\
+% \field{core}{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+%   . $\lambda P$:\textit{Ppty} . $P$(\smallrecord{\smalltfield{x}{$\mathfrak{s}$.x$_1$}})$\urcorner$}} 
+% \end{ex} 
+% Then \textit{no girl thinks she failed} yields \nexteg{}.
+% \begin{ex} 
+%  \record{\field{quants}{\{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+%       . $\lambda P$:\textit{Ppty} . \record{\tfield{e}{no(girl$'$,
+%           $P$(\smallrecord{\field{x}{$\mathfrak{s}$.x$_1$}})$|_{\mathcal{F}(\text{girl}')}$)}}$\urcorner$\}}\\
+% \field{core}{$\ulcorner\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}}
+%       . \record{\tfield{e}{\textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\mathfrak{s}$.x$_1$}})}}$\urcorner$}}
+% \end{ex} 
+% \preveg{} uses the definition of
+% \textbf{thinks$^\frown$she$^\frown$failed$_{x_0}$} given in
+% (\ref{ex:thinks-she-failed-x0}).  Let us call the value of the
+% `core'-field in \preveg{}
+% \textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}.  Then the result
+% of applying retrieval to \preveg{} is \nexteg{}.
+% \begin{ex} 
+% \record{\field{quants}{\{\}}\\
+%         \field{core}{$\ulcorner\lambda\mathfrak{s}$:\textit{Rec}
+%           . \smallrecord{\smalltfield{e}{no(girl$'$, $\lambda
+%               r$:\smallrecord{\smalltfield{x$_1$}{\textit{Ind}}\\
+%                               \smalltfield{e}{girl(x$_1$)}} .  \textbf{thinks$^\frown$she$^\frown$failed$_{x_1}$}($\mathfrak{s}\oplus$\smallrecord{\field{x$_1$}{$r$.x$_1$}})})}$\urcorner$}}
+% \end{ex} 
+     
+\paragraph{\textit{A man walked. He whistled.} }
+\label{sec:discourse-anaph}
+Given our strategy for defining the content of quantified sentences in
+terms of generalized quantifiers a witness for the content type of \textit{a man walked}
+will be \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . \record{
+    \mfield{restr}{man$'$}{\textit{Ppty}}\\
+    \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{exist(restr, scope)}}$\urcorner$ 
+\end{ex}
+We know from our treatment of the witness conditions associated with
+`exist' that \preveg{} is equivalent to \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . \\
+  \hspace*{4em}\record{
+    \mfield{restr}{man$'$}{\textit{Ppty}}\\
+    \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{
+        \tfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+        \tfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}$\urcorner$
+  \label{ex:a-man-walked-derived}
+\end{ex} 
+Using our previous treatment for free pronouns, \textit{he whistled}
+will have \nexteg{} as a witness of its content type.
+\begin{ex}
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}
+  . 
+  \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+  % $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} . \record{\tfield{e}{whistle($\mathfrak{s}$.x$_0$)}}
+
+  \label{ex:he-whistled-parametric}
+\end{ex} 
+We will represent \preveg{} as \textbf{he$^{\frown}$whistled}.
+
+The utterance of \textit{He whistled} is to be interpreted in the
+context of the previous utterance of \textit{a man walked}.
+We will achieve this by merging the quasi-fixed point type (see
+Chapter~\ref{ch:commonnouns}, p.~\pageref{ex:quasifixedpointtype}) of
+the foreground of the parametric content of the previous utterance with the context type
+of the current utterance.  The quasi-fixed point type for the
+foreground of 
+(\ref{ex:a-man-walked-derived}) is \nexteg{}.
+\begin{ex} 
+  \record{
+    \tfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
+    \mfield{restr}{man$'$}{\textit{Ppty}}\\
+    \mfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+    \tfield{e}{\record{
+        \tfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+        \tfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}} 
+\end{ex} 
+We will merge this under the label `$\mathfrak{p}$' (``previous'')
+into the context type in (\ref{ex:he-whistled-parametric}) yielding \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{p}$}{\smallrecord{
+        \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
+        \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+        \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+        \smalltfield{e}{\smallrecord{
+            \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+            \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}}
+  . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex} 
+\preveg{} makes the content of the previous utterance be part of the
+context for content of the current utterance.  It does not, however,
+express the anaphoric relation between \textit{he} and \textit{a man}.
+In order to do this we need to require that $\mathfrak{s}.\text{x}_0$
+in the context is identical with $\mathfrak{p}.\text{e}.\text{s}$.
+This can be done by introducing a manifest field under the
+`$\mathfrak{s}$'-label as in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          %\footnotesize{\textit{Assgnmnt}}\\
+          \smallmfield{x$_0$}{$\Uparrow\!\!\mathfrak{p}$.e.x}{\textit{Ind}}}}}
+  . \record{\tfield{e}{whistle($c.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex}
+On the basis of \preveg{}, we can create a new function with the same
+effect which will have the same domain and return the same results for
+each element in the domain but in which any dependency on
+`$c.\mathfrak{s}.\text{x}_0$' is replaced by a dependency on
+`$c.\mathfrak{p}.\text{e}.\text{x}$' as in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          %\footnotesize{\textit{Assgnmnt}}\\
+          \smallmfield{x$_0$}{$\Uparrow\!\!\mathfrak{p}$.e.x}{\textit{Ind}}}}}
+  . \record{\tfield{e}{whistle($c.\mathfrak{p}$.e.x)}}$\urcorner$ 
+\end{ex} 
+Since nothing now depends on the path `$\mathfrak{s}.\text{x}_0$' in
+the context and $\mathfrak{T}(\text{man}')$', that is, the type
+restriction on the path `$\mathfrak{p}$.e.x', is a subtype of
+`\textit{Ind}', the type from which the singleton type on the path
+`$\mathfrak{s}.\text{x}_0$' is derived, we can remove the path `$\mathfrak{s}.\text{x}_0$'
+without changing the extension of any records that are witnesses for the
+context type.  Thus we obtain \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{p}$}{\smallrecord{
+          \smalltfield{$\mathfrak{c}^*$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}}}\\
+          \smallmfield{restr}{man$'$}{\textit{Ppty}}\\
+          \smallmfield{scope}{walk$'|_{\mathcal{F}(\text{restr})}$}{\textit{Ppty}}\\
+          \smalltfield{e}{\smallrecord{
+              \smalltfield{x}{$\mathfrak{T}$($\Uparrow$restr)}\\
+              \smalltfield{e}{$\mathfrak{P}$($\Uparrow$scope)\{x\}}}}}}
+      }
+  . \record{\tfield{e}{whistle($c.\mathfrak{p}$.e.x)}}$\urcorner$ 
+\end{ex}
+
+\begin{shaded}
+\label{pg:path-alignment-types}Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
+paths in $T$.  Then we use $T_{\pi_1=\pi_2}$ to represent the type
+exactly like $T$ except that $T_{\pi_1=\pi_2}.\pi_1=
+(T.\pi_1)_{\pi_2}$, that is, whatever type, $T'$, is at the end of the path
+$\pi_1$, is replaced by the singleton type $T'_{\pi_2}$, or if
+$T.\pi_1$ is
+\begin{quote}
+$\langle\lambda v_1\!:\!T_1\ldots \lambda v_n\!:\!T_n\
+.\ T'\dep{v_1,\ldots,v_n}, \Pi\rangle$
+\end{quote}
+then it is replaced by
+\begin{quote}
+$\langle\lambda v_1\!:\!T_1\ldots \lambda v_n\!:\!T_n\ 
+.\ (T'\dep{v_1,\ldots,v_n})_{\pi_2}, \Pi\rangle$
+\end{quote}
+We use $T_{\pi_{11}=\pi_{21},\ldots,\pi_{1n}=\pi_{2n}}$ to
+represent $(\ldots(T_{\pi_{11}=\pi_{21}})\ldots)_{\pi_{1n}=\pi_{2n}}$.
+
+Suppose that $\varphi_1$ and $\varphi_2$ and parametric contents,
+$\pi_{11}\ldots\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$ and \\
+$\pi_{21}\ldots\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$,
+then the \textit{content $\varphi_1$ given $\varphi_2$ with
+  alignment of $\pi_{11}$ and $\pi_{21}$;\ldots;$\pi_{1n}$ and $\pi_{2n}$},
+$\varphi_1|_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\varphi_2$, is
+\begin{quote}
+  \record{
+    \field{bg}{($\varphi_1$.bg \d{$\wedge$} \smallrecord{
+        \smalltfield{$\mathfrak{p}$}{$\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$}})$_{\pi_{11}=\mathfrak{p}.\pi_{21},\ldots,\pi_{1n}=\mathfrak{p}.\pi_{2n}}$}\\
+    \field{fg}{$\lambda c$:bg . $\varphi_1(c)$}}
+\end{quote}
+
+This gives us a way of combining two parametric contents.  Now we need
+a way of combining the kinds of parametric content types that we are
+using for underspecified interpretation.  If $T_1$ and $T_2$ are types
+of parametric contents, then there is a combined type,
+$\mathfrak{C}(T_1,T_2)$, whose witnesses include witnesses for $T_1$
+given a witness for $T_2$ with some possible alignment between the
+two.  The witnesses of $\mathfrak{C}(T_1,T_2)$ are characterized
+recursively by:
+\begin{enumerate} 
+ 
+\item if $\varphi:T_1$, then $\varphi:\mathfrak{C}(T_1,T_2)$ 
+ 
+\item \begin{tabbing}
+    if \=$\varphi_1:\mathfrak{C}(T_1,T_2)$,\\
+  \>$\pi_{11},\ldots,\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$,\\ \>$\varphi_2:T_2$ and\\
+\>$\pi_{21},\ldots,\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg}))$,
+  \end{tabbing}
+  then
+  \begin{quote}
+    $\varphi_1|_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\varphi_2:\mathfrak{C}(T_1,T_2)$
+  \end{quote}
+  
+ 
+\end{enumerate} 
+What we need then for the content type of the utterance is
+$\mathfrak{S}(\mathfrak{C}(T_1,T_2))$.  We can express this by means
+of the action rule in \nexteg{}.
+\end{shaded}
+\begin{sidewaysfigure}
+\begin{ex}
+  
+  \begin{prooftree}
+    \hypo{s_{i,A}:_A\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{\smallrecord{
+                  \smalltfield{cont}{\textit{ContType}}}}}}}}}
+    \hypo{u^*:_A\text{\smallrecord{
+          \smalltfield{cont}{\textit{ContType}}}}}
+    \infer[enth]2{s_{i+1,A}:_A\text{\smallrecord{
+          \smalltfield{shared}{\smallrecord{
+              \smalltfield{latest-utterance}{\smallrecord{
+                  \smallmfield{cont}{$\mathfrak{S}(\mathfrak{C}(u^*.\text{cont},s_{i,A}.\text{shared}.\text{latest-utterance}.\text{cont}))$}{\textit{ContType}}}}}}}}}
+  \end{prooftree}
+  
+\end{ex} 
+\end{sidewaysfigure}  
+  
+
+
+
+  
+
+
+
+
+% In
+% order to obtain the content of the whole discourse, we will embed the
+% content of the first sentence below the label `prev' (meaning
+% ``previous'') and embed \textbf{he$^{\frown}$whistled} under `e'.
+% This is the same technique we used to encode order (and salience) and
+% to avoid unwanted label clash in our representation of attitudinal
+% states in Chapter~\ref{ch:intensional}.  At the same time we need to
+% ensure that the resulting content (on the anaphoric reading of the
+% pronoun) does not depend on the context and that the `x$_0$' in
+% \textbf{he$^{\frown}$whistled} gets bound to the path `e.x' in the
+% content of the first sentence.  The result we obtain is \nexteg{a}
+% which, spelling out the function application in the `e'-field, is
+% identical with \nexteg{b}.
+% \begin{ex}
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} . 
+% \record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+%                                                  \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
+%          \tfield{e}{\textbf{he$^{\frown}$whistled}($\mathfrak{s}\oplus$\smallrecord{\field{x$_0$}{$\Uparrow$prev.e.x}})}}   
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} . 
+% \record{\tfield{prev}{\record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(man$'$)}\\
+%                                                  \tfield{e}{$\mathfrak{P}$(walk$'_{\mathcal{F}(\text{man}')}$)\{x\}}}}}}\\
+%          \tfield{e}{\record{\tfield{e}{whistle($\Uparrow$prev.e.x)}}}} 
+ 
+% \end{subex} 
+   
+ 
+% \end{ex} 
+
+% Now we must consider how we would construct general rules that would
+% combine the parametric content of the discourse so far with the
+% parametric content of a new declarative sentence added to the
+% discourse.  We will first consider the simple case where no anaphora
+% occurs (for example, an interpretation of \textit{A man walked.  He
+%   whistled} here \textit{he} is refers deictically and is not
+% anaphorically related to \textit{a man}).  We will use
+% $\mathcal{T}_{\text{curr}}$ to refer to the current parametric
+% content of the discourse so far.  (We are making the simplifying
+% assumption that the discourse consists of a string of declarative
+% sentence utterances.) We will use $\mathcal{T}_{\text{new}}$ to refer
+% to the paramtric content of the new (declarative) sentence with which
+% we are updating the content of the discourse.  We will use
+% $\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ to represent the
+% result of updating $\mathcal{T}_{\text{curr}}$ with
+% $\mathcal{T}_{\text{new}}$.  The non-anaphoric update is then defined
+% as in \nexteg{}.
+% \begin{ex} 
+% If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$ and
+% $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, then
+% $\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ is
+% \begin{quote}
+% $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})$
+% . \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+%           \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s})$}}
+% \end{quote}
+% \end{ex} 
+% This method of combination is similar to the S-combinator in
+% combinatory logic, in that it applies both parametric contents to a
+% context, $\mathfrak{s}$.  It abstracts over $\mathfrak{s}$ and makes
+% sure that it is of an appropriate type to be an argument to both
+% parametric contents.  Rather than applying the first result of
+% application to $\mathfrak{s}$ to the second it
+% creates a record type involving both the contents.  In addition it
+% increments the `x'-labels in the second content so that there will no
+% be unintended label clash between the two.
+
+% In the case of making a discourse anaphoric connection two additional things
+% have to happen.  The pronoun content within $\mathcal{T}_{\text{new}}$
+% has to be connected to some path in $\mathcal{T}_{\text{curr}}$ and
+% the updated parametric content
+% $\mathcal{T}_{\text{curr}}+\mathcal{T}_{\text{new}}$ must be made not
+% to depend on the context to determine the pronoun content.  We first
+% give a definition which will allow one discourse anaphoric connection
+% and we will then generalize this to a set of anaphoric connections.
+% The definition given in \preveg{} will be a specific case of this
+% general definition, where the set of anaphoric connections is empty.
+% The case of a single anaphoric connection is given in \nexteg{}.
+% \begin{ex} 
+% If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
+% $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$, for any
+% $s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))$ and
+% $[\ell:v]\in[T_2]_{\text{incr}_x(T_1)}$, then
+% $\mathcal{T}_{\text{curr}}+_{\pi,\ell}\mathcal{T}_{\text{new}}$ is
+% \begin{quote}
+% $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)}\ominus[\ell,v])$
+% . \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+%           \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus[\ell=\text{prev}.\pi])$}}
+% \end{quote} 
+% \end{ex} 
+% Here the dependence of $\mathcal{T}_{\text{new}}$ on $\ell$ is
+% discharged locally by requiring that the $\ell$-field contains the
+% same as the $\pi$-field from $\mathcal{T}_{\text{curr}}$.  The
+% dependence on $\ell$ is thus removed from the domain of the function
+% representing the parametric content for the whole discourse.
+
+% Now let us consider how we can upgrade \preveg{} to allow for more
+% than one pronoun resolution at a time as in an example like \textit{A
+%   dog chased a cat.  She didn't catch him.} In order to facilitate
+% this we introduce two new operators, $\ominus_{\text{set}}$ and
+% $\oplus_{\text{set}}$, which perform $\ominus$ and $\oplus$
+% respectively for each member of a set in their second arguments.  Thus
+% $\ominus_{\text{set}}$ will subtract a set of fields from a record
+% type and $\oplus_{\text{set}}$ will add a set of fields to a record.
+% We present the upgraded version of \preveg{} in \nexteg{} where if
+% $\pi$ is an ordered pair we use $\pi_1$ and $\pi_2$ to represent the
+% first and second members of $\pi$ respectively and if $f$ is a field
+% then we use label($f$) to represent the label in the field, that is
+% the first member of the ordered pair which is the field.
+% \begin{ex} 
+% If $\mathcal{T}_{\text{curr}}$ : $(T_1\rightarrow\textit{Type})$,
+% $\mathcal{T}_{\text{new}}$ : $(T_2\rightarrow\textit{Type})$ and\\
+% \hspace*{2em}$\vec{\Pi}\subseteq[T_2]_{\text{incr}_x(T_1)}\times\{\pi\mid$ for any
+% $s:T_1$, $\pi\in\text{paths}(\mathcal{T}_{\text{curr}}(s))\}$ such
+% that $\vec{\Pi}$ is the graph of a one-one function,\\ then
+% $\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ is
+% \begin{quote}
+% $\lambda\mathfrak{s}$:$(T_1$\d{$\wedge$}$[T_2]_{\text{incr}_x(T_1)})\ominus_{\text{set}}\vec{\Pi}_1$
+% .\\ \hspace*{2em} \record{\tfield{prev}{$\mathcal{T}_{\text{curr}}(\mathfrak{s})$}\\
+%           \tfield{e}{$[\mathcal{T}_{\text{new}}]_{\text{incr}_x(T_1)}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=\text{prev}.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$}}
+% \end{quote} 
+% \end{ex} 
+% If $\vec{\Pi}$ is
+% $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+% then for convenience we represent
+% $\mathcal{T}_{\text{curr}}+_{\vec{\Pi}}\mathcal{T}_{\text{new}}$ as $\mathcal{T}_{\text{curr}}+_{\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}\mathcal{T}_{\text{new}}$.
+
+This does not express any of the linguistic constraints concerning
+what anaphors can be related to what antecedents.  % This will be
+% addressed in Section~\ref{sec:struc-cntxt}.
+  
+  
+% This does not give us a field which \textit{he} could pick up on to
+% obtain the anaphoric reference.  However, we can show that the type
+% in \nexteg{a} and \nexteg{b} are truth-conditionally equivalent, that is,  \nexteg{a}
+% has a witness just in case \nexteg{b} has a witness.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item exist(man$'$, walk$'$) 
+ 
+% \item \record{\tfield{x}{\textit{Ind}}\\
+%               \tfield{c}{man(x)}\\
+%               \tfield{e}{walk(x)}}
+ 
+% \end{subex} 
+% \label{ex:amw-drt}  
+% \end{ex} 
+% The argument for this goes as follows.  By an argument parallel to
+% that in (\ref{ex:witnessconds-edr}c) we can show that \nexteg{a} and
+% \nexteg{b} are equivalent.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $s$ : exist(man$'$, walk$'$) 
+ 
+% \item $\{a\mid\exists s'[s':\text{man}(a)]\}\cap\{a\mid\exists
+%   s'[s':\text{man}(a)]\wedge\exists s'[s'\underline{\varepsilon}s\wedge s':\text{walk}(a)]\}\not=\emptyset$ 
+ 
+% \end{subex} 
+% \label{ex:amw-wit}   
+% \end{ex} 
+% This entails \nexteg{a} which, because of the arity of `man' and
+% `walk', is equivalent to \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\exists a[\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$
+ 
+% \item $\exists a[a:\textit{Ind}\wedge\exists s'[s':\text{man}(a)]\wedge\exists s'[s':\text{walk}(a)]]$ 
+ 
+% \end{subex} 
+   
+% \end{ex} 
+% If \preveg{b} is true, then it will be possible to construct a witness
+% for (\ref{ex:amw-drt}b).  On the other hand, if $s$ is of type
+% (\ref{ex:amw-drt}b), then (\ref{ex:amw-wit}b) will be true so there
+% will be a witness for (\ref{ex:amw-drt}a), for example, $s$ itself.
+% Thus if it has been asserted that there is a situation of type
+% (\ref{ex:amw-drt}a), it is safe to assume that there is a situation of
+% type (\ref{ex:amw-drt}b) (assuming that the assertion was true).
+% (\ref{ex:amw-drt}b) gives us a field which can be picked up by anaphora.  
+
+  
+
+\paragraph{\textit{no dog which chases a cat catches it}}
+\label{sec:donkey-anaph}
+This example is an instance of what is known in the literature as
+\textit{donkey anaphora}.  For a brief overview with references to a
+large linguistic literature see \cite{KingLewis2018}.  For good
+overviews up to the mid nineties from a linguistic perspective see
+\cite{Chierchia1995}, Chapter~2 and \cite{Kanazawa1994}.
+Our treatment of donkey anaphora will treat 
+\textit{it} in \nexteg{a}  more like the kind of discourse
+anaphora discussed in the previous example rather than
+direct binding of a pronoun by a quantifier.  In this way it follows
+the classic linguistic treatment of donkey anaphora in DRT, first
+formulated in \cite{Kamp1981}.  Some evidence for this can be taken
+from \nexteg{b}, where it is difficult to relate the singular pronoun
+\textit{it} to \textit{every cat}, and \nexteg{c} where the plural
+pronoun \textit{them} can be related \textit{every cat}.  This follows
+the pattern of discourse anaphora illustrated in \nexteg{d} and
+\nexteg{e}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item no dog which chases a cat catches it 
+ 
+\item no dog which chases every cat catches it
+
+\item no dog which chases every cat catches them
+
+\item Every cat miaowed.  It wanted milk.
+
+\item Every cat miaowed.  They wanted milk. 
+ 
+\end{subex} 
+   
+\end{ex}
+
+The key to the treatment of donkey anaphora is a process of local
+accommodation of context in a parametric property.  Consider a
+parametric content for the verb-phrase \textit{catches it} given in
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}
+} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $c.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
+\end{ex} 
+Local accommodation involves ``moving'' the type of the context into
+the domain type of the property under the label `$\mathfrak{c}$' as in
+\nexteg{}, adjusting any paths in $c$ addressed in the resulting
+function to paths in $r$ beginning with `$\mathfrak{c}$'.
+\begin{ex} 
+ $\ulcorner\lambda c$:\textit{Cntxt} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{\textit{Assgnmnt}}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}
+}}} .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
+\label{ex:catch-it-localized}
+\end{ex}
+In general we define a localization operation, $\mathcal{L}$, on
+parametric properties characterized in \nexteg{}.
+\begin{ex} 
+  If $\mathcal{P}$ is a parametric property of the form
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T_1\ . \ulcorner\lambda r\!:\!T_2\ .\
+    \varphi\urcorner\urcorner$
+  \end{quote}
+  then the \textit{localization of $\mathcal{P}$},
+  $\mathcal{L}(\mathcal{P})$, is
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!\textit{Cntxt}\ .\ \ulcorner\lambda
+    r\!:\!T_2\text{\d{$\wedge$}\smallrecord{
+        \smalltfield{$\mathfrak{c}$}{$T_1$}}}\ .\ 
+    \varphi_{c.\pi\leadsto r.\mathfrak{c}.\pi}\urcorner\urcorner$
+  \end{quote}
+\label{ex:localization}  
+\end{ex} 
+  
+If we use the localized content (\ref{ex:catch-it-localized}) as the
+content of the verb phrase, then, after combination with \textit{no
+  dog which chases a cat}, the scope of the quantifier will become
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smalltfield{x$_0$}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($\Uparrow$x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+
+
+
+We can paraphrase this as ``the property of being a dog which chases a
+cat and there is something which it catches''.  In order to obtain the
+anaphora we need to align the following two paths in the domain type
+of this function: `$\mathfrak{c}.\mathfrak{s}.\text{x}_0$' and
+`e$_2$.x'.  This we do in \nexteg{} by creating a manifest field on
+the former path.
+
+\begin{ex} 
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{dog(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+        \smalltfield{e}{chase$^\dagger$($r$.x, x)}}}}
+   .
+  \record{
+    \tfield{e}{catch$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+We can paraphrase this as ``the property of being a dog which chases a
+cat and catches that cat''.
+
+In order to include such properties with aligned paths as the scope of
+quantifiers in our interpretations, we will first generalize the
+characterization of alignment of paths given on
+p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
+\begin{ex} 
+  If $\varphi=\ulcorner\lambda r\!:\!T\ .\ \psi\urcorner$ and
+  $\pi_1,\pi_2\in\mathrm{paths}(T)$, then
+  \begin{quote}
+    $\varphi_{\pi_1=\pi_2}=\ulcorner\lambda r\!:\!T_{\pi_1=\pi_2}\ .\
+    \psi\urcorner$
+  \end{quote}
+\end{ex} 
+We then add two further clauses to the characterization of witnesses
+for $\mathfrak{S}(T)$ for content types, $T$, in \nexteg{} with the
+new additions boxed.
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item \fbox{if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+      then $\mathcal{L}(\varphi):\mathfrak{S}(T)$}
+    
+  \item \fbox{\begin{minipage}[t]{.9\linewidth}if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}}
+
+    
+  \item if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-donkey-type}   
+\end{ex}
+
+
+
+Overall we can get a parametric content for \textit{no dog which
+  chases a cat catches it} which looks like \nexteg{} where
+\savebox{\boxone}{\textbf{dog}$^\frown$\textbf{which}$^\frown$\textbf{chases}$^\frown$\textbf{a}$^\frown$\textbf{cat}} \usebox{\boxone}
+and \savebox{\boxtwo}{\textbf{catches}$^\frown$\textbf{it}}\usebox{\boxtwo} represent parametric contents
+which have not undergone operations introduced by $\mathfrak{S}$.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{no(restr, scope)}}
+\end{ex} 
+Given the semantics we have specified for the determiner \textit{no},
+\preveg{} is \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex} 
+We can paraphrase this content as ``for every dog which chases a cat
+it's not the case that it's a dog which chases a cat$_i$ and catches
+it$_i$'' where the subscript on \textit{cat} and \textit{it} indicates
+that \textit{it} is anaphorically related to \textit{a cat}.
+
+
+% The basic content related to \textit{no} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{no($Q$,$P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% As usual we abbreviate the content of \textit{dog} as `dog$'$'.  The
+% relative pronoun \textit{which} has the content specified for
+% \textit{who} in Section~\ref{sec:long-distance}.  (We are simplifying
+% by not accounting for the gender distinction between the two.)  We
+% repeat this in \nexteg{} and will refer to it here as \textbf{which}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh}{\textit{Ind}}}
+%   . $\lambda P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh\} 
+% \end{ex} 
+% The basic content of an utterance of \textit{chase} is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Quant}}} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{chase($r_1$.x, $r_2$.x)}} 
+% \end{ex} 
+% The indefinite article $a$ will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda Q$:\textit{Ppty} $\lambda
+% P$:\textit{Ppty} . \record{\tfield{e}{exist($Q$, $P|_{\mathcal{F}(Q)}$)}} 
+% \end{ex} 
+% Thus the phrase \textit{a cat} will have the content in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+% . \record{\tfield{e}{exist(cat$'$, $P|_{\mathcal{F}(\text{cat}')}$)}} 
+% \end{ex} 
+% We will refer to \preveg{} as \textbf{a$^\frown$cat}.  Given this the
+% content of \textit{chase a cat} will be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{chase($r_1$.x,
+%     \textbf{a$^\frown$cat}($\mathfrak{s}$))}}
+% \label{ex:chaseacat-noexport} 
+% \end{ex} 
+% Given that \textit{chase} is an extensional verb it will obey a
+% constraint like (\ref{ex:mp-find}) on p.~\pageref{ex:mp-find}, as
+% given in \nexteg{}.
+% \begin{ex} 
+% $e$ : chase($a$, $Q$) iff $e$ : $Q$($\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \smallrecord{\smalltfield{e}{chase$^{\dagger}$($a$,
+% $r$.x)}}) 
+% \end{ex} 
+% This means that we can construe the content to be a function which
+% returns an equivalent type to that returned in
+% (\ref{ex:chaseacat-noexport}).  This new content is given in
+% \nexteg{}.
+% \begin{ex} 
+% $\lambda s$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\textbf{a$^\frown$cat}($\mathfrak{s}$)($\lambda
+%       r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%       . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{exist(cat$'$, $\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                     \smalltfield{e}{cat(x)}}
+%                   . \smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x, $r$.x)}})}} 
+% \end{ex} 
+% In turn, \preveg{} is equivalent to \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%   . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($r_1$.x,
+%                          $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}
+% \label{ex:chase-a-cat} 
+% \end{ex} 
+% We represent \preveg{} as \textbf{chase$^\frown$a$^\frown$cat}.  From
+% this we can form a ``sentence with a gap'' interpretation,
+% \textbf{chase$^\frown$a$^\frown$cat$_S$}, in the manner described in
+% Section~\ref{sec:long-distance}.  This is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}} . $\lambda
+% P$:\textit{Ppty} . $P$\{$\mathfrak{s}$.wh$_0$\}(\textbf{chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)) 
+% \end{ex} 
+% Unpacking \preveg{} we obtain \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{wh$_0$}{\textit{Ind}}}
+% . \record{\tfield{e}{\record{\tfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                \tfield{e}{\record{\tfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                    \smalltfield{e}{cat(x)}}}\\
+%                    \tfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\mathfrak{s}$.wh$_0$, $\Uparrow\!\mathfrak{c}$.x)}}}}}}}} 
+% \end{ex} 
+% Again following the analysis of long-distance dependencies developed
+% in Section~\ref{sec:long-distance}, the content of \textit{which
+%   chased a cat} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} . \\
+% \hspace*{1em} $\lambda
+% r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \textbf{which}($\mathfrak{s}\oplus[\text{wh}=r_1.\text{x}$)($\lambda
+% r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \textbf{chase$^\frown$a$^\frown$cat$_S$}($\mathfrak{s}\oplus[\text{wh}_0=r_2.\text{x}]$) 
+% \end{ex} 
+% Unpacking \preveg{} gives us (\ref{ex:chase-a-cat}).  That is, the content of
+% \textit{which chased a cat} is identical with the content of
+% \textit{chased a cat}.  For clarity we will represent this content
+% also as \textbf{which$^\frown$chase$^\frown$a$^\frown$cat}.
+% Again following the proposal in Section~\ref{sec:long-distance} the
+% content for \textit{dog which chases a cat} will be
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} $\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e$_1$}{dog$'$\{$r$.x\}}\\
+%           \tfield{e$_2$}{\textbf{which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$)\{$r$.x\}}} 
+% \end{ex} 
+% We call this
+% \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}. Now
+% \textit{no dog which chases a cat} will correspond to \nexteg{a} which
+% is equivalent to \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{no(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$),
+%       $P|_{\mathcal{F}(\textbf{dog}^\frown\textbf{which}^\frown\textbf{chase}^\frown
+%           \textbf{a}^\frown\textbf{cat}(\mathfrak{s}))}$)}} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec} $\lambda P$:\textit{Ppty}
+%   . \record{\tfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}(P|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+% \end{subex} 
+% \label{ex:no-dog-which-chases-a-cat}   
+% \end{ex} 
+% Call this
+% \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}.
+% This is to combine with the content of \textit{catches it}, given in
+% \nexteg{}. 
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}} 
+% \end{ex}
+% We will represent this as \textbf{catch$^\frown$it}. 
+% Using the S-combinator strategy to
+% (\ref{ex:no-dog-which-chases-a-cat}b) yields \nexteg{a}, equivalently
+% \nexteg{b}, which represents a reading of the sentence where
+% \textit{it} is not captured and refers to a particular object provided
+% by the context.
+% \begin{ex}
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}(\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{catch$^\dagger$($r$.x, $\mathfrak{s}$.x$_0$)}}$|_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s}))})\{\text{x}\}$)}}}} 
+ 
+% \item $\lambda\mathfrak{s}$:\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{s}$.x$_0$)}}
+% )}}}} 
+ 
+% \end{subex} 
+   
+ 
+% \end{ex} 
+% In terms of the notation in \preveg{b}, it is simple enough to see
+% what needs to be done in order to change it to a case of donkey
+% anaphora.  The second argument to `catch$^\dagger$',
+% `$\mathfrak{s}$.x$_0$', has to be changed so that it presents a path
+% to the cat, that is, `$\mathfrak{c}$.e$_2$.e.x'.  Also the dependence
+% of this parametric content on `x$_0$' has to be removed.  Thus the
+% domain type for the $\lambda$-abstraction, currently
+% `\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}', should be replaced
+% by `\textit{Rec}'.  The result would be \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}$\neg$\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{dog$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(cat$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{cat(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{chase$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{catch$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}}
+% \label{ex:no-dog-which-chases-a-cat-catches-it-captured} 
+% \end{ex} 
+% We will achieve this by introducing a notion of restriction on a
+% parametric property in which we will allow anaphora to take place.
+% Let us first consider a case without anaphora.  Suppose that
+% $\mathcal{P}$ is a parametric property of type
+% $(T_1\rightarrow(T_2\rightarrow \textit{Type}))$ and that $T$ is a
+% type then we define the restriction of $\mathcal{P}$ by $T$,
+% $\mathcal{P}|^p_T$, to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1$ $\lambda r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s})(r)$ 
+% \end{ex} 
+% Now suppose that $[\ell,v]$ is a field in $T_1$ and $\pi$ is a path in
+% $T_2$ and we want to make an anaphoric association between $\ell$ and
+% $\pi$.  We define such a restriction,
+% $\mathcal{P}|^p_{T,\ell\leadsto\pi}$ as \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus[\ell:v]$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus[\ell=r.\pi])(r)$ 
+% \end{ex}
+% To enable the capture of several pronouns, we let $\vec\Pi\subseteq
+% T_1\times\text{paths}(T)$ such that $\vec\Pi$ is the graph of a one-one
+% function (whose domain is included in the fields of $T_1$ and whose
+% range is included in the paths of $T$).  We then define
+% $\mathcal{P}|^p_{T,\vec{\Pi}}$ to be \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:$T_1\ominus_{\text{set}}\vec{\Pi}_1$ $\lambda
+% r$:$T_2$\d{$\wedge$}$T$ . $\mathcal{P}(\mathfrak{s}\oplus_{\text{set}}\{[\text{label}(\vec{\pi}_1)=r.\vec{\pi}_2]\mid\vec{\pi}\in\vec{\Pi}\})$ 
+% \end{ex} 
+% If $\vec{\Pi}$ is
+% $\{\langle\langle\ell_1,v_1\rangle,\pi_1\rangle,\ldots,\langle\langle\ell_n,v_n\rangle,\pi_n\rangle\}$
+% then for convenience we represent $\mathcal{P}|^p_{T,\vec{\Pi}}$ as
+% $\mathcal{P}|^p_{T,\ell_1\leadsto\pi_1,\ldots,\ell_n\leadsto\pi_n}$. Using
+% this notation,  the content of \textit{no dog which chases a cat catches
+%   it} where the pronoun is captured is \nexteg{}.
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec}
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&$\neg\mathfrak{P}$(\textbf{catch$^\frown$it}$|^p_{\mathcal{F}(\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}(\mathfrak{s})),\text{x}_0\leadsto\text{e}_2.\text{e}.\text{x}}(\mathfrak{s})$)\{x\})}}}} 
+% \end{ex} 
+% Unpacking \preveg{} yields
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}).
+
+This treatment of donkey anaphora is essentially similar to that of
+\cite{Chierchia1995} in that it associates an existential reading the
+pronoun it, that is, it is not the case that there is a cat which the
+dog chases that it also catches.  The dog does not catch any of the
+cats it chases.  If we use \textit{every} instead of \textit{no} we
+get a reading which is paraphrased as ``every dog which chases a cat
+is a dog which chases a cat and catches it''.  This is what is known
+in the literature as a \textit{weak reading} or a
+\textit{$\exists$-reading}. It says that every dog which chases a cat
+catches \textit{some} cat that it chases (but not necessarily all).
+This reading may intuitively not be appropriate for \textit{every dog
+  that chases a cat catches it} which for many speakers would suggest
+that the dogs catch all the cats they chase.  However, the weak
+reading is important for the examples in \nexteg{}.
+
+% Notice that \preveg{}
+% forces what is known in the literature as a \textit{strong} reading
+% for the donkey anaphora.  That is, none of the dogs which chase a cat
+% catch \textit{any} of the cats which they chase.  That monotone
+% decreasing quantifiers force such strong readings was noted, for
+% example, by [Chierchia???? Pelletier????].  Monotone increasing
+% quantifiers, however, allow \textit{weak} readings.  Examples of
+% donkey sentences mentioned in the literature that have naturally weak
+% readings are given in \nexteg{}.
+\begin{ex} 
+\begin{subex} 
+ 
+\item Every person who had a dime put it in the parking
+  meter. \citep{PelletierSchubert1989} 
+ 
+\item Every man who has a daughter thinks she is the most beautiful
+  girl in the world \citep{Cooper1979} 
+ 
+\end{subex} 
+   
+\end{ex} 
+\preveg{a} does not seem to suggest that anybody who had several dimes
+put them all in the meter and \preveg{b} does not seem to
+commit a man who has two daughters to believe the contradictory
+proposition that they are both the one and only most beautiful girl in
+the world.
+%
+% @@
+%
+% Let us consider the content for \textit{every person who
+%   had a dime put it in the parking meter} given in \nexteg{}.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{person$^\frown$who$^\frown$have$^\frown$a$^\frown$dime}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{person$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(dime$'$)}\\
+%                                                                               %                  \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                               %                                                                                         \smalltfield{e}{dime(x)}}}\\
+%                                                                               %                       \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{put\_in\_the\_meter$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \end{ex} 
+% \preveg{} is exactly similar to
+% (\ref{ex:no-dog-which-chases-a-cat-catches-it-captured}) modulo the
+% properties and predicates involved except that there is no negation in
+% \preveg{}.  \preveg{} requires then that every person who had a dime
+% is a person who had a dime and put it in the meter, that is, a weak
+% reading which requires only that each relevant person put some dime in
+% the meter, not all of their dimes. 
+What then do we say about the
+original donkey sentences like \textit{every farmer who owns a donkey
+  likes it} which were analyzed by Geach and the classical analyses in
+DRT and type theory as having a strong reading in which every farmer
+who owns a donkey likes any donkey that he owns?  One option is to say
+that we only need the weak reading for such sentences as it is
+consistent with the stronger reading.  Many speakers feel that it
+unclear what the sentence means if some man owns more than one donkey.
+% \begin{ex} 
+%  $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{donkey(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}}}\\
+%                \smalltfield{e}{like$^\dagger$($x$, $\mathfrak{c}$.e$_2$.e.x)}}
+% )}}}} 
+% \label{ex:donkey-weak} 
+% \end{ex} 
+That is,
+\textit{every farmer who owns a donkey likes it} requires that for
+every donkey owning farmer there is at least one donkey the farmer
+owns such that she likes it.  This allows for the farmers to like all
+their donkeys but does not require it. (See \citealp{Kanazawa1994} for
+a discussion of this.)  In the case of \textit{every dog which chases
+  a cat catches it} I have the following intuition:
+\begin{quote}
+  if there is a dog under consideration which is involved in two
+  distinct cat-chasing events (with a single cat) and only succeeds in catching the cat in
+  one of the two events, then this seems to make the sentence false;
+
+  if there is a dog under consideration which is involved in a single
+  event of chasing two cats and only succeeds in catching one of the
+  cats in that event, then it seems that the sentence could still be
+  true.
+\end{quote}
+This suggests an analysis which requires that every relevant
+cat-chasing event must involve the catching of at least one of the
+cats chased in that event.  Firm judgements concerning such intuitions
+are notoriously hard to come by.  \cite{Chierchia1995} argues that the
+strong $\forall$-reading is necessary because of examples like
+\nexteg{}.
+\begin{ex} 
+Every man who owned a slave owned his offspring 
+\end{ex} 
+\preveg{} is a modification of an example in \cite{Heim1990} which is
+used to make a different argument.  It seems like a single instance of
+somebody owning a slave but not the slave's offspring would be
+sufficient to falsify \preveg{}.  Though again, in the case of a slave
+who has several offspring one of which is owned by somebody else, it
+seems to me that it is unclear whether that is sufficient to falsify
+the sentence.
+
+% One might also
+% argue that the strong reading is necessary for interpreting sentences
+% such as \nexteg{}.
+% \begin{ex} 
+% It is not true that every farmer who owns a donkey likes it 
+% \end{ex} 
+% If there is a reading of \preveg{} on which it is true even if every
+% farmer likes at least one of her donkeys, but at least one farmer 
+% does not like all of them, then we need to analyze this a strong reading. [????Check
+% for discussion of this.] 
+
+\label{pg:donkey-purification-universal}
+One option is to recreate the original Geach reading by
+using the variant of the purification operation, `$\mathfrak{P}^\forall$', in
+(\ref{ex:purification-universal}), p.~\pageref{ex:purification-universal} which introduces a function on local contexts.
+% \begin{ex} 
+% If $P$ : \textit{Ppty}, then
+% \begin{quote}
+% if $P$.bg$^x$ = $P$.bg, then
+% \begin{quote}
+% $\mathfrak{P}(P)=P$
+% \end{quote}
+% otherwise:
+% \begin{quote}
+% $\mathfrak{P}(P)$ is $\ulcorner\lambda r_1$:$P$.bg$^{\text{x}}$
+% . ($(r_2\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+% \record{
+%           \tfield{e}{$P(r_2)$}})$\urcorner$
+% \end{quote}
+% \end{quote}
+% %\label{ex:purification-classic}
+% \end{ex}
+Using `$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' will have the
+consequence that the content of \textit{every farmer who owns a donkey
+  likes it} will be \nexteg{}.
+\savebox{\boxone}{\textbf{farmer}$^\frown$\textbf{who}$^\frown$\textbf{owns}$^\frown$\textbf{a}$^\frown$\textbf{donkey}}
+\savebox{\boxtwo}{\textbf{likes}$^\frown$\textbf{it}}
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{every(restr, scope)}}
+\end{ex} 
+
+Given the general witness condition associated with `every', \preveg{} is
+equivalent to \nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}(\text{scope})\{x\})$}
+      }}}
+\end{ex}
+If we use a variant of this witness condition which uses
+`$\mathfrak{P}^\forall$' instead of `$\mathfrak{P}$' we have
+\nexteg{}.
+\begin{ex} 
+  $\lambda c$:\textit{Cntxt} . \record{
+    \mfield{restr}{\usebox{\boxone}($c$)}{\textit{Ppty}}\\
+    \mfield{scope}{$(\mathcal{L}(\text{\usebox{\boxtwo}})(c)|_{\mathcal{F}(\text{\usebox{\boxone}})})_{\mathfrak{c}.\mathfrak{s}.\text{x}_0=\text{e}_2.\text{x}}$}{\textit{Ppty}}\\
+    \smalltfield{e}{\record{
+        \tfield{X}{every$^w$(restr)}\\
+        \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\mathfrak{P}^\forall(\text{scope})\{x\})$}
+      }}}
+  \label{ex:efwoadli-classic}
+\end{ex}
+Let us check that \preveg{} does in fact give us the strong
+$\forall$-reading.  We will do this by showing that the value
+associated with the label `scope' will be paraphrasable as ``the
+property of being an individual such that if it's a farmer who owns a
+donkey, she likes that donkey'', that is, likes every donkey she
+owns. We can show this by unpacking the expression representing the
+scope in \preveg{}.  `\textbf{likes}$^\frown$\textbf{it}', according to
+our treatment of free pronouns and extensional verbs, will be
+\nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{Cntxt}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        %\footnotesize{Assgnmnt}\\
+        \smalltfield{x$_0$}{\textit{Ind}}}}} .
+  $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $c.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex}
+Using the definition of the localization operation, $\mathcal{L}$, in
+(\ref{ex:localization}), we can see that
+`$\mathcal{L}(\textbf{likes}^\frown\textbf{it})$' is \nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda c$:\textit{Cntxt} . $\ulcorner\lambda
+r$:\smallrecord{
+  \smalltfield{x}{\textit{Ind}}\\
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $r.\mathfrak{c}.\mathfrak{s}$.x$_0$)}}$\urcorner\urcorner$
+\end{ex} 
+Applying \preveg{} to any context, $c$, will obtain \nexteg{}.
+\begin{ex} 
+ $\ulcorner\lambda
+r$:\smallrecord{
+  \smalltfield{x}{\textit{Ind}}\\
+  \smalltfield{$\mathfrak{c}$}{\smallrecord{
+      \footnotesize{\textit{Cntxt}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+          \smalltfield{x$_0$}{\textit{Ind}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x, $r.\mathfrak{c}.\mathfrak{s}$.x$_0$)}}$\urcorner$
+\end{ex} 
+Restricting \preveg{} by
+`$\mathcal{F}(\textbf{farmer}^\frown\textbf{who}^\frown\textbf{owns}^\frown\textbf{a}^\frown\textbf{donkey})$',
+yields \nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smalltfield{x$_0$}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{farmer(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+        \smalltfield{e}{own$^\dagger$($\Uparrow$x, x)}}}}
+   .
+  \record{
+    \tfield{e}{like$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex}
+Aligning the paths `$\mathfrak{c}.\mathfrak{s}.\text{x}_0$' and
+`e$_2$.x' in \preveg{} yields \nexteg{}.
+\begin{ex} 
+$\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{farmer(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+        \smalltfield{e}{own$^\dagger$($\Uparrow$x, x)}}}}
+   .
+  \record{
+    \tfield{e}{like$^{\dagger}$($r$.x, $r.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$\urcorner$ 
+\end{ex} 
+Finally, in the `e.f'-field in (\ref{ex:efwoadli-classic})
+`$\mathfrak{P}^\forall$' is applied to the scope, that is, \preveg{}.
+Thus `$\mathfrak{P}^\forall(\text{scope})$' represents \nexteg{}.
+\begin{ex} 
+ $\ulcorner\lambda r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . (($r'$:\smallrecord{
+    \smallmfield{x}{$r$.x}{\textit{Ind}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \footnotesize{\textit{Cntxt}}\\
+        \smalltfield{$\mathfrak{s}$}{\smallrecord{
+            %\footnotesize{\textit{Assgnmnt}}\\
+            \smallmfield{x$_0$}{$\Uparrow^2$e$_2$.x}{\textit{Ind}}}}\\
+        \smalltfield{$\mathfrak{c}$}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}
+}}\\
+    \smalltfield{e$_1$}{farmer(x)}\\
+    \smalltfield{e$_2$}{\smallrecord{
+        \smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+        \smalltfield{e}{own$^\dagger$($\Uparrow$x, x)}}}})$\rightarrow$
+  \record{
+    \tfield{e}{like$^{\dagger}$($r'$.x, $r'.\mathfrak{c}.\mathfrak{s}.\text{x}_0$)}}$)\urcorner$
+\end{ex} 
+\preveg{} can be paraphrased as ``the property of being an individual,
+$x$, if $x$ is a farmer and owns a donkey, $y$, then $x$ likes $y$''
+thus requiring that every farmer likes all of the donkeys she owns.
+The whole sentence says that every farmer who owns a donkey has this property.  
+
+
+% \begin{ex} 
+% $\lambda\mathfrak{s}$:\textit{Rec} 
+%   . \smallrecord{\smalltfield{e}{\record{\tfield{X}{every$^w$(\textbf{farmer$^\frown$who$^\frown$owns$^\frown$a$^\frown$donkey}($\mathfrak{s}$))}\\
+%                            \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow$\\
+% &&\hspace*{2em}(($r$:\smallrecord{\smallmfield{x}{$x$}{\textit{Ind}}\\
+%                                                                \smalltfield{e$_1$}{farmer$'$\{x\}}\\
+%                                                                \smalltfield{e$_2$}{\smallrecord{\smalltfield{e}{\smallrecord{\smalltfield{x}{$\mathfrak{T}$(donkey$'$)}\\
+%                                                                                                 \smalltfield{e}{\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smallmfield{x}{$\Uparrow^2$x}{\textit{Ind}}\\
+%                                                                                                                                                                        \smalltfield{e}{donkey(x)}}}\\
+%                                                                                                      \smalltfield{e}{\smallrecord{\smalltfield{e}{have$^\dagger$($\Uparrow^4$x,
+%                                                                                                            $\Uparrow\!\mathfrak{c}$.x)}}}}}}}}}})
+%                                                                                        $\rightarrow$\\
+%                &&\hspace*{5em}\smallrecord{\smalltfield{e}{like$^\dagger$($x$, $r$.e$_2$.e.x)}}
+% ))}}}}  
+% \end{ex} 
+% \preveg{} requires that the function labelled `f' maps any farmer who
+% owns a donkey to a function which maps any situation in which that
+% farmer owns a donkey to a situation in which the farmer likes the
+% donkey.  Since for any donkey the farmer owns there will be a
+% situation in which the farmer owns that donkey, this has the effect of
+% universal quantification over the farmer's donkeys.  The difference
+% between strong and weak readings is, however, cashed out in terms of
+% whether we map farmers to functions from ``donkey owning'' situations
+% to ``liking'' situations or to situations where there is ``donkey
+% owning'' and ``liking''.
+
+ 
+
+The domain of the function introduced is farmers who own a donkey in
+our analysis of both the weak and the strong readings.  This is in
+contrast to the classical treatment of the strong reading
+\citep{Geach1962,KampReyle1993} which can be construed as 
+quantification over pairs of farmers and donkeys.  This works in the
+case of universal quantification. The sentence \textit{every farmer
+  who owns a donkey likes it} can be construed as ``every
+farmer-donkey pair such that the farmer owns the donkey is such that
+the farmer likes the donkey''.  However, for other generalized
+quantifiers, such as \textit{most} this represents an incorrect
+paraphrase.  Thus \textit{most farmers who own a donkey like it}
+cannot be construed as ``most farmer-donkey pairs such that the farmer
+owns the donkey are such that the farmer likes the donkey''.
+\cite{Chierchia1995} gives a good account of why this is so.  Suppose
+we have five farmers four of which have exactly one donkey and do not
+like it.  The fifth farmer has fifty donkeys and likes them all.
+Clearly in this case most farmer-donkey pairs are such that the farmer
+likes the donkey but it is not the case that most farmers who own a
+donkey like it.  This problem is known in the literature as the
+\textit{proportion problem}.  The treatment that we have proposed here
+does not suffer from it since the quantification is over farmers who
+own a donkey rather than farmer-donkey pairs. 
+    
+% In order to get this to work out in a compositional way we will use
+% the kind of quantifier anatomy  that we introduced in
+% Chapters~\ref{ch:gram} and~\ref{ch:commonnouns} except that we will
+% use parametric properties instead of non-parametric properties.  Let
+% us introduce some abbreviatory notation [should introduce from the
+% beginning!].  Suppose that $q$ is a quantifier relation,
+% $\mathcal{P}$ and $\mathcal{Q}$ are parametric properties and
+% $\mathfrak{s}$ is a context of the kind we have been using in this
+% chapter, then we use $\mathfrak{Q}(q,\mathcal{P},\mathcal{Q},\mathfrak{s})$ to represent
+% \nexteg{}.
+% \begin{ex} 
+% \record{\mfield{restr}{$\mathcal{P}$}{\textit{PPpty}}\\
+%         \mfield{scope}{$\mathcal{Q}$}{\textit{PPpty}}\\
+%         \tfield{e}{$q$(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+% \end{ex} 
+% Instead of (\ref{ex:no-dog-which-chases-a-cat}) we will have
+% \nexteg{a}, which is identical with \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec}
+%   $\lambda\mathcal{P}$:\textit{PPpty}
+%   . $\mathfrak{Q}$(no, \textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat},
+%   $\mathcal{P}$, $\mathfrak{s}$)
+
+ 
+% \item $\lambda\mathfrak{s}$:\textit{Rec}
+%   $\lambda\mathcal{P}$:\textit{PPpty}
+%   . \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
+%             \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
+%             \tfield{e}{no(restr($\mathfrak{s}$), scope($\mathfrak{s}$))}} 
+% % \record{\mfield{restr}{\textbf{dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}}{\textit{PPpty}}\\
+% %             \mfield{scope}{$\mathcal{P}$}{\textit{PPpty}}\\
+% %             \tfield{e}{\record{\tfield{X}{every$^w$($\Uparrow$restr($\mathfrak{s}$))}\\
+% %                                \tfield{f}{(($x:\mathfrak{T}(\text{X}))\rightarrow\neg\mathfrak{P}$($\Uparrow$scope($\mathfrak{s}$)))\{x\}}}}}
+                         
+ 
+% \end{subex} 
+   
+% \end{ex} 
+% We will now use
+% \textbf{no$^\frown$dog$^\frown$which$^\frown$chase$^\frown$a$^\frown$cat}
+% to refer to \preveg{} rather than
+% (\ref{ex:no-dog-which-chases-a-cat}).  Note that we have not
+% restricted the scope (that is the second argument of the quantifier
+% relation) by the fixed point type of the restriction (that is the
+% first argument of the quantifier relation).  Now that we have put the
+% parametric properties used to form the arguments to the quantifier
+% relation in their own fields (`restr' and `scope') we can have access
+% to them at the point at which we combine the noun-phrase
+% interpretation with that of another constituent and can at that point
+% make modifications to the second argument.  Since we have the
+% arguments to the quantifier relation accessible via the labels `restr'
+% and `scope' 
+
+
+     
+\paragraph{\textit{Sam likes him/himself}}
+The treatment of anaphora that we have presented so far overgenerates
+in that it does not take account of the restrictions on anaphoric
+possibilities which exist in natural languages.  For example, the
+sentence \nexteg{} does not allow a reading in which
+\textit{him} is anaphorically related to \textit{Sam}.
+\begin{ex} 
+Sam likes him 
+\end{ex} 
+Note that this is not the same as saying that \textit{Sam} and
+\textit{him} are not allowed to refer to the same individual.  There
+are cases where this is possible, though often bizarre.  Suppose that
+Sam finds a wikipedia page describing a person with interests and
+achievements very similar to his own but he does not realize that in
+fact somebody has written a page about Sam himself.  Sam can decide
+that he likes the person described in the entry and this can be
+described by \preveg{}.  % An similar example well-known in the
+% literature from \cite{Lakoff1970} is \nexteg{}.
+% \begin{ex} 
+% I dreamt that I was Brigitte Bardot and that I kissed me 
+% \end{ex}
+The basic technique that we employ for making this distinction is
+illustrated by the types in \nexteg{}.
+\begin{ex} 
+  \begin{subex} 
+ 
+\item \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{named(x, ``Sam'')}\\
+    \tfield{y}{\textit{Ind}}\\
+    \tfield{e}{like(x, y)}} 
+ 
+\item \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{named(x, ``Sam'')}\\
+    \mfield{y}{x}{\textit{Ind}}\\
+    \tfield{e}{like(x, y)}}
+  
+\item \record{
+    \tfield{x}{\textit{Ind}}\\
+    \tfield{c}{named(x, ``Sam'')}\\
+    \tfield{e}{like(x, x)}} 
+ 
+\end{subex} 
+  
+  
+\end{ex} 
+In \preveg{a} we have two fields for individuals labelled by `x' and
+`y' respectively.  There is nothing to prevent these fields from being
+filled by the same individual in some of the witnesses for the type.
+In \preveg{b}, however, the fields will be filled by the same
+individual in any witness for the type.  A further possibility is to
+have just one field for an individual as in \preveg{c}. Let us see how
+these options play out in actual parametric contents for \textit{Sam
+  likes him} resulting currently in a content where \textit{him} is
+anaphorically related to \textit{Sam}.  A parametric content for
+\textit{likes him} is \nexteg{}, parallel to contents for similar verb
+phrases we have seen previously.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . $\ulcorner\lambda
+  r$:\smallrecord{
+    \smalltfield{x}{\textit{Ind}}} . \record{
+    \tfield{e}{like$^\dagger$($r$.x,
+      $c.\mathfrak{s}.\text{x}_0$)}}$\urcorner\urcorner$
+  \label{ex:likes-him}
+\end{ex} 
+Using the lexical rule for proper nouns we obtain the parametric
+content \nexteg{} for \textit{Sam}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{x}{\textit{Ind}}\\
+        \smalltfield{e}{named(x, ``Sam'')}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{c}.\text{x}\}\urcorner$
+\end{ex} 
+Let us represent \preveg{} as \textbf{Sam}.  Using
+`$\mathrm{storage}$' we obtain an additioinal parametric content given
+in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{\textbf{Sam}}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{ex} 
+We can now obtain a parametric content for \textit{Sam likes him} by
+using \preveg{} and (\ref{ex:likes-him}) combined with `@$_{0,1}$'.
+This is given in \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{\textbf{Sam}}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\textit{PropCntxt}}\\
+        \smalltfield{a}{\textit{PropCntxt}}}}} . \record{
+    \tfield{e}{like$^\dagger$($c.\mathfrak{s}.\text{x}_0,c.\mathfrak{s}.\text{x}_0$)}}$\urcorner$
+\end{ex} 
+We can now apply `$\mathrm{retrieve}$' to `x$_0$' and \preveg{} to
+obtain \nexteg{}.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \smalltfield{$\mathfrak{c}$}{\smallrecord{
+        \smalltfield{f}{\smallrecord{
+            \smalltfield{x}{\textit{Ind}}\\
+            \smalltfield{e}{named(x, ``Sam'')}}}\\
+        \smalltfield{a}{\smallrecord{
+            \smalltfield{f}{\textit{PropCntxt}}\\
+            \smalltfield{a}{\textit{PropCntxt}}}}}}} . \record{
+    \tfield{e}{like$^\dagger$($c.\mathfrak{c}$.f.x, $c.\mathfrak{c}$.f.x)}}$\urcorner$
+\end{ex} 
+\preveg{} is not an appropriate content for \textit{Sam likes him}
+although it would be appropriate for \textit{Sam likes himself}.
+Simplifying a good deal,  pronouns which are not reflexive (like
+\textit{himself}) cannot be anaphorically related to an antecedent
+within the same clause.  This is Principle B of Chomsky's binding
+theory \citep{Chomsky1981}.  We shall treat this by adding a field
+labelled `$\mathfrak{l}$' in the context requiring an assignment which keeps track of pronouns
+which are local. We adjust the definition of \textit{Cntxt} to be
+\nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{l}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex}
+The generating parametric content for \textit{he} is \nexteg{} where we
+mark `x$_0$' in the $\mathfrak{l}$-field.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{l}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{ex} 
+We adjust (\ref{ex:combine-align}) to include reference to paths
+`$\mathfrak{l}$.x$_i$' by adding the boxed material as in \nexteg{}.
+\begin{ex} 
+If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+  \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} and
+  $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{Ind}}}}} but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}} \fbox{and $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{l}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}}},
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application and anaphoric
+      relation of $j$ to $i$}, $\alpha\text{@}_{i,j}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}(c))\urcorner$
+\end{quote}
+
+\label{ex:combine-align-local}
+
+\end{ex} 
+The information about locality represented by the
+`$\mathfrak{l}$'-field will now percolate up as a constraint on the
+context as we combine consituents.  However, once we reach a sentence
+we no longer want the pronoun to count as local since pronouns can be
+anaphorically related to antecedents outside the clause in which they
+occur as in \textit{Sam$_i$ thinks that she$_i$ is lucky}. We define
+an operation $B$ on parametric contents (think of Principle ``B'' or
+``Boundary'') which uses asymmetric merge to remove the locality
+constraint.  $B$ is defined in \nexteg{}.
+\begin{ex} 
+  If $\alpha$ is a parametric content,
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T\ .\ \varphi\dep{c}\urcorner$
+  \end{quote}
+  then $B(\alpha)$ is
+  \begin{quote}
+    $\ulcorner\lambda c$:$T$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\mathfrak{l}$}{\textit{Assgnmnt}}}
+    . $\varphi\dep{c}\urcorner$\footnote{This assumes that paremtric
+      contents are defined in such as way that $\varphi$ will not
+      depend on $c.\mathfrak{l}.\pi$ for any $\pi$.  Otherwise
+      $B(\alpha)$ would need to be
+      \begin{quote}
+        $\ulcorner\lambda c$:$T$\fbox{\d{$\wedge$}}\smallrecord{
+          \smalltfield{$\mathfrak{l}$}{\textit{Assgnmnt}}}
+        . $[\varphi\dep{c}]_{c.\mathfrak{l}.\pi\leadsto c.\mathfrak{s}.\pi}\urcorner$
+      \end{quote}}
+      
+    
+  \end{quote}
+  
+\end{ex}
+Suppose that $T_1$ and $T_2$ are of type \textit{ContType} and that
+$\mathcal{O}$ is a combination operation such as @ etc., then we say
+that $T_1\mathcal{O}^{\mathfrak{S},B}T_2$ is also a type with the
+witness condition in \nexteg{}.
+\begin{ex} 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
+then $B(\alpha\mathcal{O}\beta):T_1\mathcal{O}^{\mathfrak{S},B}T_2$.
+Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S},B}T_2$. 
+\end{ex} 
+In \nexteg{} we introduce versions of `ContForwardApp' operations
+which involve $B$.
+\begin{ex} 
+  If $\mathcal{O}$ is a combination operator, then
+  ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$ is
+  \begin{quote}
+    $\lambda u$:\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+      \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S},B}u[1].\text{cont})$}}
+  \end{quote}
+  \end{ex} 
+We then introduce a notation for constituent structure rules involving
+locality boundaries as in \nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    B(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$
+  \end{quote}
+  
+\end{ex} 
+Thus for example we can formulate the constituent rule that says
+that a sentence can consist of a noun phrase followed by a verb phrase
+as \nexteg{}.
+\begin{ex} 
+  \textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ $B$(\textit{NP}$'$($_{\text{@}}$\textit{VP}$'$))
+\end{ex} 
+  
+Reflexive pronouns, like \textit{himself}, obey an almost
+complementary principle to non-reflexive pronouns -- they must be
+anaphorically related to a local antecedent and cannot be related to a
+non-local antecedent.  In addition, they must be related to some
+antecedent.  They cannot simply refer to something in the context as
+ordinary pronouns can.  In Chomsky's binding theory such pronouns are
+called ``anaphors'' and include both reflexive pronouns and
+reciprocals such as \textit{each other}.  In order to handle such
+requirements on local anaphora we will add another component to the
+context type under the label $\mathfrak{r}$ (``reflexive''). Thus the
+type \textit{Cntxt} will  now be defined as in \nexteg{}.
+\begin{ex} 
+\record{
+    \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{l}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{r}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
+\end{ex}
+The generating parametric content for \textit{himself} is \nexteg{}
+where we mark `x$_0$' in the $\mathfrak{r}$-field.
+\begin{ex} 
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}\\
+    \smalltfield{$\mathfrak{r}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{ex}
+The reflexive marking in the context will percolate up to contexts
+associated with higher phrases.  We provide a mechanism for removing
+the marking in properties and simultaneously binding the reflexive
+pronoun.  This is given in \nexteg{}.
+\begin{ex} 
+  If $\mathcal{P}$ is a parametric property of the form
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T_1\ .\ \ulcorner\lambda
+    r\!:\!T_2\dep{T_1}\ .\ \varphi\dep{T_1,T_2}\urcorner\urcorner$
+  \end{quote}
+  where for some natural number $i$, $T_1\sqsubseteq$ \smallrecord{
+    \smalltfield{$\mathfrak{r}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}, then \textit{the reflexivization
+  of} $\mathcal{P}$, $\mathfrak{R}(\mathcal{P})$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:($T_1$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\mathfrak{r}$}{\textit{Assgnmnt}}})$\ominus\mathfrak{s}.\text{x}_i$
+    . $\ulcorner\lambda r$:$T_2$
+    . $[\varphi]_{c.\mathfrak{s}.\text{x}_i\leadsto
+      r.\text{x}}\urcorner\urcorner$
+  \end{quote}
+  
+\end{ex} 
+This operation removes the reflexive marking in the
+$\mathfrak{r}$-field of the context using asymmetric merge and also
+removes the corresponding path `$\mathfrak{s}.\text{x}_i$' from the
+context type so there is no dependence on an individual labelled
+`x$_i$' in the context.  Any dependence on `$\mathfrak{s}$.x$_i$' in
+the body of the property represented by $\varphi$ is replaced by a
+dependence on `x' in the domain of the property --- note that the
+domain type of the property, $T_2$, is guaranteed to be a record type
+with `x' among its labels by the requirement that $\mathcal{P}$ is a
+parametric property.
+
+The operation, $\mathfrak{R}$, gives us a way of binding reflexive
+pronouns with verb phrases by the subject of the sentence.  It does
+not, however, allow us to have a reflexive bound within a verb-phrase
+as in examples like \textit{The guru revealed Kim$_i$ to
+  himself$_i$}.  Nor does it correctly require that both occurrences
+of \textit{himself} have to be anaphorically related to \textit{the
+  guru} in \textit{The guru revealed himself to himself}.\footnote{In
+  other languages such as German and Scandinavian languages, these
+  examples involve a different reflexive construction.  (See, for
+  example, \citealp{Hellan1986}.)}  We shall not deal with such cases
+here.
+
+We will, however, introduce a mechanism for requiring that the
+reflexive pronoun must be anaphorically related to something.  It
+cannot be left as free and dependent on the context like a regular
+pronoun.  Our strategy for doing this involves mapping a parametric
+content type to a subtype which excludes witnesses which have a
+reflexive marking involving the label $\mathfrak{r}$ in the context
+type.  For any parametric content type, $T$, we characterize a
+subtype, $\mathfrak{A}(T)$, which excludes parametric contents with
+free reflexives as indicated by the $\mathfrak{r}$-field
+($\mathfrak{A}$ for ``Principle A'').  This is characterized in \nexteg{}.
+\begin{ex} 
+If $T$ is a parametric content type, then $\mathfrak{A}(T)$ is also a
+parametric content type.
+
+$\varphi:\mathfrak{A}(T)$ iff $\varphi:T$ and $\varphi$.bg
+$\not\sqsubseteq$ \smallrecord{
+  \smalltfield{$\mathfrak{r}$}{\smallrecord{
+      \smalltfield{x$_i$}{\textit{Ind}}}}}, for any natural number $i$.
+\end{ex} 
+In \nexteg{} we introduce versions of `ContForwardApp' operations
+which involve $\mathfrak{A}$.
+\begin{ex} 
+  If $\mathcal{O}$ is a combination operator, then
+  ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$ is
+  \begin{quote}
+    $\lambda u$:\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+      \smalltfield{cont}{$\mathfrak{S}(\mathfrak{A}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S}}u[1].\text{cont}))$}}
+  \end{quote}
+  \end{ex} 
+We then introduce a notation for constituent structure rules involving
+locality boundaries as in \nexteg{}.
+\begin{ex} 
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    \mathfrak{A}(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$
+  \end{quote}
+  
+\end{ex} 
+Thus for example we can formulate the constituent rule that says
+that a sentence can consist of a noun phrase followed by a verb phrase
+as \nexteg{}.
+\begin{ex} 
+  \textit{VP} $\longrightarrow$ \textit{V NP} $\mid$ $\mathfrak{A}$(\textit{V}$'$($_{\text{@}}$\textit{NP}$'$))
+\end{ex} 
+Introducing the $\mathfrak{A}$-locality boundary at the VP-level as in
+\preveg{} will ensure that all reflexives will be anaphorically
+related within a clause.
+
+In order to include reflexives we need to extend our characterization
+of $\mathfrak{S}$ to include reflexive parametric contents as
+indicated by the boxed text in \nexteg{}.
+
+\begin{ex} 
+\begin{subex} 
+ 
+\item If $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type 
+ 
+\item The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+    then $\mathcal{L}(\varphi):\mathfrak{S}(T)$
+    
+  \item \fbox{if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+    then $\mathfrak{R}(\varphi):\mathfrak{S}(T)$}
+    
+  \item \begin{minipage}[t]{.9\linewidth}if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}
+
+    
+  \item if $\alpha\mathcal{O}\beta:T$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+    $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate} 
+  
+ 
+\end{subex} 
+\label{ex:storage-reflexive}   
+\end{ex}
+
+This is only the beginning of a theory of
+reflexives in English.  For example, it will not on its own prevent reflexives
+occuring in subject position as in \textit{$^*$Himself saw Sam} or
+\textit{$^*$Kim feels that herself is welcome}. Perhaps this is simply
+a matter of case, which we have not treated here.  There is just no
+nominative version of the reflexive which can be used as the subject
+of a tensed sentence.  This is perhaps suggested by the acceptability
+of \textit{Kim feels herself to be welcome} which seems to express the
+same content.
+A further example, well-known from the literature, concerns what are
+known as picture noun-phrases.  While this treatment will allow for a correct
+interpretation of \textit{Kim found a picture of herself} where
+\textit{Kim} is the antecedent of \textit{herself} it will not
+correctly account for \textit{Kim found Sam's picture of herself}
+where the only possible antecedent for \textit{herself} is
+\textit{Sam}.  We will leave a more complete treatment of reflexives for future exploration.
+
+
+
+% The parametric content for \textit{him} is given in \nexteg{}.
+
+% \begin{ex} 
+% $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                 \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+% $\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+% \end{ex} 
+
+% The parametric content of the reflexive pronoun \textit{himself} is
+% the same as \preveg{} except that the values associated with the
+% labels `local' and `refl' are switched, as shown in \nexteg{}.
+
+% \begin{ex} 
+% $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                 \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}}
+%  . 
+% $\lambda P$:\textit{Ppty} . $P$\{c.$\mathfrak{s}$.x$_0$\}
+% \end{ex} 
+% We will refer to \preveg{} as \textbf{himself}.  The idea is that the `local'-field in the context must be passed up to
+% the VP unchanged, whereas the `refl'-field must be emptied
+% (discharged) at the VP-level.  Thus \textit{likes him} has the
+% parametric content in \nexteg{a} whereas \textit{likes himself} has
+% the parametric content in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                 \smallmfield{local}{$\mathfrak{T}$(\{$\mathfrak{s}$.x$_0$\})}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
+% $\lambda P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}} 
+ 
+% \item $\lambda
+% c$:\smallrecord{\smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+%   \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}} . 
+% $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . \record{\tfield{e}{like($r$.x,
+%   \textbf{himself}(\smallrecord{\field{$\mathfrak{s}$}{\smallrecord{\field{x$_0$}{$r$.x}}}\\
+%                                 \field{local}{$\mathfrak{T}$($\emptyset$)}\\
+%                                 \field{refl}{$\mathfrak{T}$(\{$r$.x\})}}))}}
+ 
+ 
+% \end{subex} 
+   
+% \end{ex}
+% The idea is that context parameters represented by `$\mathfrak{s}$'
+% are open for binding unless object supplying that parameter are
+% required to be of type `$c$.local'.  Reflexive parameters are, however,
+% required to be of type `$c$.refl' and these must be bound within the VP.
+% Note that since the reflexive is bound by `$r$.x' in \preveg{b} it is
+% not represented in `$c$.refl' in the context for the VP.  Thus
+% \textit{himself} on its own requires an individual to be supplied by
+% the context to give it a referent.  However, for the content of
+% \textit{likes himself} no such individual is required from the context
+% since the property which is the content of the VP is that of ``being
+% an $x$ such that $x$ likes $x$''.  [Better way to talk about this?].
+
+% [Possible revision of treatment of proper names:]
+% The content of an utterance of \textit{Sam} is given in \nexteg{}.
+% \begin{ex} 
+% $\lambda
+% c$:\smallrecord{\smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                                            \smalltfield{e}{named(x,
+%                                                                                              ``Sam'')}}}}}}
+%                                                                                  . $\lambda
+%                                                                                  P$:\textit{Ppty}
+%                                                                                  . $P$($c$.$\mathfrak{c}$.id$_0$) 
+% \end{ex} 
+% The content of \textit{Sam likes him} is given in \nexteg{a} and
+% \textit{Sam likes himself} in \nexteg{b}.
+% \begin{ex} 
+% \begin{subex} 
+ 
+% \item $\lambda
+%   c$:\smallrecord{\smalltfield{$\mathfrak{s}$}{\smallrecord{\smalltfield{x$_0$}{\textit{Ind}}}}\\
+%                   \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                             \smalltfield{e}{named(x,
+%                                                                               ``Sam'')}}}}}}
+%                                                                   . 
+% \record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
+%     P$:\textit{Ppty} . $P$\{$c$.$\mathfrak{s}$.x$_0$\})}}
+ 
+% \item $\lambda
+%   c$:\smallrecord{
+% \smallmfield{local}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smallmfield{refl}{$\mathfrak{T}$($\emptyset$)}{\textit{Type}}\\
+% \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{id$_0$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                                                                             \smalltfield{e}{named(x,
+%                                                                               ``Sam'')}}}}}}
+%                                                                   . \\
+% \hspace*{3em}                                                                   
+% \record{\tfield{e}{like($c$.$\mathfrak{c}$.id$_0$.x, $\lambda
+%     P$:\textit{Ppty} . 
+% $P$\{$c$.$\mathfrak{c}$.id$_0$.x\})}} 
+ 
+% \end{subex} 
+   
+% \end{ex} 
+               
+      
+
+
+%[Grammar to be added.]
+
+
+
+\section{Summary of resources introduced}
+\label{sec:sumresch8}
+
+
+
+% This summary does not include the resources for chart processing
+% introduced in Section~\ref{sec:chart}.
+
+Items that are new since Chapter~\ref{ch:quant} are marked
+``\textbf{New!}'' and items that have been revised since
+Chapter~\ref{ch:quant} are marked ``\textbf{Revised!}''.  % We have
+% included some items for completeness which were not explicitly
+% introduced in the text.
+
+\subsection{Universal grammar resources} 
+
+\subsubsection{Types} 
+
+\begin{description}
+
+  \item[\textnormal{\textit{Loc}}] --- \record{\tfield{x-coord}{\textit{Real}}\\
+        \tfield{y-coord}{\textit{Real}}\\
+        \tfield{z-coord}{\textit{Real}}}
+
+  
+\item[\textnormal{\textit{Phon}}] --- a basic type
+
+  $e$ : \textit{Phon} iff $e$ is a phonological event
+  
+\item[\textnormal{\textit{SEvent}}] --- \record{\tfield{e-loc}{\textit{Loc}} \\
+        \tfield{sp}{\textit{Ind}} \\
+        \tfield{au}{\textit{Ind}} \\
+        \tfield{e}{\textit{Phon}} \\
+        \tfield{c$_{\mathrm{loc}}$}{loc(e,e-loc)} \\
+        \tfield{c$_{\mathrm{sp}}$}{speaker(e,sp)} \\
+        \tfield{c$_{\mathrm{au}}$}{audience(e,au)}} (as in
+      Chapter~\ref{ch:infex})
+
+      \item[\textnormal{\textit{Assgnmnt}}] --- a basic type
+
+      $r:\textit{Assgnmnt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\subset\{\text{x}_0,\text{x}_1,\ldots\}$
+
+\bigskip
+
+If $T$ is \textit{Assgnmnt}$\wedge T'$, $T'$ is a record type and
+  $\ell\in\mathrm{labels}(T')$, then
+  \begin{enumerate} 
+    
+  \item if $\mathrm{labels}(T')=\{\ell\}$, $T\ominus\ell=\textit{Assgnmnt}$ 
+    
+  \item otherwise, $T\ominus\ell= \textit{Assgnmnt}\wedge (T'\ominus\ell/T)$
+    
+  \end{enumerate}
+
+    
+    
+  %\end{enumerate}
+
+  
+
+\item[\textnormal{\textit{PropCntxt}}] --- a basic type
+
+  $r:\textit{PropCntxt}$ iff
+$r:\textit{Rec}$ and
+$\mathrm{labels}(r)\cap\{\text{x}_0,\text{x}_1,\ldots\}=\emptyset$
+
+\bigskip
+
+If $T$ is \textit{PropCntxt}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
+  \begin{enumerate}
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{PropCntxt}\wedge(T'\ominus \pi/T')$
+  \end{enumerate}
+
+\item[\textnormal{\textit{Cntxt}} Revised!] --- \record{
+    \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
+    \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
+
+        \item[\textnormal{\textit{CntxtType}}] --- a basic type
+
+    $T:\textit{CntxtType}$ iff $T\sqsubseteq\textit{Cntxt}$
+      
+    % \item[\textnormal{\textit{IndPpty}} New!] ---
+    %   (\smallrecord{\smalltfield{x}{\textit{Ind}}}$\rightarrow$\textit{RecType})
+
+      
+    % \item[\textnormal{\textit{FramePpty}} New!] ---
+    %   (\smallrecord{\smalltfield{x}{\textit{Rec}}}$\rightarrow$\textit{RecType})
+      
+    \item[\textnormal{\textit{xType}}] --- a basic type
+
+      $T$ : \textit{xType} iff $T$ : \textit{RecType} and $\text{x}\in\mathrm{labels}(T)$
+
+      \item[\textnormal{\textit{Ppty}}] ---
+        \record{\tfield{bg}{\textit{xType}}\\
+          \tfield{fg}(bg$\rightarrow$\textit{RecType})}
+
+        \begin{description}
+        
+      \item[purification of properties, \textnormal{$\mathcal{P}(P)$}]\mbox{}
+
+        If $P$ : \textit{Ppty}, then
+\begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
+$\mathfrak{P}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
+. \record{\tfield{$\mathfrak{c}$}{$P.\text{bg}\parallel$ \smallrecord{\field{x}{$r$.x}}}\\
+          \tfield{e}{$P(\mathfrak{c})$}}$\urcorner$
+\end{quote}
+\end{quote}
+\item[purification$^\forall$ of properties, \textnormal{$\mathcal{P}^\forall(P)$}]\mbox{}
+
+  If $P$ : \textit{Ppty}, then
+\begin{quote}
+if $P$.bg$^x$ = $P$.bg, then
+\begin{quote}
+$\mathfrak{P^\forall}(P)=P$
+\end{quote}
+otherwise:
+\begin{quote}
+$\mathfrak{P^\forall}(P)$ is $\ulcorner\lambda r$:$P$.bg$^{\text{x}}$
+. ($(r'\!:\!P.\text{bg}\!\parallel\!\!\text{\smallrecord{\field{x}{$r$.x}}})\rightarrow$
+\record{
+          \tfield{e}{$P(r')$}})$\urcorner$
+\end{quote}
+\end{quote}
+\item[\textnormal{$P\{a\}$}] \mbox{}
+
+  If $P$ is a pure property, $P\{a\}$
+  represents the type $P$(\smallrecord{\field{x}{$a$}})
+
+\item[\textnormal{$\mathfrak{T}(P)$}] \mbox{}
+
+  If $P$ : \textit{Ppty} and $P$ is pure, then $\mathfrak{T}(P)$ : \textit{Type}.
+
+  $a:\mathfrak{T}(P)$ iff $\mathfrak{P}(P)\{a\}$ is witnessed.
+  
+\item[\textnormal{exist$^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then exist$^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{exist}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|=1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=\frac{1}{|\down{\mathfrak{T}(P)}|}$)
+ 
+\end{enumerate}
+
+\item[\textnormal{exist$_{\text{pl}}^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then exist$_{\text{pl}}^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{exist}_{\text{pl}}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\geq 2$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{2}{|\down{\mathfrak{T}(P)}|}$)
+ 
+\end{enumerate}
+
+\item[\textnormal{no$^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then no$^{\text{w}}$($P$) : \textit{Type}.
+
+  $X:\text{no}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|=0$
+
+
+(equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=0$)
+\end{enumerate}
+  equivalently,
+\begin{quote}
+  $X:\text{no}^{\text{w}}(P)$ iff $X=\emptyset$
+\end{quote}
+
+\item[\textnormal{every$^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then every$^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{every}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|=|\down{\mathfrak{T}(P)}|$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))=1$)
+ 
+\end{enumerate}
+equivalently,
+\begin{quote}
+  $X:\text{every}^{\text{w}}(P)$ iff $X=\down{\mathfrak{T}(P)}$
+\end{quote}
+
+
+\item[\textnormal{most$^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then most$^{\text{w}}$($P$) : \textit{Type}.
+
+  $X:\text{most}^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{most}}(P)$, where
+  $.5<\theta_{\text{most}}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{most}}(P)$)
+ 
+\end{enumerate}
+
+\item[\textnormal{many$_a^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then many$_a^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{many}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\geq\theta_{\text{many}_a}(P)$, where
+  $\theta_{\text{many}_a}(P)$ is a natural number, $i$, such that
+  $i>2$.
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{many}_a}(P)}{[\down{\mathfrak{T}(P)}]}$)
+ 
+\end{enumerate}
+
+\item[\textnormal{many$_p^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then many$_p^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{many}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{many}_p}(P)$, where
+  $0<\theta_{\text{many}_p}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{many}_p}(P)$)
+ 
+\end{enumerate}
+
+\item[\textnormal{few$_a^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then few$_a^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\leq\theta_{\text{few}_a}(P)$, where
+  $\theta_{\text{few}_a}(P)$ is a natural number, $i$, such that $i>2$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$)
+ 
+\end{enumerate}
+
+\item[\textnormal{few$_p^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then few$_p^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\leq\theta_{\text{few}_p}(P)$, where
+  $0<\theta_{\text{few}_p}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\leq\theta_{\text{few}_p}(P)$)
+ 
+\end{enumerate}  
+
+\item[\textnormal{a\_few$_a^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then a\_few$_a^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{a\_few}_a^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $|X|\geq\theta_{\text{few}_a}(P)$, where
+  $\theta_{\text{few}_a}(P)$ is a natural number, $i$, such that $i>2$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\frac{\theta_{\text{few}_a}(P)}{[\down{\mathfrak{T}(P)}]}$)
+ 
+\end{enumerate}
+
+\item[\textnormal{a\_few$_p^{\text{w}}$($P$)}] \mbox{}
+
+  If $P$ : \textit{Ppty}, then a\_few$_p^{\text{w}}$($P$) :
+  \textit{Type}.
+
+  $X:\text{a\_few}_p^{\text{w}}(P)$ iff
+\begin{enumerate} 
+ 
+\item $X:\mathrm{set}(\mathfrak{T}(P))$ 
+ 
+\item $\frac{|X|}{|\downP{P}|}\geq\theta_{\text{few}_p}(P)$, where
+  $0<\theta_{\text{few}_p}(P)<1$
+
+  (equivalently, $p(\mathfrak{T}(X)\|\mathfrak{T}(P))\geq\theta_{\text{few}_p}(P)$)
+ 
+\end{enumerate}  
+
+  
+\end{description}
+
+\item[\textnormal{$^T\textit{Ppty}$}] --- if $T$ is a type, then
+  $^T\textit{Ppty}$ is a type
+
+  $P:{^T\textit{Ppty}}$ iff $P:\textit{Ppty}$ and
+  $P.\text{bg}\sqsubseteq$ \smallrecord{
+    \smalltfield{x}{$T$}}
+        
+      \item[\textnormal{\textit{PlPpty}}] --- a basic type
+
+        $P$ : \textit{PlPpty} iff $P$ : \textit{Ppty} and for some type $T$,
+$P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}} 
+        
+      \item[\textnormal{\textit{PPpty}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
+          \tfield{fg}{(bg$\rightarrow$\textit{Ppty})}}
+
+        
+      \item[\textnormal{$^T\textit{PPpty}$}] --- if $T$ is a
+        type, then $^T\textit{PPpty}$ is a type
+
+        $\mathcal{P}:{^T\textit{PPpty}}$ iff
+  $\mathcal{P}:\textit{PPpty}$ and for any $c:\mathcal{P}.\text{bg}$, $\mathcal{P}(c):{^T\textit{Ppty}}$
+        
+      \item[\textnormal{\textit{Quant}}] ---
+        (\textit{Ppty}$\rightarrow$\textit{RecType})
+        
+      \item[\textnormal{\textit{PQuant}}] --- \record{\tfield{bg}{\textit{CntxtType}} \\
+          \tfield{fg}{(bg$\rightarrow$\textit{Quant})}}
+        
+      \item[\textnormal{\textit{QuantDet}}] ---
+        (\textit{Ppty}$\rightarrow$\textit{Quant})
+        
+      \item[\textnormal{\textit{PQuantDet}}] ---
+        \record{
+          \tfield{bg}{\textit{CntxtType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{QuantDet})}}
+        
+      \item[\textnormal{\textit{PRecType}}] ---
+        \record{
+          \tfield{bg}{\textit{CntxtType}}\\
+          \tfield{fg}{(bg$\rightarrow$\textit{RecType})}}
+          
+
+    \item[\textnormal{\textit{Cont}}] ---
+      \textit{PRecType}$\vee$\textit{PPpty}$\vee$\textit{PQuant}$\vee$\textit{PQuantDet}
+
+      
+    \item[\textnormal{ContType} New!] ---  a basic type
+
+      $T : \textit{ContType}$ iff $T\sqsubseteq\textit{Cont}$
+
+      
+    \item[\textnormal{\textit{QStore}} New!] --- a basic type
+
+      $r:\textit{QStore}$ iff $r:Assgnmnt$
+and for any $\text{x}_i\in\mathrm{labels}(r)$,
+$r.\text{x}_i:\textit{PQuant}$
+
+If $T$ is \textit{QStore}$\wedge T'$ and
+  $\pi\in\mathrm{tpaths}(T')$ then
+  \begin{enumerate}
+    
+  \item if $\pi$ is $\ell$ and $\mathrm{labels}(T')=\{\ell\}$, then $T\ominus\pi=\textit{PropCntxt}$
+    
+  \item otherwise, $T\ominus\pi= \textit{QStore}\wedge(T'\ominus \pi/T')$
+  \end{enumerate}
+
+  \begin{description}
+\item[unplugged New!] --- definition
+
+  A parametric content, $\alpha$, is \textit{unplugged} iff $c:\alpha$.bg implies $c.\mathfrak{q}\not=\emptyset$
+(that is, $c.\mathfrak{q}$ is not the empty record).  Otherwise $\alpha$
+is \textit{plugged}.
+
+\item[\textnormal{$\mathrm{store}(\mathcal{Q})$} New!] \mbox{}
+
+  If $\mathcal{Q}:\textit{PQuant}$ and $\mathcal{Q}$ is plugged, then
+$\mathrm{store}(\mathcal{Q})$ is
+\begin{quote}
+  $\ulcorner\lambda c$:\smallrecord{
+    \footnotesize{\textit{Cntxt}}\\
+    \smalltfield{$\mathfrak{q}$}{\smallrecord{
+        \smallmfield{x$_0$}{$\mathcal{Q}$}{\textit{PQuant}}}}\\
+    \smalltfield{$\mathfrak{s}$}{\smallrecord{
+        \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+  P$:\textit{Ppty} . $P\{c.\mathfrak{s}.\text{x}_0\}\urcorner$
+\end{quote}
+
+\item[\textnormal{$\mathrm{retrieve}(\text{x}_i,\alpha)$} New!]
+  \mbox{}
+
+    If $\alpha:\textit{PRecType}$, $\mathcal{Q}:\textit{PQuant}$ 
+  $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+    \tfield{$\mathfrak{q}$}{\smallrecord{
+          \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
+$[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and\\
+$\alpha'$ is
+$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
+  $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
+  \begin{quote}
+    $\lambda
+    c$:$(\mathcal{Q}'.\text{bg}$\d{$\wedge$}$\alpha'.\text{bg}\ominus\mathfrak{q}.\text{x}_i,\mathfrak{s}.\text{x}_i)$
+    . \\ \hspace*{2em}$\mathcal{Q'}(c)(\mathfrak{P}(\ulcorner\lambda
+    r$:\smallrecord{
+      \smalltfield{x}{\textit{Ind}}\\
+      \smalltfield{$\mathfrak{s}$}{\smallrecord{
+\footnotesize{\textit{Assgnmnt}}\\          \smallmfield{x$_i$}{$\Uparrow$x}{\textit{Ind}}}}}\d{$\wedge$}$\alpha'.\text{bg}^{\mathfrak{s}.\text{x}_i}$
+    . $\alpha'(c[r][\mathfrak{q}.\text{x}_i=\mathcal{Q}])\urcorner))$
+  \end{quote}
+
+
+
+\end{description}
+
+\item[\textnormal{$\mathfrak{S}(T)$} New!] --- if
+  $T:\textit{ContType}$, then $\mathfrak{S}(T)$ is a type
+
+  The witnesses of $\mathfrak{S}(T)$ are characterized by
+  \begin{enumerate} 
+ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
+ 
+  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{store}$', then
+    $\mathrm{store}(\varphi):\mathfrak{S}(T)$
+
+  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+    arguments to `$\mathrm{retrieve}$', then
+    $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
+    
+  \item nothing is a witness for $\mathfrak{S}(T)$ except as required above.
+ 
+  \end{enumerate}
+
+  
+  
+
+      
+    \item[\textnormal{\textit{Cat}}] --- a basic type
+
+      s, np, det, n, v, vp : \textit{Cat}
+
+    
+    \item[\textnormal{\textit{Syn}}] ---  \record{\tfield{cat}{\textit{Cat}} \\
+        \tfield{daughters}{\textit{Sign}$^*$}} 
+ 
+
+
+  
+    \item[\textnormal{\textit{Sign}} Revised!] ---  a basic type
+
+      $\sigma$ : \textit{Sign} iff $\sigma$ :
+      \record{\tfield{s-event}{\textit{SEvent}} \\
+         \tfield{syn}{\textit{Syn}} \\
+        \tfield{cont}{\textit{ContType}}} 
+
+  
+\item[\textnormal{\textit{SignType}}] --- a basic type
+
+  $T:\textit{SignType}$ iff $T\sqsubseteq\textit{Sign}$ 
+
+  
+\item[\textnormal{\textit{S}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{s}{\textit{Cat}}}}})
+  
+\item[\textnormal{\textit{S}/$i$}] --- if $i$ is a natural
+  number, then \textit{S}/$i$ is a type
+
+  $\alpha:\textit{S}/i$ iff $\alpha:\textit{S}$ and $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{g}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}} 
+  
+  
+\item[\textnormal{\textit{NP}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{np}{\textit{Cat}}}}}
+  
+\item[\textnormal{\textit{whNP}}] --- a basic type
+
+  $\sigma$ : \textit{WhNP} iff $\sigma$ : \textit{NP}, $\sigma$.cont is $\mathcal{Q}$ and
+$\mathcal{Q}.\text{bg}\sqsubseteq$\smallrecord{
+  \smalltfield{$\mathfrak{w}$}{\smallrecord{
+      \smalltfield{x$_i$}{\textit{Ind}}}}}, for some natural number
+$i$.
+
+\item[\textnormal{\textit{NP}$_{\text{wh}_i}$}] --- if $i$ is a
+  natural number, then \textit{NP}$_{\text{wh}_i}$ is a type
+
+  $\alpha:\textit{NP}_{\text{wh}_i}$ iff $\alpha:\textit{NP}$ and
+  $\alpha.\text{cont}.\text{bg}\sqsubseteq$\smallrecord{
+    \smalltfield{$\mathfrak{w}$}{\smallrecord{
+        \smalltfield{x$_i$}{\textit{Ind}}}}}
+
+  
+\item[\textnormal{\textit{Det}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+\smalltfield{syn}{\smallrecord{\smallmfield{cat}{det}{\textit{Cat}}}}}
+  
+\item[\textnormal{\textit{N}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{n}{\textit{Cat}}}}}
+  
+\item[\textnormal{$^T\textit{N}$}] --- if $T$ is a type, then
+  $^T\textit{N}$ is a type
+
+  $\alpha:{^T\textit{N}}$ iff
+  $\alpha:\textit{N}$ and $\alpha.\text{cont}:{^T\textit{PPpty}}$
+  
+\item[\textnormal{\textit{V}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{v}{\textit{Cat}}}}}
+  
+  
+\item[\textnormal{\textit{VP}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{vp}{\textit{Cat}}}}}
+
+\item[\textnormal{\textit{Rel}}] --- 
+  \smallrecord{
+    \footnotesize{\textit{Sign}}\\
+    \smalltfield{syn}{\smallrecord{\smallmfield{cat}{rel}{\textit{Cat}}}}}
+
+  
+\item[\textnormal{$^T\textit{Rel}$}] --- if $T$ is a type, then
+  $^T\textit{Rel}$ is a type
+
+  $\alpha:{^T\textit{Rel}}$ iff
+  $\alpha:\textit{Rel}$ and $\alpha.\text{cont}:{^T\textit{PPpty}}$
+  
+\item[\textnormal{\textit{NoDaughters}}] ---
+  \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$\varepsilon$}{\textit{Sign}$^*$}}}}
+
+  
+\item[\textnormal{\textit{Real}}] --- a basic type
+
+  $n$ : \textit{Real} iff $n$ is a real number
+
+  
+\item[\textnormal{\textit{Card}}] --- a basic type
+
+  $n$ : \textit{Card} iff $n$ is a cardinal number (natural numbers
+  with the addition of $\aleph_0, \aleph_1,\ldots$)
+ 
+
+  
+
+\item[\textnormal{\textit{AmbTempFrame}}] --- \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{temp(loc, x)}}
+
+      
+    \item[\textnormal{\textit{TempRiseEventCntxt}}] ---
+      \record{
+        \tfield{fix}{\record{
+            \tfield{loc}{\textit{Loc}}}}\\
+        \tfield{scale}{(\textit{AmbTempFrame}
+          $\rightarrow$ \textit{Real})}}
+      
+    \item[\textnormal{\textit{TempRiseEvent}}] ---
+      
+      $\lambda r$:\textit{TempRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{AmbTempFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+      
+    \item[\textnormal{\textit{PriceFrame}}] --- \record{\tfield{x}{\textit{Real}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{commodity}{\textit{Ind}} \\
+        \tfield{e}{price(commodity, loc, x)}}
+      
+    \item[\textnormal{\textit{PriceRiseEventCntxt}}] --- \record{
+        \tfield{fix}{\record{
+            \tfield{loc}{\textit{Loc}}\\
+            \tfield{commodity}{\textit{Ind}}}}\\
+        \tfield{scale}{(\textit{PriceFrame}
+                             $\rightarrow$ \textit{Real})}}
+ 
+  \item[\textnormal{\textit{PriceRiseEvent}}] --- \mbox{}
+
+   $\lambda
+r$:\textit{TempRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{PriceFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+      
+    \item[\textnormal{\textit{LocFrame}}] --- \record{\tfield{x}{\textit{Ind}} \\
+        \tfield{loc}{\textit{Loc}} \\
+        \tfield{e}{at(x, loc)}}
+      
+    \item[\textnormal{\textit{LocRiseEventCntxt}}] ---
+      \record{\tfield{fix}{\record{\tfield{x}{\textit{Ind}}
+                                               }}\\
+                         \tfield{scale}{(\textit{LocFrame}
+                           $\rightarrow$ \textit{Real})}}
+                       
+ \item[\textnormal{\textit{LocRiseEvent}}] ---
+
+   $\lambda
+r$:\textit{LocRiseEventCntxt} .\\  
+\hspace*{2em}\record{\tfield{e}{(\textit{LocFrame}$\parallel$$r$.fix)$^2$}\\
+        \tfield{c$_{\mathrm{rise}}$}{$r$.scale(e[0]) $<$
+          $r$.scale(e[1])}}
+
+      
+    \item[\textnormal{\textit{Topos}}] --- a basic type
+
+      If $\tau:\textit{Topos}$, then $\tau$ : \record{\tfield{bg}{\textit{Type}}\\
+        \tfield{fg}{(bg$\rightarrow$\textit{Type})}} 
+
+                       
+
+
+\end{description}
+
+    \subsubsection{Predicates} (as in Chapter~\ref{ch:quant})
+
+% \begin{description}
+
+%  \item[with arity \textnormal{$\langle$\textit{Phon},
+%     \textit{Loc}$\rangle$}] \mbox{}
+  
+%     \begin{description}
+
+%     \item[\textnormal{loc}] --- $e$ : loc($u$, $l$) iff $u$ is located
+%       at $l$ in $e$
+
+%     \end{description}
+    
+%   \item[with arity \textnormal{$\langle$\textit{Phon},
+%       \textit{Ind}$\rangle$}] \mbox{}
+
+%     \begin{description}
+
+%     \item[\textnormal{speaker}] --- $e$ : speaker($u$, $a$) iff $u$
+%         is the speaker of $u$ in $e$
+
+%     \item[\textnormal{audience}] --- $e$ : audience($u$, $a$) iff
+%         $u$ is the audience of $u$ in $e$
+
+%       \end{description}
+
+%     \item[with arity \textnormal{$\langle\textit{Card}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{card}] --- $X$ : card($n$) iff for some $T$,
+%     $X:\mathrm{set}(T)$ and $|X|=n$
+    
+%   \item[\textnormal{card\_at\_least}] --- $X$ : card\_at\_least($n$) iff for some $T$, $X:\mathrm{set}(T)$
+%     and $|X|\geq n$
+
+    
+%   \item[\textnormal{card\_at\_most}] --- $X$ : card\_at\_most($n$) iff for some $T$, $X:\mathrm{set}(T)$
+%     and $|X|\leq n$
+
+%   \end{description}
+      
+%   \item[with arity \textnormal{$\langle$\textit{Ppty}$\rangle$}]
+%     \mbox{}
+
+%     \begin{description}
+      
+%     \item[\textnormal{unique}] --- $s:\textrm{unique}(P)$ iff
+%       $\mid\!\downP{P\!\restriction\!s}\!\mid = 1$
+
+%     \end{description}
+
+%     \item[with arity \textnormal{$\langle\textit{Ppty},\textit{Ppty}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{exist} Revised!] \mbox{}
+%     \begin{description}
+      
+%     \item[general witness condition] \mbox{}
+
+%       $s:\text{exist}(P,Q)$ iff $s$ :
+%       \record{\tfield{X}{exist$^w(P)$}\\
+%         \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+      
+%     \item[particular witness condition] \mbox{}
+
+%       $s:\text{exist}(P,Q)$ iff $s$ :
+%   \record{\tfield{x}{$\mathfrak{T}(P)$}\\
+%         \tfield{e}{$\mathfrak{P}(Q)$\{x\}}}
+
+%     \end{description}
+
+%     % $s$ : exist($P$,$Q$) iff
+%      % $\downP{P}\cap\downP{Q\!\restriction\! s}\not=\emptyset$
+%     % $s$ : exist($P$,$Q$) iff
+%     % $\downP{P\!\restriction\!s}\cap\downP{Q|_{\mathcal{F}(P.\mathrm{fg})}\!\restriction\!s}\not=\emptyset$
+
+    
+%   \item[\textnormal{exist$_\text{pl}$} New!] \mbox{}
+
+%     \begin{description}
+      
+%     \item[general witness condition] \mbox{}
+
+%       $s:\text{exist}_{\text{pl}}(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{exist$_{\text{pl}}^w(P)$}\\
+%     \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+% \end{description}
+
+% \item[\textnormal{no} New!] \mbox{}
+
+%   \begin{description}
+    
+%   \item[general witness condition] \mbox{}
+
+%     $s:\text{no}(P,Q)$ iff $s$ :
+%     \record{\tfield{X}{$\text{no}^w(P)$}\\
+%       \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+%         \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+    
+%   \item[particular witness condition] \mbox{}
+
+%     $s:\text{no}(P,Q)$ iff $s$ :
+%     \record{\tfield{X}{$\text{every}^w(P)$}\\
+%       \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}}
+
+%   \end{description}
+
+        
+    
+% \item[\textnormal{every} Revised!] \mbox{}
+%   % $s$ : every($P$,$Q$) iff
+%   % $\downP{P}\subseteq\downP{Q\!\restriction\!s}$
+
+%   \begin{description}
+
+    
+%   \item[general witness condition] \mbox{}
+
+%     $s:\text{every}(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{every}^w(P)$}\\
+%           \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+%       \end{description}
+
+      
+%     \item[\textnormal{most} New!] \mbox{}
+
+%       \begin{description}
+        
+%       \item[general witness condition] \mbox{}
+
+%         $s:\text{most}(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{most}^w(P)$}\\
+%     \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+% \end{description}
+
+% \item[\textnormal{many$_a$} New!] \mbox{}
+
+%   \begin{description}
+    
+%   \item[general witness condition] \mbox{}
+
+%     $s:\text{many}_a(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{many}_a^w(P)$}\\
+%     \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+% \end{description}
+
+% \item[\textnormal{many$_p$} New!] \mbox{}
+
+%   \begin{description}
+
+    
+%   \item[general witness condition] \mbox{}
+
+%     $s:\text{many}_p(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{many}_p^w(P)$}\\
+%     \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+% \end{description}
+
+% \item[\textnormal{few$_a$} New!] \mbox{}
+
+%   \begin{description}
+
+    
+%   \item[general witness condition] \mbox{}
+
+%     $s:\text{few}_a(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{few}_a^w(P)$}\\
+%           \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+%             \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+        
+%       \item[particular witness condition] \mbox{}
+
+%         $s:\text{few}_a(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\overline{\text{few}_a^w(P)}$}\\
+%     \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}}
+  
+%       \end{description}
+
+      
+%     \item[\textnormal{few$_p$} New!] \mbox{}
+
+%       \begin{description}
+        
+%       \item[general witness condition] \mbox{}
+
+%         $s:\text{few}_p(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{few}_p^w(P)$}\\
+%           \tfield{f}{($(a:(\mathfrak{T}(P)\wedge\mathfrak{T}(Q)))\rightarrow$
+%             \record{\mfield{x}{$a$}{$\mathfrak{T}$(X)}})}}
+
+        
+%       \item[particular witness condition] \mbox{}
+
+%         $s:\text{few}_p(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\overline{\text{few}_p^w(P)}$}\\
+%           \tfield{f}{$((x:\mathfrak{T}(X))\rightarrow\neg\mathfrak{P}(Q)\{x\})$}}
+
+%       \end{description}
+
+      
+%     \item[\textnormal{a\_few$_a$} New!] \mbox{}
+
+%       \begin{description}
+
+
+       
+%       \item[general witness condition] \mbox{}
+
+%         $s:\text{a\_few}_a(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{a\_few}_a^w(P)$}\\
+%     \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+% \end{description}
+
+% \item[\textnormal{a\_few$_p$} New!] \mbox{}
+
+%   \begin{description}
+    
+%   \item[general witness condition] \mbox{}
+
+%     $s:\text{a\_few}_p(P,Q)$ iff $s$ :
+%   \record{\tfield{X}{$\text{a\_few}_p^w(P)$}\\
+%     \tfield{f}{$((a:\mathfrak{T}(\text{X}))\rightarrow\mathfrak{P}(Q)\{a\})$}}
+
+% \end{description}
+
+
+      
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{PlPpty},\textit{PlPpty}\rangle$}] \mbox{}
+  
+% \begin{description}
+    
+% \item[\textnormal{exactly\_$n$}] --- for $n$ a natural number,
+
+%   $s$ : exactly\_$n$($P$, $Q$) iff $s$ : at\_least\_$n$($P$, $Q$)$\wedge$at\_most\_$n$($P$, $Q$)
+
+%     % $s$ : exactly\_$n$($P$, $Q$) iff
+%     %       $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+%     %     \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card($n$)}}}}
+%     %   \not=\emptyset$
+
+      
+%     \item[\textnormal{at\_least\_$n$}] --- for $n$ a natural
+%       number,
+
+%       $s$ : at\_least\_$n$($P$, $Q$) iff
+%           $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
+%         \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+%       \not=\emptyset$
+
+%       % $s$ : at\_least\_$n$($P$, $Q$) iff
+%       %     $\down{\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+%       %   \text{ \d{$\wedge$} \smallrecord{\smalltfield{x}{card\_at\_least($n$)}}}}
+%       % \not=\emptyset$
+
+      
+%     \item[\textnormal{at\_most\_$n$}] --- for $n$ a natural
+%       number,
+
+%       $s$ : at\_most\_$n$($P$, $Q$) iff
+%           $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}(P.\text{fg})})
+%         \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+%       % $s$ : at\_most\_$n$($P$, $Q$) iff
+%       %     $r:\mathcal{F}((Q\!\restriction\!        s).\text{fg}\mid_{\mathcal{F}((P\restriction s).\text{fg})})
+%       %   \text{ implies } r:\text{ \smallrecord{\smalltfield{x}{card\_at\_most($n$)}}}$
+
+% \end{description}    
+
+  
+% \item[with arity \textnormal{\{$\langle T\rangle\mid T$ is a type\}}]
+%   \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{be}] --- $e:\text{be}(a)$ iff $a\varepsilon e$
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Loc},\textit{Real}\rangle$}] \mbox{}
+%   \begin{description}
+    
+%   \item[\textnormal{temp}] --- $e:\text{temp}(l,n)$ iff $n$ is
+%     the temperature at $l$ in $e$.
+
+    
+  
+
+%   \end{description}
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Real},\textit{Real}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{less-than}] --- $e$ : less-than($n$, $m$) iff $n\varepsilon e$, $m\varepsilon e$ and $n<m$
+
+%   \end{description}
+
+% \item[with arity
+%   \textnormal{$\langle\textit{Type},\textit{Type},\textit{Topos}\rangle$}]
+%   \mbox{}
+
+%   \begin{description}
+
+    
+%   \item[\textnormal{nec}] ---
+
+%     If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
+%     \begin{quote}
+%       $s:_p\mathrm{nec}(T,B,\tau)$ iff $s:_pB$, 
+%       $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+%       $\tau(s)\sqsubseteq_{\mathbb{T}}T$
+%     \end{quote}
+
+    
+%   \item[\textnormal{poss}] ---
+
+%     If $\mathbb{T}$ is a modal type system and $p\in\mathbb{T}$, then
+%     \begin{quote}
+%       $s:_p\mathrm{poss}(T,B,\tau)$ iff $s:_pB$, 
+%       $B\sqsubseteq_{\mathbb{T}}\tau.\mathrm{bg}$ and 
+%       $\tau(s)\top_{\mathbb{T}}T$
+%     \end{quote}
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{RecType},\textit{RecType}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{pov}
+%     ] --- $e:\text{pov}(T_1,T_2)$ iff $T_2$
+%     is a point of view on $T_1$ in $e$.
+
+%     $e:\text{pov}(T_1,T_2)$ implies
+%     $\mathrm{labels}(T_2)\subseteq\mathrm{labels(T_1)}$
+
+%   \end{description}
+
+  
+% \item[with arity
+%   \textnormal{$\langle\textit{Ind},\textit{RecType}\rangle$}] \mbox{}
+
+%   \begin{description}
+    
+%   \item[\textnormal{ltm}] --- $e:\text{ltm}(a,T)$ iff $T$ is $a$'s
+%     long term memory in $e$.
+    
+%   \item[\textnormal{rbelieve}] --- $e:\text{rbelieve}(a,T)$ iff
+%     $T$ is $a$'s religious beliefs in $e$.
+
+    
+%   \item[\textnormal{des}] --- $e:\text{des}(a,T)$ iff $T$ is
+%     $a$'s desires in $e$.
+
+%   \end{description}
+  
+  
+
+  
+  
+  
+
+
+% \end{description}
+
+\subsubsection{Properties} (as in Chapter~\ref{ch:quant})
+
+% \begin{description}
+  
+% \item[\textnormal{$P_1\&P_2$} New!] \mbox{}
+
+%   If $T$ is a type, $P_1:{^T\textit{Ppty}}$ and $P_2:{^T\textit{Ppty}}$,
+% then \textit{the conjunction of $P_1$ and
+%   $P_2$}, $P_1\&P_2$, is
+% \begin{quote}
+%   $\ulcorner\lambda r$:\smallrecord{
+%     \smalltfield{x}{$T$}} .
+%   \record{
+%     \tfield{e$_1$}{$P_1\{r.\text{x}\}$}\\
+%     \tfield{e$_2$}{$P_2\{r.\text{x}\}$}}$\urcorner$
+% \end{quote}
+
+% \end{description}
+
+\subsubsection{Scales} (as in Chapter~\ref{ch:commonnouns})
+
+% % % \begin{description}
+  
+% % % \item[\textnormal{$\zeta_{\text{temp}}$} New!] ---
+% % %   $\lambda r$:\textit{AmbTempFrame} . $r$.x : (\textit{AmbTempFrame}
+% % %   $\rightarrow$ \textit{Real})
+
+  
+% % % \item[\textnormal{$\zeta_{\mathrm{height}}$} New!] ---
+% % %   $\lambda r$:\textit{LocFrame} . $r$.loc.z-coord : (\textit{LocFrame}
+% % %   $\rightarrow$ \textit{Real})
+
+  
+% % % \item[\textnormal{$\zeta_{\text{age}}$} New!] ---  
+% % % $\lambda r$:\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+% % %                          \smalltfield{age}{\textit{Real}}\\
+% % %                          \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+% % %                        . $r$.age : (\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+% % %                          \smalltfield{age}{\textit{Real}}\\
+% % %                          \smalltfield{c$_{\mathrm{age}}$}{age\_of(x,age)}}
+% % %                        $\rightarrow$ \textit{Real})
+
+% % % \end{description}
+
+
+
+\subsubsection{Lexicon} (as in Chapter~\ref{ch:quant})
+% \begin{description}
+% \item[\textnormal{Lex}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type (that is,
+% $T_{\mathrm{phon}}\sqsubseteq\textit{Phon}$) and $T_{\mathrm{sign}}$
+% is a sign type (that is, $T_{\mathrm{sign}}\sqsubseteq\textit{Sign}$), then we shall use
+% Lex($T_{\mathrm{phon}}$, $T_{\mathrm{sign}}$) to represent
+% \begin{quote}
+% (($T_{\mathrm{sign}}$ \d{$\wedge$}
+% \smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{$T_{\mathrm{phon}}$}}}})
+% \d{$\wedge$} \textit{NoDaughters})
+% \end{quote}
+
+% % \item[\textnormal{SemCommonNoun($p$)}] \mbox{}
+
+% %   If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$, then SemCommonNoun($p$) is
+% %   \begin{quote}
+% %     $\lambda c$:\textit{Rec} . $\lambda
+% % r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% % . \record{\tfield{e}{$p$($r$.x)}}
+% % \end{quote}
+
+% % \item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+% %     $p$)}] \mbox{}
+
+% %   If $T_{\mathrm{phon}}$ is a phonological type and $p$ is a
+% %   predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+% %   $p$) is
+% %   \begin{quote}
+% %     Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+% %     \smallrecord{\smallmfield{cont}{SemCommonNoun($p$)}{\textit{PPpty}}}
+% %   \end{quote}
+
+% \item[\textnormal{SemCommonNoun($T_{\mathrm{bg}}$, $p$)}]
+%   \mbox{}
+
+%     If $p$ is a predicate with arity $\langle\textit{Ind}\rangle$ and
+%     $T_{\mathrm{bg}}$ is a type (of context), then
+%     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+% . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
+% \end{quote}
+
+% If $p$ is a predicate with arity $\langle\textit{Rec}\rangle$ and $T_{\mathrm{bg}}$ is a type (of context), then
+%     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+% r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+% . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
+% \end{quote}
+  
+% %     \todo{Not sure this is used}If $p$ is a predicate with arity $\langle\textit{Rec},
+% %     \textit{Rec}\rangle$ and $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a type (of context), then
+% %     SemCommonNoun($T_{\mathrm{bg}}$, $p$) is
+% %   \begin{quote}
+% %     $\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+% % r$:\textit{Rec}
+% % . \record{\tfield{e}{$p$($r$, $c.\mathfrak{c}$)}}
+% % \end{quote}
+
+% \item[\textnormal{Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+%     $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+%     % If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+%   % predicate with arity $\langle\textit{Ind}\rangle$ and
+%   % $T_{\mathrm{bg}}$ is a type (of context), then
+%   % Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+%   % $p$) is
+%   % \begin{quote}
+%   %   Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+%   %   \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+%   %       $p$)}{\textit{PPpty}}}
+%   % \end{quote}
+
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a
+%   predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}\rangle$ and
+%   $T_{\mathrm{bg}}$ is a type (of context), then
+%   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+%   $p$) is
+%   \begin{quote}
+%     Lex($T_{\mathrm{phon}}$, \textit{N}) \d{$\wedge$}
+%     \smallrecord{\smallmfield{cont}{SemCommonNoun($T_{\mathrm{bg}}$,
+%         $p$)}{\textit{PPpty}}}
+%   \end{quote}
+  
+% \item[\textnormal{SemPropName($T_{\text{phon}}$)}] \mbox{}
+
+%   If $T_{\text{phon}}$ is a phonological type, then SemPropName($T_{\text{phon}}$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:\smallrecord{
+%       \footnotesize{\textit{Cntxt}}\\
+%       \smalltfield{$\mathfrak{c}$}{\smallrecord{\smalltfield{x}{\textit{Ind}}\\
+%                          \smalltfield{e}{named(x, $T_{\mathrm{phon}}$)}}}} . $\lambda
+%                        P$:\textit{Ppty} . $P(c.\mathfrak{c})\urcorner$
+%   \end{quote}
+  
+% \item[\textnormal{Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$
+%     )}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type,
+
+%   then Lex$_{\mathrm{PropName}}$($T_{\mathrm{phon}}$) is
+%   \begin{quote}
+%     Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cnt}{SemPropName($T_{\mathrm{phon}}$)}{\textit{PQuant}}}
+% \end{quote}
+
+% \item[\textnormal{SemPron} ] \mbox{}
+
+%   $\ulcorner\lambda c$:\smallrecord{
+%     \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{s}$}{\smallrecord{
+%         \smalltfield{x$_0$}{\textit{Ind}}}}} . $\lambda
+%   P$:\textit{Ppty}
+%   . $P$(\smallrecord{\field{x}{$c.\mathfrak{s}$.x$_0$}})$\urcorner$
+
+% \item[\textnormal{LexPron($T_{\text{phon}}$)}] \mbox{}
+
+% If $T_{\text{phon}}$ is a phonological type, then
+% LexPron($T_{\text{phon}}$) is
+% \begin{quote}
+% Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemPron}{\textit{PQuant}}}
+% \end{quote}
+
+% \item[\textnormal{SemWhPron} New!] \mbox{}
+
+%   $\ulcorner\lambda c$:\smallrecord{
+%   \footnotesize{\textit{Cntxt}}\\
+%   \smalltfield{$\mathfrak{w}$}{\smallrecord{
+%       \smalltfield{x$_0$}{\textit{Ind}}}}}
+% . $\lambda P$:\textit{Ppty}
+% . $P$(\smallrecord{\field{x}{$c.\mathfrak{w}.\text{x}_0$}})$\urcorner$
+
+% \item[\textnormal{LexWhPron($T_{\text{phon}}$)} New!] \mbox{}
+
+%   If $T_{\text{phon}}$ is a phonological type, then
+% LexWhPron($T_{\text{phon}}$) is
+% \begin{quote}
+% Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemWhPron}{\textit{PQuant}}}
+% \end{quote}
+
+% \item[\textnormal{SemNumeral($n$)}] \mbox{}
+
+%   If $n$ is a real number, then SemNumeral($n$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:\textit{Cntxt} . $\lambda P$:\textit{Ppty}
+%     . $P$(\smallrecord{\field{x}{$n$}})$\urcorner$
+%   \end{quote}
+
+  
+% \item[\textnormal{Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$)}] \mbox{}
+
+%     If $T_{\mathrm{phon}}$ is a phonological type and $n$ is a real
+%     number, then Lex$_{\mathrm{numeral}}$($T_{\mathrm{phon}}$, $n$) is
+%     \begin{quote}
+%       Lex($T_{\mathrm{phon}}$, \textit{NP}) \d{$\wedge$}
+%       \smallrecord{\smallmfield{cnt}{SemNumeral($n$)}{\textit{PQuant}}}
+%     \end{quote}
+    
+
+  
+% \item[\textnormal{SemIndefArt}] \mbox{}
+
+%   % $\ulcorner\lambda c$:\textit{Rec} . \\
+% % \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+% % \hspace*{2em} $\lambda P$:\textit{Ppty}
+% % . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+% %           \mfield{scope}{$P$}{\textit{Ppty}} \\
+% %           \tfield{e}{exist(restr, scope)}}$\urcorner$
+
+% $\lambda Q$:\textit{Ppty} . \\
+%   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+%   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+%   \hspace*{3em}\record{
+%     \mfield{restr}{$Q$}{\textit{Ppty}}\\
+%     \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+%     \tfield{e}{exist(restr, scope)}}$\urcorner$
+
+
+
+ 
+
+        
+%       \item[\textnormal{Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$)}]
+%         \mbox{}
+
+%         If $T_{\mathrm{Phon}}$ is a phonological type, then
+%         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cont}{SemIndefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+%         \end{quote}
+
+        
+%       \item[\textnormal{SemUniversal}] \mbox{}
+
+%                $\lambda Q$:\textit{Ppty} . \\
+%   \hspace*{1em}$\ulcorner\lambda c$:\textit{Cntxt} . \\
+%   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+%   \hspace*{3em}\record{
+%     \mfield{restr}{$Q$}{\textit{Ppty}}\\
+%     \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+%     \tfield{e}{every(restr, scope)}}$\urcorner$
+
+ 
+
+  
+% \item[\textnormal{Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$)}]
+%         \mbox{}
+
+%         If $T_{\mathrm{Phon}}$ is a phonological type, then
+%         Lex$_{\mathrm{Universal}}$($T_{\mathrm{Phon}}$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cont}{SemUniversal}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+%         \end{quote}
+
+%         \item[\textnormal{SemDefArt}] \mbox{}
+
+%  %  $\lambda c$:\textit{Rec} . \\
+% % \hspace*{1em}$\lambda Q$:\textit{Ppty} . \\
+% % \hspace*{2em} $\lambda P$:\textit{Ppty}
+% % . \record{\mfield{restr}{$Q$}{\textit{Ppty}} \\
+% %           \mfield{scope}{$P$}{\textit{Ppty}} \\
+% %           \tfield{e}{the(restr, scope)}}
+
+%                     $\lambda Q$:\textit{Ppty} . \\
+%                     \hspace*{1em}$\ulcorner\lambda c$:\smallrecord{
+%                       \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{c}$}{\smallrecord{
+%         \smalltfield{e}{unique($Q$)}}}} . \\
+%   \hspace*{2em}$\lambda P$:\textit{Ppty} . \\
+%   \hspace*{3em}\record{
+%     \mfield{restr}{$Q\!\restriction\!c.\mathfrak{c}$.e}{\textit{Ppty}}\\
+%     \mfield{scope}{$P|_{\mathfrak{F}(\text{restr})}$}{\textit{Ppty}}\\
+%     \tfield{e}{every(restr, scope)}}$\urcorner$
+
+
+        
+%       \item[\textnormal{Lex$_{\mathrm{DefArt}}$($T_{\mathrm{Phon}}$)}]
+%         \mbox{}
+
+%         If $T_{\mathrm{Phon}}$ is a phonological type, then
+%         Lex$_{\mathrm{IndefArt}}$($T_{\mathrm{Phon}}$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{Phon}}$, \textit{Det}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cont}{SemDefArt}{(\textit{Ppty}$\rightarrow$\textit{PQuant})}}
+%         \end{quote}
+
+%       \item[\textnormal{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}]
+%         \mbox{}
+
+%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%           . \record{\tfield{e}{$p$($r$.x)}}$\urcorner\urcorner$
+%         \end{quote}
+
+%         If $T_{\text{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} is a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Rec}, \textit{Rec}\rangle$, then SemIntransVerb($T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\ulcorner\lambda
+%           r$:\smallrecord{\smalltfield{x}{\textit{Rec}}}
+%           . \record{\tfield{e}{$p$($r$.x, $c.\mathfrak{c}$)}}$\urcorner\urcorner$
+%         \end{quote}
+
+        
+%       \item[\textnormal{Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%           $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+%         % If $T_{\mathrm{phon}}$ is a phonological type,
+%         % $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+%         % predicate with arity $\langle\textit{Ind}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%         % $T_{\mathrm{bg}}$, $p$) is
+%         % \begin{quote}
+%         %   Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+%         %   \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+%         % \end{quote}
+
+%         If $T_{\mathrm{phon}}$ is a phonological type,
+%         $T_{\mathrm{bg}}\sqsubseteq$\smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{Rec}}} a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind}\rangle$ or $\langle\textit{Rec}, \textit{Rec}\rangle$, then Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%         $T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{phon}}$, \textit{V$_i$}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cnt}{SemIntransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+%         \end{quote}
+
+        
+%       \item[\textnormal{SemTransVerb($T_{\mathrm{bg}}, p$)}] \mbox{}
+
+%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+%           \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+%           r_1$:\smallrecord{\smalltfield{x}{\textit{Ind}}} . $\mathcal{Q}(\ulcorner\lambda r_2$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%           . \record{\tfield{e}{$p$($r_1$.x, $r_2$.x)}}$\urcorner)\urcorner\urcorner$
+%         \end{quote}
+
+%         If $T_{\text{bg}}$ is a record type (for context) and $p$ is a
+%   predicate with arity $\langle\textit{Ind},\textit{Quant}\rangle$, then SemTransVerb($T_{\mathrm{bg}}$, $p$) is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$T_{\mathrm{bg}}$ . $\lambda
+%     \mathcal{Q}$:\textit{Quant} . $\ulcorner\lambda
+%     r$:\smallrecord{\smalltfield{x}{\textit{Ind}}}
+%     . \record{\tfield{e}{$p$($r$.x, $\mathcal{Q}$)}}$\urcorner)\urcorner$
+%   \end{quote}
+        
+% \item[\textnormal{Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+%           $T_{\mathrm{bg}}$, $p$)}] \mbox{}
+
+%         If $T_{\mathrm{phon}}$ is a phonological type,
+%         $T_{\mathrm{bg}}$ a record type (for context) and $p$ is a
+%         predicate with arity $\langle\textit{Ind},\textit{Ind}\rangle$
+%         or $\langle\textit{Ind},\textit{Quant}\rangle$, then Lex$_{\mathrm{TransVerb}}$($T_{\mathrm{phon}}$,
+%         $T_{\mathrm{bg}}$, $p$) is
+%         \begin{quote}
+%           Lex($T_{\mathrm{phon}}$, \textit{V$_t$}) \d{$\wedge$}
+%           \smallrecord{\smallmfield{cnt}{SemTransVerb($T_{\mathrm{bg}}$, $p$)}{\textit{PPpty}}}
+%         \end{quote}
+
+        
+
+        
+%       \item[\textnormal{SemBe}] \mbox{}
+
+%         % $\lambda c:T_{\text{bg}}$ . \\
+% %         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+% % \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{\tfield{x}{\textit{Ind}}}
+% % . \\
+% % \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% % r_2$:\smallrecord{\tfield{x}{\textit{Ind}}}
+% % . \record{\mfield{x}{$r_2$.x, $r_1$.x}{\textit{Ind}}\\
+% % \tfield{e}{be(x)}}$\urcorner$)$\urcorner$
+
+%         \begin{description}
+          
+%         \item[\textnormal{SemBe$_{\text{ID}}$}] \mbox{}
+
+%           $\ulcorner\lambda c$:\smallrecord{
+%             \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{c}$}{\smallrecord{
+%         \smalltfield{ty}{\textit{Type}}}}} . \\
+%         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+%         \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+%           \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+% . \\
+% \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% r_2$:\smallrecord{
+%   \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+% . \record{\mfield{x}{$r_1$.x, $r_2$.x}{$c.\mathfrak{c}$.ty}\\
+%   \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$
+
+% \item[\textnormal{SemBe$_{\text{scalar}}$}] \mbox{}
+
+%   $\ulcorner\lambda c$:\smallrecord{
+%     \footnotesize{\textit{Cntxt}}\\
+%     \smalltfield{$\mathfrak{c}$}{\smallrecord{
+%         \smalltfield{ty}{\textit{Type}}\\
+%       \smalltfield{sc}{(ty$\rightarrow$\textit{Real})}}}} . \\
+%         \hspace*{1em}$\lambda\mathcal{Q}$:\textit{Quant} . \\
+%         \hspace*{2em} $\ulcorner\lambda r_1$:\smallrecord{
+%           \smalltfield{x}{$c.\mathfrak{c}$.ty}}
+% . \\
+% \hspace*{3em} $\mathcal{Q}$($\ulcorner\lambda
+% r_2$:\smallrecord{
+%   \smalltfield{x}{\textit{Real}}}
+% . \record{\mfield{x}{$c.\mathfrak{c}$.sc($r_1$.x), $r_2$.x}{\textit{Real}}\\
+%   \tfield{e}{be(x)}}$\urcorner$)$\urcorner\urcorner$
+
+% \end{description}
+
+
+% \item[\textnormal{Lex$_{\mathrm{be}}$($T_{\mathrm{Phon}}$)}] \mbox{}
+
+%   If $T_{\mathrm{Phon}}$ is a phonological type, then
+%   Lex$_{\mathrm{be}_{\text{ID}}}$($T_{\mathrm{Phon}}$) is
+% \begin{quote}
+%   Lex($T_{\mathrm{Phon}}$,
+% \textit{V}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemBe$_{\text{ID}}$}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+% \end{quote}
+
+% If $T_{\mathrm{Phon}}$ is a phonological type, then
+%   Lex$_{\mathrm{be}_{\text{scalar}}}$($T_{\mathrm{Phon}}$) is
+% \begin{quote}
+%   Lex($T_{\mathrm{Phon}}$,
+% \textit{V}) \d{$\wedge$}
+% \smallrecord{\smallmfield{cont}{SemBe$_{\text{scalar}}$}{(\textit{Quant}$\rightarrow$\textit{Ppty})}}
+% \end{quote}
+
+% \item[\textnormal{$\mathrm{FrameType}(p)$}] \mbox{}
+
+%   $\mathrm{FrameType}$ is a partial function on predicates, $p$, with
+%   arity $\langle\textit{Ind}\rangle$ which can be defined for
+%   particular agents and particular times, which obeys the constraint:
+%   \begin{quote}
+%     $\mathrm{FrameType}(p)\sqsubseteq$ \record{
+%     \tfield{x}{\textit{Ind}}\\
+%     \tfield{e}{$p$(x)}}
+% \end{quote}
+
+% \item[\textnormal{$p$\_frame}] \mbox{}
+
+%   \begin{enumerate} 
+ 
+% \item If $p$ is a predicate in the domain of $\mathrm{FrameType}$,
+%   then $p$\_frame is a predicate with arity $\langle\textit{Rec}\rangle$. 
+ 
+% \item $e:p\_\text{frame}(r)$ iff $r:\mathrm{FrameType}(p)$ and $e=r$ 
+ 
+% \end{enumerate}
+
+% \item[\textnormal{$p$\_pl}] \mbox{}
+
+%   \begin{enumerate} 
+ 
+% \item If $p$ is a singular predicate (i.e. there is no $p'$ such that
+%   $p=p'\_\text{pl}$) with arity $\langle T\rangle$, then
+%   $p\_\text{pl}$ is a predicate with arity $\langle\mathrm{plurality}(T)\rangle$ 
+ 
+% \item $e:p\_\text{pl}(A)$ if for all $a\in A$, $e:p(a)$ 
+ 
+% \end{enumerate} 
+  
+
+% \item[\textnormal{CommonNounIndToFrame}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+% arity $\langle\textit{Ind}\rangle$ and
+% $T_\mathrm{bg}$ is a record type (the ``background type'' or
+% ``presupposition'') then \\ 
+% \mbox{CommonNounIndToFrame(Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$))} =
+% \begin{quote}
+%   Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$\_frame)
+% \end{quote}
+
+% \item[\textnormal{RestrictCommonNoun}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate,
+% $T_{\mathrm{bg}}$ and $T_{\mathrm{res}}$ are record types and $\Sigma$
+% is Lex$_{\mathrm{CommonNoun}}$($T_{\mathrm{phon}}$, $T_{\mathrm{bg}}$,
+% $p$), then RestrictCommonNoun($\Sigma$, $T_{\mathrm{res}}$) is
+% \begin{quote}
+% $\Sigma$
+% \fbox{\d{$\wedge$}} \record{
+%   \mfield{cont}{$\ulcorner\lambda c\!:\!T_{\mathrm{bg}}\ .\
+%     \ulcorner\text{SemCommonNoun}(T_{\mathrm{bg}},p)(c)\!\mid_{T_{\mathrm{res}}}\urcorner\urcorner$}{\textit{PPpty}}}
+% \end{quote}
+
+% \item[\textnormal{IntransVerbIndToFrame}] \mbox{}
+
+%   If $T_{\mathrm{phon}}$ is a phonological type, $p$ is a predicate with
+% arity $\langle\textit{Ind}\rangle$ and
+% $T_\mathrm{bg}$ is a record type (the ``background type'' or
+% ``presupposition'') then \\ 
+% \mbox{IntransVerbIndToFrame(Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$))} =
+% \begin{quote}
+%   Lex$_{\mathrm{IntransVerb}}$($T_{\mathrm{phon}}$,
+%   $T_\mathrm{bg}$, $p$\_frame)
+% \end{quote}
+
+% \item[\textnormal{PluralCommonNoun}] \mbox{}
+
+%   We assume that `pluralnoun' is a function that maps phonological
+%   types for singular common nouns to corresponding phonological types
+%   for plural common nouns.
+
+%   If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+%   singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+%   is a record type then
+%   PluralCommonNoun(Lex$_{\text{CommonNoun}}$($T_{\text{phon}}$,
+%   $T_{\text{bg}}$, $p$)) =
+%   \begin{quote}
+%     Lex$_{\text{CommonNoun}}$(pluralnoun($T_{\text{phon}}$),
+%     $T_{\text{bg}}$, $p$\_pl)
+%   \end{quote}
+
+  
+% \item[\textnormal{PluralIntransVerb}] \mbox{}
+
+%   We assume that `pluralverb' is a function that maps phonological
+%   types for singular verbs to corresponding phonological types
+%   for plural verbs.
+
+%   If $T_{\text{phon}}$ is a (singular) phonological type, $p$ is a
+%   singular predicate with arity $\langle T\rangle$ and $T_{\text{bg}}$
+%   is a record type then
+%   PluralIntransVerb(Lex$_{\text{IntransVerb}}$($T_{\text{phon}}$,
+%   $T_{\text{bg}}$, $p$)) =
+%   \begin{quote}
+%     Lex$_{\text{IntransVerb}}$(pluralverb($T_{\text{phon}}$),
+%     $T_{\text{bg}}$, $p$\_pl)
+%   \end{quote} 
+        
+% \item[\textnormal{TransVerbToVerbPhrase} New!] \mbox{}
+
+%   If $T_{\text{phon}}$ is a phonological type, $T_{\text{bg}}$ a
+%   context type, $p$ is a predicate with arity
+%   $\langle\textit{Ind},\textit{Ind}\rangle$ or
+%   $\langle\textit{Ind},\textit{Quant}\rangle$ and $\Sigma$ is
+%   Lex$_{\text{TransVerb}}$($T_{\text{phon}}$, $T_{\text{bg}}$, $p$),
+%   then TransVerbToVerbPhrase($\Sigma$) is
+%   \begin{quote}
+%     $\Sigma$ \fbox{\d{$\wedge$}} \record{
+%       \mfield{cat}{vp}{\textit{Cat}}\\
+%       \mfield{cont}{$\varphi$}{\textit{PPpty}}}
+%   \end{quote}
+%   where $\varphi$ is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$\Sigma$.cont.bg\d{$\wedge$}\smallrecord{
+%       \smalltfield{$\mathfrak{g}$}{\smallrecord{
+%           \smalltfield{x$_0$}{\textit{Ind}}}}}
+%     . $\Sigma$.cont($c$)($\lambda P$:\textit{Ppty}
+%     . $P\{c.\mathfrak{g}.\text{x}_0\}$)$\urcorner$
+%   \end{quote}
+  
+  
+  
+% \end{description}
+
+
+
+\subsubsection{Constituent structure} 
+\begin{description}
+  
+%\item[Uninterpreted phrase structure]
+  
+\item[\textnormal{RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)}] \mbox{}
+
+If $T_{\text{mother}}$ is a sign type and $T_{\text{daughters}}$ is a
+type of strings of signs then
+\begin{quote}
+RuleDaughters($T_{\text{daughters}}$,
+$T_{\text{mother}}$)
+\end{quote}
+is
+\begin{quote}
+  $\lambda u\! :\! T_{\text{daughters}}$\ . $T_{\text{mother}}$ \d{$\wedge$} \smallrecord{\smalltfield{syn}{\smallrecord{\smallmfield{daughters}{$u$}{$T_{\text{daughters}}$}}}}
+\end{quote}
+
+\item[\textnormal{ConcatPhon}] \mbox{}
+
+  $\lambda
+u$:\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{\textit{Phon}}}}}$^+$\
+. \\
+\hspace*{1em}\record{\tfield{s-event}{\record{\mfield{e}{concat$_i$($u[i]$.s-event.e)}{\textit{Phon}}}}}
+
+\item[\textnormal{$T_{\text{mother}}\longrightarrow T_{\text{daughter}_1},\ldots
+    T_{\text{daughter}_n}$}] \mbox{}
+
+  If $T_{\text{mother}}$ is a sign type and
+  $T_{\text{daughter}_1},\ldots T_{\text{daughter}_n}$ are sign types,
+  then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow T_{\text{daughter}_1}\ldots
+    T_{\text{daughter}_n}$
+  \end{quote}
+  represents
+  \begin{quote}
+RuleDaughters($T_{\text{mother}}$,
+${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
+\end{quote}
+
+%\item[Content combination operations] 
+
+\item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
+
+  If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+                             T_2$))}} 
+and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+  \begin{quote}
+   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      . \\
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+
+      
+    \end{quote}
+
+      \item[\textnormal{$\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$}]
+    \mbox{}
+
+      If
+  \begin{enumerate}
+  \item $\alpha$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{Quant})}},
+    
+  \item $\beta$ : \smallrecord{
+      \smalltfield{bg}{\textit{CntxtType}}\\
+      \smalltfield{fg}{(bg$\rightarrow$\textit{RecType})}},
+    
+  \item $\alpha$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{w}$}{\smallrecord{
+          \smalltfield{x$_i$}{\textit{Ind}}}}} for some natural number,
+    $i$, and
+    
+  \item $\beta$.bg $\sqsubseteq$ \smallrecord{
+      \smalltfield{$\mathfrak{g}$}{\smallrecord{
+          \smalltfield{x$_j$}{\textit{Ind}}}}} for some natural number,
+    $j$,
+  \end{enumerate}
+  then \textit{the \textit{wh}$_{i,j}$-combination of $\alpha$ and
+    $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda
+    c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
+    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    . \\
+    \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
+    \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
+    ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
+    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+  \end{quote} 
+
+  \item[\textnormal{$\alpha\text{@\!@}\beta$}] \mbox{}
+
+  If $\alpha$ : ($T_1\rightarrow$ \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_2$)}}) 
+                         and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+                         then the \textit{combination of $\alpha$ and
+    $\beta$  based on functional application}, $\alpha\text{@\!@}\beta$, is
+  \begin{quote}
+    $\ulcorner\lambda c$:\record{
+      \tfield{$\mathfrak{c}$}{\record{
+          \tfield{s}{$\beta$.bg}\\
+          \tfield{f}{$\alpha(\beta(s))$.bg}\\
+          \mfield{a}{s.$\mathfrak{c}$}{\textit{PropCntxt}}}}\\
+    \mfield{$\mathfrak{s}$}{$\mathfrak{c}$.s.$\mathfrak{s}$}{\textit{Assgnmnt}}}
+      . \\*[\baselineskip]
+      \hspace*{10em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}}(c))(c)\urcorner$
+    \end{quote}
+
+    \item[\textnormal{$\alpha\text{@}_{\&}\beta$}] \mbox{}
+
+  If $T$ is a type, $\alpha:{^T\textit{PPpty}}$ and
+  $\beta:{^T\textit{PPpty}}$ 
+  then \textit{the property conjunction
+    combination of $\alpha$ and $\beta$}, $\alpha\text{@}_{\&}\beta$,
+  is
+\begin{quote}
+  $\lambda
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+      \end{quote}
+
+      
+    \item[\textnormal{$T_1\mathcal{O}^{\mathfrak{S}}T_2$} New!]
+      \mbox{}
+
+      Suppose that $T_1$ and
+$T_2$ are of type \textit{ContType} and that $\mathcal{O}$ is a combination
+operation such as @,\ldots as characterized above, then we say $T_1\mathcal{O}^{\mathfrak{S}}T_2$
+is also a type with the witness condition:
+\begin{quote} 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
+then $\alpha\mathcal{O}\beta:T_1\mathcal{O}^{\mathfrak{S}}T_2$.
+Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S}}T_2$. 
+\end{quote} 
+
+
+    
+%    \item[Forward application] 
+    
+\item[\textnormal{ContForwardApp$_{\mathfrak{S},\mathcal{O}}$} New!]
+  \mbox{}
+
+  If $\mathcal{O}$ is one of @, @@, @$_{\text{wh}_{i,j}}$ (for some
+natural numbers $i$ and $j$) or @$_{\&}$, then
+ContForwardApp$_{\mathfrak{S},\mathcal{O}}$ is
+\begin{quote}
+  $\lambda u$:\smallrecord{
+    \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+    \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+    \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S}}u[1].\text{cont})$}}
+\end{quote}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "ttl"
+%%% End:
