@@ -2269,6 +2269,14 @@ Chapter~\ref{ch:propnames}, p.~\pageref{pg:incr}.  We will use
 \end{subex} 
    
 \end{ex}
+We will informally use \nexteg{} to represent incrementation of all
+paths which lead to assignments so that we do not have to keep track
+of the required subscripts as we add additional assignments to our
+contexts.  
+\begin{ex} 
+$\mathrm{incr}(\varphi, T)$ 
+\end{ex} 
+  
 We now modify the definition of the combination of $\alpha$ and
 $\beta$, $\alpha\text{@}\beta$, given in Chapter~\ref{ch:propnames},
 p.~\pageref{ex:s-combination} to \nexteg{}.
@@ -2282,9 +2290,9 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
   \begin{quote}
    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      \d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
       . \\
-      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
       
 \end{quote}
@@ -2345,27 +2353,27 @@ revise \textit{Cntxt} to \nexteg{}.
     \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}} 
 \end{ex}
-We also modify the definition of combination to increment the
-$\mathfrak{w}$-assignment as in \nexteg{}.
-\begin{ex}
-If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
-                             T_2$))}} 
-and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-                           \smalltfield{fg}{(bg$\rightarrow T_1$)}}
-                         then the \textit{combination of $\alpha$ and
-    $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
-  \begin{quote}
-   $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-      . \\
-      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+% We also modify the definition of combination to increment the
+% $\mathfrak{w}$-assignment as in \nexteg{}.
+% \begin{ex}
+% If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+%                              T_2$))}} 
+% and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%                            \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+%                          then the \textit{combination of $\alpha$ and
+%     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
+%   \begin{quote}
+%    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+%       . \\
+%       \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
       
-\end{quote}
+% \end{quote}
 
  
-\end{ex}
+% \end{ex}
 
 
 
@@ -2903,7 +2911,7 @@ gaps, `@$_{\mathrm{wh}}$', characterized in \nexteg{}.
     $\beta$}, $\alpha\text{@}_{\mathrm{wh}_{i,j}}\beta$, is
   \begin{quote}
     $\ulcorner\lambda
-    c$:([$\alpha$.bg$\ominus\mathfrak{w}.\text{x}_i$]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathfrak{g}.\text{x}_j]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    c$:([$\alpha$.bg$\ominus\mathfrak{w}.\text{x}_i$]$_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}\ominus\mathfrak{g}.\text{x}_j]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
     .
     \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:\smallrecord{
       \smalltfield{x}{\textit{Ind}}\\
@@ -2914,7 +2922,7 @@ gaps, `@$_{\mathrm{wh}}$', characterized in \nexteg{}.
       \smalltfield{x}{\textit{Ind}}\\
       \smalltfield{$\mathfrak{g}$}{\smallrecord{
           \smallmfield{x$_j$}{$\Uparrow$x}{\textit{Ind}}}}} . \\
-    \hspace*{13em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+    \hspace*{13em}$\mathrm{incr}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
   \end{quote}
   
 \end{ex}
@@ -2950,12 +2958,12 @@ introduced by the \textit{wh} and gap interpretations as in \nexteg{}.
   \begin{quote}
     $\ulcorner\lambda
     c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
-    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    \hspace*{5em}$\mathrm{incr}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
     . \\
     \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
     \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
     ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
-    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+    \hspace*{15em}$\mathrm{incr}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
   \end{quote} 
 \end{ex}
 The effect of the property purification here will be to locally
@@ -3122,8 +3130,8 @@ We can now characterize a combination operation, @$_{\&}$, in
   is
 \begin{quote}
   $\lambda
-  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
 \end{quote}
 \end{ex}
 
@@ -4773,9 +4781,9 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
   \begin{quote}
    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      \d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
       . \\
-      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
       
     \end{quote}
@@ -4879,12 +4887,12 @@ u$:\smallrecord{\smalltfield{cont}{\smallrecord{\smalltfield{bg}{\textit{CntxtTy
   \begin{quote}
     $\ulcorner\lambda
     c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
-    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    \hspace*{5em}$\mathrm{incr}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
     . \\
     \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
     \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
     ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
-    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+    \hspace*{15em}$\mathrm{incr}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
   \end{quote} 
 
 \item[\textnormal{ContForwardApp$_{\text{@}_{\text{wh}_{i,j}}}$($T_{\text{fun}},T_{\text{arg}},T_{\text{res}}$)}
@@ -4999,8 +5007,8 @@ u$:\smallrecord{\smalltfield{cont}{$(T_{\text{arg}}\rightarrow
   is
 \begin{quote}
   $\lambda
-  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
       \end{quote}
 
       

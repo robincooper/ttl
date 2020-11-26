@@ -1174,49 +1174,71 @@ interpretation associated with pronoun utterances.  For example, we
 will define a variant of the combination operation `@', `@$_{i,j}$' which
 anaphorically relates a pronoun associated with the context path
 `$\mathfrak{s}.j$' to one associated with the context path
-`$\mathfrak{s}.i$'.  This is given in \nexteg{}, which is the same as
-the characterization of `@' except for the addition of the boxed
-material.
-
-\todo{See notes for generalizing and simplifying. Text
-  around will need changing.}
-
-@@
+`$\mathfrak{s}.i$'.  This is given in \nexteg{}.
 
 \begin{ex} 
-If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-                           \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
-                             T_2$))}} 
-and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
-  \smalltfield{fg}{(bg$\rightarrow T_1$)}}
-\fbox{and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
-    \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_i$}{\textit{Ind}}}}} and
-  $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
-  \smallrecord{
-    \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{Ind}}}}}} \fbox{but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
-  \smallrecord{
-    \smalltfield{$\mathfrak{q}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{PQuant}}}}}},
-                         then the \textit{combination of $\alpha$ and
-    $\beta$  based on functional application \fbox{and anaphoric
-      relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
-  \begin{quote}
-    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
-      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.x}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
+If $\mathcal{O}$ is a combination operator, then so is
+$\mathcal{O}_{i,j}$, where $i$ and $j$ are natural numbers.
+
+If
+$\alpha$ and $\beta$ are parametric contents such that
+$\alpha\mathcal{O}\beta$ is defined, $\alpha.\text{bg}\sqsubseteq$
+\smallrecord{
+  \smalltfield{$\mathfrak{s}$}{\smallrecord{
+      \smalltfield{x$_i$}{\textit{Ind}}}}}
+and $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+\smallrecord{
+  \smalltfield{$\mathfrak{s}$}{\smallrecord{
+      \smalltfield{x$_j$}{\textit{Ind}}}}}
+but $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+\smallrecord{
+  \smalltfield{$\mathfrak{q}$}{\smallrecord{
+      \smalltfield{x$_j$}{\textit{PQuant}}}}},
+then $\alpha\mathcal{O}_{i,j}\beta$ is
+\begin{quote}
+  $[\alpha\mathcal{O}\beta]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
 \end{quote}
+
+    
+    
+
+
+% If $\alpha$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%                            \smalltfield{fg}{(bg$\rightarrow$($T_1\rightarrow
+%                              T_2$))}} 
+% and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
+%   \smalltfield{fg}{(bg$\rightarrow T_1$)}}
+% \fbox{and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
+%     \smalltfield{$\mathfrak{s}$}{\smallrecord{
+%         \smalltfield{x$_i$}{\textit{Ind}}}}} and
+%   $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+%   \smallrecord{
+%     \smalltfield{$\mathfrak{s}$}{\smallrecord{
+%         \smalltfield{x$_j$}{\textit{Ind}}}}}} \fbox{but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+%   \smallrecord{
+%     \smalltfield{$\mathfrak{q}$}{\smallrecord{
+%         \smalltfield{x$_j$}{\textit{PQuant}}}}}},
+%                          then the \textit{combination of $\alpha$ and
+%     $\beta$  based on functional application \fbox{and anaphoric
+%       relation of $j$ to $i$}}, $\alpha\text{@}_{\fbox{i,j}}\beta$, is
+%   \begin{quote}
+%     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
+%       \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}$
+%       . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.x}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\boxed{\scriptstyle\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}}(c))\urcorner$
+% \end{quote}
 
 \label{ex:combine-align}
 
 \end{ex} 
-We can define similar modifications, $\mathcal{O}_{i,j}$ for the other combination
-operators, $\mathcal{O}$.  Note that these additional combination
-operations as currently formulated will only allow one anaphoric
-relation to be introduced with each combination.  A more complete
-treatment will probably need a generalized formulation in which there
-are several pairs, $\langle i,j\rangle$, which are related simultaneously.
+% We can define similar modifications, $\mathcal{O}_{i,j}$ for the other combination
+% operators, $\mathcal{O}$.  Note that these additional combination
+% operations as currently formulated will only allow one anaphoric
+% relation to be introduced with each combination.  A more complete
+% treatment will probably need a generalized formulation in which there
+% are several pairs, $\langle i,j\rangle$, which are related
+% simultaneously.
+
+@@\todo{change incr subscripts.  Change references to $T$ in recursion clauses.}
 
 We can now add contents with anaphora to
 our characterization of $\mathfrak{S}(T)$ given in
@@ -5319,6 +5341,32 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
   c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
         . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
       \end{quote}
+
+     
+    \item[\textnormal{$\alpha\mathcal{O}_{i,j}\beta$} New!] \mbox{}
+
+      If $\mathcal{O}$ is a combination operator, then so is
+$\mathcal{O}_{i,j}$, where $i$ and $j$ are natural numbers.
+
+If
+$\alpha$ and $\beta$ are parametric contents such that
+$\alpha\mathcal{O}\beta$ is defined, $\alpha.\text{bg}\sqsubseteq$
+\smallrecord{
+  \smalltfield{$\mathfrak{s}$}{\smallrecord{
+      \smalltfield{x$_i$}{\textit{Ind}}}}}
+and $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+\smallrecord{
+  \smalltfield{$\mathfrak{s}$}{\smallrecord{
+      \smalltfield{x$_j$}{\textit{Ind}}}}}
+but $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+\smallrecord{
+  \smalltfield{$\mathfrak{q}$}{\smallrecord{
+      \smalltfield{x$_j$}{\textit{PQuant}}}}},
+then $\alpha\mathcal{O}_{i,j}\beta$ is
+\begin{quote}
+  $[\alpha\mathcal{O}\beta]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
+\end{quote}
+
 
       
     \item[\textnormal{$T_1\mathcal{O}^{\mathfrak{S}}T_2$} New!]
