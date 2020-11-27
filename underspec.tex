@@ -906,7 +906,7 @@ store and given scope over the non-parametric content.
           \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
 $[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and
 $\alpha'$ is
-$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
+$[\mathrm{incr}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
   $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
   \begin{quote}
     $\lambda
@@ -986,10 +986,10 @@ We give a precise characterization of this in \nexteg{}.
  
   \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
  
-  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{store}$', then
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi$ is in the range of `$\mathrm{store}$', then
     $\mathrm{store}(\varphi):\mathfrak{S}(T)$
 
-  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+  \item if $\varphi:\mathfrak{S}(T)$ and `x$_i$' and $\varphi$ are appropriate
     arguments to `$\mathrm{retrieve}$', then
     $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
     
@@ -1238,8 +1238,6 @@ then $\alpha\mathcal{O}_{i,j}\beta$ is
 % are several pairs, $\langle i,j\rangle$, which are related
 % simultaneously.
 
-@@\todo{change incr subscripts.  Change references to $T$ in recursion clauses.}
-
 We can now add contents with anaphora to
 our characterization of $\mathfrak{S}(T)$ given in
 (\ref{ex:storage-type}) as in \nexteg{} where we again use boxing to
@@ -1255,15 +1253,15 @@ indicate the new material.
   \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
 
     
-  \item \fbox{\begin{minipage}[t]{.85\linewidth}if $\alpha\mathcal{O}\beta:T$, (for
+  \item \fbox{\begin{minipage}[t]{.85\linewidth}if $\alpha\mathcal{O}\beta:\mathfrak{S}(T)$, (for
       some combination operation, $\mathcal{O}$) and
       $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
       numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$\end{minipage}}
  
-  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
     $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
 
-  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+  \item if $\varphi:\mathfrak{S}(T)$ and `x$_i$' and $\varphi$ are appropriate
     arguments to `$\mathrm{retrieve}$', then
     $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
     
@@ -1769,7 +1767,8 @@ context type.  Thus we obtain \nexteg{}.
 \end{ex}
 
 \begin{shaded}
-\label{pg:path-alignment-types}Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
+\label{pg:path-alignment-types}(Repeated in
+Appendix~\ref{app:path-align-rectype}) Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
 paths in $T$.  Then we use $T_{\pi_1=\pi_2}$ to represent the type
 exactly like $T$ except that $T_{\pi_1=\pi_2}.\pi_1=
 (T.\pi_1)_{\pi_2}$, that is, whatever type, $T'$, is at the end of the path
@@ -1791,8 +1790,8 @@ Suppose that $\varphi_1$ and $\varphi_2$ and parametric contents,
 $\pi_{11}\ldots\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$ and \\
 $\pi_{21}\ldots\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$,
 then the \textit{content $\varphi_1$ given $\varphi_2$ with
-  alignment of $\pi_{11}$ and $\pi_{21}$;\ldots;$\pi_{1n}$ and $\pi_{2n}$},
-$\varphi_1|_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\varphi_2$, is
+  alignment of $\pi_{11}$ and $\pi_{21}$,\ldots,$\pi_{1n}$ and $\pi_{2n}$},
+$\varphi_1\ |_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\ \varphi_2$, is
 \begin{quote}
   \record{
     \field{bg}{($\varphi_1$.bg \d{$\wedge$} \smallrecord{
@@ -1843,7 +1842,7 @@ of the action rule in \nexteg{}.
               \smalltfield{latest-utterance}{\smallrecord{
                   \smallmfield{cont}{$\mathfrak{S}(\mathfrak{C}(u^*.\text{cont},s_{i,A}.\text{shared}.\text{latest-utterance}.\text{cont}))$}{\textit{ContType}}}}}}}}}
   \end{prooftree}
-  
+\label{ex:interp-cntxt-previous-utterance}  
 \end{ex} 
 \end{sidewaysfigure}  
   
@@ -2191,6 +2190,8 @@ the former path.
 \end{ex}
 We can paraphrase this as ``the property of being a dog which chases a
 cat and catches that cat''.
+
+@@
 
 In order to include such properties with aligned paths as the scope of
 quantifiers in our interpretations, we will first generalize the
@@ -3101,13 +3102,13 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
 and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
         \smalltfield{x$_i$}{\textit{Ind}}}}} and
-  $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+  $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
   \smallrecord{
     \smalltfield{$\mathfrak{s}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{Ind}}}}} but $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+        \smalltfield{x$_j$}{\textit{Ind}}}}} but $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
   \smallrecord{
     \smalltfield{$\mathfrak{q}$}{\smallrecord{
-        \smalltfield{x$_j$}{\textit{PQuant}}}}} \fbox{and $\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+        \smalltfield{x$_j$}{\textit{PQuant}}}}} \fbox{and $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
   \smallrecord{
     \smalltfield{$\mathfrak{l}$}{\smallrecord{
         \smalltfield{x$_j$}{\textit{PQuant}}}}}},
@@ -3116,8 +3117,8 @@ and $\alpha.\text{bg}\sqsubseteq$ \smallrecord{
       relation of $j$ to $i$}, $\alpha\text{@}_{i,j}\beta$, is
   \begin{quote}
     $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$[\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
-      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{q}.\text{x},\mathfrak{l}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}(c))\urcorner$
+      \d{$\wedge$}$[\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
+      . \\ \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)([\mathrm{incr}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}(c))\urcorner$
 \end{quote}
 
 \label{ex:combine-align-local}
@@ -4024,7 +4025,7 @@ $\mathrm{store}(\mathcal{Q})$ is
           \smallmfield{x$_i$}{$\mathcal{Q}$}{\textit{Ind}}}}}, $\mathcal{Q}'$ is
 $[\mathcal{Q}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$ and\\
 $\alpha'$ is
-$[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
+$[\mathrm{incr}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, then
   $\mathrm{retrieve}(\text{x}_i,\alpha)$ is
   \begin{quote}
     $\lambda
@@ -4048,11 +4049,16 @@ $[\mathrm{incr}_{\mathfrak{q}.\text{x},\mathfrak{s}.\text{x},\mathfrak{w}.\text{
   \begin{enumerate} 
  
   \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
+
+  \item if $\alpha\mathcal{O}\beta:\mathfrak{S}(T)$, (for
+      some combination operation, $\mathcal{O}$) and
+      $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
+      numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
  
-  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{store}$', then
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi$ is in the range of `$\mathrm{store}$', then
     $\mathrm{store}(\varphi):\mathfrak{S}(T)$
 
-  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+  \item if $\varphi:\mathfrak{S}(T)$ and `x$_i$' and $\varphi$ are appropriate
     arguments to `$\mathrm{retrieve}$', then
     $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
     
@@ -5267,9 +5273,9 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
     $\beta$  based on functional application}, $\alpha\text{@}\beta$, is
   \begin{quote}
    $\ulcorner\lambda c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$
-      \d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+      \d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
       . \\
-      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
+      \hspace*{2em}$[\alpha]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)(\mathrm{incr}([\beta.\text{fg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c))\urcorner$
 
       
     \end{quote}
@@ -5302,12 +5308,12 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
   \begin{quote}
     $\ulcorner\lambda
     c$:([$\alpha$.bg$\ominus\mathrm{paths}_{\mathfrak{w}.\text{x}_i}(\alpha.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}\\
-    \hspace*{5em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
+    \hspace*{5em}$\mathrm{incr}([\beta.\text{bg}\ominus\mathrm{paths}_{\mathfrak{g}.\text{x}_j}(\beta.\text{bg})]_{\mathfrak{c}\leadsto\mathfrak{c}.a},\alpha.\text{bg})$)
     . \\
     \hspace*{1em} $\mathfrak{P}(\ulcorner\lambda r_1$:$[\alpha.\text{bg}^{\mathfrak{w}.\text{x}_i}]_{\mathfrak{w}.\text{x}_i\leadsto\text{x}}$ . \\
     \hspace*{4em}$\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f},\mathfrak{w}.\text{x}_i\leadsto\text{x}}(c[r_1])$
     ($\mathfrak{P}(\ulcorner\lambda r_2$:$[\beta.\text{bg}^{\mathfrak{g}.\text{x}_j}]_{\mathfrak{g}.\text{x}_j\leadsto\text{x}}$ . \\
-    \hspace*{15em}$\mathrm{incr}_{\mathfrak{s}.\text{x},\mathfrak{w}.\text{x},\mathfrak{g}.\text{x}}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
+    \hspace*{15em}$\mathrm{incr}(\beta_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a},\mathfrak{g}.\text{x}_j\leadsto\text{x}},\alpha.\text{bg})(c[r_2])\urcorner)$)$\urcorner)\urcorner$
   \end{quote} 
 
   \item[\textnormal{$\alpha\text{@\!@}\beta$}] \mbox{}
@@ -5338,8 +5344,8 @@ and $\beta$ : \smallrecord{\smalltfield{bg}{\textit{CntxtType}}\\
   is
 \begin{quote}
   $\lambda
-  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
-        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}_{\mathfrak{s}.\text{x}}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
+  c$:$[\alpha.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}$\d{$\wedge$}$\mathrm{incr}([\beta.\text{bg}]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})$
+        . $\alpha_{\mathfrak{c}\leadsto\mathfrak{c}.\text{f}}(c)\&\mathrm{incr}([\beta]_{\mathfrak{c}\leadsto\mathfrak{c}.\text{a}},\alpha.\text{bg})(c)$
       \end{quote}
 
      
@@ -5727,6 +5733,61 @@ replaces all the previous variants that were defined in previous chapters.
 %   $T:\textit{AcknowledgementType}$ iff $T\sqsubseteq \textit{Acknowledgement}$
 
 % \end{description}
+
+\subsection{Universal discourse resources}
+
+\begin{description}
+
+  
+\item[\textnormal{$\varphi_1\
+    |_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\ \varphi_2$} New!]
+  \mbox{}
+
+  Suppose that $\varphi_1$ and $\varphi_2$ and parametric contents,
+$\pi_{11}\ldots\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$ and \\
+$\pi_{21}\ldots\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$,
+then the \textit{content $\varphi_1$ given $\varphi_2$ with
+  alignment of $\pi_{11}$ and $\pi_{21}$,\ldots,$\pi_{1n}$ and $\pi_{2n}$},
+$\varphi_1\ |_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\ \varphi_2$, is
+\begin{quote}
+  \record{
+    \field{bg}{($\varphi_1$.bg \d{$\wedge$} \smallrecord{
+        \smalltfield{$\mathfrak{p}$}{$\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg})$}})$_{\pi_{11}=\mathfrak{p}.\pi_{21},\ldots,\pi_{1n}=\mathfrak{p}.\pi_{2n}}$}\\
+    \field{fg}{$\lambda c$:bg . $\varphi_1(c)$}}
+\end{quote}
+
+\item[\textnormal{$\mathfrak{C}(T_1,T_2)$} New!] \mbox{}
+
+  If $T_1$ and $T_2$ are types
+of parametric contents, then there is a combined type,
+$\mathfrak{C}(T_1,T_2)$, whose witnesses include witnesses for $T_1$
+given a witness for $T_2$ with some possible alignment between the
+two.
+
+The witnesses of $\mathfrak{C}(T_1,T_2)$ are characterized
+recursively by:
+\begin{enumerate} 
+ 
+\item if $\varphi:T_1$, then $\varphi:\mathfrak{C}(T_1,T_2)$ 
+ 
+\item \begin{tabbing}
+    if \=$\varphi_1:\mathfrak{C}(T_1,T_2)$,\\
+  \>$\pi_{11},\ldots,\pi_{1n}\in\mathrm{paths}(\varphi_1.\text{bg})$,\\ \>$\varphi_2:T_2$ and\\
+\>$\pi_{21},\ldots,\pi_{2n}\in\mathrm{paths}(\mathcal{F}_{\text{quasi}^*}(\varphi_2.\text{fg}))$,
+  \end{tabbing}
+  then
+  \begin{quote}
+    $\varphi_1|_{\pi_{11},\pi_{21};\ldots;\pi_{1n},\pi_{2n}}\varphi_2:\mathfrak{C}(T_1,T_2)$
+  \end{quote}
+  
+ 
+\end{enumerate}
+
+\item[Interpretation in the context of a previous utterance New!] ---
+  action rule in example~(\ref{ex:interp-cntxt-previous-utterance}).
+
+\end{description}
+
 
 \subsection{Universal dialogue resources} (as in Chapter~\ref{ch:propnames})
 
