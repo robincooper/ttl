@@ -2191,12 +2191,11 @@ the former path.
 We can paraphrase this as ``the property of being a dog which chases a
 cat and catches that cat''.
 
-@@
-
 In order to include such properties with aligned paths as the scope of
 quantifiers in our interpretations, we will first generalize the
 characterization of alignment of paths given on
-p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
+p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}
+(repeated in Appendix~\ref{app:path-align-rectype}).
 \begin{ex} 
   If $\varphi=\ulcorner\lambda r\!:\!T\ .\ \psi\urcorner$ and
   $\pi_1,\pi_2\in\mathrm{paths}(T)$, then
@@ -2204,6 +2203,7 @@ p.~\pageref{pg:path-alignment-types}f to functions in \nexteg{}.
     $\varphi_{\pi_1=\pi_2}=\ulcorner\lambda r\!:\!T_{\pi_1=\pi_2}\ .\
     \psi\urcorner$
   \end{quote}
+  \label{ex:path-alignment-fcts}
 \end{ex} 
 We then add two further clauses to the characterization of witnesses
 for $\mathfrak{S}(T)$ for content types, $T$, in \nexteg{} with the
@@ -2227,15 +2227,15 @@ new additions boxed.
     $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}}
 
     
-  \item if $\alpha\mathcal{O}\beta:T$, (for
+  \item if $\alpha\mathcal{O}\beta:\mathfrak{S}(T)$, (for
       some combination operation, $\mathcal{O}$) and
       $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
       numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
  
-  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
     $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
 
-  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+  \item if $\varphi:\mathfrak{S}(T)$ and `x$_i$' and $\varphi$ are appropriate
     arguments to `$\mathrm{retrieve}$', then
     $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
     
@@ -3201,7 +3201,9 @@ that a sentence can consist of a noun phrase followed by a verb phrase
 as \nexteg{}.
 \begin{ex} 
   \textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ $B$(\textit{NP}$'$($_{\text{@}}$\textit{VP}$'$))
-\end{ex} 
+\end{ex}
+
+@@
   
 Reflexive pronouns, like \textit{himself}, obey an almost
 complementary principle to non-reflexive pronouns -- they must be
@@ -3668,6 +3670,7 @@ If $T$ is \textit{PropCntxt}$\wedge T'$ and
 \item[\textnormal{\textit{Cntxt}} Revised!] --- \record{
     \tfield{$\mathfrak{q}$}{\textit{QStore}}\\
     \tfield{$\mathfrak{s}$}{\textit{Assgnmnt}}\\
+    \tfield{$\mathfrak{l}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{w}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{g}$}{\textit{Assgnmnt}}\\
     \tfield{$\mathfrak{c}$}{\textit{PropCntxt}}}
@@ -4048,7 +4051,16 @@ $[\mathrm{incr}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, the
   The witnesses of $\mathfrak{S}(T)$ are characterized by
   \begin{enumerate} 
  
-  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$ 
+  \item if $\varphi:T$ then $\varphi:\mathfrak{S}(T)$
+    
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+    then $\mathcal{L}(\varphi):\mathfrak{S}(T)$
+
+    
+  \item if $\varphi:\mathfrak{S}(T)$,
+    $\varphi\sqsubseteq\text{\smallrecord{
+        \smallmfield{scope}{$\psi$}{\textit{Ppty}}}}$ and
+    $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$
 
   \item if $\alpha\mathcal{O}\beta:\mathfrak{S}(T)$, (for
       some combination operation, $\mathcal{O}$) and
@@ -5260,7 +5272,21 @@ RuleDaughters($T_{\text{mother}}$,
 ${T_{\text{daughter}_1}}^\frown\ldots^\frown T_{\text{daughter}_n}$)\d{\d{$\wedge$}}ConcatPhon 
 \end{quote}
 
-%\item[Content combination operations] 
+% \item[Content combination operations]
+
+\item[\textnormal{$B(\alpha)$} New!] \mbox{}
+
+  If $\alpha$ is a parametric content,
+  \begin{quote}
+    $\ulcorner\lambda c\!:\!T\ .\ \varphi\dep{c}\urcorner$
+  \end{quote}
+  then $B(\alpha)$ is
+  \begin{quote}
+    $\ulcorner\lambda c$:$T$\fbox{\d{$\wedge$}}\smallrecord{
+      \smalltfield{$\mathfrak{l}$}{\textit{Assgnmnt}}}
+    . $\varphi\dep{c}\urcorner$
+  \end{quote}
+  
 
 \item[\textnormal{$\alpha\text{@}\beta$}] \mbox{}
 
@@ -5356,18 +5382,26 @@ $\mathcal{O}_{i,j}$, where $i$ and $j$ are natural numbers.
 
 If
 $\alpha$ and $\beta$ are parametric contents such that
-$\alpha\mathcal{O}\beta$ is defined, $\alpha.\text{bg}\sqsubseteq$
+\begin{enumerate}
+\item $\alpha\mathcal{O}\beta$ is defined
+  
+\item $\alpha.\text{bg}\sqsubseteq$
 \smallrecord{
   \smalltfield{$\mathfrak{s}$}{\smallrecord{
       \smalltfield{x$_i$}{\textit{Ind}}}}}
-and $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
+\item $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\sqsubseteq$
 \smallrecord{
   \smalltfield{$\mathfrak{s}$}{\smallrecord{
       \smalltfield{x$_j$}{\textit{Ind}}}}}
-but $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+\item $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
 \smallrecord{
   \smalltfield{$\mathfrak{q}$}{\smallrecord{
-      \smalltfield{x$_j$}{\textit{PQuant}}}}},
+      \smalltfield{x$_j$}{\textit{PQuant}}}}} 
+\item $\mathrm{incr}(\beta.\text{bg},\alpha.\text{bg})\not\sqsubseteq$
+  \smallrecord{
+    \smalltfield{$\mathfrak{l}$}{\smallrecord{
+        \smalltfield{x$_j$}{\textit{PQuant}}}}}
+\end{enumerate}
 then $\alpha\mathcal{O}_{i,j}\beta$ is
 \begin{quote}
   $[\alpha\mathcal{O}\beta]_{\mathfrak{s}.\text{x}_j\leadsto\mathfrak{s}.\text{x}_i}$
@@ -5386,6 +5420,18 @@ is also a type with the witness condition:
 If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
 then $\alpha\mathcal{O}\beta:T_1\mathcal{O}^{\mathfrak{S}}T_2$.
 Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S}}T_2$. 
+\end{quote}
+
+\item[\textnormal{$T_1\mathcal{O}^{\mathfrak{S},B}T_2$} New!] \mbox{}
+
+  Suppose that $T_1$ and $T_2$ are of type \textit{ContType} and that
+$\mathcal{O}$ is a combination operation such as @ etc., then we say
+that $T_1\mathcal{O}^{\mathfrak{S},B}T_2$ is also a type with the
+witness condition:
+\begin{quote} 
+If $\alpha:T_1$, $\beta:T_2$ and $\alpha\mathcal{O}\beta$ is defined,
+then $B(\alpha\mathcal{O}\beta):T_1\mathcal{O}^{\mathfrak{S},B}T_2$.
+Nothing else is a witness for $T_1\mathcal{O}^{\mathfrak{S},B}T_2$. 
 \end{quote} 
 
 
@@ -5405,7 +5451,20 @@ ContForwardApp$_{\mathfrak{S},\mathcal{O}}$ is
 \end{quote}
 
 \paragraph{Note:}  This single characterization of ContForwardApp
-replaces all the previous variants that were defined in previous chapters.
+replaces all the previous variants that were defined in previous
+chapters.
+
+\item[\textnormal{ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$} New!]
+  \mbox{}
+
+  If $\mathcal{O}$ is a combination operator, then
+  ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$ is
+  \begin{quote}
+    $\lambda u$:\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+      \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S},B}u[1].\text{cont})$}}
+  \end{quote}
 
 % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
 
@@ -5522,6 +5581,26 @@ replaces all the previous variants that were defined in previous chapters.
 
   \paragraph{Note:} This covers all the variant notations introduced
   in previous chapters.
+
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    B(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$}
+  New!] \mbox{}
+
+If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    B(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$
+  \end{quote}
 
 % \item[\textnormal{$T_{\text{mother}}\longrightarrow
 %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
@@ -5937,9 +6016,9 @@ recursively by:
 
 % \end{description}
 
-\subsection{English resources} (as in Chapter~\ref{ch:quant}
+\subsection{English resources} 
 
-% \subsubsection{Types and predicates} (as in Chapter~\ref{ch:intensional})
+ \subsubsection{Types and predicates} (as in Chapter~\ref{ch:intensional})
 
 %  % \begin{description}
 
@@ -6151,124 +6230,127 @@ recursively by:
 
 % % \end{description}
 
-%  \subsubsection{Grammar} 
+\subsubsection{Grammar} 
 
-% \begin{description}
+\begin{description}
 
 
 
-% \item[Lexical sign types] \mbox{}
+\item[Lexical sign types] \mbox{}
 
-%   Let \textit{Lexicon} be the set of lexical sign types defined
-%   inductively as follows.  The
-%   following set is included in \textit{Lexicon}.
+  Let \textit{Lexicon} be the set of lexical sign types defined
+  inductively as follows.  The
+  following set is included in \textit{Lexicon}.
 
-% \begin{tabbing}
-%     \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
-%     \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
-%     \> Lex$_{\mathrm{Pron}}$(``he''), \\
-%     \> Lex$_{\mathrm{numeral}}$(``nine'', 9), \\
-%     \> Lex$_{\mathrm{numeral}}$(``ninety'', 90), \\ 
-%     \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
-%     \> Lex$_{\mathrm{Universal}}$(``every''), \\
-% \> Lex$_{\mathrm{DefArt}}$(``the''),\\
-% \> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer),\\
-% \> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor), \\
-% \> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$), \\
-% \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
-% \textit{DogFrame}),\\
-% \> Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) ($=\Sigma_{\text{``passenger''}}$), \\
-% \> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
-% \textit{PassengerFrame}), \\
-% \> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
-% temperature) (= $\Sigma_{\text{``temperature''}}$), \\
-% \> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
-% \textit{AmbTempFrame}),\\
-% \> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``run'', \textit{Rec}, run), \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
-% rise), \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
-% rise), \\
-% \> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
-% rise), \\
-% \> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
-% \> Lex$_{\mathrm{TransVerb}}$(``find'', \textit{Rec}, find), \\
-% \> Lex$_{\mathrm{TransVerb}}$(``seek'', \textit{Rec}, seek), \\
-% \> Lex$_{\mathrm{TransVerb}}$(``worship'', \textit{Rec}, worship), \\
-% \> Lex$_{\mathrm{be}_{\text{ID}}}$(``is''), \\
-% \> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is''), \\
-% \> Lex(``ok'', \textit{S}),  \\
-% \> Lex(``aha'', \textit{S})  \}
-% \end{tabbing}
+\begin{tabbing}
+    \{\=Lex$_{\mathrm{PropName}}$(``Dudamel''), \\
+    \> Lex$_{\mathrm{PropName}}$(``Beethoven''), \\
+    \> Lex$_{\mathrm{Pron}}$(``he''), \\
+    \> Lex$_{\mathrm{numeral}}$(``nine'', 9), \\
+    \> Lex$_{\mathrm{numeral}}$(``ninety'', 90), \\ 
+    \> Lex$_{\mathrm{IndefArt}}$(``a''), \\
+    \> Lex$_{\mathrm{Universal}}$(``every''), \\
+\> Lex$_{\mathrm{DefArt}}$(``the''),\\
+\> Lex$_{\text{CommonNoun}}$(``composer'', \textit{Rec}, composer),\\
+\> Lex$_{\text{CommonNoun}}$(``conductor'', \textit{Rec}, conductor), \\
+\> Lex$_{\text{CommonNoun}}$(``dog'', \textit{Rec}, dog) (= $\Sigma_{\text{``dog''}}$), \\
+\> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``dog''}}$),
+\textit{DogFrame}),\\
+\> Lex$_{\mathrm{CommonNoun}}$(``passenger'', \textit{Rec}, passenger) ($=\Sigma_{\text{``passenger''}}$), \\
+\> RestrictCommonNoun(CommonNounIndToFrame($\Sigma_{\text{``passenger''}}$),
+\textit{PassengerFrame}), \\
+\> Lex$_{\text{CommonNoun}}$(``temperature'', \textit{Rec},
+temperature) (= $\Sigma_{\text{``temperature''}}$), \\
+\> RestrictCommonNoun($\Sigma_{\text{``temperature''}}$,
+\textit{AmbTempFrame}),\\
+\> Lex$_{\mathrm{IntransVerb}}$(``leave'', \textit{Rec}, leave), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``run'', \textit{Rec}, run), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{TempRiseEventCntxt}}},
+rise), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{PriceRiseEventCntxt}}},
+rise), \\
+\> Lex$_{\mathrm{IntransVerb}}$(``rise'', \smallrecord{\smalltfield{$\mathfrak{c}$}{\textit{LocRiseEventCntxt}}},
+rise), \\
+\> Lex$_{\mathrm{TransVerb}}$(``hug'', \textit{Rec}, hug), \\
+\> Lex$_{\mathrm{TransVerb}}$(``find'', \textit{Rec}, find), \\
+\> Lex$_{\mathrm{TransVerb}}$(``seek'', \textit{Rec}, seek), \\
+\> Lex$_{\mathrm{TransVerb}}$(``worship'', \textit{Rec}, worship), \\
+\> Lex$_{\mathrm{be}_{\text{ID}}}$(``is''), \\
+\> Lex$_{\mathrm{be}_{\text{scalar}}}$(``is''), \\
+\> Lex(``ok'', \textit{S}),  \\
+\> Lex(``aha'', \textit{S})  \}
+\end{tabbing}
 
-% \begin{description}
+\begin{description}
   
-% \item[Transitive verbs as verb phrases New!] \mbox{}
+\item[Transitive verbs as verb phrases] \mbox{}
 
-% If $\Sigma$ = Lex$_{\text{TransVerb}}$($T_{\text{Phon}}$,
-% $T_{\text{bg}}$, $p$), for some $T_{\text{Phon}}$, $T_{\text{bg}}$ and
-% $p$, and $\Sigma\in\textit{Lexicon}$, then
-% TransVerbToVerbPhrase($\Sigma$) $\in$ \textit{Lexicon}.
-% \end{description}
+If $\Sigma$ = Lex$_{\text{TransVerb}}$($T_{\text{Phon}}$,
+$T_{\text{bg}}$, $p$), for some $T_{\text{Phon}}$, $T_{\text{bg}}$ and
+$p$, and $\Sigma\in\textit{Lexicon}$, then
+TransVerbToVerbPhrase($\Sigma$) $\in$ \textit{Lexicon}.
+\end{description}
 
-% \item[Constituent structure rule components] \mbox{} 
-%   \begin{description}
+\item[Constituent structure rule components] \mbox{} 
+  \begin{description}
 
-%     \item[\textnormal{CnstrIsA}] \mbox{}
+    \item[\textnormal{CnstrIsA}] \mbox{}
 
-%   $\lambda
-% u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
-%                                                                     \hspace*{5em}$^{\frown}$
-% \textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
-% }}}. \\
-% \hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
+  $\lambda
+u$:\textit{V}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``is''}}}}$^{\frown}$\textit{NP}\d{$\wedge$}\smallrecord{\smalltfield{syn}{\smallrecord{\smalltfield{daughters}{\textit{Det}\d{$\wedge$}\smallrecord{\smalltfield{s-event}{\smallrecord{\smalltfield{e}{``a''}}}} \\
+                                                                    \hspace*{5em}$^{\frown}$
+\textit{N}\d{$\wedge$}\smallrecord{\smalltfield{cont}{\textit{Ppty}}}}
+}}}. \\
+\hspace*{1em} \textit{VP}\d{$\wedge$}\smallrecord{\smallmfield{cont}{$u$[2].syn.daughters[2].cont}{\textit{Ppty}}} 
 
-%   \end{description}
+  \end{description}
   
 
 
-% \item[Constituent structure rules] \mbox{}
+\item[Constituent structure rules] \mbox{}
 
-% Let \textit{CSRules} be the set of constituent structure rules,
-% defined inductively as follows.  The following set is included in \textit{CSRules}.
+Let \textit{CSRules} be the set of constituent structure rules,
+defined inductively as follows.  The following set is included in \textit{CSRules}.
   
-%   \begin{tabbing}
-%     \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$ \textit{NP}$'$(\textit{VP}$'$:\textit{Ppty}):\textit{RecType},\\
-%     \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
-%     \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$:\textit{PPpty}):\textit{PQuant},\\
-%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
-%     \d{\d{$\wedge$}} CnstrIsA, \\
-%     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
-%     \textit{V}$'$(\textit{NP}$'$:\textit{Quant}):\textit{Ppty}\}
-%   \end{tabbing}
+  \begin{tabbing}
+    \{\=\textit{S} $\longrightarrow$ \textit{NP VP} $\mid$
+    $B$(\textit{NP}$'$($_{\text{@}}$\textit{VP}$'$) \textbf{Revised!},\\
+    \>\textit{NP} $\longrightarrow$ \textit{Det N} $\mid$
+    \textit{Det}$'$($_{\text{@\!@}}$\textit{N}$'$) \textbf{Revised!},\\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
+    \d{\d{$\wedge$}} CnstrIsA, \\
+    \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
+    \textit{V}$'$(\textit{NP}$'$) \textbf{Revised!}\}
+  \end{tabbing}
 
-%   \begin{description}
+\todo{CnstrIsA needs revising}
+
+  \begin{description}
 
     
-%   \item[Relative clauses New!] \mbox{}
+  \item[Relative clauses] \mbox{}
 
-%     If $i$ and $j$ are natural numbers, then
-%     \begin{quote}
-%       \textit{Rel} $\longrightarrow$ \textit{NP}$_{\text{wh}_i}$
-%       \textit{S}/$j$ $\mid$
-%       \textit{NP}$_{\text{wh}_i}'$($_{\text{@}_{\text{wh}_{i,j}}}$\textit{S}/$j'$:\textit{PRecType}):\textit{PPpty}
-%     \end{quote}
-%     is a member of \textit{CSRules}
+    If $i$ and $j$ are natural numbers, then
+    \begin{quote}
+      \textit{Rel} $\longrightarrow$ \textit{NP}$_{\text{wh}_i}$
+      \textit{S}/$j$ $\mid$
+      \textit{NP}$_{\text{wh}_i}'$($_{\text{@}_{\text{wh}_{i,j}}}$\textit{S}/$j'$) \textbf{Revised!}
+    \end{quote}
+    is a member of \textit{CSRules}
 
-%     \bigskip
+    \bigskip
 
-%     If $T$ is a type, then
-%     \begin{quote}
-%       $\textit{N}\longrightarrow{^T\textit{N}}\ {^T\textit{Rel}}\
-%       \mid\
-%       {^T\textit{N}}'(_{\text{@}_\&}{^T\textit{Rel}}':{^T\textit{PPpty}}):{^T\textit{PPpty}}$
-%     \end{quote}
-%     is a member of \textit{CSRules}
+    If $T$ is a type, then
+    \begin{quote}
+      $\textit{N}\longrightarrow{^T\textit{N}}\ {^T\textit{Rel}}\
+      \mid\
+      {^T\textit{N}}'(_{\text{@}_\&}{^T\textit{Rel}}')$ \textbf{Revised!}
+    \end{quote}
+    is a member of \textit{CSRules}
 
-% \end{description}
+\end{description}
 
-% \end{description}
+\end{description}
 
 
 \section{Summary}
