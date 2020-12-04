@@ -3262,8 +3262,6 @@ pronoun.  This is given in \nexteg{}.
   
 \end{ex}
 
-@@
-
 
 This operation removes the reflexive marking in the
 $\mathfrak{r}$-field of the context using asymmetric merge and also
@@ -3374,15 +3372,15 @@ indicated by the boxed text in \nexteg{}.
     $\pi_1,\pi_2\in\mathrm{paths}(\psi.\text{bg})$, then $\varphi[\text{scope}=\psi_{\pi_1=\pi_2}:\textit{Ppty}]:\mathfrak{S}(T)$\end{minipage}
 
     
-  \item if $\alpha\mathcal{O}\beta:T$, (for
+  \item if $\alpha\mathcal{O}\beta:\mathfrak{S}(T)$, (for
       some combination operation, $\mathcal{O}$) and
       $\alpha\mathcal{O}_{i,j}\beta$ is defined (for some natural
       numbers, $i$ and $j$), then $\alpha\mathcal{O}_{i,j}\beta:\mathfrak{S}(T)$
  
-  \item if $\varphi:T$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi$ is in the range of `$\mathrm{storage}$', then
     $\mathrm{storage}(\varphi):\mathfrak{S}(T)$
 
-  \item if $\varphi:T$ and `x$_i$' and $\varphi$ are appropriate
+  \item if $\varphi:\mathfrak{S}(T)$ and `x$_i$' and $\varphi$ are appropriate
     arguments to `$\mathrm{retrieve}$', then
     $\mathrm{retrieve}(\text{x}_i,\varphi):\mathfrak{S}(T)$
     
@@ -3524,30 +3522,6 @@ where the only possible antecedent for \textit{herself} is
 
 %[Grammar to be added.]
 %\end{ex} 
-Note that we now no longer have to keep track of the arguments to
-ContForwardApp that we had in some of the variants since the
-combination of the types will always return a result, though if the
-types of contents do not match for the particular combination
-operation the combined type will have no witnesses.  This means that
-we can simplify our notation for constituent structure rules as in
-\nexteg{}.
-\begin{ex} 
-If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
-  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
-  combination operation, then
-  \begin{quote}
-    $T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
-    T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}')$
-  \end{quote}
-  is
-  \begin{quote}
-  $T_{\text{mother}}\longrightarrow
-    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
-    ContForwardApp$_{\mathfrak{S},\mathcal{O}}$
-  \end{quote}
-  
-\end{ex} 
   
   
 % @@
@@ -4028,6 +4002,22 @@ $P$.bg $\sqsubseteq$ \smallrecord{\smalltfield{x}{$\mathrm{plurality}(T)$}}
 
       $T : \textit{ContType}$ iff $T\sqsubseteq\textit{Cont}$
 
+      \begin{description}
+        
+      \item[\textnormal{$\mathfrak{A}(T)$} New!] \mbox{}
+
+        If $T$ is a parametric content type, then $\mathfrak{A}(T)$ is also a
+        parametric content type.
+
+        $\varphi:\mathfrak{A}(T)$ iff $\varphi:T$ and $\varphi$.bg
+        $\not\sqsubseteq$ \smallrecord{
+          \smalltfield{$\mathfrak{r}$}{\smallrecord{
+              \smalltfield{x$_i$}{\textit{Ind}}}}}, for any natural number
+        $i$.
+
+      \end{description}
+
+
       
     \item[\textnormal{\textit{QStore}} New!] --- a basic type
 
@@ -4101,6 +4091,9 @@ $[\mathrm{incr}(\alpha,\mathcal{Q}')]_{\mathfrak{c}\leadsto\mathfrak{c}.a}$, the
     
   \item if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
     then $\mathcal{L}(\varphi):\mathfrak{S}(T)$
+    
+  \item if $\varphi:\mathfrak{S}(T)$ and $\varphi:\textit{PPpty}$,
+    then $\mathfrak{R}(\varphi):\mathfrak{S}(T)$
 
     
   \item if $\varphi:\mathfrak{S}(T)$,
@@ -5538,6 +5531,19 @@ chapters.
       \smalltfield{cont}{$\mathfrak{S}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S},B}u[1].\text{cont})$}}
   \end{quote}
 
+  
+\item[\textnormal{ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$}
+  New!] \mbox{}
+
+  If $\mathcal{O}$ is a combination operator, then
+  ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$ is
+  \begin{quote}
+    $\lambda u$:\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}}$^\frown$\smallrecord{
+      \smalltfield{cont}{\textit{ContType}}} . \smallrecord{
+      \smalltfield{cont}{$\mathfrak{S}(\mathfrak{A}(u[0].\text{cont}\mathcal{O}^{\mathfrak{S}}u[1].\text{cont}))$}}
+  \end{quote}
+
 % \item[\textnormal{ContForwardApp($T_{\text{arg}}$, $T_{\text{res}}$)}] \mbox{}
 
 %   If $T_{\text{arg}}$ and $T_{\text{res}}$ are types, then
@@ -5673,6 +5679,28 @@ If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
     T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
     ContForwardApp$_{\mathfrak{S},\mathcal{O},B}$
   \end{quote}
+
+  
+\item[\textnormal{$T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    \mathfrak{A}(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$}
+  New!] \mbox{}
+
+  If $T_{\text{mother}}$, $T_{\text{daughter}_1}$ and
+  $T_{\text{daughter}_2}$ are sign types and $\mathcal{O}$ is a
+  combination operation, then
+  \begin{quote}
+    $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
+    \mathfrak{A}(T_{\text{daughter}_1}'(_{\mathcal{O}}T_{\text{daughter}_2}'))$
+  \end{quote}
+  is
+  \begin{quote}
+  $T_{\text{mother}}\longrightarrow
+    T_{\text{daughter}_1}\ T_{\text{daughter}_2}$ \d{\d{$\wedge$}}
+    ContForwardApp$_{\mathfrak{S},\mathcal{O},\mathfrak{A}}$
+  \end{quote}
+  
 
 % \item[\textnormal{$T_{\text{mother}}\longrightarrow
 %     T_{\text{daughter}_1}\ T_{\text{daughter}_2}\ \mid\
@@ -6392,7 +6420,7 @@ defined inductively as follows.  The following set is included in \textit{CSRule
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP}
     \d{\d{$\wedge$}} CnstrIsA, \\
     \>\textit{VP} $\longrightarrow$ \textit{V} \textit{NP} $\mid$
-    \textit{V}$'$(\textit{NP}$'$) \textbf{Revised!}\}
+    $\mathfrak{A}$(\textit{V}$'$($_{\text{@}}$\textit{NP}$'$)) \textbf{Revised!}\}
   \end{tabbing}
 
 
@@ -6426,6 +6454,38 @@ defined inductively as follows.  The following set is included in \textit{CSRule
 
 
 \section{Summary}
+
+In this chapter we have explored how to use types to characterize
+underspecified interpretation.  A type underspecifies its witnesses
+since any one of them can be used as a specific object of the type.
+We thus characterize types of contents to play the role of
+underspecified representations as employed, for example, in DRT by
+\cite{Reyle1993} or using Quasi Logical Form \citep{Alshawi1992}.
+Using underspecified representations of meaning is important in
+computational applications where a large number of alternative
+specified representations can be generated.  The idea here is that we
+can compute a single type of content for an utterance and then
+determine a precise content as needed and check that it is of the type
+generated.  This helps us understand how speakers of a natural
+language can rapidly process utterances in real time when in fact many
+different contents are available.
+
+We started by recreating the storage algorithm of \cite{Cooper1983},
+showing how the stores for quantifiers can be incorporated into
+context on the structure view of context we have developed using
+record types.  We then showed how a treatment of anaphora can be added
+to the elaboration of content types
+including discourse anaphora, donkey anaphora and aspects of Chomskian
+binding theory.
+
+While we do not claim that we have covered everything that has been
+accounted for in the considerable linguistic literature on these
+topics, there does seem to be enough here to show that our theory of
+types which we used in the earlier parts of the book to deal with
+perception, interaction and mental states, is also capable of dealing
+with these central concerns of linguistic semantics.
+
+
 
 
 %%% Local Variables:
