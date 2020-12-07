@@ -352,38 +352,36 @@ specify the type $(T_1\rightharpoonup T_2)$   to be the labelled set
 
 $\{\langle\mathrm{partdmn},T_1\rangle,\langle\mathrm{rng},T_2\rangle\}$
 
-where `partdmn' (``polymorphic domain'') and `rng' (``range'') are
+where `partdmn' (``partial domain'') and `rng' (``range'') are
 reserved labels (`rng' being the same reserved label that was used for
-non-polymorphic function types).
-
-@@
+total function types).
 
 
-A\todo{Do we want both these definitions?} system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
-$\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
-  Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
-  polymorphic function types} if
-\begin{enumerate} 
+% A\todo{Do we want both these definitions?} system of complex types {\bf TYPE$_C$} = $\langle${\bf Type}, {\bf BType},
+% $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
+%   Arity\/}$\rangle$, $\langle A,F\rangle$$\rangle$ \textit{has
+%   polymorphic function types} if
+% \begin{enumerate} 
  
-\item for any $T_1,T_2 \in \textbf{Type}$,
-  $\displaystyle{\bigvee_{T\sqsubseteq T_1}}(T\rightarrow T_2) \in \textbf{Type}$ 
+% \item for any $T_1,T_2 \in \textbf{Type}$,
+%   $\displaystyle{\bigvee_{T\sqsubseteq T_1}}(T\rightarrow T_2) \in \textbf{Type}$ 
  
-\item for any $T_1,T_2 \in \textbf{Type}$,
-  $f:_{\mathbf{TYPE_C}}\displaystyle{\bigvee_{T\sqsubseteq
-      T_1}}(T\rightarrow T_2)$ iff there is some type $T'$ such that
-  $f:(T'\rightarrow T_2)$ and $T'\sqsubseteq T_1$
+% \item for any $T_1,T_2 \in \textbf{Type}$,
+%   $f:_{\mathbf{TYPE_C}}\displaystyle{\bigvee_{T\sqsubseteq
+%       T_1}}(T\rightarrow T_2)$ iff there is some type $T'$ such that
+%   $f:(T'\rightarrow T_2)$ and $T'\sqsubseteq T_1$
    
  
-\end{enumerate}
+% \end{enumerate}
 
-We
-specify the type $\displaystyle{\bigvee_{T\sqsubseteq T_1}}(T\rightarrow T_2)$   to be the labelled set
+% We
+% specify the type $\displaystyle{\bigvee_{T\sqsubseteq T_1}}(T\rightarrow T_2)$   to be the labelled set
 
-$\{\langle\mathrm{polydmn},T_1\rangle,\langle\mathrm{rng},T_2\rangle\}$
+% $\{\langle\mathrm{polydmn},T_1\rangle,\langle\mathrm{rng},T_2\rangle\}$
 
-where `polydmn' (``polymorphic domain'') and `rng' (``range'') are
-reserved labels (`rng' being the same reserved label that was used for
-non-polymorphic function types).
+% where `polydmn' (``polymorphic domain'') and `rng' (``range'') are
+% reserved labels (`rng' being the same reserved label that was used for
+% non-polymorphic function types).
 
 
 
@@ -411,7 +409,7 @@ of $v$ in $\varphi$ with $a$).
 
 % (Here we suppress the subscript $\mathbf{TYPE_C}$ on the `:'.)
 For
-example, the function
+example, the graph of the function
 
 $\lambda v$:\textit{Ind} . run($v$)
 
@@ -433,6 +431,14 @@ $\lambda$-calculus.  When we discuss record types as arguments to
 functions we will need to introduce one slight complication to our
 notion of function application.  We will introduce that complication
 when we discuss record types.
+
+In order to maintain $\alpha$-equivalence (for example, if $v_1$ and
+$v_2$ are distinct variables, $\lambda v_1\!:\!T\ .\ \varphi\dep{v_1}$
+represents the same function as $\lambda v_2\!:\!T\ .\
+\varphi\dep{v_2}$), we use a variant of de Bruijn indexing
+\citep{deBruijn1972} in the labelled set we use to model functions.
+
+@@\todo{Needs working out}
 
 
 
