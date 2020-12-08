@@ -437,8 +437,41 @@ $v_2$ are distinct variables, $\lambda v_1\!:\!T\ .\ \varphi\dep{v_1}$
 represents the same function as $\lambda v_2\!:\!T\ .\
 \varphi\dep{v_2}$), we use a variant of de Bruijn indexing
 \citep{deBruijn1972} in the labelled set we use to model functions.
+We model functions as labelled sets with two fields with the
+distinguished labels `lambda' and `body'.
+Where de Bruijn uses natural numbers to index the variable positions
+we use segments of paths in the labelled set which relate the
+appropriate instance of the 'body'-label labelling the field which is
+sister to the binding 'lambda'-field.  Thus
+\begin{quote}
+  $\lambda v$:\textit{Ind} . run($v$)
+\end{quote}
+is the labelled set
+\begin{quote}
+  \begin{tabbing}
+    $\{$\=$\langle$lambda, \textit{Ind}$\rangle$,\\
+    \>$\langle$body, $\{$\=$\langle$pred, run$\rangle$,\\
+    \>\>                  $\langle$arg$_1$, body.arg$_1\rangle\}\rangle\}$
+  \end{tabbing}
+\end{quote}
+and
+\begin{quote}
+  $\lambda v_1$:\textit{Ind} . $r_1(v_1,\lambda v_2$:\textit{Ind}
+  . $r_2(v_2,v_1))$
+\end{quote}
+is the labelled set
+\begin{quote}
+  \begin{tabbing}
+    $\{$\=$\langle$lambda, \textit{Ind}$\rangle$,\\
+    \>   $\langle$body, $\{$\=$\langle$pred, $r_1\rangle$,\\
+    \>\>                     $\langle$arg$_1$, body.arg$\rangle$,\\
+    \>\>                     $\langle$arg$_2$, $\{$\=$\langle$lambda, \textit{Ind}$\rangle$,\\
+    \>\>\>                                          $\langle$body, $\{$\=$\langle$pred, $r_2\rangle$,\\
+    \>\>\>\>                                                            $\langle$arg$_1$, body.arg$_1\rangle$,\\
+    \>\>\>\>                                                            $\langle$arg$_2$, body.arg$_2$.body.arg$_2\rangle\}\rangle\}\rangle\}\rangle\}$
+  \end{tabbing}
+\end{quote}
 
-@@\todo{Needs working out}
 
 
 
@@ -466,6 +499,8 @@ $X:_{\mathbf{TYPE_C}}\mathrm{set}(T)$ iff  $X$ is a set and
 We let $\mathrm{set}(T)$ represent the labelled set
 $\{\langle\mathrm{set},T\rangle\}$ where `set' is a reserved
 label.
+
+@@
 
 If $T$ is a type and $X:\mathrm{set}(T)$, then $\mathfrak{T}(X)$ is a
 type.  $a:\mathfrak{T}(X)$ iff $a\in X$. (Chapter~\ref{ch:quant},
