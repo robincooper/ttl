@@ -491,7 +491,14 @@ $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
  
 \item for any $T \in \textbf{Type}$, 
 $X:_{\mathbf{TYPE_C}}\mathrm{set}(T)$ iff  $X$ is a set and 
-  for all $a\in X$, $a:_{\mathbf{TYPE_C}}T$
+for all $a\in X$, $a:_{\mathbf{TYPE_C}}T$
+
+\item for any $T \in \textbf{Type}$, if $X:\mathrm{set}(T)$, then
+  $\mathfrak{T}(X)\in \textbf{Type}$ (Chapter~\ref{ch:quant},
+  p.~\pageref{ex:mathfrakT})
+
+  
+\item $a:\mathfrak{T}(X)$ iff $a\in X$
    
  
 \end{enumerate}
@@ -500,12 +507,10 @@ We let $\mathrm{set}(T)$ represent the labelled set
 $\{\langle\mathrm{set},T\rangle\}$ where `set' is a reserved
 label.
 
-@@
-
-If $T$ is a type and $X:\mathrm{set}(T)$, then $\mathfrak{T}(X)$ is a
-type.  $a:\mathfrak{T}(X)$ iff $a\in X$. (Chapter~\ref{ch:quant},
-p.~\pageref{ex:mathfrakT})\todo{Need to expand this to a system of
-  complex types with set types and membership types}
+% If $T$ is a type and $X:\mathrm{set}(T)$, then $\mathfrak{T}(X)$ is a
+% type.  $a:\mathfrak{T}(X)$ iff $a\in X$. (Chapter~\ref{ch:quant},
+% p.~\pageref{ex:mathfrakT})\todo{Need to expand this to a system of
+%   complex types with set types and membership types}
 
 % We also introduce a special kind of set type known as a plurality
 % type.  The idea here is that a plurality is a set that does not contain any two
@@ -681,10 +686,10 @@ $\langle$\textbf{PType}, {\bf Pred}, \textbf{ArgIndices}, {\it
 
 \begin{enumerate} 
  
-\item for any non-empty finite set of types, $\mathbb{T}$, such that $\mathbb{T}
+\item for any non-empty finite set of types, $\mathscr{T}$, such that $\mathscr{T}
   \subseteq\mathbf{Type}$, $\bigwedge\mathbb{T} \in \mathbf{Type}$ 
  
-\item for any finite $\mathbb{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigwedge\mathbb{T}$ iff
+\item for any finite $\mathscr{T} \subseteq\mathbf{Type}$, $a:_{\mathbf{TYPE_C}}\bigwedge\mathscr{T}$ iff
   $a:_{\mathbf{TYPE_C}}T$ for all $T\in\mathbb{T}$
  
 \end{enumerate}
@@ -1167,151 +1172,151 @@ substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our examp
 
 \end{quote}
 
-We will first look in more detail at flattening.  Flattened records
-have \textit{complex labels} (or \textit{paths}) of the form
-$\ell_1.\ell_2.\ldots.\ell_n$.  If $L$ is a set of labels, the set of
-\textit{complex labels}, $L_\pi$, \textit{based on} $L$ is the minimal
-set such that:
-\begin{enumerate} 
+% We will first look in more detail at flattening.  Flattened records
+% have \textit{complex labels} (or \textit{paths}) of the form
+% $\ell_1.\ell_2.\ldots.\ell_n$.  If $L$ is a set of labels, the set of
+% \textit{complex labels}, $L_\pi$, \textit{based on} $L$ is the minimal
+% set such that:
+% \begin{enumerate} 
  
-\item if $\ell\in L$, then $\ell\in L_\pi$ 
+% \item if $\ell\in L$, then $\ell\in L_\pi$ 
  
-\item if $\pi\in L_\pi$ and $\ell\in L$, then $\pi.\ell\in L_\pi$ 
+% \item if $\pi\in L_\pi$ and $\ell\in L$, then $\pi.\ell\in L_\pi$ 
  
-\end{enumerate}
+% \end{enumerate}
 
-Recall that a record, $r$, is a set of fields, $f$, where each $f$, is
-an ordered pair, $\langle\ell,v\rangle$ where $\ell$ is a (complex)
-label and $v$ is the value of the field which may itself be a record
-or some other object.  If $r$ is a record, then $\varphi(r)$,
-\textit{the flattening of} $r$, is \label{pg:flattening}
-\begin{quote}
-$\displaystyle{\bigcup_{f\in r}}\mathrm{FlattenField}(f)$
-\end{quote}
-where $\mathrm{FlattenField}(\langle\ell,v\rangle)$ is
-\begin{quote}
-$\varphi(\{\langle\ell.\ell_1,v_1\rangle,
-           \langle\ell.\ell_2,v_2\rangle,
-           \ldots,
-           \langle\ell.\ell_n,v_n\rangle\})$
-\end{quote}
-if $v$ is the record
-$\{\langle\ell_1,v_1\rangle,
-   \langle\ell_2,v_2\rangle,
-   \ldots,
-   \langle\ell_n,v_n\rangle\}$
-and
-$\langle\ell,v\rangle$
-otherwise.
+% Recall that a record, $r$, is a set of fields, $f$, where each $f$, is
+% an ordered pair, $\langle\ell,v\rangle$ where $\ell$ is a (complex)
+% label and $v$ is the value of the field which may itself be a record
+% or some other object.  If $r$ is a record, then $\varphi(r)$,
+% \textit{the flattening of} $r$, is \label{pg:flattening}
+% \begin{quote}
+% $\displaystyle{\bigcup_{f\in r}}\mathrm{FlattenField}(f)$
+% \end{quote}
+% where $\mathrm{FlattenField}(\langle\ell,v\rangle)$ is
+% \begin{quote}
+% $\varphi(\{\langle\ell.\ell_1,v_1\rangle,
+%            \langle\ell.\ell_2,v_2\rangle,
+%            \ldots,
+%            \langle\ell.\ell_n,v_n\rangle\})$
+% \end{quote}
+% if $v$ is the record
+% $\{\langle\ell_1,v_1\rangle,
+%    \langle\ell_2,v_2\rangle,
+%    \ldots,
+%    \langle\ell_n,v_n\rangle\}$
+% and
+% $\langle\ell,v\rangle$
+% otherwise.
 
-We can show that if $r$ is a record then $\varphi(r)$ is a record.  It
-follows trivially from the requirement that records are graphs of
-functions from labels to values.  If $r$ is a record
-$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$, then
-the \textit{set of labels of} $r$, $\mathrm{labels}(r)$, is
-$\{\ell_1,\ldots,\ell_n\}$.  For example, if $r$ is the record
-\begin{quote}
-\record{\field{x}{\record{\field{z}{$a$}\\
-                          \field{w}{$b$}}}\\
-        \field{y}{$c$}}
-\end{quote}
-then $\mathrm{labels}(r)$ is $\{\mathrm{x},\mathrm{y}\}$. That is, `labels' picks out
-the ``highest level'' of labels in a complex record.
-We use $\mathrm{tpaths}(r)$ to represent the \textit{set of total
-  paths} of $r$, $\mathrm{labels}(\varphi(r))$.
+% We can show that if $r$ is a record then $\varphi(r)$ is a record.  It
+% follows trivially from the requirement that records are graphs of
+% functions from labels to values.  If $r$ is a record
+% $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$, then
+% the \textit{set of labels of} $r$, $\mathrm{labels}(r)$, is
+% $\{\ell_1,\ldots,\ell_n\}$.  For example, if $r$ is the record
+% \begin{quote}
+% \record{\field{x}{\record{\field{z}{$a$}\\
+%                           \field{w}{$b$}}}\\
+%         \field{y}{$c$}}
+% \end{quote}
+% then $\mathrm{labels}(r)$ is $\{\mathrm{x},\mathrm{y}\}$. That is, `labels' picks out
+% the ``highest level'' of labels in a complex record.
+% We use $\mathrm{tpaths}(r)$ to represent the \textit{set of total
+%   paths} of $r$, $\mathrm{labels}(\varphi(r))$.
 
 
 
-If $L$ is a set of labels,
-then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
-based on $L$ is the minimal set such that
-\begin{enumerate} 
+% If $L$ is a set of labels,
+% then the set of \textit{complex labels} (or \textit{paths}), $L_+$,
+% based on $L$ is the minimal set such that
+% \begin{enumerate} 
  
-\item if $\ell\in L$, then $\ell\in L_+$ 
+% \item if $\ell\in L$, then $\ell\in L_+$ 
  
-\item if $\pi\in L_+$ and $\ell\in L$, then $\pi.\ell\in L_+$ 
+% \item if $\pi\in L_+$ and $\ell\in L$, then $\pi.\ell\in L_+$ 
  
-\end{enumerate}
+% \end{enumerate}
 
-If $r$ is a record such that $\mathrm{labels}(r)\subseteq L_+$, then
-the \textit{inverse flattening} (or \textit{expansion}) \textit{of}
-$r$, $\varphi^-(r)$, is the minimal set such that
-\begin{enumerate} 
+% If $r$ is a record such that $\mathrm{labels}(r)\subseteq L_+$, then
+% the \textit{inverse flattening} (or \textit{expansion}) \textit{of}
+% $r$, $\varphi^-(r)$, is the minimal set such that
+% \begin{enumerate} 
  
-\item if $\langle\ell,v\rangle\in r$ and $\ell\in L$, then $\langle\ell,v\rangle\in\varphi^-(r)$ 
+% \item if $\langle\ell,v\rangle\in r$ and $\ell\in L$, then $\langle\ell,v\rangle\in\varphi^-(r)$ 
  
-\item if $\ell\in L$, $\pi\in L_+$ and $\langle\ell.\pi,v\rangle\in
-  r$, then 
-$\langle\ell,\varphi^-(\{\langle\pi',v'\rangle\mid\langle\ell.\pi',v'\rangle\in r\})\rangle\in\varphi^-(r)$
+% \item if $\ell\in L$, $\pi\in L_+$ and $\langle\ell.\pi,v\rangle\in
+%   r$, then 
+% $\langle\ell,\varphi^-(\{\langle\pi',v'\rangle\mid\langle\ell.\pi',v'\rangle\in r\})\rangle\in\varphi^-(r)$
  
-\end{enumerate}
+% \end{enumerate}
 
-\paragraph{Claim:} If $r$ is a record, then $\varphi^-(\varphi(r))=r$.
+% \paragraph{Claim:} If $r$ is a record, then $\varphi^-(\varphi(r))=r$.
 
-The \textit{set of total paths of} $r$, $\mathrm{tpaths}(r)$, is
-$\mathrm{labels}(\varphi(r))$.
+% The \textit{set of total paths of} $r$, $\mathrm{tpaths}(r)$, is
+% $\mathrm{labels}(\varphi(r))$.
 
-If $r$ is a record, then the \textit{set
-  of paths of} $r$, $\mathrm{paths}(r)$, is the minimal set such that
-\begin{enumerate} 
+% If $r$ is a record, then the \textit{set
+%   of paths of} $r$, $\mathrm{paths}(r)$, is the minimal set such that
+% \begin{enumerate} 
  
-\item If $\pi\in\mathrm{tpaths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
+% \item If $\pi\in\mathrm{tpaths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
  
-\item If $\ell$ is a label (in $L$), $\pi$ is a non-empty path based
-  on $L$ and
-  $\pi.\ell\in\mathrm{paths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
+% \item If $\ell$ is a label (in $L$), $\pi$ is a non-empty path based
+%   on $L$ and
+%   $\pi.\ell\in\mathrm{paths}(r)$, then $\pi\in\mathrm{paths}(r)$ 
  
-\end{enumerate} 
+% \end{enumerate} 
 
-If $\Pi$ is a set of paths (in $L_+$), then the \textit{set of longest
-  paths in} $\Pi$, $\mathrm{longest}(\Pi)$ is such that
-$\pi\in\mathrm{longest}(\Pi)$ iff $\pi\in\Pi$ and there is no $\pi'$
-such that $\pi.\pi'\in\Pi$.
+% If $\Pi$ is a set of paths (in $L_+$), then the \textit{set of longest
+%   paths in} $\Pi$, $\mathrm{longest}(\Pi)$ is such that
+% $\pi\in\mathrm{longest}(\Pi)$ iff $\pi\in\Pi$ and there is no $\pi'$
+% such that $\pi.\pi'\in\Pi$.
 
-\paragraph{Claim:}
-$\mathrm{longest}(\mathrm{paths}(r))=\mathrm{tpaths}(r)$
+% \paragraph{Claim:}
+% $\mathrm{longest}(\mathrm{paths}(r))=\mathrm{tpaths}(r)$
 
-If $R$ is a set of records, then 
-the \textit{set of common paths of} $R$,
-$\mathrm{cpaths}(R)$,\label{pg:cpaths} is
-\begin{quote}
-$\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r)$,
-\end{quote}
-the \textit{set of longest common
-  paths of} $R$, $\mathrm{lcpaths}(R)$, is
-\begin{quote}
-$\mathrm{longest}(\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r))$
-\end{quote} 
-and the \textit{set of common total paths of} $R$,
-$\mathrm{ctpaths}(R)$,\label{pg:ctpaths} is
-\begin{quote}
-$\displaystyle{\bigcap_{r\in R}}\mathrm{tpaths}(r)$
-\end{quote}
+% If $R$ is a set of records, then 
+% the \textit{set of common paths of} $R$,
+% $\mathrm{cpaths}(R)$,\label{pg:cpaths} is
+% \begin{quote}
+% $\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r)$,
+% \end{quote}
+% the \textit{set of longest common
+%   paths of} $R$, $\mathrm{lcpaths}(R)$, is
+% \begin{quote}
+% $\mathrm{longest}(\displaystyle{\bigcap_{r\in R}}\mathrm{paths}(r))$
+% \end{quote} 
+% and the \textit{set of common total paths of} $R$,
+% $\mathrm{ctpaths}(R)$,\label{pg:ctpaths} is
+% \begin{quote}
+% $\displaystyle{\bigcap_{r\in R}}\mathrm{tpaths}(r)$
+% \end{quote}
 
-\paragraph{Claim:} $\mathrm{lcpaths}(R)=\mathrm{ctpaths}(R)$
+% \paragraph{Claim:} $\mathrm{lcpaths}(R)=\mathrm{ctpaths}(R)$
 
 
 
-Consider the records
-\begin{quote}
-$r_1$ = \record{\field{x}{\record{\field{x}{$a$}\\
-                                  \field{y}{$b$}}}\\
-                \field{y}{\record{\field{x}{$c$}\\
-                                  \field{y}{$d$}}}}
+% Consider the records
+% \begin{quote}
+% $r_1$ = \record{\field{x}{\record{\field{x}{$a$}\\
+%                                   \field{y}{$b$}}}\\
+%                 \field{y}{\record{\field{x}{$c$}\\
+%                                   \field{y}{$d$}}}}
 
-$r_2$ = \record{\field{x}{\record{\field{z}{$e$}\\
-                                  \field{w}{$f$}}}\\
-                \field{y}{\record{\field{x}{$g$}\\
-                                  \field{y}{$h$}}}}
-\end{quote}
-The following hold true:
-\begin{quote}
-$\mathrm{paths}(r_1) = \{\mathrm{x},\mathrm{x.x},\mathrm{x.y},\mathrm{y},\mathrm{y.x},\mathrm{y.y}\}$\\
-$\mathrm{paths}(r_2) = \{\mathrm{x},\mathrm{x.z},\mathrm{x.w},\mathrm{y},\mathrm{y.x},\mathrm{y.y}\}$\\
-$\mathrm{lcpaths}(\{r_1,r_2\}) = \{\mathrm{x},\mathrm{y.x},\mathrm{y.y}\}$
-\end{quote} 
-The notion of longest common paths for a set of records will be
-important when we discuss paths in record types below.  [Is this still true?] 
+% $r_2$ = \record{\field{x}{\record{\field{z}{$e$}\\
+%                                   \field{w}{$f$}}}\\
+%                 \field{y}{\record{\field{x}{$g$}\\
+%                                   \field{y}{$h$}}}}
+% \end{quote}
+% The following hold true:
+% \begin{quote}
+% $\mathrm{paths}(r_1) = \{\mathrm{x},\mathrm{x.x},\mathrm{x.y},\mathrm{y},\mathrm{y.x},\mathrm{y.y}\}$\\
+% $\mathrm{paths}(r_2) = \{\mathrm{x},\mathrm{x.z},\mathrm{x.w},\mathrm{y},\mathrm{y.x},\mathrm{y.y}\}$\\
+% $\mathrm{lcpaths}(\{r_1,r_2\}) = \{\mathrm{x},\mathrm{y.x},\mathrm{y.y}\}$
+% \end{quote} 
+% The notion of longest common paths for a set of records will be
+% important when we discuss paths in record types below.  [Is this still true?] 
   
 
 % If $r$ is the record 
@@ -1354,7 +1359,9 @@ important when we discuss paths in record types below.  [Is this still true?]
 %                                     \langle\pi_{n,m_n},v_{n,m_n}\rangle\})
 %                  \rangle
 %         \end{array}\right\}$
-% \end{quote}
+%     \end{quote}
+
+@@\todo{Define relabelling for labelled sets -- see notes}
 
 We now turn our attention to relabelling.\label{pg:relabelling}   
 An $L$\textit{-relabelling} is a one-one function whose domain and range
