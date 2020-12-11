@@ -117,6 +117,62 @@ $X\ominus\pi_1,\ldots,\pi_n$ for $X\ominus\pi_1\ominus\ldots\ominus\pi_n$.
 % and spell out a set theoretic coding for all of our structured
 % objects.
 
+If $\mathcal{L}$ is a set of labels, the $\mathcal{L}_+$ is defined
+inductively by
+\begin{enumerate} 
+ 
+\item if $\ell\in\mathcal{L}$, then $\ell\in\mathcal{L}_+$ 
+ 
+\item if $\ell\in\mathcal{L}$ and $\pi\in\mathcal{L}_+$, then $\ell.\pi\in\mathcal{L}_+$ 
+ 
+\end{enumerate} 
+
+If $\mathcal{L}$ is a set of labels and $X$ is a labelled set such
+that $\mathrm{paths}(X)\subseteq\mathcal{L}_+$, then a
+$\mathcal{L}$-relabelling of $X$ is a one-one function, $\eta$, such
+that
+\begin{enumerate} 
+ 
+\item $\mathrm{dom}(\eta)\subseteq\mathrm{paths}(X)$ 
+ 
+\item
+  $\mathrm{rng}(\eta)\subseteq\mathcal{L}_+-(\mathrm{paths}(X)-\mathrm{dom}(\eta))$
+  
+\item if $\pi_1,\pi_2\in\mathrm{dom}(\eta)$ and $\pi_1<\pi_2$, then $\eta(\pi_1)<\eta(\pi_2)$
+ 
+\end{enumerate} 
+
+If $X$ is a labelled set based on $\mathcal{L}$ and $\eta$ is a
+$\mathcal{L}$-relabelling of $X$, then $[X]_\eta$ is the labelled set
+$X'$ exactly like $X$ except that
+\begin{enumerate} 
+ 
+\item if $\pi\in\mathrm{dom}(\eta)$, then $\eta(\pi)$ replaces $\pi$
+  in $\mathrm{paths}(X')$, that is
+  \begin{quote}
+    $\mathrm{paths}(X')=(\mathrm{paths}(X)-\mathrm{dom}(\eta))\cup\mathrm{rng}(\eta)$
+  \end{quote}
+  
+ 
+\item if $\pi\in\mathrm{dom}(\eta)$ and there is no
+  $\pi'\in\mathrm{dom}(\eta)$ such that $\pi<\pi'$, then
+  $X'.\eta(\pi)=X.\pi$
+  
+\item if $\pi\in\mathrm{tpaths}(X')$ and
+  $\pi\not\in\mathrm{dom}(\eta)$, then $X'.\pi=X.\pi$
+ 
+\end{enumerate} 
+
+We represent a relabelling,
+$\eta$, whose domain is $\{\pi_1,\ldots,\pi_n\}$ and which is defined
+by $\eta(\pi_1)=\pi'_1,\ldots,\eta(\pi_n)=\pi'_n$ as:
+\begin{quote}
+$\pi_1\leadsto\pi'_1$\\
+\vdots\\
+$\pi_n\leadsto\pi'_n$
+\end{quote}
+
+
 
 \section{Basic types}
 \label{sec:basic}
@@ -1067,76 +1123,92 @@ Similarly, $\mathrm{tpaths}_{\text{rec}}(r)$ is the set of paths,
 $\pi$, such that $\pi\in\mathrm{paths}_{\text{rec}}(r)$ and $r.\pi$ is
 not a record.
 
-We sometimes use `$\mathrm{paths}$' and `$\mathrm{tpaths}$' without the subscript for these
-more restricted notions when there is no risk for confusion.
+We say that $\eta$ is a $\mathcal{L}$-relabelling$_{\text{rec}}$ for a record,
+$r$, just
+in case it is a $\mathcal{L}$-relabelling for $r$ whose domain is a
+subset of $\mathrm{paths}_{\text{rec}}(r)$.
 
-A value may itself be a record and paths may extend into embedded
-records.  A record which contains records as values is called a {\it
-  complex record\/} and otherwise a record is {\it simple\/}.  Values which are not records are called {\it
-  leaves\/}.  Consider a record $r$ \label{pg:record}
-\begin{display}
-\record{\field{$f$}{\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
-                                                \field{$\mathit{gg}$}{$b$}}}\\
-                            \field{$g$}{$c$}}}\\
-        \field{$g$}{\record{\field{$h$}{\record{\field{$g$}{$a$}\\
-                                                \field{$h$}{$d$}}}}}}
-\end{display}
-Among the paths in $r$ are $r.f$, $r.g.h$ and $r.f.f.\mathit{ff}$ which denote,
-respectively, 
-\begin{display}
-\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
-                                                \field{$\mathit{gg}$}{$b$}}}\\
-                            \field{$g$}{$c$}}
-\end{display}
-\begin{display} 
-\record{\field{$g$}{$a$}\\
-                                                \field{$h$}{$d$}}
-\end{display}
-and $a$.  We will make a distinction between \textit{absolute paths},
-such as those we have already mentioned, which consist of a record
-followed by a series of labels connected by dots and \textit{relative
-  paths} which are just a series of labels connected by dots,
-e.g. $g.h$.  Relative paths are useful when we wish to refer to
-similar paths in different records.  We will use \textit{path} to
-refer to either absolute or relative paths when it is clear from the
-context which is meant.  The set of leaves of $r$, also known as its {\it
-  extension\/} (those objects other than labels which it contains), is
-$\{a,b,c,d\}$.  The bag (or multiset) of leaves of $r$, also known as
-its {\it multiset extension\/}, is $\{a,a,b,c,d\}$.  A record may be
-regarded as a way of labelling and structuring its extension.
+We generally use `$\mathrm{paths}$' and `$\mathrm{tpaths}$' without the subscript for these
+more restricted notions when there is no risk for confusion.
+Similarly we talk of relabellings for records when what is meant are relabellings$_{\text{rec}}$.
+
+% A value may itself be a record and paths may extend into embedded
+% records.  A record which contains records as values is called a {\it
+%   complex record\/} and otherwise a record is {\it simple\/}.  Values which are not records are called {\it
+%   leaves\/}.  Consider a record $r$ \label{pg:record}
+% \begin{display}
+% \record{\field{$f$}{\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
+%                                                 \field{$\mathit{gg}$}{$b$}}}\\
+%                             \field{$g$}{$c$}}}\\
+%         \field{$g$}{\record{\field{$h$}{\record{\field{$g$}{$a$}\\
+%                                                 \field{$h$}{$d$}}}}}}
+% \end{display}
+% Among the paths in $r$ are $r.f$, $r.g.h$ and $r.f.f.\mathit{ff}$ which denote,
+% respectively, 
+% \begin{display}
+% \record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
+%                                                 \field{$\mathit{gg}$}{$b$}}}\\
+%                             \field{$g$}{$c$}}
+% \end{display}
+% \begin{display} 
+% \record{\field{$g$}{$a$}\\
+%                                                 \field{$h$}{$d$}}
+% \end{display}
+% and $a$.  We will make a distinction between \textit{absolute paths},
+% such as those we have already mentioned, which consist of a record
+% followed by a series of labels connected by dots and \textit{relative
+%   paths} which are just a series of labels connected by dots,
+% e.g. $g.h$.  Relative paths are useful when we wish to refer to
+% similar paths in different records.  We will use \textit{path} to
+% refer to either absolute or relative paths when it is clear from the
+% context which is meant. 
+The  \textit{extension} of a record, $r$, is
+\begin{quote}
+  $\displaystyle{\bigcup_{\pi\in\mathrm{tpaths}_{\text{rec}}(r)}\{r.\pi\}}$
+\end{quote}
+The \textit{multiset extension} of $r$ is similarly
+\begin{quote}
+  $\displaystyle{\biguplus_{\pi\in\mathrm{tpaths}_{\text{rec}}(r)}\{r.\pi\}}$
+\end{quote}
+(where $\uplus$ represents multiset union).
+
+A record may be
+regarded as a way of labelling and structuring its (multiset) extension.
 
 An object, $a$, is a \textit{component} (Chapter~\ref{ch:gram}, p.~\pageref{pg:component}) of a record, $r$, in symbols,
 $a\varepsilon r$, just in case there is some path, $\pi$, in $r$ such
-that $r.\pi=a$.  Thus the record, $r$, above has the following
-components: $r.f$, $r.f.f$, $r.f.f.\mathit{ff}$,
-$r.f.f.\mathit{gg}$, $r.f.g$, $r.g$, $r.g.h$, $r.g.h.g$ and
-$r.g.h.h$. An object, $a$, is \textit{present} (Chapter~\ref{ch:gram},
-p.~\pageref{pg:present}) in a record, $r$, in
-symbols, $a\underline{\varepsilon} r$, just in case either $a=r$ or
-$a\varepsilon r$.
+that $r.\pi=a$.  % Thus the record, $r$, above has the following
+% components: $r.f$, $r.f.f$, $r.f.f.\mathit{ff}$,
+% $r.f.f.\mathit{gg}$, $r.f.g$, $r.g$, $r.g.h$, $r.g.h.g$ and
+% $r.g.h.h$. An object, $a$, is \textit{present} (Chapter~\ref{ch:gram},
+% p.~\pageref{pg:present}) in a record, $r$, in
+% symbols, $a\underline{\varepsilon} r$, just in case either $a=r$ or
+% $a\varepsilon r$.
 
-We can, of course, also think of complex records as trees, for
-example:
-\begin{quote}
-\Tree [ [.\textit{f} 
-          [.\textit{f}
-              [.\textit{ff} $a$ ]
-              [.\textit{gg} $b$ ]
-          ]
-        [.\textit{g} $c$ ]
-        ]
-        [.\textit{g}
-          [.\textit{h}
-              [.\textit{g} $a$ ]
-              [.\textit{h} $d$ ]
-          ]
-        ]        
-      ] 
-\end{quote}
-We can thus use tree terminology to describe relationships between
-occurrences of labels.  For example, we can say that the topmost
-occurrence of \textit{f} immediately dominates another occurrence of
-\textit{f} and an occurrence of \textit{g}.\label{pg:imm-dom}
+% We can, of course, also think of complex records as trees, for
+% example:
+% \begin{quote}
+% \Tree [ [.\textit{f} 
+%           [.\textit{f}
+%               [.\textit{ff} $a$ ]
+%               [.\textit{gg} $b$ ]
+%           ]
+%         [.\textit{g} $c$ ]
+%         ]
+%         [.\textit{g}
+%           [.\textit{h}
+%               [.\textit{g} $a$ ]
+%               [.\textit{h} $d$ ]
+%           ]
+%         ]        
+%       ] 
+% \end{quote}
+% We can thus use tree terminology to describe relationships between
+% occurrences of labels.  For example, we can say that the topmost
+% occurrence of \textit{f} immediately dominates another occurrence of
+% \textit{f} and an occurrence of \textit{g}.\label{pg:imm-dom}
+
+@@
 
 Two
 records are {\it (multiset) extensionally equivalent\/} if they have
@@ -1361,19 +1433,13 @@ substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our examp
 %         \end{array}\right\}$
 %     \end{quote}
 
-@@\todo{Define relabelling for labelled sets -- see notes}
 
-We now turn our attention to relabelling.\label{pg:relabelling}   
-An $L$\textit{-relabelling} is a one-one function whose domain and range
-are included in $L_+$. We will standardly represent a relabelling,
-$\eta$, whose domain is $\{\pi_1,\ldots,\pi_n\}$ and which is defined
-by $\eta(\pi_1)=\pi'_1,\ldots,\eta(\pi_n)=\pi'_n$ as:
-\begin{quote}
-$\pi_1\leadsto\pi'_1$\\
-\vdots\\
-$\pi_n\leadsto\pi'_n$
-\end{quote} 
 
+% We now turn our attention to relabelling.\label{pg:relabelling}   
+% An $L$\textit{-relabelling} is a one-one function whose domain and range
+% are included in $L_+$.
+
+@@
 
 
 If $r$ is a record
