@@ -3783,6 +3783,23 @@ In our informal proof theoretic notation this can be represented as
 \end{ex}
 As with join types, we can, if we wish, use $T_1\wedge\ldots\wedge
 T_n$ to represent $\bigwedge\{T_1,\ldots,T_n\}$.
+
+Note that the definition of paths for record types
+(Chapter~\ref{ch:percint}, p.~\pageref{ex:paths-rectype}) means that
+paths in record types will extend into meet types (but not join
+types). For example, the record type \nexteg{a} (assuming \textit{Sit} is some
+basic type) has the paths \nexteg{b}
+\begin{ex}
+  \begin{subex}
+  \item   \record{
+      \tfield{e}{\record{
+          \tfield{x}{\textit{Ind}}\\
+          \tfield{y}{\textit{Ind}}\\
+          \tfield{e}{hug(x,y)}} $\wedge$ \textit{Sit}}}
+
+  \item   \{e, e.x, e.y, e.e\}
+  \end{subex}
+\end{ex}
   
 \end{shaded}
 

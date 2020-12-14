@@ -1208,41 +1208,39 @@ that $r.\pi=a$.  % Thus the record, $r$, above has the following
 % occurrence of \textit{f} immediately dominates another occurrence of
 % \textit{f} and an occurrence of \textit{g}.\label{pg:imm-dom}
 
-@@
+% Two
+% records are {\it (multiset) extensionally equivalent\/} if they have
+% the same (multiset) extension.  Two important, though trivial, facts
+%   about records are:
+% \begin{quote}
+% {\it Flattening.\/} \label{pg:flattening} For any record $r$, there is a multiset
+% extensionally equivalent simple record.  We can define an operation of flattening on records which
+% will always produce an equivalent simple record.  In the case of our
+% example, the result of flattening is
+% \begin{display}
+% \record{\field{$f.f.\mathit{ff}$}{$a$} \\
+%         \field{$f.f.\mathit{gg}$}{$b$} \\
+%         \field{$f.g$}{$c$} \\
+%         \field{$g.h.g$}{$a$} \\
+%         \field{$g.h.h$}{$d$}}
+% \end{display}
+% assuming the flattening operation uses paths from the original record
+% in a rather obvious way to create unique labels for the new record.
 
-Two
-records are {\it (multiset) extensionally equivalent\/} if they have
-the same (multiset) extension.  Two important, though trivial, facts
-  about records are:
-\begin{quote}
-{\it Flattening.\/} \label{pg:flattening} For any record $r$, there is a multiset
-extensionally equivalent simple record.  We can define an operation of flattening on records which
-will always produce an equivalent simple record.  In the case of our
-example, the result of flattening is
-\begin{display}
-\record{\field{$f.f.\mathit{ff}$}{$a$} \\
-        \field{$f.f.\mathit{gg}$}{$b$} \\
-        \field{$f.g$}{$c$} \\
-        \field{$g.h.g$}{$a$} \\
-        \field{$g.h.h$}{$d$}}
-\end{display}
-assuming the flattening operation uses paths from the original record
-in a rather obvious way to create unique labels for the new record.
+% {\it Relabelling.\/}  \label{pg:relabelling}For any record $r$, if $\pi_1.\ell.\pi_2$ is a
+% path $\pi$ in $r$, and $\pi_1.\ell'.\pi{_2}'$ is {\it not\/} a path in
+% $r$ (for any $\pi{_2}'$),
+% then substituting $\ell'$ for the occurrence of $\ell$ in $\pi$ results in
+% a record which is multiset equivalent to $r$.  We could, for example,
+% substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our example record.
 
-{\it Relabelling.\/}  \label{pg:relabelling}For any record $r$, if $\pi_1.\ell.\pi_2$ is a
-path $\pi$ in $r$, and $\pi_1.\ell'.\pi{_2}'$ is {\it not\/} a path in
-$r$ (for any $\pi{_2}'$),
-then substituting $\ell'$ for the occurrence of $\ell$ in $\pi$ results in
-a record which is multiset equivalent to $r$.  We could, for example,
-substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our example record.
+% \record{\field{$f$}{\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
+%                                                 \field{$\mathit{gg}$}{$b$}}}\\
+%                             \field{$g$}{$c$}}}\\
+%         \field{$g$}{\record{\field{$h$}{\record{\field{$k$}{$a$}\\
+%                                                 \field{$h$}{$d$}}}}}}
 
-\record{\field{$f$}{\record{\field{$f$}{\record{\field{$\mathit{ff}$}{$a$}\\
-                                                \field{$\mathit{gg}$}{$b$}}}\\
-                            \field{$g$}{$c$}}}\\
-        \field{$g$}{\record{\field{$h$}{\record{\field{$k$}{$a$}\\
-                                                \field{$h$}{$d$}}}}}}
-
-\end{quote}
+% \end{quote}
 
 % We will first look in more detail at flattening.  Flattened records
 % have \textit{complex labels} (or \textit{paths}) of the form
@@ -1439,151 +1437,148 @@ substitute $k$ for the second occurrence of $g$ in the path $g.h.g$ in our examp
 % An $L$\textit{-relabelling} is a one-one function whose domain and range
 % are included in $L_+$.
 
-@@
+% If $r$ is a record
+% $\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ and
+% $\eta$ is a relabelling, the \textit{application of $\eta$ to $r$},
+% $\eta*r$ is
+% $\{\langle\ell'_1,v_1\rangle,\ldots,\langle\ell'_n,v_n\rangle\}$ where
+% for each $i$ such that $1\leq i\leq n$, $\ell'_i$ is $\eta(\ell_i)$ if
+% $\ell_i$ is in the domain of $\eta$ and $\ell_i$ otherwise.  Suppose
+% $\eta$ is the relabelling $\mathrm{x}\leadsto\mathrm{xx},
+% \mathrm{z}\leadsto\mathrm{zz}$ and $r$ is as above.  Then $\eta*r$ is
+% \begin{quote}
+% \record{\field{xx}{\record{\field{z}{$a$}\\
+%                           \field{w}{$b$}}}\\
+%         \field{y}{$c$}}
+% \end{quote}
+% That is, the label `x' is changed, but nothing else.
 
+% We say that a relabelling, $\eta$, is \textit{limited} to a record,
+% $r$, just in case $\mathrm{dom}(\eta)\subseteq\mathrm{labels}(r)$.\label{pg:limited}
 
-If $r$ is a record
-$\{\langle\ell_1,v_1\rangle,\ldots,\langle\ell_n,v_n\rangle\}$ and
-$\eta$ is a relabelling, the \textit{application of $\eta$ to $r$},
-$\eta*r$ is
-$\{\langle\ell'_1,v_1\rangle,\ldots,\langle\ell'_n,v_n\rangle\}$ where
-for each $i$ such that $1\leq i\leq n$, $\ell'_i$ is $\eta(\ell_i)$ if
-$\ell_i$ is in the domain of $\eta$ and $\ell_i$ otherwise.  Suppose
-$\eta$ is the relabelling $\mathrm{x}\leadsto\mathrm{xx},
-\mathrm{z}\leadsto\mathrm{zz}$ and $r$ is as above.  Then $\eta*r$ is
-\begin{quote}
-\record{\field{xx}{\record{\field{z}{$a$}\\
-                          \field{w}{$b$}}}\\
-        \field{y}{$c$}}
-\end{quote}
-That is, the label `x' is changed, but nothing else.
+% We are, however, mainly interested in replacing total paths in a
+% record which is why we have defined relabellings on the set of paths,
+% $L_+$ rather than the set of labels, $L$.  The \textit{result of
+%   relabelling a record, $r$, with a relabelling, $\eta$}, in symbols,
+% $[r]_\eta$, is $\varphi^-(\eta*\varphi(r))$.  We say that $\eta$ is a
+% \textit{proper relabelling}\label{pg:proper-relabelling} for $r$ just in case $[r]_\eta$ is a
+% record.
 
-We say that a relabelling, $\eta$, is \textit{limited} to a record,
-$r$, just in case $\mathrm{dom}(\eta)\subseteq\mathrm{labels}(r)$.\label{pg:limited}
+% Suppose $r$ is the record
+% \begin{quote}
+% \record{\field{x}{\record{\field{x}{$a$}\\
+%                           \field{y}{$b$}}}\\
+%         \field{y}{\record{\field{x}{$c$}}}}
+% \end{quote}
+% and $\eta$ is the relabelling
+% \begin{quote}
+% x.x $\leadsto$ y.z\\
+% x.y $\leadsto$ x\\
+% \end{quote}
+% $\varphi(r)$ is the flattened record
+% \begin{quote}
+% \record{\field{x.x}{$a$}\\
+%         \field{x.y}{$b$}\\
+%         \field{y.x}{$c$}}
+% \end{quote}
+% $\eta*\varphi(r)$ is
+% \begin{quote}
+% \record{\field{y.z}{$a$}\\
+%         \field{x}{$b$}\\
+%         \field{y.x}{$c$}}
+% \end{quote}
+% Then $[r]_\eta$ is the expansion of this record, that is, the record
+% \begin{quote}
+% \record{\field{x}{$b$}\\
+%         \field{y}{\record{\field{x}{$c$}\\
+%                           \field{z}{$a$}}}}
+% \end{quote}
+% and $\eta$ is a proper relabelling for $r$.  
 
-We are, however, mainly interested in replacing total paths in a
-record which is why we have defined relabellings on the set of paths,
-$L_+$ rather than the set of labels, $L$.  The \textit{result of
-  relabelling a record, $r$, with a relabelling, $\eta$}, in symbols,
-$[r]_\eta$, is $\varphi^-(\eta*\varphi(r))$.  We say that $\eta$ is a
-\textit{proper relabelling}\label{pg:proper-relabelling} for $r$ just in case $[r]_\eta$ is a
-record.
-
-Suppose $r$ is the record
-\begin{quote}
-\record{\field{x}{\record{\field{x}{$a$}\\
-                          \field{y}{$b$}}}\\
-        \field{y}{\record{\field{x}{$c$}}}}
-\end{quote}
-and $\eta$ is the relabelling
-\begin{quote}
-x.x $\leadsto$ y.z\\
-x.y $\leadsto$ x\\
-\end{quote}
-$\varphi(r)$ is the flattened record
-\begin{quote}
-\record{\field{x.x}{$a$}\\
-        \field{x.y}{$b$}\\
-        \field{y.x}{$c$}}
-\end{quote}
-$\eta*\varphi(r)$ is
-\begin{quote}
-\record{\field{y.z}{$a$}\\
-        \field{x}{$b$}\\
-        \field{y.x}{$c$}}
-\end{quote}
-Then $[r]_\eta$ is the expansion of this record, that is, the record
-\begin{quote}
-\record{\field{x}{$b$}\\
-        \field{y}{\record{\field{x}{$c$}\\
-                          \field{z}{$a$}}}}
-\end{quote}
-and $\eta$ is a proper relabelling for $r$.  
-
-Now let us consider a case where the relabelling is not proper.
-Suppose we start with the same record, $r$, as above but take a new
-relabelling, $\eta'$:
-\begin{quote}
-x.x $\leadsto$ x
-\end{quote}
-Now $\eta'*\varphi(r)$ is the record
-\begin{quote}
-\record{\field{x}{$a$}\\
-        \field{x.y}{$b$}\\
-        \field{y.x}{$c$}}
-\end{quote}
-However, the expansion $\varphi^-(\eta'*\varphi(r))$ is the set of
-ordered pairs:
-\begin{quote}
-$\{\langle\mathrm{x},a\rangle,
-   \langle\mathrm{x},\{\langle\mathrm{y},b\rangle\}\rangle,
-   \langle\mathrm{y},\{\langle\mathrm{x},c\rangle\}\rangle\}$
-\end{quote}
-which is not a record since it is not the graph of a function:  it has
-two ordered pairs whose first member is `x'.  We can read the problem
-already from the flattened record since it has a label, `x', which is a
-proper initial segment of another of its labels, `x.y'.  Therefore
-$\eta'$ is not a proper relabelling for $r$.  Note that we cannot read
-the improperness off $\eta'$ alone.  $\eta'$ is a proper relabelling
-for the record $r'$:
-\begin{quote}
-\record{\field{x}{\record{\field{x}{$a$}}}\\
-        \field{y}{\record{\field{x}{$c$}}}}
-\end{quote}
-$[r']_{\eta'}$ is the record:
-\begin{quote}
-\record{\field{x}{$a$}\\
-        \field{y}{\record{\field{x}{$c$}}}}
-\end{quote}
+% Now let us consider a case where the relabelling is not proper.
+% Suppose we start with the same record, $r$, as above but take a new
+% relabelling, $\eta'$:
+% \begin{quote}
+% x.x $\leadsto$ x
+% \end{quote}
+% Now $\eta'*\varphi(r)$ is the record
+% \begin{quote}
+% \record{\field{x}{$a$}\\
+%         \field{x.y}{$b$}\\
+%         \field{y.x}{$c$}}
+% \end{quote}
+% However, the expansion $\varphi^-(\eta'*\varphi(r))$ is the set of
+% ordered pairs:
+% \begin{quote}
+% $\{\langle\mathrm{x},a\rangle,
+%    \langle\mathrm{x},\{\langle\mathrm{y},b\rangle\}\rangle,
+%    \langle\mathrm{y},\{\langle\mathrm{x},c\rangle\}\rangle\}$
+% \end{quote}
+% which is not a record since it is not the graph of a function:  it has
+% two ordered pairs whose first member is `x'.  We can read the problem
+% already from the flattened record since it has a label, `x', which is a
+% proper initial segment of another of its labels, `x.y'.  Therefore
+% $\eta'$ is not a proper relabelling for $r$.  Note that we cannot read
+% the improperness off $\eta'$ alone.  $\eta'$ is a proper relabelling
+% for the record $r'$:
+% \begin{quote}
+% \record{\field{x}{\record{\field{x}{$a$}}}\\
+%         \field{y}{\record{\field{x}{$c$}}}}
+% \end{quote}
+% $[r']_{\eta'}$ is the record:
+% \begin{quote}
+% \record{\field{x}{$a$}\\
+%         \field{y}{\record{\field{x}{$c$}}}}
+% \end{quote}
 
 
 
-We use $\eta^-$ to represent the inverse of the labelling $\eta$.
-That is, for any $\pi$, $\pi'$, $\pi\leadsto\pi'$ is in $\eta$ just in
-case $\pi'\leadsto\pi$ is in $\eta^-$. 
-\paragraph{Claim:} If
-$\eta$ is a proper relabelling for $r$ limited to $\varphi(r)$, then $\eta^-$ is a proper
-relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  
+% We use $\eta^-$ to represent the inverse of the labelling $\eta$.
+% That is, for any $\pi$, $\pi'$, $\pi\leadsto\pi'$ is in $\eta$ just in
+% case $\pi'\leadsto\pi$ is in $\eta^-$. 
+% \paragraph{Claim:} If
+% $\eta$ is a proper relabelling for $r$ limited to $\varphi(r)$, then $\eta^-$ is a proper
+% relabelling for $[r]_\eta$ and $[[r]_\eta]_{\eta^-}=r$.  
 
-The
-requirement that $\eta$ is limited to $\varphi(r)$ is important here
-since it prevents cases where $\eta^-$ would change labelling not
-changed by $\eta$.  Consider an example where $\eta$ is 
-\begin{quote}
-x $\leadsto$ z\\
-x.x $\leadsto$ y
-\end{quote}
-and $r$ is
-\begin{quote}
-\record{\field{x}{\record{\field{x}{$a$}}}\\
-        \field{z}{$b$}}
-\end{quote}
-Note that in this case $\eta$ is \textit{not} limited to $\varphi(r)$ whose
-labels are `x.x' and `z' but do not include `x'.  $\eta$ is
-proper for $r$ and $[r]_\eta$ is
-\begin{quote}
-\record{\field{y}{$a$}\\
-        \field{z}{$b$}}
-\end{quote}
-Now consider $\eta^-$ which is
-\begin{quote}
-z $\leadsto$ x\\
-y $\leadsto$ x.x
-\end{quote}
-The relabelling of $[r]_\eta$ by $\eta^-$ will be the set of ordered
-pairs
-\begin{quote}
-$\{\langle\mathrm{x},b\rangle,\langle\mathrm{x},\{\langle\mathrm{x},a\rangle\}\rangle\}$
-\end{quote}
-which is not a record (since `x' occurs twice as a label).  Hence in
-this case $\eta^-$ is not a proper relabelling for $[r]_\eta$ and
-$[[r]_\eta]_{\eta^-}$ is not identical with $r$.  The reason for this
-is that $\eta^-$ relabels a field that was not relabelled by $\eta$.
-Hence it is doing more than simply ``undoing'' the relabelling
-performed by $\eta$.  This state of affairs will be prevented by
-requiring that $\eta$ is limited to $r$, for example by removing `x
-$\leadsto$ z' from $\eta$.  Only paths changed by $\eta$ will be
-changed back by $\eta^-$ and our claim will hold true.
+% The
+% requirement that $\eta$ is limited to $\varphi(r)$ is important here
+% since it prevents cases where $\eta^-$ would change labelling not
+% changed by $\eta$.  Consider an example where $\eta$ is 
+% \begin{quote}
+% x $\leadsto$ z\\
+% x.x $\leadsto$ y
+% \end{quote}
+% and $r$ is
+% \begin{quote}
+% \record{\field{x}{\record{\field{x}{$a$}}}\\
+%         \field{z}{$b$}}
+% \end{quote}
+% Note that in this case $\eta$ is \textit{not} limited to $\varphi(r)$ whose
+% labels are `x.x' and `z' but do not include `x'.  $\eta$ is
+% proper for $r$ and $[r]_\eta$ is
+% \begin{quote}
+% \record{\field{y}{$a$}\\
+%         \field{z}{$b$}}
+% \end{quote}
+% Now consider $\eta^-$ which is
+% \begin{quote}
+% z $\leadsto$ x\\
+% y $\leadsto$ x.x
+% \end{quote}
+% The relabelling of $[r]_\eta$ by $\eta^-$ will be the set of ordered
+% pairs
+% \begin{quote}
+% $\{\langle\mathrm{x},b\rangle,\langle\mathrm{x},\{\langle\mathrm{x},a\rangle\}\rangle\}$
+% \end{quote}
+% which is not a record (since `x' occurs twice as a label).  Hence in
+% this case $\eta^-$ is not a proper relabelling for $[r]_\eta$ and
+% $[[r]_\eta]_{\eta^-}$ is not identical with $r$.  The reason for this
+% is that $\eta^-$ relabels a field that was not relabelled by $\eta$.
+% Hence it is doing more than simply ``undoing'' the relabelling
+% performed by $\eta$.  This state of affairs will be prevented by
+% requiring that $\eta$ is limited to $r$, for example by removing `x
+% $\leadsto$ z' from $\eta$.  Only paths changed by $\eta$ will be
+% changed back by $\eta^-$ and our claim will hold true.
 
 \paragraph{Using records as assignments}\mbox{}
 
@@ -1618,10 +1613,11 @@ If $r$ is a record, $\pi$ is $\ell_0.\ell_1.\ldots.\ell_n$ where
       \end{enumerate}
     \end{quote}
 
-    If $r_1$ is a record and $r_2$ is a record such
-$\mathrm{tpaths}(r_2)=\{\pi_1,\ldots,\pi_n\}$, then $r_1[r_2]$ is
+    If $r_1$ is a record and $r_2$ is a record such that
+    $\mathrm{tpaths}(r_2)=\{\pi_1,\ldots,\pi_n\}$, then $r_1[r_2]$ is
+    \begin{quote}
 $r_1[\pi_1=r_2.\pi_1]\ldots[\pi_n=r_2.\pi_n]$
-
+\end{quote}
 
 \subsection{Record types}
 \label{app:rectypes}
@@ -1683,45 +1679,34 @@ and \textbf{RType} $\subseteq$ \textbf{Type}
 % set of fields.\footnote{This terminology was not introduced in
 % \cite{Cooper2012}.}\label{pg:proprectype}
 
-The notion of paths for record types is the set of paths viewing the
-record type as a labelled set but without those paths which include
-distinguished labels used in the labelled sets for non-record
-structures except in the case of those used in meet types:
-`$\mathrm{conj}$', `$\mathrm{conj}_1$' and `$\mathrm{conj}_2$'.  We
-include modified versions of such paths where such labels have been
-removed.  For example, the record type (assuming \textit{Sit} is some
-basic type):
-\begin{quote}
-  $\{\text{RT}, \langle\text{e},
-  \{\langle\text{conj}_1,
-  \{\text{RT}, \langle\text{x},\textit{Ind}\rangle,
-  \langle\text{y},\textit{Ind}\rangle,
-  \langle\text{e},\langle\lambda v_1\!\!:\!\!\textit{Ind},
-  \lambda v_2\!\!:\!\!\textit{Ind} .
-  \text{hug}(v_1,v_2),
-  \langle\text{x},\text{y}\rangle\rangle\rangle\}\rangle,
-  \langle\text{conj}_2,\textit{Sit}\rangle\}\rangle\}$
+ If  $T$ is a record type, then  (Chapter~\ref{ch:percint}, p.~\pageref{ex:paths-rectype})
+\begin{quote} 
+ 
+
+  $\pi\in\mathrm{paths}_{\text{rectype}}(T)$ iff for any $r:T$, $\pi\in\mathrm{paths}_{\text{rec}}(r)$ 
 \end{quote}
-which we normally represent as
+and
 \begin{quote}
-  \record{\tfield{e}{\record{
-        \tfield{x}{\textit{Ind}}\\
-        \tfield{y}{\textit{Ind}}\\
-        \tfield{e}{hug(x,y)}} $\wedge$ \textit{Sit}}}
-\end{quote}
-has the paths
-\begin{quote}
-  \{e, e.x, e.y, e.e\}
-\end{quote}
+ $\pi\in\mathrm{tpaths}_{\text{rectype}}(T)$ iff for any $r:T$, $\pi\in\mathrm{tpaths}_{\text{rec}}(r)$  
+ 
+\end{quote} 
+
+% The notion of paths for record types is the set of paths viewing the
+% record type as a labelled set but without those paths which include
+% distinguished labels used in the labelled sets for non-record
+% structures except in the case of those used in meet types:
+% `$\mathrm{conj}$', `$\mathrm{conj}_1$' and `$\mathrm{conj}_2$'.  We
+% include modified versions of such paths where such labels have been
+% removed.  
 
           
           
   
 
 
-This gives us non-dependent record types in a system of complex types.
-We can extend this to intensional systems of complex types (with
-stratification).  
+% This gives us non-dependent record types in a system of complex types.
+% We can extend this to intensional systems of complex types (with
+% stratification).  
 
 % We can introduce a limited
 % dependency into a system of complex types with record types by
@@ -1877,6 +1862,8 @@ we sometimes use a convenient notation representing e.g.
 \begin{display}
 love($\pi_1,\pi_2$)
 \end{display}
+
+@@\todo{Move what follows into Ch. 1?}
 
 Our systems now allow both function types and dependent record types
 and allow dependent record types to be arguments to functions.  We
