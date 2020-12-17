@@ -69,6 +69,9 @@ $\pi_1$ is a \textit{proper initial subpath}
     $\pi_1<\pi_2$, just in case there is
     some $\pi$ such that $\pi_2=\pi_1.\pi$.
 
+If $X$ is a labelled set, then \textit{$x$ is a component of $X$},
+$x\varepsilon X$, iff there some $\pi\in\mathrm{paths}(X)$ such that $X.\pi=x$.
+
 We characterize \textit{the subtraction of a path, $\pi$, from a
   labelled set $X$}, $X\ominus\pi$,  (Chapter~\ref{ch:quant},
   p.~\pageref{ex:subtraction-labelled-sets}) as follows: 
@@ -95,6 +98,8 @@ We characterize \textit{the subtraction of a path, $\pi$, from a
   \end{quote}
 
 \end{enumerate}
+
+
 
 
 If $X$ is a labelled set and
@@ -171,6 +176,39 @@ $\pi_1\leadsto\pi'_1$\\
 \vdots\\
 $\pi_n\leadsto\pi'_n$
 \end{quote}
+
+The remaining definitions relating to labelled sets are for the
+support of dependent record types.
+
+An \textit{indexed value, $v$, in a labelled set, $X$} is a pair
+\begin{quote}
+  $\langle f,\langle\pi_1,\ldots,\pi_n\rangle\rangle$
+\end{quote}
+such that for some $\pi$ in $\mathrm{paths}(X)$
+\begin{enumerate}
+  
+\item $X.\pi=v$
+  
+\item $f$ is a function with $n$ arguments
+  
+\item for $1\leq i\leq n$,
+  $\pi_i\in\mathrm{paths}(X)-\{\pi'|\pi'\leq\pi\}$
+\end{enumerate}
+
+A \textit{labelled set with path dependencies} is a labelled set, $X$,
+which has a component which is an indexed value in $X$.
+
+A \textit{parametric labelled set} is a function, $f$, whose range is
+a family of labelled sets.  If $f$ requires $n$ arguments then
+$\langle f, \langle i_1,\ldots,i_n\rangle\rangle$ is an
+\textit{indexed labelled set} indexed by $\langle
+i_1,\ldots,\i_n\rangle$.  If $X=\langle f, \langle
+i_1,\ldots,i_n\rangle\rangle$ is an indexed labelled set, then
+$\mathrm{labels}(X)$ is $\mathrm{labels}(f(a_1,\ldots,a_n))$ where
+$a_1,\ldots,a_n$ are appropriate arguments to $f$. \todo{Need to
+  restrict $f$ so there will be a unique set of labels}
+
+@@
 
 
 
