@@ -1,9 +1,13 @@
 \renewcommand{\thechapter}{}
-\chapter{TTR}
+\chapter{}{}{}
 \label{app:ttr}
 \renewcommand{\thesection}{\arabic{section}}
+
+\section*{TTR}
 Unless otherwise stated this is the version of TTR presented in 
 \cite{Cooper2012}.
+
+
 
  \section{Underlying set theory}
  \label{app:sets}
@@ -21,12 +25,30 @@ members of sets).  We will assume that among the urelements is a countably infin
 set which is designated as the set of \textit{labels}. In addition we assume
 that among the urelements there is a finite or countably infinite set,
 disjoint from the set of labels, designated as the set of
-\textit{flavours}.  An \textit{(unflavoured) labelled set}
+\textit{flavours}.  Finally, we assume that there is a countably infinite set
+of urelements, \fbox{0}, \fbox{1},\ldots, called indices, which is
+disjoint from both the set of labels and the set of flavours.
+
+A \textit{field} is either
+\begin{quote}
+  an ordered pair $\langle\ell,a\rangle$ where
+  $\ell$ is a label and $a$ is not a label or a flavour
+\end{quote}
+or
+\begin{quote}
+  an ordered triple $\langle\ell,a,i\rangle$ where
+  $\langle\ell,a\rangle$ is a field and $i$ is an index
+\end{quote}
+
+
+An \textit{(unflavoured) labelled set}
 (Chapter~\ref{ch:percint}, p.~\pageref{sec:labelled-sets}) is a set
-of ordered pairs whose first member is a label and whose second
-element is either an urelement which is not a label or a set (possibly a labelled
-set), such that no more than one ordered pair can contain any
+of fields% ordered pairs whose first member is a label and whose second
+% element is either an urelement which is not a label or a set (possibly a labelled
+% set)
+such that no more than one field can contain any
 particular label as its first member.  This means that a labelled set
+whose members are all ordered pairs
 is the traditional set theoretic construction of an extensional
 function from a set of labels onto some set. A \textit{flavoured
 labelled set} is an unflavoured labelled set, $X$, with the addition of
@@ -34,13 +56,14 @@ some flavour, $\mathfrak{f}$, that is, $X\cup\{\mathfrak{f}\}$. We use
 flavours when we need to distinguish objects which correspond to the
 same set of ordered pairs.
 
-We refer to the first members of the pairs in a
+We refer to the first members of the fields in a
 labelled set (flavoured or unflavoured) as \textit{labels} used in the labelled set and we will refer to
-the second members of the ordered pairs as the \textit{labelled
+the second members of the fields as the \textit{labelled
   elements} of the labelled set.  If $X$ is a labelled set we use
 $\mathrm{labels}(X)$ to represent the set $\{\ell\mid\exists 
-x\ \langle\ell,x\rangle\in X\}$, the left projection of $X$.  If
-$\ell\in\mathrm{labels}(X)$ and $\langle\ell,v\rangle\in X$ then we
+x,i\ \langle\ell,x\rangle\in X\text{ or }\langle\ell,x,i\rangle\in X\}$, the left projection of $X$.  If
+$\ell\in\mathrm{labels}(X)$ and $\langle\ell,v\rangle\in X$ or
+$\langle\ell,v,i\rangle\in X$ for some $i$, then we
 use $X.\ell$ to represent $v$.  We characterize the set of
 \textit{paths} in a labelled set, $\mathrm{paths}(X)$ by the following
 inductive definition:
@@ -177,38 +200,38 @@ $\pi_1\leadsto\pi'_1$\\
 $\pi_n\leadsto\pi'_n$
 \end{quote}
 
-The remaining definitions relating to labelled sets are for the
-support of dependent record types.
+% The remaining definitions relating to labelled sets are for the
+% support of dependent record types.
 
-An \textit{indexed value, $v$, in a labelled set, $X$} is a pair
-\begin{quote}
-  $\langle f,\langle\pi_1,\ldots,\pi_n\rangle\rangle$
-\end{quote}
-such that for some $\pi$ in $\mathrm{paths}(X)$
-\begin{enumerate}
+% An \textit{indexed value, $v$, in a labelled set, $X$,} is a pair
+% \begin{quote}
+%   $\langle f,\langle\pi_1,\ldots,\pi_n\rangle\rangle$
+% \end{quote}
+% such that for some $\pi$ in $\mathrm{paths}(X)$
+% \begin{enumerate}
   
-\item $X.\pi=v$
+% \item $X.\pi=v$
   
-\item $f$ is a function with $n$ arguments
+% \item $f$ is a function with $n$ arguments
   
-\item for $1\leq i\leq n$,
-  $\pi_i\in\mathrm{paths}(X)-\{\pi'|\pi'\leq\pi\}$
-\end{enumerate}
+% \item for $1\leq i\leq n$,
+%   $\pi_i\in\mathrm{paths}(X)-\{\pi'|\pi'\leq\pi\}$
+% \end{enumerate}
 
-A \textit{labelled set with path dependencies} is a labelled set, $X$,
-which has a component which is an indexed value in $X$.
+% A \textit{labelled set with path dependencies} is a labelled set, $X$,
+% which has a component which is an indexed value in $X$.
 
-A \textit{parametric labelled set} is a function, $f$, whose range is
-a family of labelled sets.  If $f$ requires $n$ arguments then
-$\langle f, \langle i_1,\ldots,i_n\rangle\rangle$ is an
-\textit{indexed labelled set} indexed by $\langle
-i_1,\ldots,\i_n\rangle$.  If $X=\langle f, \langle
-i_1,\ldots,i_n\rangle\rangle$ is an indexed labelled set, then
-$\mathrm{labels}(X)$ is $\mathrm{labels}(f(a_1,\ldots,a_n))$ where
-$a_1,\ldots,a_n$ are appropriate arguments to $f$. \todo{Need to
-  restrict $f$ so there will be a unique set of labels}
+% A \textit{parametric labelled set} is a function, $f$, whose range is
+% a family of labelled sets.  If $f$ requires $n$ arguments then
+% $\langle f, \langle i_1,\ldots,i_n\rangle\rangle$ is an
+% \textit{indexed labelled set} indexed by $\langle
+% i_1,\ldots,\i_n\rangle$.  If $X=\langle f, \langle
+% i_1,\ldots,i_n\rangle\rangle$ is an indexed labelled set, then
+% $\mathrm{labels}(X)$ is $\mathrm{labels}(f(a_1,\ldots,a_n))$ where
+% $a_1,\ldots,a_n$ are appropriate arguments to $f$. \todo{Need to
+%   restrict $f$ so there will be a unique set of labels}
 
-@@
+
 
 
 
@@ -1901,7 +1924,8 @@ we sometimes use a convenient notation representing e.g.
 love($\pi_1,\pi_2$)
 \end{display}
 
-@@\todo{Move what follows into Ch. 1?}
+@@\todo{Move what follows into Ch. 1?  Move a redefinition of unique
+  identifier notation here and use for $\beta$-conversion?}
 
 Our systems now allow both function types and dependent record types
 and allow dependent record types to be arguments to functions.  We
