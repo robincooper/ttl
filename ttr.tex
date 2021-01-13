@@ -1,5 +1,6 @@
 \renewcommand{\thechapter}{}
 \chapter{}{}{}
+%\chapter{Appendix}
 \label{app:ttr}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -1924,202 +1925,206 @@ we sometimes use a convenient notation representing e.g.
 love($\pi_1,\pi_2$)
 \end{display}
 
-@@\todo{Move what follows into Ch. 1?  Move a redefinition of unique
-  identifier notation here and use for $\beta$-conversion?}
+% @@\todo{Move what follows into Ch. 1?  Move a redefinition of unique
+%   identifier notation here and use for $\beta$-conversion?}
 
-Our systems now allow both function types and dependent record types
-and allow dependent record types to be arguments to functions.  We
-have to be careful when considering what the result of applying a
-function to a dependent record type should be.  Consider the following
-simple example:
-\begin{display}
-$\lambda
-v_0:$\textit{RecType} . \smallrecord{\smalltfield{c$_0$}{$v_0$}}
-\end{display}
-What should be the result of applying this function to the record type
-\begin{display}
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
-          $\langle$x$\rangle\rangle$}}
-\end{display}
-Given normal assumptions about function application the result would
-be
-\begin{display}
-\record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
-          $\langle$x$\rangle\rangle$}}}} (incorrect!)
-\end{display}
-but this would be incorrect.  In fact it is not a well-formed record
-type since x is not a path in it.  Instead the result should be 
-\begin{display}
-\record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
-          $\langle$c$_0$.x$\rangle\rangle$}}}}
-\end{display}
-where the path from the top of the record type is specified.  However,
-in the abbreviatory notation we write just `x' when the label is used
-as an argument and interpret this as the path from the top of the
-record type to the field labelled `x' in the local record type.  Thus
-we will write
-\begin{display}
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{dog(x)}}
-\end{display}
-(where the `x' in `dog(x)' signifies the path consisting of just the
-single label `x') and
-\begin{display}
-\record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{dog(x)}}}}
-\end{display}
-(where the `x' in `dog(x)' signifies the path from the top of the
-record type down to `x' in the local
-record type, that is, `c$_0$.x').\footnote{This convention of
-  representing the path from the top of the record type to the
-  ``local'' field by the final label on the path is new since \cite{Cooper2012}.}
+% [This is just wrong.  The paths in type only start from the level at
+% which the dependent field is placed.  But what is the consequence for relabelling?]
 
-Note
-that this adjustment of paths is only required when a record type is being
-substituted into a position that lies on a path within a resulting
-record type.  It will not, for example, apply in a case where a record
-type is to be substituted for an argument to a predicate such as when
-applying the function
-\begin{display}
-$\lambda v_0:$\textit{RecType} . \smallrecord{\tfield{c$_0$}{appear($v_0$)}}
-\end{display}
-to
-\begin{display}
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} . dog($v$),
-          $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} . approach($v$),
-          $\langle$x$\rangle\rangle$}}
-\end{display}
-where the position of $v_0$ is in an ``intensional context'', that is,
-as the argument to a predicate and there is no path to this position
-in the record type resulting from applying the function.  Here the
-result of the application is
-\begin{display}
-\record{\tfield{c$_0$}{appear(
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} . dog($v$),
-          $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} . approach($v$),
-          $\langle$x$\rangle\rangle$}}
-)}}
-\end{display}
-with no adjustment necessary to the paths representing the
-dependencies.\footnote{This record corresponds to the interpretation
-  of \textit{it appears that a dog is approaching}.}  (Note that `c$_0$.x' is not a path in this record
-type.) 
+% Our systems now allow both function types and dependent record types
+% and allow dependent record types to be arguments to functions.  We
+% have to be careful when considering what the result of applying a
+% function to a dependent record type should be.  Consider the following
+% simple example:
+% \begin{display}
+% $\lambda
+% v_0:$\textit{RecType} . \smallrecord{\smalltfield{c$_0$}{$v_0$}}
+% \end{display}
+% What should be the result of applying this function to the record type
+% \begin{display}
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
+%           $\langle$x$\rangle\rangle$}}
+% \end{display}
+% Given normal assumptions about function application the result would
+% be
+% \begin{display}
+% \record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
+%           $\langle$x$\rangle\rangle$}}}} (incorrect!)
+% \end{display}
+% but this would be incorrect.  In fact it is not a well-formed record
+% type since x is not a path in it.  Instead the result should be 
+% \begin{display}
+% \record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v_1:$\textit{Ind} . dog($v_1$),
+%           $\langle$c$_0$.x$\rangle\rangle$}}}}
+% \end{display}
+% where the path from the top of the record type is specified.  However,
+% in the abbreviatory notation we write just `x' when the label is used
+% as an argument and interpret this as the path from the top of the
+% record type to the field labelled `x' in the local record type.  Thus
+% we will write
+% \begin{display}
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{dog(x)}}
+% \end{display}
+% (where the `x' in `dog(x)' signifies the path consisting of just the
+% single label `x') and
+% \begin{display}
+% \record{\tfield{c$_0$}{\record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{dog(x)}}}}
+% \end{display}
+% (where the `x' in `dog(x)' signifies the path from the top of the
+% record type down to `x' in the local
+% record type, that is, `c$_0$.x').\footnote{This convention of
+%   representing the path from the top of the record type to the
+%   ``local'' field by the final label on the path is new since \cite{Cooper2012}.}
 
-Suppose that we wish to represent a type which requires that there is
-some dog such that it appears to be approaching (that is a \textit{de
-  re} reading).  In the abbreviatory notation we might be tempted to
-write
-\begin{display}
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{dog(x)} \\
-        \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{approach(x)}})}}
-      (incorrect!)
-\end{display}
-corresponding to
-\begin{display}
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
-          $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{$\langle\lambda
-              v$:\textit{Ind} . approach($v$),
-              $\langle$x$\rangle\rangle$}})}} (incorrect!)
-\end{display}
-This is, however, incorrect since it refers to a path `x' in the type
-which is the argument to `appear' which does not exist.  Instead we
-need to refer to the path `x' in the record type containing the field
-labelled `c$_0$':
-\begin{display}
- \record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
-          $\langle$x$\rangle\rangle$} \\
-        \tfield{c$_0$}{$\langle\lambda v$:\textit{Ind} . appear(\record{\tfield{c$_2$}{approach($v$)}}),
-              $\langle$x$\rangle\rangle$}}
-\end{display}
-In the abbreviatory notation we will use `$\Uparrow$' to indicate that
-the path referred to is in the ``next higher'' record
-type\footnote{This notation is new since \cite{Cooper2012}.}:
-\begin{display}
-\record{\tfield{x}{\textit{Ind}} \\
-        \tfield{c$_1$}{dog(x)} \\
-        \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{approach($\Uparrow$x)}})}}
-\end{display}
+% Note
+% that this adjustment of paths is only required when a record type is being
+% substituted into a position that lies on a path within a resulting
+% record type.  It will not, for example, apply in a case where a record
+% type is to be substituted for an argument to a predicate such as when
+% applying the function
+% \begin{display}
+% $\lambda v_0:$\textit{RecType} . \smallrecord{\tfield{c$_0$}{appear($v_0$)}}
+% \end{display}
+% to
+% \begin{display}
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} . dog($v$),
+%           $\langle$x$\rangle\rangle$} \\
+%         \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} . approach($v$),
+%           $\langle$x$\rangle\rangle$}}
+% \end{display}
+% where the position of $v_0$ is in an ``intensional context'', that is,
+% as the argument to a predicate and there is no path to this position
+% in the record type resulting from applying the function.  Here the
+% result of the application is
+% \begin{display}
+% \record{\tfield{c$_0$}{appear(
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v:$\textit{Ind} . dog($v$),
+%           $\langle$x$\rangle\rangle$} \\
+%         \tfield{c$_2$}{$\langle\lambda v:$\textit{Ind} . approach($v$),
+%           $\langle$x$\rangle\rangle$}}
+% )}}
+% \end{display}
+% with no adjustment necessary to the paths representing the
+% dependencies.\footnote{This record corresponds to the interpretation
+%   of \textit{it appears that a dog is approaching}.}  (Note that `c$_0$.x' is not a path in this record
+% type.) 
 
-These matters arise as a result of our choice of using paths to
-represent dependencies in record types (rather than, for example,
-introducing additional unique identifiers to keep track of the
-positions within a record type as has been suggested by Thierry Coquand).  It seems like a matter of implementation rather than a matter
-of substance and it is straightforward to define a path-aware notion
-of substitution which can be used in the definition of what it means
-to apply a TTR function to an argument.  If $f$ is a function
-represented by $\lambda v:T\ .\ \varphi$ and $\alpha$ is the representation
-of an object of type $T$, then the result of applying $f$ to $\alpha$,
-$f(\alpha)$, is represented by Subst($\alpha$,$v$,$\varphi$,$\emptyset$),
-that is, the result of substituting $\alpha$ for $v$ in $\varphi$ with
-respect to the empty path where for arbitrary
-$\alpha,v,\varphi,\pi$,
-Subst($\alpha$,$v$,$\varphi$,$\pi$) is defined as 
-\begin{enumerate} 
+% Suppose that we wish to represent a type which requires that there is
+% some dog such that it appears to be approaching (that is a \textit{de
+%   re} reading).  In the abbreviatory notation we might be tempted to
+% write
+% \begin{display}
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{dog(x)} \\
+%         \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{approach(x)}})}}
+%       (incorrect!)
+% \end{display}
+% corresponding to
+% \begin{display}
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
+%           $\langle$x$\rangle\rangle$} \\
+%         \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{$\langle\lambda
+%               v$:\textit{Ind} . approach($v$),
+%               $\langle$x$\rangle\rangle$}})}} (incorrect!)
+% \end{display}
+% This is, however, incorrect since it refers to a path `x' in the type
+% which is the argument to `appear' which does not exist.  Instead we
+% need to refer to the path `x' in the record type containing the field
+% labelled `c$_0$':
+% \begin{display}
+%  \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{$\langle\lambda v$:\textit{Ind} . dog($v$),
+%           $\langle$x$\rangle\rangle$} \\
+%         \tfield{c$_0$}{$\langle\lambda v$:\textit{Ind} . appear(\record{\tfield{c$_2$}{approach($v$)}}),
+%               $\langle$x$\rangle\rangle$}}
+% \end{display}
+% In the abbreviatory notation we will use `$\Uparrow$' to indicate that
+% the path referred to is in the ``next higher'' record
+% type\footnote{This notation is new since \cite{Cooper2012}.}:
+% \begin{display}
+% \record{\tfield{x}{\textit{Ind}} \\
+%         \tfield{c$_1$}{dog(x)} \\
+%         \tfield{c$_0$}{appear(\record{\tfield{c$_2$}{approach($\Uparrow$x)}})}}
+% \end{display}
+
+% These matters arise as a result of our choice of using paths to
+% represent dependencies in record types (rather than, for example,
+% introducing additional unique identifiers to keep track of the
+% positions within a record type as has been suggested by Thierry Coquand).  It seems like a matter of implementation rather than a matter
+% of substance and it is straightforward to define a path-aware notion
+% of substitution which can be used in the definition of what it means
+% to apply a TTR function to an argument.  If $f$ is a function
+% represented by $\lambda v:T\ .\ \varphi$ and $\alpha$ is the representation
+% of an object of type $T$, then the result of applying $f$ to $\alpha$,
+% $f(\alpha)$, is represented by Subst($\alpha$,$v$,$\varphi$,$\emptyset$),
+% that is, the result of substituting $\alpha$ for $v$ in $\varphi$ with
+% respect to the empty path where for arbitrary
+% $\alpha,v,\varphi,\pi$,
+% Subst($\alpha$,$v$,$\varphi$,$\pi$) is defined as 
+% \begin{enumerate} 
  
-\item extend-paths($\alpha$,$\pi$), if $\varphi$ is $v$ 
+% \item extend-paths($\alpha$,$\pi$), if $\varphi$ is $v$ 
  
-\item $\varphi$, if $\varphi$ is of the form $\lambda v:T\ .\ \zeta$, for some
-  $T$ and $\zeta$ (i.e. don't do any substitution if $v$ is bound
-  within $\varphi$)
+% \item $\varphi$, if $\varphi$ is of the form $\lambda v:T\ .\ \zeta$, for some
+%   $T$ and $\zeta$ (i.e. don't do any substitution if $v$ is bound
+%   within $\varphi$)
 
-\item $\lambda u:T$ . Subst($\alpha$,$v$,$\zeta$,$\pi$), if $\varphi$ is
-  of the form $\lambda u:T . \zeta$ and $u$ is not $v$.
+% \item $\lambda u:T$ . Subst($\alpha$,$v$,$\zeta$,$\pi$), if $\varphi$ is
+%   of the form $\lambda u:T . \zeta$ and $u$ is not $v$.
 
-\item
-  \record{\tfield{$\ell_1$}{Subst($\alpha$,$v$,$T_1$,$\pi.\ell_1$)} \\
-          \ldots \\
-          \tfield{$\ell_n$}{Subst($\alpha$,$v$,$T_n$,$\pi.\ell_n$)}},
-        if $\varphi$ is \record{\tfield{$\ell_1$}{$T_1$} \\
-                             \ldots \\ 
-                             \tfield{$\ell_n$}{$T_n$}}
+% \item
+%   \record{\tfield{$\ell_1$}{Subst($\alpha$,$v$,$T_1$,$\pi.\ell_1$)} \\
+%           \ldots \\
+%           \tfield{$\ell_n$}{Subst($\alpha$,$v$,$T_n$,$\pi.\ell_n$)}},
+%         if $\varphi$ is \record{\tfield{$\ell_1$}{$T_1$} \\
+%                              \ldots \\ 
+%                              \tfield{$\ell_n$}{$T_n$}}
 
-\item $P$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
-  if $\alpha$ is $P(\beta_1,\ldots,\beta_n)$ for some predicate $P$
+% \item $P$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
+%   if $\alpha$ is $P(\beta_1,\ldots,\beta_n)$ for some predicate $P$
 
-% \item $O$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
-%   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
+% % \item $O$(Subst($\alpha$,$v$,$\beta_1$,$\pi$),\ldots,Subst($\alpha$,$v$,$\beta_n$,$\pi$)),
+% %   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
 
-\item $\varphi$ otherwise
+% \item $\varphi$ otherwise
  
-\end{enumerate} 
+% \end{enumerate} 
  
-extend-paths($\alpha$,$\pi$) is
-\begin{enumerate} 
+% extend-paths($\alpha$,$\pi$) is
+% \begin{enumerate} 
  
-\item $\langle f, \langle \pi.\pi_1,\ldots,\pi.\pi_n\rangle\rangle$,
-  if $\alpha$ is $\langle f, \langle \pi_1,\ldots,\pi_n\rangle\rangle$ 
+% \item $\langle f, \langle \pi.\pi_1,\ldots,\pi.\pi_n\rangle\rangle$,
+%   if $\alpha$ is $\langle f, \langle \pi_1,\ldots,\pi_n\rangle\rangle$ 
  
-\item \record{\tfield{$\ell_1$}{extend-paths($T_1,\pi$)} \\
-              \ldots \\
-              \tfield{$\ell_n$}{extend-paths($T_n,\pi$)}} if $\alpha$
-            is \record{\tfield{$\ell_1$}{$T_1$} \\
-                       \ldots \\
-                       \tfield{$\ell_n$}{$T_n$}}
+% \item \record{\tfield{$\ell_1$}{extend-paths($T_1,\pi$)} \\
+%               \ldots \\
+%               \tfield{$\ell_n$}{extend-paths($T_n,\pi$)}} if $\alpha$
+%             is \record{\tfield{$\ell_1$}{$T_1$} \\
+%                        \ldots \\
+%                        \tfield{$\ell_n$}{$T_n$}}
 
-\item
-  $P$(extend-paths($\beta_1,\pi$),\ldots,extend-paths($\beta_n,\pi$)),
-  if $\alpha$ is $P(\beta_1,\ldots,\beta_n)$ for some predicate $P$
+% \item
+%   $P$(extend-paths($\beta_1,\pi$),\ldots,extend-paths($\beta_n,\pi$)),
+%   if $\alpha$ is $P(\beta_1,\ldots,\beta_n)$ for some predicate $P$
 
-% \item $O$(extend-paths($\beta_1,\pi$),\ldots,extend-paths($\beta_n,\pi$)),
-%   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
+% % \item $O$(extend-paths($\beta_1,\pi$),\ldots,extend-paths($\beta_n,\pi$)),
+% %   if $\alpha$ is $O(\beta_1,\ldots,\beta_n)$ for some operator symbol $O$
 
-\item $\alpha$, otherwise
+% \item $\alpha$, otherwise
  
-\end{enumerate} 
+% \end{enumerate} 
 
 
-\section{Merges of record types}
+
+\subsection{Merges of record types}
 \label{app:merge}
 
 
@@ -2324,8 +2329,8 @@ $\lambda r\!:\!T_1\ .\ T_2(r)$ \d{\d{$\wedge$}} $\lambda r\!:\!T_3\ .\ T_4(r)$
 denotes the function $\lambda r\!:\!T_1$\d{$\wedge$}$T_3\ .\
 T_2(r)$\d{$\wedge$}$T_4(r)$.
 
-\paragraph{Constructing fixed point types for functions which return
-  types} (Chapter~\ref{ch:commonnouns}, p.~\pageref{pg:fixedpointtype-discussion}ff.)
+\subsection{Constructing fixed point types for functions which return
+  record types} (Chapter~\ref{ch:commonnouns}, p.~\pageref{pg:fixedpointtype-discussion}ff.)
 \label{pg:fixedpointtype}
 
 % If, for
@@ -3402,7 +3407,9 @@ then
 % some $\ell$, $T_1$ and $T_2$, then the result of \textit{merging} the two
 % \textit{fields} is $\langle\ell,T_1$\d{$\wedge$}$T_2\rangle$.
 
-\section{Unique identifier notation for record types}
+@@
+
+\subsection{Unique identifier notation for record types}
 \label{app:unique-id}
 
 The unique identifier notation for a type, $T$, can be obtained from the official
