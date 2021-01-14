@@ -3407,7 +3407,6 @@ then
 % some $\ell$, $T_1$ and $T_2$, then the result of \textit{merging} the two
 % \textit{fields} is $\langle\ell,T_1$\d{$\wedge$}$T_2\rangle$.
 
-@@
 
 \subsection{Unique identifier notation for record types}
 \label{app:unique-id}
@@ -3464,7 +3463,78 @@ p.~\pageref{ex:unique-id-to-official}):
  
 \end{enumerate}
 
-\section{Dependency in record types and record type generalization}
+This notational conversion can be characterized also in terms of
+labelled sets:
+
+If $T$ is a dependent record type then a unique identifier correlate
+for $T$ is obtained by the following operations applied to $T$ in
+order.
+\begin{enumerate} 
+ 
+\item For each $\pi$ and $\ell$ occurring in a dependent value,
+  $v=\langle f,\langle\ldots,\pi.\ell,\ldots\rangle\rangle$ such that
+  for som $\pi'$ and $\ell'$, $T.\pi'.\ell'=v$ and
+  $T.\pi'.\pi.\ell=v'$, change the field $\langle\ell,v'\rangle$ to
+  $\langle\ell,v',\text{\fbox{$i$}}\rangle$, where \fbox{$i$} is a
+  fresh identifier, and replace $\pi.\ell$ in $v$ with \fbox{$i$}.  
+ 
+\item Replace any pair in a dependent field of the form
+  \begin{quote}
+    $\langle\lambda v_1\!:\!T_1\ .\ \ldots\ .\ \lambda v_n\!:\!T_n\ .\
+    \varphi\dep{v_1,\ldots,v_n},
+    \langle\text{\fbox{$i_1$}},\ldots,\text{\fbox{$i_n$}}\rangle\rangle$
+  \end{quote}
+  with
+  \begin{quote}
+    $\varphi\dep{\langle\text{\fbox{$i_1$}},T_1\rangle,\ldots,\langle\text{\fbox{$i_n$}},T_n\rangle}$
+  \end{quote}
+  
+ 
+\end{enumerate}
+
+The following procedure can be used for finding a dependent record
+type for a unique identifier correlate.
+\begin{enumerate} 
+ 
+\item If $X$ is a labelled set, then for each occurrence, $\xi$ of
+  $\langle\text{\fbox{$i$}},T\rangle$, for some $i$ and $T$, in $X$,
+  find the smallest labelled set, $\Delta$, such that
+  $\Delta\underline{\varepsilon}X$ and contains $\xi$ and
+  $\langle\ell,v,\text{\fbox{$i$}}\rangle$ for some $\ell$ and $v$.
+
+  Let $\pi_a$ be the path in $\Delta$ such that
+  $\Delta.\pi_a=\langle\ell,v,\text{\fbox{$i$}}\rangle$.
+
+  Let $\ell_d.\pi_d$ be the longest path in $\Delta$ (not containing a
+  reserved label) such that $\xi$ occurs in $\Delta.\ell_d.\pi_d$.
+
+  If $\Delta.\ell_d$ is an ordered pair
+  \begin{quote}
+    $\langle\lambda v_j\!:\!T_j\ .\
+    \varphi\dep{\langle\boxed{i},T\rangle},\langle\pi_1,\ldots,\pi_n\rangle\rangle$
+  \end{quote}
+  then replace $\Delta.\ell_d$ with
+  \begin{quote}
+    $\langle\lambda v_i\!:\!T\ .\ \lambda v_j\!:\!T_j\ .\
+    \varphi\dep{v_i},\langle\pi_1,\ldots,\pi_n,\pi_a\rangle\rangle$
+  \end{quote}
+  Otherwise if $\Delta.\ell_d$ is
+  $\varphi\dep{\langle\boxed{i},T\rangle}$, replace it with
+  \begin{quote}
+    $\langle\lambda v_i\!:\!T\ .\
+    \varphi\dep{v_i},\langle\pi_a\rangle\rangle$
+  \end{quote}
+  
+  
+ 
+\item  For any $\ell$, $v$ and $\boxed{i}$, replace any occurrence of
+  $\langle\ell,v,\boxed{i}\rangle$ in $X$ with $\langle\ell,v\rangle$.
+ 
+\end{enumerate} 
+  
+@@  
+
+\subsection{Dependency in record types and record type generalization}
 \label{app:dep-rectype}
 
 If $T$ is a record type, $\pi_1\in\mathrm{paths}(T)$ and
