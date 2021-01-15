@@ -1,10 +1,12 @@
 \renewcommand{\thechapter}{}
-\chapter{}{}{}
+\chapter{TTR}{}{}
 %\chapter{Appendix}
 \label{app:ttr}
 \renewcommand{\thesection}{\arabic{section}}
 
-\section*{TTR}
+
+
+%\section*{TTR}
 Unless otherwise stated this is the version of TTR presented in 
 \cite{Cooper2012}.
 
@@ -3530,12 +3532,21 @@ type for a unique identifier correlate.
 \item  For any $\ell$, $v$ and $\boxed{i}$, replace any occurrence of
   $\langle\ell,v,\boxed{i}\rangle$ in $X$ with $\langle\ell,v\rangle$.
  
-\end{enumerate} 
-  
-@@  
+\end{enumerate}   
 
 \subsection{Dependency in record types and record type generalization}
 \label{app:dep-rectype}
+\label{app:gen-rectypes}
+
+If $T$ : \textit{RecType}, $\ell\in\text{labels}(T)$ and
+$\langle\ell,T'\rangle\in T$ where $T'$: \textit{Type} (that is,
+$[\ell,T']$ is a non-dependent field in $T$), then \textit{the
+  generalization of $T$ to its $\ell$-field} (Chapter~\ref{ch:quant}, p.~\pageref{ex:gen-to-ell}, $T^\ell$, is
+\begin{quote}
+\record{\tfield{$\ell$}{$T'$}}
+\end{quote}
+(This simple definition is made more general in the definition of
+generalization to a path given below.)
 
 If $T$ is a record type, $\pi_1\in\mathrm{paths}(T)$ and
 $\pi_2\in\mathrm{tpaths}(T)$, then $\pi_2$ \textit{depends on} $\pi_1$
@@ -3573,7 +3584,7 @@ $\pi'\in\mathrm{tpaths}(T')$, $T'.\pi=T.\pi$.
 
 
 
-\section{Using records to restrict % and specify
+\subsection{Using records to restrict % and specify
   record types}
 \label{app:specrec}
 
@@ -3687,61 +3698,59 @@ $o\!\restriction\!r$ to represent the object $o$ restricted to $r$.
   
   
 We use a similar notation for restricted fields in record types as we
-do for manifest fields.  That is, we represent \nexteg{a} as
-\nexteg{b} in the case where $T$ is not a record type or a pair of a
+do for manifest fields.  That is, we represent
+\begin{quote}
+  \record{\tfield{$\ell$}{$T\!\restriction\!r$}}
+\end{quote}
+as
+\begin{quote}
+  \record{\rfield{$\ell$}{$r$}{$T$}}
+\end{quote}
+in the case where $T$ is not a record type or a pair of a
 dependent type and a sequence of paths.
-\begin{ex} 
-\begin{subex} 
- 
-\item \record{\tfield{$\ell$}{$T\!\restriction\!r$}} 
- 
-\item \record{\rfield{$\ell$}{$r$}{$T$}} 
- 
-\end{subex} 
-   
-\end{ex}
 
 
-\todo{The remaining versions of restriction are perhaps not necessary}If $T$ is a record type and $r$ is a record, then $T\!\mid\!\restriction\! r$, the
-\textit{restriction} of $T$ by
-$r$ is the result
-of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
-$\ell$ is a label in $r$, with 
-\begin{enumerate}
-\item  $\langle\ell,T'\!\restriction\!r.\ell\rangle$\footnote{That is,
-    in an adaptation of our
-graphical notation for manifest fields, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
-replaced by \smallrecord{\smallrfield{$\ell$}{$r.\ell$}{$T'$}}}, if
-$T'$ is a type
-\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
-  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
-  paths of length $n$ and for any
-  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
-  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)\!\restriction\!r.\ell$
-\end{enumerate}
 
-A variant of this notion of restriction is default restriction
-which will only require restriction of fields which are not already
-restricted. If $T$ is a record type and $r$ is a record, then
-$T\drestr r$, the
-\textit{default restriction} of $T$ by
-$r$ is the result
-of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
-$\ell$ is a label in $r$, with 
-\begin{enumerate}
-\item  $\langle\ell,T'\!\restriction\!r.\ell\rangle$, if
-$T'$ is a type but not a restricted type. If $T'$ is a
-singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
-\item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
-  f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
-  paths of length $n$ and for any
-  $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
-  $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)\!\restriction\!r.\ell$ if $f(a_1)\ldots(a_n)$ is not a
-  restricted type. Otherwise, $f'(a_1)\ldots(a_n) =
-  f(a_1)\ldots(a_n)$.
-\end{enumerate}  
+% \todo{The remaining versions of restriction are perhaps not necessary}If $T$ is a record type and $r$ is a record, then $T\!\mid\!\restriction\! r$, the
+% \textit{restriction} of $T$ by
+% $r$ is the result
+% of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+% $\ell$ is a label in $r$, with 
+% \begin{enumerate}
+% \item  $\langle\ell,T'\!\restriction\!r.\ell\rangle$\footnote{That is,
+%     in an adaptation of our
+% graphical notation for manifest fields, \smallrecord{\smalltfield{$\ell$}{$T'$}} is
+% replaced by \smallrecord{\smallrfield{$\ell$}{$r.\ell$}{$T'$}}}, if
+% $T'$ is a type
+% \item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+%   f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+%   paths of length $n$ and for any
+%   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+%   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)\!\restriction\!r.\ell$
+% \end{enumerate}
+
+% A variant of this notion of restriction is default restriction
+% which will only require restriction of fields which are not already
+% restricted. If $T$ is a record type and $r$ is a record, then
+% $T\drestr r$, the
+% \textit{default restriction} of $T$ by
+% $r$ is the result
+% of replacing each field, $\langle \ell, T'\rangle$, in $T$ such that
+% $\ell$ is a label in $r$, with 
+% \begin{enumerate}
+% \item  $\langle\ell,T'\!\restriction\!r.\ell\rangle$, if
+% $T'$ is a type but not a restricted type. If $T'$ is a
+% singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
+% \item $\langle\ell,\langle f',\Pi\rangle\rangle$, if $T'=\langle
+%   f,\Pi\rangle$ where $f$ is a function and $\Pi$ is a sequence of
+%   paths of length $n$ and for any
+%   $a_1,\ldots,a_n$, $f'(a_1)\ldots(a_n)$ is defined iff
+%   $f(a_1)\ldots(a_n)$ is defined and $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)\!\restriction\!r.\ell$ if $f(a_1)\ldots(a_n)$ is not a
+%   restricted type. Otherwise, $f'(a_1)\ldots(a_n) =
+%   f(a_1)\ldots(a_n)$.
+% \end{enumerate}  
 
 
 % If $T$ is a record type and $r$ is a record, then $T\parallel r$, the
@@ -3831,8 +3840,8 @@ singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
 % \end{quote}
 % \end{quote}  
 
-\section{Generalizing record types}
-\label{app:gen-rectypes}
+%\section{Generalizing record types}
+%\label{app:gen-rectypes}
 
 % One way to make a record type more general is to pick out one of its
 % non-dependent fields.  Consider 
@@ -3848,17 +3857,9 @@ singleton type then $\langle \ell, T'\rangle$ is replaced by itself.
 % In general for a record type,  $T$, we will represent the generalization
 % of $T$ to its non-dependent $\ell$-field as $T^\ell$.  The general
 % definition of this is:
-\begin{quote}
-If $T$ : \textit{RecType}, $\ell\in\text{labels}(T)$ and
-$\langle\ell,T'\rangle\in T$ where $T'$: \textit{Type} (that is,
-$[\ell,T']$ is a non-dependent field in $T$), then \textit{the
-  generalization of $T$ to its $\ell$-field} (Chapter~\ref{ch:quant}, p.~\pageref{ex:gen-to-ell}, $T^\ell$, is
-\begin{quote}
-\record{\tfield{$\ell$}{$T'$}}
-\end{quote}
-\end{quote}
 
-\section{Path alignment within record types}
+
+\subsection{Path alignment within record types}
 \label{app:path-align-rectype}
 (Chapter~\ref{ch:underspec}, p.~\pageref{pg:path-alignment-types}) Suppose that $T$ is a record type and that $\pi_1$ and $\pi_2$ are
 paths in $T$.  Then we use $T_{\pi_1=\pi_2}$ to represent the type
@@ -4135,7 +4136,7 @@ This definition has as a consequence that `$^\frown$' is associative:
 $(T_1^\frown T_2)^\frown T_3=T_1^\frown(T_2^\frown T_3)$.  
 
 
-\subsection*{Concatenation of values on a defined path in a string of
+\subsection{Concatenation of values on a defined path in a string of
   records}
 
 This definition is introduced in Chapter~\ref{ch:gram}, p.~\pageref{pg:concat-i}.
@@ -4210,7 +4211,7 @@ concat$_i$($s[i].\pi$) to represent $\displaystyle\mathop{\mathrm{concat}}_{0\le
 % ``sam''$^{\frown}$``ran'' ' is the type of speech events which are
 % concatenations of an utterance of \textit{Sam} and an utterance of \textit{ran}.
 
-\subsection*{Predicates which relate strings}
+\subsection{Predicates which relate strings}
 \label{app:stringrels}
 
 We introduce a number of distinguished predicates which are used to
