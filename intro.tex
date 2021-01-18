@@ -39,16 +39,16 @@ theory of action.  Part~II
 semantics from a dialogical point of view and argues that there are
 advantages to looking at some old puzzles from this perspective.
 
-@@
-
 In Chapter~\ref{ch:percint} we introduce a notion of perception of an
-object or event as making a judgement that the object is of a type.
-In symbols, we write $a:T$ to indicate that object $a$ is of type $T$.
-We shall talk interchangeably of an object being of a type or being a
+object or situation as making a judgement that it is of a type.
+In symbols, we write $a:T$ to indicate that  $a$ is of type $T$.
+We shall talk interchangeably of something being of a type or being a
 witness for a type.  Our claim
-is that we can only perceive something as being of a type, even if
+is that perceiving something involves classifying it as being of a type, even if
 that type is very general (like \textit{PhysicalObject} or
-\textit{Event}) -- we cannot perceive it \textit{simpliciter}.  We
+\textit{Event}) -- we cannot perceive it \textit{simpliciter}.
+Following Kant we cannot perceive \textit{das Ding an sich} (``the
+thing itself'') but only in terms of a type that we assign to it.   We
 present basic notions of the theory of types which will be developed
 in the book, TTR, a type theory with
 records, which builds to a great extent on ideas taken from the type
@@ -68,7 +68,7 @@ record is a collection of fields consisting of a label (attribute or
 feature in the standard linguistic way of talking) and an object of
 some kind (which itself can be a record).  An schematic example of a
 record is given in \nexteg{}, where the $\ell_i$ are labels and the
-$o_i$ are objects.
+$o_i$ are objects (including situations).
 \begin{ex} 
 \record{\field{$\ell_0$}{\record{\field{$\ell_1$}{$o_0$}\\
                                  \field{$\ell_2$}{$o_1$}}}\\
@@ -90,7 +90,10 @@ many suggestions in the literature on how to add them.  We have
 borrowed freely from some of these ideas in TTR although the way we
 have developed the notions differs essentially from previous
 proposals.  We will use records and record types to model situations
-and situation types.   
+and situation types in a sense related to that of situation semantics
+as developed by Barwise and Perry. The records and record types are
+also related to  discourse representation structures as introduced by
+Kamp.  
 
 In Chapter~\ref{ch:infex} we introduce some basic notions of a theory of
 action based on these types which will be developed further as the
@@ -110,7 +113,10 @@ true in the dialogue so far and what questions are currently under discussion.
 
 In Chapter~\ref{ch:gram} we show how syntax and semantics can be
 embedded in the theory of action characterized in
-Chapters~\ref{ch:percint} and \ref{ch:infex}.  This is in contrast to
+Chapters~\ref{ch:percint} and \ref{ch:infex}.  Grammatical rules are
+regarded in terms of affordances which license us to draw conclusions
+about the types to be associated with speech events on the basis of
+speech events previously perceived.  This is in contrast to
 a formal language view where language is seen as a set of analyzed
 strings of symbols associated with meanings of some kind.  The
 philosophical ground of the action-based approach goes back to the relational theory of
@@ -121,7 +127,10 @@ Speech Act Theory developed by Austin and Searle to the concerns of
 compositional interpretation of syntactic structure.  \ignore{We think that
 placing the old situation semantics project within the theory of types
 that we present makes it more convincing and also gives it greater
-mathematical precision and detail.}  A more recent theory to which the
+mathematical precision and detail.}  It also enables us to develop a
+formal approach to dialogical theories of language such as those
+developed by the psychologist Herb Clark and the linguist Per Linell.
+A recent theory to which the
 ideas in this chapter are related is that of Dynamic Syntax (DS).
 While the particular formulations in our approach look rather
 different from those in DS the two theories have common aims relating
@@ -132,11 +141,11 @@ treatment of language as a system in flux where an act of speaking can
 create a new previously unavailable linguistic resource that can be
 reused in future speech events.
 
-The theory of types that we employ gives us two important notions
+The theory of types that we employ gives us two notions
 which will be important in the development of semantics in Part~II.
 The first is the notion of \textit{intensionality}.  Types in TTR are
 intensional in that the identity of a type is not established in terms
-of the set of objects which are of that type.  That is, types are not
+of the set of witnesses of that type.  That is, types are not
 \textit{extensional} in the way that sets are in a standard set
 theory.  The axiom of extensionality in standard set theory requires
 that there cannot be two sets which have the same members.  In contrast, there can be different types which have exactly the same set
@@ -148,7 +157,7 @@ and be used to construct new types.  We will call this \textit{first
 programming languages, that is, the ability not only to carry out
 procedures but to reflect on and reason about them.  In our terms, an
 important enabling factor for human language is that we not only can
-perceive objects and events in terms of types and act on these
+perceive objects and situations in terms of types and act on these
 perceptions but that we can also
 reason about and act on the types themselves, for example, in ascribing them to
 other agents as
@@ -178,13 +187,17 @@ place to look is the agent's long term memory (which we will equate
 with the agent's beliefs, although one may ultimately wish to make a
 distinction).  This resource is also modelled as a type representing
 how the world would be if the agent's memory or beliefs are correct.
-The fact that we are reasoning about to what extent the context type
+The fact that we are reasoning about the extent to which the context type
 associated with the utterance matches the types modelling the agent's
 relevant resources enables us to talk about cases where there are
 names of non-existent objects (that is, the agent's resource types do
 not exactly match the world) or where a single object in the world
 corresponds to two objects in the resources or \textit{vice versa} (another way in which
 there can be a mismatch between reality and an agent's resources).
+The proposal to represent different aspects of mental states in terms
+of record types is closely related to (and inspired by) similar
+proposals for representing mental states using discourse
+representation structures.
 
 In Chapter~\ref{ch:commonnouns} we look at frames associated with
 common nouns.  The idea of frames goes back to early work on frame
@@ -216,9 +229,9 @@ examples you need to have as a resource an appropriate frame type
 associated with the noun \textit{ship}.
 
 In Chapter~\ref{ch:intensional} we explore phenomena in natural
-language which are standardly referred to as \textit{modality} and
-\textit{intensionality}. We argue that types as we conceive them are better
-placed to deal with these phenomena than possible worlds that are used
+language which are standardly referred to as \textit{modal} and
+\textit{intensional}. We argue that types as we conceive them are better
+placed to deal with these phenomena than the possible worlds that are used
 in standard formal semantics.  In standard formal semantics
 propositions are regarded as sets of possible worlds.  For example,
 the proposition corresponding to \textit{a boy hugged a dog} is the
@@ -278,59 +291,20 @@ large sets.  We suggest that this phenomenon can be analyzed by
 estimating a probability based on the evidence presented in our
 cognitive resources (long-term memory or beliefs as discussed in
 Chapters~\ref{ch:propnames} and \ref{ch:intensional}).
-Finally, we give an account of how TTR types can be used to talk of
-content which is underspecified for quantifier scope.  The idea is to
-compute content types which have the various available contents which
-can be associated with an utterance as witnesses.
 
-There are a number of general themes which are woven together in this book and
-which have different emphasis at different points in the text:
-\begin{itemize} 
- 
-\item language as action 
- 
-\item linguistic content grounded in perception as type judgement
 
-\item language as interaction and coordination
+In Chapter~\ref{ch:underspec} we give an account of how TTR types can be used to talk of
+content which is underspecified.  The idea is to exploit the notion of
+types which can have several witnesses as ``underspecifications'' of
+those witnesses.  Rather than associating contents with utterances as
+we have done in the earlier chapters, we associate \textit{types} of
+contents with utterances.  Thus a dialogue participant when observing
+a speech event associates it with a type of content rather than a
+particular content.  We show how earlier ideas about the treatment of
+underspecification of quantifier scope and anaphora can be
+accommodated in this view.
 
-\item language as a system in flux 
 
-\item types, not possible worlds
-
-\item types and reference to non-existent objects
-
-\item types and cognitive resources
-
-\item getting the balance right between language, the external world
-  and mental states
-
-\item types as a way of doing underspecification
-
-\item avoiding an intermediate ``semantic'' language such as logical
-  form or discourse representation language but rather giving a direct
-  interpretation of linguistic events in terms of a semantic
-  universe containing structured objects
- 
-\end{itemize} 
-Behind all this is a desire to find a theory of types which can be
-used to talk about cognition in general as well as allow us to give a
-general account of language which includes many of the insights we
-have gained from separate linguistic theories, a foundation for a
-formal approach to cognition, if you like.
-
-Why try to do all of this at once?  Would it not have been better to
-write individual books and papers on each of these topics in turn?
-These are questions that I have asked myself at various points while
-writing this book.  It worries me (and it will probably worry you)
-despite the fact that I know the answer:  it is important to have a
-single approach to language in which all these issues can be addressed
-simultaneously.  Taking the issues one at a time is not as
-convincing or ultimately as interesting as showing how these different
-aspects of language interact in a complex system, giving us a view
-of linguistic interpretation which both embraces an action oriented
-approach and preserves the insights we have gained from formal
-semantics as well as addressing some of the puzzles that it failed to
-solve adequately.  
 
 %%% Local Variables:
 %%% mode: latex
