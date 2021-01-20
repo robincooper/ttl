@@ -85,25 +85,111 @@ equivalent.  Finally, when the grain of types is too fine, as with
 record types that only differ in their labelling, it is
 straightforward to use relabelling in order to make this grain irrelevant.
 
-\paragraph{Types and reference to non-existent objects} @@
+\paragraph{Types and reference to non-existent objects} There are a
+number of ways in which expressions in natural languages, notably
+proper names and pronouns, can be used to refer to non-existent
+objects.  Rather than posit a class of non-existent objects as such in
+our semantic universe we have used types in order to achieve this.
+Recall that there is no requirement that all types have witnesses.
+There are also ``impossible'' or inconsistent types which could not
+have witnesses in any possibility.  The labels in record types can be
+exploited to achieve the effect of anaphoric reference to non-existent
+objects.  This provides us with a parsimonious theory in which there a
+types and real existent witnesses for types.  We do not have to in
+addition posit possible but non-actual objects or impossible objects
+and it gives us a convenient and intuitive way of talking about fiction as
+presenting a type (or a series of types) which are not witnessed.
 
-\paragraph{Types and cognitive resources}
+\paragraph{Types and cognitive resources}  Given that we have viewed
+language in terms of action by cognitive agents grounded in their
+perception of the world, it does not come as a surprise that the
+agents' mental states and cognitive resources play a central role in
+our account of how language is used in communication.  This represents
+a shift from the view given by classical formal semantics which is
+often presented in terms of the relationship between language and the
+world.  While we have tried to show that the insights gained from 
+traditional formal semantics can be incorporated in our
+action-based theory, the puzzles that remain in the traditional
+approach often involve cases where mental states seem to play a role.
+This is particularly obvious in the case of attitudes such as belief.
+Our analysis of belief involves matching the content of an utterance
+against a type which we judge to represent an aspect of the mental
+state of the person whose belief we are reporting.  However, we have
+also used mental states in cases where it is not so obvious in
+traditional theories that they are necessary, for example, in the
+treatment of the use of proper names.  This is natural in a
+dialogically oriented approach to semantics where processing an
+utterance in a dialogue involves updating an information state which
+records the current ``scoreboard'' (using David Lewis's term) of the
+dialogue so far.  We have proposed that types can be used in the
+modelling of cognitive resources as well as in the modelling of
+utterances and their content.  For example, a model of an agent's
+belief state is a type which intuitively represents how the world would be if the
+agent's beliefs were true.  We suspect that most people's total belief
+states are inconsistent types which could not actually be witnessed.
 
-\paragraph{Getting the balance right between language, the external world
-  and mental states}
 
-\paragraph{Types as a way of doing underspecification}
 
-\paragraph{Avoiding an intermediate ``semantic'' language such as logical
-  form or discourse representation language but rather giving a direct
-  interpretation of linguistic events in terms of a semantic
-  universe containing structured objects}
+\paragraph{Types as a way of doing underspecification}  Types, as we
+know, can have several witnesses.  This means that we can use types to
+represent that we do not have information to choose among the
+witnesses.  Thus types can be used to do the work of what have been
+called ``underspecified representations'' in the linguistic and
+computational literature or ``descriptions'' in the computational
+literature.  Our exploration of underspecification
+Chapter~\ref{ch:underspec} involved relating types of utterances to
+types of contents rather than to contents as we had done in the
+earlier chapters.  The aim of the work on underspecification in
+general in the literature is to make the treatment of ambiguity in
+natural language tractable by having a single representation covering
+in some cases hundreds or even thousands of contents that might be
+associated with a given utterance and being able to refine such a
+general representation as the meaning of the utterance is narrowed
+down.  Structured types such as record types are well-suited to this
+kind of refinement and are thus promising candidates for 
+underspecified processing of natural language.  From a
+psycholinguistic and philosophical perspective the use of types both
+for underspecification and the modelling of beliefs provides us with a
+interesting perspective on linguistic processing:  namely, that what
+we get from processing an utterance is not a fully specified content
+but rather a belief about what kind of content was expressed --- a
+belief that may be more or less specific depending on the information
+we have available.  Given that we also have beliefs about what the
+kind of context we are in, also modelled by types we can begin to see
+how content types could be refined by context types thus giving us a
+perspective on what is called ``ambiguity resolution'' in the
+computational literature.
+
+
+
+\paragraph{Direct interpretation} Part of Montague's original
+programme for semantics was to show that natural languages can be
+interpreted directly without first having to translate them into an
+artificial logical representation.  For Montague this was in support
+of the slogan ``English as a formal language'' --- the claim that
+English can be given the same kind of semantic treatment as the
+artificial formal languages created by logicians.  This is appealing
+for the kind of theory developed in this book which is an attempt to
+say something about the kind of cognition involved in linguistic
+communication.  Presumably our linguistic behaviour has evolved in
+order to support our communication with each other.  A theory which
+says that language first has to be mapped to an artificial logical
+language which is then interpreted suggests either that evolution has
+failed to give us a language which we can use for communication or
+that we, as theorists, have so far failed to find a way of
+explaining how the actual speech events as such can convey
+information.  In this book we have not introduced an intermediate
+language between the natural language and its interpretation.  Rather
+we have explored what kind of types corresponding to cognitive
+resources are related to speech events.  This seems more convincing as
+the basis of a cognitive theory of communication. 
  
-Behind all this is a desire to find a theory of types which can be
+\paragraph{Types in a general theory of cognition}  Behind all this is a desire to find a theory of types which can be
 used to talk about cognition in general as well as allow us to give a
 general account of language which includes many of the insights we
 have gained from separate linguistic theories, a foundation for a
-formal approach to cognition, if you like.
+formal approach to cognition, if you like.  What has been presented in
+this book represents a first step towards such a theory.
 
 Why try to do all of this at once?  Would it not have been better to
 write individual books and papers on each of these topics in turn?
@@ -117,7 +203,9 @@ aspects of language interact in a complex system, giving us a view
 of linguistic interpretation which both embraces an action oriented
 approach and preserves the insights we have gained from formal
 semantics as well as addressing some of the puzzles that it failed to
-solve adequately.  
+solve adequately.  A large part of the motivation for using types in
+the way that we have is that the same theory of types can be used
+address all of these issues within a single coherent theory.
 
 
 %%% Local Variables:
